@@ -5,7 +5,6 @@
 }
 
 .hero-text {
-    height: 100px;
     padding: 15px 20px 25px 20px;
     background-color: #C04C9C;
     overflow: hidden;
@@ -31,9 +30,8 @@
     color: #fff;
     border: 1px solid #fff;
     border-radius: 3px;
-    width: 125px;
-    height: 40px;
     font-size: 18px;
     font-weight: 100;
+    padding: 10px;
     margin-top: 5px;
 }

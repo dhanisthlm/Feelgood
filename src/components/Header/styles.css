@@ -96,6 +96,10 @@ header {
     content: 'Bol';
 }
 
+.sikiracija:after {
+    content: 'Sikiracija';
+}
+
 .panika:after {
     content: 'Panika';
 }
@@ -128,12 +132,12 @@ header {
     width: 57px !important;
 }
 
-.sikiracija:after {
-    content: 'Sikiracija';
+.stres:after {
+    content: 'Stres';
 }
 
-.frustracia:after {
-    content: 'Frustracia';
+.stres:after {
+    content: 'Stres';
 }
 
 .djete:after {
@@ -152,7 +156,7 @@ header {
     content: 'Zaglavili';
 }
 
-.sikiracija.show:after {
+.worry.show:after {
     color: #F6ABE1;
 }
 
@@ -178,7 +182,7 @@ header {
     margin-left: 2px !important;
 }
 
-.worry.frustracia svg {
+.worry.stres svg {
     height: 72px;
     margin-left: 0px;
     margin-top: 0px;
