@@ -1,0 +1,22 @@
+@font-face {
+    font-family: "Aviano Future Black Fast";
+    src: url("//db.onlinewebfonts.com/t/30f8491b2f14e1b55edb304482831743.eot");
+    src: url("//db.onlinewebfonts.com/t/30f8491b2f14e1b55edb304482831743.eot?#iefix") format("embedded-opentype"),
+    url("//db.onlinewebfonts.com/t/30f8491b2f14e1b55edb304482831743.woff2") format("woff2"),
+    url("//db.onlinewebfonts.com/t/30f8491b2f14e1b55edb304482831743.woff") format("woff"),
+    url("//db.onlinewebfonts.com/t/30f8491b2f14e1b55edb304482831743.ttf") format("truetype"),
+    url("//db.onlinewebfonts.com/t/30f8491b2f14e1b55edb304482831743.svg#Aviano Future Black Fast") format("svg");
+}
+
+html {
+
+}
+
+body {
+
+}
+
+a {
+    text-decoration: none;
+    cursor: pointer;
+}

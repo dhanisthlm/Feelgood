@@ -1,0 +1,15 @@
+{
+  "auth": {
+    "username": "admin",
+    "password": "pass",
+    "ttl": "28800000",
+    "key": "KT.Y6k:q@#v/@3`hEP.[/QNm$.8BDDrZtrQX3u/4da=\"Ak&N5&M_6B\\P[Z+K>hnm"
+  },
+  "database": {
+    "host": "mongodb://heroku_xlczst0x:1fdle7bqfd3do1n7uaetjmgubr@ds127321.mlab.com:27321/heroku_xlczst0x"
+  },
+  "openTok": {
+    "key": "45894982",
+    "secret": "7677abae9f9357bf5b3e40b24f64f798d8a59838"
+  }
+}
