@@ -67,7 +67,7 @@ header {
 .tezina svg {
     height: 65px !important;
     margin-top: 8px !important;
-    margin-left: 0px !important;
+    margin-left: 8px !important;
     margin-bottom: 8px;
 }
 
@@ -110,7 +110,7 @@ header {
 
 .sukob svg {
     width: 70px !important;
-    margin-left: -1px !important;
+    margin-left: 3px !important;
     margin-top: -4px !important;
 }
 
@@ -128,7 +128,7 @@ header {
 
 .djete svg {
     margin-top: -6px !important;
-    margin-left: -2px !important;
+    margin-left: 10px !important;
     width: 57px !important;
 }
 
@@ -166,6 +166,7 @@ header {
 
 .sikiracija svg {
     width: 64px !important;
+    margin-left: 5px;
 }
 
 .worry:after {
@@ -198,7 +199,7 @@ header {
 
 .worry.fobia svg {
     width: 67px !important;
-    margin-left: 2px !important;
+    margin-left: 6px !important;
 }
 
 .worry {
@@ -250,13 +251,12 @@ header {
     width: 80px;
     height: 86px;
     margin-top: -2px;
-    margin-left: -6px;
 }
 
 .payment {
     overflow: hidden;
-    text-align: center;
     margin-bottom: 25px;
+    padding: 20px 45px;
 }
 
 .payment-sum-header {
@@ -265,21 +265,23 @@ header {
     color: #fff;
     letter-spacing: 2px;
     font-weight: 600;
-    margin: 0 0 0 143px;
+    margin: 0;
 }
 
 .payment-text {
+    padding: 25px 40px 25px 40px;
     margin-top: 30px;
-    padding: 20px;
     background-color: #C04C9C;
     overflow: hidden;
     text-align: center;
 }
 
 .payment-text h3 {
-    color: #fff;
+    color: #C04C9C;
+    font-weight: 700;
     font-size: 40px;
-    margin: 0 0 7px 0;
+    margin: 24px 0 7px 0;
+    text-align: center;
 }
 
 .payment-text p {
@@ -300,43 +302,56 @@ header {
     padding: 10px;
     display: inline-block;
     vertical-align: text-bottom;
-    width: 163px;
+    width: 165px;
     float: right;
-    margin-right: 200px;
     margin-top: 4px;
 }
 
-.payment h1 {
+.payment h3 {
     color: #C04C9C;
-    font-size: 48px;
+    margin-top: 10px;
+    font-size: 40px;
     text-align: center;
     margin-bottom: 10px;
+}
+
+.payment .right {
+    margin-top: 57px;
+}
+
+.payment .right p {
+    font-size: 17px;
+    margin-top: 0;
+    line-height: 25px;
 }
 
 .payment .intro {
     margin: 0 auto 20px;
     text-align: center;
-    width: 55%;
+    width:70%;
     line-height: 25px;
+    font-size: 18px;
 }
 
 .payment .skype,
  .payment .email,
  .payment .weeks {
-     display: inline-block;
+    //display: inline-block;
     position: relative;
-    vertical-align: top;
+    //vertical-align: top;
  }
 
 .payment .skype,
-.payment .email {
-    width: 35%;
-    text-align: center;
+.payment .email,
+.payment .right {
+    position: relative;
+    width: 33.333%;
+    //text-align: center;
 }
 
 .payment .skype > div,
 .payment .email > div {
-   display: inline-block;
+   //display: inline-block;
 }
 
 .payment-spec {
@@ -352,14 +367,20 @@ header {
     margin-bottom: 3px;
 }
 
-.skype:after {
+.skype:after,
+.email:after {
     content: '';
     position: absolute;
-    right: -5px;
+    right: 13%;
     top: 62px;
     width: 2px;
     height: 260px;
     border-right: 1px solid #aaa;
+}
+
+.payment-wrapper {
+    display: flex;
+    justify-content: space-evenly;
 }
 
 .email-s-label {
@@ -390,11 +411,13 @@ header {
     text-align: left;
 }
 
-.payment > div > h3 {
+.payment .payment-wrapper h4 {
     color: #C04C9C;
     text-transform: uppercase;
     text-align: left;
-    margin-left: 21%;
+    margin-left: 13px;
+    margin-bottom: 15px;
+    font-size: 18px;
 }
 
 input {

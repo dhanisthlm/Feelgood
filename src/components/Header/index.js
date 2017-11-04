@@ -224,109 +224,114 @@ export class Header extends Component {
                     <button className="category-button">Kontaktirajte nas</button>
                 </div>
                 <div className="payment">
-                    <h1>Koliko kosta terapija?</h1>
+                    <h3>Koliko kosta terapija?</h3>
                     <p className="intro">
                         Ovde smo za vas, ako trebate sa kom razgovarati. Se Zdravlje.nu, svako moze dobiti terapiju
                         diskretno i po razumnoj cijeni. U terapiji prepoznajemo/identifikujemo koje misli i emocije.
                     </p>
-                    <div className="container skype">
-                        <h3 className="heading">Skype</h3>
-                        <div>
-                            <input
-                                id="skype-s"
-                                type="checkbox"
-                                name="skype"
-                                checked={ this.state.skype.s }
-                                onClick={ this.handleCheckbox }
-                            />
-                            <label htmlFor="skype-s">1 Skype poziv</label>
+                    <div className="payment-wrapper">
+                        <div className="container skype">
+                            <h4 className="heading">Skype</h4>
+                            <div>
+                                <input
+                                    id="skype-s"
+                                    type="checkbox"
+                                    name="skype"
+                                    checked={ this.state.skype.s }
+                                    onClick={ this.handleCheckbox }
+                                />
+                                <label htmlFor="skype-s">1 Skype poziv</label>
+                            </div>
+                            <div>
+                                <input
+                                    id="skype-m"
+                                    type="checkbox"
+                                    name="skype"
+                                    checked={ this.state.skype.m }
+                                    onClick={ this.handleCheckbox }
+                                />
+                                <label htmlFor="skype-m">Paket za 8 skype poziva</label>
+                            </div>
+                            <div>
+                                <input
+                                    id="skype-l"
+                                    type="checkbox"
+                                    name="skype"
+                                    checked={ this.state.skype.l }
+                                    onClick={ this.handleCheckbox }
+                                />
+                                <label htmlFor="skype-l">Paket za 3 skype poziva</label>
+                            </div>
+                            <div>
+                                <input
+                                    id="skype-xl"
+                                    type="checkbox"
+                                    name="skype"
+                                    checked={ this.state.skype.xl }
+                                    onClick={ this.handleCheckbox }
+                                />
+                                <label htmlFor="skype-xl">Paket za 15 skype poziva</label>
+                            </div>
                         </div>
-                        <div>
-                            <input
-                                id="skype-m"
-                                type="checkbox"
-                                name="skype"
-                                checked={ this.state.skype.m }
-                                onClick={ this.handleCheckbox }
-                            />
-                            <label htmlFor="skype-m">Paket za 8 skype poziva</label>
-                        </div>
-                        <div>
-                            <input
-                                id="skype-l"
-                                type="checkbox"
-                                name="skype"
-                                checked={ this.state.skype.l }
-                                onClick={ this.handleCheckbox }
-                            />
-                            <label htmlFor="skype-l">Paket za 3 skype poziva</label>
-                        </div>
-                        <div>
-                            <input
-                                id="skype-xl"
-                                type="checkbox"
-                                name="skype"
-                                checked={ this.state.skype.xl }
-                                onClick={ this.handleCheckbox }
-                            />
-                            <label htmlFor="skype-xl">Paket za 15 skype poziva</label>
-                        </div>
-                    </div>
-                    <div className="email">
-                        <h3 className="heading">E-posta</h3>
-                        <div>
-                            <input
-                                id="email-s"
-                                className="email-s"
-                                type="checkbox"
-                                name="skype"
-                                checked={ this.state.email.s }
-                                onClick={ this.handleCheckbox }
-                            />
-                            <label className="email-s-label" htmlFor="email-s">Odgovar u toku 24h</label>
-                            <p className="week-text week-text-s">
-                                Det här är en text som ska fyll upp utrymme så att layouten ska se bättre ut, vi får komma på vad det ska stå här.
-                            </p>
-                            <div className="week-wrapper">
-                                <div className="wrapper">
-                                    <div className="week-title">
-                                        <span>Dizina</span>
-                                        <span>sednica</span>
+                        <div className="email">
+                            <h4 className="heading">E-posta</h4>
+                            <div>
+                                <input
+                                    id="email-s"
+                                    className="email-s"
+                                    type="checkbox"
+                                    name="skype"
+                                    checked={ this.state.email.s }
+                                    onClick={ this.handleCheckbox }
+                                />
+                                <label className="email-s-label" htmlFor="email-s">Odgovar u toku 24h</label>
+                                <p className="week-text week-text-s">
+                                    Det här är en text som ska fyll upp utrymme så att layouten ska se bättre ut, vi får komma på vad det ska stå här.
+                                </p>
+                                <div className="week-wrapper">
+                                    <div className="wrapper">
+                                        <div className="week-title">
+                                            <span>Dizina</span>
+                                            <span>sednica</span>
+                                        </div>
+                                        <div className="border-left" />
+                                        <div className="n-weeks">
+                                            <span>3</span>
+                                        </div>
+                                        <div className="border-right" />
                                     </div>
-                                    <div className="border-left" />
-                                    <div className="n-weeks">
-                                        <span>3</span>
+                                </div>
+                            </div>
+                            <div>
+                                <input
+                                    id="email-m"
+                                    className="email-m"
+                                    type="checkbox"
+                                    name="skype"
+                                    checked={ this.state.email.m }
+                                    onClick={ this.handleCheckbox }
+                                />
+                                <label className="email-m-label" htmlFor="email-m">Odgovar u toku 4h</label>
+                                <p className="week-text week-text-m">
+                                    Det här är en text som ska fyll upp utrymme så att layouten ska se bättre ut, vi får komma på vad det ska stå här.
+                                </p>
+                                <div className="week-wrapper">
+                                    <div className="wrapper">
+                                        <div className="week-title">
+                                            <span>Dizina</span>
+                                            <span>sednica</span>
+                                        </div>
+                                        <div className="border-left" />
+                                        <div className="n-weeks">
+                                            <span>2</span>
+                                        </div>
+                                        <div className="border-right" />
                                     </div>
-                                    <div className="border-right" />
                                 </div>
                             </div>
                         </div>
-                        <div>
-                            <input
-                                id="email-m"
-                                className="email-m"
-                                type="checkbox"
-                                name="skype"
-                                checked={ this.state.email.m }
-                                onClick={ this.handleCheckbox }
-                            />
-                            <label className="email-m-label" htmlFor="email-m">Odgovar u toku 4h</label>
-                            <p className="week-text week-text-m">
-                                Det här är en text som ska fyll upp utrymme så att layouten ska se bättre ut, vi får komma på vad det ska stå här.
-                            </p>
-                            <div className="week-wrapper">
-                                <div className="wrapper">
-                                    <div className="week-title">
-                                        <span>Dizina</span>
-                                        <span>sednica</span>
-                                    </div>
-                                    <div className="border-left" />
-                                    <div className="n-weeks">
-                                        <span>2</span>
-                                    </div>
-                                    <div className="border-right" />
-                                </div>
-                            </div>
+                        <div className="right">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut expedita officia quasi. Alias aliquam architecto corporis culpa cupiditate doloremque eaque facere fugit harum illo ipsam, iste labore minima necessitatibus odio quidem quisquam sed sit, totam ut.</p><p>Animi autem corporis cum dignissimos impedit magnam maiores, minus nemo omnis possimus, sed vel!</p>
                         </div>
                     </div>
                 </div>
