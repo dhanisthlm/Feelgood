@@ -8,7 +8,7 @@ export class Header extends Component {
 
         this.state = {
             skype: {
-				s: false,
+				s: true,
 				m: false,
 				l: false,
 				xl: false
@@ -16,7 +16,8 @@ export class Header extends Component {
             email: {
                 s: false,
                 l: false
-            }
+            },
+            lastSize: 's'
         };
 
         this.handleMouseEnter = this.handleMouseEnter.bind(this);
@@ -24,12 +25,7 @@ export class Header extends Component {
         this.handleCheckbox = this.handleCheckbox.bind(this);
     }
 
-    componentDidMount () {
-        const self = this;
-
-
-
-    }
+    componentDidMount () {}
 
     handleMouseEnter (e) {
         e.currentTarget.classList.add('show');
@@ -43,9 +39,42 @@ export class Header extends Component {
     handleCheckbox (e) {
         const type = e.target.id.split('-')[0];
         const size = e.target.id.split('-')[1];
+
+        if (type === 'skype') {
+            if ( size !== this.state.lastSize) {
+                this.setState({
+                    skype: {
+                        s: false,
+                        m: false,
+                        l: false,
+                        xl: false
+                    }
+                }, () => {
+                    this.setCategorySize(size, type);
+                })
+            } else {
+                this.setCategorySize(size, type);
+            }
+        } else if (type === 'email') {
+            if ( size !== this.state.lastSize) {
+                this.setState({
+                    email: {
+                        s: false,
+                        l: false
+                    }
+                }, () => {
+                    this.setCategorySize(size, type);
+                })
+            } else {
+                this.setCategorySize(size, type);
+            }
+        }
+    }
+
+    setCategorySize (size, type) {
         let category = this.state[type];
         category[size] = !category[size];
-		this.setState({ category });
+        this.setState({category, lastSize: size});
     }
 
     componentWillReceiveProps (nextProps) {}
@@ -232,7 +261,7 @@ export class Header extends Component {
                     <div className="payment-wrapper">
                         <div className="container skype">
                             <h4 className="heading">Skype</h4>
-                            <div>
+                            <div className="wrapper">
                                 <input
                                     id="skype-s"
                                     type="checkbox"
@@ -242,7 +271,7 @@ export class Header extends Component {
                                 />
                                 <label htmlFor="skype-s">1 Skype poziv</label>
                             </div>
-                            <div>
+                            <div className="wrapper">
                                 <input
                                     id="skype-m"
                                     type="checkbox"
@@ -252,7 +281,7 @@ export class Header extends Component {
                                 />
                                 <label htmlFor="skype-m">Paket za 8 skype poziva</label>
                             </div>
-                            <div>
+                            <div className="wrapper">
                                 <input
                                     id="skype-l"
                                     type="checkbox"
@@ -262,20 +291,17 @@ export class Header extends Component {
                                 />
                                 <label htmlFor="skype-l">Paket za 3 skype poziva</label>
                             </div>
-                            <div>
-                                <input
-                                    id="skype-xl"
-                                    type="checkbox"
-                                    name="skype"
-                                    checked={ this.state.skype.xl }
-                                    onClick={ this.handleCheckbox }
-                                />
-                                <label htmlFor="skype-xl">Paket za 15 skype poziva</label>
+                            <div className="toggle_radios">
+                                <input type="radio" checked className="toggle_option" id="first_toggle" name="toggle_option" />
+                                <input type="radio" className="toggle_option" id="second_toggle" name="toggle_option" />
+                                <label className="small-skype" htmlFor="first_toggle"><p>20 min poziv</p></label>
+                                <label className="large-skype" htmlFor="second_toggle"><p>45 min poziv</p></label>
+                                <div className="toggle_option_slider"></div>
                             </div>
                         </div>
                         <div className="email">
                             <h4 className="heading">E-posta</h4>
-                            <div>
+                            <div className="wrapper">
                                 <input
                                     id="email-s"
                                     className="email-s"
@@ -302,7 +328,7 @@ export class Header extends Component {
                                     </div>
                                 </div>
                             </div>
-                            <div>
+                            <div className="wrapper">
                                 <input
                                     id="email-m"
                                     className="email-m"

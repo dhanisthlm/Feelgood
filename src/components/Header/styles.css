@@ -425,7 +425,7 @@ input {
     left: -9999px;
 }
 
-label {
+.skype .wrapper label, .email .wrapper label {
     display: block;
     margin-bottom: 15px;
     position: relative;
@@ -548,7 +548,7 @@ label {
     text-indent: -3px;
 }
 
-label:before {
+.skype .wrapper label:before, .email .wrapper label:before {
     content: '';
     display: block;
     position: absolute;
@@ -571,7 +571,7 @@ label:last-of-type {
     //transform: translateX(40px);
 }
 
-label:hover {
+.skype .wrapper label:hover, .email .wrapper label:hover {
     box-shadow: 0 0 5px rgba(0, 0, 0, .6);
 }
 
@@ -595,7 +595,7 @@ input.email-m:checked ~ .week-text {
     display: none;
 }
 
-input:checked + label:before {
+.skype .wrapper input:checked + label:before, .email .wrapper input:checked + label:before {
     content: '\2713';
     display: block;
     position: absolute;
@@ -637,4 +637,97 @@ input:checked + label::before {
     font-weight: 400;
     color: #27548c;
     font-size: 14px;
+}
+
+
+.radio-wrapper {
+    margin: 100px 0;
+}
+.toggle_radios {
+    position: relative;
+    margin-left: 3px;
+    background: #43c568;
+    overflow: hidden;
+    padding: 0 !important;
+    -webkit-border-radius: 50px;
+    -moz-border-radius: 50px;
+    border-radius: 50px;
+    height: 40px;
+    width: 252px;
+    border: 3px solid #fff;
+    box-shadow: 0 0 20px rgba(0, 0, 0, .2);
+}
+.toggle_radios > * {
+    float: left;
+}
+.toggle_radios input[type=radio]{
+    display: none;
+}
+.toggle_radios label{
+    position: relative;
+    color: rgba(255,255,255,.9);
+    display: block;
+    width: 119px;
+    height: 34px;
+    margin: 3px 3px;
+    -webkit-border-radius: 50px;
+    -moz-border-radius: 50px;
+    border-radius: 50px;
+    cursor: pointer;
+    z-index: 1;
+    text-align: center;
+    margin-left: 0px;
+}
+.toggle_option_slider{
+    width: 124px;
+    height: 34px;
+    position: absolute;
+    top: 3px;
+    position: absolute;
+    top: 3px;
+    -webkit-border-radius: 50px;
+    -moz-border-radius: 50px;
+    border-radius: 50px;
+    -webkit-transition: all .4s ease;
+    -moz-transition: all .4s ease;
+    -o-transition: all .4s ease;
+    -ms-transition: all .4s ease;
+    transition: all .4s ease;
+}
+
+.toggle_radios label p {
+    margin: 0;
+    font-family: lato;
+    display: inline-block;
+    line-height: 34px;
+    font-size: 17px;
+    margin-left: 18px;
+    position: absolute;
+    left: 0;
+    z-index: 9;
+    opacity: .7
+}
+
+#first_toggle:checked ~ .toggle_option_slider{
+    background: rgba(255,255,255,1);
+    left: 3px;
+}
+#second_toggle:checked ~ .toggle_option_slider{
+    background: rgba(255,255,255,1);
+    left: 125px;
+}
+
+#first_toggle:checked ~ .small-skype p{
+    color: #43c568;
+    opacity: 1;
+}
+
+#second_toggle:checked ~ .large-skype p{
+    color: #43c568;
+    opacity: 1;
+}
+
+#third_toggle:checked ~ .toggle_option_slider{
+    background: rgba(255,255,255,.3);
+    left: 215px;
 }
