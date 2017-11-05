@@ -10,15 +10,18 @@ export class Header extends Component {
             skype: {
 				s: {
                     active: true,
-                    cost: 45
+                    cost: 45,
+                    week: 1
                 },
 				m: {
 				    active: false,
-                    cost: 126
+                    cost: 126,
+                    week: 3
                 },
 				l: {
 				    active: false,
-                    cost: 240
+                    cost: 320,
+                    week: 8
                 }
 			},
             email: {
@@ -77,9 +80,9 @@ export class Header extends Component {
             if ( size !== this.state.lastSize.skype) {
                 this.setState({
                     skype: {
-                        s: { active: false, cost: this.state.skype.s.cost },
-                        m: { active: false, cost: this.state.skype.m.cost },
-                        l: { active: false, cost: this.state.skype.l.cost }
+                        s: { active: false, cost: this.state.skype.s.cost, week: this.state.skype.s.week },
+                        m: { active: false, cost: this.state.skype.m.cost, week: this.state.skype.m.week },
+                        l: { active: false, cost: this.state.skype.l.cost, week: this.state.skype.l.week }
                     }
                 }, () => {
                     this.setCategorySize(size, type);
@@ -123,16 +126,20 @@ export class Header extends Component {
         let skype = 0;
         let email = 0;
         let skypeDuration = this.state.skypeDuration.s.active ? 's' : 'l';
+        let emailWeeks = 1;
+        let skypeWeeks = 1;
 
         for (let item in this.state.skype) {
             if (this.state.skype[item].active === true) {
                 skype = this.state.skype[item].cost * this.state.skypeDuration[skypeDuration].factor;
+                skypeWeeks = this.state.skype[item].week;
             }
         }
 
         for (let item in this.state.email) {
             if (this.state.email[item].active === true) {
                 email = this.calculateEmailDiscount(this.state.email[item].cost, this.state.email[item].week);
+                emailWeeks = this.state.email[item].week;
             }
         }
 
@@ -146,7 +153,11 @@ export class Header extends Component {
             }
         }
 
-        return Math.round((email > 0 ) ? (skype + email) * .95 : skype + email);
+        return {
+            total: Math.round((email > 0 ) ? (skype + email) * .95 : skype + email),
+            email: Math.round(email / emailWeeks),
+            skype: (skype > 0 && email > 0) ? Math.round((skype / skypeWeeks) * 0.95) : Math.round(skype / skypeWeeks)
+        }
     }
 
     handleWeeks (e) {
@@ -406,7 +417,7 @@ export class Header extends Component {
                                     checked={ this.state.skype.m.active }
                                     onClick={ this.handleCheckbox }
                                 />
-                                <label htmlFor="skype-m">Paket za 8 skype poziva</label>
+                                <label htmlFor="skype-m">Paket za 3 skype poziva</label>
                             </div>
                             <div className="wrapper">
                                 <input
@@ -416,7 +427,7 @@ export class Header extends Component {
                                     checked={ this.state.skype.l.active }
                                     onClick={ this.handleCheckbox }
                                 />
-                                <label htmlFor="skype-l">Paket za 3 skype poziva</label>
+                                <label htmlFor="skype-l">Paket za 8 skype poziva</label>
                             </div>
                             <div ref="duration-radios" className="toggle_radios">
                                 <input type="radio" checked={this.state.skypeDuration.s.active} className="toggle_option" id="duration-s" name="toggle_option" />
@@ -492,10 +503,10 @@ export class Header extends Component {
                     </div>
                 </div>
                 <div className="payment-text">
-                    <h2 className="payment-sum-header">Cijena: {this.calculateCost()} KM</h2>
+                    <h2 className="payment-sum-header">Cijena: { this.calculateCost().total } KM</h2>
                     <div className="payment-spec">
-                        <span>Skype: 42 KM / posiv</span>
-                        <span>E-posta: 0 KM / sednica</span>
+                        <span>Skype: { this.calculateCost().skype } KM / posiv</span>
+                        <span>E-posta: { this.calculateCost().email } KM / sednica</span>
                     </div>
                     <button>Zakazite</button>
                 </div>
