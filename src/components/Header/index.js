@@ -8,21 +8,38 @@ export class Header extends Component {
 
         this.state = {
             skype: {
-				s: true,
-				m: false,
-				l: false,
-				xl: false
+				s: {
+                    active: true,
+                    cost: 45
+                },
+				m: {
+				    active: false,
+                    cost: 42
+                },
+				l: {
+				    active: false,
+                    cost: 40
+                }
 			},
             email: {
-                s: false,
-                l: false
+                s: {
+                    active: false,
+                    cost: 30,
+                    week: 1
+                },
+                m: {
+                    active: false,
+                    cost: 80,
+                    week: 1
+                }
             },
-            lastSize: 's'
+            lastSize: 's',
         };
 
         this.handleMouseEnter = this.handleMouseEnter.bind(this);
         this.handleMouseLeave = this.handleMouseLeave.bind(this);
         this.handleCheckbox = this.handleCheckbox.bind(this);
+        this.handleWeeks = this.handleWeeks.bind(this);
     }
 
     componentDidMount () {}
@@ -44,10 +61,9 @@ export class Header extends Component {
             if ( size !== this.state.lastSize) {
                 this.setState({
                     skype: {
-                        s: false,
-                        m: false,
-                        l: false,
-                        xl: false
+                        s: { active: false, cost: this.state.skype.s.cost },
+                        m: { active: false, cost: this.state.skype.m.cost },
+                        l: { active: false, cost: this.state.skype.l.cost }
                     }
                 }, () => {
                     this.setCategorySize(size, type);
@@ -59,8 +75,8 @@ export class Header extends Component {
             if ( size !== this.state.lastSize) {
                 this.setState({
                     email: {
-                        s: false,
-                        l: false
+                        s: { active: false, cost: this.state.email.s.cost, week: this.state.email.s.week },
+                        m: { active: false, cost: this.state.email.m.cost, week: this.state.email.m.week }
                     }
                 }, () => {
                     this.setCategorySize(size, type);
@@ -71,15 +87,62 @@ export class Header extends Component {
         }
     }
 
+    calculateCost () {
+        let skype = 0;
+        let email = 0;
+
+        for (let item in this.state.skype) {
+            if (this.state.skype[item].active === true) {
+                skype = this.state.skype[item].cost;
+            }
+        }
+
+        for (let item in this.state.email) {
+            if (this.state.email[item].active === true) {
+                email = this.state.email[item].cost;
+            }
+        }
+
+        return skype + email;
+    }
+
+    handleWeeks (e) {
+        const type = e.target.id.split('-')[0];
+        const size = e.target.id.split('-')[1];
+
+        if (type === 'add') {
+            let nWeeks = this.state.email[size].week +1;
+
+            this.setState({
+                email: {
+                    s: { active: this.state.email.s.active, cost: this.state.email.s.cost, week: size === 's' ? nWeeks : this.state.email.s.week },
+                    m: { active: this.state.email.m.active, cost: this.state.email.m.cost, week: size === 'm' ? nWeeks : this.state.email.m.week }
+                }
+            });
+        } else {
+            if (this.state.email[size].week > 1) {
+                let nWeeks = this.state.email[size].week - 1;
+
+                this.setState({
+                    email: {
+                        s: { active: this.state.email.s.active, cost: this.state.email.s.cost, week: size === 's' ? nWeeks : this.state.email.s.week },
+                        m: { active: this.state.email.m.active, cost: this.state.email.m.cost, week: size === 'm' ? nWeeks : this.state.email.m.week }
+                    }
+                });
+            }
+        }
+    }
+
     setCategorySize (size, type) {
         let category = this.state[type];
-        category[size] = !category[size];
-        this.setState({category, lastSize: size});
+        category[size].active = !category[size].active;
+        this.setState({ category, lastSize: size });
     }
 
     componentWillReceiveProps (nextProps) {}
 
     render () {
+        console.log('state', this.state);
         return (
             <div>
                 <header>
@@ -215,7 +278,8 @@ export class Header extends Component {
                             </p>
                             <svg xmlns="http://www.w3.org/2000/svg" width="390" height="395" viewBox="0 0 390 395">
                                 <path fill-rule="evenodd" clip-rule="evenodd" fill="#C04C9C" d="M211.09 81.802v-12.82c4.98-1.01 9.518 2.615 11.484 9 .916 2.972.895 6.4 2.4 8.978 1.527 2.616 4.385 4.47 6.714 6.6 2.682 2.45 5.915 4.474 8.014 7.338 2.724 3.72 4.457 2.132 6.485-.246 3.498-4.1 7.025-8.177 10.4-12.374C261.513 82.152 267.013 76.34 271 69.64c5.256-8.836 9.247-18.422 13.85-27.654 4-8.023 7.823-16.153 12.233-23.948 3.07-5.424 12.473-8.424 16.876-6.106 7.79 4.1 11.04 12.01 7.447 19.557-5.56 11.675-11.48 23.18-17.332 34.716-4.138 8.156-8.09 16.436-12.754 24.286-2.827 4.76-6.706 8.934-10.372 13.146-7.146 8.214-14.47 16.274-21.732 24.387-1.187 1.325-2.63 2.462-3.605 3.92-.832 1.243-1.703 2.898-1.52 4.228.114.812 2.18 1.912 3.382 1.93 10.83.148 21.77.996 32.453-.27 6.03-.716 11.703-4.882 17.422-7.727 9.058-4.506 18.006-9.232 27.027-13.812 3.507-1.78 6.965-3.778 10.666-5.028 5.514-1.863 11.09-2.144 15.75 2.364 4.816 4.66 5.31 10.69 2.664 16.015-1.82 3.66-5.775 6.826-9.515 8.853-9.643 5.227-19.707 9.666-29.574 14.48-7.342 3.58-14.562 7.418-21.994 10.798-2.62 1.192-5.693 1.874-8.574 1.918-12.996.2-25.996.018-38.994.165-1.934.02-3.857 1.062-5.785 1.634 1.345 1.17 2.523 2.664 4.063 3.456 14.327 7.375 28.66 14.746 43.142 21.808 2.536 1.237 5.777 1.404 8.696 1.422 20 .117 39.997.032 59.995.08 6.832.016 13.06 4.476 13.887 9.736 1.255 7.985-1.846 14.502-8.678 16.948-2.824 1.01-6.086 1.077-9.15 1.094-20.64.106-41.284-.173-61.916.228-8.668.168-15.272-4.43-22.408-7.83-12.93-6.16-25.637-12.788-38.508-19.077-1.355-.663-3.182-.36-4.79-.504.826 1.308 1.524 2.72 2.502 3.905 3.782 4.584 7.71 9.047 11.476 13.643 5.43 6.627 10.705 13.38 16.153 19.99 8.677 10.53 17.42 21.003 26.177 31.466 5.19 6.2 11.282 11.83 15.465 18.64 4.424 7.206 7.204 15.45 10.452 23.342 6.534 15.877 13.35 31.662 19.146 47.81 3.007 8.375 3.82 15.5-4.96 20.822-4.954 3.002-15.28 1.64-18.044-4.688-3.88-8.884-7.723-17.788-11.35-26.778-5.576-13.827-10.5-27.94-16.64-41.508-2.51-5.548-7.34-10.094-11.343-14.906-7.46-8.97-15.082-17.802-22.654-26.676-.31-.36-.802-.565-1.777-1.23-.822 1.654-1.64 3.147-2.328 4.7-4.943 11.158-10.457 21.993-19.8 30.206-8.926 7.844-19.017 13.287-31.366 12.604-8.228-.454-15.326-3.93-22.074-8.596-12.648-8.744-19.19-21.7-25.2-35.118-.328-.734-.61-1.512-1.07-2.158-.372-.52-.977-.877-1.75-1.537-8.892 10.666-17.447 21.505-26.62 31.793-12.227 13.715-15.71 31.473-22.84 47.534-4.45 10.03-8.067 20.434-12.604 30.42-2.925 6.44-6.714 7.98-15.715 7.272-4.49-.354-7.945-4.043-9.346-9.54-1.933-7.586 1.73-14.004 4.21-20.64 4.183-11.188 8.356-22.39 12.89-33.437 3.918-9.542 7.955-19.074 12.684-28.227 2.45-4.743 6.386-8.762 9.88-12.916 11.236-13.366 22.68-26.56 33.847-39.983 8.305-9.983 16.277-20.243 24.47-30.32.912-1.12 2.454-1.715 3.424-2.803.644-.723.79-1.89 1.16-2.856-1.127-.178-2.5-.865-3.346-.456-9.936 4.807-19.792 9.778-29.67 14.706-7.96 3.97-15.83 8.13-23.93 11.793-2.41 1.09-5.453 1.055-8.208 1.064-22.046.082-44.092.03-66.138.067-6.526.012-11.385-3.613-13.69-8.85-1.87-4.246-2.278-10.327 1.945-13.875 3.158-2.653 7.715-4.933 11.722-5.06 17.314-.543 34.67-.673 51.98-.06 9.653.34 18.097-1.92 26.42-6.467 11.235-6.138 22.776-11.715 34.144-17.613 1.138-.59 1.99-1.736 2.973-2.625-1.364-.64-2.72-1.82-4.092-1.84-11.496-.15-23.016-.504-34.487.054-8.338.405-15.52-2.2-22.628-5.847-13.588-6.97-27.206-13.88-40.79-20.86-2.86-1.47-5.58-3.218-8.442-4.687-4.75-2.437-6.29-8.783-4.34-16.272 1.117-4.287 6.3-7.62 11.428-8.095 6.944-.642 12.22 3.383 17.854 6.105 13.13 6.348 25.983 13.266 39.046 19.756 2.417 1.2 5.28 2.014 7.96 2.08 9.825.242 19.662.17 29.492.005 1.378-.024 3.546-.948 3.892-1.956.4-1.166-.43-3.213-1.38-4.313-9.888-11.465-19.45-23.264-30.025-34.07-9.76-9.974-13.586-23.037-20.22-34.616-4.635-8.088-8.77-16.477-12.825-24.878-1.773-3.675-3.375-7.623-4.01-11.613-1.075-6.745 4.022-13.737 10.776-15.26 7.135-1.61 12.764 2.472 16.27 9.37 8.974 17.664 17.223 35.728 26.92 52.98 4.164 7.405 11.24 13.16 16.91 19.737 2.03 2.356 3.757 4.973 5.735 7.377 2.146 2.608 4.053 3.644 6.522-.104 1.68-2.55 4.134-4.968 6.802-6.407 5.816-3.138 8.44-7.94 10.004-14.1.896-3.528 3.085-6.87 5.277-9.868 1.037-1.418 3.446-1.832 6.146-3.145v14.562c9.973-.003 19.423-.003 29.284-.003z"/>
-                            </svg>                        </div>
+                            </svg>
+                        </div>
                         <div onMouseEnter={this.handleMouseEnter}
                              onMouseLeave={this.handleMouseLeave}
                              ref="sukob"
@@ -266,7 +330,7 @@ export class Header extends Component {
                                     id="skype-s"
                                     type="checkbox"
                                     name="skype"
-                                    checked={ this.state.skype.s }
+                                    checked={ this.state.skype.s.active }
                                     onClick={ this.handleCheckbox }
                                 />
                                 <label htmlFor="skype-s">1 Skype poziv</label>
@@ -276,7 +340,7 @@ export class Header extends Component {
                                     id="skype-m"
                                     type="checkbox"
                                     name="skype"
-                                    checked={ this.state.skype.m }
+                                    checked={ this.state.skype.m.active }
                                     onClick={ this.handleCheckbox }
                                 />
                                 <label htmlFor="skype-m">Paket za 8 skype poziva</label>
@@ -286,7 +350,7 @@ export class Header extends Component {
                                     id="skype-l"
                                     type="checkbox"
                                     name="skype"
-                                    checked={ this.state.skype.l }
+                                    checked={ this.state.skype.l.active }
                                     onClick={ this.handleCheckbox }
                                 />
                                 <label htmlFor="skype-l">Paket za 3 skype poziva</label>
@@ -307,7 +371,7 @@ export class Header extends Component {
                                     className="email-s"
                                     type="checkbox"
                                     name="skype"
-                                    checked={ this.state.email.s }
+                                    checked={ this.state.email.s.active }
                                     onClick={ this.handleCheckbox }
                                 />
                                 <label className="email-s-label" htmlFor="email-s">Odgovar u toku 24h</label>
@@ -320,11 +384,11 @@ export class Header extends Component {
                                             <span>Dizina</span>
                                             <span>sednica</span>
                                         </div>
-                                        <div className="border-left" />
+                                        <div id="sub-s" onClick={this.handleWeeks} className="border-left" />
                                         <div className="n-weeks">
-                                            <span>3</span>
+                                            <span>{this.state.email.s.week}</span>
                                         </div>
-                                        <div className="border-right" />
+                                        <div id="add-s" onClick={this.handleWeeks} className="border-right" />
                                     </div>
                                 </div>
                             </div>
@@ -334,7 +398,7 @@ export class Header extends Component {
                                     className="email-m"
                                     type="checkbox"
                                     name="skype"
-                                    checked={ this.state.email.m }
+                                    checked={ this.state.email.m.active }
                                     onClick={ this.handleCheckbox }
                                 />
                                 <label className="email-m-label" htmlFor="email-m">Odgovar u toku 4h</label>
@@ -347,11 +411,11 @@ export class Header extends Component {
                                             <span>Dizina</span>
                                             <span>sednica</span>
                                         </div>
-                                        <div className="border-left" />
+                                        <div id="sub-m" onClick={this.handleWeeks} className="border-left" />
                                         <div className="n-weeks">
-                                            <span>2</span>
+                                            <span>{this.state.email.m.week}</span>
                                         </div>
-                                        <div className="border-right" />
+                                        <div id="add-m" onClick={this.handleWeeks} className="border-right" />
                                     </div>
                                 </div>
                             </div>
@@ -362,7 +426,7 @@ export class Header extends Component {
                     </div>
                 </div>
                 <div className="payment-text">
-                    <h2 className="payment-sum-header">Cijena: 120 KM</h2>
+                    <h2 className="payment-sum-header">Cijena: {this.calculateCost()} KM</h2>
                     <div className="payment-spec">
                         <span>Skype: 42 KM / posiv</span>
                         <span>E-posta: 0 KM / sednica</span>
