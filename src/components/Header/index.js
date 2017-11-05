@@ -14,11 +14,11 @@ export class Header extends Component {
                 },
 				m: {
 				    active: false,
-                    cost: 42
+                    cost: 126
                 },
 				l: {
 				    active: false,
-                    cost: 40
+                    cost: 240
                 }
 			},
             email: {
@@ -33,13 +33,29 @@ export class Header extends Component {
                     week: 1
                 }
             },
-            lastSize: 's',
+            skypeDuration: {
+                s: {
+                    length: 20,
+                    active: true,
+                    factor: 0.66
+                },
+                l: {
+                    length: 45,
+                    active: false,
+                    factor: 1
+                }
+            },
+            lastSize: {
+                skype: 's',
+                email: ''
+            },
         };
 
         this.handleMouseEnter = this.handleMouseEnter.bind(this);
         this.handleMouseLeave = this.handleMouseLeave.bind(this);
         this.handleCheckbox = this.handleCheckbox.bind(this);
         this.handleWeeks = this.handleWeeks.bind(this);
+        this.handleSkypeDuration = this.handleSkypeDuration.bind(this);
     }
 
     componentDidMount () {}
@@ -58,7 +74,7 @@ export class Header extends Component {
         const size = e.target.id.split('-')[1];
 
         if (type === 'skype') {
-            if ( size !== this.state.lastSize) {
+            if ( size !== this.state.lastSize.skype) {
                 this.setState({
                     skype: {
                         s: { active: false, cost: this.state.skype.s.cost },
@@ -72,7 +88,7 @@ export class Header extends Component {
                 this.setCategorySize(size, type);
             }
         } else if (type === 'email') {
-            if ( size !== this.state.lastSize) {
+            if ( size !== this.state.lastSize.email) {
                 this.setState({
                     email: {
                         s: { active: false, cost: this.state.email.s.cost, week: this.state.email.s.week },
@@ -87,23 +103,50 @@ export class Header extends Component {
         }
     }
 
+    calculateEmailDiscount (cost, weeks) {
+        var factor = 1;
+
+        if (weeks === 2) {
+            factor = .95;
+        } else if (weeks === 3) {
+            factor = .925;
+        } else if (weeks === 4) {
+            factor = .9;
+        } else if (weeks > 4) {
+            factor = .875;
+        }
+
+        return Math.round((cost * factor) * weeks);
+    }
+
     calculateCost () {
         let skype = 0;
         let email = 0;
+        let skypeDuration = this.state.skypeDuration.s.active ? 's' : 'l';
 
         for (let item in this.state.skype) {
             if (this.state.skype[item].active === true) {
-                skype = this.state.skype[item].cost;
+                skype = this.state.skype[item].cost * this.state.skypeDuration[skypeDuration].factor;
             }
         }
 
         for (let item in this.state.email) {
             if (this.state.email[item].active === true) {
-                email = this.state.email[item].cost;
+                email = this.calculateEmailDiscount(this.state.email[item].cost, this.state.email[item].week);
             }
         }
 
-        return skype + email;
+        if (this.refs['duration-text'] && this.refs['duration-radios']) {
+            if (skype === 0) {
+                this.refs['duration-text'].style.display = 'block';
+                this.refs['duration-radios'].style.display = 'none';
+            } else {
+                this.refs['duration-text'].style.display = 'none';
+                this.refs['duration-radios'].style.display = 'block';
+            }
+        }
+
+        return Math.round((email > 0 ) ? (skype + email) * .95 : skype + email);
     }
 
     handleWeeks (e) {
@@ -136,7 +179,27 @@ export class Header extends Component {
     setCategorySize (size, type) {
         let category = this.state[type];
         category[size].active = !category[size].active;
-        this.setState({ category, lastSize: size });
+        let lastSize = this.state.lastSize;
+        lastSize[type] = size;
+        this.setState({ category, lastSize });
+    }
+
+    handleSkypeDuration (e) {
+        const size = e.currentTarget.id.split('-')[1];
+        this.setState({
+            skypeDuration: {
+                s: {
+                    active: size === 's',
+                    length: this.state.skypeDuration.s.length,
+                    factor: this.state.skypeDuration.s.factor
+                },
+                l: {
+                    active: size === 'l',
+                    length: this.state.skypeDuration.l.length,
+                    factor: this.state.skypeDuration.l.factor
+                }
+            }
+        })
     }
 
     componentWillReceiveProps (nextProps) {}
@@ -355,13 +418,16 @@ export class Header extends Component {
                                 />
                                 <label htmlFor="skype-l">Paket za 3 skype poziva</label>
                             </div>
-                            <div className="toggle_radios">
-                                <input type="radio" checked className="toggle_option" id="first_toggle" name="toggle_option" />
-                                <input type="radio" className="toggle_option" id="second_toggle" name="toggle_option" />
-                                <label className="small-skype" htmlFor="first_toggle"><p>20 min poziv</p></label>
-                                <label className="large-skype" htmlFor="second_toggle"><p>45 min poziv</p></label>
+                            <div ref="duration-radios" className="toggle_radios">
+                                <input type="radio" checked={this.state.skypeDuration.s.active} className="toggle_option" id="duration-s" name="toggle_option" />
+                                <input type="radio" checked={this.state.skypeDuration.l.active} className="toggle_option" id="duration-l" name="toggle_option" />
+                                <label id="duration-s" onClick={this.handleSkypeDuration} className="small-skype" htmlFor="duration-s"><p>20 min poziv</p></label>
+                                <label id="duration-l" onClick={this.handleSkypeDuration} className="large-skype" htmlFor="duration-l"><p>45 min poziv</p></label>
                                 <div className="toggle_option_slider"></div>
                             </div>
+                            <p ref="duration-text" className="duration-text">
+                                Det här är en text som ska fyll upp utrymme så att layouten ska se bättre ut, vi får komma på vad det ska stå här.
+                            </p>
                         </div>
                         <div className="email">
                             <h4 className="heading">E-posta</h4>

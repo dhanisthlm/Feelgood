@@ -708,26 +708,30 @@ input:checked + label::before {
     opacity: .7
 }
 
-#first_toggle:checked ~ .toggle_option_slider{
+#duration-s:checked ~ .toggle_option_slider{
     background: rgba(255,255,255,1);
     left: 3px;
 }
-#second_toggle:checked ~ .toggle_option_slider{
+#duration-l:checked ~ .toggle_option_slider{
     background: rgba(255,255,255,1);
     left: 125px;
 }
 
-#first_toggle:checked ~ .small-skype p{
+#duration-s:checked ~ .small-skype p{
     color: #43c568;
     opacity: 1;
 }
 
-#second_toggle:checked ~ .large-skype p{
+#duration-l:checked ~ .large-skype p{
     color: #43c568;
     opacity: 1;
 }
 
-#third_toggle:checked ~ .toggle_option_slider{
-    background: rgba(255,255,255,.3);
-    left: 215px;
+.duration-text {
+    display: none;
+    margin-left: 13px;
+    font-size: 14px;
+    width: 245px;
+    margin-top: 0;
+    margin-bottom: 0;
 }
