@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="633ec404-33d3-401e-9c97-0d54e14bee68" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/Header/styles.css" afterPath="$PROJECT_DIR$/src/components/Header/styles.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/client/index.html" afterPath="$PROJECT_DIR$/dist/client/index.html" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -60,18 +61,6 @@
         </entry>
       </file>
       <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/index.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="322">
-              <caret line="23" column="13" lean-forward="false" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
-              <folding>
-                <element signature="e#0#26#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/Header/index.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="472">
@@ -105,7 +94,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="styles.css" pinned="false" current-in-tab="true">
+      <file leaf-file-name="styles.css" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/Header/styles.css">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="373">
@@ -115,11 +104,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
+      <file leaf-file-name="package.json" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/package.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="345">
+              <caret line="15" column="19" lean-forward="false" selection-start-line="15" selection-start-column="19" selection-end-line="15" selection-end-column="19" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/dist/client/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="230">
-              <caret line="10" column="85" lean-forward="false" selection-start-line="10" selection-start-column="85" selection-end-line="10" selection-end-column="85" />
+            <state relative-caret-position="322">
+              <caret line="14" column="0" lean-forward="true" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -129,7 +128,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>cateb</find>
       <find>ategor</find>
       <find>max-wi</find>
       <find>payment</find>
@@ -159,6 +157,7 @@
       <find>cost</find>
       <find>duration-r</find>
       <find>calculast</find>
+      <find>payment-sub</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -211,9 +210,9 @@
         <option value="$PROJECT_DIR$/src/components/App/styles.css" />
         <option value="$PROJECT_DIR$/src/components/Main/styles.css" />
         <option value="$PROJECT_DIR$/src/components/Hero/styles.css" />
-        <option value="$PROJECT_DIR$/dist/client/index.html" />
         <option value="$PROJECT_DIR$/src/components/Header/index.js" />
         <option value="$PROJECT_DIR$/src/components/Header/styles.css" />
+        <option value="$PROJECT_DIR$/dist/client/index.html" />
       </list>
     </option>
   </component>
@@ -521,12 +520,12 @@
       <workItem from="1507410473330" duration="449000" />
       <workItem from="1508349071298" duration="27210000" />
       <workItem from="1509814359872" duration="3540000" />
-      <workItem from="1509881253555" duration="19092000" />
+      <workItem from="1509881253555" duration="19411000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="109909000" />
+    <option name="totallyTimeSpent" value="110228000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="24" width="1903" height="1172" extended-state="0" />
@@ -643,13 +642,6 @@
     <entry file="file://$PROJECT_DIR$/src/components/Gallery/Meta/ListItem/index.js" />
     <entry file="file://$PROJECT_DIR$/src/components/Gallery/Meta/ListItem/styles.css" />
     <entry file="file://$PROJECT_DIR$/src/components/Gallery/Meta/styles.css" />
-    <entry file="file://$PROJECT_DIR$/package.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="15" column="19" lean-forward="false" selection-start-line="15" selection-start-column="19" selection-end-line="15" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/reducers/video.js" />
     <entry file="file://$PROJECT_DIR$/src/reducers/image.js" />
     <entry file="file://$PROJECT_DIR$/src/components/Gallery/Video/Detail/index.js" />
@@ -761,14 +753,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dist/client/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="230">
-          <caret line="10" column="85" lean-forward="false" selection-start-line="10" selection-start-column="85" selection-end-line="10" selection-end-column="85" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/Hero/index.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="276">
@@ -801,6 +785,22 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="373">
           <caret line="268" column="17" lean-forward="true" selection-start-line="268" selection-start-column="17" selection-end-line="268" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="15" column="19" lean-forward="false" selection-start-line="15" selection-start-column="19" selection-end-line="15" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dist/client/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="322">
+          <caret line="14" column="0" lean-forward="true" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
           <folding />
         </state>
       </provider>
