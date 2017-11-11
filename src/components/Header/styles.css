@@ -52,13 +52,7 @@ header {
 }
 
 .row-1, .row-2, .row-3 {
-    display: flex;
-    display: -webkit-flex;
-    display: -moz-flex;
-    display: -ms-flex;
-    display: -o-flex;
-    display: flex;
-    justify-content: space-between;
+    text-align: center;
 }
 
 .row-1, .row-2 {
