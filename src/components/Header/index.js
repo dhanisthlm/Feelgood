@@ -119,6 +119,7 @@ export class Header extends Component {
             factor = .875;
         }
 
+        console.log(cost, factor)
         return Math.round((cost * factor) * weeks);
     }
 
@@ -154,7 +155,7 @@ export class Header extends Component {
         }
 
         return {
-            total: Math.round((email > 0 ) ? (skype + email) * .95 : skype + email),
+            total: Math.round((email > 0 ) && (skype > 0) ? (skype + email) * .95 : skype + email),
             email: Math.round(email / emailWeeks),
             skype: (skype > 0 && email > 0) ? Math.round((skype / skypeWeeks) * 0.95) : Math.round(skype / skypeWeeks)
         }
