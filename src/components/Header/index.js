@@ -40,7 +40,7 @@ export class Header extends Component {
                 s: {
                     length: 20,
                     active: true,
-                    factor: 0.66
+                    factor: 0.675
                 },
                 l: {
                     length: 45,
@@ -119,8 +119,8 @@ export class Header extends Component {
             factor = .875;
         }
 
-        console.log(cost, factor)
-        return Math.round((cost * factor) * weeks);
+        console.log('cost', cost, factor)
+        return Math.round(cost * factor) * weeks;
     }
 
     calculateCost () {
@@ -130,17 +130,17 @@ export class Header extends Component {
         let emailWeeks = 1;
         let skypeWeeks = 1;
 
-        for (let item in this.state.skype) {
-            if (this.state.skype[item].active === true) {
-                skype = this.state.skype[item].cost * this.state.skypeDuration[skypeDuration].factor;
-                skypeWeeks = this.state.skype[item].week;
+        for (let nSkype in this.state.skype) {
+            if (this.state.skype[nSkype].active === true) {
+                skype = this.state.skype[nSkype].cost * this.state.skypeDuration[skypeDuration].factor;
+                skypeWeeks = this.state.skype[nSkype].week;
             }
         }
 
-        for (let item in this.state.email) {
-            if (this.state.email[item].active === true) {
-                email = this.calculateEmailDiscount(this.state.email[item].cost, this.state.email[item].week);
-                emailWeeks = this.state.email[item].week;
+        for (let nEmail in this.state.email) {
+            if (this.state.email[nEmail].active === true) {
+                email = this.calculateEmailDiscount(this.state.email[nEmail].cost, this.state.email[nEmail].week);
+                emailWeeks = this.state.email[nEmail].week;
             }
         }
 
@@ -155,7 +155,7 @@ export class Header extends Component {
         }
 
         return {
-            total: Math.round((email > 0 ) && (skype > 0) ? (skype + email) * .95 : skype + email),
+            total: Math.round((email > 0 ) && (skype > 0) ? (skype + email) * .95 : Math.round(skype) + Math.round(email)),
             email: Math.round(email / emailWeeks),
             skype: (skype > 0 && email > 0) ? Math.round((skype / skypeWeeks) * 0.95) : Math.round(skype / skypeWeeks)
         }
@@ -438,11 +438,10 @@ export class Header extends Component {
                                 <div className="toggle_option_slider"></div>
                             </div>
                             <p ref="duration-text" className="duration-text">
-                                Det här är en text som ska fyll upp utrymme så att layouten ska se bättre ut, vi får komma på vad det ska stå här.
-                            </p>
+                                Izaberite opciju videopoziva za vašu terapiju.  Cijena odabrane terapije je prikazana u doljnem polju.</p>
                         </div>
                         <div className="email">
-                            <h4 className="heading">E-posta</h4>
+                            <h4 className="heading">E-pošta</h4>
                             <div className="wrapper">
                                 <input
                                     id="email-s"
@@ -459,8 +458,8 @@ export class Header extends Component {
                                 <div className="week-wrapper">
                                     <div className="wrapper">
                                         <div className="week-title">
-                                            <span>Dizina</span>
-                                            <span>sednica</span>
+                                            <span>Broj</span>
+                                            <span>sedmica</span>
                                         </div>
                                         <div id="sub-s" onClick={this.handleWeeks} className="border-left" />
                                         <div className="n-weeks">
@@ -486,8 +485,8 @@ export class Header extends Component {
                                 <div className="week-wrapper">
                                     <div className="wrapper">
                                         <div className="week-title">
-                                            <span>Dizina</span>
-                                            <span>sednica</span>
+                                            <span>Broj</span>
+                                            <span>sedmica</span>
                                         </div>
                                         <div id="sub-m" onClick={this.handleWeeks} className="border-left" />
                                         <div className="n-weeks">
@@ -507,9 +506,84 @@ export class Header extends Component {
                     <h2 className="payment-sum-header">Cijena: { this.calculateCost().total } KM</h2>
                     <div className="payment-spec">
                         <span>Skype: { this.calculateCost().skype } KM / posiv</span>
-                        <span>E-posta: { this.calculateCost().email } KM / sednica</span>
+                        <span>E-pošta: { this.calculateCost().email } KM / sedmica</span>
                     </div>
                     <button>Zakazite</button>
+                </div>
+                <div className="coworkers">
+                    <h3>Naši psiholozi</h3>
+                    <p className="intro">Ovdje smo za vas, ako trebate s kim razgovarati. Zdravlje.nu nudi vam terapiju diskretno i po razumnoj cijeni. Nu nudi vam terapiju diskretno i po razumnoj cijeni</p>
+                    <div className="cards">
+                        <div className="card">
+                            <div className="photo-wrapper">
+                                <div className="photo-info-wrapper">
+                                    <p>
+                                        Det här är en text som ska fyll upp utrymme så att layouten ska se bättre ut, vi får komma på vad det ska stå här.
+                                        Det här är en text som ska fyll upp utrymme så att layouten ska se bättre ut, vi får komma på vad det ska stå här.
+                                        Layouten ska se bättre ut, vi får komma på vad det ska stå här. layouten ska se bättre ut, vi får komma på vad det ska stå här och så vidare.
+                                    </p>
+                                </div>
+                                <img src="./images/worker1.jpg"  />
+                            </div>
+                            <div className="info-wrapper">
+                                <div className="title-wrapper">
+                                    <p>Förnamn Efternamn</p>
+                                    <p>Diplomerad psykolog</p>
+                                </div>
+                                <div className="diploma-wrapper">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+                                        <path d="M486.4 51.2H25.6C12.8 51.2 0 64 0 76.8v358.4c0 12.8 12.8 25.6 25.6 25.6h460.8c15.36 0 25.6-12.8 25.6-25.6V76.8c0-12.8-10.24-25.6-25.6-25.6zM58.88 135.68h153.6c15.36 0 25.6 10.24 25.6 25.6 0 15.36-10.24 25.6-25.6 25.6H58.88c-15.36 0-25.6-12.8-25.6-25.6 0-15.36 10.24-25.6 25.6-25.6zm0 102.4h153.6c15.36 0 25.6 10.24 25.6 25.6 0 15.36-10.24 25.6-25.6 25.6H58.88c-15.36 0-25.6-12.8-25.6-25.6 0-15.36 10.24-25.6 25.6-25.6zm256 153.6h-256c-15.36 0-25.6-10.24-25.6-25.6 0-15.36 10.24-25.6 25.6-25.6h256c15.36 0 25.6 10.24 25.6 25.6 0 12.8-12.8 25.6-25.6 25.6zM435.2 256L384 222.72 332.8 256l12.8-51.2-38.4-51.2h53.76L384 102.4l23.04 51.2h53.76l-38.4 51.2 12.8 51.2z" fill="#6393cf"/>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="card">
+                            <div className="photo-wrapper">
+                                <div className="photo-info-wrapper">
+                                    <p>
+                                        Det här är en text som ska fyll upp utrymme så att layouten ska se bättre ut, vi får komma på vad det ska stå här.
+                                        Det här är en text som ska fyll upp utrymme så att layouten ska se bättre ut, vi får komma på vad det ska stå här.
+                                        Layouten ska se bättre ut, vi får komma på vad det ska stå här. layouten ska se bättre ut, vi får komma på vad det ska stå här och så vidare.
+                                    </p>
+                                </div>
+                                <img src="./images/worker1.jpg"  />
+                            </div>
+                            <div className="info-wrapper">
+                                <div className="title-wrapper">
+                                    <p>Förnamn Efternamn</p>
+                                    <p>Diplomerad psykolog</p>
+                                </div>
+                                <div className="diploma-wrapper">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+                                        <path d="M486.4 51.2H25.6C12.8 51.2 0 64 0 76.8v358.4c0 12.8 12.8 25.6 25.6 25.6h460.8c15.36 0 25.6-12.8 25.6-25.6V76.8c0-12.8-10.24-25.6-25.6-25.6zM58.88 135.68h153.6c15.36 0 25.6 10.24 25.6 25.6 0 15.36-10.24 25.6-25.6 25.6H58.88c-15.36 0-25.6-12.8-25.6-25.6 0-15.36 10.24-25.6 25.6-25.6zm0 102.4h153.6c15.36 0 25.6 10.24 25.6 25.6 0 15.36-10.24 25.6-25.6 25.6H58.88c-15.36 0-25.6-12.8-25.6-25.6 0-15.36 10.24-25.6 25.6-25.6zm256 153.6h-256c-15.36 0-25.6-10.24-25.6-25.6 0-15.36 10.24-25.6 25.6-25.6h256c15.36 0 25.6 10.24 25.6 25.6 0 12.8-12.8 25.6-25.6 25.6zM435.2 256L384 222.72 332.8 256l12.8-51.2-38.4-51.2h53.76L384 102.4l23.04 51.2h53.76l-38.4 51.2 12.8 51.2z" fill="#6393cf"/>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="card">
+                            <div className="photo-wrapper">
+                                <div className="photo-info-wrapper">
+                                    <p>
+                                        Det här är en text som ska fyll upp utrymme så att layouten ska se bättre ut, vi får komma på vad det ska stå här.
+                                        Det här är en text som ska fyll upp utrymme så att layouten ska se bättre ut, vi får komma på vad det ska stå här.
+                                        Layouten ska se bättre ut, vi får komma på vad det ska stå här. layouten ska se bättre ut, vi får komma på vad det ska stå här och så vidare.
+                                    </p>
+                                </div>
+                                <img src="./images/worker1.jpg"  />
+                            </div>
+                            <div className="info-wrapper">
+                                <div className="title-wrapper">
+                                    <p>Förnamn Efternamn</p>
+                                    <p>Diplomerad psykolog</p>
+                                </div>
+                                <div className="diploma-wrapper">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+                                        <path d="M486.4 51.2H25.6C12.8 51.2 0 64 0 76.8v358.4c0 12.8 12.8 25.6 25.6 25.6h460.8c15.36 0 25.6-12.8 25.6-25.6V76.8c0-12.8-10.24-25.6-25.6-25.6zM58.88 135.68h153.6c15.36 0 25.6 10.24 25.6 25.6 0 15.36-10.24 25.6-25.6 25.6H58.88c-15.36 0-25.6-12.8-25.6-25.6 0-15.36 10.24-25.6 25.6-25.6zm0 102.4h153.6c15.36 0 25.6 10.24 25.6 25.6 0 15.36-10.24 25.6-25.6 25.6H58.88c-15.36 0-25.6-12.8-25.6-25.6 0-15.36 10.24-25.6 25.6-25.6zm256 153.6h-256c-15.36 0-25.6-10.24-25.6-25.6 0-15.36 10.24-25.6 25.6-25.6h256c15.36 0 25.6 10.24 25.6 25.6 0 12.8-12.8 25.6-25.6 25.6zM435.2 256L384 222.72 332.8 256l12.8-51.2-38.4-51.2h53.76L384 102.4l23.04 51.2h53.76l-38.4 51.2 12.8 51.2z" fill="#6393cf"/>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         )
