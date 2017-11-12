@@ -295,7 +295,7 @@ header {
 
 .payment .intro,
 .coworkers .intro {
-    margin: 0 auto 5px;
+    margin: 0 auto 15px;
     text-align: center;
     width:70%;
     line-height: 25px;
@@ -372,7 +372,7 @@ header {
 }
 
 .payment .skype {
-    padding-right: 40px;
+    //padding-right: 40px;
     position: relative;
 }
 
