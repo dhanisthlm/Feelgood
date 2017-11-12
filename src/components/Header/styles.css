@@ -225,7 +225,7 @@ header {
     letter-spacing: 2px;
     font-weight: 600;
     margin: 0;
-    width: 320px;
+    min-width: 320px;
 }
 
 .payment-text {
