@@ -295,7 +295,7 @@ header {
 
 .payment .intro,
 .coworkers .intro {
-    margin: 0 auto 20px;
+    margin: 0 auto 5px;
     text-align: center;
     width:70%;
     line-height: 25px;

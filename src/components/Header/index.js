@@ -153,7 +153,7 @@ export class Header extends Component {
                 this.refs['duration-radios'].style.display = 'block';
             }
         }
-        
+
         return {
             total: Math.round((email > 0 ) && (skype > 0) ? (skype + email) * .95 : (Math.round(skype / skypeWeeks) * skypeWeeks) + Math.floor(email)),
             email: Math.round(email / emailWeeks),
