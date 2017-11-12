@@ -153,9 +153,9 @@ export class Header extends Component {
                 this.refs['duration-radios'].style.display = 'block';
             }
         }
-
+        
         return {
-            total: Math.round((email > 0 ) && (skype > 0) ? (skype + email) * .95 : Math.round(skype) + Math.round(email)),
+            total: Math.round((email > 0 ) && (skype > 0) ? (skype + email) * .95 : (Math.round(skype / skypeWeeks) * skypeWeeks) + Math.floor(email)),
             email: Math.round(email / emailWeeks),
             skype: (skype > 0 && email > 0) ? Math.round((skype / skypeWeeks) * 0.95) : Math.round(skype / skypeWeeks)
         }
@@ -243,7 +243,7 @@ export class Header extends Component {
                     <img src="/images/flowers.jpg" alt="hero-image" />
                     <div className="hero-text">
                         <h3>Terapija za svaskoga</h3>
-                        <p>Ovdje smo za vas, ako trebate s kim razgovarati. Zdravlje.nu nudi vam terapiju diskretno i po razumnoj cijeni. U terapiji prepoznajemo koje misli i emocije vas sprečavaju da se osjećate dobro i budete uspješni u životu, te radimo na promjeni.</p>
+                        <p className="preamble">Ovdje smo za vas, ako trebate s kim razgovarati. Zdravlje.nu nudi vam terapiju diskretno i po razumnoj cijeni. U terapiji prepoznajemo koje misli i emocije vas sprečavaju da se osjećate dobro i budete uspješni u životu, te radimo na promjeni.</p>
                         <button>Zapocnite</button>
                     </div>
                 </div>
@@ -509,6 +509,10 @@ export class Header extends Component {
                         <span>E-pošta: { this.calculateCost().email } KM / sedmica</span>
                     </div>
                     <button>Zakazite</button>
+                </div>
+                <div className="intersection">
+                    <p>Ono što mislite da postanete</p>
+                    <img src="./images/peace.jpg" />
                 </div>
                 <div className="coworkers">
                     <h3>Naši psiholozi</h3>

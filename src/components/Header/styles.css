@@ -236,9 +236,16 @@ header {
     text-align: center;
 }
 
-.payment-text h3,
-.coworkers h3 {
+.payment-text h3 {
     color: #C04C9C;
+    font-weight: 700;
+    font-size: 40px;
+    margin: 24px 0 7px 0;
+    text-align: center;
+}
+
+.coworkers h3 {
+    color: #fff;
     font-weight: 700;
     font-size: 40px;
     margin: 24px 0 7px 0;
@@ -254,7 +261,7 @@ header {
 }
 
 .payment-text button {
-    background-color: #6393CF;
+    background-color: #246cc7;
     color: #fff;
     border: 1px solid #fff;
     border-radius: 3px;
@@ -293,6 +300,10 @@ header {
     width:70%;
     line-height: 25px;
     font-size: 18px;
+}
+
+.coworkers .intro {
+    color: #fff;
 }
 
 .payment .skype,
@@ -707,6 +718,7 @@ input:checked + label::before {
 .coworkers {
     padding: 5px 45px 45px;
     text-align: center;
+    background-color: #C04C9C;
 }
 
 .cards {
@@ -735,9 +747,11 @@ input:checked + label::before {
     margin: 0 2%;
     margin-top: 25px;
     overflow: hidden;
-    height: 370px;
-    box-shadow: 0 0 7px 1px #888;
+    height: 360px;
+    box-shadow: 2px 2px 7px 1px rgba(0, 0, 0, 0.5);
     border: 8px solid #fff;
+    background: #C04C9C;
+    border-radius: 3px;
 }
 
 .card:hover .photo-info-wrapper {
@@ -747,8 +761,8 @@ input:checked + label::before {
 .photo-wrapper {
     height: 300px;
     overflow: hidden;
-    border-radius: 5px 5px 0 0;
     position: relative;
+    border: 1px solid #fff;
 }
 
 .photo-wrapper img {
@@ -757,11 +771,10 @@ input:checked + label::before {
 }
 
 .info-wrapper {
-    width: 230px;
-    background-color: #C04C9C;
+    width: 233px;
+    background-color: #fff;
     height: 47px;
     border-radius: 0 0 5px 5px;
-    margin-top: 2px;
     padding: 10px;
     position: relative;
 }
@@ -779,7 +792,7 @@ input:checked + label::before {
     margin-top: 0;
     margin-bottom: 5px;
     margin-left: 5px;
-    color: #fff;
+    color: #333;
     text-align: left;
 }
 
@@ -792,6 +805,10 @@ input:checked + label::before {
     margin-right: 7px;
     margin-top: -2px;
     position: relative;
+}
+
+.info-wrapper svg path {
+    fill: #246cc7 !important;
 }
 
 .diploma-wrapper {
@@ -808,8 +825,29 @@ input:checked + label::before {
     background-color: #fff;
 }
 
-
-
 .title-wrapper {
     float: left;
+}
+
+.intersection {
+    height: 542px;
+    overflow: hidden;
+    position: relative;
+}
+
+.intersection img {
+    display: block;
+    width: 100%;
+}
+
+.intersection p {
+    position: absolute;
+    color: #fff;
+    font-size: 60px;
+    font-weight: 700;
+    width: 450px;
+    text-align: center;
+    left: 130px;
+    top: 120px;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, .7);
 }
