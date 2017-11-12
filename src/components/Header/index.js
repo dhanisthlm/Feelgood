@@ -520,16 +520,14 @@ export class Header extends Component {
                             <div className="photo-wrapper">
                                 <div className="photo-info-wrapper">
                                     <p>
-                                        Det här är en text som ska fyll upp utrymme så att layouten ska se bättre ut, vi får komma på vad det ska stå här.
-                                        Det här är en text som ska fyll upp utrymme så att layouten ska se bättre ut, vi får komma på vad det ska stå här.
-                                        Layouten ska se bättre ut, vi får komma på vad det ska stå här. layouten ska se bättre ut, vi får komma på vad det ska stå här och så vidare.
+                                        Život ne određuju okolnost, već kako ih mi doživljavamo; naši izbori su ti koji dovode do života kakav živimo. Svako želi voditi ispunjen život vrijedan življenja, postati naj bolja verzija sebe, al nekad zaglavimo. Promjenit pogled na događaj i doživljaj mijenja taj događaj i doživljaj. Na taj naćin možemo uspostaviti ravnotežu između pozitivnih i negativnih aspekata ljudskog života, što je formula sretnog života. Tu sam da vam pomognem, da postanete zadovoljniji, sretniji, samopouzdaniji, bez strahova, sumnji, nedoumica oko ispravnosti odluka koje donosite, bez frustracija, depresije i briga.
                                     </p>
                                 </div>
                                 <img src="./images/worker1.jpg"  />
                             </div>
                             <div className="info-wrapper">
                                 <div className="title-wrapper">
-                                    <p>Förnamn Efternamn</p>
+                                    <p>Aida Rešić</p>
                                     <p>Diplomerad psykolog</p>
                                 </div>
                                 <div className="diploma-wrapper">
@@ -543,16 +541,14 @@ export class Header extends Component {
                             <div className="photo-wrapper">
                                 <div className="photo-info-wrapper">
                                     <p>
-                                        Det här är en text som ska fyll upp utrymme så att layouten ska se bättre ut, vi får komma på vad det ska stå här.
-                                        Det här är en text som ska fyll upp utrymme så att layouten ska se bättre ut, vi får komma på vad det ska stå här.
-                                        Layouten ska se bättre ut, vi får komma på vad det ska stå här. layouten ska se bättre ut, vi får komma på vad det ska stå här och så vidare.
+                                        Život ne određuju okolnost, već kako ih mi doživljavamo; naši izbori su ti koji dovode do života kakav živimo. Svako želi voditi ispunjen život vrijedan življenja, postati naj bolja verzija sebe, al nekad zaglavimo. Promjenit pogled na događaj i doživljaj mijenja taj događaj i doživljaj. Na taj naćin možemo uspostaviti ravnotežu između pozitivnih i negativnih aspekata ljudskog života, što je formula sretnog života. Tu sam da vam pomognem, da postanete zadovoljniji, sretniji, samopouzdaniji, bez strahova, sumnji, nedoumica oko ispravnosti odluka koje donosite, bez frustracija, depresije i briga.
                                     </p>
                                 </div>
                                 <img src="./images/worker1.jpg"  />
                             </div>
                             <div className="info-wrapper">
                                 <div className="title-wrapper">
-                                    <p>Förnamn Efternamn</p>
+                                    <p>Aida Rešić</p>
                                     <p>Diplomerad psykolog</p>
                                 </div>
                                 <div className="diploma-wrapper">
@@ -566,16 +562,14 @@ export class Header extends Component {
                             <div className="photo-wrapper">
                                 <div className="photo-info-wrapper">
                                     <p>
-                                        Det här är en text som ska fyll upp utrymme så att layouten ska se bättre ut, vi får komma på vad det ska stå här.
-                                        Det här är en text som ska fyll upp utrymme så att layouten ska se bättre ut, vi får komma på vad det ska stå här.
-                                        Layouten ska se bättre ut, vi får komma på vad det ska stå här. layouten ska se bättre ut, vi får komma på vad det ska stå här och så vidare.
+                                        Život ne određuju okolnost, već kako ih mi doživljavamo; naši izbori su ti koji dovode do života kakav živimo. Svako želi voditi ispunjen život vrijedan življenja, postati naj bolja verzija sebe, al nekad zaglavimo. Promjenit pogled na događaj i doživljaj mijenja taj događaj i doživljaj. Na taj naćin možemo uspostaviti ravnotežu između pozitivnih i negativnih aspekata ljudskog života, što je formula sretnog života. Tu sam da vam pomognem, da postanete zadovoljniji, sretniji, samopouzdaniji, bez strahova, sumnji, nedoumica oko ispravnosti odluka koje donosite, bez frustracija, depresije i briga.
                                     </p>
                                 </div>
                                 <img src="./images/worker1.jpg"  />
                             </div>
                             <div className="info-wrapper">
                                 <div className="title-wrapper">
-                                    <p>Förnamn Efternamn</p>
+                                    <p>Aida Rešić</p>
                                     <p>Diplomerad psykolog</p>
                                 </div>
                                 <div className="diploma-wrapper">
