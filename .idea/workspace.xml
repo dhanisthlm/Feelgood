@@ -53,8 +53,8 @@
       <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/Header/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="388">
-              <caret line="155" column="0" lean-forward="false" selection-start-line="155" selection-start-column="0" selection-end-line="155" selection-end-column="0" />
+            <state relative-caret-position="615">
+              <caret line="591" column="26" lean-forward="false" selection-start-line="591" selection-start-column="26" selection-end-line="591" selection-end-column="26" />
               <folding>
                 <element signature="e#0#51#0" expanded="true" />
               </folding>
@@ -87,8 +87,8 @@
       <file leaf-file-name="styles.css" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/components/Header/styles.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="281">
-              <caret line="298" column="23" lean-forward="true" selection-start-line="298" selection-start-column="23" selection-end-line="298" selection-end-column="23" />
+            <state relative-caret-position="246">
+              <caret line="855" column="18" lean-forward="false" selection-start-line="855" selection-start-column="18" selection-end-line="855" selection-end-column="18" />
               <folding>
                 <element signature="e#538#84282#2" expanded="true" />
               </folding>
@@ -120,8 +120,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>skype</find>
-      <find>lastSi</find>
       <find>lastS</find>
       <find>first-toggle</find>
       <find>skypeDuration</find>
@@ -150,6 +148,8 @@
       <find>intro</find>
       <find>button</find>
       <find>o</find>
+      <find>payment .intro</find>
+      <find>console.l</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -525,7 +525,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="121194000" />
+    <option name="totallyTimeSpent" value="122256000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="24" width="1903" height="1172" extended-state="0" />
@@ -590,7 +590,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/components/Header/index.js</url>
-          <line>443</line>
+          <line>441</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
       </breakpoints>
@@ -792,8 +792,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/Header/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="388">
-          <caret line="155" column="0" lean-forward="false" selection-start-line="155" selection-start-column="0" selection-end-line="155" selection-end-column="0" />
+        <state relative-caret-position="615">
+          <caret line="591" column="26" lean-forward="false" selection-start-line="591" selection-start-column="26" selection-end-line="591" selection-end-column="26" />
           <folding>
             <element signature="e#0#51#0" expanded="true" />
           </folding>
@@ -802,8 +802,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/Header/styles.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="281">
-          <caret line="298" column="23" lean-forward="true" selection-start-line="298" selection-start-column="23" selection-end-line="298" selection-end-column="23" />
+        <state relative-caret-position="246">
+          <caret line="855" column="18" lean-forward="false" selection-start-line="855" selection-start-column="18" selection-end-line="855" selection-end-column="18" />
           <folding>
             <element signature="e#538#84282#2" expanded="true" />
           </folding>

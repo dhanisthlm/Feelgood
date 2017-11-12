@@ -119,7 +119,6 @@ export class Header extends Component {
             factor = .875;
         }
 
-        console.log('cost', cost, factor)
         return Math.round(cost * factor) * weeks;
     }
 
@@ -155,8 +154,8 @@ export class Header extends Component {
         }
 
         return {
-            total: Math.round((email > 0 ) && (skype > 0) ? (skype + email) * .95 : (Math.round(skype / skypeWeeks) * skypeWeeks) + Math.floor(email)),
-            email: Math.round(email / emailWeeks),
+            total: function () { return (this.email * emailWeeks) + (this.skype * skypeWeeks )},
+            email: (skype > 0 && email > 0) ? Math.round((email / emailWeeks) * 0.95) : Math.round(email / emailWeeks),
             skype: (skype > 0 && email > 0) ? Math.round((skype / skypeWeeks) * 0.95) : Math.round(skype / skypeWeeks)
         }
     }
@@ -217,7 +216,6 @@ export class Header extends Component {
     componentWillReceiveProps (nextProps) {}
 
     render () {
-        console.log('state', this.state);
         return (
             <div>
                 <header>
@@ -503,7 +501,7 @@ export class Header extends Component {
                     </div>
                 </div>
                 <div className="payment-text">
-                    <h2 className="payment-sum-header">Cijena: { this.calculateCost().total } KM</h2>
+                    <h2 className="payment-sum-header">Cijena: { this.calculateCost().total() } KM</h2>
                     <div className="payment-spec">
                         <span>Skype: { this.calculateCost().skype } KM / posiv</span>
                         <span>E-pošta: { this.calculateCost().email } KM / sedmica</span>
@@ -587,6 +585,10 @@ export class Header extends Component {
                                 </div>
                             </div>
                         </div>
+                    </div>
+                </div>
+                <div className="checkout">
+                    <div className="basket">
                     </div>
                 </div>
             </div>
