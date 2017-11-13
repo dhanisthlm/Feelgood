@@ -51,6 +51,7 @@
     width: 165px;
     float: right;
     margin-top: 4px;
+    cursor: pointer;
 }
 
 .payment h3 {

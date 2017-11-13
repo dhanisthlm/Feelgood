@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux';
+import Checkout from '../Checkout';
 import styles from './styles.css';
 
 export class Payment extends Component {
@@ -7,6 +8,7 @@ export class Payment extends Component {
 		super(props);
 
 		this.state = {
+			checkout: false,
 			skype: {
 				s: {
 					active: true,
@@ -57,6 +59,8 @@ export class Payment extends Component {
 		this.handleCheckbox = this.handleCheckbox.bind(this);
 		this.handleWeeks = this.handleWeeks.bind(this);
 		this.handleSkypeDuration = this.handleSkypeDuration.bind(this);
+		this.handleCheckout = this.handleCheckout.bind(this);
+		this.resetCheckout = this.resetCheckout.bind(this);
 	}
 
 	handleCheckbox (e) {
@@ -107,6 +111,22 @@ export class Payment extends Component {
 		}
 
 		return Math.round(cost * factor) * weeks;
+	}
+
+	resetCheckout () {
+		const body = document.getElementsByTagName('body')[0];
+		body.style.overflow = 'scroll';
+		this.setState({ checkout: false });
+	}
+
+	handleCheckout () {
+		const body = document.getElementsByTagName('body')[0];
+		if (!this.state.checkout) {
+			this.setState({checkout: true});
+			body.style.overflow = 'hidden';
+		} else {
+			body.style.overflow = 'scroll';
+		}
 	}
 
 	calculateCost () {
@@ -203,6 +223,11 @@ export class Payment extends Component {
 	render () {
 		return (
 			<dic>
+				{(() => {
+					if (this.state.checkout === true) {
+						return <Checkout resetCheckout={ this.resetCheckout } />
+					}
+				})()}
 				<div className="payment">
 					<h3>Koliko kosta terapija?</h3>
 					<p className="intro">
@@ -320,7 +345,7 @@ export class Payment extends Component {
 						<span>Skype: { this.calculateCost().skype } KM / posiv</span>
 						<span>E-pošta: { this.calculateCost().email } KM / sedmica</span>
 					</div>
-					<button>Zakazite</button>
+					<button onClick={ this.handleCheckout }>Zakazite</button>
 				</div>
 			</dic>
 		);
