@@ -1,0 +1,445 @@
+.payment {
+    overflow: hidden;
+    margin-bottom: 25px;
+    padding: 20px 45px 0;
+}
+
+.payment-sum-header {
+    display: inline-block;
+    font-size: 40px;
+    color: #fff;
+    letter-spacing: 2px;
+    font-weight: 600;
+    margin: 0;
+    min-width: 320px;
+}
+
+.payment-text {
+    padding: 25px 40px 25px 40px;
+    margin-top: 30px;
+    background-color: #C04C9C;
+    overflow: hidden;
+    text-align: center;
+}
+
+.payment-text h3 {
+    color: #C04C9C;
+    font-weight: 700;
+    font-size: 40px;
+    margin: 24px 0 7px 0;
+    text-align: center;
+}
+
+.payment-text p {
+    float: left;
+    margin: 0;
+    font-weight: 300;
+    color: #fff;
+    max-width: 700px;
+}
+
+.payment-text button {
+    background-color: #246cc7;
+    color: #fff;
+    border: 1px solid #fff;
+    border-radius: 3px;
+    font-size: 18px;
+    font-weight: 100;
+    padding: 10px;
+    display: inline-block;
+    vertical-align: text-bottom;
+    width: 165px;
+    float: right;
+    margin-top: 4px;
+}
+
+.payment h3 {
+    color: #C04C9C;
+    margin-top: 10px;
+    font-size: 40px;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.payment .right {
+    margin-top: 57px;
+}
+
+.payment .right p {
+    font-size: 17px;
+    margin-top: 0;
+    line-height: 25px;
+}
+
+.payment .intro,
+.coworkers .intro {
+    margin: 0 auto 15px;
+    text-align: center;
+    width:70%;
+    line-height: 25px;
+    font-size: 18px;
+}
+
+.payment .skype,
+.payment .email,
+.payment .weeks {
+//display: inline-block;
+    position: relative;
+//vertical-align: top;
+}
+
+.payment .skype,
+.payment .email,
+.payment .right {
+    position: relative;
+    width: 33.333%;
+//text-align: center;
+}
+
+.payment .skype > div,
+.payment .email > div {
+//display: inline-block;
+}
+
+.payment-spec {
+    width: 200px;
+    margin-top: 5px;
+    margin-left: 30px;
+    display: inline-block;
+}
+
+.payment-spec span {
+    display: block;
+    color: #fff;
+    text-align: left;
+    margin-bottom: 3px;
+}
+
+.skype:after,
+.email:after {
+    content: '';
+    position: absolute;
+    right: 13%;
+    top: 62px;
+    width: 2px;
+    height: 260px;
+    border-right: 1px solid #aaa;
+}
+
+.payment-wrapper {
+    display: flex;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+    display: -o-flex;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.email-s-label {
+    margin-bottom: 5px;
+}
+
+.email-m-label {
+    margin-bottom: 0;
+    margin-top: 3px;
+}
+
+.payment .skype {
+//padding-right: 40px;
+    position: relative;
+}
+
+.weeks {
+    border: 4px solid #C04C9C;
+    width: 200px;
+    height: 200px;
+    border-radius: 3px;
+    margin: 60px 49px;
+    vertical-align: middle;
+    margin-top: 84px;
+}
+
+.payment > div > * {
+    text-align: left;
+}
+
+.payment .payment-wrapper h4 {
+    color: #C04C9C;
+    text-transform: uppercase;
+    text-align: left;
+    margin-left: 13px;
+    margin-bottom: 15px;
+    font-size: 18px;
+}
+
+input {
+    position: absolute;
+    left: -9999px;
+}
+
+.skype .wrapper label, .email .wrapper label {
+    display: block;
+    margin-bottom: 15px;
+    position: relative;
+    padding: 15px 30px 15px 62px;
+    border: 3px solid #fff;
+    border-radius: 100px;
+    color: #fff;
+    background-color: #C04C9C;
+    box-shadow: 0 0 20px rgba(0, 0, 0, .2);
+    white-space: nowrap;
+    cursor: pointer;
+    user-select: none;
+    transition: background-color .2s, box-shadow .2s;
+    width: 161px;
+    text-align: left;
+}
+
+.week-text {
+    margin-left: 13px;
+    font-size: 14px;
+    width: 245px;
+}
+
+.border-right {
+    border-right: 5px solid #C04C9C;
+    border-bottom: 5px solid #C04C9C;
+    width: 18px;
+    height: 18px;
+    transform: rotate(-45deg);
+    float: left;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+.week-wrapper .wrapper {
+    display: inline-block;
+}
+
+.border-left {
+    float: left;
+    border-left: 5px solid #C04C9C;
+    border-top: 5px solid #C04C9C;
+    width: 18px;
+    height: 18px;
+    transform: rotate(-45deg);
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+.week-wrapper {
+    display: none;
+    height: 50px;
+    margin-bottom: 15px;
+    margin-top: 14px;
+    padding-right: 13px;
+    padding-left: 37px;
+    box-sizing: border-box;
+    width: 250px;
+    padding-top: 6px;
+    text-align: left;
+}
+
+.week-wrapper .wrapper {
+    display: inline-block;
+}
+
+.week-title {
+    margin-right: 20px;
+    text-align: center;
+    float: left;
+}
+
+.week-title span {
+    display: block;
+    color: #C04C9C;
+}
+
+.n-weeks {
+    float: left;
+    width: 50px;
+    height: 40px;
+    border-radius: 4px;
+    font-size: 41px;
+    font-weight: 600;
+    color: #C04C9C;
+    line-height: 39px;
+    text-align: center;
+    text-indent: -3px;
+}
+
+.n-weeks span {
+    font-size: 41px;
+    font-weight: 600;
+    color: #C04C9C;
+    line-height: 39px;
+    text-align: center;
+    text-indent: -3px;
+}
+
+.skype .wrapper label:before, .email .wrapper label:before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 6px;
+    bottom: 10px;
+    left: 7px;
+    background-color: #fff;
+    width: 32px;
+    height: 32px;
+    border: 3px solid #fff;
+    border-radius: 100px;
+    transition: background-color .2s;
+}
+
+label:first-of-type {
+//transform: translateX(-40px);
+}
+
+label:last-of-type {
+//transform: translateX(40px);
+}
+
+.skype .wrapper label:hover, .email .wrapper label:hover {
+    box-shadow: 0 0 5px rgba(0, 0, 0, .6);
+}
+
+input:checked + label {
+//background-color: #ab576c;
+}
+
+input.email-s:checked ~ .week-wrapper {
+    display: block;
+}
+
+input.email-m:checked ~ .week-wrapper {
+    display: block;
+}
+
+input.email-s:checked ~ .week-text {
+    display: none;
+}
+
+input.email-m:checked ~ .week-text {
+    display: none;
+}
+
+.skype .wrapper input:checked + label:before, .email .wrapper input:checked + label:before {
+    content: '\2713';
+    display: block;
+    position: absolute;
+    top: 6px;
+    bottom: 10px;
+    left: 7px;
+    background-color: #fff;
+    width: 32px;
+    height: 32px;
+    border: 3px solid #fff;
+    border-radius: 100px;
+    transition: background-color .2s;
+    color: #C04C9C;
+    font-size: 33px;
+    line-height: 33px;
+    text-indent: 2px;
+}
+
+input:checked + label::before {
+//background-color: #fff;
+}
+
+.radio-wrapper {
+    margin: 100px 0;
+}
+.toggle_radios {
+    position: relative;
+    margin-left: 3px;
+    background: #43c568;
+    overflow: hidden;
+    padding: 0 !important;
+    -webkit-border-radius: 50px;
+    -moz-border-radius: 50px;
+    border-radius: 50px;
+    height: 40px;
+    width: 252px;
+    border: 3px solid #fff;
+    box-shadow: 0 0 20px rgba(0, 0, 0, .2);
+}
+.toggle_radios > * {
+    float: left;
+}
+.toggle_radios input[type=radio]{
+    display: none;
+}
+.toggle_radios label{
+    position: relative;
+    color: rgba(255,255,255,.9);
+    display: block;
+    width: 119px;
+    height: 34px;
+    margin: 3px 3px;
+    -webkit-border-radius: 50px;
+    -moz-border-radius: 50px;
+    border-radius: 50px;
+    cursor: pointer;
+    z-index: 1;
+    text-align: center;
+    margin-left: 0px;
+}
+.toggle_option_slider{
+    width: 124px;
+    height: 34px;
+    position: absolute;
+    top: 3px;
+    position: absolute;
+    top: 3px;
+    -webkit-border-radius: 50px;
+    -moz-border-radius: 50px;
+    border-radius: 50px;
+    -webkit-transition: all .4s ease;
+    -moz-transition: all .4s ease;
+    -o-transition: all .4s ease;
+    -ms-transition: all .4s ease;
+    transition: all .4s ease;
+}
+
+.toggle_radios label p {
+    margin: 0;
+    font-family: lato;
+    display: inline-block;
+    line-height: 34px;
+    font-size: 17px;
+    margin-left: 18px;
+    position: absolute;
+    left: 0;
+    z-index: 9;
+    opacity: .7
+}
+
+#duration-s:checked ~ .toggle_option_slider{
+    background: rgba(255,255,255,1);
+    left: 3px;
+}
+#duration-l:checked ~ .toggle_option_slider{
+    background: rgba(255,255,255,1);
+    left: 125px;
+}
+
+#duration-s:checked ~ .small-skype p{
+    color: #43c568;
+    opacity: 1;
+}
+
+#duration-l:checked ~ .large-skype p{
+    color: #43c568;
+    opacity: 1;
+}
+
+.duration-text {
+    display: none;
+    margin-left: 13px;
+    font-size: 14px;
+    width: 245px;
+    margin-top: 0;
+    margin-bottom: 0;
+}

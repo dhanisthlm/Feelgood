@@ -1,0 +1,118 @@
+.coworkers {
+    padding: 5px 45px 45px;
+    text-align: center;
+    background-color: #C04C9C;
+}
+
+.cards {
+    display: inline-block;
+    width: 100%;
+}
+
+.photo-info-wrapper {
+    position: absolute;
+    background-color: rgba(0, 0, 0, .6);
+    width: 100%;
+    height: 400px;
+    color: #fff;
+    font-weight: 300;
+    padding: 0 15px;
+    box-sizing: border-box;
+    opacity: 0;
+}
+
+.photo-info-wrapper p {
+    line-height: 22px;
+    text-align: left;
+}
+
+.card {
+    display: inline-block;
+    margin: 0 2%;
+    margin-top: 25px;
+    overflow: hidden;
+    height: 449px;
+    box-shadow: 2px 2px 7px 1px rgba(0, 0, 0, 0.5);
+    border: 8px solid #fff;
+    background-color: #fff;
+    border-radius: 3px;
+}
+
+.card:hover .photo-info-wrapper {
+    opacity: 1;
+}
+
+.photo-wrapper {
+    height: 383px;
+    overflow: hidden;
+    position: relative;
+    border: 1px solid #fff;
+}
+
+.photo-wrapper img {
+    width: 300px;
+    height: auto;
+}
+
+.info-wrapper {
+    width: 282px;
+    background-color: #fff;
+    height: 47px;
+    border-radius: 0 0 5px 5px;
+    padding: 10px;
+    position: relative;
+}
+
+.info-wrapper:first-child {
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.info-wrapper:last-child {
+    font-size: 14px;
+}
+
+.info-wrapper p {
+    line-height: 19px;
+    font-size: 14px;
+    margin-top: 5px;
+    text-align: left;
+}
+
+.info-wrapper svg {
+    float: right;
+    top: 0;
+    z-index: 99;
+    width: 50px;
+    height: auto;
+    margin-right: 7px;
+    margin-top: 0px;
+    position: relative;
+}
+
+.info-wrapper svg path {
+    fill: #246cc7 !important;
+}
+
+.diploma-wrapper {
+    position: relative;
+}
+
+.diploma-wrapper:before {
+    content: '';
+    position: absolute;
+    right: 11px;
+    top: 5px;
+    width: 43px;
+    height: 38px;
+    background-color: #fff;
+}
+
+.title-wrapper {
+    float: left;
+}
+
+.title-wrapper p:first-child {
+    font-size: 23px;
+    margin-bottom: 0;
+}

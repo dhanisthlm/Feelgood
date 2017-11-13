@@ -1,0 +1,22 @@
+.intersection {
+    height: 542px;
+    overflow: hidden;
+    position: relative;
+}
+
+.intersection img {
+    display: block;
+    width: 100%;
+}
+
+.intersection p {
+    position: absolute;
+    color: #fff;
+    font-size: 60px;
+    font-weight: 700;
+    width: 450px;
+    text-align: center;
+    left: 130px;
+    top: 120px;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, .7);
+}
