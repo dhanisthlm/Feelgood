@@ -5,7 +5,7 @@ import Hero from './Hero';
 import Payment from './Payment';
 import Quote from './Quote';
 import Traitments from './Traitments';
-import QuoteImage from './QuoteImage';
+import QuoteImage from './Quoteimage';
 import Staff from './Staff';
 import styles from './styles.css';
 
