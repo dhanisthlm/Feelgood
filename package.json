@@ -10,7 +10,8 @@
     "build": "webpack --config ./webpack/config.prod.js --progress --profile --colors",
     "start": "npm run build && NODE_ENV=production node index.js",
     "build:clean": "rimraf dist/client/static",
-    "dev": "npm run build:clean && NODE_ENV=development node index.js"
+    "dev": "npm run build:clean && NODE_ENV=development node index.js",
+    "test": "mocha --require ignore-styles test/utils/setup.js --compilers js:babel-register test/**/*Spec.jsx"
   },
   "dependencies": {
     "request": "*",
@@ -63,6 +64,21 @@
     "rc-checkbox": ""
   },
   "devDependencies": {
-    "sass-loader": "^6.0.6"
+    "babel-jest": "^21.2.0",
+    "babel-plugin-istanbul": "^4.1.5",
+    "chai": "^4.1.2",
+    "enzyme": "^3.1.1",
+    "ignore-styles": "^5.0.1",
+    "istanbul": "^0.4.5",
+    "jest": "^21.2.1",
+    "jsdom": "^11.3.0",
+    "mocha": "^4.0.1",
+    "nyc": "^11.3.0",
+    "react": "^15.6.2",
+    "react-addons-test-utils": "^15.6.2",
+    "react-dom": "^15.6.2",
+    "regenerator-runtime": "^0.11.0",
+    "sass-loader": "^6.0.6",
+    "sinon": "^4.1.2"
   }
 }
