@@ -1,38 +1,28 @@
-import { shallow } from 'enzyme';
-import { describe, it, before, after } from 'mocha';
+import React from 'react';
+import ReactTestUtils from 'react-dom/test-utils'; // ES6
+import { shallow, mount, render } from 'enzyme';
+import { describe, it, before, after, have } from 'mocha';
 import {expect} from 'chai';
 import sinon from 'sinon';
+import configureStore from 'redux-mock-store';
+const mockStore = configureStore();
+const dispatch = sinon.spy();
 import Payment from '../src/components/Front/Payment';
 
-describe('<Payment />', () => {
+describe('Payment Component', () => {
+	it('should call handleCheckout on button click', () => {
+		const wrapper = shallow(
+			<Payment
+				dispatch={dispatch}
+				store={mockStore({ runtime: {} }) }
+			/>
+		);
 
-	/*
-	let wrapper;
-	let onButtonClickSpy;
-
-	before(() => {
-		onButtonClickSpy = sinon.spy();
-		wrapper = shallow(<ModuleToolbar onButtonClick={onButtonClickSpy}/>);
+		const instance = wrapper.instance();
+		const spy = sinon.spy(instance, 'handleCheckout');
+		instance.forceUpdate();
+		wrapper.update();
+		wrapper.find('.checkout-button').simulate('click', { preventDefault() {} });
+		expect(spy.called).to.equal(true);
 	});
-
-	after(() => {
-		sinon.restore();
-	});
-	it('should render 2 <div> tags', () => {
-		expect(wrapper.find(<div>)).to.have.length(2);
-			});
-
-			it('should render 1 <a> tag', () => {
-				expect(wrapper.find(<a>)).to.have.length(1);
-					});
-
-				it('should render a `.clicks-0`', () => {
-					expect(wrapper.find('.clicks-0')).to.have.length(1);
-				});
-
-				it('should click button once', () => {
-					wrapper.find('button').simulate('click');
-					expect(onButtonClickSpy.calledOnce).to.equal(true);
-				});
-				*/
 });

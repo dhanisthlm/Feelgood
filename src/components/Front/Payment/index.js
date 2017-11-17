@@ -345,7 +345,7 @@ export class Payment extends Component {
 						<span>Skype: { this.calculateCost().skype } KM / posiv</span>
 						<span>E-pošta: { this.calculateCost().email } KM / sedmica</span>
 					</div>
-					<button onClick={ this.handleCheckout }>Zakazite</button>
+					<button className="checkout-button" onClick={ this.handleCheckout }>Zakazite</button>
 				</div>
 			</dic>
 		);
@@ -354,8 +354,4 @@ export class Payment extends Component {
 
 Payment.propTypes = { dispatch: PropTypes.func };
 
-const mapStateToProps = (state) => ({
-
-});
-
-export default connect(mapStateToProps)(Payment)
+export default Payment;
