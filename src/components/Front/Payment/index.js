@@ -354,4 +354,8 @@ export class Payment extends Component {
 
 Payment.propTypes = { dispatch: PropTypes.func };
 
-export default Payment;
+const mapStateToProps = (state) => ({
+
+});
+
+export default connect(mapStateToProps)(Payment)
