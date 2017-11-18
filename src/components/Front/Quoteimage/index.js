@@ -11,7 +11,7 @@ export class QuoteImage extends Component {
 
 	render () {
 		return (
-			<div className="intersection">
+			<div className="quote-image">
 				<p>Ono što mislite da postanete</p>
 				<img src="./images/peace.jpg" />
 			</div>

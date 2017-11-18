@@ -43,7 +43,13 @@ module.exports = {
                     path.join(__dirname, '..', 'validators')
                 ]
             },
-            { test: /\.css$/, loader: 'style-loader!css-loader' },
+            {
+                test: /\.css$/,
+                loader: 'style-loader!css-loader',
+                options: {
+                    modules: true
+                }
+            },
             { test: /\.png$/, loader: 'url-loader?limit=100000' },
             { test: /\.jpg$/, loader: 'file-loader' },
             { test: /\.json$/, loader: 'json-loader' },

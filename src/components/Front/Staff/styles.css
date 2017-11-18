@@ -1,15 +1,32 @@
-.coworkers {
+.staff {
     padding: 5px 45px 45px;
     text-align: center;
     background-color: #C04C9C;
 }
 
-.cards {
+.staff .heading {
+    color: #fff;
+    font-weight: 700;
+    font-size: 40px;
+    margin: 24px 0 7px 0;
+    text-align: center;
+}
+
+.staff .preamble {
+    color: #fff;
+    margin: 0 auto 25px;
+    text-align: center;
+    width: 70%;
+    line-height: 25px;
+    font-size: 18px;
+}
+
+.staff .cards {
     display: inline-block;
     width: 100%;
 }
 
-.photo-info-wrapper {
+.staff .card .photo-info-wrapper {
     position: absolute;
     background-color: rgba(0, 0, 0, .6);
     width: 100%;
@@ -21,12 +38,12 @@
     opacity: 0;
 }
 
-.photo-info-wrapper p {
+.staff .card .photo-info-wrapper p {
     line-height: 22px;
     text-align: left;
 }
 
-.card {
+.staff .card {
     display: inline-block;
     margin: 0 2%;
     margin-top: 25px;
@@ -38,23 +55,23 @@
     border-radius: 3px;
 }
 
-.card:hover .photo-info-wrapper {
+.staff .card:hover .photo-info-wrapper {
     opacity: 1;
 }
 
-.photo-wrapper {
+.staff .card .photo-wrapper {
     height: 383px;
     overflow: hidden;
     position: relative;
     border: 1px solid #fff;
 }
 
-.photo-wrapper img {
+.staff .card .photo-wrapper img {
     width: 300px;
     height: auto;
 }
 
-.info-wrapper {
+.staff .card .info-wrapper {
     width: 282px;
     background-color: #fff;
     height: 47px;
@@ -63,23 +80,23 @@
     position: relative;
 }
 
-.info-wrapper:first-child {
+.staff .card .info-wrapper:first-child {
     font-weight: 600;
     font-size: 16px;
 }
 
-.info-wrapper:last-child {
+.staff .card .info-wrapper:last-child {
     font-size: 14px;
 }
 
-.info-wrapper p {
+.staff .card .info-wrapper p {
     line-height: 19px;
     font-size: 14px;
     margin-top: 5px;
     text-align: left;
 }
 
-.info-wrapper svg {
+.staff .card .info-wrapper svg {
     float: right;
     top: 0;
     z-index: 99;
@@ -90,15 +107,15 @@
     position: relative;
 }
 
-.info-wrapper svg path {
+.staff .card .info-wrapper svg path {
     fill: #246cc7 !important;
 }
 
-.diploma-wrapper {
+.staff .card .diploma-wrapper {
     position: relative;
 }
 
-.diploma-wrapper:before {
+.staff .card .diploma-wrapper:before {
     content: '';
     position: absolute;
     right: 11px;
@@ -108,11 +125,11 @@
     background-color: #fff;
 }
 
-.title-wrapper {
+.staff .card .title-wrapper {
     float: left;
 }
 
-.title-wrapper p:first-child {
+.staff .card .title-wrapper p:first-child {
     font-size: 23px;
     margin-bottom: 0;
 }

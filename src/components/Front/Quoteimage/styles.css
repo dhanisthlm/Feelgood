@@ -1,15 +1,15 @@
-.intersection {
+.quote-image {
     height: 542px;
     overflow: hidden;
     position: relative;
 }
 
-.intersection img {
+.quote-image img {
     display: block;
     width: 100%;
 }
 
-.intersection p {
+.quote-image p {
     position: absolute;
     color: #fff;
     font-size: 60px;

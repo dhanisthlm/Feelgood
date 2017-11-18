@@ -4,3 +4,7 @@
     color: #C04C9C;
     text-align: center;
 }
+
+:local(.quote) {
+    color: green;
+}

@@ -71,9 +71,20 @@ export class Payment extends Component {
 			if ( size !== this.state.lastSize.skype) {
 				this.setState({
 					skype: {
-						s: { active: false, cost: this.state.skype.s.cost, week: this.state.skype.s.week },
-						m: { active: false, cost: this.state.skype.m.cost, week: this.state.skype.m.week },
-						l: { active: false, cost: this.state.skype.l.cost, week: this.state.skype.l.week }
+						s: {
+							active: false,
+							cost: this.state.skype.s.cost,
+							week: this.state.skype.s.week
+						},
+						m: {
+							active: false,
+							cost: this.state.skype.m.cost,
+							week: this.state.skype.m.week
+						},
+						l: {
+							active: false,
+							cost: this.state.skype.l.cost,
+							week: this.state.skype.l.week }
 					}
 				}, () => {
 					this.setCategorySize(size, type);
@@ -85,8 +96,16 @@ export class Payment extends Component {
 			if ( size !== this.state.lastSize.email) {
 				this.setState({
 					email: {
-						s: { active: false, cost: this.state.email.s.cost, week: this.state.email.s.week },
-						m: { active: false, cost: this.state.email.m.cost, week: this.state.email.m.week }
+						s: {
+							active: false,
+							cost: this.state.email.s.cost,
+							week: this.state.email.s.week
+						},
+						m: {
+							active: false,
+							cost: this.state.email.m.cost,
+							week: this.state.email.m.week
+						}
 					}
 				}, () => {
 					this.setCategorySize(size, type);
@@ -98,16 +117,27 @@ export class Payment extends Component {
 	}
 
 	calculateEmailDiscount (cost, weeks) {
-		var factor = 1;
+		let factor;
 
-		if (weeks === 2) {
-			factor = .95;
-		} else if (weeks === 3) {
-			factor = .925;
-		} else if (weeks === 4) {
-			factor = .9;
-		} else if (weeks > 4) {
-			factor = .875;
+		switch (true) {
+			case (weeks === 2):
+				factor = .95;
+				break;
+
+			case (weeks === 3):
+				factor = .925;
+				break;
+
+			case (weeks === 4):
+				factor = .9;
+				break;
+
+			case (weeks > 4):
+				factor = .875;
+				break;
+
+			default:
+				factor = 1;
 		}
 
 		return Math.round(cost * factor) * weeks;
@@ -131,22 +161,26 @@ export class Payment extends Component {
 
 	calculateCost () {
 		let skype = 0;
-		let email = 0;
 		let skypeDuration = this.state.skypeDuration.s.active ? 's' : 'l';
-		let emailWeeks = 1;
+        let email = 0;
+        let emailWeeks = 1;
 		let skypeWeeks = 1;
 
-		for (let nSkype in this.state.skype) {
-			if (this.state.skype[nSkype].active === true) {
-				skype = this.state.skype[nSkype].cost * this.state.skypeDuration[skypeDuration].factor;
-				skypeWeeks = this.state.skype[nSkype].week;
-			}
+		for (let size in this.state.skype) {
+			if (this.state.skype.hasOwnProperty(size)) {
+                if (this.state.skype[size].active === true) {
+                    skype = this.state.skype[size].cost * this.state.skypeDuration[skypeDuration].factor;
+                    skypeWeeks = this.state.skype[size].week;
+                }
+            }
 		}
 
-		for (let nEmail in this.state.email) {
-			if (this.state.email[nEmail].active === true) {
-				email = this.calculateEmailDiscount(this.state.email[nEmail].cost, this.state.email[nEmail].week);
-				emailWeeks = this.state.email[nEmail].week;
+		for (let size in this.state.email) {
+            if (this.state.email.hasOwnProperty(size)) {
+				if (this.state.email[size].active === true) {
+                    email = this.calculateEmailDiscount(this.state.email[size].cost, this.state.email[size].week);
+                    emailWeeks = this.state.email[size].week;
+                }
 			}
 		}
 
@@ -176,8 +210,15 @@ export class Payment extends Component {
 
 			this.setState({
 				email: {
-					s: { active: this.state.email.s.active, cost: this.state.email.s.cost, week: size === 's' ? nWeeks : this.state.email.s.week },
-					m: { active: this.state.email.m.active, cost: this.state.email.m.cost, week: size === 'm' ? nWeeks : this.state.email.m.week }
+					s: {
+						active: this.state.email.s.active,
+						cost: this.state.email.s.cost,
+						week: size === 's' ? nWeeks : this.state.email.s.week },
+					m: {
+						active: this.state.email.m.active,
+						cost: this.state.email.m.cost,
+						week: size === 'm' ? nWeeks : this.state.email.m.week
+					}
 				}
 			});
 		} else {
@@ -186,8 +227,16 @@ export class Payment extends Component {
 
 				this.setState({
 					email: {
-						s: { active: this.state.email.s.active, cost: this.state.email.s.cost, week: size === 's' ? nWeeks : this.state.email.s.week },
-						m: { active: this.state.email.m.active, cost: this.state.email.m.cost, week: size === 'm' ? nWeeks : this.state.email.m.week }
+						s: {
+							active: this.state.email.s.active,
+							cost: this.state.email.s.cost,
+							week: size === 's' ? nWeeks : this.state.email.s.week
+						},
+						m: {
+							active: this.state.email.m.active,
+							cost: this.state.email.m.cost,
+							week: size === 'm' ? nWeeks : this.state.email.m.week
+						}
 					}
 				});
 			}
@@ -196,9 +245,11 @@ export class Payment extends Component {
 
 	setCategorySize (size, type) {
 		let category = this.state[type];
-		category[size].active = !category[size].active;
-		let lastSize = this.state.lastSize;
+        let lastSize = this.state.lastSize;
+
+        category[size].active = !category[size].active;
 		lastSize[type] = size;
+
 		this.setState({ category, lastSize });
 	}
 
@@ -229,14 +280,14 @@ export class Payment extends Component {
 					}
 				})()}
 				<div className="payment">
-					<h3>Koliko kosta terapija?</h3>
-					<p className="intro">
+					<h3 className="heading">Koliko kosta terapija?</h3>
+					<p className="preamble">
 						Ovde smo za vas, ako trebate sa kom razgovarati. Se Zdravlje.nu, svako moze dobiti terapiju
 						diskretno i po razumnoj cijeni. U terapiji prepoznajemo/identifikujemo koje misli i emocije.
 					</p>
-					<div className="payment-wrapper">
+					<div className="payment-type-wrapper">
 						<div className="container skype">
-							<h4 className="heading">Skype</h4>
+							<h4 className="category-heading">Skype</h4>
 							<div className="wrapper">
 								<input
 									id="skype-s"
@@ -268,17 +319,17 @@ export class Payment extends Component {
 								<label htmlFor="skype-l">Paket za 8 skype poziva</label>
 							</div>
 							<div ref="duration-radios" className="toggle_radios">
-								<input type="radio" checked={this.state.skypeDuration.s.active} className="toggle_option" id="duration-s" name="toggle_option" />
-								<input type="radio" checked={this.state.skypeDuration.l.active} className="toggle_option" id="duration-l" name="toggle_option" />
-								<label id="duration-s" onClick={this.handleSkypeDuration} className="small-skype" htmlFor="duration-s"><p>20 min poziv</p></label>
-								<label id="duration-l" onClick={this.handleSkypeDuration} className="large-skype" htmlFor="duration-l"><p>45 min poziv</p></label>
+								<input type="radio" checked={ this.state.skypeDuration.s.active } className="toggle_option" id="duration-s" name="toggle_option" />
+								<input type="radio" checked={ this.state.skypeDuration.l.active } className="toggle_option" id="duration-l" name="toggle_option" />
+								<label id="duration-s" onClick={ this.handleSkypeDuration } className="small-skype" htmlFor="duration-s"><p>20 min poziv</p></label>
+								<label id="duration-l" onClick={ this.handleSkypeDuration } className="large-skype" htmlFor="duration-l"><p>45 min poziv</p></label>
 								<div className="toggle_option_slider"></div>
 							</div>
 							<p ref="duration-text" className="duration-text">
 								Izaberite opciju videopoziva za vašu terapiju.  Cijena odabrane terapije je prikazana u doljnem polju.</p>
 						</div>
 						<div className="email">
-							<h4 className="heading">E-pošta</h4>
+							<h4 className="category-heading">E-pošta</h4>
 							<div className="wrapper">
 								<input
 									id="email-s"
@@ -292,18 +343,16 @@ export class Payment extends Component {
 								<p className="week-text week-text-s">
 									Det här är en text som ska fyll upp utrymme så att layouten ska se bättre ut, vi får komma på vad det ska stå här.
 								</p>
-								<div className="week-wrapper">
-									<div className="wrapper">
-										<div className="week-title">
-											<span>Broj</span>
-											<span>sedmica</span>
-										</div>
-										<div id="sub-s" onClick={this.handleWeeks} className="border-left" />
-										<div className="n-weeks">
-											<span>{this.state.email.s.week}</span>
-										</div>
-										<div id="add-s" onClick={this.handleWeeks} className="border-right" />
+								<div className="weeks">
+									<div className="week-title">
+										<span>Broj</span>
+										<span>sedmica</span>
 									</div>
+									<div id="sub-s" onClick={this.handleWeeks} className="arrow-left" />
+									<div className="n-weeks">
+										<span>{this.state.email.s.week}</span>
+									</div>
+									<div id="add-s" onClick={this.handleWeeks} className="arrow-right" />
 								</div>
 							</div>
 							<div className="wrapper">
@@ -319,29 +368,27 @@ export class Payment extends Component {
 								<p className="week-text week-text-m">
 									Det här är en text som ska fyll upp utrymme så att layouten ska se bättre ut, vi får komma på vad det ska stå här.
 								</p>
-								<div className="week-wrapper">
-									<div className="wrapper">
-										<div className="week-title">
-											<span>Broj</span>
-											<span>sedmica</span>
-										</div>
-										<div id="sub-m" onClick={this.handleWeeks} className="border-left" />
-										<div className="n-weeks">
-											<span>{this.state.email.m.week}</span>
-										</div>
-										<div id="add-m" onClick={this.handleWeeks} className="border-right" />
+								<div className="weeks">
+									<div className="week-title">
+										<span>Broj</span>
+										<span>sedmica</span>
 									</div>
+									<div id="sub-m" onClick={this.handleWeeks} className="arrow-left" />
+									<div className="n-weeks">
+										<span>{this.state.email.m.week}</span>
+									</div>
+									<div id="add-m" onClick={this.handleWeeks} className="arrow-right" />
 								</div>
 							</div>
 						</div>
-						<div className="right">
+						<div className="info-text">
 							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut expedita officia quasi. Alias aliquam architecto corporis culpa cupiditate doloremque eaque facere fugit harum illo ipsam, iste labore minima necessitatibus odio quidem quisquam sed sit, totam ut.</p><p>Animi autem corporis cum dignissimos impedit magnam maiores, minus nemo omnis possimus, sed vel!</p>
 						</div>
 					</div>
 				</div>
-				<div className="payment-text">
-					<h2 className="payment-sum-header">Cijena: { this.calculateCost().total() } KM</h2>
-					<div className="payment-spec">
+				<div className="text-wrapper">
+					<h2 className="total">Cijena: { this.calculateCost().total() } KM</h2>
+					<div className="spec">
 						<span>Skype: { this.calculateCost().skype } KM / posiv</span>
 						<span>E-pošta: { this.calculateCost().email } KM / sedmica</span>
 					</div>

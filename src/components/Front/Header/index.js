@@ -11,7 +11,7 @@ export class Header extends Component {
 
     render () {
         return (
-            <header>
+            <header className="header">
                 <div className="logo-text">
                     <span>Kontaktirajte nas</span>
                     <span>Hitna pomoc</span>

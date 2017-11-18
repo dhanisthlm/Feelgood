@@ -1,24 +1,24 @@
-header {
+.header {
     position: relative;
     padding-left: 300px;
     overflow: hidden;
 }
 
-.logo {
+.header .logo {
     position: absolute;
     left: 20px;
 }
 
-.logo svg {
+.header .logo svg {
     width: 240px;
 }
 
-.main-menu {
+.header .main-menu {
     float: left;
     margin-top: 68px;
 }
 
-.main-menu div {
+.header .main-menu div {
     display: inline-block;
     font-weight: 400;
     margin-right: 30px;
@@ -26,25 +26,13 @@ header {
     font-size: 18px;
 }
 
-.coworkers h3 {
-    color: #fff;
-    font-weight: 700;
-    font-size: 40px;
-    margin: 24px 0 7px 0;
-    text-align: center;
-}
-
-.coworkers .intro {
-    color: #fff;
-}
-
-.logo-text {
+.header .logo-text {
     position: absolute;
     left: 40px;
     top: 17px;
 }
 
-.logo-text span {
+.header .logo-text span {
     position: relative;
     font-weight: 400;
     color: #27548c;
@@ -52,7 +40,7 @@ header {
     margin-right: 20px;
 }
 
-.logo-text span:first-child:after {
+.header .logo-text span:first-child:after {
     content: '|';
     position: absolute;
     color: #27548c;
@@ -61,14 +49,14 @@ header {
 
 }
 
-.contact {
+.header .contact {
     position: absolute;
     right: 38px;
     top: 47px;
     text-align: right;
 }
 
-.contact span:first-child {
+.header .contact span:first-child {
     display: block;
     margin-bottom: 5px;
     font-weight: 400;
@@ -76,7 +64,7 @@ header {
     font-size: 14px;
 }
 
-.contact span:last-child {
+.header .contact span:last-child {
     font-weight: 400;
     color: #27548c;
     font-size: 14px;

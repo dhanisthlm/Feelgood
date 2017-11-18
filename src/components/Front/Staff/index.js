@@ -11,9 +11,9 @@ export class Staff extends Component {
 
 	render () {
 		return (
-			<div className="coworkers">
-				<h3>Naši psiholozi</h3>
-				<p className="intro">Ovdje smo za vas, ako trebate s kim razgovarati. Zdravlje.nu nudi vam terapiju diskretno i po razumnoj cijeni. Nu nudi vam terapiju diskretno i po razumnoj cijeni</p>
+			<div className="staff">
+				<h3 className="heading">Naši psiholozi</h3>
+				<p className="preamble">Ovdje smo za vas, ako trebate s kim razgovarati. Zdravlje.nu nudi vam terapiju diskretno i po razumnoj cijeni. Nu nudi vam terapiju diskretno i po razumnoj cijeni</p>
 				<div className="cards">
 					<div className="card">
 						<div className="photo-wrapper">

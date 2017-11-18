@@ -1,10 +1,10 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux';
 import Header from './Header';
-import Hero from './Hero';
+import Hero from './Intro';
 import Payment from './Payment';
 import Quote from './Quote';
-import Traitments from './Traitments';
+import Traitments from './Issues';
 import QuoteImage from './Quoteimage';
 import Staff from './Staff';
 import styles from './styles.css';
