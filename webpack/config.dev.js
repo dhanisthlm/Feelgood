@@ -1,8 +1,10 @@
 var path = require('path')
-var webpack = require('webpack')
+var webpack = require('webpack');
+var nodeExternals = require('webpack-node-externals');
 
 module.exports = {
-  devtool: 'source-map',
+  devtool: 'inline-source-map',
+  target: 'node', // webpack should emit node.js compatible code
   entry: [
     'babel-polyfill',
     './src/index'
@@ -13,7 +15,8 @@ module.exports = {
     publicPath: '/static/'
   },
   plugins: [
-    new webpack.NoErrorsPlugin(),
+      new webpack.IgnorePlugin(/jsdom/),
+      new webpack.NoErrorsPlugin(),
     function () {
       this.plugin('done', function (stats) {
         if (stats.compilation.errors && stats.compilation.errors.length && process.argv.indexOf('--watch') === -1) {
@@ -23,15 +26,16 @@ module.exports = {
       })
     }
   ],
+  externals: [nodeExternals()],
   resolve: {
     alias: {}
   },
-  watch: true,
   module: {
     loaders: [
       {
         test: /\.js$/,
         loaders: ['babel'],
+        exclude: /\/node_modules\//,
         include: path.join(__dirname, '..', 'src')
       },
         { test: /\.css/, loader: "style-loader!css-loader" },

@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
+import Public from '../Public';
 import styles from './styles.css';
 
 export class App extends Component {
@@ -10,7 +11,9 @@ export class App extends Component {
   render () {
     return (
       <div className="app">
-        {this.props.children}
+          {(() => {
+              return (this.props.location.pathname === '/') ? <Public /> : this.props.children;
+          })()}
       </div>
     )
   }

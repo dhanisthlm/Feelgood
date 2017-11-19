@@ -7,7 +7,7 @@ import sinon from 'sinon';
 import configureStore from 'redux-mock-store';
 const mockStore = configureStore();
 const dispatch = sinon.spy();
-import { Payment } from '../src/components/Front/Payment';
+import { Payment } from '../src/components/Public/Payment';
 
 const wrapper = shallow(
 	<Payment
