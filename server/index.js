@@ -2,7 +2,12 @@ import Path from 'path'
 import Hapi from 'hapi'
 import Inert from 'inert'
 import base from './base'
-import gallery from './api/gallery'
+import encounter from './api/encounter'
+import mongoose from 'mongoose';
+import config from 'config';
+
+mongoose.connect(config.get('database.host'));
+mongoose.connection.on('error', console.error.bind(console, 'db error:'));
 
 const server = new Hapi.Server({
     connections: {
@@ -52,7 +57,7 @@ server.register([
   },
 
   {
-    register: gallery
+    register: encounter
   }
 ], (error) => {
   if (error) throw error
