@@ -4,7 +4,13 @@ export default handleActions({
     ENCOUNTER_SAVED: (state) => {
         return {
             ...state,
-            saved: !this.state.saved
+            saved: true
+        }
+    },
+    RESET_ENCOUNTER: (state) => {
+        return {
+            ...state,
+            saved: false
         }
     }
 }, {

@@ -10,11 +10,11 @@ const encounterSchema = Schema({
     phone: {
       type: String
     },
-    skype: {
-      type: String
+    comment: {
+        type: String
     },
-    email: {
-      type: String
+    code: {
+        type: String
     },
     price: {
         type: Number

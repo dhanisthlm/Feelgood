@@ -326,7 +326,8 @@ export class Payment extends Component {
 								<div className="toggle_option_slider"></div>
 							</div>
 							<p ref="duration-text" className="duration-text">
-								Izaberite opciju videopoziva za vašu terapiju.  Cijena odabrane terapije je prikazana u doljnem polju.</p>
+								Izaberite jedan Skype-poziv ili paket sa više Skype-poziva. Možete kombinovati sa e-poštom.
+							</p>
 						</div>
 						<div className="email">
 							<h4 className="category-heading">E-pošta</h4>
@@ -341,7 +342,7 @@ export class Payment extends Component {
 								/>
 								<label className="email-s-label" htmlFor="email-s">Odgovar u toku 24h</label>
 								<p className="week-text week-text-s">
-									Det här är en text som ska fyll upp utrymme så att layouten ska se bättre ut, vi får komma på vad det ska stå här.
+									Neograničen broj e-pošte, odgovor u toku 24h. Možete kombinovati sa Skype-pozivom.
 								</p>
 								<div className="weeks">
 									<div className="week-title">
@@ -366,7 +367,7 @@ export class Payment extends Component {
 								/>
 								<label className="email-m-label" htmlFor="email-m">Odgovar u toku 4h</label>
 								<p className="week-text week-text-m">
-									Det här är en text som ska fyll upp utrymme så att layouten ska se bättre ut, vi får komma på vad det ska stå här.
+									Neograničen broj e-pošte, odgovor u toku 4h radnim danima 07.00-22.00, vikend i praznik 09.00-18.00.
 								</p>
 								<div className="weeks">
 									<div className="week-title">
