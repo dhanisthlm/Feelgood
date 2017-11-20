@@ -1,12 +1,8 @@
 var path = require('path')
 var webpack = require('webpack');
-var nodeExternals = require('webpack-node-externals');
 
 module.exports = {
-  devtool: 'inline-source-map',
-  target: 'node', // webpack should emit node.js compatible code
   entry: [
-    'babel-polyfill',
     './src/index'
   ],
   output: {
@@ -15,7 +11,6 @@ module.exports = {
     publicPath: '/static/'
   },
   plugins: [
-      new webpack.IgnorePlugin(/jsdom/),
       new webpack.NoErrorsPlugin(),
     function () {
       this.plugin('done', function (stats) {
@@ -26,7 +21,6 @@ module.exports = {
       })
     }
   ],
-  externals: [nodeExternals()],
   resolve: {
     alias: {}
   },

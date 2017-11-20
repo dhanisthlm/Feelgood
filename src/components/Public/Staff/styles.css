@@ -55,7 +55,7 @@
     border-radius: 3px;
 }
 
-.staff .card:hover .photo-info-wrapper {
+.staff .card .photo-wrapper:hover .photo-info-wrapper {
     opacity: 1;
 }
 
@@ -113,6 +113,7 @@
 
 .staff .card .diploma-wrapper {
     position: relative;
+    cursor: pointer;
 }
 
 .staff .card .diploma-wrapper:before {
@@ -132,4 +133,54 @@
 .staff .card .title-wrapper p:first-child {
     font-size: 23px;
     margin-bottom: 0;
+}
+
+.staff .show-diploma {
+    display: block !important;
+}
+
+.staff .diploma {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 99999;
+}
+
+.staff .diploma-open-wrapper svg {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    top: 26px;
+    right: 7px;
+    z-index: 9999;
+    cursor: pointer;
+}
+
+.staff .diploma-open-wrapper {
+    position: relative;
+    height: 70%;
+    width: 34%;
+    z-index: 99999999;
+    top: 50%;
+    left: 50%;
+    display: block;
+    margin-top: -375px;
+    margin-left: -260px;
+    padding: 10px;
+    border-radius: 3px;
+}
+
+.staff .diploma img {
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    display: block;
+    padding: 10px;
+    background-color: #C04C9C;
+    border-radius: 3px;
 }
