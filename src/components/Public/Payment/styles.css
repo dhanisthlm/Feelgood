@@ -313,6 +313,7 @@
     margin: 100px 0;
 }
 .payment .toggle_radios {
+    display: none;
     position: relative;
     margin-left: 3px;
     background: #43c568;
@@ -382,7 +383,6 @@
 }
 
 .payment .duration-text {
-    display: none;
     margin-left: 13px;
     font-size: 14px;
     width: 245px;

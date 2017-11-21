@@ -9,26 +9,61 @@
 }
 
 .checkout .basket {
-    width: 501px;
-    height: 657px;
+    width: 600px;
+    height: 666px;
     padding: 45px;
-    border: 7px solid #c04c9c;
     border-radius: 5px;
     text-align: center;
     background-color: #fff;
     left: 50%;
     top: 50%;
     position: absolute;
-    margin-left: -325px;
-    margin-top: -356px;
+    margin-left: -300px;
+    margin-top: -333px;
     box-sizing: border-box;
+}
+
+.checkout .basket:before {
+    content: '';
+    position: absolute;
+    left: 14px;
+    top: 14px;
+    width: 568px;
+    height: 634px;
+    border: 2px solid #c04c9c;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.checkout .basket:after {
+    content: '';
+    position: absolute;
+    left: 20px;
+    top: 20px;
+    width: 91%;
+    height: 613px;
+    border: 7px solid #c04c9c;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.checkout .basket .front {
+    margin-top: 11px;
+    position: absolute;
+    left: 50%;
+    margin-left: -175px;
+    z-index: 99;
+}
+
+.checkout .basket .back {
+    margin: 0 auto;
+    width: 410px;
 }
 
 .checkout .basket .front,
 .checkout .basket .back {
     color: #c04c9c;
     font-size: 40px;
-    margin-top: 0;
     text-align: left;
     display: inline-block;
 }
@@ -40,25 +75,21 @@
 }
 
 .checkout .basket p:nth-child(2) {
-    margin-top: 15px;
+    margin-top: 5px;
     margin-bottom: 0;
 }
 
 .checkout .basket p:nth-child(3) {
-    margin: 0;
+    margin: 15px 0 0 0;
     font-weight: 400;
     color: #c04c9c;
-    margin-left: 2px;
     font-size: 29px;
-    border-top: 1px solid #999;
-    display: inline-block;
-    margin-top: 11px;
-    border-bottom: 1px solid#999;
-    padding: 5px;
+    text-align: center;
 }
 
 .checkout .basket p:nth-child(4) {
-    margin-top: 20px;
+    padding-top: 12px;
+    margin-top: -2px;
     margin-bottom: 0;
 }
 
@@ -66,13 +97,9 @@
     margin: 0;
     font-weight: 400;
     color: #c04c9c;
-    margin-left: 2px;
     font-size: 29px;
-    border-top: 1px solid #999;
-    display: inline-block;
-    margin-top: 11px;
-    border-bottom: 1px solid#999;
-    padding: 5px;
+    margin: 14px 0 9px 0;
+    text-align: center;
 }
 
 .checkout .none {
@@ -80,15 +107,16 @@
 }
 
 .checkout .basket label:nth-child(2) {
-    margin-top: 20px;
+    margin-top: 15px;
+    margin-bottom: 0;
 }
 
 .checkout .basket p:nth-child(6) {
-    margin: 20px 0;
+    margin: 4px 0 14px;
 }
 
 .checkout .basket p:nth-child(7) {
-    margin: 20px 0;
+    margin: 4px 0 14px;
 }
 
 .checkout .basket p:nth-child(8) {
@@ -99,20 +127,27 @@
     margin: 5px 0 0 0;
 }
 
-.checkout .basket h1 {
+.checkout .basket .front h1 {
     display: inline-block;
     margin-top: 0;
-    font-size: 41px;
     margin-bottom: 5px;
+    font-size: 40px;
+}
+
+.checkout .basket .back h1 {
+    display: inline-block;
+    margin-top: 30px;
+    margin-bottom: 5px;
+    font-size: 40px;
 }
 
 .checkout .basket label {
-    color: #333;
+    color: #c04c9c;
     display: block;
     font-size: 19px;
     margin-bottom: 5px;
     margin-left: 3px;
-    font-weight: 300;
+    font-weight: 400;
     text-align: left;
 }
 
@@ -128,6 +163,7 @@
     font-size: 16px;
     font-weight: 200;
     outline: 0;
+    box-shadow: inset 0 0 1px 0 #999;
 }
 
 .checkout .basket textarea {
@@ -146,7 +182,7 @@
 }
 
 .checkout .basket button {
-    width: 357px;
+    width: 351px;
     height: 56px;
     background-color: #c04c9c;
     border: none;

@@ -10,7 +10,7 @@ export class Payment extends Component {
 		this.state = {
 			checkout: false,
 			skype: {
-				s: { active: true, cost: 45, week: 1 },
+				s: { active: false, cost: 45, week: 1 },
 				m: { active: false, cost: 126, week: 3 },
 				l: { active: false, cost: 320, week: 8 }
 			},
@@ -247,8 +247,7 @@ export class Payment extends Component {
 				<div className="payment">
 					<h3 className="heading">Koliko kosta terapija?</h3>
 					<p className="preamble">
-						Ovde smo za vas, ako trebate sa kom razgovarati. Se Zdravlje.nu, svako moze dobiti terapiju
-						diskretno i po razumnoj cijeni. U terapiji prepoznajemo/identifikujemo koje misli i emocije.
+						Ovdje možete naručiti psihološko savjetovanje. Cijenu za vase izbore mozete naci u doljnem dio stranice. Izaberite Skype-poziv, e-postu ili kombinaciju Skype-poziv i e-postu. Što više poziva ili sedmica e-poste odlučite da kupite, sto jeftinija je cena po pozivu i po sedmicu e-poste.
 					</p>
 					<div className="payment-type-wrapper">
 						<div className="container skype">
