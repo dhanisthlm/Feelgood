@@ -12,7 +12,7 @@ export class App extends Component {
     return (
       <div className="app">
           {(() => {
-              return (this.props.location.pathname === '/') ? <Public /> : this.props.children;
+              return (this.props.location.pathname === '/anka') ? <Public /> : this.props.children;
           })()}
       </div>
     )
