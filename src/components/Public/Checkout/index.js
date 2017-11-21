@@ -1,5 +1,8 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux';
+import validation from 'react-validation-mixin';
+import strategy from 'joi-validation-strategy';
+import { encounterValidator } from '../../../../validators/encounters';
 import { saveEncounter, resetEncounter } from '../../../actions/encounter';
 import styles from './styles.css';
 
@@ -15,6 +18,7 @@ export class Checkout extends Component {
 			isOpen: false
 		};
 
+		this.validatorTypes = encounterValidator;
 		this.resetCheckout = this.resetCheckout.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.handleChange = this.handleChange.bind(this);
@@ -23,6 +27,10 @@ export class Checkout extends Component {
 	componentDidMount () {
 		this.setState({ isOpen: true });
 	}
+
+    getValidatorData() {
+        return this.state;
+    }
 
 	resetCheckout () {
 		this.setState({
@@ -42,7 +50,12 @@ export class Checkout extends Component {
 	}
 
 	handleSubmit () {
-		this.props.dispatch(saveEncounter(this.state));
+		this.props.validate((error) => {
+			console.log(error);
+			if (!error) {
+                this.props.dispatch(saveEncounter(this.state));
+			}
+		})
 	}
 
 	render () {
@@ -92,4 +105,4 @@ const mapStateToProps = (state) => ({
 	save: state.encounter.saved
 });
 
-export default connect(mapStateToProps)(Checkout)
+export default connect(mapStateToProps)(validation(strategy)(Checkout));

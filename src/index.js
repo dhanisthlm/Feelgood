@@ -17,7 +17,7 @@ import styles from './styles.css';
 render((
   <Provider store={store}>
     <Router history={browserHistory}>
-      <Route path="/" component={App}>
+      <Route path="/anka" component={App}>
           <Route path='/main' component={Payment}/>
       </Route>
     </Router>

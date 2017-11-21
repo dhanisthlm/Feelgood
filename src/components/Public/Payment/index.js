@@ -245,7 +245,7 @@ export class Payment extends Component {
 					}
 				})()}
 				<div className="payment">
-					<h3 className="heading">Koliko kosta terapija?</h3>
+					<h3 className="heading">Koliko kosta psihološko savjetovanje?</h3>
 					<p className="preamble">
 						Ovdje možete naručiti psihološko savjetovanje. Cijenu za vase izbore mozete naci u doljnem dio stranice. Izaberite Skype-poziv, e-postu ili kombinaciju Skype-poziv i e-postu. Što više poziva ili sedmica e-poste odlučite da kupite, sto jeftinija je cena po pozivu i po sedmicu e-poste.
 					</p>

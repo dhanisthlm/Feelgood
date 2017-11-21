@@ -14,8 +14,8 @@ export class Hero extends Component {
             <div className="introduction">
                 <img src="/images/flowers.jpg" alt="hero-image" />
                 <div className="text-wrapper">
-                    <h3 className="heading">Terapija za svaskoga</h3>
-                    <p className="preamble">Ovdje smo za vas, ako trebate s kim razgovarati. Zdravlje.nu nudi vam terapiju diskretno i po razumnoj cijeni. U terapiji prepoznajemo koje misli i emocije vas sprečavaju da se osjećate dobro i budete uspješni u životu, te radimo na promjeni.</p>
+                    <h3 className="heading">Psihološko savjetovanje za svakodnevne probleme</h3>
+                    <p className="preamble">Ovdje smo za vas ako trebate s kim razgovarat. Zdravlje.nu vam nudi psihološke savjetovanje diskretno i po razumnoj cijeni. U razgovoru prepoznajemo koje misli i emocije vas sprečavaju da se osjećate dobro i budete uspješni u životu, te radimo na promjeni.</p>
                     <button className="intro-button">Zapocnite</button>
                 </div>
             </div>

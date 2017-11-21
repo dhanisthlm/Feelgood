@@ -45,6 +45,7 @@
     "react": "^15.1.0",
     "react-burger-menu": "*",
     "react-checkbox": "*",
+    "react-validation-mixin": "^5.4.0",
     "react-dom": "^15.1.0",
     "react-i18next": "*",
     "react-redux": "^4.4.5",

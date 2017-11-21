@@ -1,4 +1,4 @@
-var path = require('path')
+var path = require('path');
 var webpack = require('webpack');
 
 module.exports = {
@@ -22,7 +22,9 @@ module.exports = {
     }
   ],
   resolve: {
-    alias: {}
+    alias: {
+      'joi': 'joi-browser'
+    }
   },
   module: {
     loaders: [
@@ -30,7 +32,12 @@ module.exports = {
         test: /\.js$/,
         loaders: ['babel'],
         exclude: /\/node_modules\//,
-        include: path.join(__dirname, '..', 'src')
+        include: [
+            path.join(__dirname, '..', 'src'),
+            path.join(__dirname, '..', 'server/config'),
+            path.join(__dirname, '..', 'helpers'),
+            path.join(__dirname, '..', 'validators')
+        ]
       },
         { test: /\.css/, loader: "style-loader!css-loader" },
         { test: /\.png/, loader: "url-loader?limit=100000&mimetype=image/png" },
@@ -40,7 +47,9 @@ module.exports = {
         { test: /\.eot/, loader: "file-loader"}
     ]
   },
-    node: 'empty',
-    tls: 'empty',
-    dns: 'empty'
+    node: {
+        tls: 'empty',
+        dns: 'empty',
+        net: 'empty'
+    }
 };
