@@ -10,50 +10,19 @@ export class Payment extends Component {
 		this.state = {
 			checkout: false,
 			skype: {
-				s: {
-					active: true,
-					cost: 45,
-					week: 1
-				},
-				m: {
-					active: false,
-					cost: 126,
-					week: 3
-				},
-				l: {
-					active: false,
-					cost: 320,
-					week: 8
-				}
+				s: { active: true, cost: 45, week: 1 },
+				m: { active: false, cost: 126, week: 3 },
+				l: { active: false, cost: 320, week: 8 }
 			},
 			email: {
-				s: {
-					active: false,
-					cost: 30,
-					week: 1
-				},
-				m: {
-					active: false,
-					cost: 80,
-					week: 1
-				}
+				s: { active: false, cost: 30, week: 1 },
+				m: { active: false, cost: 80, week: 1 }
 			},
 			skypeDuration: {
-				s: {
-					length: 20,
-					active: true,
-					factor: 0.675
-				},
-				l: {
-					length: 45,
-					active: false,
-					factor: 1
-				}
+				s: { length: 20, active: true, factor: 0.675 },
+				l: { length: 45, active: false, factor: 1 }
 			},
-			lastSize: {
-				skype: 's',
-				email: ''
-			}
+			lastSize: { skype: 's', email: '' }
 		};
 
 		this.handleCheckbox = this.handleCheckbox.bind(this);
@@ -151,13 +120,9 @@ export class Payment extends Component {
 
 	handleCheckout () {
 		const body = document.getElementsByTagName('body')[0];
-		if (!this.state.checkout) {
-			this.setState({checkout: true});
-			body.style.overflow = 'hidden';
-		} else {
-			body.style.overflow = 'scroll';
-		}
-	}
+		body.style.overflow = (!this.state.checkout) ? 'hidden' : 'scroll';
+        this.setState({ checkout: !this.state.checkout });
+    }
 
 	calculateCost () {
 		let skype = 0;

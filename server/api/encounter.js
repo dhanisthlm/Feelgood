@@ -1,6 +1,6 @@
 import Encounter from '../models/encounter';
 
-const saveEncounter = (request) => {
+const saveEncounter = (request, reply) => {
     const encounter = new Encounter(request.payload.encounter);
     encounter.save();
     return reply(200);

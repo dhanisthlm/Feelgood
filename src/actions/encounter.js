@@ -3,8 +3,7 @@ import * as request from 'axios';
 export const saveEncounter = (encounter) => (dispatch) => {
     return request
         .post('/encounter', { encounter })
-        .then(() => {
-            console.log('foo')
+        .then((data) => {
             dispatch({ type: 'ENCOUNTER_SAVED' });
         })
         .catch((error) => {
