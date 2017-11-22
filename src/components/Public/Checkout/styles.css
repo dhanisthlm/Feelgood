@@ -200,13 +200,14 @@
     font-weight: 200;
     border-radius: 5px;
     cursor: pointer;
+    outline: 0;
 }
 
 .checkout .basket svg {
-    width: 35px;
-    height: 35px;
+    width: 18px;
+    height: 25px;
     position: absolute;
-    right: 9px;
-    top: 13px;
+    right: 13px;
+    top: 11px;
     cursor: pointer;
 }
