@@ -15,10 +15,6 @@ export const encounterValidator = Joi.object().keys({
         .email()
         .required(),
 
-    price: Joi
-        .string()
-        .required(),
-
     comment: Joi
         .string()
         .allow('', null)

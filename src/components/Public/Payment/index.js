@@ -238,7 +238,7 @@ export class Payment extends Component {
 
 	render () {
 		return (
-			<dic>
+			<div>
 				{(() => {
 					if (this.state.checkout === true) {
 						return <Checkout resetCheckout={ this.resetCheckout } />
@@ -359,7 +359,7 @@ export class Payment extends Component {
 					</div>
 					<button className="checkout-button" onClick={ this.handleCheckout }>Zakazite</button>
 				</div>
-			</dic>
+			</div>
 		);
 	}
 }
