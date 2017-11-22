@@ -52,7 +52,7 @@ export class Checkout extends FormComponent {
 
 	handleSubmit () {
 		this.props.validate((error) => {
-            this.basket.style.height = this.front.offsetHeight + 130 + 'px';
+            this.basket.style.height = this.front.offsetHeight + 'px';
             if (!error) {
                 this.props.dispatch(saveEncounter(this.state));
 			}
@@ -75,6 +75,7 @@ export class Checkout extends FormComponent {
             return (
 				<div ref={(checkout) => { this.checkout = checkout; }} className="checkout">
 					<div ref={(basket) => { this.basket = basket; }} className="basket">
+						<div className="header" />
 						<div className="outer-frame">
 							<div className="inner-frame">
 								<svg onClick={ this.resetCheckout } viewBox="0 0 94.926 94.926">
@@ -118,7 +119,10 @@ export class Checkout extends FormComponent {
 										</textarea>
 										{this.getValidationMessages('comment')}
 									</div>
-									<button onClick={ this.handleSubmit }>Zakažite</button>
+									<div className="form-buttons">
+										<button onClick={ this.resetCheckout }>Otkazati</button>
+										<button onClick={ this.handleSubmit }>Zakažite</button>
+									</div>
 								</div>
 								<div className={back}>
 									<h1>Potvrda narudžbe</h1>
@@ -126,11 +130,10 @@ export class Checkout extends FormComponent {
 									<p className="big">YYY YYY YYY YYY</p>
 									<p>Napišite vaše ime, telefon broj / e-poštu i šifru ispod na uplatnicu:</p>
 									<p className="big">ABB CCD DDD</p>
-									<p>Mi će mo vas zovnuti da rezerviramo termin za razgovor sa našim psiholozima kada smo
-										primili novac.</p>
+									<p>Mi će mo vas zovnuti da rezerviramo termin za razgovor sa našim psiholozima kada smo primili novac.</p>
 									<p>Dobićete fakturu na vašu e-poštu u roku od 24 sata sa detaljima plaćanja.</p>
-									<p>Mnogo hvala,</p>
-									<p>Tim zdravilje</p>
+									<p>Mnogo hvala, tim zdravilje</p>
+									<button onClick={ this.resetCheckout }>Blizu</button>
 								</div>
 							</div>
 						</div>
