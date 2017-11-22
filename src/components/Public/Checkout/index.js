@@ -16,6 +16,7 @@ export class Checkout extends FormComponent {
 			mail: '',
 			phone: '',
 			comment: '',
+			code: '',
 			isOpen: false
 		};
 
@@ -39,6 +40,7 @@ export class Checkout extends FormComponent {
             mail: '',
             phone: '',
             comment: '',
+			code: '',
 			isOpen: false
 		});
 
@@ -52,8 +54,9 @@ export class Checkout extends FormComponent {
 
 	handleSubmit () {
 		this.props.validate((error) => {
-            this.basket.style.height = this.front.offsetHeight + 'px';
+            this.basket.style.height = this.front.offsetHeight  + 40 + 'px';
             if (!error) {
+                this.basket.style.height = this.front.offsetHeight + 'px';
                 this.props.dispatch(saveEncounter(this.state));
 			}
         })
@@ -129,7 +132,7 @@ export class Checkout extends FormComponent {
 									<p>Molimo uplatite xxx na bankovni računu:</p>
 									<p className="big">YYY YYY YYY YYY</p>
 									<p>Napišite vaše ime, telefon broj / e-poštu i šifru ispod na uplatnicu:</p>
-									<p className="big">ABB CCD DDD</p>
+									<p className="big">{this.props.data.code}</p>
 									<p>Mi će mo vas zovnuti da rezerviramo termin za razgovor sa našim psiholozima kada smo primili novac.</p>
 									<p>Dobićete fakturu na vašu e-poštu u roku od 24 sata sa detaljima plaćanja.</p>
 									<p>Mnogo hvala, tim zdravilje</p>

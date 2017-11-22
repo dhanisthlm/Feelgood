@@ -13,9 +13,6 @@ const encounterSchema = Schema({
     comment: {
         type: String
     },
-    code: {
-        type: String
-    },
     price: {
         type: Number
     }

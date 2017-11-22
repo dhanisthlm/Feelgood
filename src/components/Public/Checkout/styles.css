@@ -176,6 +176,7 @@
     float: left;
     font-size: 14px;
     width: 100%;
+    text-align: left;
 }
 
 .checkout .basket input {

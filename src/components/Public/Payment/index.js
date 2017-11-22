@@ -9,18 +9,19 @@ export class Payment extends Component {
 
 		this.state = {
 			checkout: false,
+			code: '',
 			skype: {
-				s: { active: false, cost: 45, week: 1 },
-				m: { active: false, cost: 126, week: 3 },
-				l: { active: false, cost: 320, week: 8 }
+				s: { active: false, cost: 45, week: 1, code: '1' },
+				m: { active: false, cost: 126, week: 3, code: '3' },
+				l: { active: false, cost: 320, week: 8, code: '8' }
 			},
 			email: {
-				s: { active: false, cost: 30, week: 1 },
-				m: { active: false, cost: 80, week: 1 }
+				s: { active: false, cost: 30, week: 1, code: '04' },
+				m: { active: false, cost: 80, week: 1, code: '24' }
 			},
 			skypeDuration: {
-				s: { length: 20, active: true, factor: 0.675 },
-				l: { length: 45, active: false, factor: 1 }
+				s: { length: 20, active: true, factor: 0.675, code: '20' },
+				l: { length: 45, active: false, factor: 1, code: '45' }
 			},
 			lastSize: { skype: 's', email: '' }
 		};
@@ -43,17 +44,21 @@ export class Payment extends Component {
 						s: {
 							active: false,
 							cost: this.state.skype.s.cost,
-							week: this.state.skype.s.week
+							week: this.state.skype.s.week,
+                            code: this.state.skype.s.code
 						},
 						m: {
 							active: false,
 							cost: this.state.skype.m.cost,
-							week: this.state.skype.m.week
+							week: this.state.skype.m.week,
+                            code: this.state.skype.m.code
 						},
 						l: {
 							active: false,
 							cost: this.state.skype.l.cost,
-							week: this.state.skype.l.week }
+							week: this.state.skype.l.week,
+                            code: this.state.skype.l.code
+						}
 					}
 				}, () => {
 					this.setCategorySize(size, type);
@@ -68,12 +73,14 @@ export class Payment extends Component {
 						s: {
 							active: false,
 							cost: this.state.email.s.cost,
-							week: this.state.email.s.week
+							week: this.state.email.s.week,
+                            code: this.state.email.s.code
 						},
 						m: {
 							active: false,
 							cost: this.state.email.m.cost,
-							week: this.state.email.m.week
+							week: this.state.email.m.week,
+                            code: this.state.email.m.code
 						}
 					}
 				}, () => {
@@ -130,12 +137,17 @@ export class Payment extends Component {
         let email = 0;
         let emailWeeks = 1;
 		let skypeWeeks = 1;
+		let skypeCode = '0';
+		let skypeDurationCode = '00';
+		let emailCode = '00';
 
 		for (let size in this.state.skype) {
 			if (this.state.skype.hasOwnProperty(size)) {
                 if (this.state.skype[size].active === true) {
                     skype = this.state.skype[size].cost * this.state.skypeDuration[skypeDuration].factor;
                     skypeWeeks = this.state.skype[size].week;
+                    skypeCode = this.state.skype[size].code;
+                    skypeDurationCode = this.state.skypeDuration[skypeDuration].code;
                 }
             }
 		}
@@ -145,6 +157,7 @@ export class Payment extends Component {
 				if (this.state.email[size].active === true) {
                     email = this.calculateEmailDiscount(this.state.email[size].cost, this.state.email[size].week);
                     emailWeeks = this.state.email[size].week;
+                    emailCode = this.state.email[size].code;
                 }
 			}
 		}
@@ -159,10 +172,13 @@ export class Payment extends Component {
 			}
 		}
 
+		console.log(skypeCode, skypeDurationCode, emailCode, skypeDuration);
+
 		return {
 			total: function () { return (this.email * emailWeeks) + (this.skype * skypeWeeks )},
 			email: (skype > 0 && email > 0) ? Math.round((email / emailWeeks) * 0.95) : Math.round(email / emailWeeks),
-			skype: (skype > 0 && email > 0) ? Math.round((skype / skypeWeeks) * 0.95) : Math.round(skype / skypeWeeks)
+			skype: (skype > 0 && email > 0) ? Math.round((skype / skypeWeeks) * 0.95) : Math.round(skype / skypeWeeks),
+			code: skypeCode + '' + skypeDurationCode + '' + emailCode
 		}
 	}
 
@@ -176,13 +192,16 @@ export class Payment extends Component {
 			this.setState({
 				email: {
 					s: {
-						active: this.state.email.s.active,
-						cost: this.state.email.s.cost,
-						week: size === 's' ? nWeeks : this.state.email.s.week },
+                        active: this.state.email.s.active,
+                        cost: this.state.email.s.cost,
+                        week: size === 's' ? nWeeks : this.state.email.s.week,
+                        code: this.state.email.s.code
+                    },
 					m: {
 						active: this.state.email.m.active,
 						cost: this.state.email.m.cost,
-						week: size === 'm' ? nWeeks : this.state.email.m.week
+						week: size === 'm' ? nWeeks : this.state.email.m.week,
+                        code: this.state.email.m.code
 					}
 				}
 			});
@@ -195,12 +214,14 @@ export class Payment extends Component {
 						s: {
 							active: this.state.email.s.active,
 							cost: this.state.email.s.cost,
-							week: size === 's' ? nWeeks : this.state.email.s.week
+							week: size === 's' ? nWeeks : this.state.email.s.week,
+                            code: this.state.email.s.code
 						},
 						m: {
 							active: this.state.email.m.active,
 							cost: this.state.email.m.cost,
-							week: size === 'm' ? nWeeks : this.state.email.m.week
+							week: size === 'm' ? nWeeks : this.state.email.m.week,
+                            code: this.state.email.m.code,
 						}
 					}
 				});
@@ -225,12 +246,14 @@ export class Payment extends Component {
 				s: {
 					active: size === 's',
 					length: this.state.skypeDuration.s.length,
-					factor: this.state.skypeDuration.s.factor
+					factor: this.state.skypeDuration.s.factor,
+					code: this.state.skypeDuration.s.code
 				},
 				l: {
 					active: size === 'l',
 					length: this.state.skypeDuration.l.length,
-					factor: this.state.skypeDuration.l.factor
+					factor: this.state.skypeDuration.l.factor,
+                    code: this.state.skypeDuration.l.code
 				}
 			}
 		})
@@ -241,7 +264,7 @@ export class Payment extends Component {
 			<div>
 				{(() => {
 					if (this.state.checkout === true) {
-						return <Checkout resetCheckout={ this.resetCheckout } />
+						return <Checkout data={this.calculateCost()} resetCheckout={ this.resetCheckout } />
 					}
 				})()}
 				<div className="payment">
