@@ -10,7 +10,7 @@
 
 .checkout .basket {
     width: 600px;
-    height: 666px;
+    min-height: 666px;
     padding: 45px;
     border-radius: 5px;
     text-align: center;
@@ -23,35 +23,27 @@
     box-sizing: border-box;
 }
 
-.checkout .basket:before {
-    content: '';
+.checkout .outer-frame {
     position: absolute;
     left: 14px;
     top: 14px;
     width: 568px;
-    height: 634px;
+    height: 95%;
     border: 2px solid #c04c9c;
-    z-index: 0;
-    pointer-events: none;
 }
 
-.checkout .basket:after {
-    content: '';
+.checkout .inner-frame {
     position: absolute;
-    left: 20px;
-    top: 20px;
-    width: 91%;
-    height: 613px;
+    left: 8px;
+    top: 5px;
+    width: 95%;
+    height: 96%;
     border: 7px solid #c04c9c;
-    z-index: 0;
-    pointer-events: none;
 }
 
 .checkout .basket .front {
-    margin-top: 11px;
-    position: absolute;
+    margin: 20px auto;
     left: 50%;
-    margin-left: -175px;
     z-index: 99;
 }
 
@@ -151,9 +143,26 @@
     text-align: left;
 }
 
+.checkout input.error {
+    background-color: #c64c9c;
+    color: #fff;
+}
+
+.checkout .form-element-wrapper {
+    margin-top: 15px;
+    overflow: hidden;
+}
+
+.checkout .error {
+    display: blocK;
+    float: left;
+    font-size: 14px;
+    width: 100%;
+}
+
 .checkout .basket input {
     display: block;
-    margin-bottom: 19px;
+    margin-bottom: 3px;
     height: 42px;
     width: 350px;
     border-radius: 3px;
