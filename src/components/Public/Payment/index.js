@@ -278,6 +278,9 @@ export class Payment extends Component {
 	}
 
 	render () {
+		const order = this.calculateCost();
+		const buttonStyle = (order.total() === 0) ? 'checkout-button disabled' : 'checkout-button';
+
 		return (
 			<div>
 				{(() => {
@@ -398,7 +401,7 @@ export class Payment extends Component {
 						<span>Skype: { this.calculateCost().skype } KM / posiv</span>
 						<span>E-pošta: { this.calculateCost().email } KM / sedmica</span>
 					</div>
-					<button className="checkout-button" onClick={ this.handleCheckout }>Zakazite</button>
+					<button className={buttonStyle} onClick={ this.handleCheckout }>Zakazite</button>
 				</div>
 			</div>
 		);

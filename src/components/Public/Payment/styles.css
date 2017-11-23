@@ -328,6 +328,11 @@
     box-shadow: 0 0 20px rgba(0, 0, 0, .2);
 }
 
+.payment + .text-wrapper button.disabled {
+    background-color: #999;
+    pointer-events: none !important;
+}
+
 .payment .toggle_radios > * {
     float: left;
 }
