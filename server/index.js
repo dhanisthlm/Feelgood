@@ -2,7 +2,8 @@ import Path from 'path'
 import Hapi from 'hapi'
 import Inert from 'inert'
 import base from './base'
-import encounter from './api/encounter'
+import encounter from './api/encounter';
+import staff from './api/staff';
 import mongoose from 'mongoose';
 import config from 'config';
 
@@ -58,6 +59,9 @@ server.register([
 
   {
     register: encounter
+  },
+  {
+    register: staff
   }
 ], (error) => {
   if (error) throw error

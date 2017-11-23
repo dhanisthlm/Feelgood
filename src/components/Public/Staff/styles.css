@@ -39,8 +39,9 @@
 }
 
 .staff .card .photo-info-wrapper p {
-    line-height: 22px;
+    line-height: 25px;
     text-align: left;
+    margin: 12px;
 }
 
 .staff .card {
@@ -102,7 +103,7 @@
     z-index: 99;
     width: 50px;
     height: auto;
-    margin-right: 7px;
+    margin-right: -3px;
     margin-top: 0px;
     position: relative;
 }
@@ -153,34 +154,46 @@
 .staff .diploma-open-wrapper svg {
     position: absolute;
     width: 30px;
-    height: 30px;
-    top: 26px;
-    right: 7px;
-    z-index: 9999;
+    height: 29px;
+    top: 20px;
+    right: 19px;
     cursor: pointer;
+    z-index: 999999999;
+}
+.staff .diploma-open-wrapper.diploma-wrapper-vertical {
+    position: absolute;
+    width: 450px;
+    height: calc(450px / 0.74);
+    max-height: 700px;
+    z-index: 99999999;
+    padding: 10px;
+    border-radius: 3px;
+    margin: auto;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    margin-left: -220px;
 }
 
-.staff .diploma-open-wrapper {
-    position: relative;
-    height: 725px;
-    width: 525px;
+.staff .diploma-open-wrapper.diploma-wrapper-horizontal {
+    position: absolute;
+    width: 700px;
+    height: calc(700px * 0.62);
+    max-height: 700px;
     z-index: 99999999;
+    padding: 10px;
+    border-radius: 3px;
     top: 50%;
     left: 50%;
-    display: block;
-    margin-top: -375px;
-    margin-left: -260px;
-    padding: 10px;
-    border-radius: 3px;
+    margin-left: -350px;
+    margin-top: -225px;
 }
 
-.staff .diploma img {
-    height: 100%;
+.staff .diploma img.diploma-vertical {
     width: 100%;
-    top: 0;
-    left: 0;
-    display: block;
-    padding: 10px;
-    background-color: #C04C9C;
-    border-radius: 3px;
+}
+
+.staff .diploma img.diploma-horizontal {
+    width: 100%;
 }
