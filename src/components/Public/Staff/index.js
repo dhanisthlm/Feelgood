@@ -11,26 +11,47 @@ export class Staff extends Component {
 			diploma: '',
 			staff: [
 				{
-					'name': 'davor',
+					'name': 'aida',
 					'fullName': 'Aida Rešić',
-					'image': 'worker1.jpg',
+					'image': 'aida.jpg',
 					'title': 'Diplomerad psykolog',
 					'text': 'Život ne određuju okolnost, već kako ih mi doživljavamo; naši izbori su ti koji dovode do života kakav živimo. Svako želi voditi ispunjen život vrijedan življenja, postati naj bolja verzija sebe, al nekad zaglavimo. Promjenit pogled na događaj i doživljaj mijenja taj događaj i doživljaj. Na taj naćin možemo uspostaviti ravnotežu između pozitivnih i negativnih aspekata ljudskog života, što je formula sretnog života. Tu sam da vam pomognem, da postanete zadovoljniji, sretniji, samopouzdaniji, bez strahova, sumnji, nedoumica oko ispravnosti odluka koje donosite, bez frustracija, depresije i briga.'
 				},
                 {
-                    'name': 'davor',
-                    'fullName': 'Irma Banjic',
-					'image': 'worker2.jpg',
+                    'name': 'bozana',
+                    'fullName': 'Božana Vidakovič',
+					'image': 'bozana.jpg',
                     'title': 'Diplomerad psykolog',
                     'text': 'Život ne određuju okolnost, već kako ih mi doživljavamo; naši izbori su ti koji dovode do života kakav živimo. Svako želi voditi ispunjen život vrijedan življenja, postati naj bolja verzija sebe, al nekad zaglavimo. Promjenit pogled na događaj i doživljaj mijenja taj događaj i doživljaj. Na taj naćin možemo uspostaviti ravnotežu između pozitivnih i negativnih aspekata ljudskog života, što je formula sretnog života. Tu sam da vam pomognem, da postanete zadovoljniji, sretniji, samopouzdaniji, bez strahova, sumnji, nedoumica oko ispravnosti odluka koje donosite, bez frustracija, depresije i briga.'
                 },
                 {
                     'name': 'davor',
                     'fullName': 'Davor Matosevic',
-                    'image': 'worker3.jpg',
+                    'image': 'davor.jpg',
                     'title': 'Diplomerad psykolog',
                     'text': 'Život ne određuju okolnost, već kako ih mi doživljavamo; naši izbori su ti koji dovode do života kakav živimo. Svako želi voditi ispunjen život vrijedan življenja, postati naj bolja verzija sebe, al nekad zaglavimo. Promjenit pogled na događaj i doživljaj mijenja taj događaj i doživljaj. Na taj naćin možemo uspostaviti ravnotežu između pozitivnih i negativnih aspekata ljudskog života, što je formula sretnog života. Tu sam da vam pomognem, da postanete zadovoljniji, sretniji, samopouzdaniji, bez strahova, sumnji, nedoumica oko ispravnosti odluka koje donosite, bez frustracija, depresije i briga.'
-                }
+                },
+                {
+                    'name': 'irma',
+                    'fullName': 'Irma Banjić - Zaimović',
+                    'image': 'irma.jpg',
+                    'title': 'Diplomerad psykolog',
+                    'text': 'Život ne određuju okolnost, već kako ih mi doživljavamo; naši izbori su ti koji dovode do života kakav živimo. Svako želi voditi ispunjen život vrijedan življenja, postati naj bolja verzija sebe, al nekad zaglavimo. Promjenit pogled na događaj i doživljaj mijenja taj događaj i doživljaj. Na taj naćin možemo uspostaviti ravnotežu između pozitivnih i negativnih aspekata ljudskog života, što je formula sretnog života. Tu sam da vam pomognem, da postanete zadovoljniji, sretniji, samopouzdaniji, bez strahova, sumnji, nedoumica oko ispravnosti odluka koje donosite, bez frustracija, depresije i briga.'
+                },
+                {
+                    'name': 'emina',
+                    'fullName': 'Emina Mujanović',
+                    'image': 'emina.jpg',
+                    'title': 'Diplomerad psykolog',
+                    'text': 'Život ne određuju okolnost, već kako ih mi doživljavamo; naši izbori su ti koji dovode do života kakav živimo. Svako želi voditi ispunjen život vrijedan življenja, postati naj bolja verzija sebe, al nekad zaglavimo. Promjenit pogled na događaj i doživljaj mijenja taj događaj i doživljaj. Na taj naćin možemo uspostaviti ravnotežu između pozitivnih i negativnih aspekata ljudskog života, što je formula sretnog života. Tu sam da vam pomognem, da postanete zadovoljniji, sretniji, samopouzdaniji, bez strahova, sumnji, nedoumica oko ispravnosti odluka koje donosite, bez frustracija, depresije i briga.'
+                },
+                {
+                    'name': 'aida',
+                    'fullName': 'Aida Rešić',
+                    'image': 'aida.jpg',
+                    'title': 'Diplomerad psykolog',
+                    'text': 'Život ne određuju okolnost, već kako ih mi doživljavamo; naši izbori su ti koji dovode do života kakav živimo. Svako želi voditi ispunjen život vrijedan življenja, postati naj bolja verzija sebe, al nekad zaglavimo. Promjenit pogled na događaj i doživljaj mijenja taj događaj i doživljaj. Na taj naćin možemo uspostaviti ravnotežu između pozitivnih i negativnih aspekata ljudskog života, što je formula sretnog života. Tu sam da vam pomognem, da postanete zadovoljniji, sretniji, samopouzdaniji, bez strahova, sumnji, nedoumica oko ispravnosti odluka koje donosite, bez frustracija, depresije i briga.'
+                },
 			]
 
 		};
