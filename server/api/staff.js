@@ -5,7 +5,7 @@ const getStaff = (request, reply) => {
         if (error) return reply(error);
 
         if (result.length) {
-            return reply(result.data);
+            return reply(result);
         }
     });
 };

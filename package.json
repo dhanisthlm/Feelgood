@@ -7,8 +7,10 @@
   "scripts": {
     "mongo:start": "mongod --config /usr/local/etc/mongod.conf --fork --logpath /dev/null",
     "mongo:stop": "mongo admin --eval 'db.shutdownServer()' > /dev/null",
-    "build": "webpack --config ./webpack/config.prod.js --progress --profile --colors",
-    "start": "npm run build && NODE_ENV=production node index.js",
+    "build-prod": "webpack --config ./webpack/config.prod.js --progress --profile --colors",
+    "build-stage": "webpack --config ./webpack/config.stage.js --progress --profile --colors",
+    "start": "npm run build-prod && NODE_ENV=production node index.js",
+    "start-stage": "npm run build-stage && NODE_ENV=stage node index.js",
     "build:clean": "rimraf dist/client/static",
     "dev": "npm run build:clean && NODE_ENV=development node index.js",
     "test": "mocha --require ignore-styles test/utils/setup.js --compilers js:babel-register test/**/*Spec.jsx"
