@@ -13,18 +13,21 @@ export class Staff extends Component {
 				{
 					'name': 'davor',
 					'fullName': 'Aida Rešić',
+					'image': 'worker1.jpg',
 					'title': 'Diplomerad psykolog',
 					'text': 'Život ne određuju okolnost, već kako ih mi doživljavamo; naši izbori su ti koji dovode do života kakav živimo. Svako želi voditi ispunjen život vrijedan življenja, postati naj bolja verzija sebe, al nekad zaglavimo. Promjenit pogled na događaj i doživljaj mijenja taj događaj i doživljaj. Na taj naćin možemo uspostaviti ravnotežu između pozitivnih i negativnih aspekata ljudskog života, što je formula sretnog života. Tu sam da vam pomognem, da postanete zadovoljniji, sretniji, samopouzdaniji, bez strahova, sumnji, nedoumica oko ispravnosti odluka koje donosite, bez frustracija, depresije i briga.'
 				},
                 {
                     'name': 'davor',
-                    'fullName': 'Aida Rešić',
+                    'fullName': 'Irma Banjic',
+					'image': 'worker2.jpg',
                     'title': 'Diplomerad psykolog',
                     'text': 'Život ne određuju okolnost, već kako ih mi doživljavamo; naši izbori su ti koji dovode do života kakav živimo. Svako želi voditi ispunjen život vrijedan življenja, postati naj bolja verzija sebe, al nekad zaglavimo. Promjenit pogled na događaj i doživljaj mijenja taj događaj i doživljaj. Na taj naćin možemo uspostaviti ravnotežu između pozitivnih i negativnih aspekata ljudskog života, što je formula sretnog života. Tu sam da vam pomognem, da postanete zadovoljniji, sretniji, samopouzdaniji, bez strahova, sumnji, nedoumica oko ispravnosti odluka koje donosite, bez frustracija, depresije i briga.'
                 },
                 {
                     'name': 'davor',
-                    'fullName': 'Aida Rešić',
+                    'fullName': 'Davor Matosevic',
+                    'image': 'worker3.jpg',
                     'title': 'Diplomerad psykolog',
                     'text': 'Život ne određuju okolnost, već kako ih mi doživljavamo; naši izbori su ti koji dovode do života kakav živimo. Svako želi voditi ispunjen život vrijedan življenja, postati naj bolja verzija sebe, al nekad zaglavimo. Promjenit pogled na događaj i doživljaj mijenja taj događaj i doživljaj. Na taj naćin možemo uspostaviti ravnotežu između pozitivnih i negativnih aspekata ljudskog života, što je formula sretnog života. Tu sam da vam pomognem, da postanete zadovoljniji, sretniji, samopouzdaniji, bez strahova, sumnji, nedoumica oko ispravnosti odluka koje donosite, bez frustracija, depresije i briga.'
                 }
@@ -70,18 +73,19 @@ export class Staff extends Component {
 				</div>
 				<div className="cards">
                     {this.state.staff.map(function(person) {
+                    	const image = "./images/" + person.image;
                         return (
 							<div className="card">
 								<div className="photo-wrapper">
 									<div className="photo-info-wrapper">
 										<p>{person.text}</p>
 									</div>
-									<img src="./images/worker1.jpg"  />
+									<img src={image}  />
 								</div>
 								<div className="info-wrapper">
 									<div className="title-wrapper">
 										<p>{person.fullName}</p>
-										<p>person.title</p>
+										<p>{person.title}</p>
 									</div>
 									<div id={person.name} className="diploma-wrapper" onClick={ self.openDiploma } >
 										<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">

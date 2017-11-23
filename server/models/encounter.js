@@ -13,8 +13,38 @@ const encounterSchema = Schema({
     comment: {
         type: String
     },
+    order: {
+        skype: {
+            week: {
+                type: Number,
+                default: 0
+            },
+            cost: {
+                type: Number,
+                default: 0
+            },
+            duration: {
+                type: Number,
+                default: 0
+            }
+        },
+        email: {
+           week: {
+               type: Number,
+               default: 0
+           },
+            cost: {
+               type: Number,
+                default: 0
+            }
+        }
+    },
     price: {
-        type: Number
+        type: Number,
+        default: 0
+    },
+    date: {
+        type: Date
     }
 });
 

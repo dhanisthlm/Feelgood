@@ -13,7 +13,7 @@ export class QuoteImage extends Component {
 		return (
 			<div className="quote-image">
 				<p>Ono što mislite da postanete</p>
-				<img src="./images/peace.jpg" />
+				<img src="./images/reader.jpg" />
 			</div>
 		);
 	}

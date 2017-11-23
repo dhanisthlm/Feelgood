@@ -7,7 +7,7 @@ export class Payment extends Component {
 	constructor (props) {
 		super(props);
 
-		this.state = {
+		this.initialState = {
 			checkout: false,
 			code: '',
 			skype: {
@@ -26,11 +26,14 @@ export class Payment extends Component {
 			lastSize: { skype: 's', email: '' }
 		};
 
+		this.state = {...this.initialState};
+
 		this.handleCheckbox = this.handleCheckbox.bind(this);
 		this.handleWeeks = this.handleWeeks.bind(this);
 		this.handleSkypeDuration = this.handleSkypeDuration.bind(this);
 		this.handleCheckout = this.handleCheckout.bind(this);
 		this.resetCheckout = this.resetCheckout.bind(this);
+		this.getData = this.getData.bind(this);
 	}
 
 	handleCheckbox (e) {
@@ -122,7 +125,7 @@ export class Payment extends Component {
 	resetCheckout () {
 		const body = document.getElementsByTagName('body')[0];
 		body.style.overflow = 'scroll';
-		this.setState({ checkout: false });
+        //this.setState({...this.initialState});
 	}
 
 	handleCheckout () {
@@ -130,6 +133,23 @@ export class Payment extends Component {
 		body.style.overflow = (!this.state.checkout) ? 'hidden' : 'scroll';
         this.setState({ checkout: !this.state.checkout });
     }
+
+    getData () {
+		const data = {};
+
+		Object.keys(this.state).filter((item) => {
+			return Object.keys(this.state[item]).filter((subItem) => {
+				if (item === 'skype' || item === 'email' || item === 'skypeDuration') {
+                    if (this.state[item][subItem].hasOwnProperty('active') && this.state[item][subItem].active === true) {
+                        data[item] = this.state[item][subItem];
+                    }
+                }
+			})
+		});
+
+		console.log('data', data);
+		return data;
+	}
 
 	calculateCost () {
 		let skype = 0;
@@ -171,8 +191,6 @@ export class Payment extends Component {
 				this.refs['duration-radios'].style.display = 'block';
 			}
 		}
-
-		console.log(skypeCode, skypeDurationCode, emailCode, skypeDuration);
 
 		return {
 			total: function () { return (this.email * emailWeeks) + (this.skype * skypeWeeks )},
@@ -264,7 +282,7 @@ export class Payment extends Component {
 			<div>
 				{(() => {
 					if (this.state.checkout === true) {
-						return <Checkout data={this.calculateCost()} resetCheckout={ this.resetCheckout } />
+						return <Checkout data={this.getData()} cost={this.calculateCost()} resetCheckout={ this.resetCheckout } />
 					}
 				})()}
 				<div className="payment">

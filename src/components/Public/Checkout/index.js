@@ -7,6 +7,21 @@ import { encounterValidator } from '../../../../validators/encounters';
 import { saveEncounter, resetEncounter } from '../../../actions/encounter';
 import styles from './styles.css';
 
+const options = {
+    language: {
+        any: {
+            empty: '!!Tekstno polje ne sme biti prazno',
+        },
+        string: {
+            regex: {
+                base: '!!Netačan format telefona',
+                phone: '!!Netačan format telefona',
+            },
+            email: '!!Netačan format e-pošte',
+        },
+    }
+};
+
 export class Checkout extends FormComponent {
 	constructor (props) {
 		super(props);
@@ -27,7 +42,7 @@ export class Checkout extends FormComponent {
 	}
 
 	componentDidMount () {
-		this.setState({ isOpen: true });
+		this.setState({ isOpen: true, data: this.props.data, cost: this.props.cost });
 	}
 
     getValidatorData() {
@@ -73,6 +88,8 @@ export class Checkout extends FormComponent {
 	render () {
         const front = (this.props.save === true) ? 'front none' : 'front';
         const back = (this.props.save === false) ? 'back none' : 'back';
+
+        console.log(this.props);
 
 		if (this.state.isOpen === true) {
             return (
@@ -132,7 +149,7 @@ export class Checkout extends FormComponent {
 									<p>Molimo uplatite xxx na bankovni računu:</p>
 									<p className="big">YYY YYY YYY YYY</p>
 									<p>Napišite vaše ime, telefon broj / e-poštu i šifru ispod na uplatnicu:</p>
-									<p className="big">{this.props.data.code}</p>
+									<p className="big">{this.props.cost.code}</p>
 									<p>Mi će mo vas zovnuti da rezerviramo termin za razgovor sa našim psiholozima kada smo primili novac.</p>
 									<p>Dobićete fakturu na vašu e-poštu u roku od 24 sata sa detaljima plaćanja.</p>
 									<p>Mnogo hvala, tim zdravilje</p>
@@ -155,4 +172,4 @@ const mapStateToProps = (state) => ({
 	save: state.encounter.saved
 });
 
-export default connect(mapStateToProps)(validation(strategy)(Checkout));
+export default connect(mapStateToProps)(validation(strategy(options))(Checkout));
