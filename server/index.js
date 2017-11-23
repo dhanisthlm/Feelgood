@@ -21,7 +21,7 @@ const server = new Hapi.Server({
 });
 
 server.connection({
-    host: process.env.NODE_ENV === 'production' ? '0.0.0.0' : 'localhost',
+    host: process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'stage' ? '0.0.0.0' : 'localhost',
     port: +process.env.PORT || 8000,
     routes: {
         cors: true
@@ -29,9 +29,9 @@ server.connection({
 });
 
 if (process.env.NODE_ENV === 'development') {
-  const webpack = require('webpack')
-  const WebpackPlugin = require('hapi-webpack-plugin')
-  const wpconfig = require('../webpack/config.dev')
+  const webpack = require('webpack');
+  const WebpackPlugin = require('hapi-webpack-plugin');
+  const wpconfig = require('../webpack/config.dev');
 
   server.register({
     register: WebpackPlugin,
