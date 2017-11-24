@@ -39,56 +39,23 @@ export class Payment extends Component {
 	handleCheckbox (e) {
 		const type = e.target.id.split('-')[0];
 		const size = e.target.id.split('-')[1];
+		const skype = this.state.skype;
+        const email = this.state.email;
 
 		if (type === 'skype') {
 			if ( size !== this.state.lastSize.skype) {
-				this.setState({
-					skype: {
-						s: {
-							active: false,
-							cost: this.state.skype.s.cost,
-							week: this.state.skype.s.week,
-                            code: this.state.skype.s.code
-						},
-						m: {
-							active: false,
-							cost: this.state.skype.m.cost,
-							week: this.state.skype.m.week,
-                            code: this.state.skype.m.code
-						},
-						l: {
-							active: false,
-							cost: this.state.skype.l.cost,
-							week: this.state.skype.l.week,
-                            code: this.state.skype.l.code
-						}
-					}
-				}, () => {
-					this.setCategorySize(size, type);
-				})
+				skype.s.active = false;
+				skype.m.active = false;
+				skype.l.active = false;
+				this.setState({ skype }, () => this.setCategorySize(size, type));
 			} else {
 				this.setCategorySize(size, type);
 			}
 		} else if (type === 'email') {
 			if ( size !== this.state.lastSize.email) {
-				this.setState({
-					email: {
-						s: {
-							active: false,
-							cost: this.state.email.s.cost,
-							week: this.state.email.s.week,
-                            code: this.state.email.s.code
-						},
-						m: {
-							active: false,
-							cost: this.state.email.m.cost,
-							week: this.state.email.m.week,
-                            code: this.state.email.m.code
-						}
-					}
-				}, () => {
-					this.setCategorySize(size, type);
-				})
+				email.s.active = false;
+				email.m.active = false;
+                this.setState({ email }, () => this.setCategorySize(size, type));
 			} else {
 				this.setCategorySize(size, type);
 			}
@@ -102,19 +69,15 @@ export class Payment extends Component {
 			case (weeks === 2):
 				factor = .95;
 				break;
-
 			case (weeks === 3):
 				factor = .925;
 				break;
-
 			case (weeks === 4):
 				factor = .9;
 				break;
-
 			case (weeks > 4):
 				factor = .875;
 				break;
-
 			default:
 				factor = 1;
 		}
@@ -147,7 +110,7 @@ export class Payment extends Component {
 			})
 		});
 
-		console.log('data', data);
+		//console.log('data', data);
 		return data;
 	}
 
@@ -203,48 +166,19 @@ export class Payment extends Component {
 	handleWeeks (e) {
 		const type = e.target.id.split('-')[0];
 		const size = e.target.id.split('-')[1];
+        const email = this.state.email;
 
-		if (type === 'add') {
+        if (type === 'add') {
 			let nWeeks = this.state.email[size].week +1;
-
-			this.setState({
-				email: {
-					s: {
-                        active: this.state.email.s.active,
-                        cost: this.state.email.s.cost,
-                        week: size === 's' ? nWeeks : this.state.email.s.week,
-                        code: this.state.email.s.code
-                    },
-					m: {
-						active: this.state.email.m.active,
-						cost: this.state.email.m.cost,
-						week: size === 'm' ? nWeeks : this.state.email.m.week,
-                        code: this.state.email.m.code
-					}
-				}
-			});
-		} else {
-			if (this.state.email[size].week > 1) {
-				let nWeeks = this.state.email[size].week - 1;
-
-				this.setState({
-					email: {
-						s: {
-							active: this.state.email.s.active,
-							cost: this.state.email.s.cost,
-							week: size === 's' ? nWeeks : this.state.email.s.week,
-                            code: this.state.email.s.code
-						},
-						m: {
-							active: this.state.email.m.active,
-							cost: this.state.email.m.cost,
-							week: size === 'm' ? nWeeks : this.state.email.m.week,
-                            code: this.state.email.m.code,
-						}
-					}
-				});
-			}
+			email.s.week = size === 's' ? nWeeks : this.state.email.s.week;
+            email.m.week = size === 'm' ? nWeeks : this.state.email.m.week;
+		} else if (this.state.email[size].week > 1) {
+			let nWeeks = this.state.email[size].week - 1;
+			email.s.week = size === 's' ? nWeeks : this.state.email.s.week;
+			email.m.week = size === 'm' ? nWeeks : this.state.email.m.week;
 		}
+
+        this.setState({ email });
 	}
 
 	setCategorySize (size, type) {
@@ -253,28 +187,15 @@ export class Payment extends Component {
 
         category[size].active = !category[size].active;
 		lastSize[type] = size;
-
 		this.setState({ category, lastSize });
 	}
 
 	handleSkypeDuration (e) {
 		const size = e.currentTarget.id.split('-')[1];
-		this.setState({
-			skypeDuration: {
-				s: {
-					active: size === 's',
-					length: this.state.skypeDuration.s.length,
-					factor: this.state.skypeDuration.s.factor,
-					code: this.state.skypeDuration.s.code
-				},
-				l: {
-					active: size === 'l',
-					length: this.state.skypeDuration.l.length,
-					factor: this.state.skypeDuration.l.factor,
-                    code: this.state.skypeDuration.l.code
-				}
-			}
-		})
+		const skypeDuration = this.state.skypeDuration;
+		skypeDuration.s.active = size === 's';
+		skypeDuration.l.active = size === 'l';
+		this.setState({ skypeDuration });
 	}
 
 	render () {
@@ -410,8 +331,6 @@ export class Payment extends Component {
 
 Payment.propTypes = { dispatch: PropTypes.func };
 
-const mapStateToProps = (state) => ({
-
-});
+const mapStateToProps = (state) => ({ });
 
 export default connect(mapStateToProps)(Payment)

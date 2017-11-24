@@ -39,7 +39,7 @@
 }
 
 .staff .card .photo-info-wrapper p {
-    line-height: 25px;
+    line-height: 19px;
     text-align: left;
     margin: 12px;
 }
@@ -155,11 +155,12 @@
     position: absolute;
     width: 30px;
     height: 29px;
-    top: 20px;
-    right: 19px;
+    top: 27px;
+    right: -11px;
     cursor: pointer;
     z-index: 999999999;
 }
+
 .staff .diploma-open-wrapper.diploma-wrapper-vertical {
     position: absolute;
     width: 450px;
@@ -192,8 +193,18 @@
 
 .staff .diploma img.diploma-vertical {
     width: 100%;
+    border: 8px solid #C04C9C;
+    border-radius: 5px;
+    padding: 10px;
+    background: #fff;
+    pointer-events: none;
 }
 
 .staff .diploma img.diploma-horizontal {
     width: 100%;
+    border: 8px solid #C04C9C;
+    border-radius: 5px;
+    padding: 10px;
+    background: #fff;
+    pointer-events: none;
 }

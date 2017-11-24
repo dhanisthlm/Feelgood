@@ -38,8 +38,11 @@ export class Staff extends Component {
         }, 200);
 	}
 
-	closeDiploma () {
+	closeDiploma (event) {
+		const id = event.target.id;
         const body = document.getElementsByTagName('body')[0];
+
+        if (id === 'inner-wrapper') return;
         body.style.overflow = 'scroll';
         this.setState({ diploma: '', openDiploma: false });
 	}
@@ -52,8 +55,8 @@ export class Staff extends Component {
 			<div className="staff">
 				<h3 className="heading">Naši psiholozi</h3>
 				<p className="preamble">Ovdje smo za vas, ako trebate s kim razgovarati. Zdravlje.nu nudi vam terapiju diskretno i po razumnoj cijeni. Nu nudi vam terapiju diskretno i po razumnoj cijeni</p>
-				<div className={diploma}>
-					<div className={`diploma-open-wrapper diploma-wrapper-${this.state.direction}`}>
+				<div id="diploma-wrapper" onClick={ this.closeDiploma } className={diploma}>
+					<div id="inner-wrapper" className={`diploma-open-wrapper diploma-wrapper-${this.state.direction}`}>
 						<img className={`diploma-${this.state.direction}`} src={`images/diplom-${this.state.diploma}.jpg`} />
 						<svg onClick={ this.closeDiploma } xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 44" width="512" height="512">
 							<path d="M22 0C9.8 0 0 9.8 0 22s9.8 22 22 22 22-9.8 22-22S34.2 0 22 0zm3.2 22.4l7.5 7.5c.2.2.3.5.3.7s-.1.5-.3.7l-1.4 1.4c-.2.2-.5.3-.7.3-.3 0-.5-.1-.7-.3l-7.5-7.5c-.2-.2-.5-.2-.7 0l-7.5 7.5c-.2.2-.5.3-.7.3-.3 0-.5-.1-.7-.3l-1.4-1.4c-.2-.2-.3-.5-.3-.7s.1-.5.3-.7l7.5-7.5c.2-.2.2-.5 0-.7l-7.5-7.5c-.2-.2-.3-.5-.3-.7s.1-.5.3-.7l1.4-1.4c.2-.2.5-.3.7-.3s.5.1.7.3l7.5 7.5c.2.2.5.2.7 0l7.5-7.5c.2-.2.5-.3.7-.3.3 0 .5.1.7.3l1.4 1.4c.2.2.3.5.3.7s-.1.5-.3.7l-7.5 7.5c-.2.1-.2.5 0 .7z" fill="#c04c9c"/>

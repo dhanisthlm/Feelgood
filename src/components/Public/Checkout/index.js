@@ -89,8 +89,6 @@ export class Checkout extends FormComponent {
         const front = (this.props.save === true) ? 'front none' : 'front';
         const back = (this.props.save === false) ? 'back none' : 'back';
 
-        console.log(this.props);
-
 		if (this.state.isOpen === true) {
             return (
 				<div ref={(checkout) => { this.checkout = checkout; }} className="checkout">
@@ -140,16 +138,16 @@ export class Checkout extends FormComponent {
 										{this.getValidationMessages('comment')}
 									</div>
 									<div className="form-buttons">
-										<button onClick={ this.resetCheckout }>Otkazati</button>
+										<button onClick={ this.resetCheckout }>Natrag</button>
 										<button onClick={ this.handleSubmit }>Zakažite</button>
 									</div>
 								</div>
 								<div className={back}>
 									<h1>Potvrda narudžbe</h1>
 									<p>Molimo uplatite xxx na bankovni računu:</p>
-									<p className="big">YYY YYY YYY YYY</p>
+									<p>YYY YYY YYY YYY</p>
 									<p>Napišite vaše ime, telefon broj / e-poštu i šifru ispod na uplatnicu:</p>
-									<p className="big">{this.props.cost.code}</p>
+									<p >{this.props.cost.code}</p>
 									<p>Mi će mo vas zovnuti da rezerviramo termin za razgovor sa našim psiholozima kada smo primili novac.</p>
 									<p>Dobićete fakturu na vašu e-poštu u roku od 24 sata sa detaljima plaćanja.</p>
 									<p>Mnogo hvala, tim zdravilje</p>

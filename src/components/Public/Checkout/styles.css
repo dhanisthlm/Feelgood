@@ -208,7 +208,7 @@
 }
 
 .checkout .form-buttons button:first-child {
-    width: 142px;
+    width: 118px;
     margin-right: 11px;
     background: #bbb;
 }
@@ -218,7 +218,7 @@
 }
 
 .checkout .form-buttons button:last-child {
-    width: 199px;
+    width: 222px;
 }
 
 .checkout .basket button {
