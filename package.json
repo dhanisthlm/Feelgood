@@ -1,9 +1,13 @@
 {
-  "name": "Gallery",
-  "version": "0.0.1",
-  "description": "A gallery",
+  "name": "Zdravlje",
+  "version": "1.0.0",
+  "description": "Counceling",
   "main": "index.js",
   "author": "Daniel Jansson",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:dhanisthlm/Feelgood.git"
+  },
   "scripts": {
     "mongo:start": "mongod --config /usr/local/etc/mongod.conf --fork --logpath /dev/null",
     "mongo:stop": "mongo admin --eval 'db.shutdownServer()' > /dev/null",
@@ -13,7 +17,7 @@
     "start-stage": "npm run build-stage && NODE_ENV=stage node index.js",
     "build:clean": "rimraf dist/client/static",
     "dev": "npm run build:clean && NODE_ENV=development node index.js",
-    "test": "mocha --require ignore-styles test/utils/setup.js --compilers js:babel-register test/**/*Spec.jsx"
+    "test": "nyc mocha --require ignore-styles test/utils/setup.js --compilers js:babel-register test/**/*Spec.jsx"
   },
   "dependencies": {
     "axios": "*",
