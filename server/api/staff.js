@@ -4,7 +4,7 @@ const getStaff = (request, reply) => {
     Staff.find({}, (error, result) => {
         if (error) return reply(error);
 
-        if (result.length) {
+        if (result.data.length) {
             return reply(result.data);
         }
     });
