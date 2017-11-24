@@ -2,9 +2,9 @@ import * as request from 'axios';
 
 export const getEncounters = () => (dispatch) => {
     return request
-        .get('/staff')
+        .get('/encounters')
         .then((data) => {
-            dispatch({ type: 'ENCOUNTERS', payload: data });
+            dispatch({ type: 'ENCOUNTERS', payload: data.data });
         })
         .catch((error) => {
             console.log('error', error);

@@ -3,7 +3,7 @@ import Encounter from '../models/encounter';
 const getEncounters = (request, reply) => {
     Encounter.find({}, (error, result) => {
         if (error) return reply(error);
-        return reply(result.data);
+        return reply(result).code(200);
     });
 };
 
