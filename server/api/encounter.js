@@ -3,10 +3,7 @@ import Encounter from '../models/encounter';
 const getEncounters = (request, reply) => {
     Encounter.find({}, (error, result) => {
         if (error) return reply(error);
-
-        if (result.length) {
-            return reply(result);
-        }
+        return reply(result.data);
     });
 };
 

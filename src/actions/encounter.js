@@ -4,7 +4,7 @@ export const getEncounters = () => (dispatch) => {
     return request
         .get('/staff')
         .then((data) => {
-            dispatch({ type: 'ENCOUNTERS', payload: data.data });
+            dispatch({ type: 'ENCOUNTERS', payload: data });
         })
         .catch((error) => {
             console.log('error', error);

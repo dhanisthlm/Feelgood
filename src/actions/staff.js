@@ -4,7 +4,7 @@ export const getStaff = () => (dispatch) => {
     return request
         .get('/staff')
         .then((data) => {
-            dispatch({ type: 'GET_STAFF', payload: data.data });
+            dispatch({ type: 'GET_STAFF', payload: data });
         })
         .catch((error) => {
             console.log('error', error);

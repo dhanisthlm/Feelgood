@@ -3,7 +3,7 @@ import Staff from '../models/staff';
 const getStaff = (request, reply) => {
     Staff.find({}, (error, result) => {
         if (error) return reply(error);
-        return reply(result.data);
+        return reply(result);
     });
 };
 
