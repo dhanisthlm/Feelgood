@@ -330,7 +330,7 @@ export class Payment extends Component {
 									<span className="percent-text">50% popust</span>
 									<span className="launch">za slavlje lansiranja</span>
 									<span className="web-adress">Zdravlje.nu</span>
-									<span className="launch-date">Otvaram 16 og dec!</span>
+									<span className="launch-date">Otvaram 16og dec!</span>
 									<span className="kod-text">Konristite kod </span>
 									<span className="kod-text2">Zdravlje.nu</span>
 									<span className="year-1">Vazi do kraja 2017 god</span>
