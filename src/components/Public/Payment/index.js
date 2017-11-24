@@ -14,9 +14,9 @@ export class Payment extends Component {
 			enteredCode: '',
 			code: '',
 			skype: {
-				s: { active: false, cost: 45, week: 1, code: '1' },
-				m: { active: false, cost: 126, week: 3, code: '3' },
-				l: { active: false, cost: 320, week: 8, code: '8' }
+				s: { active: false, cost: 60, week: 1, code: '1' },
+				m: { active: false, cost: 174, week: 3, code: '3' },
+				l: { active: false, cost: 448, week: 8, code: '8' }
 			},
 			email: {
 				s: { active: false, cost: 30, week: 1, code: '04' },
@@ -331,9 +331,9 @@ export class Payment extends Component {
 									<span className="launch">za slavlje lansiranja</span>
 									<span className="web-adress">Zdravlje.nu</span>
 									<span className="launch-date">Otvaram 16 og dec!</span>
-									<span className="kod-text">Konristite kod Zdravlje.nu</span>
-									<span className="year-1">Vazi do kraja</span>
-									<span className="year-2">2017 god</span>
+									<span className="kod-text">Konristite kod </span>
+									<span className="kod-text2">Zdravlje.nu</span>
+									<span className="year-1">Vazi do kraja 2017 god</span>
 								</div>
 							</div>
 						</div>
@@ -348,12 +348,12 @@ export class Payment extends Component {
 					<button
 						className={buttonStyle}
 						onClick={ this.handleCheckout }>
-						Zakazite
+						Zakažite
 					</button>
 					<div className="promo-textfield">
 						<input type="text"
 							onChange={ this.handleKeyUp }
-							placeholder="Unesite kod..."
+							placeholder="Unesite kod"
 							value={this.state.enteredCode}
 						/>
 					</div>

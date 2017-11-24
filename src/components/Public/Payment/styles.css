@@ -108,6 +108,8 @@
     transition: background-color .2s, box-shadow .2s;
     width: 161px;
     text-align: left;
+    font-weight: 300;
+    font-size: 17px;
 }
 
 .payment .skype .wrapper label:before,
@@ -336,7 +338,7 @@
 
 .payment + .text-wrapper .promo-textfield {
     float: right;
-    margin-right: 188px;
+    margin-right: 160px;
 }
 
 .payment + .text-wrapper .promo-textfield span {
@@ -355,15 +357,15 @@
 }
 
 .info-text .percent {
-    font-size: 47px;
+    font-size: 30px;
     display: block;
-    line-height: 28px;
+    margin-bottom: 3px;
 }
 
 .payment + .text-wrapper .promo-textfield input {
     display: block;
     width: 156px;
-    height: 45px;
+    height: 40px;
     border: 1px solid #888;
     box-sizing: border-box;
     padding: 10px;
@@ -372,7 +374,7 @@
     border-radius: 3px;
     text-align: center;
     font-weight: 200;
-    margin-top: -1px;
+    margin-top: 5px;
 }
 
 .info-text .percent-text {
@@ -385,38 +387,50 @@
     display: block;
     font-size: 19px;
     font-weight: 300;
-    margin-top: 8px;
+    margin-top: 0px;
+    margin-bottom: 5px;
 }
 
 .info-text .web-adress {
     display: block;
     font-size: 30px;
     margin-top: 4px;
-    margin-bottom: 5px;
+    margin-bottom: 8px;
+    font-weight: 300;
 }
 
 .info-text .launch-date {
     display: block;
     font-size: 19px;
-    font-weight: 300;
+    font-weight: 400;
+    margin-top: -1px;
+    margin-bottom: 1px;
 }
 
 .info-text .kod-text {
-    display: block;
+    display: inline;
     font-size: 19px;
+    margin-top: 6px;
+    font-weight: 300;
+}
+
+.info-text .kod-text2 {
+    display: inline;
+    font-size: 19px;
+    margin-top: 6px;
+    font-weight: 400;
+}
+
+
+.info-text .year-1 {
+    display: block;
+    font-size: 16px;
     margin-top: 2px;
     font-weight: 300;
 }
 
-.info-text .year-1 {
-    display: block;
-    font-size: 19px;
-    margin-top: 10px;
-    font-weight: 300;
-}
-
 .info-text .year-2 {
-    font-size: 19px;
+    font-size: 16px;
     margin-top: -1px;
     font-weight: 300;
 }
@@ -424,8 +438,8 @@
 .payment .promo-text {
     position: absolute;
     width: 228px;
-    top: 88px;
-    left: 89px;
+    top: 97px;
+    left: 86px;
     color: #fff;
     text-align: center;
 }
