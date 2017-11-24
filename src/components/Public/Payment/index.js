@@ -9,6 +9,9 @@ export class Payment extends Component {
 
 		this.initialState = {
 			checkout: false,
+			promoCode: 'zdravlje.nu',
+			promoDiscount: 0.5,
+			enteredCode: '',
 			code: '',
 			skype: {
 				s: { active: false, cost: 45, week: 1, code: '1' },
@@ -34,6 +37,7 @@ export class Payment extends Component {
 		this.handleCheckout = this.handleCheckout.bind(this);
 		this.resetCheckout = this.resetCheckout.bind(this);
 		this.getData = this.getData.bind(this);
+		this.handleKeyUp = this.handleKeyUp.bind(this);
 	}
 
 	handleCheckbox (e) {
@@ -60,6 +64,10 @@ export class Payment extends Component {
 				this.setCategorySize(size, type);
 			}
 		}
+	}
+
+	handleKeyUp (e) {
+		this.setState({ enteredCode: e.target.value });
 	}
 
 	calculateEmailDiscount (cost, weeks) {
@@ -115,7 +123,6 @@ export class Payment extends Component {
 	}
 
 	calculateCost () {
-		let skype = 0;
 		let skypeDuration = this.state.skypeDuration.s.active ? 's' : 'l';
         let email = 0;
         let emailWeeks = 1;
@@ -123,8 +130,9 @@ export class Payment extends Component {
 		let skypeCode = '0';
 		let skypeDurationCode = '00';
 		let emailCode = '00';
+        let skype = 0;
 
-		for (let size in this.state.skype) {
+        for (let size in this.state.skype) {
 			if (this.state.skype.hasOwnProperty(size)) {
                 if (this.state.skype[size].active === true) {
                     skype = this.state.skype[size].cost * this.state.skypeDuration[skypeDuration].factor;
@@ -153,6 +161,11 @@ export class Payment extends Component {
 				this.refs['duration-text'].style.display = 'none';
 				this.refs['duration-radios'].style.display = 'block';
 			}
+		}
+
+		if (this.state.enteredCode.toLowerCase() === this.state.promoCode) {
+        	skype = skype * this.state.promoDiscount;
+        	email = email * this.state.promoDiscount;
 		}
 
 		return {
@@ -278,11 +291,11 @@ export class Payment extends Component {
 										<span>Broj</span>
 										<span>sedmica</span>
 									</div>
-									<div id="sub-s" onClick={this.handleWeeks} className="arrow-left" />
+									<div id="sub-s" onClick={ this.handleWeeks } className="arrow-left" />
 									<div className="n-weeks">
 										<span>{this.state.email.s.week}</span>
 									</div>
-									<div id="add-s" onClick={this.handleWeeks} className="arrow-right" />
+									<div id="add-s" onClick={ this.handleWeeks } className="arrow-right" />
 								</div>
 							</div>
 							<div className="wrapper">
@@ -332,7 +345,18 @@ export class Payment extends Component {
 						<span>Skype: { this.calculateCost().skype } KM / posiv</span>
 						<span>E-pošta: { this.calculateCost().email } KM / sedmica</span>
 					</div>
-					<button className={buttonStyle} onClick={ this.handleCheckout }>Zakazite</button>
+					<button
+						className={buttonStyle}
+						onClick={ this.handleCheckout }>
+						Zakazite
+					</button>
+					<div className="promo-textfield">
+						<input type="text"
+							onChange={ this.handleKeyUp }
+							placeholder="Unesite kod..."
+							value={this.state.enteredCode}
+						/>
+					</div>
 				</div>
 			</div>
 		);

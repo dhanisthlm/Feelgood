@@ -53,7 +53,6 @@
     box-shadow: 2px 2px 7px 1px rgba(0, 0, 0, 0.5);
     border: 8px solid #fff;
     background-color: #fff;
-    border-radius: 3px;
 }
 
 .staff .card .photo-wrapper:hover .photo-info-wrapper {
@@ -194,7 +193,6 @@
 .staff .diploma img.diploma-vertical {
     width: 100%;
     border: 8px solid #C04C9C;
-    border-radius: 5px;
     padding: 10px;
     background: #fff;
     pointer-events: none;
@@ -203,7 +201,6 @@
 .staff .diploma img.diploma-horizontal {
     width: 100%;
     border: 8px solid #C04C9C;
-    border-radius: 5px;
     padding: 10px;
     background: #fff;
     pointer-events: none;

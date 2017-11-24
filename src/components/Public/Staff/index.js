@@ -28,9 +28,7 @@ export class Staff extends Component {
 	createStaff () {}
 
 	openDiploma (e) {
-        const body = document.getElementsByTagName('body')[0];
         const diplomaDirection = e.currentTarget.getAttribute("data-direction");
-        body.style.overflow = 'hidden';
 		this.setState({ diploma: e.currentTarget.id, direction: diplomaDirection });
 
 		setTimeout(() => {
@@ -40,10 +38,7 @@ export class Staff extends Component {
 
 	closeDiploma (event) {
 		const id = event.target.id;
-        const body = document.getElementsByTagName('body')[0];
-
         if (id === 'inner-wrapper') return;
-        body.style.overflow = 'scroll';
         this.setState({ diploma: '', openDiploma: false });
 	}
 
