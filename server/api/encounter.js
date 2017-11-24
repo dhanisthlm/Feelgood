@@ -1,7 +1,16 @@
 import Encounter from '../models/encounter';
-import EncounterValidator from '../../validators/encounters';
 
-const saveEncounter = (request, reply) => {
+const getEncounters = (request, reply) => {
+    Encounter.find({}, (error, result) => {
+        if (error) return reply(error);
+
+        if (result.length) {
+            return reply(result);
+        }
+    });
+};
+
+const createEncounter = (request, reply) => {
     const encounter = new Encounter();
     let skypePrice = 0;
     let emailPrice = 0;
@@ -34,13 +43,17 @@ const saveEncounter = (request, reply) => {
 exports.register = (server, options, next) => {
     server.route([
         {
+            method: 'GET',
+            path: '/encounters',
+            config: {
+                handler: getEncounters
+            }
+        },
+        {
             method: 'POST',
             path: '/encounter',
             config: {
-                handler: saveEncounter,
-                validate: {
-                    params: EncounterValidator
-                }
+                handler: createEncounter
             }
         }
     ]);

@@ -56,7 +56,6 @@ server.register([
   {
     register: base
   },
-
   {
     register: encounter
   },

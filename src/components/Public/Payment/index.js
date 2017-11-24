@@ -312,7 +312,17 @@ export class Payment extends Component {
 							</div>
 						</div>
 						<div className="info-text">
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut expedita officia quasi. Alias aliquam architecto corporis culpa cupiditate doloremque eaque facere fugit harum illo ipsam, iste labore minima necessitatibus odio quidem quisquam sed sit, totam ut.</p><p>Animi autem corporis cum dignissimos impedit magnam maiores, minus nemo omnis possimus, sed vel!</p>
+							<div className="promo">
+								<div className="promo-text">
+									<span className="percent-text">50% popust</span>
+									<span className="launch">za slavlje lansiranja</span>
+									<span className="web-adress">Zdravlje.nu</span>
+									<span className="launch-date">Otvaram 16 og dec!</span>
+									<span className="kod-text">Konristite kod Zdravlje.nu</span>
+									<span className="year-1">Vazi do kraja</span>
+									<span className="year-2">2017 god</span>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>

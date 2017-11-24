@@ -7,7 +7,7 @@ import { syncHistory } from 'redux-simple-router';
 import thunkMiddleware from 'redux-thunk';
 import reducers from './reducers';
 import App from './components/App';
-import Payment from './components/Public/Payment';
+import Admin from './components/Admin';
 
 const reduxRouterMiddleware = syncHistory(browserHistory);
 const createStoreWithMiddleware = applyMiddleware(reduxRouterMiddleware, thunkMiddleware)(createStore);
@@ -18,7 +18,7 @@ render((
   <Provider store={store}>
     <Router history={browserHistory}>
       <Route path="/anka" component={App}>
-          <Route path='/main' component={Payment}/>
+          <Route path='/admin' component={Admin}/>
       </Route>
     </Router>
   </Provider>
