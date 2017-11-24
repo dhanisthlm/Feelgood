@@ -39,11 +39,19 @@
     justify-content: space-evenly;
 }
 
+.skype .category-heading {
+    margin-left: 90px !important;
+}
+
+.email .category-heading {
+    margin-left: 84px !important;
+}
+
 .payment .category-heading {
     color: #C04C9C;
     margin-bottom: 13px;
     margin-left: 10px;
-    font-size: 20px;
+    font-size: 24px;
     font-weight: 500;
     margin-top: 10px;
 }

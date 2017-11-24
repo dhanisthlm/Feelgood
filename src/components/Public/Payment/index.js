@@ -19,8 +19,8 @@ export class Payment extends Component {
 				l: { active: false, cost: 448, week: 8, code: '8' }
 			},
 			email: {
-				s: { active: false, cost: 30, week: 1, code: '04' },
-				m: { active: false, cost: 80, week: 1, code: '24' }
+				s: { active: false, cost: 40, week: 1, code: '04' },
+				m: { active: false, cost: 110, week: 1, code: '24' }
 			},
 			skypeDuration: {
 				s: { length: 20, active: true, factor: 0.675, code: '20' },
