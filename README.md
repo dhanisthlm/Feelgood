@@ -1,7 +1,6 @@
-Name: Gallery
+Name: Zdravlje
 Author: Daniel Jansson
-Date: 17/9-17
-Description: A gallery
+Description: Councelling
 
 Techniques:
   - JavaScript
@@ -20,4 +19,7 @@ Requirements:
 Installation:
   npm install and then "npm run dev"
   to launch app, go to localhost:8000
+
+  <a href='https://coveralls.io/github/dhanisthlm/Feelgood?branch=master'><img src='https://coveralls.io/repos/github/dhanisthlm/Feelgood/badge.svg?branch=master' alt='Coverage Status' /></a>
+
 
