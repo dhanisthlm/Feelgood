@@ -43,8 +43,8 @@ export class Payment extends Component {
                 l: { active: false, cost: 448, week: 8, code: '8', description: 'Paket za 8 Skype poziva' }
             },
             email: {
-                s: { active: false, cost: 40, week: 1, code: '04', description: 'E-posta, odgovor u toku 24 sata'},
-                m: { active: false, cost: 110, week: 1, code: '24', description: 'E-posta, odgovor u toku 4 sata'}
+                s: { active: false, cost: 40, week: 1, code: '24', description: 'E-posta, odgovor u toku 24 sata'},
+                m: { active: false, cost: 110, week: 1, code: '04', description: 'E-posta, odgovor u toku 4 sata'}
             },
             skypeDuration: {
                 s: { length: 20, active: true, factor: 0.666666, code: '20' },
@@ -202,6 +202,7 @@ export class Payment extends Component {
 	calculateCost () {
 		let skypeDuration = this.state.skypeDuration.s.active ? 's' : 'l';
 		let promoDiscountFactor = 1;
+		let combinationDiscountFactor = 1;
         let email = 0;
         let emailWeeks = 1;
 		let skypeWeeks = 1;
@@ -244,6 +245,7 @@ export class Payment extends Component {
 		}
 
         if (skype > 0 && email > 0) {
+        	combinationDiscountFactor = 0.95;
             this.combinationDiscount = Math.round(email - Math.round(email * 0.95) + (skype - Math.round(skype * 0.95)));
         } else {
             delete this.combinationDiscount;
@@ -258,13 +260,13 @@ export class Payment extends Component {
             promoDiscountFactor = 1;
         	delete this.promoDiscount;
 		}
-
-		return {
-			total: function () { return Math.round(((this.email * emailWeeks) + (this.skype * skypeWeeks )))},
-			email: (skype > 0 && email > 0) ? Math.round(((email / emailWeeks) * 0.95) * promoDiscountFactor) : Math.round((email / emailWeeks) * promoDiscountFactor),
-			skype: (skype > 0 && email > 0) ? Math.round(((skype / skypeWeeks) * 0.95) * promoDiscountFactor) : Math.round((skype / skypeWeeks) * promoDiscountFactor),
-			code: skypeCode + '' + skypeDurationCode + '' + emailCode
-		}
+		
+        return {
+            total: function () { return Math.round((email + skype) * promoDiscountFactor * combinationDiscountFactor) },
+            email: Math.round(email/emailWeeks * promoDiscountFactor),
+            skype: Math.round(skype/skypeWeeks * promoDiscountFactor),
+            code: skypeCode + '' + skypeDurationCode + '' + emailCode
+        }
 	}
 
     /**
