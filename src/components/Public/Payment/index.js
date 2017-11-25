@@ -7,20 +7,22 @@ export class Payment extends Component {
 	constructor (props) {
 		super(props);
 
-		this.initialState = {
+		this.state = {
 			checkout: false,
+			combinationDiscount: 0,
+			promoDiscount: 0,
 			promoCode: 'zdravlje.nu',
-			promoDiscount: 0.5,
+			promoDiscountFactor: 0.5,
 			enteredCode: '',
 			code: '',
 			skype: {
-				s: { active: false, cost: 60, week: 1, code: '1' },
-				m: { active: false, cost: 174, week: 3, code: '3' },
-				l: { active: false, cost: 448, week: 8, code: '8' }
+				s: { active: false, cost: 60, week: 1, code: '1', description: '1 Skype poziva' },
+				m: { active: false, cost: 174, week: 3, code: '3', description: 'Paket za 3 skype poziva' },
+				l: { active: false, cost: 448, week: 8, code: '8', description: 'Paket za 8 Skype poziva' }
 			},
 			email: {
-				s: { active: false, cost: 40, week: 1, code: '04' },
-				m: { active: false, cost: 110, week: 1, code: '24' }
+				s: { active: false, cost: 40, week: 1, code: '04', description: 'E-posta, odgovor u toku 24 sata'},
+				m: { active: false, cost: 110, week: 1, code: '24', description: 'E-posta, odgovor u toku 4 sata'}
 			},
 			skypeDuration: {
 				s: { length: 20, active: true, factor: 0.675, code: '20' },
@@ -28,8 +30,6 @@ export class Payment extends Component {
 			},
 			lastSize: { skype: 's', email: '' }
 		};
-
-		this.state = {...this.initialState};
 
 		this.handleCheckbox = this.handleCheckbox.bind(this);
 		this.handleWeeks = this.handleWeeks.bind(this);
@@ -57,11 +57,26 @@ export class Payment extends Component {
 			}
 		} else if (type === 'email') {
 			if ( size !== this.state.lastSize.email) {
-				email.s.active = false;
-				email.m.active = false;
-                this.setState({ email }, () => this.setCategorySize(size, type));
+                email.s.week = 1;
+                email.s.cost = 40;
+                email.m.week = 1;
+                email.m.cost = 110;
+                email.s.active = false;
+                email.m.active = false;
+
+				this.setState({email}, () => this.setCategorySize(size, type));
 			} else {
-				this.setCategorySize(size, type);
+				if (e.currentTarget.checked) {
+                    email.s.week = 1;
+                    email.s.cost = 40;
+                    email.m.week = 1;
+                    email.m.cost = 110;
+                    email.s.active = false;
+                    email.m.active = false;
+                    this.setState({email}, () => this.setCategorySize(size, type));
+                } else {
+                    this.setCategorySize(size, type)
+				}
 			}
 		}
 	}
@@ -94,14 +109,32 @@ export class Payment extends Component {
 	}
 
 	resetCheckout () {
-		const body = document.getElementsByTagName('body')[0];
-		body.style.overflow = 'scroll';
-        //this.setState({...this.initialState});
+		this.setState({
+            checkout: false,
+            combinationDiscount: 0,
+            promoDiscount: 0,
+            promoCode: 'zdravlje.nu',
+            promoDiscountFactor: 0.5,
+            enteredCode: '',
+            code: '',
+            skype: {
+                s: { active: false, cost: 60, week: 1, code: '1', description: '1 Skype poziva' },
+                m: { active: false, cost: 174, week: 3, code: '3', description: 'Paket za 3 skype poziva' },
+                l: { active: false, cost: 448, week: 8, code: '8', description: 'Paket za 8 Skype poziva' }
+            },
+            email: {
+                s: { active: false, cost: 40, week: 1, code: '04', description: 'E-posta, odgovor u toku 24 sata'},
+                m: { active: false, cost: 110, week: 1, code: '24', description: 'E-posta, odgovor u toku 4 sata'}
+            },
+            skypeDuration: {
+                s: { length: 20, active: true, factor: 0.675, code: '20' },
+                l: { length: 45, active: false, factor: 1, code: '45' }
+            },
+            lastSize: { skype: 's', email: '' }
+		})
 	}
 
 	handleCheckout () {
-		const body = document.getElementsByTagName('body')[0];
-		body.style.overflow = (!this.state.checkout) ? 'hidden' : 'scroll';
         this.setState({ checkout: !this.state.checkout });
     }
 
@@ -117,6 +150,9 @@ export class Payment extends Component {
                 }
 			})
 		});
+
+		data.combinationDiscount = this.combinationDiscount;
+		data.promoDiscount = this.promoDiscount;
 
 		//console.log('data', data);
 		return data;
@@ -164,8 +200,13 @@ export class Payment extends Component {
 		}
 
 		if (this.state.enteredCode.toLowerCase() === this.state.promoCode) {
-        	skype = skype * this.state.promoDiscount;
-        	email = email * this.state.promoDiscount;
+        	skype = skype * this.state.promoDiscountFactor;
+        	email = email * this.state.promoDiscountFactor;
+        	this.promoDiscount = Math.round((email + skype) * this.state.promoDiscountFactor);
+		}
+
+		if (skype > 0 && email > 0) {
+        	this.combinationDiscount = Math.round((email/emailWeeks) + (skype/skypeWeeks ) * 0.05);
 		}
 
 		return {

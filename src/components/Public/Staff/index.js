@@ -59,10 +59,10 @@ export class Staff extends Component {
 					</div>
 				</div>
 				<div className="cards">
-                    {this.props.staff.map(function(person) {
+                    {this.props.staff.map(function(person, i) {
                     	const image = "./images/" + person.image;
                         return (
-							<div className="card">
+							<div key={i} className="card">
 								<div className="photo-wrapper">
 									<div className="photo-info-wrapper">
 										<p>{person.text}</p>

@@ -9,15 +9,15 @@
 }
 
 .checkout .basket {
-    width: 600px;
+    width: 1000px;
     min-height: 614px;
     text-align: center;
     background-color: #fff;
     left: 50%;
     top: 50%;
     position: absolute;
-    margin-left: -300px;
-    margin-top: -333px;
+    margin-left: -500px;
+    margin-top: -307px;
     box-sizing: border-box;
 }
 
@@ -48,11 +48,15 @@
     margin: 20px auto;
     left: 50%;
     z-index: 99;
+    width: 400px;
 }
 
 .checkout .basket .back {
-    margin: 0 auto;
-    width: 410px;
+    color: #c04c9c;
+    font-size: 26px;
+    display: inline-block;
+    margin-top: 7px;
+    width: 410px
 }
 
 .checkout .basket .front,
@@ -70,20 +74,20 @@
 }
 
 .checkout .basket p:nth-child(2) {
-    margin-top: 15px;
+    margin-top: 27px;
     margin-bottom: 0;
     text-align: left;
 }
 
 .checkout .basket p:nth-child(3) {
-    margin: 10px 0 0 0;
+    margin: 7px 0 0 0;
     font-weight: 300;
     color: #c04c9c;
     font-size: 29px;
 }
 
 .checkout .basket p:nth-child(4) {
-    padding-top: 8px;
+    padding-top: 5px;
     margin-top: -2px;
     margin-bottom: 0;
     text-align: left;
@@ -91,18 +95,18 @@
 
 .checkout .basket .back button {
     display: block;
-    width: 497px;
-    margin-top: 26px;
-    margin-left: -39px;
+    width: 100%;
+    margin-top: 19px;
+    margin-left: -1px;
+    height: 47px;
 }
 
 .checkout .basket p:nth-child(5) {
-    margin: 0;
-    font-weight: 300;
     color: #c04c9c;
-    font-size: 29px;
-    margin: 10px 0 6px 0;
+    font-size: 30px;
+    margin: 7px 0 6px 0;
     text-align: center;
+    font-weight: 300;
 }
 
 .checkout .none {
@@ -125,7 +129,7 @@
 }
 
 .checkout .basket p:nth-child(8) {
-    margin: 20px 0 0 0;
+    margin: 16px 0 0 0;
     text-align: left;
 }
 
@@ -141,6 +145,7 @@
     color: #fff;
     margin-bottom: 23px;
     text-align: center;
+    margin-left: -426px;
 }
 
 .checkout .basket .back h1 {
@@ -149,6 +154,7 @@
     margin-top: 10px;
     font-size: 40px;
     color: #fff;
+    margin-left: -426px;
 }
 
 .checkout .basket label {
@@ -183,22 +189,22 @@
     display: block;
     margin-bottom: 3px;
     height: 42px;
-    width: 350px;
-    border: 1px solid #888;
+    width: 100%;
+    border: 1px solid #999;
     box-sizing: border-box;
+    border-radius: 3px;
     padding: 10px;
     font-size: 16px;
     font-weight: 200;
     outline: 0;
-    box-shadow: inset 0 0 1px 0 #999;
 }
 
 .checkout .basket textarea {
     display: block;
     margin-bottom: 19px;
     height: 110px;
-    width: 350px;
-    border: 1px solid #888;
+    width: 100%;
+    border: 1px solid #999;
     resize: none;
     box-sizing: border-box;
     font-size: 16px;
@@ -218,16 +224,16 @@
 }
 
 .checkout .form-buttons button:last-child {
-    width: 222px;
+    width: 271px;
 }
 
 .checkout .basket button {
     width: 351px;
-    height: 56px;
+    height: 47px;
     background-color: #c04c9c;
     border: none;
     color: #fff;
-    font-size: 25px;
+    font-size: 21px;
     font-weight: 200;
     cursor: pointer;
     outline: 0;
@@ -244,4 +250,53 @@
 
 .checkout .basket svg path {
     fill: #fff;
+}
+
+table {
+    float: left;
+    margin-right: -15px;
+    margin-top: 116px;
+    margin-left: 55px;
+    width: 430px;
+}
+
+th {
+    margin-right: 70px;
+    margin-top: 109px;
+    margin-left: 45px;
+    width: 389px;
+    font-weight: 300;
+    font-size: 17px;
+    color: #fff;
+    padding: 5px;
+}
+
+td {
+    font-weight: 300;
+    padding: 6px 10px;
+}
+
+tr td:first-child {
+    text-align: left;
+    padding-left: 17px;
+}
+
+tr {
+    background-color: #eee;
+}
+
+th:first-child {
+    border-radius: 5px 0 0 0;
+}
+
+th:last-child {
+    border-radius: 0 5px 0 0;
+}
+
+thead tr {
+    background-color: #c04c9c;
+}
+
+.right {
+    text-align: right !important;
 }

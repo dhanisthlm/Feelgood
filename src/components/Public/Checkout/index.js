@@ -89,6 +89,11 @@ export class Checkout extends FormComponent {
         const front = (this.props.save === true) ? 'front none' : 'front';
         const back = (this.props.save === false) ? 'back none' : 'back';
 
+        const skypeCost = this.props.data.skype ? this.props.data.skype.cost : 0;
+		const emailCost = this.props.data.email ? this.props.data.email.cost : 0;
+		const combinationDiscount = this.props.data.combinationDiscount ? this.props.data.combinationDiscount : 0;
+		const promoDiscount = this.props.data.promoDiscount ? this.props.data.promoDiscount : 0;
+
 		if (this.state.isOpen === true) {
             return (
 				<div ref={(checkout) => { this.checkout = checkout; }} className="checkout">
@@ -99,6 +104,94 @@ export class Checkout extends FormComponent {
 								<svg onClick={ this.resetCheckout } viewBox="0 0 94.926 94.926">
 									<path d="M55.931,47.463L94.306,9.09c0.826-0.827,0.826-2.167,0-2.994L88.833,0.62C88.436,0.224,87.896,0,87.335,0   c-0.562,0-1.101,0.224-1.498,0.62L47.463,38.994L9.089,0.62c-0.795-0.795-2.202-0.794-2.995,0L0.622,6.096   c-0.827,0.827-0.827,2.167,0,2.994l38.374,38.373L0.622,85.836c-0.827,0.827-0.827,2.167,0,2.994l5.473,5.476   c0.397,0.396,0.936,0.62,1.498,0.62s1.1-0.224,1.497-0.62l38.374-38.374l38.374,38.374c0.397,0.396,0.937,0.62,1.498,0.62   s1.101-0.224,1.498-0.62l5.473-5.476c0.826-0.827,0.826-2.167,0-2.994L55.931,47.463z" fill="#c04c9c"/>
 								</svg>
+								<table>
+									<colgroup>
+										<col width="60%" />
+										<col width="20%" />
+										<col width="20%" />
+									</colgroup>
+									<thead>
+										<tr>
+											<th>Stavka</th>
+											<th>Sedmica</th>
+											<th>Cijena</th>
+										</tr>
+									</thead>
+                                    {(() => {
+                                        if (this.props.data.skype) {
+                                            return(
+                                            	<tr>
+													<td>{this.props.data.skype.description}</td>
+													<td className="right">{this.props.data.skype.week} KM</td>
+													<td className="right">{this.props.data.skype.cost} KM</td>
+												</tr>
+											)
+                                        }
+                                    })()}
+                                    {(() => {
+                                        if (this.props.data.email) {
+                                            return(
+												<tr>
+													<td>{this.props.data.email.description}</td>
+													<td className="right">{this.props.data.email.week} KM</td>
+													<td className="right">{this.props.data.email.cost} KM</td>
+												</tr>
+                                            )
+                                        }
+                                    })()}
+                                    <tr>
+										<td>&nbsp;</td>
+										<td>&nbsp;</td>
+										<td>&nbsp;</td>
+									</tr>
+									<tr>
+										<td className="right" colSpan="2">Suma</td>
+										<td className="right">{skypeCost + emailCost} KM</td>
+									</tr>
+                                    {(() => {
+                                        if (this.props.data.promoDiscount) {
+                                            return (
+												<tr>
+													<td className="right" colSpan="2">kombinacija popust</td>
+													<td className="right">{combinationDiscount} KM</td>
+												</tr>
+                                            )
+                                        }
+                                    })()}
+                                    {(() => {
+                                        if (this.props.data.promoDiscount) {
+                                            return (
+												<tr>
+													<td className="right" colSpan="2">Suma iza kominacijskog popusta
+													</td>
+													<td className="right">{(skypeCost + emailCost) - combinationDiscount}
+														KM
+													</td>
+												</tr>
+                                            )
+                                        }
+                                    })()}
+                                    {(() => {
+                                        if (this.props.data.promoDiscount) {
+                                            return(
+												<tr>
+													<td className="right" colSpan="2">Voucher popust</td>
+													<td className="right">{this.props.data.promoDiscount} KM</td>
+												</tr>
+                                            )
+                                        }
+                                    })()}
+                                    {(() => {
+                                        if (this.props.data.promoDiscount || this.props.data.promoDiscount) {
+                                            return (
+												<tr>
+													<td className="right" colSpan="2">Ukupno</td>
+													<td className="right">{(skypeCost + emailCost) - combinationDiscount - promoDiscount} KM</td>
+												</tr>
+                                            )
+                                        }
+                                    })()}
+								</table>
 								<div ref={(front) => { this.front = front; }} className={front}>
 									<h1>Potvrda narudžbe</h1>
 									<div className="form-element-wrapper">
