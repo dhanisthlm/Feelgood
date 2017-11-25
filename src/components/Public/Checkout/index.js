@@ -90,9 +90,10 @@ export class Checkout extends FormComponent {
         const back = (this.props.save === false) ? 'back none' : 'back';
 
         const skypeCost = this.props.data.skype ? this.props.data.skype.cost : 0;
-		const emailCost = this.props.data.email ? this.props.data.email.cost : 0;
+        const skypeDurationFactor = this.props.data.skypeDuration.factor;
+		const emailCost = this.props.data.email ? this.props.calculateEmailDiscount(this.props.data.email.cost, this.props.data.email.week) / this.props.data.email.week : 0;
+		const nWeeks = this.props.data.email ? this.props.data.email.week : 0;
 		const combinationDiscount = this.props.data.combinationDiscount ? this.props.data.combinationDiscount : 0;
-		const promoDiscount = this.props.data.promoDiscount ? this.props.data.promoDiscount : 0;
 
 		if (this.state.isOpen === true) {
             return (
@@ -122,8 +123,8 @@ export class Checkout extends FormComponent {
                                             return(
                                             	<tr>
 													<td>{this.props.data.skype.description}</td>
-													<td className="right">{this.props.data.skype.week} KM</td>
-													<td className="right">{this.props.data.skype.cost} KM</td>
+													<td className="right">{this.props.data.skype.week}</td>
+													<td className="right">{Math.round(this.props.data.skype.cost * skypeDurationFactor)} KM</td>
 												</tr>
 											)
                                         }
@@ -133,8 +134,8 @@ export class Checkout extends FormComponent {
                                             return(
 												<tr>
 													<td>{this.props.data.email.description}</td>
-													<td className="right">{this.props.data.email.week} KM</td>
-													<td className="right">{this.props.data.email.cost} KM</td>
+													<td className="right">{this.props.data.email.week}</td>
+													<td className="right">{this.props.calculateEmailDiscount(this.props.data.email.cost, this.props.data.email.week)} KM</td>
 												</tr>
                                             )
                                         }
@@ -146,10 +147,10 @@ export class Checkout extends FormComponent {
 									</tr>
 									<tr>
 										<td className="right" colSpan="2">Suma</td>
-										<td className="right">{skypeCost + emailCost} KM</td>
+										<td className="right">{Math.round(skypeCost * skypeDurationFactor) + (emailCost * nWeeks)} KM</td>
 									</tr>
                                     {(() => {
-                                        if (this.props.data.promoDiscount) {
+                                        if (this.props.data.combinationDiscount) {
                                             return (
 												<tr>
 													<td className="right" colSpan="2">kombinacija popust</td>
@@ -159,13 +160,11 @@ export class Checkout extends FormComponent {
                                         }
                                     })()}
                                     {(() => {
-                                        if (this.props.data.promoDiscount) {
+                                        if (this.props.data.combinationDiscount > 0) {
                                             return (
 												<tr>
-													<td className="right" colSpan="2">Suma iza kominacijskog popusta
-													</td>
-													<td className="right">{(skypeCost + emailCost) - combinationDiscount}
-														KM
+													<td className="right" colSpan="2">Suma iza kominacijskog popusta</td>
+													<td className="right">{(Math.round(skypeCost * skypeDurationFactor) + (emailCost * nWeeks)) - this.props.data.combinationDiscount} KM
 													</td>
 												</tr>
                                             )
@@ -182,11 +181,11 @@ export class Checkout extends FormComponent {
                                         }
                                     })()}
                                     {(() => {
-                                        if (this.props.data.promoDiscount || this.props.data.promoDiscount) {
+                                        if (this.props.data.promoDiscount) {
                                             return (
 												<tr>
 													<td className="right" colSpan="2">Ukupno</td>
-													<td className="right">{(skypeCost + emailCost) - combinationDiscount - promoDiscount} KM</td>
+													<td className="right">{this.props.cost.total()} KM</td>
 												</tr>
                                             )
                                         }

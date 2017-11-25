@@ -7,84 +7,117 @@ export class Payment extends Component {
 	constructor (props) {
 		super(props);
 
-		this.state = {
-			checkout: false,
-			combinationDiscount: 0,
-			promoDiscount: 0,
-			promoCode: 'zdravlje.nu',
-			promoDiscountFactor: 0.5,
-			enteredCode: '',
-			code: '',
-			skype: {
-				s: { active: false, cost: 60, week: 1, code: '1', description: '1 Skype poziva' },
-				m: { active: false, cost: 174, week: 3, code: '3', description: 'Paket za 3 skype poziva' },
-				l: { active: false, cost: 448, week: 8, code: '8', description: 'Paket za 8 Skype poziva' }
-			},
-			email: {
-				s: { active: false, cost: 40, week: 1, code: '04', description: 'E-posta, odgovor u toku 24 sata'},
-				m: { active: false, cost: 110, week: 1, code: '24', description: 'E-posta, odgovor u toku 4 sata'}
-			},
-			skypeDuration: {
-				s: { length: 20, active: true, factor: 0.675, code: '20' },
-				l: { length: 45, active: false, factor: 1, code: '45' }
-			},
-			lastSize: { skype: 's', email: '' }
-		};
+		this.state = {};
 
-		this.handleCheckbox = this.handleCheckbox.bind(this);
+		this.handlePackage = this.handlePackage.bind(this);
 		this.handleWeeks = this.handleWeeks.bind(this);
 		this.handleSkypeDuration = this.handleSkypeDuration.bind(this);
 		this.handleCheckout = this.handleCheckout.bind(this);
 		this.resetCheckout = this.resetCheckout.bind(this);
 		this.getData = this.getData.bind(this);
-		this.handleKeyUp = this.handleKeyUp.bind(this);
+		this.handlePromoCode = this.handlePromoCode.bind(this);
 	}
 
-	handleCheckbox (e) {
+	componentWillMount () {
+		this.setState(this.createInitialState());
+	}
+
+    /**
+     * This callback type is called `requestCallback
+     * @callback requestCallback
+     * @param {number} responseCode
+	 * @return {void}
+     */
+	createInitialState () {
+		return {
+            checkout: false,
+            combinationDiscount: 0,
+            promoDiscount: 0,
+            promoCode: 'zdravlje.nu',
+            promoDiscountFactor: 0.5,
+            enteredCode: '',
+            code: '',
+            skype: {
+                s: { active: false, cost: 60, week: 1, code: '1', description: '1 Skype poziva' },
+                m: { active: false, cost: 174, week: 3, code: '3', description: 'Paket za 3 skype poziva' },
+                l: { active: false, cost: 448, week: 8, code: '8', description: 'Paket za 8 Skype poziva' }
+            },
+            email: {
+                s: { active: false, cost: 40, week: 1, code: '04', description: 'E-posta, odgovor u toku 24 sata'},
+                m: { active: false, cost: 110, week: 1, code: '24', description: 'E-posta, odgovor u toku 4 sata'}
+            },
+            skypeDuration: {
+                s: { length: 20, active: true, factor: 0.675, code: '20' },
+                l: { length: 45, active: false, factor: 1, code: '45' }
+            },
+            lastSize: { skype: 's', email: '' }
+        };
+    }
+
+    /**
+     * This callback type is called `requestCallback
+     * @callback requestCallback
+     * @param {number} responseCode
+     * @return {void}
+     */
+    resetEmail () {
+		const email = this.state.email;
+        email.s.week = 1;
+        email.s.cost = 40;
+        email.m.week = 1;
+        email.m.cost = 110;
+        email.s.active = false;
+        email.m.active = false;
+        this.setState({ email });
+	}
+
+	resetSkype () {
+        const skype = this.state.skype;
+        skype.s.active = false;
+        skype.m.active = false;
+        skype.l.active = false;
+        this.setState({skype});
+	}
+
+    /**
+     * This callback type is called `requestCallback
+     * @callback requestCallback
+     * @param {number} responseCode
+     * @return {void}
+     */
+	handlePackage (e) {
 		const type = e.target.id.split('-')[0];
 		const size = e.target.id.split('-')[1];
-		const skype = this.state.skype;
-        const email = this.state.email;
 
-		if (type === 'skype') {
-			if ( size !== this.state.lastSize.skype) {
-				skype.s.active = false;
-				skype.m.active = false;
-				skype.l.active = false;
-				this.setState({ skype }, () => this.setCategorySize(size, type));
-			} else {
-				this.setCategorySize(size, type);
-			}
-		} else if (type === 'email') {
-			if ( size !== this.state.lastSize.email) {
-                email.s.week = 1;
-                email.s.cost = 40;
-                email.m.week = 1;
-                email.m.cost = 110;
-                email.s.active = false;
-                email.m.active = false;
+        if (type === 'skype' && size !== this.state.lastSize.skype) {
+               this.resetSkype();
+		}
 
-				this.setState({email}, () => this.setCategorySize(size, type));
-			} else {
-				if (e.currentTarget.checked) {
-                    email.s.week = 1;
-                    email.s.cost = 40;
-                    email.m.week = 1;
-                    email.m.cost = 110;
-                    email.s.active = false;
-                    email.m.active = false;
-                    this.setState({email}, () => this.setCategorySize(size, type));
-                } else {
-                    this.setCategorySize(size, type)
-				}
+		if (type === 'email') {
+			if ( size !== this.state.lastSize.email || e.currentTarget.checked) {
+                this.resetEmail();
 			}
 		}
+
+    	this.setCategorySize(size, type);
 	}
 
-	handleKeyUp (e) {
+    /**
+     * This callback type is called `requestCallback
+     * @callback requestCallback
+     * @param {number} responseCode
+     * @return {void}
+     */
+	handlePromoCode (e) {
 		this.setState({ enteredCode: e.target.value });
 	}
 
+    /**
+     * This callback type is called `requestCallback
+     * @callback requestCallback
+     * @param {number} responseCode
+     * @return {void}
+     */
 	calculateEmailDiscount (cost, weeks) {
 		let factor;
 
@@ -108,44 +141,41 @@ export class Payment extends Component {
 		return Math.round(cost * factor) * weeks;
 	}
 
+    /**
+     * This callback type is called `requestCallback
+     * @callback requestCallback
+     * @param {number} responseCode
+     * @return {void}
+     */
 	resetCheckout () {
-		this.setState({
-            checkout: false,
-            combinationDiscount: 0,
-            promoDiscount: 0,
-            promoCode: 'zdravlje.nu',
-            promoDiscountFactor: 0.5,
-            enteredCode: '',
-            code: '',
-            skype: {
-                s: { active: false, cost: 60, week: 1, code: '1', description: '1 Skype poziva' },
-                m: { active: false, cost: 174, week: 3, code: '3', description: 'Paket za 3 skype poziva' },
-                l: { active: false, cost: 448, week: 8, code: '8', description: 'Paket za 8 Skype poziva' }
-            },
-            email: {
-                s: { active: false, cost: 40, week: 1, code: '04', description: 'E-posta, odgovor u toku 24 sata'},
-                m: { active: false, cost: 110, week: 1, code: '24', description: 'E-posta, odgovor u toku 4 sata'}
-            },
-            skypeDuration: {
-                s: { length: 20, active: true, factor: 0.675, code: '20' },
-                l: { length: 45, active: false, factor: 1, code: '45' }
-            },
-            lastSize: { skype: 's', email: '' }
-		})
+        this.setState(this.createInitialState());
 	}
 
+    /**
+     * This callback type is called `requestCallback
+     * @callback requestCallback
+     * @param {number} responseCode
+     * @return {void}
+     */
 	handleCheckout () {
         this.setState({ checkout: !this.state.checkout });
     }
 
+    /**
+     * This callback type is called `requestCallback
+     * @callback requestCallback
+     * @param {number} responseCode
+     * @return {object} data
+     */
     getData () {
 		const data = {};
+		const self = this;
 
 		Object.keys(this.state).filter((item) => {
 			return Object.keys(this.state[item]).filter((subItem) => {
 				if (item === 'skype' || item === 'email' || item === 'skypeDuration') {
                     if (this.state[item][subItem].hasOwnProperty('active') && this.state[item][subItem].active === true) {
-                        data[item] = this.state[item][subItem];
+						data[item] = this.state[item][subItem];
                     }
                 }
 			})
@@ -154,12 +184,18 @@ export class Payment extends Component {
 		data.combinationDiscount = this.combinationDiscount;
 		data.promoDiscount = this.promoDiscount;
 
-		//console.log('data', data);
 		return data;
 	}
 
+    /**
+     * This callback type is called `requestCallback
+     * @callback requestCallback
+     * @param {number} responseCode
+     * @return {object} cost
+     */
 	calculateCost () {
 		let skypeDuration = this.state.skypeDuration.s.active ? 's' : 'l';
+		let promoDiscountFactor = 1;
         let email = 0;
         let emailWeeks = 1;
 		let skypeWeeks = 1;
@@ -167,6 +203,8 @@ export class Payment extends Component {
 		let skypeDurationCode = '00';
 		let emailCode = '00';
         let skype = 0;
+        let skypeDiscount = 0;
+        let emailDiscount = 0;
 
         for (let size in this.state.skype) {
 			if (this.state.skype.hasOwnProperty(size)) {
@@ -199,24 +237,36 @@ export class Payment extends Component {
 			}
 		}
 
-		if (this.state.enteredCode.toLowerCase() === this.state.promoCode) {
-        	skype = skype * this.state.promoDiscountFactor;
-        	email = email * this.state.promoDiscountFactor;
-        	this.promoDiscount = Math.round((email + skype) * this.state.promoDiscountFactor);
+        if (skype > 0 && email > 0) {
+            this.combinationDiscount = Math.round(email - Math.round(email * 0.95) + (skype - Math.round(skype * 0.95)));
+        } else {
+            delete this.combinationDiscount;
 		}
 
-		if (skype > 0 && email > 0) {
-        	this.combinationDiscount = Math.round((email/emailWeeks) + (skype/skypeWeeks ) * 0.05);
+		if (this.state.enteredCode.toLowerCase() === this.state.promoCode) {
+        	promoDiscountFactor = 0.5;
+        	skypeDiscount = skype * this.state.promoDiscountFactor;
+        	emailDiscount = email * this.state.promoDiscountFactor;
+        	this.promoDiscount = (skype > 0 && email > 0) ? Math.round((emailDiscount + skypeDiscount) * 0.95) : Math.round((emailDiscount + skypeDiscount));
+		} else {
+            promoDiscountFactor = 1;
+        	delete this.promoDiscount;
 		}
 
 		return {
-			total: function () { return (this.email * emailWeeks) + (this.skype * skypeWeeks )},
+			total: function () { return Math.round(((this.email * emailWeeks) + (this.skype * skypeWeeks )) * promoDiscountFactor)},
 			email: (skype > 0 && email > 0) ? Math.round((email / emailWeeks) * 0.95) : Math.round(email / emailWeeks),
 			skype: (skype > 0 && email > 0) ? Math.round((skype / skypeWeeks) * 0.95) : Math.round(skype / skypeWeeks),
 			code: skypeCode + '' + skypeDurationCode + '' + emailCode
 		}
 	}
 
+    /**
+     * This callback type is called `requestCallback
+     * @callback requestCallback
+     * @param {number} responseCode
+     * @return {void}
+     */
 	handleWeeks (e) {
 		const type = e.target.id.split('-')[0];
 		const size = e.target.id.split('-')[1];
@@ -235,6 +285,12 @@ export class Payment extends Component {
         this.setState({ email });
 	}
 
+    /**
+     * This callback type is called `requestCallback
+     * @callback requestCallback
+     * @param {number} responseCode
+     * @return {void}
+     */
 	setCategorySize (size, type) {
 		let category = this.state[type];
         let lastSize = this.state.lastSize;
@@ -244,6 +300,12 @@ export class Payment extends Component {
 		this.setState({ category, lastSize });
 	}
 
+    /**
+     * This callback type is called `requestCallback
+     * @callback requestCallback
+     * @param {number} responseCode
+     * @return {void}
+     */
 	handleSkypeDuration (e) {
 		const size = e.currentTarget.id.split('-')[1];
 		const skypeDuration = this.state.skypeDuration;
@@ -252,6 +314,12 @@ export class Payment extends Component {
 		this.setState({ skypeDuration });
 	}
 
+    /**
+     * This callback type is called `requestCallback
+     * @callback requestCallback
+     * @param {number} responseCode
+     * @return {void}
+     */
 	render () {
 		const order = this.calculateCost();
 		const buttonStyle = (order.total() === 0) ? 'checkout-button disabled' : 'checkout-button';
@@ -260,7 +328,13 @@ export class Payment extends Component {
 			<div>
 				{(() => {
 					if (this.state.checkout === true) {
-						return <Checkout data={this.getData()} cost={this.calculateCost()} resetCheckout={ this.resetCheckout } />
+						return(
+							<Checkout data={this.getData()}
+								  cost={this.calculateCost()}
+								  calculateEmailDiscount={this.calculateEmailDiscount}
+								  resetCheckout={ this.resetCheckout }
+							/>
+						)
 					}
 				})()}
 				<div className="payment">
@@ -277,7 +351,7 @@ export class Payment extends Component {
 									type="checkbox"
 									name="skype"
 									checked={ this.state.skype.s.active }
-									onClick={ this.handleCheckbox }
+									onClick={ this.handlePackage }
 								/>
 								<label htmlFor="skype-s">1 Skype poziv</label>
 							</div>
@@ -287,7 +361,7 @@ export class Payment extends Component {
 									type="checkbox"
 									name="skype"
 									checked={ this.state.skype.m.active }
-									onClick={ this.handleCheckbox }
+									onClick={ this.handlePackage }
 								/>
 								<label htmlFor="skype-m">Paket za 3 skype poziva</label>
 							</div>
@@ -297,7 +371,7 @@ export class Payment extends Component {
 									type="checkbox"
 									name="skype"
 									checked={ this.state.skype.l.active }
-									onClick={ this.handleCheckbox }
+									onClick={ this.handlePackage }
 								/>
 								<label htmlFor="skype-l">Paket za 8 skype poziva</label>
 							</div>
@@ -321,7 +395,7 @@ export class Payment extends Component {
 									type="checkbox"
 									name="skype"
 									checked={ this.state.email.s.active }
-									onClick={ this.handleCheckbox }
+									onClick={ this.handlePackage }
 								/>
 								<label className="email-s-label" htmlFor="email-s">Odgovar u toku 24h</label>
 								<p className="week-text week-text-s">
@@ -346,7 +420,7 @@ export class Payment extends Component {
 									type="checkbox"
 									name="skype"
 									checked={ this.state.email.m.active }
-									onClick={ this.handleCheckbox }
+									onClick={ this.handlePackage }
 								/>
 								<label className="email-m-label" htmlFor="email-m">Odgovar u toku 4h</label>
 								<p className="week-text week-text-m">
@@ -393,7 +467,7 @@ export class Payment extends Component {
 					</button>
 					<div className="promo-textfield">
 						<input type="text"
-							onChange={ this.handleKeyUp }
+							onChange={ this.handlePromoCode }
 							placeholder="Unesite kod"
 							value={this.state.enteredCode}
 						/>
