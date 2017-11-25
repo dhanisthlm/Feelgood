@@ -161,10 +161,13 @@ export class Checkout extends FormComponent {
                                     })()}
                                     {(() => {
                                         if (this.props.data.combinationDiscount > 0) {
-                                            return (
+                                        	const className = this.props.data.promoDiscount
+												? 'right' : 'right heavy';
+
+                                        	return (
 												<tr>
-													<td className="right" colSpan="2">Suma iza kominacijskog popusta</td>
-													<td className="right">{(Math.round(skypeCost * skypeDurationFactor) + (emailCost * nWeeks)) - this.props.data.combinationDiscount} KM
+													<td className={className} colSpan="2">Suma iza kominacijskog popusta</td>
+													<td className={className}>{(Math.round(skypeCost * skypeDurationFactor) + (emailCost * nWeeks)) - this.props.data.combinationDiscount} KM
 													</td>
 												</tr>
                                             )
@@ -184,8 +187,8 @@ export class Checkout extends FormComponent {
                                         if (this.props.data.promoDiscount) {
                                             return (
 												<tr>
-													<td className="right" colSpan="2">Ukupno</td>
-													<td className="right">{this.props.cost.total()} KM</td>
+													<td className="right heavy" colSpan="2">Ukupno</td>
+													<td className="right heavy">{this.props.cost.total()} KM</td>
 												</tr>
                                             )
                                         }

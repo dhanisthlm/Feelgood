@@ -216,7 +216,7 @@
 .checkout .form-buttons button:first-child {
     width: 118px;
     margin-right: 11px;
-    background: #bbb;
+    background: #c2519e8c;
 }
 
 .checkout .form-buttons button {
@@ -282,7 +282,7 @@ tr td:first-child {
 }
 
 tr {
-    background-color: #eee;
+    background-color: #c04c9c59;
 }
 
 th:first-child {
@@ -299,4 +299,9 @@ thead tr {
 
 .right {
     text-align: right !important;
+}
+
+.heavy {
+    font-weight: 600 !important;
+    color: #444 !important;
 }
