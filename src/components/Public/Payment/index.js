@@ -47,7 +47,7 @@ export class Payment extends Component {
                 m: { active: false, cost: 110, week: 1, code: '24', description: 'E-posta, odgovor u toku 4 sata'}
             },
             skypeDuration: {
-                s: { length: 20, active: true, factor: 0.675, code: '20' },
+                s: { length: 20, active: true, factor: 0.666666, code: '20' },
                 l: { length: 45, active: false, factor: 1, code: '45' }
             },
             lastSize: { skype: 's', email: '' }
