@@ -21,7 +21,7 @@ export class Traitments extends Component {
 	render () {
 		return (
 			<div>
-				<div className="issues">
+				<div id="usluge" className="issues">
 					<div className="row-1">
 						<div onMouseEnter={this.handleMouseEnter}
 							 onMouseLeave={this.handleMouseLeave}

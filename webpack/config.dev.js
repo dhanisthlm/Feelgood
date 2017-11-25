@@ -44,7 +44,8 @@ module.exports = {
         { test: /\.woff/, loader: "url-loader?limit=100000"},
         { test: /\.woff2/, loader: "url-loader?limit=100000"},
         { test: /\.ttf/, loader: "file-loader"},
-        { test: /\.eot/, loader: "file-loader"}
+        { test: /\.eot/, loader: "file-loader"},
+        { test: /\.json$/, loader: 'json-loader' },
     ]
   },
     node: {

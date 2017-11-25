@@ -18,12 +18,14 @@
     margin-top: 68px;
 }
 
-.header .main-menu div {
+.header .main-menu a {
     display: inline-block;
     font-weight: 400;
     margin-right: 30px;
     color: #C04C9C;
     font-size: 18px;
+    text-decoration: none;
+    cursor: pointer;
 }
 
 .header .logo-text {

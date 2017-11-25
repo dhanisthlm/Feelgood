@@ -16,7 +16,7 @@ export class Hero extends Component {
                 <div className="text-wrapper">
                     <h3 className="heading">Psihološko savjetovanje za svakodnevne probleme</h3>
                     <p className="preamble">Ovdje smo za vas ako trebate s kim razgovarat. Zdravlje.nu vam nudi psihološke savjetovanje diskretno i po razumnoj cijeni. U razgovoru prepoznajemo koje misli i emocije vas sprečavaju da se osjećate dobro i budete uspješni u životu, te radimo na promjeni.</p>
-                    <button className="intro-button">Zapocnite</button>
+                    <a href="/anka#whoarew" className="intro-button">Zapocnite</a>
                 </div>
             </div>
         );

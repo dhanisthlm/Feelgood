@@ -47,8 +47,8 @@ export class Staff extends Component {
 		const self = this;
 
 		return (
-			<div className="staff">
-				<h3 className="heading">Naši psiholozi</h3>
+			<div id="kosmomi" className="staff">
+				<h3 className="heading">Ko smo mi</h3>
 				<p className="preamble">Ovdje smo za vas, ako trebate s kim razgovarati. Zdravlje.nu nudi vam terapiju diskretno i po razumnoj cijeni. Nu nudi vam terapiju diskretno i po razumnoj cijeni</p>
 				<div id="diploma-wrapper" onClick={ this.closeDiploma } className={diploma}>
 					<div id="inner-wrapper" className={`diploma-open-wrapper diploma-wrapper-${this.state.direction}`}>

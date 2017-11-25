@@ -1,0 +1,90 @@
+{
+  "sv-SE": {
+    "common": {
+    },
+    "header": {
+      "howItWorks": "Så fungerar det",
+      "subjects": "Ämnen",
+      "forParents": "För föräldrar",
+      "forStudents": "För elever",
+      "becomeTeacher": "Bli lärare",
+      "contactUs": "Kontakta oss",
+      "signIn": "Logga in",
+      "register": "Registrera dig"
+    },
+    "footer": {
+      "faq": "Vanliga frågor",
+      "becomeTeacher": "Jobba som lärare",
+      "forParents": "För föräldrar",
+      "payments": "Betalningsvillkor",
+      "rules": "Regler och villkor"
+    },
+    "front": {
+      "learnFrom": "Lär dig av",
+      "ourExperts": "våra experter",
+      "getBetterGrades": "få bättre betyg",
+      "bookFreeLesson": "Boka gratis lektion",
+      "subjectNeeded": "Välj de ämnen som passar dig.",
+      "personalPage": "Personlig sida med kursöversikt",
+      "liveVideo": "Live video-lektioner med våra lärare.",
+      "paymentOptions": "Erbjudanden",
+      "lesson": "lektion",
+      "lessons": "lektioner",
+      "shortMonth": "mån"
+    },
+    "login": {
+      "signIn": "Logga in",
+      "email": "E-mail",
+      "password": "Lösenord",
+      "send": "Skicka"
+    },
+    "register": {
+      "firstName": "Förnamn",
+      "lastName": "Efternamn",
+      "email": "E-post",
+      "phone": "Telefonnummer",
+      "password": "Lösenord",
+      "repeatPassword": "Upprepa lösenord",
+      "birthDate": "Födelsedatum",
+      "day": "Dag",
+      "month": "Månad",
+      "year": "År",
+      "teacher": "Lärare",
+      "student": "Elev",
+      "createAccount": "Skapa konto",
+      "send": "Skicka",
+      "typeOfUser": "Typ av användare",
+      "chooseTypeOfUser": "Välj typ av användare"
+    },
+    "lesson": {
+      "classroom": "Klassrum",
+      "page": "Sida",
+      "addPage": "Ny sida",
+      "tools": "Verktyg",
+      "teacher": "Lärare",
+      "student": "Elev",
+      "isWriting": "skriver",
+      "grid": "Rutnät"
+    },
+    "dashboardLesson": {
+      "course": "Kurs",
+      "subject": "Ämne",
+      "level": "Nivå",
+      "teacher": "Lärare",
+      "date": "Datum",
+      "time": "Tid",
+      "startLesson": "Starta lektion",
+      "lessons": "Lektioner",
+      "lesson": "Lektion"
+    },
+    "navigation": {
+      "student": "Elev",
+      "teacher": "Lärare",
+      "classroom": "Klassrum"
+    }
+  },
+  "en-US": {
+    "common": {
+    }
+  }
+}
