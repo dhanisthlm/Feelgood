@@ -123,7 +123,7 @@ export class Checkout extends FormComponent {
                                             return(
                                             	<tr>
 													<td>{this.props.data.skype.description}</td>
-													<td className="right">{this.props.data.skype.week}</td>
+													<td>{this.props.data.skype.week}</td>
 													<td className="right">{Math.round(this.props.data.skype.cost * skypeDurationFactor)} KM</td>
 												</tr>
 											)
@@ -134,7 +134,7 @@ export class Checkout extends FormComponent {
                                             return(
 												<tr>
 													<td>{this.props.data.email.description}</td>
-													<td className="right">{this.props.data.email.week}</td>
+													<td>{this.props.data.email.week}</td>
 													<td className="right">{this.props.calculateEmailDiscount(this.props.data.email.cost, this.props.data.email.week)} KM</td>
 												</tr>
                                             )
