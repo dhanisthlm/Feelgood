@@ -1,0 +1,1538 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/components/Public/Payment/index.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../../prettify.css" />
+    <link rel="stylesheet" href="../../../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../../../index.html">All files</a> / <a href="index.html">src/components/Public/Payment</a> index.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">57.04% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>77/135</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">52.63% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>40/76</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">83.33% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>5/6</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">57.46% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>77/134</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line medium'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289
+290
+291
+292
+293
+294
+295
+296
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
+331
+332
+333
+334
+335
+336
+337
+338
+339
+340
+341
+342
+343
+344
+345
+346
+347
+348
+349
+350
+351
+352
+353
+354
+355
+356
+357
+358
+359
+360
+361
+362
+363
+364
+365
+366
+367
+368
+369
+370
+371
+372
+373
+374
+375
+376
+377
+378
+379
+380
+381
+382
+383
+384
+385
+386
+387
+388
+389
+390
+391
+392
+393
+394
+395
+396
+397
+398
+399
+400
+401
+402
+403
+404
+405
+406
+407
+408
+409
+410
+411
+412
+413
+414
+415
+416
+417
+418
+419
+420
+421
+422
+423
+424
+425
+426
+427
+428
+429
+430
+431
+432
+433
+434
+435
+436
+437
+438
+439
+440
+441
+442
+443
+444
+445
+446
+447
+448
+449
+450
+451
+452
+453
+454
+455
+456
+457
+458
+459
+460
+461
+462
+463
+464
+465
+466
+467
+468
+469
+470
+471
+472
+473
+474
+475
+476
+477
+478
+479
+480
+481
+482
+483
+484
+485
+486
+487
+488
+489
+490
+491
+492</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">24x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">24x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">24x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">22x</span>
+<span class="cline-any cline-yes">40x</span>
+<span class="cline-any cline-yes">14x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">54x</span>
+<span class="cline-any cline-yes">54x</span>
+<span class="cline-any cline-yes">54x</span>
+<span class="cline-any cline-yes">54x</span>
+<span class="cline-any cline-yes">54x</span>
+<span class="cline-any cline-yes">54x</span>
+<span class="cline-any cline-yes">54x</span>
+<span class="cline-any cline-yes">54x</span>
+<span class="cline-any cline-yes">54x</span>
+<span class="cline-any cline-yes">54x</span>
+<span class="cline-any cline-yes">54x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">54x</span>
+<span class="cline-any cline-yes">162x</span>
+<span class="cline-any cline-yes">162x</span>
+<span class="cline-any cline-yes">32x</span>
+<span class="cline-any cline-yes">32x</span>
+<span class="cline-any cline-yes">32x</span>
+<span class="cline-any cline-yes">32x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">54x</span>
+<span class="cline-any cline-yes">108x</span>
+<span class="cline-any cline-yes">108x</span>
+<span class="cline-any cline-yes">24x</span>
+<span class="cline-any cline-yes">24x</span>
+<span class="cline-any cline-yes">24x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">54x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">54x</span>
+<span class="cline-any cline-yes">24x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">30x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">54x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">54x</span>
+<span class="cline-any cline-yes">54x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">54x</span>
+<span class="cline-any cline-yes">30x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">13x</span>
+<span class="cline-any cline-yes">13x</span>
+<span class="cline-any cline-yes">13x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">13x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">13x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React, { Component, PropTypes } from 'react'
+import { connect } from 'react-redux';
+import Checkout from '../Checkout';
+import styles from './styles.css';
+&nbsp;
+export class Payment extends Component {
+	constructor (props) <span class="branch-1 cbranch-no" title="branch not covered" >{</span>
+		super(props);
+&nbsp;
+		this.state = {};
+&nbsp;
+		this.handlePackage = this.handlePackage.bind(this);
+		this.handleWeeks = this.handleWeeks.bind(this);
+		this.handleSkypeDuration = this.handleSkypeDuration.bind(this);
+		this.handleCheckout = this.handleCheckout.bind(this);
+		this.resetCheckout = this.resetCheckout.bind(this);
+		this.getData = this.getData.bind(this);
+		this.handlePromoCode = this.handlePromoCode.bind(this);
+	}
+&nbsp;
+	componentWillMount () {
+		this.setState(this.createInitialState());
+	}
+&nbsp;
+    /**
+     * This callback type is called `requestCallback
+     * @callback requestCallback
+     * @param {number} responseCode
+	 * @return {void}
+     */
+	createInitialState () {
+		return {
+            checkout: false,
+            combinationDiscount: 0,
+            promoDiscount: 0,
+            promoCode: 'zdravlje.nu',
+            promoDiscountFactor: 0.5,
+            enteredCode: '',
+            code: '',
+            skype: {
+                s: { active: false, cost: 60, week: 1, code: '1', description: '1 Skype poziva' },
+                m: { active: false, cost: 174, week: 3, code: '3', description: 'Paket za 3 skype poziva' },
+                l: { active: false, cost: 448, week: 8, code: '8', description: 'Paket za 8 Skype poziva' }
+            },
+            email: {
+                s: { active: false, cost: 40, week: 1, code: '04', description: 'E-posta, odgovor u toku 24 sata'},
+                m: { active: false, cost: 110, week: 1, code: '24', description: 'E-posta, odgovor u toku 4 sata'}
+            },
+            skypeDuration: {
+                s: { length: 20, active: true, factor: 0.666666, code: '20' },
+                l: { length: 45, active: false, factor: 1, code: '45' }
+            },
+            lastSize: { skype: 's', email: '' }
+        };
+    }
+&nbsp;
+    /**
+     * This callback type is called `requestCallback
+     * @callback requestCallback
+     * @param {number} responseCode
+     * @return {void}
+     */
+    resetEmail () {
+		const email = <span class="cstat-no" title="statement not covered" >this.state.email;</span>
+<span class="cstat-no" title="statement not covered" >        email.s.week = 1;</span>
+<span class="cstat-no" title="statement not covered" >        email.s.cost = 40;</span>
+<span class="cstat-no" title="statement not covered" >        email.m.week = 1;</span>
+<span class="cstat-no" title="statement not covered" >        email.m.cost = 110;</span>
+<span class="cstat-no" title="statement not covered" >        email.s.active = false;</span>
+<span class="cstat-no" title="statement not covered" >        email.m.active = false;</span>
+<span class="cstat-no" title="statement not covered" >        this.setState({ email });</span>
+	}
+&nbsp;
+    /**
+     * This callback type is called `requestCallback
+     * @callback requestCallback
+     * @param {number} responseCode
+     * @return {void}
+     */
+	resetSkype () {
+        const skype = <span class="cstat-no" title="statement not covered" >this.state.skype;</span>
+<span class="cstat-no" title="statement not covered" >        skype.s.active = false;</span>
+<span class="cstat-no" title="statement not covered" >        skype.m.active = false;</span>
+<span class="cstat-no" title="statement not covered" >        skype.l.active = false;</span>
+<span class="cstat-no" title="statement not covered" >        this.setState({skype});</span>
+	}
+&nbsp;
+    /**
+     * This callback type is called `requestCallback
+     * @callback requestCallback
+     * @param {number} responseCode
+     * @return {void}
+     */
+	handlePackage (e) {
+		const type = <span class="cstat-no" title="statement not covered" >e.target.id.split('-')[0];</span>
+		const size = <span class="cstat-no" title="statement not covered" >e.target.id.split('-')[1];</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        if (type === 'skype' &amp;&amp; size !== this.state.lastSize.skype) {</span>
+<span class="cstat-no" title="statement not covered" >               this.resetSkype();</span>
+		}
+&nbsp;
+<span class="cstat-no" title="statement not covered" >		if (type === 'email') {</span>
+<span class="cstat-no" title="statement not covered" >			if ( size !== this.state.lastSize.email || e.currentTarget.checked) {</span>
+<span class="cstat-no" title="statement not covered" >                this.resetEmail();</span>
+			}
+		}
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    	this.setCategorySize(size, type);</span>
+	}
+&nbsp;
+    /**
+     * This callback type is called `requestCallback
+     * @callback requestCallback
+     * @param {number} responseCode
+     * @return {void}
+     */
+	handlePromoCode (e) {
+<span class="cstat-no" title="statement not covered" >		this.setState({ enteredCode: e.target.value });</span>
+	}
+&nbsp;
+    /**
+     * This callback type is called `requestCallback
+     * @callback requestCallback
+     * @param {number} responseCode
+     * @return {void}
+     */
+	calculateEmailDiscount (cost, weeks) {
+		let factor;
+&nbsp;
+		switch (true) {
+			case (weeks === 2):
+				factor = .95;
+				break;
+			case (weeks === 3):
+				factor = .925;
+				break;
+			case (weeks === 4):
+				factor = .9;
+				break;
+<span class="branch-3 cbranch-no" title="branch not covered" >			case (weeks &gt; 4):</span>
+<span class="cstat-no" title="statement not covered" >				factor = .875;</span>
+<span class="cstat-no" title="statement not covered" >				break;</span>
+<span class="branch-4 cbranch-no" title="branch not covered" >			default:</span>
+<span class="cstat-no" title="statement not covered" >				factor = 1;</span>
+		}
+&nbsp;
+		return Math.round(cost * factor) * weeks;
+	}
+&nbsp;
+    /**
+     * This callback type is called `requestCallback
+     * @callback requestCallback
+     * @param {number} responseCode
+     * @return {void}
+     */
+	resetCheckout () {
+<span class="cstat-no" title="statement not covered" >        this.setState(this.createInitialState());</span>
+	}
+&nbsp;
+    /**
+     * This callback type is called `requestCallback
+     * @callback requestCallback
+     * @param {number} responseCode
+     * @return {void}
+     */
+	handleCheckout () {
+        this.setState({ checkout: !this.state.checkout });
+    }
+&nbsp;
+    /**
+     * This callback type is called `requestCallback
+     * @callback requestCallback
+     * @param {number} responseCode
+     * @return {object} data
+     */
+    getData () {
+		const data = {};
+		const self = this;
+&nbsp;
+		Object.keys(this.state).filter((item) =&gt; {
+			return Object.keys(this.state[item]).filter((subItem) =&gt; {
+				if (item === 'skype' || item === 'email' || item === 'skypeDuration') {
+                    if (this.state[item][subItem].hasOwnProperty('active') &amp;&amp; this.state[item][subItem].active === true) {
+						data[item] = this.state[item][subItem];
+                    }
+                }
+			})
+		});
+&nbsp;
+		data.combinationDiscount = this.combinationDiscount;
+		data.promoDiscount = this.promoDiscount;
+&nbsp;
+		return data;
+	}
+&nbsp;
+    /**
+     * This callback type is called `requestCallback
+     * @callback requestCallback
+     * @param {number} responseCode
+     * @return {object} cost
+     */
+	calculateCost () {
+		let skypeDuration = this.state.skypeDuration.s.active ? 's' : 'l';
+		let promoDiscountFactor = 1;
+        let email = 0;
+        let emailWeeks = 1;
+		let skypeWeeks = 1;
+		let skypeCode = '0';
+		let skypeDurationCode = '00';
+		let emailCode = '00';
+        let skype = 0;
+        let skypeDiscount = 0;
+        let emailDiscount = 0;
+&nbsp;
+        for (let size in this.state.skype) {
+			<span class="missing-if-branch" title="else path not taken" >E</span>if (this.state.skype.hasOwnProperty(size)) {
+                if (this.state.skype[size].active === true) {
+                    skype = this.state.skype[size].cost * this.state.skypeDuration[skypeDuration].factor;
+                    skypeWeeks = this.state.skype[size].week;
+                    skypeCode = this.state.skype[size].code;
+                    skypeDurationCode = this.state.skypeDuration[skypeDuration].code;
+                }
+            }
+		}
+&nbsp;
+		for (let size in this.state.email) {
+            <span class="missing-if-branch" title="else path not taken" >E</span>if (this.state.email.hasOwnProperty(size)) {
+				if (this.state.email[size].active === true) {
+                    email = this.calculateEmailDiscount(this.state.email[size].cost, this.state.email[size].week);
+                    emailWeeks = this.state.email[size].week;
+                    emailCode = this.state.email[size].code;
+                }
+			}
+		}
+&nbsp;
+		<span class="missing-if-branch" title="if path not taken" >I</span>if (this.refs['duration-text'] &amp;&amp; <span class="branch-1 cbranch-no" title="branch not covered" >this.refs['duration-radios']) {</span>
+<span class="cstat-no" title="statement not covered" >			if (skype === 0) {</span>
+<span class="cstat-no" title="statement not covered" >				this.refs['duration-text'].style.display = 'block';</span>
+<span class="cstat-no" title="statement not covered" >				this.refs['duration-radios'].style.display = 'none';</span>
+			} else {
+<span class="cstat-no" title="statement not covered" >				this.refs['duration-text'].style.display = 'none';</span>
+<span class="cstat-no" title="statement not covered" >				this.refs['duration-radios'].style.display = 'block';</span>
+			}
+		}
+&nbsp;
+        if (skype &gt; 0 &amp;&amp; email &gt; 0) {
+            this.combinationDiscount = Math.round(email - Math.round(email * 0.95) + (skype - Math.round(skype * 0.95)));
+        } else {
+            delete this.combinationDiscount;
+		}
+&nbsp;
+		<span class="missing-if-branch" title="if path not taken" >I</span>if (this.state.enteredCode.toLowerCase() === this.state.promoCode) {
+<span class="cstat-no" title="statement not covered" >        	promoDiscountFactor = 0.5;</span>
+<span class="cstat-no" title="statement not covered" >        	skypeDiscount = skype * this.state.promoDiscountFactor;</span>
+<span class="cstat-no" title="statement not covered" >        	emailDiscount = email * this.state.promoDiscountFactor;</span>
+<span class="cstat-no" title="statement not covered" >        	this.promoDiscount = (skype &gt; 0 &amp;&amp; email &gt; 0) ? Math.round((emailDiscount + skypeDiscount) * 0.95) : Math.round((emailDiscount + skypeDiscount));</span>
+		} else {
+            promoDiscountFactor = 1;
+        	delete this.promoDiscount;
+		}
+&nbsp;
+		return {
+			total: function () { return Math.round(((this.email * emailWeeks) + (this.skype * skypeWeeks )))},
+			email: (skype &gt; 0 &amp;&amp; email &gt; 0) ? Math.round(((email / emailWeeks) * 0.95) * promoDiscountFactor) : Math.round((email / emailWeeks) * promoDiscountFactor),
+			skype: (skype &gt; 0 &amp;&amp; email &gt; 0) ? Math.round(((skype / skypeWeeks) * 0.95) * promoDiscountFactor) : Math.round((skype / skypeWeeks) * promoDiscountFactor),
+			code: skypeCode + '' + skypeDurationCode + '' + emailCode
+		}
+	}
+&nbsp;
+    /**
+     * This callback type is called `requestCallback
+     * @callback requestCallback
+     * @param {number} responseCode
+     * @return {void}
+     */
+	handleWeeks (e) {
+		const type = <span class="cstat-no" title="statement not covered" >e.target.id.split('-')[0];</span>
+		const size = <span class="cstat-no" title="statement not covered" >e.target.id.split('-')[1];</span>
+        const email = <span class="cstat-no" title="statement not covered" >this.state.email;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        if (type === 'add') {</span>
+			let nWeeks = <span class="cstat-no" title="statement not covered" >this.state.email[size].week +1;</span>
+<span class="cstat-no" title="statement not covered" >			email.s.week = size === 's' ? nWeeks : this.state.email.s.week;</span>
+<span class="cstat-no" title="statement not covered" >            email.m.week = size === 'm' ? nWeeks : this.state.email.m.week;</span>
+		} else <span class="cstat-no" title="statement not covered" >if (this.state.email[size].week &gt; 1) {</span>
+			let nWeeks = <span class="cstat-no" title="statement not covered" >this.state.email[size].week - 1;</span>
+<span class="cstat-no" title="statement not covered" >			email.s.week = size === 's' ? nWeeks : this.state.email.s.week;</span>
+<span class="cstat-no" title="statement not covered" >			email.m.week = size === 'm' ? nWeeks : this.state.email.m.week;</span>
+		}
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        this.setState({ email });</span>
+	}
+&nbsp;
+    /**
+     * This callback type is called `requestCallback
+     * @callback requestCallback
+     * @param {number} responseCode
+     * @return {void}
+     */
+	setCategorySize (size, type) {
+		let category = <span class="cstat-no" title="statement not covered" >this.state[type];</span>
+        let lastSize = <span class="cstat-no" title="statement not covered" >this.state.lastSize;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        category[size].active = !category[size].active;</span>
+<span class="cstat-no" title="statement not covered" >		lastSize[type] = size;</span>
+<span class="cstat-no" title="statement not covered" >		this.setState({ category, lastSize });</span>
+	}
+&nbsp;
+    /**
+     * This callback type is called `requestCallback
+     * @callback requestCallback
+     * @param {number} responseCode
+     * @return {void}
+     */
+	handleSkypeDuration (e) {
+		const size = <span class="cstat-no" title="statement not covered" >e.currentTarget.id.split('-')[1];</span>
+		const skypeDuration = <span class="cstat-no" title="statement not covered" >this.state.skypeDuration;</span>
+<span class="cstat-no" title="statement not covered" >		skypeDuration.s.active = size === 's';</span>
+<span class="cstat-no" title="statement not covered" >		skypeDuration.l.active = size === 'l';</span>
+<span class="cstat-no" title="statement not covered" >		this.setState({ skypeDuration });</span>
+	}
+&nbsp;
+    /**
+     * This callback type is called `requestCallback
+     * @callback requestCallback
+     * @param {number} responseCode
+     * @return {void}
+     */
+	render () {
+		const order = this.calculateCost();
+		const buttonStyle = (order.total() === 0) ? 'checkout-button disabled' : 'checkout-button';
+&nbsp;
+		return (
+			&lt;div&gt;
+				{(() =&gt; {
+					if (this.state.checkout === true) {
+						return(
+							&lt;Checkout data={this.getData()}
+								  cost={this.calculateCost()}
+								  calculateEmailDiscount={this.calculateEmailDiscount}
+								  resetCheckout={ this.resetCheckout }
+							/&gt;
+						)
+					}
+				})()}
+				&lt;div id="cijene" className="payment"&gt;
+					&lt;h3 className="heading"&gt;Koliko kosta psihološko savjetovanje?&lt;/h3&gt;
+					&lt;p className="preamble"&gt;
+						Ovdje možete naručiti psihološko savjetovanje. Cijenu za vase izbore mozete naci u doljnem dio stranice. Izaberite Skype-poziv, e-postu ili kombinaciju Skype-poziv i e-postu. Što više poziva ili sedmica e-poste odlučite da kupite, sto jeftinija je cena po pozivu i po sedmicu e-poste.
+					&lt;/p&gt;
+					&lt;div className="payment-type-wrapper"&gt;
+						&lt;div className="container skype"&gt;
+							&lt;h4 className="category-heading"&gt;Skype&lt;/h4&gt;
+							&lt;div className="wrapper"&gt;
+								&lt;input
+									id="skype-s"
+									type="checkbox"
+									name="skype"
+									checked={ this.state.skype.s.active }
+									onClick={ this.handlePackage }
+								/&gt;
+								&lt;label htmlFor="skype-s"&gt;1 Skype poziv&lt;/label&gt;
+							&lt;/div&gt;
+							&lt;div className="wrapper"&gt;
+								&lt;input
+									id="skype-m"
+									type="checkbox"
+									name="skype"
+									checked={ this.state.skype.m.active }
+									onClick={ this.handlePackage }
+								/&gt;
+								&lt;label htmlFor="skype-m"&gt;Paket za 3 skype poziva&lt;/label&gt;
+							&lt;/div&gt;
+							&lt;div className="wrapper"&gt;
+								&lt;input
+									id="skype-l"
+									type="checkbox"
+									name="skype"
+									checked={ this.state.skype.l.active }
+									onClick={ this.handlePackage }
+								/&gt;
+								&lt;label htmlFor="skype-l"&gt;Paket za 8 skype poziva&lt;/label&gt;
+							&lt;/div&gt;
+							&lt;div ref="duration-radios" className="toggle_radios"&gt;
+								&lt;input type="radio" checked={ this.state.skypeDuration.s.active } className="toggle_option" id="duration-s" name="toggle_option" /&gt;
+								&lt;input type="radio" checked={ this.state.skypeDuration.l.active } className="toggle_option" id="duration-l" name="toggle_option" /&gt;
+								&lt;label id="duration-s" onClick={ this.handleSkypeDuration } className="small-skype" htmlFor="duration-s"&gt;&lt;p&gt;20 min poziv&lt;/p&gt;&lt;/label&gt;
+								&lt;label id="duration-l" onClick={ this.handleSkypeDuration } className="large-skype" htmlFor="duration-l"&gt;&lt;p&gt;45 min poziv&lt;/p&gt;&lt;/label&gt;
+								&lt;div className="toggle_option_slider"&gt;&lt;/div&gt;
+							&lt;/div&gt;
+							&lt;p ref="duration-text" className="duration-text"&gt;
+								Izaberite jedan Skype-poziv ili paket sa više Skype-poziva. Možete kombinovati sa e-poštom.
+							&lt;/p&gt;
+						&lt;/div&gt;
+						&lt;div className="email"&gt;
+							&lt;h4 className="category-heading"&gt;E-pošta&lt;/h4&gt;
+							&lt;div className="wrapper"&gt;
+								&lt;input
+									id="email-s"
+									className="email-s"
+									type="checkbox"
+									name="skype"
+									checked={ this.state.email.s.active }
+									onClick={ this.handlePackage }
+								/&gt;
+								&lt;label className="email-s-label" htmlFor="email-s"&gt;Odgovar u toku 24h&lt;/label&gt;
+								&lt;p className="week-text week-text-s"&gt;
+									Neograničen broj e-pošte, odgovor u toku 24h. Možete kombinovati sa Skype-pozivom.
+								&lt;/p&gt;
+								&lt;div className="weeks"&gt;
+									&lt;div className="week-title"&gt;
+										&lt;span&gt;Broj&lt;/span&gt;
+										&lt;span&gt;sedmica&lt;/span&gt;
+									&lt;/div&gt;
+									&lt;div id="sub-s" onClick={ this.handleWeeks } className="arrow-left" /&gt;
+									&lt;div className="n-weeks"&gt;
+										&lt;span&gt;{this.state.email.s.week}&lt;/span&gt;
+									&lt;/div&gt;
+									&lt;div id="add-s" onClick={ this.handleWeeks } className="arrow-right" /&gt;
+								&lt;/div&gt;
+							&lt;/div&gt;
+							&lt;div className="wrapper"&gt;
+								&lt;input
+									id="email-m"
+									className="email-m"
+									type="checkbox"
+									name="skype"
+									checked={ this.state.email.m.active }
+									onClick={ this.handlePackage }
+								/&gt;
+								&lt;label className="email-m-label" htmlFor="email-m"&gt;Odgovar u toku 4h&lt;/label&gt;
+								&lt;p className="week-text week-text-m"&gt;
+									Neograničen broj e-pošte, odgovor u toku 4h radnim danima 07.00-22.00, vikend i praznik 09.00-18.00.
+								&lt;/p&gt;
+								&lt;div className="weeks"&gt;
+									&lt;div className="week-title"&gt;
+										&lt;span&gt;Broj&lt;/span&gt;
+										&lt;span&gt;sedmica&lt;/span&gt;
+									&lt;/div&gt;
+									&lt;div id="sub-m" onClick={this.handleWeeks} className="arrow-left" /&gt;
+									&lt;div className="n-weeks"&gt;
+										&lt;span&gt;{this.state.email.m.week}&lt;/span&gt;
+									&lt;/div&gt;
+									&lt;div id="add-m" onClick={this.handleWeeks} className="arrow-right" /&gt;
+								&lt;/div&gt;
+							&lt;/div&gt;
+						&lt;/div&gt;
+						&lt;div className="info-text"&gt;
+							&lt;div className="promo"&gt;
+								&lt;div className="promo-text"&gt;
+									&lt;span className="percent-text"&gt;50% popust&lt;/span&gt;
+									&lt;span className="launch"&gt;za slavlje lansiranja&lt;/span&gt;
+									&lt;span className="web-adress"&gt;Zdravlje.nu&lt;/span&gt;
+									&lt;span className="launch-date"&gt;Otvaram 16og dec!&lt;/span&gt;
+									&lt;span className="kod-text"&gt;Konristite kod &lt;/span&gt;
+									&lt;span className="kod-text2"&gt;Zdravlje.nu&lt;/span&gt;
+									&lt;span className="year-1"&gt;Vazi do kraja 2017 god&lt;/span&gt;
+								&lt;/div&gt;
+							&lt;/div&gt;
+						&lt;/div&gt;
+					&lt;/div&gt;
+				&lt;/div&gt;
+				&lt;div className="text-wrapper"&gt;
+					&lt;h2 className="total"&gt;Cijena: { this.calculateCost().total() } KM&lt;/h2&gt;
+					&lt;div className="spec"&gt;
+						&lt;span&gt;Skype: { this.calculateCost().skype } KM / posiv&lt;/span&gt;
+						&lt;span&gt;E-pošta: { this.calculateCost().email } KM / sedmica&lt;/span&gt;
+					&lt;/div&gt;
+					&lt;button
+						className={buttonStyle}
+						onClick={ this.handleCheckout }&gt;
+						Zakažite
+					&lt;/button&gt;
+					&lt;div className="promo-textfield"&gt;
+						&lt;input type="text"
+							onChange={ this.handlePromoCode }
+							placeholder="Unesite kod"
+							value={this.state.enteredCode}
+						/&gt;
+					&lt;/div&gt;
+				&lt;/div&gt;
+			&lt;/div&gt;
+		);
+	}
+}
+&nbsp;
+Payment.propTypes = { dispatch: PropTypes.func };
+&nbsp;
+const <span class="fstat-no" title="function not covered" >mapStateToProps = <span class="cstat-no" title="statement not covered" >(</span>state) =&gt; ({ });</span>
+&nbsp;
+export default connect(mapStateToProps)(Payment)
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Sat Nov 25 2017 20:23:05 GMT+0100 (CET)
+</div>
+</div>
+<script src="../../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../../sorter.js"></script>
+</body>
+</html>
