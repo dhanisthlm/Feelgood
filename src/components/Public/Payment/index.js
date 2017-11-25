@@ -71,6 +71,12 @@ export class Payment extends Component {
         this.setState({ email });
 	}
 
+    /**
+     * This callback type is called `requestCallback
+     * @callback requestCallback
+     * @param {number} responseCode
+     * @return {void}
+     */
 	resetSkype () {
         const skype = this.state.skype;
         skype.s.active = false;
@@ -254,9 +260,9 @@ export class Payment extends Component {
 		}
 
 		return {
-			total: function () { return Math.round(((this.email * emailWeeks) + (this.skype * skypeWeeks )) * promoDiscountFactor)},
-			email: (skype > 0 && email > 0) ? Math.round((email / emailWeeks) * 0.95) : Math.round(email / emailWeeks),
-			skype: (skype > 0 && email > 0) ? Math.round((skype / skypeWeeks) * 0.95) : Math.round(skype / skypeWeeks),
+			total: function () { return Math.round(((this.email * emailWeeks) + (this.skype * skypeWeeks )))},
+			email: (skype > 0 && email > 0) ? Math.round(((email / emailWeeks) * 0.95) * promoDiscountFactor) : Math.round((email / emailWeeks) * promoDiscountFactor),
+			skype: (skype > 0 && email > 0) ? Math.round(((skype / skypeWeeks) * 0.95) * promoDiscountFactor) : Math.round((skype / skypeWeeks) * promoDiscountFactor),
 			code: skypeCode + '' + skypeDurationCode + '' + emailCode
 		}
 	}
