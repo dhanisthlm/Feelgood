@@ -20,14 +20,14 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">18.64% </span>
+        <span class="strong">18.97% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>11/59</span>
+        <span class='fraction'>11/58</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>0/32</span>
+        <span class='fraction'>0/30</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
@@ -35,9 +35,9 @@
         <span class='fraction'>0/13</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">18.97% </span>
+        <span class="strong">19.3% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>11/58</span>
+        <span class='fraction'>11/57</span>
       </div>
     </div>
   </div>
@@ -310,8 +310,7 @@
 265
 266
 267
-268
-269</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+268</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -402,7 +401,6 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -672,9 +670,8 @@ export class Checkout extends FormComponent {
 &nbsp;
         const skypeCost = <span class="cstat-no" title="statement not covered" >this.props.data.skype ? this.props.data.skype.cost : 0;</span>
         const skypeDurationFactor = <span class="cstat-no" title="statement not covered" >this.props.data.skypeDuration.factor;</span>
-		const emailCost = <span class="cstat-no" title="statement not covered" >this.props.data.email ? this.props.calculateEmailDiscount(this.props.data.email.cost, this.props.data.email.week) / this.props.data.email.week : 0;</span>
+		const emailCost = <span class="cstat-no" title="statement not covered" >this.props.data.email ? this.props.calculateEmailDiscount(this.props.data.email) / this.props.data.email.week : 0;</span>
 		const nWeeks = <span class="cstat-no" title="statement not covered" >this.props.data.email ? this.props.data.email.week : 0;</span>
-		const combinationDiscount = <span class="cstat-no" title="statement not covered" >this.props.data.combinationDiscount ? this.props.data.combinationDiscount : 0;</span>
 &nbsp;
 <span class="cstat-no" title="statement not covered" >		if (this.state.isOpen === true) {</span>
 <span class="cstat-no" title="statement not covered" >            return (</span>
@@ -716,7 +713,7 @@ export class Checkout extends FormComponent {
 												&lt;tr&gt;
 													&lt;td&gt;{this.props.data.email.description}&lt;/td&gt;
 													&lt;td&gt;{this.props.data.email.week}&lt;/td&gt;
-													&lt;td className="right"&gt;{this.props.calculateEmailDiscount(this.props.data.email.cost, this.props.data.email.week)} KM&lt;/td&gt;
+													&lt;td className="right"&gt;{this.props.calculateEmailDiscount(this.props.data.email)} KM&lt;/td&gt;
 												&lt;/tr&gt;
                                             )
                                         }
@@ -731,24 +728,24 @@ export class Checkout extends FormComponent {
 										&lt;td className="right"&gt;{Math.round(skypeCost * skypeDurationFactor) + (emailCost * nWeeks)} KM&lt;/td&gt;
 									&lt;/tr&gt;
                                     {(<span class="fstat-no" title="function not covered" >() =&gt; </span>{
-<span class="cstat-no" title="statement not covered" >                                        if (this.props.data.combinationDiscount) {</span>
+<span class="cstat-no" title="statement not covered" >                                        if (this.props.data.packageDiscount) {</span>
 <span class="cstat-no" title="statement not covered" >                                            return (</span>
 												&lt;tr&gt;
-													&lt;td className="right" colSpan="2"&gt;kombinacija popust&lt;/td&gt;
-													&lt;td className="right"&gt;{combinationDiscount} KM&lt;/td&gt;
+													&lt;td className="right" colSpan="2"&gt;Kombinacija popust&lt;/td&gt;
+													&lt;td className="right"&gt;{this.props.data.packageDiscount} KM&lt;/td&gt;
 												&lt;/tr&gt;
                                             )
                                         }
                                     })()}
                                     {(<span class="fstat-no" title="function not covered" >() =&gt; </span>{
-<span class="cstat-no" title="statement not covered" >                                        if (this.props.data.combinationDiscount &gt; 0) {</span>
+<span class="cstat-no" title="statement not covered" >                                        if (this.props.data.packageDiscount &gt; 0) {</span>
                                         	const className = <span class="cstat-no" title="statement not covered" >this.props.data.promoDiscount</span>
 												? 'right' : 'right heavy';
 &nbsp;
 <span class="cstat-no" title="statement not covered" >                                        	return (</span>
 												&lt;tr&gt;
 													&lt;td className={className} colSpan="2"&gt;Suma iza kominacijskog popusta&lt;/td&gt;
-													&lt;td className={className}&gt;{(Math.round(skypeCost * skypeDurationFactor) + (emailCost * nWeeks)) - this.props.data.combinationDiscount} KM
+													&lt;td className={className}&gt;{(Math.round(skypeCost * skypeDurationFactor) + (emailCost * nWeeks)) - this.props.data.packageDiscount} KM
 													&lt;/td&gt;
 												&lt;/tr&gt;
                                             )
@@ -769,7 +766,7 @@ export class Checkout extends FormComponent {
 <span class="cstat-no" title="statement not covered" >                                            return (</span>
 												&lt;tr&gt;
 													&lt;td className="right heavy" colSpan="2"&gt;Ukupno&lt;/td&gt;
-													&lt;td className="right heavy"&gt;{this.props.cost.total()} KM&lt;/td&gt;
+													&lt;td className="right heavy"&gt;{ this.props.cost.total } KM&lt;/td&gt;
 												&lt;/tr&gt;
                                             )
                                         }
@@ -853,7 +850,7 @@ export default connect(mapStateToProps)(validation(strategy(options))(Checkout))
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Sun Nov 26 2017 01:24:56 GMT+0100 (CET)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Sun Nov 26 2017 12:54:20 GMT+0100 (CET)
 </div>
 </div>
 <script src="../../../../prettify.js"></script>

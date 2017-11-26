@@ -72,13 +72,13 @@ describe('Payment component', () => {
         // atach spy to component
         instance.forceUpdate();
 
-        expect(costSpy.returnValues[0].total()).to.equal(40);
+        expect(costSpy.returnValues[0].total).to.equal(40);
         expect(costSpy.returnValues[0].email).to.equal(0);
         expect(costSpy.returnValues[0].skype).to.equal(40);
         costSpy.restore();
     });
 
-    it('should return correct sum: -skype (3weeks, 45min), -email (2weeks, 24h) and 5% discount', () => {
+    it('should return correct sum: -skype (3weeks, 20min), -email (2weeks, 24h) and 5% discount', () => {
         const costSpy = sinon.spy(instance, 'calculateCost');
         instance.setState({
             promoCode: 'zdravlje.nu',
@@ -101,9 +101,9 @@ describe('Payment component', () => {
         // atach spy to component
         instance.forceUpdate();
 
-        expect(costSpy.returnValues[0].total()).to.equal(182);
+        expect(costSpy.returnValues[0].total).to.equal(182);
         expect(costSpy.returnValues[0].email).to.equal(38);
-        expect(costSpy.returnValues[0].skype).to.equal(37);
+        expect(costSpy.returnValues[0].skype).to.equal(39);
         costSpy.restore();
     });
 
@@ -130,17 +130,15 @@ describe('Payment component', () => {
         // atach spy to component
         instance.forceUpdate();
 
-        expect(costSpy.returnValues[0].total()).to.equal(716);
+        expect(costSpy.returnValues[0].total).to.equal(716);
         expect(costSpy.returnValues[0].email).to.equal(102);
-        expect(costSpy.returnValues[0].skype).to.equal(53);
+        expect(costSpy.returnValues[0].skype).to.equal(56);
         costSpy.restore();
     });
 
     it('should return correct sum: -skype (3weeks, 45min) -email (4weeks, 24h) and 50% voucher discount', () => {
         const costSpy = sinon.spy(instance, 'calculateCost');
         instance.setState({
-            promoCode: 'zdravlje.nu',
-            enteredCode: '',
             promoCode: 'zdravlje.nu',
             enteredCode: 'zdravlje.nu',
             skype: {
@@ -161,9 +159,9 @@ describe('Payment component', () => {
         // atach spy to component
         instance.forceUpdate();
 
-        expect(costSpy.returnValues[0].total()).to.equal(151);
-        expect(costSpy.returnValues[0].email).to.equal(9);
-        expect(costSpy.returnValues[0].skype).to.equal(28);
+        expect(costSpy.returnValues[0].total).to.equal(151);
+        expect(costSpy.returnValues[0].email).to.equal(36);
+        expect(costSpy.returnValues[0].skype).to.equal(58);
         costSpy.restore();
     });
 
@@ -190,9 +188,9 @@ describe('Payment component', () => {
         // atach spy to component
         instance.forceUpdate();
 
-        expect(costSpy.returnValues[0].total()).to.equal(566);
+        expect(costSpy.returnValues[0].total).to.equal(566);
         expect(costSpy.returnValues[0].email).to.equal(96);
-        expect(costSpy.returnValues[0].skype).to.equal(37);
+        expect(costSpy.returnValues[0].skype).to.equal(39);
         costSpy.restore();
     });
 });

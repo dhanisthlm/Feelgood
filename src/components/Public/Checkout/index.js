@@ -42,7 +42,11 @@ export class Checkout extends FormComponent {
 	}
 
 	componentDidMount () {
-		this.setState({ isOpen: true, data: this.props.data, cost: this.props.cost });
+		this.setState({
+			isOpen: true,
+			data: this.props.data,
+			cost: this.props.cost
+		});
 	}
 
     getValidatorData() {
@@ -89,11 +93,10 @@ export class Checkout extends FormComponent {
         const front = (this.props.save === true) ? 'front none' : 'front';
         const back = (this.props.save === false) ? 'back none' : 'back';
 
-        const skypeCost = this.props.data.skype ? this.props.data.skype.cost : 0;
+        const skype = this.props.data.skype || {};
         const skypeDurationFactor = this.props.data.skypeDuration.factor;
-		const emailCost = this.props.data.email ? this.props.calculateEmailDiscount(this.props.data.email.cost, this.props.data.email.week) / this.props.data.email.week : 0;
+		const emailCost = this.props.data.email ? this.props.calculateEmailDiscount(this.props.data.email) / this.props.data.email.week : 0;
 		const nWeeks = this.props.data.email ? this.props.data.email.week : 0;
-		const combinationDiscount = this.props.data.combinationDiscount ? this.props.data.combinationDiscount : 0;
 
 		if (this.state.isOpen === true) {
             return (
@@ -122,9 +125,9 @@ export class Checkout extends FormComponent {
                                         if (this.props.data.skype) {
                                             return(
                                             	<tr>
-													<td>{this.props.data.skype.description}</td>
-													<td>{this.props.data.skype.week}</td>
-													<td className="right">{Math.round(this.props.data.skype.cost * skypeDurationFactor)} KM</td>
+													<td>{skype.description}</td>
+													<td>{skype.week}</td>
+													<td className="right">{Math.round(skype.cost * skypeDurationFactor)} KM</td>
 												</tr>
 											)
                                         }
@@ -135,7 +138,7 @@ export class Checkout extends FormComponent {
 												<tr>
 													<td>{this.props.data.email.description}</td>
 													<td>{this.props.data.email.week}</td>
-													<td className="right">{this.props.calculateEmailDiscount(this.props.data.email.cost, this.props.data.email.week)} KM</td>
+													<td className="right">{this.props.calculateEmailDiscount(this.props.data.email)} KM</td>
 												</tr>
                                             )
                                         }
@@ -147,27 +150,27 @@ export class Checkout extends FormComponent {
 									</tr>
 									<tr>
 										<td className="right" colSpan="2">Suma</td>
-										<td className="right">{Math.round(skypeCost * skypeDurationFactor) + (emailCost * nWeeks)} KM</td>
+										<td className="right">{Math.round(skype.cost * skypeDurationFactor) + (emailCost * nWeeks)} KM</td>
 									</tr>
                                     {(() => {
-                                        if (this.props.data.combinationDiscount) {
+                                        if (this.props.data.packageDiscount) {
                                             return (
 												<tr>
-													<td className="right" colSpan="2">kombinacija popust</td>
-													<td className="right">{combinationDiscount} KM</td>
+													<td className="right" colSpan="2">Kombinacija popust</td>
+													<td className="right">{this.props.data.packageDiscount} KM</td>
 												</tr>
                                             )
                                         }
                                     })()}
                                     {(() => {
-                                        if (this.props.data.combinationDiscount > 0) {
+                                        if (this.props.data.packageDiscount > 0) {
                                         	const className = this.props.data.promoDiscount
 												? 'right' : 'right heavy';
 
                                         	return (
 												<tr>
 													<td className={className} colSpan="2">Suma iza kominacijskog popusta</td>
-													<td className={className}>{(Math.round(skypeCost * skypeDurationFactor) + (emailCost * nWeeks)) - this.props.data.combinationDiscount} KM
+													<td className={className}>{(Math.round(skype.cost * skypeDurationFactor) + (emailCost * nWeeks)) - this.props.data.packageDiscount} KM
 													</td>
 												</tr>
                                             )
@@ -188,7 +191,7 @@ export class Checkout extends FormComponent {
                                             return (
 												<tr>
 													<td className="right heavy" colSpan="2">Ukupno</td>
-													<td className="right heavy">{this.props.cost.total()} KM</td>
+													<td className="right heavy">{ this.props.cost.total } KM</td>
 												</tr>
                                             )
                                         }

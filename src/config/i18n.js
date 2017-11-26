@@ -1,10 +1,11 @@
 import i18next from 'i18next';
 import * as resources from '../../i18n/translations.json';
 
-export const defaultLocale = 'sv-SE';
+export const defaultLocale = 'ba-BA';
 
 export const supportedLocales = [
-    'sv-SE'
+    'sv-SE',
+    'ba-BA'
 ];
 
 i18next.init({
