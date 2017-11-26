@@ -5,23 +5,9 @@ import validation from 'react-validation-mixin';
 import strategy from 'joi-validation-strategy';
 import FormComponent from '../../FormComponent';
 import { encounterValidator } from '../../../../validators/encounters';
+import { i18nValidation } from  '../../../../helpers/validation';
 import { saveEncounter, resetEncounter } from '../../../actions/encounter';
 import styles from './styles.css';
-
-const options = {
-    language: {
-        any: {
-            empty: '!!Tekstno polje ne sme biti prazno',
-        },
-        string: {
-            regex: {
-                base: '!!Netačan format telefona',
-                phone: '!!Netačan format telefona',
-            },
-            email: '!!Netačan format e-pošte',
-        },
-    }
-};
 
 export class Checkout extends FormComponent {
 	constructor (props) {
@@ -174,7 +160,8 @@ export class Checkout extends FormComponent {
                                         	return (
 												<tr>
 													<td className={className} colSpan="2">Suma iza kominacijskog popusta</td>
-													<td className={className}>{(Math.round(this.state.skype.cost * skypeDurationFactor) + (emailCost * nWeeks)) - this.state.packageDiscount} KM
+													<td className={className}>
+														{(Math.round(this.state.skype.cost * skypeDurationFactor) + (emailCost * nWeeks)) - this.state.packageDiscount} KM
 													</td>
 												</tr>
                                             )
@@ -245,13 +232,13 @@ export class Checkout extends FormComponent {
 									</div>
 								</div>
 								<div className={back}>
-									<h1>Potvrda narudžbe</h1>
-									<p>Molimo uplatite xxx na bankovni računu:</p>
+									<h1>{ t('heading') }</h1>
+									<p>{ t('pleasePay') }</p>
 									<p>YYY YYY YYY YYY</p>
-									<p>Napišite vaše ime, telefon broj / e-poštu i šifru ispod na uplatnicu:</p>
+									<p>{ t('includeIdData')}</p>
 									<p >{this.props.cost.code}</p>
-									<p>Mi će mo vas zovnuti da rezerviramo termin za razgovor sa našim psiholozima kada smo primili novac.</p>
-									<p>Dobićete fakturu na vašu e-poštu u roku od 24 sata sa detaljima plaćanja.</p>
+									<p>{ t('callbackAffirmation') }</p>
+									<p>{ t('invoiceAffirmation') }</p>
 									<p>Mnogo hvala, tim zdravilje</p>
 									<button onClick={ this.resetCheckout }>Blizu</button>
 								</div>
@@ -272,4 +259,4 @@ const mapStateToProps = (state) => ({
 	save: state.encounter.saved
 });
 
-export default connect(mapStateToProps)(translate('checkoutView')(validation(strategy(options))(Checkout)));
+export default connect(mapStateToProps)(translate('checkoutView')(validation(strategy(i18nValidation()))(Checkout)));

@@ -11,7 +11,11 @@
       "intro": "Ovdje možete naručiti psihološko savjetovanje. Cijenu za vase izbore mozete naci u doljnem dio stranice. Izaberite Skype-poziv, e-postu ili kombinaciju Skype-poziv i e-postu. Što više poziva ili sedmica e-poste odlučite da kupite, sto jeftinija je cena po pozivu i po sedmicu e-poste."
     },
     "checkoutView": {
-      "heading": "Potvrda narudžbe"
+      "heading": "Potvrda narudžbe",
+      "pleasePay": "Molimo uplatite xxx na bankovni računu:",
+      "includeIdData": "Napišite vaše ime, telefon broj / e-poštu i šifru ispod na uplatnicu:",
+      "callbackAffirmation": "Mi će mo vas zovnuti da rezerviramo termin za razgovor sa našim psiholozima kada smo primili novac.",
+      "invoiceAffirmation": "Dobićete fakturu na vašu e-poštu u roku od 24 sata sa detaljima plaćanja."
     }
   }
 }
