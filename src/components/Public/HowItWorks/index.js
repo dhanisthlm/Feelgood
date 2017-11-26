@@ -15,6 +15,8 @@ export class HowItWorks extends Component {
 
         return (
             <div className="how-it-works">
+                <h3 className="heading">{ t('heading') }</h3>
+                <p className="preamble">{ t('intro') }</p>
                 <div className="row-1">
                     <div className="step-wrapper">
                         <div className="circle">
@@ -23,7 +25,7 @@ export class HowItWorks extends Component {
                                 <path fill="#fff" d="M301.1 186.95c3.9-39.7-4.9-74.6-36.8-71.6 0 0-13.8-16.7-41.4-6.2-9.5 3.6-34.8 12.7-33.5 67.7s-19.6 55.4-19.6 55.4 10.7 15.6 47.2 15.3v10.3l27.7 81 27.7-80.8v-10.9s31.6 1 46.6-14.3c0 0-21.8-6.2-17.9-45.9z"/>
                             </svg>
                         </div>
-                        <p className="heading">1. This is a heading to describe</p>
+                        <p className="sub-heading">1. This is a heading to describe</p>
                         <p className="description">
                             <p className="description">
                                 Lorem ipsum dolor sit amet, conseces adipis elit. Earum ex, hic illo iste itaque nihil quia quibusdam voluptas voluptate volup.
@@ -38,26 +40,13 @@ export class HowItWorks extends Component {
                                 <path fill="#ffffff" d="M337.324 0H167.192c-28.924 0-53.5 23.584-53.5 52.5v398.664c0 28.916 24.056 52.44 52.98 52.44l170.412-.184c28.92 0 52.58-23.528 52.58-52.448l.248-398.5C389.908 23.452 366.364 0 337.324 0zM227.68 31.476h49.36c4.336 0 7.868 3.52 7.868 7.868 0 4.348-3.532 7.868-7.868 7.868h-49.36c-4.348 0-7.868-3.52-7.868-7.868 0-4.348 3.52-7.868 7.868-7.868zm-29.66 2.504c2.916-2.912 8.224-2.952 11.136 0 1.46 1.456 2.324 3.5 2.324 5.588 0 2.048-.864 4.088-2.324 5.548-1.452 1.46-3.504 2.32-5.548 2.32-2.084 0-4.088-.86-5.588-2.32-1.452-1.456-2.28-3.5-2.28-5.548-.004-2.088.828-4.132 2.28-5.588zm52.752 454.028c-12.984 0-23.544-10.568-23.544-23.548 0-12.984 10.56-23.548 23.544-23.548s23.544 10.564 23.544 23.548c0 12.98-10.564 23.548-23.544 23.548zm114.716-63.1H141.232V74.756h224.256v350.152z" />
                             </svg>
                         </div>
-                        <p className="heading">2. This is a heading to describe</p>
+                        <p className="sub-heading">2. This is a heading to describe</p>
                         <p className="description">
                             <p className="description">
                                 Lorem ipsum dolor sit amet, conseces adipis elit. Earum ex, hic illo iste itaque nihil quia quibusdam voluptas voluptate volup.
                                 Lorem ipsum dolor sit amet, con adipis elit. Earum ex, hic illo iste itaque nihil quia quibusdam voluptas volupat.
                                 Lorem ipsum dolor sit amet, con adipis elit. Earum ex, hic illo iste itaque nihillet quia quibusdam voluptas voluptate.
                             </p>
-                        </p>
-                    </div>
-                    <div className="step-wrapper">
-                        <div className="circle">
-                            <svg className="bank" xmlns="http://www.w3.org/2000/svg" width="841.889" height="595.281" viewBox="0 0 841.889 595.281">
-                                <path fill="#FFF" d="M708.97 171.602l-280.2-140.68c-4.925-2.473-10.727-2.473-15.65 0L132.92 171.6c-5.894 2.96-9.614 8.99-9.614 15.587v58.132c0 9.63 7.81 17.44 17.44 17.44h560.4c9.63 0 17.438-7.81 17.438-17.44V187.19c0-6.598-3.72-12.63-9.614-15.588zm-288.025 9.773c-12.843 0-23.253-10.41-23.253-23.253s10.41-23.254 23.253-23.254 23.253 10.41 23.253 23.254c0 12.842-10.41 23.253-23.253 23.253zM701.145 438.322H659.29V297.64H531.397v140.682H310.492V297.64H182.6v140.682h-41.855c-9.63 0-17.44 7.81-17.44 17.44v93.012c0 9.632 7.81 17.44 17.44 17.44h560.4c9.632 0 17.44-7.81 17.44-17.44V455.76c0-9.63-7.808-17.438-17.44-17.438z"/>
-                            </svg>
-                        </div>
-                        <p className="heading">3. This is a heading to describe</p>
-                        <p className="description">
-                            Lorem ipsum dolor sit amet, conseces adipis elit. Earum ex, hic illo iste itaque nihil quia quibusdam voluptas voluptate volup.
-                            Lorem ipsum dolor sit amet, con adipis elit. Earum ex, hic illo iste itaque nihil quia quibusdam voluptas volupat.
-                            Lorem ipsum dolor sit amet, con adipis elit. Earum ex, hic illo iste itaque nihillet quia quibusdam voluptas voluptate.
                         </p>
                     </div>
                 </div>
@@ -71,7 +60,7 @@ export class HowItWorks extends Component {
                                 </g>
                             </svg>
                         </div>
-                        <p className="heading">4. This is a heading to describe</p>
+                        <p className="sub-heading">4. This is a heading to describe</p>
                         <p className="description">
                             <p className="description">
                                 Lorem ipsum dolor sit amet, conseces adipis elit. Earum ex, hic illo iste itaque nihil quia quibusdam voluptas voluptate volup.
@@ -91,27 +80,13 @@ export class HowItWorks extends Component {
                                 </g>
                             </svg>
                         </div>
-                        <p className="heading">5. This is a heading to describe</p>
+                        <p className="sub-heading">5. This is a heading to describe</p>
                         <p className="description">
                             <p className="description">
                                 Lorem ipsum dolor sit amet, conseces adipis elit. Earum ex, hic illo iste itaque nihil quia quibusdam voluptas voluptate volup.
                                 Lorem ipsum dolor sit amet, con adipis elit. Earum ex, hic illo iste itaque nihil quia quibusdam voluptas volupat.
                                 Lorem ipsum dolor sit amet, con adipis elit. Earum ex, hic illo iste itaque nihillet quia quibusdam voluptas voluptate.
                             </p>
-                        </p>
-                    </div>
-                    <div className="step-wrapper">
-                        <div className="circle">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 489.6 489.6">
-                                <path fill="#fff" d="M450.1 21.25H39.5C17.7 21.25 0 38.95 0 60.75v277.4c0 21.9 17.7 39.6 39.5 39.6h161v44.1h-31.4c-5.2 0-9.5 4.3-9.5 9.5v27.5c0 5.2 4.3 9.5 9.5 9.5h151.4c5.2 0 9.5-4.3 9.5-9.5v-27.5c0-5.2-4.3-9.5-9.5-9.5h-31.4v-44.1h161c21.8 0 39.5-17.7 39.5-39.5V60.75c0-21.8-17.7-39.5-39.5-39.5zm-14.4 302.1h-91.8l-2.6-14.3c-1.8-10-8.3-18.5-17.4-23l-34.8-17.3c-2-1-4-2.1-5.9-3.2l11 32.5-15.4-1.2-34 41.8-34-41.8-15.4 1.2 11.2-32.5-7 3.6-34.1 16.8c-9.1 4.5-15.6 13-17.4 23l-2.6 14.3H53.9V75.15h381.8v248.2z"/>
-                                <path fill="#fff" d="M301.1 186.95c3.9-39.7-4.9-74.6-36.8-71.6 0 0-13.8-16.7-41.4-6.2-9.5 3.6-34.8 12.7-33.5 67.7s-19.6 55.4-19.6 55.4 10.7 15.6 47.2 15.3v10.3l27.7 81 27.7-80.8v-10.9s31.6 1 46.6-14.3c0 0-21.8-6.2-17.9-45.9z"/>
-                            </svg>s
-                        </div>
-                        <p className="heading">6. This is a heading to describe</p>
-                        <p className="description">
-                            Lorem ipsum dolor sit amet, conseces adipis elit. Earum ex, hic illo iste itaque nihil quia quibusdam voluptas voluptate volup.
-                            Lorem ipsum dolor sit amet, con adipis elit. Earum ex, hic illo iste itaque nihil quia quibusdam voluptas volupat.
-                            Lorem ipsum dolor sit amet, con adipis elit. Earum ex, hic illo iste itaque nihillet quia quibusdam voluptas voluptate.
                         </p>
                     </div>
                 </div>
@@ -124,5 +99,5 @@ HowItWorks.propTypes = { dispatch: PropTypes.func };
 
 const mapStateToProps = (state) => ({});
 
-export default connect(mapStateToProps)(translate('quoteView')(HowItWorks))
+export default connect(mapStateToProps)(translate('howItWorksView')(HowItWorks))
 

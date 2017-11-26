@@ -1,13 +1,13 @@
 .how-it-works {
-    padding: 35px 55px;
+    padding: 35px 35px;
     text-align: center;
 }
 
 .how-it-works .step-wrapper {
     display: inline-block;
-    width: 30%;
+    width: 42%;
     height: 400px;
-    padding: 25px;
+    padding: 25px 60px 25px 25px;
     box-sizing: border-box;
 }
 
@@ -20,7 +20,7 @@
     text-align: center;
 }
 
-.how-it-works .heading {
+.how-it-works .sub-heading {
     font-size: 20px;
     margin-bottom: 5px;
     color: #C04C9C;
@@ -30,6 +30,8 @@
 .how-it-works .description {
     margin: 0;
     text-align: left;
+    font-size: 17px;
+    font-weight: 400;
 }
 
 .how-it-works .circle svg {
@@ -42,4 +44,20 @@
     width: 130px;
     margin-top: 37px;
     height: 100px;
+}
+
+.how-it-works .heading {
+    color: #C04C9C;
+    margin-top: 10px;
+    font-size: 40px;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.how-it-works .preamble {
+    margin: 0 auto 10px;
+    text-align: center;
+    width: 70%;
+    line-height: 25px;
+    font-size: 18px;
 }
