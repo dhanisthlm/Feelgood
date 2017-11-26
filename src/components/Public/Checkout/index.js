@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux';
+import { translate } from 'react-i18next';
 import validation from 'react-validation-mixin';
 import strategy from 'joi-validation-strategy';
 import FormComponent from '../../FormComponent';
@@ -93,9 +94,9 @@ export class Checkout extends FormComponent {
 	}
 
 	render () {
+		const { t } = this.props;
         const front = (this.props.save === true) ? 'front none' : 'front';
         const back = (this.props.save === false) ? 'back none' : 'back';
-
         const skypeCost = this.state.skype ? this.state.skype.cost : 0;
         const skypeDurationFactor = this.props.data.skypeDuration.factor;
 		const emailCost = this.state.email ? this.props.emailDiscount(this.state.email) / this.state.email.week : 0;
@@ -188,7 +189,7 @@ export class Checkout extends FormComponent {
 												</tr>
                                             )
                                         }
-                                    })()}f
+                                    })()}
                                     {(() => {
                                         if (this.state.promoDiscount) {
                                             return (
@@ -201,7 +202,7 @@ export class Checkout extends FormComponent {
                                     })()}
 								</table>
 								<div ref={(front) => { this.front = front; }} className={front}>
-									<h1>Potvrda narudžbe</h1>
+									<h1>{ t('heading') }</h1>
 									<div className="form-element-wrapper">
 										<label htmlFor="name">Ime</label>
 										<input
@@ -271,4 +272,4 @@ const mapStateToProps = (state) => ({
 	save: state.encounter.saved
 });
 
-export default connect(mapStateToProps)(validation(strategy(options))(Checkout));
+export default connect(mapStateToProps)(translate('checkoutView')(validation(strategy(options))(Checkout)));
