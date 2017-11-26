@@ -1,0 +1,45 @@
+.how-it-works {
+    padding: 35px 55px;
+    text-align: center;
+}
+
+.how-it-works .step-wrapper {
+    display: inline-block;
+    width: 30%;
+    height: 400px;
+    padding: 25px;
+    box-sizing: border-box;
+}
+
+.how-it-works .circle {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    background-color: #C04C9C;
+    margin: 0 auto 20px;
+    text-align: center;
+}
+
+.how-it-works .heading {
+    font-size: 20px;
+    margin-bottom: 5px;
+    color: #C04C9C;
+    text-align: left;
+}
+
+.how-it-works .description {
+    margin: 0;
+    text-align: left;
+}
+
+.how-it-works .circle svg {
+    width: 100px;
+    margin-top: 43px;
+    height: 100px;
+}
+
+.how-it-works .circle svg.bank {
+    width: 130px;
+    margin-top: 37px;
+    height: 100px;
+}
