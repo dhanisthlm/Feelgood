@@ -122,29 +122,29 @@ export class Payment extends Component {
      * This callback type is called `requestCallback
      * @callback requestCallback
      * @param {number} responseCode
-     * @return {void}
+     * @return {number}
      */
-	calculateEmailDiscount (cost, weeks) {
+	calculateEmailDiscount (_package) {
 		let factor;
 
 		switch (true) {
-			case (weeks === 2):
+			case (_package.week === 2):
 				factor = .95;
 				break;
-			case (weeks === 3):
+			case (_package.week === 3):
 				factor = .925;
 				break;
-			case (weeks === 4):
+			case (_package.week === 4):
 				factor = .9;
 				break;
-			case (weeks > 4):
+			case (_package.week > 4):
 				factor = .875;
 				break;
 			default:
 				factor = 1;
 		}
 
-		return Math.round(cost * factor) * weeks;
+		return Math.round(_package.cost * factor) * _package.week;
 	}
 
     /**
@@ -193,6 +193,53 @@ export class Payment extends Component {
 		return data;
 	}
 
+	toggleEmailWeeks (skypeCost) {
+        if (this.refs['duration-text'] && this.refs['duration-radios']) {
+            if (skypeCost === 0) {
+                this.refs['duration-text'].style.display = 'block';
+                this.refs['duration-radios'].style.display = 'none';
+            } else {
+                this.refs['duration-text'].style.display = 'none';
+                this.refs['duration-radios'].style.display = 'block';
+            }
+        }
+	}
+
+	calculateDiscounts (skypeCost, emailCost) {
+    	let packageFactor = 1;
+    	let promoFactor = 1;
+    	let skypeDiscount = 0;
+    	let emailDiscount = 0;
+
+        if (skypeCost > 0 && emailCost > 0) {
+            packageFactor = 0.95;
+            this.combinationDiscount = Math.round(
+				emailCost - Math.round(emailCost * 0.95) +
+				skypeCost - Math.round(skypeCost * 0.95)
+			);
+        } else {
+            delete this.combinationDiscount;
+        }
+
+        if (this.state.enteredCode.toLowerCase() === this.state.promoCode) {
+            skypeDiscount = skypeCost * this.state.promoDiscountFactor;
+            emailDiscount = emailCost * this.state.promoDiscountFactor;
+            promoFactor = 0.5;
+
+            this.promoDiscount = (skypeCost > 0 && emailCost > 0)
+                ? Math.round((emailDiscount + skypeDiscount) * 0.95)
+                : Math.round(emailDiscount + skypeDiscount);
+        } else {
+            promoFactor = 1;
+            delete this.promoDiscount;
+        }
+
+        return {
+        	promoFactor,
+			packageFactor
+		}
+    }
+
     /**
      * This callback type is called `requestCallback
      * @callback requestCallback
@@ -200,71 +247,38 @@ export class Payment extends Component {
      * @return {object} cost
      */
 	calculateCost () {
-		let skypeDuration = this.state.skypeDuration.s.active ? 's' : 'l';
-		let promoDiscountFactor = 1;
-		let combinationDiscountFactor = 1;
-        let email = 0;
+		const skypeDuration = this.state.skypeDuration.s.active ? 's' : 'l';
+        let emailCost = 0;
         let emailWeeks = 1;
-		let skypeWeeks = 1;
-		let skypeCode = '0';
-		let skypeDurationCode = '00';
-		let emailCode = '00';
-        let skype = 0;
-        let skypeDiscount = 0;
-        let emailDiscount = 0;
+        let skypeCost = 0;
+        let skypeWeeks = 1;
+        let skypeCode = '0';
+        let emailCode = '00';
+        let skypeDurationCode = '00';
 
-        for (let size in this.state.skype) {
-			if (this.state.skype.hasOwnProperty(size)) {
-                if (this.state.skype[size].active === true) {
-                    skype = this.state.skype[size].cost * this.state.skypeDuration[skypeDuration].factor;
-                    skypeWeeks = this.state.skype[size].week;
-                    skypeCode = this.state.skype[size].code;
-                    skypeDurationCode = this.state.skypeDuration[skypeDuration].code;
-                }
-            }
+        const skypePackage = this.state.skype[Object.keys(this.state.skype).filter(key => this.state.skype[key].active)[0]];
+        const emailPackage = this.state.email[Object.keys(this.state.email).filter(key => this.state.email[key].active)[0]];
+
+        if (skypePackage) {
+            skypeWeeks = skypePackage.week;
+            skypeCode = skypePackage.code;
+            skypeCost = skypePackage.cost * this.state.skypeDuration[skypeDuration].factor;
+            skypeDurationCode = this.state.skypeDuration[skypeDuration].code;
+        }
+
+        if (emailPackage) {
+            emailWeeks = emailPackage.week;
+            emailCode = emailPackage.code;
+            emailCost = this.calculateEmailDiscount(emailPackage);
 		}
 
-		for (let size in this.state.email) {
-            if (this.state.email.hasOwnProperty(size)) {
-				if (this.state.email[size].active === true) {
-                    email = this.calculateEmailDiscount(this.state.email[size].cost, this.state.email[size].week);
-                    emailWeeks = this.state.email[size].week;
-                    emailCode = this.state.email[size].code;
-                }
-			}
-		}
+		this.toggleEmailWeeks(skypeCost);
+		const discount = this.calculateDiscounts(skypeCost, emailCost);
 
-		if (this.refs['duration-text'] && this.refs['duration-radios']) {
-			if (skype === 0) {
-				this.refs['duration-text'].style.display = 'block';
-				this.refs['duration-radios'].style.display = 'none';
-			} else {
-				this.refs['duration-text'].style.display = 'none';
-				this.refs['duration-radios'].style.display = 'block';
-			}
-		}
-
-        if (skype > 0 && email > 0) {
-        	combinationDiscountFactor = 0.95;
-            this.combinationDiscount = Math.round(email - Math.round(email * 0.95) + (skype - Math.round(skype * 0.95)));
-        } else {
-            delete this.combinationDiscount;
-		}
-
-		if (this.state.enteredCode.toLowerCase() === this.state.promoCode) {
-        	promoDiscountFactor = 0.5;
-        	skypeDiscount = skype * this.state.promoDiscountFactor;
-        	emailDiscount = email * this.state.promoDiscountFactor;
-        	this.promoDiscount = (skype > 0 && email > 0) ? Math.round((emailDiscount + skypeDiscount) * 0.95) : Math.round((emailDiscount + skypeDiscount));
-		} else {
-            promoDiscountFactor = 1;
-        	delete this.promoDiscount;
-		}
-		
         return {
-            total: function () { return Math.round((email + skype) * promoDiscountFactor * combinationDiscountFactor) },
-            email: Math.round(email/emailWeeks * promoDiscountFactor),
-            skype: Math.round(skype/skypeWeeks * promoDiscountFactor),
+            total: function () { return Math.round((emailCost + skypeCost) * discount.promoFactor * discount.packageFactor) },
+            email: Math.round(emailCost / emailWeeks * discount.promoFactor * discount.promoFactor),
+            skype: Math.round(skypeCost / skypeWeeks * discount.promoFactor * discount.packageFactor),
             code: skypeCode + '' + skypeDurationCode + '' + emailCode
         }
 	}
