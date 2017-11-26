@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux';
+import { translate } from 'react-i18next';
 import styles from './styles.css';
 
 export class QuoteImage extends Component {
@@ -10,6 +11,8 @@ export class QuoteImage extends Component {
 	}
 
 	render () {
+		const { t } = this.props;
+
 		return (
 			<div className="quote-image">
 				<p>Ono što mislite da postanete</p>
@@ -21,8 +24,7 @@ export class QuoteImage extends Component {
 
 QuoteImage.propTypes = { dispatch: PropTypes.func };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state) => ({});
 
-});
+export default connect(mapStateToProps)(translate('quoteImageView')(QuoteImage))
 
-export default connect(mapStateToProps)(QuoteImage)

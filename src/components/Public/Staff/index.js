@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux';
+import { translate } from 'react-i18next';
 import { getStaff } from '../../../actions/staff';
 import { createStaff } from '../../../actions/staff';
 import styles from './styles.css';
@@ -43,13 +44,14 @@ export class Staff extends Component {
 	}
 
 	render () {
+		const { t } = this.props;
 		const diploma = (this.state.openDiploma === true) ? 'diploma show-diploma' : 'diploma';
 		const self = this;
 
 		return (
 			<div id="kosmomi" className="staff">
-				<h3 className="heading">Ko smo mi</h3>
-				<p className="preamble">Ovdje smo za vas, ako trebate s kim razgovarati. Zdravlje.nu nudi vam terapiju diskretno i po razumnoj cijeni. Nu nudi vam terapiju diskretno i po razumnoj cijeni</p>
+				<h3 className="heading">{ t('heading') }</h3>
+				<p className="preamble">{ t('preamble') }</p>
 				<div id="diploma-wrapper" onClick={ this.closeDiploma } className={diploma}>
 					<div id="inner-wrapper" className={`diploma-open-wrapper diploma-wrapper-${this.state.direction}`}>
 						<img className={`diploma-${this.state.direction}`} src={`images/diplom-${this.state.diploma}.jpg`} />
@@ -95,4 +97,5 @@ const mapStateToProps = (state) => ({
 	staff: state.staff.list
 });
 
-export default connect(mapStateToProps)(Staff)
+export default connect(mapStateToProps)(translate('staffView')(Staff))
+

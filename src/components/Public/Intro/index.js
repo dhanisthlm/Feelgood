@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux';
+import { translate } from 'react-i18next';
 import styles from './styles.css';
 
 export class Hero extends Component {
@@ -10,13 +11,15 @@ export class Hero extends Component {
     }
 
     render () {
+        const { t } = this.props;
+
         return (
             <div className="introduction">
                 <img src="/images/flowers.jpg" alt="hero-image" />
                 <div className="text-wrapper">
-                    <h3 className="heading">Psihološko savjetovanje za svakodnevne probleme</h3>
-                    <p className="preamble">Ovdje smo za vas ako trebate s kim razgovarat. Zdravlje.nu vam nudi psihološke savjetovanje diskretno i po razumnoj cijeni. U razgovoru prepoznajemo koje misli i emocije vas sprečavaju da se osjećate dobro i budete uspješni u životu, te radimo na promjeni.</p>
-                    <a href="/anka#whoarew" className="intro-button">Zapocnite</a>
+                    <h3 className="heading">{ t('heading') }</h3>
+                    <p className="preamble">{ t('preamble') }</p>
+                    <a href="/anka#whoarew" className="intro-button">{ t('start') }</a>
                 </div>
             </div>
         );
@@ -25,8 +28,7 @@ export class Hero extends Component {
 
 Hero.propTypes = { dispatch: PropTypes.func };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state) => ({});
 
-});
+export default connect(mapStateToProps)(translate('introView')(Hero));
 
-export default connect(mapStateToProps)(Hero)

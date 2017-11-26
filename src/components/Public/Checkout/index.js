@@ -19,6 +19,7 @@ export class Checkout extends FormComponent {
 			phone: '',
 			comment: '',
 			code: '',
+			data: '',
 			isOpen: false
 		};
 
@@ -35,7 +36,8 @@ export class Checkout extends FormComponent {
 			email: this.props.data.email,
 			cost: this.props.cost,
 			packageDiscount: this.props.data.packageDiscount,
-			promoDiscount: this.props.data.promoDiscount
+			promoDiscount: this.props.data.promoDiscount,
+			data: this.props.data
 		});
 	}
 
@@ -106,9 +108,9 @@ export class Checkout extends FormComponent {
 									</colgroup>
 									<thead>
 										<tr>
-											<th>Stavka</th>
-											<th>Sedmica</th>
-											<th>Cijena</th>
+											<th>{ t('item') }</th>
+											<th>{ t('weeks') }</th>
+											<th>{ t('price') }</th>
 										</tr>
 									</thead>
                                     {(() => {
@@ -139,14 +141,14 @@ export class Checkout extends FormComponent {
 										<td>&nbsp;</td>
 									</tr>
 									<tr>
-										<td className="right" colSpan="2">Suma</td>
+										<td className="right" colSpan="2">{ t('sum') }</td>
 										<td className="right">{Math.round(skypeCost * skypeDurationFactor) + (emailCost * nWeeks)} KM</td>
 									</tr>
                                     {(() => {
                                         if (this.props.data.packageDiscount) {
                                             return (
 												<tr>
-													<td className="right" colSpan="2">Kombinacija popust</td>
+													<td className="right" colSpan="2">{ t('packageDiscount') }</td>
 													<td className="right">{this.state.packageDiscount} KM</td>
 												</tr>
                                             )
@@ -159,7 +161,7 @@ export class Checkout extends FormComponent {
 
                                         	return (
 												<tr>
-													<td className={className} colSpan="2">Suma iza kominacijskog popusta</td>
+													<td className={className} colSpan="2">{ t('sumWithPackageDiscount')}</td>
 													<td className={className}>
 														{(Math.round(this.state.skype.cost * skypeDurationFactor) + (emailCost * nWeeks)) - this.state.packageDiscount} KM
 													</td>
@@ -171,7 +173,7 @@ export class Checkout extends FormComponent {
                                         if (this.props.data.promoDiscount) {
                                             return(
 												<tr>
-													<td className="right" colSpan="2">Voucher popust</td>
+													<td className="right" colSpan="2">{ t('voucherDiscount') }</td>
 													<td className="right">{this.state.promoDiscount} KM</td>
 												</tr>
                                             )
@@ -181,7 +183,7 @@ export class Checkout extends FormComponent {
                                         if (this.state.promoDiscount) {
                                             return (
 												<tr>
-													<td className="right heavy" colSpan="2">Ukupno</td>
+													<td className="right heavy" colSpan="2">{ t('total') }</td>
 													<td className="right heavy">{ this.state.cost.total } KM</td>
 												</tr>
                                             )
@@ -191,7 +193,7 @@ export class Checkout extends FormComponent {
 								<div ref={(front) => { this.front = front; }} className={front}>
 									<h1>{ t('heading') }</h1>
 									<div className="form-element-wrapper">
-										<label htmlFor="name">Ime</label>
+										<label htmlFor="name">{ t('name') }</label>
 										<input
 											onChange={ this.handleChange }
 											id="name"
@@ -200,7 +202,7 @@ export class Checkout extends FormComponent {
 										{this.getValidationMessages('name')}
 									</div>
 									<div className="form-element-wrapper">
-										<label htmlFor="phone">Telefon</label>
+										<label htmlFor="phone">{ t('phone') }</label>
 										<input
 											onChange={ this.handleChange }
 											id="phone"
@@ -209,7 +211,7 @@ export class Checkout extends FormComponent {
 										{this.getValidationMessages('phone')}
 									</div>
 									<div className="form-element-wrapper">
-										<label htmlFor="email">E-pošta</label>
+										<label htmlFor="email">{ t('email') }</label>
 										<input
 											onChange={ this.handleChange }
 											id="mail"
@@ -218,7 +220,7 @@ export class Checkout extends FormComponent {
 										{this.getValidationMessages('mail')}
 									</div>
 									<div className="form-element-wrapper">
-										<label htmlFor="comment">Kommentar</label>
+										<label htmlFor="comment">{ t('comment') }</label>
 										<textarea
 											className={ this.getValidatorData('comment') }
 											onChange={ this.handleChange }>
@@ -227,8 +229,8 @@ export class Checkout extends FormComponent {
 										{this.getValidationMessages('comment')}
 									</div>
 									<div className="form-buttons">
-										<button onClick={ this.resetCheckout }>Natrag</button>
-										<button onClick={ this.handleSubmit }>Zakažite</button>
+										<button onClick={ this.resetCheckout }>{ t('back') }</button>
+										<button onClick={ this.handleSubmit }>{ t('placeOrder') }</button>
 									</div>
 								</div>
 								<div className={back}>
@@ -240,7 +242,7 @@ export class Checkout extends FormComponent {
 									<p>{ t('callbackAffirmation') }</p>
 									<p>{ t('invoiceAffirmation') }</p>
 									<p>Mnogo hvala, tim zdravilje</p>
-									<button onClick={ this.resetCheckout }>Blizu</button>
+									<button onClick={ this.resetCheckout }>{ t('close') }</button>
 								</div>
 							</div>
 						</div>

@@ -6,16 +6,126 @@
   "ba-BA": {
     "common": {
     },
+    "headerView": {
+      "contactUs": "Kontaktirajte nas",
+      "emergency": "Hitna pomoc",
+      "callUs": "Zovnite nas",
+      "phone": "Telefon",
+      "services": "Usluge",
+      "prices": "Cijene",
+      "howWork": "Kako radi",
+      "whoAreWe": "Ko smo mi"
+    },
+    "introView": {
+      "heading": "Psihološko savjetovanje za svakodnevne probleme",
+      "preamble": "Ovdje smo za vas ako trebate s kim razgovarat. Zdravlje.nu vam nudi psihološke savjetovanje diskretno i po razumnoj cijeni. U razgovoru prepoznajemo koje misli i emocije vas sprečavaju da se osjećate dobro i budete uspješni u životu, te radimo na promjeni.",
+      "start": "Zapocnite"
+    },
+    "issueView": {
+      "heading": "Uzmite prvi korak za bolje sutra",
+      "preamble": "Da biste pronašli rješenja za svoju situaciju, može vam biti korisno potražiti stručnu podršku i pomoć. Kontaktirajte nas, mi možemo pomoći.",
+      "contactUs": "Kontaktirajte nas",
+      "issues": {
+        "stress": {
+          "name": "Stres",
+          "description": "Jeste li pod stresom i imate li poteškoće u rješavanju istih?"
+        },
+        "anxiety": {
+          "name": "Sikiracija",
+          "description": "Osjećate li da se sikirate i da ne možete podnijeti brigu?"
+        },
+        "exhaustion": {
+          "name": "Iscrpljenost",
+          "description": "Imate li poteškoća sa spavanjem, umorom i iscrpljenjošću?"
+        },
+        "backPain": {
+          "name": "Bol",
+          "description": "Trebate li pomoć o olakšavanju bola?"
+        },
+        "depression": {
+          "name": "Depresivno",
+          "description": "Osjećate li se tužno ili depresivno?"
+        },
+        "kids": {
+          "name": "Diete",
+          "description": "Da li vaše dijete ima izlive bijesa?"
+        },
+        "weight": {
+          "name": "Tezina",
+          "description": "Imate li problema sa tjelesnom težinom?"
+        },
+        "panic": {
+          "name": "Panic",
+          "description": "Osjecate li anksioznost ili napad panike?"
+        },
+        "fobia": {
+          "name": "Fobia",
+          "description": "Imate li fobije koje vas sprečavaju u životu?"
+        },
+        "violence": {
+          "name": "Sukob",
+          "description": "Ulazite li lako u sukobe i jeste li frustrirani?"
+        },
+        "stuck": {
+          "name": "Zaglavili",
+          "description": "Jeste li zaglavili osobno ili profesionalno?"
+        }
+      }
+    },
+    "quoteView": {
+      "quote": "Ono što mislite da postanete"
+    },
+    "quoteImageView": {
+      "quote": "Ono što mislite da postanete"
+    },
+    "staffView": {
+      "heading": "Ko smo mi",
+      "preamble": "Ovdje smo za vas, ako trebate s kim razgovarati. Zdravlje.nu nudi vam terapiju diskretno i po razumnoj cijeni. Nu nudi vam terapiju diskretno i po razumnoj cijeni"
+    },
     "paymentView": {
       "heading": "Koliko kosta psihološko savjetovanje?",
-      "intro": "Ovdje možete naručiti psihološko savjetovanje. Cijenu za vase izbore mozete naci u doljnem dio stranice. Izaberite Skype-poziv, e-postu ili kombinaciju Skype-poziv i e-postu. Što više poziva ili sedmica e-poste odlučite da kupite, sto jeftinija je cena po pozivu i po sedmicu e-poste."
+      "intro": "Ovdje možete naručiti psihološko savjetovanje. Cijenu za vase izbore mozete naci u doljnem dio stranice. Izaberite Skype-poziv, e-postu ili kombinaciju Skype-poziv i e-postu. Što više poziva ili sedmica e-poste odlučite da kupite, sto jeftinija je cena po pozivu i po sedmicu e-poste.",
+      "skypeWeek": "skype poziv",
+      "skypeWeeks": "skype poziva",
+      "packageWith": "Paket za",
+      "selectPackageText": "Izaberite jedan Skype-poziv ili paket sa više Skype-poziva. Možete kombinovati sa e-poštom.",
+      "call": "poziv",
+      "email": "E-pošta",
+      "answerWithin": "Odgovar u toku",
+      "emailSmallText": "Neograničen broj e-pošte, odgovor u toku 24h. Možete kombinovati sa Skype-pozivom.",
+      "emailLargeText": "Neograničen broj e-pošte, odgovor u toku 4h radnim danima 07.00-22.00, vikend i praznik 09.00-18.00.",
+      "number": "Broj",
+      "week": "sedmica",
+      "discount": "popust",
+      "forCelecrationLaunch": "za slavlje lansiranja",
+      "starts": "Otvaram",
+      "enterCode": "Konristite kod",
+      "until": "Vazi do kraja",
+      "year": "god",
+      "price": "Cijena",
+      "writeCode": "Unesite kod"
     },
     "checkoutView": {
       "heading": "Potvrda narudžbe",
       "pleasePay": "Molimo uplatite xxx na bankovni računu:",
       "includeIdData": "Napišite vaše ime, telefon broj / e-poštu i šifru ispod na uplatnicu:",
       "callbackAffirmation": "Mi će mo vas zovnuti da rezerviramo termin za razgovor sa našim psiholozima kada smo primili novac.",
-      "invoiceAffirmation": "Dobićete fakturu na vašu e-poštu u roku od 24 sata sa detaljima plaćanja."
+      "invoiceAffirmation": "Dobićete fakturu na vašu e-poštu u roku od 24 sata sa detaljima plaćanja.",
+      "item": "Stavka",
+      "weeks": "Sedmica",
+      "price": "Cijena",
+      "sum": "Suma",
+      "packageDiscount": "Kombinacija popust",
+      "sumWithPackageDiscount": "Suma iza kominacijskog popusta",
+      "voucherDiscount": "Voucher popust",
+      "total": "Ukupno",
+      "name": "Ime",
+      "phone": "Telefon",
+      "email": "E-pošta",
+      "comment": "Kommentar",
+      "back": "Natrag",
+      "placeOrder": "Zakažite",
+      "close": "Blizu"
     }
   }
 }

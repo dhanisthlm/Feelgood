@@ -357,7 +357,7 @@ export class Payment extends Component {
 									checked={ this.state.skype.s.active }
 									onClick={ this.handlePackage }
 								/>
-								<label htmlFor="skype-s">1 Skype poziv</label>
+								<label htmlFor="skype-s">1 { t('skypeWeek') }</label>
 							</div>
 							<div className="wrapper">
 								<input
@@ -367,7 +367,7 @@ export class Payment extends Component {
 									checked={ this.state.skype.m.active }
 									onClick={ this.handlePackage }
 								/>
-								<label htmlFor="skype-m">Paket za 3 skype poziva</label>
+								<label htmlFor="skype-m">{ t('packageWith') } 3 { t('skypeWeeks') }</label>
 							</div>
 							<div className="wrapper">
 								<input
@@ -377,23 +377,19 @@ export class Payment extends Component {
 									checked={ this.state.skype.l.active }
 									onClick={ this.handlePackage }
 								/>
-								<label htmlFor="skype-l">Paket za 8 skype poziva</label>
+								<label htmlFor="skype-l">{ t('packageWith') } 8 { t('skypeWeeks') }</label>
 							</div>
                             {(() => {
                                 if (this.state.durationText === true) {
-                                    return(
-										<p ref="duration-text" className="duration-text">
-											Izaberite jedan Skype-poziv ili paket sa više Skype-poziva. Možete kombinovati sa e-poštom.
-										</p>
-                                    )
+                                    return(<p ref="duration-text" className="duration-text">{ t('selectPackageText') }</p>)
                                 } else {
                                     return(
 										<div ref="duration-radios" className="toggle_radios">
 											<input type="radio" checked={ this.state.skypeDuration.s.active } className="toggle_option" id="duration-s" name="toggle_option" />
 											<input type="radio" checked={ this.state.skypeDuration.l.active } className="toggle_option" id="duration-l" name="toggle_option" />
-											<label id="duration-s" onClick={ this.handleSkypeDuration } className="small-skype" htmlFor="duration-s"><p>20 min poziv</p></label>
-											<label id="duration-l" onClick={ this.handleSkypeDuration } className="large-skype" htmlFor="duration-l"><p>45 min poziv</p></label>
-											<div className="toggle_option_slider"></div>
+											<label id="duration-s" onClick={ this.handleSkypeDuration } className="small-skype" htmlFor="duration-s"><p>20 min { t('call') }</p></label>
+											<label id="duration-l" onClick={ this.handleSkypeDuration } className="large-skype" htmlFor="duration-l"><p>45 min { t('call') }</p></label>
+											<div className="toggle_option_slider" />
 										</div>
 									);
 								}
@@ -401,7 +397,7 @@ export class Payment extends Component {
 
 						</div>
 						<div className="email">
-							<h4 className="category-heading">E-pošta</h4>
+							<h4 className="category-heading">{ t('email') }</h4>
 							<div className="wrapper">
 								<input
 									id="email-s"
@@ -411,14 +407,12 @@ export class Payment extends Component {
 									checked={ this.state.email.s.active }
 									onClick={ this.handlePackage }
 								/>
-								<label className="email-s-label" htmlFor="email-s">Odgovar u toku 24h</label>
-								<p className="week-text week-text-s">
-									Neograničen broj e-pošte, odgovor u toku 24h. Možete kombinovati sa Skype-pozivom.
-								</p>
+								<label className="email-s-label" htmlFor="email-s">{ t('answerWithin') } 24h</label>
+								<p className="week-text week-text-s">{ t('emailSmallText') }</p>
 								<div className="weeks">
 									<div className="week-title">
-										<span>Broj</span>
-										<span>sedmica</span>
+										<span>{ t('number') }</span>
+										<span>{ t('week') }</span>
 									</div>
 									<div id="sub-s" onClick={ this.handleWeeks } className="arrow-left" />
 									<div className="n-weeks">
@@ -436,14 +430,12 @@ export class Payment extends Component {
 									checked={ this.state.email.m.active }
 									onClick={ this.handlePackage }
 								/>
-								<label className="email-m-label" htmlFor="email-m">Odgovar u toku 4h</label>
-								<p className="week-text week-text-m">
-									Neograničen broj e-pošte, odgovor u toku 4h radnim danima 07.00-22.00, vikend i praznik 09.00-18.00.
-								</p>
+								<label className="email-m-label" htmlFor="email-m">{ t('answerWithin') } toku 4h</label>
+								<p className="week-text week-text-m">{ t('emailLargeText') }</p>
 								<div className="weeks">
 									<div className="week-title">
-										<span>Broj</span>
-										<span>sedmica</span>
+										<span>{ t('number') }</span>
+										<span>{ t('week') }</span>
 									</div>
 									<div id="sub-m" onClick={this.handleWeeks} className="arrow-left" />
 									<div className="n-weeks">
@@ -456,23 +448,23 @@ export class Payment extends Component {
 						<div className="info-text">
 							<div className="promo">
 								<div className="promo-text">
-									<span className="percent-text">50% popust</span>
-									<span className="launch">za slavlje lansiranja</span>
+									<span className="percent-text">50% { t('discount') }</span>
+									<span className="launch">{ t('forCelecrationLaunch') }</span>
 									<span className="web-adress">Zdravlje.nu</span>
-									<span className="launch-date">Otvaram 16og dec!</span>
-									<span className="kod-text">Konristite kod </span>
+									<span className="launch-date">{ t('starts')} 16og dec!</span>
+									<span className="kod-text">{ t('enterCode') } </span>
 									<span className="kod-text2">Zdravlje.nu</span>
-									<span className="year-1">Vazi do kraja 2017 god</span>
+									<span className="year-1">{ t('until') } 2017 { t('year') }</span>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
 				<div className="text-wrapper">
-					<h2 className="total">Cijena: { this.calculateCost().total } KM</h2>
+					<h2 className="total">{ t('price') }: { this.calculateCost().total } KM</h2>
 					<div className="spec">
-						<span>Skype: { this.calculateCost().skype } KM / posiv</span>
-						<span>E-pošta: { this.calculateCost().email } KM / sedmica</span>
+						<span>Skype: { this.calculateCost().skype } KM / { t('call') }</span>
+						<span>{ t('email') }: { this.calculateCost().email } KM / { t('week') }</span>
 					</div>
 					<button
 						className={buttonStyle}
@@ -482,7 +474,7 @@ export class Payment extends Component {
 					<div className="promo-textfield">
 						<input type="text"
 							onChange={ this.handlePromoCode }
-							placeholder="Unesite kod"
+							placeholder={ t('writeCode') }
 							value={this.state.enteredCode}
 						/>
 					</div>

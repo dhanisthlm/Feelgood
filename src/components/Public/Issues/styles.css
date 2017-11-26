@@ -95,7 +95,7 @@
 }
 
 .issues .stres:after {
-    content: 'Stres';
+    content: attr(id);
 }
 
 .issues .stres svg {
@@ -106,7 +106,7 @@
 }
 
 .issues .tezina:after {
-    content: 'Tezina';
+    content: attr(id);
 }
 
 .issues .tezina svg {
@@ -115,7 +115,7 @@
 }
 
 .issues .tezina:after {
-    content: 'Tezina';
+    content: attr(id);
 }
 
 .issues .fobia svg {
@@ -124,39 +124,39 @@
 }
 
 .issues .fobia:after {
-    content: 'Fobia';
+    content: attr(id);
 }
 
 .issues .bol:after {
-    content: 'Bol';
+    content: attr(id);
 }
 
 .issues .sikiracija:after {
-    content: 'Sikiracija';
+    content: attr(id);
 }
 
 .issues .panika:after {
-    content: 'Panika';
+    content: attr(id);
 }
 
 .issues .sukob:after {
-    content: 'Sukob';
+    content: attr(id);
 }
 
 .issues .depresivno:after {
-    content: 'Depresivno';
+    content: attr(id);
 }
 
 .issues .stres:after {
-    content: 'Stres';
+    content: attr(id)
 }
 
 .issues .djete:after {
-    content: 'Djete';
+    content: attr(id);
 }
 
 .issues .zaglavili:after {
-    content: 'Zaglavili';
+    content: attr(id);
 }
 
 .issues .issue.show:after {
