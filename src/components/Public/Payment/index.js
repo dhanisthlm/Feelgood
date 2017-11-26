@@ -337,7 +337,7 @@ export class Payment extends Component {
 						return(
 							<Checkout data={this.getData()}
 								  cost={this.calculateCost()}
-								  calculateEmailDiscount={this.calculateEmailDiscount}
+								  emailDiscount={this.calculateEmailDiscount}
 								  resetCheckout={ this.resetCheckout }
 							/>
 						)
