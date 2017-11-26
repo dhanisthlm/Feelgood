@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux';
 import { translate } from 'react-i18next';
-import { routeActions } from 'react-simple-router';
 import Checkout from '../Checkout';
 import styles from './styles.css';
 
