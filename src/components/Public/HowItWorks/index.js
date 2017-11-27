@@ -14,7 +14,7 @@ export class HowItWorks extends Component {
         const { t } = this.props;
 
         return (
-            <div className="how-it-works">
+            <div id="kakoradi" className="how-it-works">
                 <h3 className="heading">{ t('heading') }</h3>
                 <p className="preamble">{ t('intro') }</p>
                 <div className="row-1">

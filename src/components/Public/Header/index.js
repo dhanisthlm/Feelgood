@@ -33,7 +33,7 @@ export class Header extends Component {
                 <nav className="main-menu">
                     <a href="/anka#usluge">{ t('services') }</a>
                     <a href="/anka#cijene">{ t('prices') }</a>
-                    <a href="/anka#kakoradi">Kako radi</a>
+                    <a href="/anka#kakoradi">{ t('howWork') }</a>
                     <a href="/anka#kosmomi">{ t('whoAreWe')}</a>
                 </nav>
             </header>
