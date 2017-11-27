@@ -11,6 +11,7 @@ import { Payment } from '../src/components/Public/Payment';
 
 const wrapper = shallow(
 	<Payment
+        t={key => key}
 		dispatch={dispatch}
 		store={mockStore({ runtime: {} }) }
 	/>
@@ -139,6 +140,8 @@ describe('Payment component', () => {
     it('should return correct sum: -skype (3weeks, 45min) -email (4weeks, 24h) and 50% voucher discount', () => {
         const costSpy = sinon.spy(instance, 'calculateCost');
         instance.setState({
+            promoCode: 'zdravlje.nu',
+            enteredCode: '',
             promoCode: 'zdravlje.nu',
             enteredCode: 'zdravlje.nu',
             skype: {

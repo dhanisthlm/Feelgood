@@ -20,24 +20,24 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">2.04% </span>
+        <span class="strong">24.49% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>1/49</span>
+        <span class='fraction'>12/49</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">0% </span>
+        <span class="strong">5% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>0/20</span>
+        <span class='fraction'>1/20</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">0% </span>
+        <span class="strong">14.29% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>0/7</span>
+        <span class='fraction'>1/7</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">2.17% </span>
+        <span class="strong">26.09% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>1/46</span>
+        <span class='fraction'>12/46</span>
       </div>
     </div>
   </div>
@@ -147,20 +147,20 @@
 102</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -248,20 +248,20 @@
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React, { Component } from 'react';
 &nbsp;
 class FormComponent extends Component {
-<span class="fstat-no" title="function not covered" >    constructor (</span>props) <span class="cstat-no" title="statement not covered" >{</span>
+    constructor (props) <span class="branch-1 cbranch-no" title="branch not covered" >{</span>
         super(props);
 &nbsp;
-<span class="cstat-no" title="statement not covered" >        this.hasBeenValidated = {};</span>
+        this.hasBeenValidated = {};
 &nbsp;
-<span class="cstat-no" title="statement not covered" >        this.getValidatorData = this.getValidatorData.bind(this);</span>
-<span class="cstat-no" title="statement not covered" >        this.getValidationState = this.getValidationState.bind(this);</span>
-<span class="cstat-no" title="statement not covered" >        this.renderHelpText = this.renderHelpText.bind(this);</span>
-<span class="cstat-no" title="statement not covered" >        this.handleChange = this.handleChange.bind(this);</span>
-<span class="cstat-no" title="statement not covered" >        this.handleCheckboxChange = this.handleCheckboxChange.bind(this);</span>
-<span class="cstat-no" title="statement not covered" >        this.handleFocus = this.handleFocus.bind(this);</span>
-<span class="cstat-no" title="statement not covered" >        this.handleBlur = this.handleBlur.bind(this);</span>
-<span class="cstat-no" title="statement not covered" >        this.isValid = this.isValid.bind(this);</span>
-<span class="cstat-no" title="statement not covered" >        this.handleValidationReset = this.handleValidationReset.bind(this);</span>
+        this.getValidatorData = this.getValidatorData.bind(this);
+        this.getValidationState = this.getValidationState.bind(this);
+        this.renderHelpText = this.renderHelpText.bind(this);
+        this.handleChange = this.handleChange.bind(this);
+        this.handleCheckboxChange = this.handleCheckboxChange.bind(this);
+        this.handleFocus = this.handleFocus.bind(this);
+        this.handleBlur = this.handleBlur.bind(this);
+        this.isValid = this.isValid.bind(this);
+        this.handleValidationReset = this.handleValidationReset.bind(this);
     }
 &nbsp;
     getValidationState (name) {
@@ -352,7 +352,7 @@ export default FormComponent;</pre></td></tr>
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Sun Nov 26 2017 12:54:20 GMT+0100 (CET)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Mon Nov 27 2017 21:01:06 GMT+0100 (CET)
 </div>
 </div>
 <script src="../../../prettify.js"></script>

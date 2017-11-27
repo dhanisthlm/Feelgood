@@ -12,10 +12,10 @@ export const getEncounters = () => (dispatch) => {
 };
 
 export const saveEncounter = (encounter) => (dispatch) => {
-    console.log('encounter', encounter);
     return request
         .post('/encounter', { encounter })
         .then((data) => {
+            console.log('fooo')
             dispatch({ type: 'ENCOUNTER_SAVED' });
         })
         .catch((error) => {
