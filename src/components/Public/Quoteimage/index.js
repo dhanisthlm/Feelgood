@@ -4,23 +4,24 @@ import { translate } from 'react-i18next';
 import styles from './styles.css';
 
 export class QuoteImage extends Component {
-	constructor (props) {
-		super(props);
+    constructor(props) {
+        super(props);
 
-		this.state = {};
-	}
+        this.state = {};
+    }
 
-	render () {
-		const { t } = this.props;
+    render() {
+        const {t} = this.props;
 
-		return (
+        return (
 			<div className="quote-image">
 				<p>Ono što mislite da postanete</p>
-				<img src="./images/reader.jpg" />
+				<img className="quote-image-desktop" src="/images/reader.jpg"/>
 			</div>
-		);
-	}
+        );
+    }
 }
+
 
 QuoteImage.propTypes = { dispatch: PropTypes.func };
 

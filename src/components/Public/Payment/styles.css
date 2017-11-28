@@ -540,7 +540,7 @@
 
 @media only screen and (max-width: 500px) {
     .payment {
-        padding: 20px 40px 25px 40px;
+        padding: 20px 40px 0 40px;
         margin-bottom: 18px;
     }
 
@@ -643,13 +643,13 @@
         position: static;
     }
 
-    .payment .infot-text .promo-text {
+    .payment .info-text .promo-text {
         position: absolute;
         width: 228px;
         color: #fff;
         text-align: center;
-        left: 88px;
-        top: 102px;
+        left: 31px !important;
+        top: 81px !important;
     }
 
     .payment + .text-wrapper .total {
@@ -667,8 +667,8 @@
     .payment + .text-wrapper .spec span:first-child {
         text-align: center;
         color: #fff;
-        font-size: 21px;
-        margin-top: 10px;
+        font-size: 18px;
+        margin-top: 5px;
     }
 
     .payment + .text-wrapper .checkout-button {
@@ -678,7 +678,7 @@
     .payment + .text-wrapper .spec span:last-child {
         text-align: center;
         color: #fff;
-        font-size: 20px;
+        font-size: 18px;
         display: inline;
     }
 

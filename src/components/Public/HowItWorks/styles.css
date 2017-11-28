@@ -65,10 +65,17 @@
 
 @media only screen and (max-width: 500px) {
     .how-it-works {
-        padding: 5px 40px 40px;
+        padding: 20px 40px 0 40px;
+    }
+
+    .how-it-works .heading {
+        text-align: left;
+        font-size: 27px;
+        margin-top: 10px;
     }
 
     .how-it-works .preamble {
+        text-align: left;
         width:100%;
         margin-bottom: 25px;
     }
