@@ -234,4 +234,12 @@
         margin: 0 0 20px 0;
         height: auto;
     }
+
+    .staff .card .photo-wrapper {
+        height: 320px;
+    }
+
+    .staff .card .info-wrapper svg {
+        margin-right: 20px;
+    }
 }
