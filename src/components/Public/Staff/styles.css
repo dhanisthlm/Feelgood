@@ -205,3 +205,17 @@
     background: #fff;
     pointer-events: none;
 }
+
+@media only screen and (max-width: 500px) {
+    .staff {
+        padding: 5px 20px 20px;
+    }
+
+    .staff .preamble {
+        width:100%;
+    }
+
+    .staff .card:first-child {
+        margin-top: 0;
+    }
+}

@@ -5,6 +5,8 @@
     text-align: center;
 }
 
-:local(.quote) {
-    color: green;
+@media only screen and (max-width: 500px) {
+    .quote p {
+        font-size: 46px;
+    }
 }

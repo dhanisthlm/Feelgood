@@ -61,3 +61,27 @@
     line-height: 25px;
     font-size: 18px;
 }
+
+
+@media only screen and (max-width: 500px) {
+    .how-it-works {
+        padding: 5px 40px 40px;
+    }
+
+    .how-it-works .preamble {
+        width:100%;
+        margin-bottom: 25px;
+    }
+
+    .how-it-works .step-wrapper {
+        display: inline-block;
+        width: 100%;
+        padding: 0;
+        box-sizing: border-box;
+        height: auto;
+    }
+
+    .how-it-works .step-wrapper p.description {
+        margin-bottom: 35px;
+    }
+}

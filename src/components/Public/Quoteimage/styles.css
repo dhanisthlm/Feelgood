@@ -21,3 +21,25 @@
     top: 0;
     text-shadow: 2px 2px 5px rgba(0, 0, 0, .7);
 }
+
+@media only screen and (max-width: 500px) {
+    .quote-image {
+        padding: 0;
+        height: 232px;
+    }
+
+    .quote-image p {
+        position: absolute;
+        color: #fff;
+        font-size: 37px;
+        text-align: left;
+        left: 404px;
+        top: -30px;
+        line-height: 36px;
+        margin-top: 41px;
+    }
+
+    .quote-image img {
+        margin-top: 0;
+    }
+}

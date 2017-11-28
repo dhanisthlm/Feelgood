@@ -71,3 +71,62 @@
     color: #27548c;
     font-size: 14px;
 }
+
+@media only screen and (max-width: 500px) {
+    .header {
+        position: static;
+        display: block;
+        text-align: center;
+        padding-top: 20px;
+        padding-left: 0;
+    }
+
+    .header .logo {
+        position: static;
+        margin: 0;
+    }
+
+    .header .logo svg {
+        width: 307px;
+        margin-left: -20px;
+        margin-top: 11px;
+        height: 82px;
+    }
+
+    .header .logo-text {
+        position: static;
+        margin-bottom: 5px;
+    }
+
+    .header .contact {
+        position: static;
+        margin-top: 4px;
+        text-align: center;
+    }
+
+    .header .contact span:first-child {
+        display: inline-block;
+        margin-right: 10px;
+    }
+
+    .header .contact span:last-child {
+        display: inline-block;
+        margin-left: 10px;
+    }
+
+    .header .main-menu {
+        float: none;
+        margin-top: 0;
+        background-color: #C04C9C;
+        padding: 12px 0;
+    }
+
+    .header .main-menu a {
+        margin-right: 25px;
+        color: #fff;
+    }
+
+    .header .main-menu a:last-child {
+        margin-right: 0;
+    }
+}
