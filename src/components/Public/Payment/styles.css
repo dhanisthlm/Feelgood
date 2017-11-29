@@ -627,6 +627,7 @@
     .payment .info-text .promo {
         width: 100%;
         height: 351px;
+        background-size: 376px
     }
 
     .payment .info-text .promo-text {
