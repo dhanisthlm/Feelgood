@@ -1,7 +1,6 @@
 import React from 'react';
-import ReactTestUtils from 'react-dom/test-utils'; // ES6
-import { shallow, mount, render } from 'enzyme';
-import { describe, it, before, after, have } from 'mocha';
+import { shallow } from 'enzyme';
+import { describe, it, have } from 'mocha';
 import {expect} from 'chai';
 import sinon from 'sinon';
 import configureStore from 'redux-mock-store';

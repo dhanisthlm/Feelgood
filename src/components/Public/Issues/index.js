@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { translate } from 'react-i18next';
 import styles from './styles.css';
 
-export class Traitments extends Component {
+export class Issues extends Component {
 	constructor (props) {
 		super(props);
 
@@ -74,54 +74,24 @@ export class Traitments extends Component {
 		})
 	}
 
-    whichTransitionEvent () {
-		var t;
-		var el = document.createElement('fakeelement');
-		var transitions = {
-			'transition':'transitionend',
-			'OTransition':'oTransitionEnd',
-			'MozTransition':'transitionend',
-			'WebkitTransition':'webkitTransitionEnd'
-		};
-
-		for(t in transitions){
-			if( el.style[t] !== undefined ){
-				return transitions[t];
-			}
-		}
-	}
-
     handleSwipeRight () {
         const carousel = this.carousel;
-        const whichEvent = this.whichTransitionEvent();
         const issues = this.state.issues;
         const first = issues.pop();
         issues.unshift(first);
-        this.carousel.style.transition = 'none';
-        carousel.classList.add('swipe-left');
         this.setState({issues});
+        carousel.classList.add('swipe-left');
         carousel.classList.add('swipe-zero');
-
-        this.carousel.addEventListener(whichEvent, () => {
-            this.carousel.classList.remove('swipe-zero');
-        }, { once: true });
     }
 
     handleSwipeLeft () {
-		const carousel = this.carousel;
-		const whichEvent = this.whichTransitionEvent();
-        carousel.style.transition = 'none';
+		const carousel = this.refs.carousel;
         const issues = this.state.issues;
         const first = issues.shift();
         issues.push(first);
-        carousel.classList.add('swipe-left');
         this.setState({issues});
+        carousel.classList.add('swipe-left');
         carousel.classList.add('swipe-zero');
-
-        this.carousel.addEventListener(whichEvent, () => {
-            this.carousel.style.transition = 'none';
-			this.carousel.classList.remove('swipe-left')
-        }, { once: true });
 	}
 
 	render () {
@@ -264,9 +234,9 @@ export class Traitments extends Component {
 				</div>
 				<div className="issues mobile-issues">
 					<div id="left" onClick={this.handleSwipeRight} className="issue-arrow-left" />
-						<div ref={(carousel) => { this.carousel = carousel; }} className="issue-carousel">
-							{ this.renderMobileIssues() }
-						</div>
+					<div ref="carousel" className="issue-carousel">
+                        { this.renderMobileIssues() }
+					</div>
 					<div id="right" onClick={this.handleSwipeLeft} className="issue-arrow-right" />
 				</div>
 				<div className="text-wrapper">
@@ -280,9 +250,9 @@ export class Traitments extends Component {
 	}
 }
 
-Traitments.propTypes = { dispatch: PropTypes.func };
+Issues.propTypes = { dispatch: PropTypes.func };
 
 const mapStateToProps = (state) => ({});
 
-export default connect(mapStateToProps)(translate('issueView')(Traitments));
+export default connect(mapStateToProps)(translate('issueView')(Issues));
 

@@ -72,6 +72,7 @@
     "yargs": "^10.0.3"
   },
   "devDependencies": {
+    "axios-http-adapter": "*",
     "babel-jest": "^21.2.0",
     "babel-plugin-istanbul": "^4.1.5",
     "babel-polyfill": "^6.26.0",
@@ -87,6 +88,7 @@
     "istanbul": "^0.4.5",
     "jest": "^21.2.1",
     "jsdom": "^11.3.0",
+    "jsdom-browser": "^0.6.0",
     "jsdomify": "^3.1.1",
     "karma": "^1.7.1",
     "karma-chai": "^0.1.0",
@@ -101,6 +103,7 @@
     "karma-webpack": "^2.0.6",
     "lodash": "*",
     "mocha": "^4.0.1",
+    "moxios": "*",
     "nock": "^9.1.3",
     "nyc": "^11.3.0",
     "phantomjs": "^2.1.7",
@@ -116,8 +119,6 @@
     "sass-loader": "^6.0.6",
     "sinon": "^4.1.2",
     "style-loader": "*",
-    "url-loader": "*",
-    "moxios": "*",
-    "axios-http-adapter": "*"
+    "url-loader": "*"
   }
 }

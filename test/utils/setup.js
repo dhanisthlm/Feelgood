@@ -4,11 +4,8 @@ import Adapter from 'enzyme-adapter-react-15';
 
 configure({ adapter: new Adapter() });
 
-console.log(JSDOM)
-
 if (JSDOM) {
     const jsdom = new JSDOM('<!doctype html><html><body></body></html>');
-
     const {window} = jsdom;
 
     function copyProps(src, target) {
@@ -22,7 +19,9 @@ if (JSDOM) {
     global.window = window;
     global.document = window.document;
     global.navigator = {userAgent: 'node.js'};
-    copyProps(window, global);
 
+    // Simulate window resize event
+
+    copyProps(window, global);
     global.navigator = {userAgent: 'node.js'};
 }

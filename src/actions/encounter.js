@@ -15,7 +15,6 @@ export const saveEncounter = (encounter) => (dispatch) => {
     return request
         .post('/encounter', { encounter })
         .then((data) => {
-            console.log('fooo')
             dispatch({ type: 'ENCOUNTER_SAVED' });
         })
         .catch((error) => {
