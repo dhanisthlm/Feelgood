@@ -12,7 +12,7 @@
 
 .introduction .heading {
     color: #fff;
-    font-size: 33px;
+    font-size: 23px !important;
     margin: 0 0 7px 0;
 }
 
@@ -45,7 +45,7 @@
     }
 
     .introduction .heading {
-        font-size: 25px;
+        font-size: 23px;
         line-height: 34px;
         margin-bottom: 12px;
     }

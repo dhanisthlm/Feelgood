@@ -22,7 +22,7 @@ export class Main extends Component {
             <div className="page">
                 <Header />
                 <Hero />
-                <Quote />
+                <QuoteImage />
                 <Traitments />
                 <Payment />
                 <QuoteImage />

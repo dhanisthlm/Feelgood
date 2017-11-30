@@ -225,8 +225,9 @@
 
 .payment .week-text {
     margin-left: 13px;
-    font-size: 14px;
+    font-size: 15px;
     width: 245px;
+    font-weight: 300;
 }
 
 .payment .n-weeks {
@@ -468,7 +469,7 @@
     position: relative;
     color: rgba(255,255,255,.9);
     display: block;
-    width: 119px;
+    width: 119px !important;
     height: 34px;
     margin: 3px 3px;
     -webkit-border-radius: 50px;
@@ -477,7 +478,7 @@
     cursor: pointer;
     z-index: 1;
     text-align: center;
-    margin-left: 0px;
+    margin: 0 auto;
 }
 
 .payment .toggle_option_slider{
@@ -499,7 +500,7 @@
 
 .payment .toggle_radios label p {
     margin: 0;
-    font-family: lato;
+    font-family: lato, 'sans-serif', 'arial';
     display: inline-block;
     line-height: 34px;
     font-size: 17px;
@@ -512,10 +513,9 @@
 
 .payment .duration-text {
     margin-left: 13px;
-    font-size: 14px;
+    font-size: 15px;
     width: 245px;
-    margin-top: 0;
-    margin-bottom: 0;
+    font-weight: 300;
 }
 
 #duration-s:checked ~ .toggle_option_slider{
@@ -540,7 +540,7 @@
 
 @media only screen and (max-width: 500px) {
     .payment {
-        padding: 20px 40px 0 40px;
+        padding: 0 40px 0 40px;
         margin-bottom: 18px;
     }
 
@@ -555,6 +555,10 @@
         display: inline-block;
         width: 100%;
         margin: 0 auto;
+    }
+
+    #duration-l:checked ~ .toggle_option_slider{
+        left: 132px;
     }
 
     .payment  .payment-type-wrapper .skype label,
@@ -573,7 +577,7 @@
     }
 
     .payment .payment-type-wrapper .email {
-        margin-top: 30px !important;
+        margin-top: 20px !important;
     }
 
     .payment .payment-type-wrapper .email .weeks {
@@ -586,12 +590,30 @@
         text-align: left;
     }
 
+    .payment .toggle_radios .small-skype p {
+       margin-top: 3px;
+        margin-left: 30px;
+    }
+
+    .payment .toggle_radios .large-skype p {
+        margin-top: 3px;
+        margin-left: 21px;
+    }
+
+    .payment .toggle_radios label {
+        width: 137px !important;
+    }
+
+    .payment .toggle_option_slider {
+        width: 145px;
+    }
+
     .payment .payment-type-wrapper .email .weeks > div {
         display: inline-blocK;
         float: none;
     }
 
-    .payment .payment-type-wrappe .email .weeks .week-text {
+    .payment .payment-type-wrapper .email .weeks .week-text {
         width: auto;
     }
 
@@ -599,6 +621,10 @@
         margin-right: 20px;
         text-align: center;
         display: inline-block
+    }
+
+    .payment .toggle_radios {
+        width: 94%;
     }
 
     .payment .heading {
@@ -654,11 +680,16 @@
     }
 
     .payment + .text-wrapper .total {
-        text-align: center;
         width: 100%;
         margin: 0;
         color: #fff;
         margin-top: 31px;
+        font-size: 33px;
+        font-weight: 600;
+        margin: 0;
+        min-width: 320px;
+        text-align: left;
+        letter-spacing: 0;
     }
 
     .payment + .text-wrapper .spec {
@@ -670,6 +701,7 @@
         color: #fff;
         font-size: 18px;
         margin-top: 5px;
+        font-weight: 300;
     }
 
     .payment + .text-wrapper .checkout-button {
@@ -681,6 +713,7 @@
         color: #fff;
         font-size: 18px;
         display: inline;
+        font-weight: 300;
     }
 
     .payment + .text-wrapper button {
