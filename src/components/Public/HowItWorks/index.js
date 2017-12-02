@@ -34,7 +34,7 @@ export class HowItWorks extends Component {
                         </div>
                         <p className="sub-heading">1. Procjena</p>
                         <p className="description">
-                            Razgovarajte bez troška desetak minuta sa našim psiholozima preko telefona (060 - 321 22 90 ili 066 - 23 60 83) ili proko Skypea (Skype adresa xxxx) kako biste utvrdili vaše savjetodavne potrebe.
+                            Razgovarajte bez troška desetak minuta sa našim psiholozima preko telefona (+387 603 21 22 90 ili +387 66 23 60 83) ili proko Skypea (Skype adresa xxxx) kako biste utvrdili vaše savjetodavne potrebe.
                         </p>
                     </div>
                     <div className="step-wrapper">
