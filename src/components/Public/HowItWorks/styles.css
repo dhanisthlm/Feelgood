@@ -13,16 +13,21 @@
     height: 120px !important;
 }
 
-.how-it-works .step-wrapper:first-child {
-    margin-right: 50px;
-}
 
 .how-it-works .step-wrapper {
     display: inline-block;
     width: 42%;
-    height: 400px;
+    margin-bottom: 35px;
     box-sizing: border-box;
     vertical-align: top;
+}
+
+.how-it-works .step-wrapper:first-child {
+    padding: 0 50px 0 20px;
+}
+
+.how-it-works .step-wrapper:last-child {
+    padding: 0 20px 0 50px;
 }
 
 .how-it-works .circle {
@@ -42,7 +47,7 @@
 }
 
 .how-it-works .description {
-    margin: 0;
+    margin-top: 0;
     text-align: left;
     font-size: 17px;
     font-weight: 400;
@@ -97,9 +102,14 @@
     .how-it-works .step-wrapper {
         display: inline-block;
         width: 100%;
-        padding: 0;
+        padding: 0 !important;
         box-sizing: border-box;
         height: auto;
+        margin-bottom: 0 !important;
+    }
+
+    .how-it-works .row-1 {
+        margin-top: 30px;
     }
 
     .how-it-works .step-wrapper p.description {

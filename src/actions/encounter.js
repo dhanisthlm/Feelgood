@@ -22,8 +22,17 @@ export const saveEncounter = (encounter) => (dispatch) => {
         });
 };
 
-export const setEncounterData = (data, cost, emailDiscount) => (dispatch) => {
-    dispatch({ type: 'ENCOUNTER_DATA', payload: { data, cost, emailDiscount }});
+export const setEncounterData = (data, cost, emailDiscount, promoDiscount) => (dispatch) => {
+    console.log('foooooooooo')
+    dispatch({
+        type: 'ENCOUNTER_DATA',
+        payload: {
+            data,
+            cost,
+            emailDiscount,
+            promoDiscount
+        }
+    });
 };
 
 export const resetEncounter = () => (dispatch) => {

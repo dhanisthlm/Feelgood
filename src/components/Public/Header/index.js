@@ -21,7 +21,7 @@ export class Header extends Component {
                 </div>
                 <div className="contact">
                     <span>{ t('callUs') } 08.00 - 17.00</span>
-                    <span>{ t('phone') }: 061 123 456</span>
+                    <span>060 - 321 22 90 &nbsp;|&nbsp; 066 - 23 60 83</span>
                 </div>
                 <h1 className="logo">
                     <svg xmlns="http://www.w3.org/2000/svg" width="411.445" height="101.206" viewBox="0 0 411.445 101.206">

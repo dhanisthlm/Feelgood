@@ -24,7 +24,8 @@ export default handleActions({
             ...state,
             data: action.payload.data,
             cost: action.payload.cost,
-            emailDiscount: action.payload.emailDiscount
+            emailDiscount: action.payload.emailDiscount,
+            promoDiscount: action.payload.promoDiscount
         }
     }
 }, {
@@ -32,5 +33,6 @@ export default handleActions({
     list: [],
     data: {},
     cost: {},
-    emailDiscount: 0
+    emailDiscount: 0,
+    promoDiscount: 0
 })

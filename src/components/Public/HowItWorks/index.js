@@ -34,7 +34,7 @@ export class HowItWorks extends Component {
                         </div>
                         <p className="sub-heading">1. Procjena</p>
                         <p className="description">
-                            Razgovarajte bez troška desetak minuta sa našim psiholozima preko telefona (060 xxx xxx ili 066 236 083) ili proko Skypea (Skype adresa xxxx) kako biste utvrdili vaše savjetodavne potrebe.
+                            Razgovarajte bez troška desetak minuta sa našim psiholozima preko telefona (060 - 321 22 90 ili 066 - 23 60 83) ili proko Skypea (Skype adresa xxxx) kako biste utvrdili vaše savjetodavne potrebe.
                         </p>
                     </div>
                     <div className="step-wrapper">
@@ -65,9 +65,8 @@ export class HowItWorks extends Component {
                             </svg>
                         </div>
                         <p className="sub-heading">3. Termin</p>
-                        <p className="description">
-                            Kada je uplata primljena, dobićete putom e-pošte termin po vašem izboru koji ste naveli prilikom naručivanja naših usluga. Potrebno nam je najmanje 24 sata da nas obavjestite o mjenjane termina. Sve promjene u roka do 24 sata prije određenog Skype termina će imati 100% naknadu za otkazivanje. Promjene u roka do 24 sata prije određenog termina e-pošte će imati naknadu jedan dan od određenje sedmice.
-                        </p>
+                        <p className="description">Kada je uplata primljena, dobićete putom e-pošte termin po vašem izboru koji ste naveli prilikom naručivanja naših usluga.</p>
+                        <p className="description">Potrebno nam je najmanje 24 sata da nas obavjestite o mjenjane termina. Sve promjene u roka do 24 sata prije određenog Skype termina će imati 100% naknadu za otkazivanje. Promjene u roka do 24 sata prije određenog termina e-pošte će imati naknadu jedan dan od određenje sedmice.</p>
                     </div>
                     <div className="step-wrapper">
                         <div className="circle">

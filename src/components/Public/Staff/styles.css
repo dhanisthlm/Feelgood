@@ -240,6 +240,6 @@
     }
 
     .staff .card .info-wrapper svg {
-        margin-right: 27px;
+        display: none;
     }
 }

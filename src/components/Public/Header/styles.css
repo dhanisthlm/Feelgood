@@ -106,13 +106,11 @@
     }
 
     .header .contact span:first-child {
-        display: inline-block;
-        margin-right: 10px;
+        display: block;
     }
 
     .header .contact span:last-child {
-        display: inline-block;
-        margin-left: 10px;
+        display: block;
     }
 
     .header .main-menu {

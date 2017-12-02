@@ -302,10 +302,19 @@ export class Payment extends Component {
 		const data = this.getData();
 		const email = this.state.email;
 		const cost = this.calculateCost();
-        const emailPackage = email[Object.keys(email)
-            .filter(key => email[key].active)[0]];
-		const emailDiscount = this.calculateEmailDiscount(emailPackage);
-        this.props.dispatch(setEncounterData(data, cost, emailDiscount));
+        const emailPackage = email[Object.keys(email).filter(key => email[key].active)[0]];
+        let emailDiscount = 0;
+        let promoDiscount = 0;
+
+        if (this.state.enteredCode === this.state.promoCode) {
+        	promoDiscount = this.state.promoDiscount;
+		}
+
+		if (emailPackage) {
+            emailDiscount = this.calculateEmailDiscount(emailPackage)
+        }
+
+        this.props.dispatch(setEncounterData(data, cost, emailDiscount, promoDiscount));
 
     }
 
@@ -355,17 +364,6 @@ export class Payment extends Component {
 
 		return (
 			<div>
-				{(() => {
-					if (this.state.checkout === true) {
-						return(
-							<Checkout data={this.getData()}
-								  cost={this.calculateCost()}
-								  emailDiscount={this.calculateEmailDiscount}
-								  resetCheckout={ this.resetCheckout }
-							/>
-						)
-					}
-				})()}
 				<div id="cijene" className="payment">
 					<h3 className="heading">{ t('heading') }</h3>
 					<p className="preamble">{ t('intro') }</p>

@@ -5,13 +5,15 @@
 .checkout .header {
     padding-left: 0;
     height: 58px;
+    height: 55px;
     background: #c04c9c;
+    margin-tip: 7px;
 }
 
 .checkout .header h1 {
     text-align: center;
     color: #fff;
-    margin: 10px 0;
+    margin: 9px 0;
 }
 
 

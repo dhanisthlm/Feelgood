@@ -576,11 +576,7 @@
         margin-bottom: 45px;
     }
 
-    .payment .payment-type-wrapper .email {
-        margin-top: 20px !important;
-    }
-
-    .payment .payment-type-wrapper .email .weeks {
+    .payment .email .weeks {
         display: none;
         height: 50px;
         margin-bottom: 15px;
@@ -608,16 +604,16 @@
         width: 145px;
     }
 
-    .payment .payment-type-wrapper .email .weeks > div {
+    .payment .email .weeks > div {
         display: inline-blocK;
         float: none;
     }
 
-    .payment .payment-type-wrapper .email .weeks .week-text {
+    .payment .email .weeks .week-text {
         width: auto;
     }
 
-    .payment .payment-type-wrapper .email .weeks .week-title {
+    .payment .email .weeks .week-title {
         margin-right: 20px;
         text-align: center;
         display: inline-block
