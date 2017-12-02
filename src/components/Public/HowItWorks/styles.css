@@ -3,12 +3,26 @@
     text-align: center;
 }
 
+.how-it-works .row-1 {
+    margin-top: 50px;
+}
+
+.how-it-works .step-4 {
+    width: 120px !important;
+    margin-top: 30px !important;
+    height: 120px !important;
+}
+
+.how-it-works .step-wrapper:first-child {
+    margin-right: 50px;
+}
+
 .how-it-works .step-wrapper {
     display: inline-block;
     width: 42%;
     height: 400px;
-    padding: 25px 60px 25px 25px;
     box-sizing: border-box;
+    vertical-align: top;
 }
 
 .how-it-works .circle {

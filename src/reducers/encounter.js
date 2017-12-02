@@ -18,8 +18,19 @@ export default handleActions({
             ...state,
             saved: false
         }
+    },
+    ENCOUNTER_DATA: (state, action) => {
+        return {
+            ...state,
+            data: action.payload.data,
+            cost: action.payload.cost,
+            emailDiscount: action.payload.emailDiscount
+        }
     }
 }, {
     saved: false,
-    list: []
+    list: [],
+    data: {},
+    cost: {},
+    emailDiscount: 0
 })

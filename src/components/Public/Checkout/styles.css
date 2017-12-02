@@ -1,54 +1,28 @@
 .checkout {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.8);
-    z-index: 999;
-}
-
-.checkout .basket {
-    width: 1000px;
-    min-height: 614px;
-    text-align: center;
-    background-color: #fff;
-    left: 50%;
-    top: 50%;
-    position: absolute;
-    margin-left: -500px;
-    margin-top: -307px;
-    box-sizing: border-box;
+    margin-top: 3px;
 }
 
 .checkout .header {
-    width: 100%;
-    height: 80px;
+    padding-left: 0;
+    height: 58px;
     background: #c04c9c;
 }
 
-.checkout .outer-frame {
-    width: 568px;
-    height: 95%;
+.checkout .header h1 {
+    text-align: center;
+    color: #fff;
+    margin: 10px 0;
 }
 
-.checkout .inner-frame {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-}
 
 .checkout .header {
     padding-left: 0;
 }
 
 .checkout .basket .front {
-    margin: 20px auto;
-    left: 50%;
-    z-index: 99;
-    width: 400px;
+    margin-left: 55px;
+    float: left;
+    width: 50%;
 }
 
 .checkout .basket .back {
@@ -213,8 +187,12 @@
     outline: 0;
 }
 
+.checkout .form-bouttons {
+    width: 100%;
+}
+
 .checkout .form-buttons button:first-child {
-    width: 118px;
+    width: 30%;
     margin-right: 11px;
     background: #c2519e8c;
 }
@@ -224,7 +202,7 @@
 }
 
 .checkout .form-buttons button:last-child {
-    width: 271px;
+    width: 68%;
 }
 
 .checkout .basket button {
@@ -254,8 +232,7 @@
 
 table {
     float: left;
-    margin-right: -15px;
-    margin-top: 116px;
+    margin-top: 48px;
     margin-left: 55px;
     width: 430px;
 }
@@ -304,4 +281,56 @@ thead tr {
 .heavy {
     font-weight: 600 !important;
     color: #444 !important;
+}
+
+.select-style {
+    height: 40px;
+    margin-top: 20px;
+    padding: 0;
+    margin: 0;
+    border: 1px solid #999;
+    border-radius: 3px;
+    overflow: hidden;
+    background-color: #fff;
+    background: #fff;
+    position: relative;
+}
+
+.select-style:after {
+    top: 50%;
+    right: 25px;
+    border: solid #0000;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+    border-color: #0000;
+    border-top-color: #333;
+    border-width: 7px;
+    margin-top: -2px;
+    z-index: 100;
+}
+
+.select-style select {
+    padding: 0 0 0 20px;
+    width: 100%;
+    border: none;
+    box-shadow: none;
+    background-color: #0000;
+    background-image: none;
+    -webkit-appearance: none;
+    appearance: none;
+    font-size: 16px;
+    height: 100%;
+    line-height: 40px;
+    box-sizing: border-box;
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-weight: 300;
+}
+
+.select-style select:focus {
+    outline: none;
 }

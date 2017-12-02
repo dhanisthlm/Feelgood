@@ -1,6 +1,8 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux';
 import { translate } from 'react-i18next';
+import { routeActions } from 'redux-simple-router';
+import { setEncounterData } from '../../../actions/encounter';
 import Checkout from '../Checkout';
 import styles from './styles.css';
 
@@ -31,6 +33,7 @@ export class Payment extends Component {
      */
     handlePromoCode (e) {
         this.setState({ enteredCode: e.target.value });
+        this.updateEncounter();
     }
 
     /**
@@ -50,14 +53,15 @@ export class Payment extends Component {
      * @return {void}
      */
     handleCheckout () {
-        this.setState({ checkout: !this.state.checkout });
+        //this.setState({ checkout: !this.state.checkout });
+        this.props.dispatch(routeActions.push('/checkout'));
     }
 
     /**
      * This callback type is called `requestCallback
      * @callback requestCallback
      * @param {number} responseCode
-	 * @return {void}
+	 * @return {object}
      */
 	createInitialState () {
 		return {
@@ -124,6 +128,7 @@ export class Payment extends Component {
 			? this.skypePackage.cost === 0 : true;
 
         this.setState({ durationText: showDurationText });
+        this.updateEncounter();
     }
 
     /**
@@ -284,7 +289,25 @@ export class Payment extends Component {
 
 		email[size].week = email[size].week + factor;
         this.setState({ email });
+        this.updateEncounter();
 	}
+
+    /**
+     * This callback type is called `requestCallback
+     * @callback requestCallback
+     * @param {number} responseCode
+     * @return {void}
+     */
+	updateEncounter () {
+		const data = this.getData();
+		const email = this.state.email;
+		const cost = this.calculateCost();
+        const emailPackage = email[Object.keys(email)
+            .filter(key => email[key].active)[0]];
+		const emailDiscount = this.calculateEmailDiscount(emailPackage);
+        this.props.dispatch(setEncounterData(data, cost, emailDiscount));
+
+    }
 
     /**
      * This callback type is called `requestCallback
@@ -316,6 +339,7 @@ export class Payment extends Component {
 		skypeDuration.l.active = size === 'l';
 
 		this.setState({ skypeDuration });
+		this.updateEncounter();
 	}
 
     /**

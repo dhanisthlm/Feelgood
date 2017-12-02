@@ -10,6 +10,7 @@ import thunkMiddleware from 'redux-thunk';
 import reducers from './reducers';
 import App from './components/App';
 import Admin from './components/Admin';
+import Checkout from './components/Public/Checkout';
 import { hashLinkScroll } from '../helpers/hashLinkScroll';
 
 const reduxRouterMiddleware = syncHistory(browserHistory);
@@ -22,6 +23,7 @@ render((
       <I18nextProvider i18n={i18n}>
         <Router history={browserHistory} onUpdate={hashLinkScroll}>
           <Route path="/anka" component={App}>
+              <Route path='/checkout' component={Checkout}/>
               <Route path='/admin' component={Admin}/>
           </Route>
         </Router>
