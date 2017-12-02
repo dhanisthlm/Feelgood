@@ -334,3 +334,73 @@ thead tr {
 .select-style select:focus {
     outline: none;
 }
+
+#breakpoints {
+    height:0px;
+}
+
+#breakpoints > div.breakpoint-small {
+    display:none;
+}
+
+#breakpoints > div.breakpoint-medium {
+    display:none;
+}
+
+
+#breakpoints > div.breakpoint-large {
+    display:block;
+}
+
+
+@media only screen and (max-width: 500px) {
+
+    #breakpoints > div.breakpoint-small {
+        display:block;
+    }
+
+    #breakpoints > div.breakpoint-medium,
+    #breakpoints > div.breakpoint-large {
+        display:none;
+    }
+
+    .checkout .header {
+        background-color: #fff;
+        position: static;
+        display: block;
+        text-align: center;
+        padding-top: 20px;
+        padding-left: 0;
+    }
+
+    .checkout .header h1 {
+        color: #C04C9C;
+    }
+
+    .checkout table {
+        float: none;
+        margin-top: 0;
+        width: 85%;
+        box-sizing: border-box;
+        margin: 9px auto 25px;
+    }
+
+    .checkout .basket .front {
+        float: none;
+        display: block;
+        color: #c04c9c;
+        font-size: 40px;
+        margin-top: 7px;
+        width: 85%;
+        margin: 0 auto;
+    }
+
+    .checkout .form-buttons button:first-child {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .checkout .form-buttons button:last-child {
+        width: 100%;
+    }
+}
