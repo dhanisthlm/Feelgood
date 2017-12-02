@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { translate } from 'react-i18next';
 import validation from 'react-validation-mixin';
 import strategy from 'joi-validation-strategy';
-import { routeActions } from 'react-simple-router';
 import FormComponent from '../../FormComponent';
 import { encounterValidator } from '../../../../validators/encounters';
 import { i18nValidation } from  '../../../../helpers/validation';
