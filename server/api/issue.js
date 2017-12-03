@@ -1,4 +1,4 @@
-import Issue from '../models/issue';
+import Issue from '../models/Issue';
 
 const getIssues = (request, reply) => {
     Issue.find({}, (error, result) => {

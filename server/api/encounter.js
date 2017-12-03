@@ -1,8 +1,6 @@
 import Encounter from '../models/encounter';
 import stripe from 'stripe';
 
-console.log('STRIPE', stripe);
-
 const getEncounters = (request, reply) => {
     Encounter.find({}, (error, result) => {
         if (error) return reply(error);
