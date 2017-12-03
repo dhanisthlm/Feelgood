@@ -6,7 +6,11 @@ import configureStore from 'redux-mock-store';
 import { shallow } from 'enzyme';
 import { describe, it, have } from 'mocha';
 import {expect} from 'chai';
-import { Checkout } from '../src/components/Public/Checkout';
+import { connect } from 'react-redux';
+import { shallowWithStore } from 'enzyme-redux';
+import { createMockStore } from 'redux-test-utils';
+
+import Checkout from '../src/components/Public/Checkout';
 import { saveEncounter } from '../src/actions/encounter';
 
 const dispatch = sinon.spy();
@@ -68,17 +72,36 @@ const mockObj = {
     "_empty_": "Kontakta mig snarast"
 };
 
+const mapStateToProps = (state) => ({
+    state,
+});
+
+const ConnectedComponent = connect(mapStateToProps)(Checkout);
+const component = shallowWithStore(
+    <ConnectedComponent
+        t={key => key}
+        getValidationMessages={ () => [] }
+        data={mockObj.data}
+        cost={mockObj.cost}
+        emailDiscount= '0.95'
+        dispatch={dispatch}
+    />,
+    createMockStore()
+);
+
+/*
 const wrapper = shallow(
     <Checkout
         t={key => key}
         getValidationMessages={ () => [] }
         data={mockObj.data}
         cost={mockObj.cost}
-        emailDiscount={ () => 0.95 }
+        emailDiscount= '0.95'
         dispatch={dispatch}
         store={mockStore({ runtime: {} }) }
     />
 );
+*/
 
 const store = mockStore({});
 

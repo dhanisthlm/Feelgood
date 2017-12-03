@@ -4,11 +4,18 @@ const encounterSchema = Schema({
     name: {
       type: String
     },
+    skype: {
+        type: String,
+        default: ''
+    },
     mail: {
       type: String
     },
     phone: {
       type: String
+    },
+    issue: {
+        type: String
     },
     comment: {
         type: String

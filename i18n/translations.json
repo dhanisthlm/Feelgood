@@ -129,7 +129,69 @@
       "comment": "Kommentar",
       "back": "Natrag",
       "placeOrder": "Zakažite",
-      "close": "Blizu"
+      "close": "Blizu",
+      "issue": "Tema",
+      "stripe": {
+        "invalid_number": "Broj kartice nije važeći broj kreditne kartice.",
+        "incomplete_number": "Broj kartice nije važeći broj kreditne kartice.",
+        "invalid_expiry_month": "Mjesec isteka kartice nije važeći.",
+        "invalid_expiry_year": "Godina isteka kartice nije važeći.",
+        "invalid_cvc": "Sigurnosni kod kartice je nevažeći.",
+        "invalid_swipe_data": "Swipe-podaci kartice su nevažeći.",
+        "incorrect_number": "Broj kartice je netačan.",
+        "expired_card": "Kartica je istekla.",
+        "incorrect_cvc": "Sigurnosni kod kartice je netačan.",
+        "incorrect_zip": "Provjera zip-kod kartice nije uspjela.",
+        "card_declined": "Kartica je odbijena.",
+        "missing": "Nema kartice za kupca koji se naplaćuje.",
+        "processing_error": "Došlo je do greške u toku obradu kartice."
+      },
+      "issues": {
+        "stress": {
+          "name": "Stres",
+          "description": "Jeste li pod stresom i imate li poteškoće u rješavanju istih?"
+        },
+        "anxiety": {
+          "name": "Sikiracija",
+          "description": "Osjećate li da se sikirate i da ne možete podnijeti brigu?"
+        },
+        "exhaustion": {
+          "name": "Iscrpljenost",
+          "description": "Imate li poteškoća sa spavanjem, umorom i iscrpljenjošću?"
+        },
+        "backPain": {
+          "name": "Bol",
+          "description": "Trebate li pomoć o olakšavanju bola?"
+        },
+        "depression": {
+          "name": "Depresivno",
+          "description": "Osjećate li se tužno ili depresivno?"
+        },
+        "kids": {
+          "name": "Diete",
+          "description": "Da li vaše dijete ima izlive bijesa?"
+        },
+        "weight": {
+          "name": "Tezina",
+          "description": "Imate li problema sa tjelesnom težinom?"
+        },
+        "panic": {
+          "name": "Panic",
+          "description": "Osjecate li anksioznost ili napad panike?"
+        },
+        "fobia": {
+          "name": "Fobia",
+          "description": "Imate li fobije koje vas sprečavaju u životu?"
+        },
+        "violence": {
+          "name": "Sukob",
+          "description": "Ulazite li lako u sukobe i jeste li frustrirani?"
+        },
+        "stuck": {
+          "name": "Zaglavili",
+          "description": "Jeste li zaglavili osobno ili profesionalno?"
+        }
+      }
     }
   }
 }

@@ -6,6 +6,10 @@ export const encounterValidator = Joi.object().keys({
         .trim()
         .required(),
 
+    skypeId: Joi
+        .string()
+        .allow('', null),
+
     phone: Joi
         .string()
         .regex(/^[0-9]*$/)

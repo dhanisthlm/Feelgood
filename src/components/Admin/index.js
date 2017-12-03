@@ -15,11 +15,27 @@ export class Admin extends Component {
     }
 
     render () {
-        console.log(this.props);
+        console.log(this.props.encounters);
 
         return (
-            <div className="admin">
-
+            <div className="page">
+                <ul>
+                {this.props.encounters.map((encounter) => {
+                    return (
+                        <li>
+                            <p>Name: {encounter.name}</p>
+                            <p>E-mail: {encounter.mail}</p>
+                            <p>Phone: {encounter.phone}</p>
+                            <p>Date: {encounter.date}</p>
+                            <p>Email cost: {encounter.order.email.cost}</p>
+                            <p>Email number of weeks: {encounter.order.email.week}</p>
+                            <p>Skype cost: {encounter.order.skype.cost}</p>
+                            <p>Skype number of weeks: {encounter.order.skype.week}</p>
+                            <p>Total price: {encounter.price}</p>
+                        </li>
+                    )
+                })}
+                </ul>
             </div>
         )
     }

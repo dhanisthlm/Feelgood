@@ -242,4 +242,8 @@
     .staff .card .info-wrapper svg {
         display: none;
     }
+
+    .staff .photo-info-wrapper {
+        display: none;
+    }
 }

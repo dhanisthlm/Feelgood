@@ -19,7 +19,8 @@ const wrapper = shallow(
 const instance = wrapper.instance();
 
 describe('Payment component', () => {
-	it('should call handleCheckout on button click', () => {
+
+    it('should call handleCheckout on button click', () => {
 		const checkoutSpy = sinon.spy(instance, 'handleCheckout');
 
 		// attach the spy to the method

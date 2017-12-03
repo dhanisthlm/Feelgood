@@ -6,6 +6,7 @@ import strategy from 'joi-validation-strategy';
 import FormComponent from '../../FormComponent';
 import { routeActions } from 'redux-simple-router';
 import { encounterValidator } from '../../../../validators/encounters';
+import { getIssues } from '../../../actions/issue';
 import { i18nValidation } from  '../../../../helpers/validation';
 import { saveEncounter, resetEncounter } from '../../../actions/encounter';
 import Header from '../Header';
@@ -19,33 +20,25 @@ export class Checkout extends FormComponent {
 			name: '',
 			mail: '',
 			phone: '',
+			skype: '',
+			skypeId: '',
 			comment: '',
 			code: '',
 			data: '',
-			isOpen: false
+			issue: 'Stres',
+			isOpen: false,
+			issues: []
 		};
 
 		this.validatorTypes = encounterValidator;
 		this.resetCheckout = this.resetCheckout.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.handleChange = this.handleChange.bind(this);
+		this.renderIssues = this.renderIssues.bind(this);
+		this.handleSelect = this.handleSelect.bind(this);
 	}
 
 	componentDidMount () {
-        let width = '';
-
-
-        console.log('props', this.state, this.props);
-
-
-        for (let item of breakpoints.children) {
-        	const width = this.getWinWidth(item);
-
-        	if (width) {
-        		this.width = width;
-			}
-		}
-
         this.setState({
             isOpen: true,
             skype: this.props.data.skype,
@@ -56,61 +49,122 @@ export class Checkout extends FormComponent {
             data: this.props.data
         });
 
+        this.props.dispatch(getIssues());
+        this.calculateWiewportSize();
+        this.initStripe();
     }
 
-    getWinWidth(el) {
-		if (el.offsetParent !== null) {
-			return el.dataset.size;
-		} else {
-			return '';
-		}
+    componentWillReceiveProps (nextProps) {
+		this.setState({ issues: nextProps.issues });
 	}
 
-	componentWillReceiveProps (nextProps) {
-		console.log('foooooo', nextProps)
-		this.setState({
-			isOpen: true,
-			skype: nextProps.data.skype,
-			email: nextProps.data.email,
-			cost: nextProps.cost,
-			packageDiscount: nextProps.data.packageDiscount,
-			promoDiscount: nextProps.data.promoDiscount,
-			data: nextProps.data
-		});
+    /**
+     * This callback type is called `requestCallback
+     * @callback requestCallback
+     * @param {number} responseCode
+     * @return {object}
+     */
+    initStripe () {
+        const style = {
+            base: {
+                fontSize: '16px',
+                color: "#32325d",
+            }
+        };
+
+        const stripe = Stripe('pk_test_CxCOETD4ltbadc9SZWuF2jm9');
+        const elements = stripe.elements();
+        const card = elements.create('card', { style });
+
+        card.addEventListener('change', event => {
+            const displayError = document.getElementById('card-errors');
+            displayError.textContent = (event.error) ? event.error.message: '';
+        });
+
+        card.mount('#card-element');
+
+        this.card = card;
+        this.stripe = stripe;
+    }
+
+    /**
+     * This callback type is called `requestCallback
+     * @callback requestCallback
+     * @param {number} responseCode
+     * @return {object}
+     */
+    calculateWiewportSize () {
+        for (let item of this.breakpoints.children) {
+            const width = (item.offsetParent !== null) ? item.dataset.size : '';
+            if (width) this.width = width;
+        }
 	}
 
+    /**
+     * This callback type is called `requestCallback
+     * @callback requestCallback
+     * @param {number} responseCode
+     * @return {object}
+     */
     getValidatorData() {
         return this.state
     }
 
+    /**
+     * This callback type is called `requestCallback
+     * @callback requestCallback
+     * @param {number} responseCode
+     * @return {object}
+     */
 	resetCheckout () {
-		this.setState({
-            name: '',
-            mail: '',
-            phone: '',
-            comment: '',
-			code: '',
-			isOpen: false
-		});
-
 		this.props.dispatch(resetEncounter());
         this.props.dispatch(routeActions.push('/anka'));
 	}
 
+    /**
+     * This callback type is called `requestCallback
+     * @callback requestCallback
+     * @param {number} responseCode
+     * @return {object}
+     */
 	handleChange (e) {
 		this.setState({ [e.target.id]: e.target.value })
 	}
 
-	handleSubmit () {
+    /**
+     * This callback type is called `requestCallback
+     * @callback requestCallback
+     * @param {number} responseCode
+     * @return {object}
+     */
+	handleSubmit (event) {
+		event.preventDefault();
+
 		this.props.validate((error) => {
-            this.basket.style.height = this.front.offsetHeight  + 40 + 'px';
+			const { t } = this.props;
+
             if (!error) {
-                this.basket.style.height = this.front.offsetHeight + 'px';
-                this.props.dispatch(saveEncounter(this.state));
+                this.stripe.createToken(this.card).then(result => {
+                    if (result.error) {
+                    	console.log(result.error);
+                        // Inform the customer that there was an error
+                        const errorElement = document.getElementById('card-errors');
+                        errorElement.textContent = t(`stripe.${result.error.code}`);
+                    } else {
+                        // Send the token to your server
+                        this.props.dispatch(saveEncounter(result.token.id, this.state));
+                    }
+                });
 			}
         })
 	}
 
+    /**
+     * This callback type is called `requestCallback
+     * @callback requestCallback
+     * @param {number} responseCode
+     * @return {object}
+     */
 	getValidationMessages (prop) {
 		return (
             this.props.getValidationMessages(prop).map((message) => {
@@ -119,6 +173,39 @@ export class Checkout extends FormComponent {
 		)
 	}
 
+    /**
+     * This callback type is called `requestCallback
+     * @callback requestCallback
+     * @param {number} responseCode
+     * @return {object}
+     */
+  	handleSelect (event) {
+    	this.setState({ issue: event.target.value });
+	}
+
+    /**
+     * This callback type is called `requestCallback
+     * @callback requestCallback
+     * @param {number} responseCode
+     * @return {object}
+     */
+	renderIssues () {
+		const { t } = this.props;
+
+		return this.state.issues.map(issue => {
+			const issueName = `issues.${issue.name}.name`;
+			return (
+				<option value={t(issueName)}>{t(issueName)}</option>
+			)
+		})
+	}
+
+    /**
+     * This callback type is called `requestCallback
+     * @callback requestCallback
+     * @param {number} responseCode
+     * @return {object}
+     */
 	render () {
 		const { t } = this.props;
         const front = (this.props.save === true) ? 'front none' : 'front';
@@ -144,160 +231,166 @@ export class Checkout extends FormComponent {
 						</div>
 						<div className="outer-frame">
 							<div className="inner-frame">
-								<table>
-									<colgroup>
-										<col width={firstColSize} />
-										<col width="20%" />
-										<col width={lastColSize} />
-									</colgroup>
-									<thead>
+								<div className="left-col-wrapper">
+									<table>
+										<colgroup>
+											<col width={firstColSize} />
+											<col width="20%" />
+											<col width={lastColSize} />
+										</colgroup>
+										<thead>
+											<tr>
+												<th>{ t('item') }</th>
+												<th>{ t('weeks') }</th>
+												<th>{ t('price') }</th>
+											</tr>
+										</thead>
+										{(() => {
+											if (this.props.data.skype) {
+												return(
+													<tr>
+														<td>{this.props.data.skype.description}</td>
+														<td className="center">{this.props.data.skype.week}</td>
+														<td className="right">{Math.round(skypeCost * skypeDurationFactor)} KM</td>
+													</tr>
+												)
+											}
+										})()}
+										{(() => {
+											if (this.props.data.email) {
+												return(
+													<tr>
+														<td>{this.props.data.email.description}</td>
+														<td className="center">{this.props.data.email.week}</td>
+														<td className="right">{this.props.emailDiscount} KM</td>
+													</tr>
+												)
+											}
+										})()}
 										<tr>
-											<th>{ t('item') }</th>
-											<th>{ t('weeks') }</th>
-											<th>{ t('price') }</th>
+											<td>&nbsp;</td>
+											<td>&nbsp;</td>
+											<td>&nbsp;</td>
 										</tr>
-									</thead>
-									{(() => {
-										if (this.props.data.skype) {
-											return(
-												<tr>
-													<td>{this.props.data.skype.description}</td>
-													<td>{this.props.data.skype.week}</td>
-													<td className="right">{Math.round(skypeCost * skypeDurationFactor)} KM</td>
-												</tr>
-											)
-										}
-									})()}
-									{(() => {
-										if (this.props.data.email) {
-											return(
-												<tr>
-													<td>{this.props.data.email.description}</td>
-													<td>{this.props.data.email.week}</td>
-													<td className="right">{this.props.emailDiscount} KM</td>
-												</tr>
-											)
-										}
-									})()}
-									<tr>
-										<td>&nbsp;</td>
-										<td>&nbsp;</td>
-										<td>&nbsp;</td>
-									</tr>
-									<tr>
-										<td className={sumClass} colSpan="2">{ t('sum') }</td>
-										<td className={sumClass}>{Math.round(skypeCost * skypeDurationFactor) + (emailCost * nWeeks)} KM</td>
-									</tr>
-									{(() => {
-										if (this.props.data.packageDiscount) {
-											return (
-												<tr>
-													<td className="right" colSpan="2">{ t('packageDiscount') }</td>
-													<td className="right">{this.props.data.packageDiscount} KM</td>
-												</tr>
-											)
-										}
-									})()}
-									{(() => {
-										if (this.props.data.packageDiscount > 0) {
-											const className = this.props.data.promoDiscount
-												? 'right' : 'right heavy';
+										<tr>
+											<td className={sumClass} colSpan="2">{ t('sum') }</td>
+											<td className={sumClass}>{Math.round(skypeCost * skypeDurationFactor) + (emailCost * nWeeks)} KM</td>
+										</tr>
+										{(() => {
+											if (this.props.data.packageDiscount) {
+												return (
+													<tr>
+														<td className="right" colSpan="2">{ t('packageDiscount') }</td>
+														<td className="right">{this.props.data.packageDiscount} KM</td>
+													</tr>
+												)
+											}
+										})()}
+										{(() => {
+											if (this.props.data.packageDiscount > 0) {
+												const className = this.props.data.promoDiscount
+													? 'right' : 'right heavy';
 
-											return (
-												<tr>
-													<td className={className} colSpan="2">{ t('sumWithPackageDiscount')}</td>
-													<td className={className}>
-														{(Math.round(this.props.data.skype.cost * skypeDurationFactor) + (emailCost * nWeeks)) - this.props.data.packageDiscount} KM
-													</td>
-												</tr>
-											)
-										}
-									})()}
-									{(() => {
-										if (this.props.data.promoDiscount) {
-											return(
-												<tr>
-													<td className="right" colSpan="2">{ t('voucherDiscount') }</td>
-													<td className="right">{this.props.data.promoDiscount} KM</td>
-												</tr>
-											)
-										}
-									})()}
-									{(() => {
-										if (this.props.data.promoDiscount) {
-											return (
-												<tr>
-													<td className="right heavy" colSpan="2">{ t('total') }</td>
-													<td className="right heavy">{ this.props.cost.total } KM</td>
-												</tr>
-											)
-										}
-									})()}
-								</table>
+												return (
+													<tr>
+														<td className={className} colSpan="2">{ t('sumWithPackageDiscount')}</td>
+														<td className={className}>
+															{(Math.round(this.props.data.skype.cost * skypeDurationFactor) + (emailCost * nWeeks)) - this.props.data.packageDiscount} KM
+														</td>
+													</tr>
+												)
+											}
+										})()}
+										{(() => {
+											if (this.props.data.promoDiscount) {
+												return(
+													<tr>
+														<td className="right" colSpan="2">{ t('voucherDiscount') }</td>
+														<td className="right">{this.props.data.promoDiscount} KM</td>
+													</tr>
+												)
+											}
+										})()}
+										{(() => {
+											if (this.props.data.promoDiscount) {
+												return (
+													<tr>
+														<td className="right heavy" colSpan="2">{ t('total') }</td>
+														<td className="right heavy">{ this.props.cost.total } KM</td>
+													</tr>
+												)
+											}
+										})()}
+									</table>
+								</div>
+
 								<div ref={(front) => { this.front = front; }} className={front}>
-									<div className="form-element-wrapper">
-										<label htmlFor="name">{ t('name') }</label>
-										<input
-											onChange={ this.handleChange }
-											id="name"
-											type="text"
-											value={this.state.name}/>
-										{this.getValidationMessages('name')}
-									</div>
-									<div className="form-element-wrapper">
-										<label htmlFor="phone">{ t('phone') }</label>
-										<input
-											onChange={ this.handleChange }
-											id="phone"
-											type="text"
-											value={this.state.phone}/>
-										{this.getValidationMessages('phone')}
-									</div>
-									<div className="form-element-wrapper">
-										<label htmlFor="email">{ t('email') }</label>
-										<input
-											onChange={ this.handleChange }
-											id="mail"
-											type="text"
-											value={this.state.mail}/>
-										{this.getValidationMessages('mail')}
-									</div>
-									<div className="form-element-wrapper">
-										<label htmlFor="skype">Skype name</label>
-										<input
-											onChange={ this.handleChange }
-											id="mail"
-											type="text"
-											value={this.state.mail}/>
-										{this.getValidationMessages('mail')}
-									</div>
-									<div className="form-element-wrapper">
-										<label htmlFor="skype">Issue</label>
-										<div className="select-style">
-											<select>
-												<option value="volvo">Stres</option>
-												<option value="saab">Diete</option>
-												<option value="mercedes">Sukob</option>
-												<option value="audi">Bol</option>
-											</select>
+									<form id="payment-form" action="/charge" method="post">
+										<div className="form-element-wrapper">
+											<label htmlFor="name">{ t('name') }</label>
+											<input
+												onChange={ this.handleChange }
+												id="name"
+												type="text"
+												value={this.state.name}/>
+											{this.getValidationMessages('name')}
 										</div>
-									</div>
-									<div className="form-element-wrapper">
-										<label htmlFor="comment">{ t('comment') }</label>
-										<textarea
-											className={ this.getValidatorData('comment') }
-											onChange={ this.handleChange }>
-											{this.state.comment}
-										</textarea>
-										{this.getValidationMessages('comment')}
-									</div>
-									<div className="form-buttons">
-										<button onClick={ this.resetCheckout }>{ t('back') }</button>
-										<button onClick={ this.handleSubmit }>{ t('placeOrder') }</button>
-									</div>
+										<div className="form-element-wrapper">
+											<label htmlFor="phone">{ t('phone') }</label>
+											<input
+												onChange={ this.handleChange }
+												id="phone"
+												type="text"
+												value={this.state.phone}/>
+											{this.getValidationMessages('phone')}
+										</div>
+										<div className="form-element-wrapper">
+											<label htmlFor="email">{ t('email') }</label>
+											<input
+												onChange={ this.handleChange }
+												id="mail"
+												type="text"
+												value={this.state.mail}/>
+											{this.getValidationMessages('mail')}
+										</div>
+										<div className="form-element-wrapper">
+											<label htmlFor="skype">Skype ID</label>
+											<input
+												onChange={ this.handleChange }
+												id="skypeId"
+												type="text"
+											/>
+											{this.getValidationMessages('skype')}
+										</div>
+										<div className="form-element-wrapper">
+											<label htmlFor="skype">{t('issue')}</label>
+											<div className="select-style">
+												<select id="issue" onChange={this.handleSelect} value={this.state.issue}>
+													{this.renderIssues()}
+												</select>
+											</div>
+										</div>
+										<div className="stripe form-element-wrapper">
+											<label htmlFor="card-element">Payment</label>
+											<div id="card-element" />
+											<div id="card-errors" role="alert" />
+										</div>
+										<div className="form-element-wrapper">
+											<label htmlFor="comment">{ t('comment') }</label>
+											<textarea
+												className={ this.getValidatorData('comment') }
+												onChange={ this.handleChange }>
+												{this.state.comment}
+											</textarea>
+											{this.getValidationMessages('comment')}
+										</div>
+										<div className="form-buttons">
+											<button onClick={ this.resetCheckout }>{ t('back') }</button>
+											<button onClick={ this.handleSubmit }>{ t('placeOrder') }</button>
+										</div>
+									</form>
 								</div>
 								<div className={back}>
-									<h1>{ t('heading') }</h1>
 									<p>{ t('pleasePay') }</p>
 									<p>YYY YYY YYY YYY</p>
 									<p>{ t('includeIdData')}</p>
@@ -327,6 +420,7 @@ const mapStateToProps = (state) => ({
 	save: state.encounter.saved,
 	data: state.encounter.data,
 	cost: state.encounter.cost,
+	issues: state.issue.list,
 	emailDiscount: state.encounter.emailDiscount,
 	promoDiscount: state.encounter.promoDiscount
 });

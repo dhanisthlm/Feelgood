@@ -11,9 +11,9 @@ export const getEncounters = () => (dispatch) => {
         });
 };
 
-export const saveEncounter = (encounter) => (dispatch) => {
+export const saveEncounter = (id, encounter) => (dispatch) => {
     return request
-        .post('/encounter', { encounter })
+        .post('/encounter', { id, encounter })
         .then((data) => {
             dispatch({ type: 'ENCOUNTER_SAVED' });
         })
@@ -23,7 +23,6 @@ export const saveEncounter = (encounter) => (dispatch) => {
 };
 
 export const setEncounterData = (data, cost, emailDiscount, promoDiscount) => (dispatch) => {
-    console.log('foooooooooo')
     dispatch({
         type: 'ENCOUNTER_DATA',
         payload: {

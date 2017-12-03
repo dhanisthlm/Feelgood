@@ -12,6 +12,7 @@ import App from './components/App';
 import Admin from './components/Admin';
 import Checkout from './components/Public/Checkout';
 import { hashLinkScroll } from '../helpers/hashLinkScroll';
+import { StripeProvider } from 'react-stripe-elements';
 
 const reduxRouterMiddleware = syncHistory(browserHistory);
 const createStoreWithMiddleware = applyMiddleware(reduxRouterMiddleware, thunkMiddleware)(createStore);

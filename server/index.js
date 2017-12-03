@@ -4,6 +4,7 @@ import Inert from 'inert'
 import base from './base'
 import encounter from './api/encounter';
 import staff from './api/staff';
+import issue from './api/issue';
 import mongoose from 'mongoose';
 import config from 'config';
 
@@ -61,6 +62,9 @@ server.register([
   },
   {
     register: staff
+  },
+  {
+    register: issue
   }
 ], (error) => {
   if (error) throw error

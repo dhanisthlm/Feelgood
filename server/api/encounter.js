@@ -1,4 +1,5 @@
 import Encounter from '../models/encounter';
+import stripe from 'stripe';
 
 const getEncounters = (request, reply) => {
     Encounter.find({}, (error, result) => {
@@ -7,7 +8,7 @@ const getEncounters = (request, reply) => {
     });
 };
 
-const createEncounter = (request, reply) => {
+const saveEncounter = (request, reply) => {
     const encounter = new Encounter();
     let skypePrice = 0;
     let emailPrice = 0;
@@ -26,6 +27,8 @@ const createEncounter = (request, reply) => {
     }
 
     encounter.name = request.payload.encounter.name;
+    encounter.skype = request.payload.encounter.skypeId;
+    encounter.issue = request.payload.encounter.issue;
     encounter.mail = request.payload.encounter.mail;
     encounter.comment = request.payload.encounter.comment;
     encounter.price = skypePrice + emailPrice;
@@ -35,6 +38,26 @@ const createEncounter = (request, reply) => {
 
     encounter.save();
     return reply(200);
+};
+
+const handleCharge = (request, reply) => {
+    // Token is created using Checkout or Elements!
+    // Get the payment token ID submitted by the form:
+    const striper = stripe("sk_test_sa1eq6hSDY9aMKNp3jl9K4j1");
+    const token = request.payload.id; //
+
+    // Charge the user's card:
+    striper.charges.create({
+        amount: 1000,
+        currency: "bam",
+        description: "Example charge",
+        source: token,
+    }, function(err, charge) {
+        console.log('err', err);
+        if (charge.paid) {
+            saveEncounter(request, reply);
+        }
+    });
 };
 
 exports.register = (server, options, next) => {
@@ -50,7 +73,7 @@ exports.register = (server, options, next) => {
             method: 'POST',
             path: '/encounter',
             config: {
-                handler: createEncounter
+                handler: handleCharge
             }
         }
     ]);
