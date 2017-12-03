@@ -1,4 +1,7 @@
 import Encounter from '../models/encounter';
+import stripe from 'stripe';
+
+console.log('STRIPE', stripe);
 
 const getEncounters = (request, reply) => {
     Encounter.find({}, (error, result) => {
@@ -42,7 +45,7 @@ const saveEncounter = (request, reply) => {
 const handleCharge = (request, reply) => {
     // Token is created using Checkout or Elements!
     // Get the payment token ID submitted by the form:
-    const striper = require('stripe')("sk_test_sa1eq6hSDY9aMKNp3jl9K4j1");
+    const striper = stripe("sk_test_sa1eq6hSDY9aMKNp3jl9K4j1");
     const token = request.payload.id; //
 
     // Charge the user's card:
