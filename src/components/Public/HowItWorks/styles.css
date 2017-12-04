@@ -13,6 +13,10 @@
     height: 120px !important;
 }
 
+.how-it-works .step-2 {
+    margin-top: 35px !important;
+}
+
 
 .how-it-works .step-wrapper {
     display: inline-block;

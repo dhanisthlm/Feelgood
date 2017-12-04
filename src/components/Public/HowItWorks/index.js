@@ -79,9 +79,8 @@ export class HowItWorks extends Component {
                             </svg>
                         </div>
                         <p className="sub-heading">4. Psiholosko savjetoanje </p>
-                        <p className="description">Standardna Skype konsultacija na Zdravlje.nu je 20 ili 45 minuta. Treba vam tiha, privatna osvijetljena soba, pouzdana internet konekcija i pametni telefon ili računar sa mikrofonom i web kamerom.</p>
-                        <p className="description">Savjetovanje se takođe može uraditi putem e-pošte, samostalno ili u kombinaciji sa Skype pozivima.</p>
-                        <p className="description">U razgovoru dobićete pomoć da saznate svoje misli, osećanja i akcije. Zajedno istražujete šta je problem, kako se to desilo i šta možete učiniti da biste to promjenili. Pokušavamo da nađemo nove načine za rešavanje vaših problema, kako u mišljenju, tako i u akciji.</p>
+                        <p className="description">Standardna Skype konsultacija na Zdravlje.nu je 20 ili 45 minuta. Treba vam tiha, privatna osvijetljena soba, pouzdana internet konekcija i pametni telefon ili računar sa mikrofonom i web kamerom. Savjetovanje se takođe može uraditi putem e-pošte, samostalno ili u kombinaciji sa Skype pozivima.</p>
+                        <p className="description">U razgovoru dobićete pomoć da saznate svoje misli, osećanja i akcije. Zajedno istražujete šta je problem, kako se to desilo i šta možete učiniti da biste to promjenili.</p>
                     </div>
                 </div>
             </div>
