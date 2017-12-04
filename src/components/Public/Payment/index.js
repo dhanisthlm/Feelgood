@@ -71,6 +71,7 @@ export class Payment extends Component {
             checkout: false,
             combinationDiscount: 0,
             promoDiscount: 0,
+			emailDiscount: 0,
             promoCode: 'zdravlje.nu',
             promoDiscountFactor: 0.5,
             enteredCode: '',
@@ -125,12 +126,12 @@ export class Payment extends Component {
 		}
 
         this.setCategorySize(size, type);
-        this.calculateCost();
+        const cost = this.calculateCost();
 
         const showDurationText = (this.skypePackage)
 			? this.skypePackage.cost === 0 : true;
 
-        this.setState({ durationText: showDurationText });
+        this.setState({ durationText: showDurationText, cost });
         this.updateEncounter();
     }
 
@@ -314,9 +315,11 @@ export class Payment extends Component {
 		}
 
 		if (emailPackage) {
-            emailDiscount = this.calculateEmailDiscount(emailPackage)
+            emailDiscount = this.calculateEmailDiscount(emailPackage);
+            this.setState({ emailDiscount })
         }
 
+        this.setState({ cost });
         this.props.dispatch(setEncounterData(data, cost, emailDiscount, promoDiscount));
 
     }

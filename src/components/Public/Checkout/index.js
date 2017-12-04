@@ -42,7 +42,6 @@ export class Checkout extends FormComponent {
 	componentWillMount () {
 		if (window.localStorage.getItem('order')) {
 			const cache = JSON.parse(window.localStorage.getItem('order'));
-			const data = this.props.data;
 
             this.setState({
                 name: cache.name,
@@ -56,6 +55,7 @@ export class Checkout extends FormComponent {
                 email: cache.email,
                 cost: cache.cost,
 				issue: cache.issue,
+				emailDiscount: cache.emailDiscount,
                 packageDiscount: cache.packageDiscount,
                 promoDiscount: cache.promoDiscount,
                 data: cache.data,
@@ -72,6 +72,7 @@ export class Checkout extends FormComponent {
                 skype: this.props.data.skype,
                 email: this.props.data.email,
                 cost: this.props.cost,
+				emailDiscount: this.props.data.emailDiscount,
                 packageDiscount: this.props.data.packageDiscount,
                 promoDiscount: this.props.data.promoDiscount,
                 data: this.props.data
@@ -251,7 +252,7 @@ export class Checkout extends FormComponent {
         const back = (this.state.save === false) ? 'back none' : 'back';
         const skypeCost = this.state.data.skype ? this.state.data.skype.cost : 0;
         const skypeDurationFactor = this.state.data.skypeDuration.factor;
-		const emailCost = this.state.data.email ? this.props.emailDiscount / this.state.data.email.week : 0;
+		const emailCost = this.state.data.email ? this.state.emailDiscount / this.state.data.email.week : 0;
 		const nWeeks = this.state.data.email ? this.state.data.email.week : 0;
 		const firstColSize = (this.width === 'small') ? '50%' : '60%';
 		const lastColSize = (this.width === 'small') ? '30%' : '20%';
@@ -261,7 +262,7 @@ export class Checkout extends FormComponent {
 				? 'right heavy' : 'right';
 
 		const spinnerClass = this.state.showSpinner ? 'showbox' : 'none';
-
+		
 		return (
 			<div className="page">
 				<div className={spinnerClass}>
@@ -312,7 +313,7 @@ export class Checkout extends FormComponent {
 														<tr>
 															<td>{this.state.data.email.description}</td>
 															<td className="center">{ this.state.data.email.week }</td>
-															<td className="right">{ this.state.emailDiscount } KM</td>
+															<td className="right">{ this.state.data.email.cost } KM</td>
 														</tr>
 													)
 												}
@@ -366,7 +367,7 @@ export class Checkout extends FormComponent {
 													return (
 														<tr>
 															<td className="right heavy" colSpan="2">{ t('total') }</td>
-															<td className="right heavy">{ this.state.data.cost.total } KM</td>
+															<td className="right heavy">{ this.state.cost.total } KM</td>
 														</tr>
 													)
 												}
