@@ -44,8 +44,6 @@ export class Checkout extends FormComponent {
 			const cache = JSON.parse(window.localStorage.getItem('order'));
 			const data = this.props.data;
 
-			console.log('data', cache.data)
-
             this.setState({
                 name: cache.name,
                 mail: cache.mail,
@@ -63,7 +61,6 @@ export class Checkout extends FormComponent {
                 data: cache.data,
 				save: false
             }, () => {
-                console.log('fdfdfddf', this.state, cache)
             });
 		}
 	}
@@ -84,13 +81,10 @@ export class Checkout extends FormComponent {
         this.props.dispatch(getIssues());
         this.calculateWiewportSize();
         this.initStripe();
-
-        console.log(this.state)
-    }
+	}
 
     componentWillReceiveProps (nextProps) {
 		this.setState({ issues: nextProps.issues });
-		console.log('1', this.props)
 		if (nextProps.save === true) {
 			this.setState({ showSpinner: false });
 		}
@@ -188,7 +182,6 @@ export class Checkout extends FormComponent {
             if (!error) {
                 this.stripe.createToken(this.card).then(result => {
                     if (result.error) {
-                    	console.log(result.error);
                         // Inform the customer that there was an error
                         const errorElement = document.getElementById('card-errors');
                         errorElement.textContent = t(`stripe.${result.error.code}`);
@@ -210,8 +203,8 @@ export class Checkout extends FormComponent {
      */
 	getValidationMessages (prop) {
 		return (
-            this.props.getValidationMessages(prop).map((message) => {
-				return <span className="error">{message}</span>;
+            this.props.getValidationMessages(prop).map((message, i) => {
+				return <span key={i} className="error">{message}</span>;
             })
 		)
 	}
@@ -238,10 +231,10 @@ export class Checkout extends FormComponent {
 	renderIssues () {
 		const { t } = this.props;
 
-		return this.state.issues.map(issue => {
+		return this.state.issues.map((issue, i) => {
 			const issueName = `issues.${issue.name}.name`;
 			return (
-				<option value={t(issueName)}>{t(issueName)}</option>
+				<option key={i} value={t(issueName)}>{t(issueName)}</option>
 			)
 		})
 	}
@@ -253,7 +246,6 @@ export class Checkout extends FormComponent {
      * @return {object}
      */
 	render () {
-		console.log(this.state);
 		const { t } = this.props;
         const front = (this.state.save === true) ? 'front none' : 'front';
         const back = (this.state.save === false) ? 'back none' : 'back';
@@ -280,7 +272,7 @@ export class Checkout extends FormComponent {
 						<p className="processing-text">Processing purchase</p>
 					</div>
 				</div>
-				<Header />
+				<Header location={this.props.location} />
 				<div ref={(checkout) => { this.checkout = checkout; }} className="checkout">
 					<div ref={(basket) => { this.basket = basket; }} className="basket">
 						<div className="header">
@@ -302,82 +294,84 @@ export class Checkout extends FormComponent {
 												<th>{ t('price') }</th>
 											</tr>
 										</thead>
-										{(() => {
-											if (this.state.data.skype) {
-												return(
-													<tr>
-														<td>{ this.state.data.skype.description }</td>
-														<td className="center">{ this.state.data.skype.week }</td>
-														<td className="right">{ Math.round(skypeCost * skypeDurationFactor) } KM</td>
-													</tr>
-												)
-											}
-										})()}
-										{(() => {
-											if (this.state.data.email) {
-												return(
-													<tr>
-														<td>{this.state.data.email.description}</td>
-														<td className="center">{ this.state.data.email.week }</td>
-														<td className="right">{ this.state.emailDiscount } KM</td>
-													</tr>
-												)
-											}
-										})()}
-										<tr>
-											<td>&nbsp;</td>
-											<td>&nbsp;</td>
-											<td>&nbsp;</td>
-										</tr>
-										<tr>
-											<td className={sumClass} colSpan="2">{ t('sum') }</td>
-											<td className={sumClass}>{Math.round(skypeCost * skypeDurationFactor) + (emailCost * nWeeks)} KM</td>
-										</tr>
-										{(() => {
-											if (this.state.data.packageDiscount) {
-												return (
-													<tr>
-														<td className="right" colSpan="2">{ t('packageDiscount') }</td>
-														<td className="right">{ this.state.data.packageDiscount } KM</td>
-													</tr>
-												)
-											}
-										})()}
-										{(() => {
-											if (this.state.data.packageDiscount > 0) {
-												const className = this.state.data.promoDiscount
-													? 'right' : 'right heavy';
+										<tbody>
+											{(() => {
+												if (this.state.data.skype) {
+													return(
+														<tr>
+															<td>{ this.state.data.skype.description }</td>
+															<td className="center">{ this.state.data.skype.week }</td>
+															<td className="right">{ Math.round(skypeCost * skypeDurationFactor) } KM</td>
+														</tr>
+													)
+												}
+											})()}
+											{(() => {
+												if (this.state.data.email) {
+													return(
+														<tr>
+															<td>{this.state.data.email.description}</td>
+															<td className="center">{ this.state.data.email.week }</td>
+															<td className="right">{ this.state.emailDiscount } KM</td>
+														</tr>
+													)
+												}
+											})()}
+											<tr>
+												<td>&nbsp;</td>
+												<td>&nbsp;</td>
+												<td>&nbsp;</td>
+											</tr>
+											<tr>
+												<td className={sumClass} colSpan="2">{ t('sum') }</td>
+												<td className={sumClass}>{Math.round(skypeCost * skypeDurationFactor) + (emailCost * nWeeks)} KM</td>
+											</tr>
+											{(() => {
+												if (this.state.data.packageDiscount) {
+													return (
+														<tr>
+															<td className="right" colSpan="2">{ t('packageDiscount') }</td>
+															<td className="right">{ this.state.data.packageDiscount } KM</td>
+														</tr>
+													)
+												}
+											})()}
+											{(() => {
+												if (this.state.data.packageDiscount > 0) {
+													const className = this.state.data.promoDiscount
+														? 'right' : 'right heavy';
 
-												return (
-													<tr>
-														<td className={className} colSpan="2">{ t('sumWithPackageDiscount')}</td>
-														<td className={className}>
-															{ (Math.round(this.state.data.skype.cost * skypeDurationFactor) + (emailCost * nWeeks)) - this.state.data.packageDiscount } KM
-														</td>
-													</tr>
-												)
-											}
-										})()}
-										{(() => {
-											if (this.state.data.promoDiscount) {
-												return(
-													<tr>
-														<td className="right" colSpan="2">{ t('voucherDiscount') }</td>
-														<td className="right">{ this.state.data.promoDiscount } KM</td>
-													</tr>
-												)
-											}
-										})()}
-										{(() => {
-											if (this.state.data.promoDiscount) {
-												return (
-													<tr>
-														<td className="right heavy" colSpan="2">{ t('total') }</td>
-														<td className="right heavy">{ this.state.data.cost.total } KM</td>
-													</tr>
-												)
-											}
-										})()}
+													return (
+														<tr>
+															<td className={className} colSpan="2">{ t('sumWithPackageDiscount')}</td>
+															<td className={className}>
+																{ (Math.round(this.state.data.skype.cost * skypeDurationFactor) + (emailCost * nWeeks)) - this.state.data.packageDiscount } KM
+															</td>
+														</tr>
+													)
+												}
+											})()}
+											{(() => {
+												if (this.state.data.promoDiscount) {
+													return(
+														<tr>
+															<td className="right" colSpan="2">{ t('voucherDiscount') }</td>
+															<td className="right">{ this.state.data.promoDiscount } KM</td>
+														</tr>
+													)
+												}
+											})()}
+											{(() => {
+												if (this.state.data.promoDiscount) {
+													return (
+														<tr>
+															<td className="right heavy" colSpan="2">{ t('total') }</td>
+															<td className="right heavy">{ this.state.data.cost.total } KM</td>
+														</tr>
+													)
+												}
+											})()}
+										</tbody>
 									</table>
 								</div>
 
@@ -462,9 +456,9 @@ export class Checkout extends FormComponent {
 					</div>
 				</div>
 				<div id="breakpoints" ref={(breakpoints) => { this.breakpoints = breakpoints; }}>
-					<div className="breakpoint-small" data-size="small"></div>
-					<div className="breakpoint-medium" data-size="medium"></div>
-					<div className="breakpoint-large" data-size="large"></div>
+					<div className="breakpoint-small" data-size="small" />
+					<div className="breakpoint-medium" data-size="medium" />
+					<div className="breakpoint-large" data-size="large" />
 				</div>
 			</div>
 		);

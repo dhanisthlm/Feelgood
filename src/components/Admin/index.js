@@ -10,7 +10,7 @@ import styles from './styles.css';
 
 export class Admin extends Component {
     constructor (props) {
-        super(props)
+        super(props);
 
         this.handleExport = this.handleExport.bind(this);
     }
@@ -57,23 +57,25 @@ export class Admin extends Component {
                             <th>Total</th>
                         </tr>
                     </thead>
-                {this.props.encounters.map((encounter) => {
-                    const localTime = moment(encounter.date).format('YYYY-MM-DD HH:mm');
+                    <tbody>
+                        {this.props.encounters.map((encounter) => {
+                            const localTime = moment(encounter.date).format('YYYY-MM-DD HH:mm');
 
-                    return (
-                        <tr>
-                            <td>{encounter.name}</td>
-                            <td>{encounter.mail}</td>
-                            <td>{encounter.phone}</td>
-                            <td>{localTime}</td>
-                            <td>{encounter.order.email.cost}</td>
-                            <td>{encounter.order.email.week}</td>
-                            <td>{encounter.order.skype.cost}</td>
-                            <td>{encounter.order.skype.week}</td>
-                            <td>{encounter.price}</td>
-                        </tr>
-                    )
-                })}
+                            return (
+                                <tr>
+                                    <td>{encounter.name}</td>
+                                    <td>{encounter.mail}</td>
+                                    <td>{encounter.phone}</td>
+                                    <td>{localTime}</td>
+                                    <td>{encounter.order.email.cost}</td>
+                                    <td>{encounter.order.email.week}</td>
+                                    <td>{encounter.order.skype.cost}</td>
+                                    <td>{encounter.order.skype.week}</td>
+                                    <td>{encounter.price}</td>
+                                </tr>
+                            )
+                        })}
+                    </tbody>
                 </table>
             </div>
         )

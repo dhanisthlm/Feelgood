@@ -50,12 +50,12 @@ export class Issues extends Component {
 	renderMobileIssues () {
 		const { t } = this.props;
 
-		return this.state.issues.map((issue) => {
+		return this.state.issues.map((issue, i) => {
 			const name = `issues.${issue}.name`;
 			const description = `issues.${issue}.description`;
 			const issueClass = `issue ${issue}`;
 			return (
-				<div className="issue-wrapper">
+				<div key={i} className="issue-wrapper">
 					<div id={ t(name) }
 						 onMouseEnter={this.handleMouseEnter}
 						 onMouseLeave={this.handleMouseLeave}
