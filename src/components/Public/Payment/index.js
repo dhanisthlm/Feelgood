@@ -32,8 +32,9 @@ export class Payment extends Component {
      * @return {void}
      */
     handlePromoCode (e) {
-        this.setState({ enteredCode: e.target.value });
-        this.updateEncounter();
+        this.setState({ enteredCode: e.target.value }, () => {
+            this.updateEncounter();
+		});
     }
 
     /**
@@ -214,7 +215,7 @@ export class Payment extends Component {
             this.promoDiscount = (skypeCost > 0 && emailCost > 0)
                 ? Math.round((emailDiscount + skypeDiscount) * 0.95)
                 : Math.round(emailDiscount + skypeDiscount);
-        } else {
+		} else {
             promoFactor = 1;
             delete this.promoDiscount;
         }
@@ -265,8 +266,8 @@ export class Payment extends Component {
 
         const discount = this.calculateDiscounts(skypeCost, emailCost);
 
-        amount.skype = Math.round(skypeCost / skypeWeeks);
-        amount.email = Math.round(emailCost / emailWeeks);
+        amount.skype = Math.round((skypeCost / skypeWeeks) * discount.promoFactor);
+        amount.email = Math.round((emailCost / emailWeeks) * discount.promoFactor);
         amount.code = skypeCode + '' + skypeDurationCode + '' + emailCode;
         amount.total = Math.round((emailCost + skypeCost) * discount.promoFactor * discount.packageFactor);
 
@@ -305,6 +306,8 @@ export class Payment extends Component {
         const emailPackage = email[Object.keys(email).filter(key => email[key].active)[0]];
         let emailDiscount = 0;
         let promoDiscount = 0;
+
+        console.log(this.state);
 
         if (this.state.enteredCode === this.state.promoCode) {
         	promoDiscount = this.state.promoDiscount;

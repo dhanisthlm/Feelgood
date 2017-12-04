@@ -74,7 +74,7 @@ export class Checkout extends FormComponent {
 
         const stripe = Stripe('pk_test_CxCOETD4ltbadc9SZWuF2jm9');
         const elements = stripe.elements();
-        const card = elements.create('card', { style });
+        const card = elements.create('card', { style, placeholder: 'Card' });
 
         card.addEventListener('change', event => {
             const displayError = document.getElementById('card-errors');
@@ -220,6 +220,8 @@ export class Checkout extends FormComponent {
 			(typeof this.props.data.packageDiscount === 'undefined' &&
 			typeof this.props.data.promoDiscount === 'undefined')
 				? 'right heavy' : 'right';
+
+		console.log(this.props)
 
 		return (
 			<div className="page">

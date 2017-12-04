@@ -1,0 +1,30 @@
+.admin-table {
+    width: 90%;
+    margin-top: 0;
+    padding-top: 50px;
+}
+
+.admin-table td {
+    text-align: center;
+}
+
+.admin-heading {
+    text-align: center;
+    margin: 0;
+    padding-top: 55px;
+    color: #c04c9c;
+}
+
+.export-button {
+    padding: 7px 15px;
+    background-color: #c04c9c;
+    border: none;
+    color: #fff;
+    font-size: 21px;
+    font-weight: 200;
+    cursor: pointer;
+    outline: 0;
+    position: absolute;
+    top: 90px;
+    right: 5.5%;
+}
