@@ -21,6 +21,14 @@
     font-size: 18px;
 }
 
+.staff .img-hajra {
+    margin-top: -13px;
+}
+
+.staff .img-irmaa {
+    margin-top: -8px;
+}
+
 .staff .cards {
     display: inline-block;
     width: 100%;

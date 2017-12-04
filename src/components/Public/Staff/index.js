@@ -69,7 +69,7 @@ export class Staff extends Component {
 									<div className="photo-info-wrapper">
 										<p>{person.text}</p>
 									</div>
-									<img className={person.direction} src={image}  />
+									<img className={`img-${person.name} ${person.direction}`} src={image}  />
 								</div>
 								<div className="info-wrapper">
 									<div className="title-wrapper">

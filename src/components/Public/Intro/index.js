@@ -19,7 +19,7 @@ export class Hero extends Component {
                 <div className="text-wrapper">
                     <h3 className="heading">{ t('heading') }</h3>
                     <p className="preamble">{ t('preamble') }</p>
-                    <a href="/anka#whoarew" className="intro-button">{ t('start') }</a>
+                    <a href="/anka#kosmomi" className="intro-button">{ t('start') }</a>
                 </div>
             </div>
         );
