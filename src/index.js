@@ -1,22 +1,16 @@
 import React from 'react';
 import { render } from 'react-dom';
-import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import { Router, Route, browserHistory } from 'react-router';
 import { I18nextProvider } from 'react-i18next';
+import store from './store';
 import i18n from './config/i18n';
-import { syncHistory } from 'redux-simple-router';
-import thunkMiddleware from 'redux-thunk';
-import reducers from './reducers';
+import { requireAuth } from './routes';
 import App from './components/App';
 import Admin from './components/Admin';
 import Checkout from './components/Public/Checkout';
+import Login from './components/Login';
 import { hashLinkScroll } from '../helpers/hashLinkScroll';
-import { StripeProvider } from 'react-stripe-elements';
-
-const reduxRouterMiddleware = syncHistory(browserHistory);
-const createStoreWithMiddleware = applyMiddleware(reduxRouterMiddleware, thunkMiddleware)(createStore);
-const store = createStoreWithMiddleware(reducers);
 import styles from './styles.css';
 
 render((
@@ -25,7 +19,8 @@ render((
         <Router history={browserHistory} onUpdate={hashLinkScroll}>
           <Route path="/anka" component={App}>
               <Route path='/checkout' component={Checkout}/>
-              <Route path='/admin' component={Admin}/>
+              <Route path='/admin' onEnter={requireAuth} component={Admin}/>
+              <Route path="/login" component={Login} />
           </Route>
         </Router>
       </I18nextProvider>

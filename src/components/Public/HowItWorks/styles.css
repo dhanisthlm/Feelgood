@@ -51,6 +51,7 @@
     text-align: left;
     font-size: 17px;
     font-weight: 400;
+    margin-bottom: 15px;
 }
 
 .how-it-works .circle svg {
@@ -113,6 +114,6 @@
     }
 
     .how-it-works .step-wrapper p.description {
-        margin-bottom: 35px;
+        margin-bottom: 15px;
     }
 }

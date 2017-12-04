@@ -158,6 +158,20 @@
     display: none;
 }
 
+.issues > div .issue:first-child {
+    margin-left: 0;
+}
+
+.issues > div .issue:last-child {
+    margin-right: 0;
+}
+
+@media only screen and (max-width: 1100px) {
+    .issues .issue {
+        margin: 0 6%;
+    }
+}
+
 @media only screen and (max-width: 500px) {
     .issues.desktop-issues {
         display: none;

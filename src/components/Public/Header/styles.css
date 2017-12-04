@@ -13,6 +13,16 @@
     width: 240px;
 }
 
+.header .auth-controls {
+    position: absolute;
+    right: 38px;
+    top: 18px;
+}
+
+.header .auth-controls a {
+    color: #C04C9C !important;
+}
+
 .header .main-menu {
     float: left;
     margin-top: 68px;
@@ -49,6 +59,14 @@
     right: -12px;
     top: 0;
 
+}
+
+.header .is-visible {
+    display: block;
+}
+
+.header .is-hidden {
+    display: none;
 }
 
 .header .contact {

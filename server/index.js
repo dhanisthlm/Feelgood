@@ -5,6 +5,7 @@ import base from './base'
 import encounter from './api/encounter';
 import staff from './api/staff';
 import issue from './api/issue';
+import auth from './api/auth';
 import mongoose from 'mongoose';
 import config from 'config';
 
@@ -50,22 +51,13 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 server.register([
-  {
-    register: Inert
-  },
+  { register: Inert },
+  { register: base },
+  { register: encounter },
+  { register: staff },
+  { register: issue },
+  { register: auth }
 
-  {
-    register: base
-  },
-  {
-    register: encounter
-  },
-  {
-    register: staff
-  },
-  {
-    register: issue
-  }
 ], (error) => {
   if (error) throw error
 

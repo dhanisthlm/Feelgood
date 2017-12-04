@@ -1,23 +1,48 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux';
 import { translate } from 'react-i18next';
+import { ping, logout } from '../../../actions/auth';
 import styles from './styles.css';
 
 export class Header extends Component {
     constructor (props) {
         super(props);
 
-        this.state = {}
+        this.state = {
+            logoutIsVisible: false
+        };
+
+        this.handleLogout = this.handleLogout.bind(this);
+    }
+
+    componentDidMount () {
+        this.props.dispatch(ping());
+    }
+
+    componentWillReceiveProps (nextProps) {
+        this.setState({
+            logoutIsVisible: nextProps.isAuthenticated
+        });
+    }
+
+    handleLogout (event) {
+        event.preventDefault();
+        this.props.dispatch(logout());
     }
 
     render () {
         const { t } = this.props;
+        const logoutBtn = (this.props.location.pathname === '/admin')
+            ? 'auth is-visible' : 'auth is-hidden';
 
         return (
             <header className="header">
                 <div className="logo-text">
                     <span>{ t('contactUs') }</span>
                     <span>{ t('emergency') }</span>
+                </div>
+                <div className="auth-controls">
+                    <a className={logoutBtn} onClick={this.handleLogout}>Logout</a>
                 </div>
                 <div className="contact">
                     <span>{ t('callUs') } 08.00 - 17.00</span>
@@ -43,7 +68,10 @@ export class Header extends Component {
 
 Header.propTypes = { dispatch: PropTypes.func };
 
-const mapStateToProps = (state) => ({});
+const mapStateToProps = (state) => ({
+    credentials: state.auth.credentials,
+    isAuthenticated: state.auth.isAuthenticated
+});
 
 export default connect(mapStateToProps)(translate('headerView')(Header))
 

@@ -13,14 +13,13 @@ import styles from './styles.css';
 export class Main extends Component {
     constructor (props) {
         super(props);
-
         this.state = {};
     }
 
     render () {
         return (
             <div className="page">
-                <Header />
+                <Header location={this.props.location} />
                 <Hero />
                 <Quote />
                 <Traitments />

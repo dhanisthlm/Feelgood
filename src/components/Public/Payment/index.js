@@ -54,9 +54,11 @@ export class Payment extends Component {
      * @return {void}
      */
     handleCheckout () {
-        //this.setState({ checkout: !this.state.checkout });
-        this.props.dispatch(routeActions.push('/checkout'));
-    }
+    	this.setState({ data: this.getData() }, () => {
+            window.localStorage.setItem('order', JSON.stringify(this.state));
+            this.props.dispatch(routeActions.push('/checkout'));
+        });
+	}
 
     /**
      * This callback type is called `requestCallback
@@ -306,8 +308,6 @@ export class Payment extends Component {
         const emailPackage = email[Object.keys(email).filter(key => email[key].active)[0]];
         let emailDiscount = 0;
         let promoDiscount = 0;
-
-        console.log(this.state);
 
         if (this.state.enteredCode === this.state.promoCode) {
         	promoDiscount = this.state.promoDiscount;

@@ -1,0 +1,55 @@
+.login .page-header {
+    background-color: #C04C9C;
+    position: static;
+    display: block;
+    text-align: center;
+    padding-left: 0;
+}
+
+.login .page-header h1 {
+    color: #ffffff;
+    padding: 7px 0;
+    margin-top: 8px;
+}
+
+.login .login-wrapper {
+    width: 300px;
+    margin: 40px auto;
+}
+
+.login label {
+    color: #c04c9c;
+    display: block;
+    font-size: 19px;
+    margin-bottom: 5px;
+    margin-left: 3px;
+    font-weight: 300;
+    text-align: left;
+    margin-top: 10px;
+}
+
+.login input {
+    display: block;
+    margin-bottom: 3px;
+    height: 42px;
+    width: 100%;
+    border: 1px solid #999;
+    box-sizing: border-box;
+    border-radius: 3px;
+    padding: 10px;
+    font-size: 16px;
+    font-weight: 200;
+    outline: 0;
+}
+
+.login button {
+    width: 100%;
+    background: #C04C9C;
+    color: #fff;
+    margin-bottom: 40px;
+    height: 40px;
+    font-size: 18px;
+    font-weight: 300;
+    margin-top: 16px;
+    box-sizing: border-box;
+}

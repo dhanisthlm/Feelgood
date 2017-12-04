@@ -1,7 +1,7 @@
 .admin-table {
     width: 90%;
     margin-top: 0;
-    padding-top: 50px;
+    padding-top: 100px;
 }
 
 .admin-table td {
@@ -15,6 +15,20 @@
     color: #c04c9c;
 }
 
+.admin .page-header {
+    background-color: #C04C9C;
+    position: static;
+    display: block;
+    text-align: center;
+    padding-left: 0;
+}
+
+.admin .page-header h1 {
+    color: #ffffff;
+    padding: 7px 0;
+    margin-top: 8px;
+}
+
 .export-button {
     padding: 7px 15px;
     background-color: #c04c9c;
@@ -25,6 +39,6 @@
     cursor: pointer;
     outline: 0;
     position: absolute;
-    top: 90px;
-    right: 5.5%;
+    top: 187px;
+    right: 67px;
 }

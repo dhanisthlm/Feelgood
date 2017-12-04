@@ -27,7 +27,8 @@ export class Checkout extends FormComponent {
 			data: '',
 			issue: 'Stres',
 			isOpen: false,
-			issues: []
+			issues: [],
+			showSpinner: false
 		};
 
 		this.validatorTypes = encounterValidator;
@@ -38,24 +39,61 @@ export class Checkout extends FormComponent {
 		this.handleSelect = this.handleSelect.bind(this);
 	}
 
+	componentWillMount () {
+		if (window.localStorage.getItem('order')) {
+			const cache = JSON.parse(window.localStorage.getItem('order'));
+			const data = this.props.data;
+
+			console.log('data', cache.data)
+
+            this.setState({
+                name: cache.name,
+                mail: cache.mail,
+                phone: cache.phone,
+                skype: cache.skype,
+                skypeId: cache.skypeId,
+                comment: cache.comment,
+                isOpen: false,
+                skype: cache.skype,
+                email: cache.email,
+                cost: cache.cost,
+				issue: cache.issue,
+                packageDiscount: cache.packageDiscount,
+                promoDiscount: cache.promoDiscount,
+                data: cache.data,
+				save: false
+            }, () => {
+                console.log('fdfdfddf', this.state, cache)
+            });
+		}
+	}
+
 	componentDidMount () {
-        this.setState({
-            isOpen: true,
-            skype: this.props.data.skype,
-            email: this.props.data.email,
-            cost: this.props.cost,
-            packageDiscount: this.props.data.packageDiscount,
-            promoDiscount: this.props.data.promoDiscount,
-            data: this.props.data
-        });
+		if (!window.localStorage.getItem('order')) {
+            this.setState({
+                isOpen: true,
+                skype: this.props.data.skype,
+                email: this.props.data.email,
+                cost: this.props.cost,
+                packageDiscount: this.props.data.packageDiscount,
+                promoDiscount: this.props.data.promoDiscount,
+                data: this.props.data
+            });
+        }
 
         this.props.dispatch(getIssues());
         this.calculateWiewportSize();
         this.initStripe();
+
+        console.log(this.state)
     }
 
     componentWillReceiveProps (nextProps) {
 		this.setState({ issues: nextProps.issues });
+		console.log('1', this.props)
+		if (nextProps.save === true) {
+			this.setState({ showSpinner: false });
+		}
 	}
 
     /**
@@ -117,6 +155,7 @@ export class Checkout extends FormComponent {
      * @return {object}
      */
 	resetCheckout () {
+		window.localStorage.removeItem('order');
 		this.props.dispatch(resetEncounter());
         this.props.dispatch(routeActions.push('/anka'));
 	}
@@ -128,6 +167,9 @@ export class Checkout extends FormComponent {
      * @return {object}
      */
 	handleChange (e) {
+		const cache = JSON.parse(window.localStorage.getItem('order'));
+		cache[e.target.id] = e.target.value;
+		window.localStorage.setItem('order', JSON.stringify(cache));
 		this.setState({ [e.target.id]: e.target.value })
 	}
 
@@ -151,6 +193,7 @@ export class Checkout extends FormComponent {
                         const errorElement = document.getElementById('card-errors');
                         errorElement.textContent = t(`stripe.${result.error.code}`);
                     } else {
+                    	this.setState({ showSpinner: true });
                         // Send the token to your server
                         this.props.dispatch(saveEncounter(result.token.id, this.state));
                     }
@@ -180,6 +223,9 @@ export class Checkout extends FormComponent {
      * @return {object}
      */
   	handleSelect (event) {
+        const cache = JSON.parse(window.localStorage.getItem('order'));
+        cache.issue = event.target.value;
+        window.localStorage.setItem('order', JSON.stringify(cache));
     	this.setState({ issue: event.target.value });
 	}
 
@@ -207,24 +253,33 @@ export class Checkout extends FormComponent {
      * @return {object}
      */
 	render () {
+		console.log(this.state);
 		const { t } = this.props;
-        const front = (this.props.save === true) ? 'front none' : 'front';
-        const back = (this.props.save === false) ? 'back none' : 'back';
-        const skypeCost = this.props.data.skype ? this.props.data.skype.cost : 0;
-        const skypeDurationFactor = this.props.data.skypeDuration.factor;
-		const emailCost = this.props.data.email ? this.props.emailDiscount / this.props.data.email.week : 0;
-		const nWeeks = this.props.data.email ? this.props.data.email.week : 0;
+        const front = (this.state.save === true) ? 'front none' : 'front';
+        const back = (this.state.save === false) ? 'back none' : 'back';
+        const skypeCost = this.state.data.skype ? this.state.data.skype.cost : 0;
+        const skypeDurationFactor = this.state.data.skypeDuration.factor;
+		const emailCost = this.state.data.email ? this.props.emailDiscount / this.state.data.email.week : 0;
+		const nWeeks = this.state.data.email ? this.state.data.email.week : 0;
 		const firstColSize = (this.width === 'small') ? '50%' : '60%';
 		const lastColSize = (this.width === 'small') ? '30%' : '20%';
 		const sumClass =
-			(typeof this.props.data.packageDiscount === 'undefined' &&
-			typeof this.props.data.promoDiscount === 'undefined')
+			(typeof this.state.data.packageDiscount === 'undefined' &&
+			typeof this.state.data.promoDiscount === 'undefined')
 				? 'right heavy' : 'right';
 
-		console.log(this.props)
+		const spinnerClass = this.state.showSpinner ? 'showbox' : 'none';
 
 		return (
 			<div className="page">
+				<div className={spinnerClass}>
+					<div className="loader">
+						<svg className="circular" viewBox="25 25 50 50">
+							<circle className="path" cx="50" cy="50" r="20" fill="none" strokeWidth="2" strokeMiterlimit="10"/>
+						</svg>
+						<p className="processing-text">Processing purchase</p>
+					</div>
+				</div>
 				<Header />
 				<div ref={(checkout) => { this.checkout = checkout; }} className="checkout">
 					<div ref={(basket) => { this.basket = basket; }} className="basket">
@@ -236,9 +291,9 @@ export class Checkout extends FormComponent {
 								<div className="left-col-wrapper">
 									<table>
 										<colgroup>
-											<col width={firstColSize} />
+											<col width={ firstColSize } />
 											<col width="20%" />
-											<col width={lastColSize} />
+											<col width={ lastColSize } />
 										</colgroup>
 										<thead>
 											<tr>
@@ -248,23 +303,23 @@ export class Checkout extends FormComponent {
 											</tr>
 										</thead>
 										{(() => {
-											if (this.props.data.skype) {
+											if (this.state.data.skype) {
 												return(
 													<tr>
-														<td>{this.props.data.skype.description}</td>
-														<td className="center">{this.props.data.skype.week}</td>
-														<td className="right">{Math.round(skypeCost * skypeDurationFactor)} KM</td>
+														<td>{ this.state.data.skype.description }</td>
+														<td className="center">{ this.state.data.skype.week }</td>
+														<td className="right">{ Math.round(skypeCost * skypeDurationFactor) } KM</td>
 													</tr>
 												)
 											}
 										})()}
 										{(() => {
-											if (this.props.data.email) {
+											if (this.state.data.email) {
 												return(
 													<tr>
-														<td>{this.props.data.email.description}</td>
-														<td className="center">{this.props.data.email.week}</td>
-														<td className="right">{this.props.emailDiscount} KM</td>
+														<td>{this.state.data.email.description}</td>
+														<td className="center">{ this.state.data.email.week }</td>
+														<td className="right">{ this.state.emailDiscount } KM</td>
 													</tr>
 												)
 											}
@@ -279,46 +334,46 @@ export class Checkout extends FormComponent {
 											<td className={sumClass}>{Math.round(skypeCost * skypeDurationFactor) + (emailCost * nWeeks)} KM</td>
 										</tr>
 										{(() => {
-											if (this.props.data.packageDiscount) {
+											if (this.state.data.packageDiscount) {
 												return (
 													<tr>
 														<td className="right" colSpan="2">{ t('packageDiscount') }</td>
-														<td className="right">{this.props.data.packageDiscount} KM</td>
+														<td className="right">{ this.state.data.packageDiscount } KM</td>
 													</tr>
 												)
 											}
 										})()}
 										{(() => {
-											if (this.props.data.packageDiscount > 0) {
-												const className = this.props.data.promoDiscount
+											if (this.state.data.packageDiscount > 0) {
+												const className = this.state.data.promoDiscount
 													? 'right' : 'right heavy';
 
 												return (
 													<tr>
 														<td className={className} colSpan="2">{ t('sumWithPackageDiscount')}</td>
 														<td className={className}>
-															{(Math.round(this.props.data.skype.cost * skypeDurationFactor) + (emailCost * nWeeks)) - this.props.data.packageDiscount} KM
+															{ (Math.round(this.state.data.skype.cost * skypeDurationFactor) + (emailCost * nWeeks)) - this.state.data.packageDiscount } KM
 														</td>
 													</tr>
 												)
 											}
 										})()}
 										{(() => {
-											if (this.props.data.promoDiscount) {
+											if (this.state.data.promoDiscount) {
 												return(
 													<tr>
 														<td className="right" colSpan="2">{ t('voucherDiscount') }</td>
-														<td className="right">{this.props.data.promoDiscount} KM</td>
+														<td className="right">{ this.state.data.promoDiscount } KM</td>
 													</tr>
 												)
 											}
 										})()}
 										{(() => {
-											if (this.props.data.promoDiscount) {
+											if (this.state.data.promoDiscount) {
 												return (
 													<tr>
 														<td className="right heavy" colSpan="2">{ t('total') }</td>
-														<td className="right heavy">{ this.props.cost.total } KM</td>
+														<td className="right heavy">{ this.state.data.cost.total } KM</td>
 													</tr>
 												)
 											}
@@ -334,7 +389,7 @@ export class Checkout extends FormComponent {
 												onChange={ this.handleChange }
 												id="name"
 												type="text"
-												value={this.state.name}/>
+												value={ this.state.name }/>
 											{this.getValidationMessages('name')}
 										</div>
 										<div className="form-element-wrapper">
@@ -343,8 +398,8 @@ export class Checkout extends FormComponent {
 												onChange={ this.handleChange }
 												id="phone"
 												type="text"
-												value={this.state.phone}/>
-											{this.getValidationMessages('phone')}
+												value={ this.state.phone }/>
+											{ this.getValidationMessages('phone') }
 										</div>
 										<div className="form-element-wrapper">
 											<label htmlFor="email">{ t('email') }</label>
@@ -352,8 +407,8 @@ export class Checkout extends FormComponent {
 												onChange={ this.handleChange }
 												id="mail"
 												type="text"
-												value={this.state.mail}/>
-											{this.getValidationMessages('mail')}
+												value={ this.state.mail }/>
+											{ this.getValidationMessages('mail') }
 										</div>
 										<div className="form-element-wrapper">
 											<label htmlFor="skype">Skype ID</label>
@@ -362,13 +417,13 @@ export class Checkout extends FormComponent {
 												id="skypeId"
 												type="text"
 											/>
-											{this.getValidationMessages('skype')}
+											{ this.getValidationMessages('skype') }
 										</div>
 										<div className="form-element-wrapper">
 											<label htmlFor="skype">{t('issue')}</label>
 											<div className="select-style">
-												<select id="issue" onChange={this.handleSelect} value={this.state.issue}>
-													{this.renderIssues()}
+												<select id="issue" onChange={ this.handleSelect } value={ this.state.issue }>
+													{ this.renderIssues() }
 												</select>
 											</div>
 										</div>
@@ -382,7 +437,7 @@ export class Checkout extends FormComponent {
 											<textarea
 												className={ this.getValidatorData('comment') }
 												onChange={ this.handleChange }>
-												{this.state.comment}
+												{ this.state.comment }
 											</textarea>
 											{this.getValidationMessages('comment')}
 										</div>

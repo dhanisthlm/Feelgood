@@ -5,6 +5,7 @@ import strategy from 'joi-validation-strategy';
 import moment from 'moment';
 import TableToExcel from 'table-to-excel';
 import { getEncounters } from '../../actions/encounter';
+import Header from '../Public/Header';
 import styles from './styles.css';
 
 export class Admin extends Component {
@@ -25,8 +26,11 @@ export class Admin extends Component {
 
     render () {
         return (
-            <div className="page">
-                <h1 className="admin-heading">Zdravlje - Susreti</h1>
+            <div className="page admin">
+                <Header location={this.props.location} />
+                <div className="page-header">
+                    <h1 className="admin-heading">Zdravlje - Susreti</h1>
+                </div>
                 <button className="export-button" onClick={ this.handleExport }>Izvoz u Excel</button>
                 <table id="admin-table" className="admin-table">
                     <colgroup>
