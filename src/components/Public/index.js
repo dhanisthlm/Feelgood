@@ -8,6 +8,7 @@ import Traitments from './Issues';
 import QuoteImage from './Quoteimage';
 import Staff from './Staff';
 import HowItWorks from './HowItWorks';
+import Footer from './Footer';
 import styles from './styles.css';
 
 export class Main extends Component {
@@ -27,6 +28,7 @@ export class Main extends Component {
                 <QuoteImage />
                 <Staff />
                 <HowItWorks />
+                <Footer />
             </div>
         )
     }

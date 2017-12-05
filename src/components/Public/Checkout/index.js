@@ -262,7 +262,7 @@ export class Checkout extends FormComponent {
 				? 'right heavy' : 'right';
 
 		const spinnerClass = this.state.showSpinner ? 'showbox' : 'none';
-		
+
 		return (
 			<div className="page">
 				<div className={spinnerClass}>
