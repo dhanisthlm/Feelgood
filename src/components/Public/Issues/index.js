@@ -67,7 +67,7 @@ export class Issues extends Component {
 					<div className="text-wrapper text-wrapper-mobile">
 						<h3 className="heading">{ t('heading') }</h3>
 						<p className="preamble">{ t('preamble') }</p>
-						<button className="issue-button">{ t('contactUs') }</button>
+						<a href="/kontakt" className="issue-button">{ t('contactUs') }</a>
 					</div>
 				</div>
 			);
@@ -242,7 +242,7 @@ export class Issues extends Component {
 				<div className="text-wrapper">
 					<h3 className="heading">{ t('heading') }</h3>
 					<p className="preamble">{ t('preamble') }</p>
-					<button className="issue-button">{ t('contactUs') }</button>
+					<a href="/kontakt" className="issue-button">{ t('contactUs') }</a>
 				</div>
 			</div>
 

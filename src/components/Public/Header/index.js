@@ -38,7 +38,7 @@ export class Header extends Component {
         return (
             <header className="header">
                 <div className="logo-text">
-                    <span>{ t('contactUs') }</span>
+                    <a href="/kontakt">{ t('contactUs') }</a>
                     <span>{ t('emergency') }</span>
                 </div>
                 <div className="auth-controls">

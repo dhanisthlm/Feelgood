@@ -40,7 +40,7 @@ export class Footer extends Component {
                     <p>Privacy policy</p>
                     <p>Terms and conditions</p>
                     <p>FAQ</p>
-                    <p>Customer service</p>
+                    <a className="link" href="/kontakt">Customer service</a>
                 </div>
             </footer>
         )
