@@ -10,6 +10,7 @@ import App from './components/App';
 import Admin from './components/Admin';
 import Checkout from './components/Public/Checkout';
 import Login from './components/Login';
+import Blog from './components/Blog';
 import { hashLinkScroll } from '../helpers/hashLinkScroll';
 import styles from './styles.css';
 
@@ -21,6 +22,7 @@ render((
               <Route path='/checkout' component={Checkout}/>
               <Route path='/admin' onEnter={requireAuth} component={Admin}/>
               <Route path="/login" component={Login} />
+              <Route path="/blogovi" component={Blog} />
           </Route>
         </Router>
       </I18nextProvider>

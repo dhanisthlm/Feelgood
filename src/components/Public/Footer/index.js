@@ -1,18 +1,19 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux';
 import { translate } from 'react-i18next';
-import { ping, logout } from '../../../actions/auth';
+import { getBlogs } from '../../../actions/blog';
 import styles from './styles.css';
 
 export class Footer extends Component {
     constructor (props) {
         super(props);
 
-        this.state = {
-        };
+        this.state = {};
     }
 
-    componentDidMount () {}
+    componentDidMount () {
+        this.props.dispatch(getBlogs());
+    }
 
     render () {
         const { t } = this.props;
@@ -25,11 +26,14 @@ export class Footer extends Component {
                 </div>
                 <div className="col col-2">
                     <h3>Blogovi</h3>
-                    <p>Det är är länk till blogg nummer 1</p>
-                    <p>Det är är länk till blogg nummer 2</p>
-                    <p>Det är är länk till blogg nummer 3</p>
-                    <p>Det är är länk till blogg nummer 4</p>
-                    <p>Det är är länk till blogg nummer 5</p>
+                    {
+                        this.props.blogs.map((blog, i) => {
+                            const href = `/blogovi#${blog.hash}`;
+                            return (i < 5)
+                                ? <a className="link" href={href} key={i}>{blog.title}</a>
+                                : null;
+                        })
+                    }
                 </div>
                 <div className="col col-3">
                     <h3>Uslovi</h3>
@@ -46,7 +50,7 @@ export class Footer extends Component {
 Footer.propTypes = { dispatch: PropTypes.func };
 
 const mapStateToProps = (state) => ({
-
+    blogs: state.blog.list
 });
 
 export default connect(mapStateToProps)(translate('headerView')(Footer))

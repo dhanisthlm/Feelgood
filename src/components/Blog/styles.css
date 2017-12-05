@@ -1,0 +1,42 @@
+.blog .page-header {
+    background-color: #C04C9C;
+    position: static;
+    display: block;
+    text-align: center;
+    padding-left: 0;
+}
+
+.blog .page-header h1 {
+    color: #ffffff;
+    padding: 7px 0;
+    margin-top: 8px;
+}
+
+.blog .blog-list {
+    padding: 30px 80px;
+}
+
+.blog .blog-item {
+    list-style-type: none;
+    margin: 0 auto;
+    width: 85%;
+}
+
+.blog  .blog-item h2 {
+    color: #C04C9C;
+}
+
+.blog .blog-item p {
+    white-space: pre-wrap;
+    max-width: 900px;
+}
+
+.blog .date {
+    color: #C04C9C;
+    margin: 5px 0 0 0;
+}
+
+.blog .author {
+    margin: 0;
+    color: #C04C9C;
+}
