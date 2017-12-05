@@ -32,6 +32,55 @@ export class Admin extends Component {
                     <h1 className="admin-heading">Zdravlje - Susreti</h1>
                 </div>
                 <button className="export-button" onClick={ this.handleExport }>Izvoz u Excel</button>
+                <ul className="mobile-list">
+                    {this.props.encounters.map((encounter) => {
+                        const localTime = moment(encounter.date).format('YYYY-MM-DD / HH:mm');
+
+                        return (
+                            <li className="list-item">
+                                <h3>informacije osobe</h3>
+                                <div>
+                                    <p>Ime:</p>
+                                    <p>{encounter.name}</p>
+                                </div>
+                                <div>
+                                    <p>E-posta:</p>
+                                    <p>{encounter.mail}</p>
+                                </div>
+                                <div>
+                                    <p>Telefon:</p>
+                                    <p>{encounter.phone}</p>
+                                </div>
+                                <div>
+                                    <p>Date:</p>
+                                    <p>{localTime}</p>
+                                </div>
+                                <h3>E-posta</h3>
+                                <div>
+                                    <p>Cost:</p>
+                                    <p>{encounter.order.email.cost}</p>
+                                </div>
+                                <div>
+                                    <p>Weeks:</p>
+                                    <p>{encounter.order.email.week}</p>
+                                </div>
+                                <h3>Skype</h3>
+                                <div>
+                                    <p>Cost:</p>
+                                    <p>{encounter.order.skype.cost}</p>
+                                </div>
+                                <div>
+                                    <p>Weeks:</p>
+                                    <p>{encounter.order.skype.week}</p>
+                                </div>
+                                <div>
+                                    <p>Price:</p>
+                                    <p>{encounter.order.price}</p>
+                                </div>
+                            </li>
+                        );
+                    })};
+                </ul>
                 <table id="admin-table" className="admin-table">
                     <colgroup>
                         <col width="17%" />
@@ -59,7 +108,7 @@ export class Admin extends Component {
                     </thead>
                     <tbody>
                         {this.props.encounters.map((encounter) => {
-                            const localTime = moment(encounter.date).format('YYYY-MM-DD HH:mm');
+                            const localTime = moment(encounter.date).format('YYYY-MM-DD / HH:mm');
 
                             return (
                                 <tr>

@@ -40,3 +40,30 @@
     margin: 0;
     color: #C04C9C;
 }
+
+@media only screen and (max-width: 500px) {
+    .blog .page-header {
+        background-color: #fff;
+        position: static;
+        display: block;
+        text-align: center;
+        padding-top: 20px;
+        padding-left: 0;
+    }
+
+    .blog .page-header h1 {
+        color: #C04C9C;
+    }
+
+    .blog .wrapper {
+        padding: 0;
+    }
+
+    .blog .blog-list {
+        padding: 0 20px;
+    }
+
+    .blog .blog-item p:last-child {
+        line-height: 22px;
+    }
+}

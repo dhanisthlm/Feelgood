@@ -33,16 +33,16 @@ export class Header extends Component {
     render () {
         const { t } = this.props;
         const logoutBtn = (this.props.location.pathname === '/admin')
-            ? 'auth is-visible' : 'auth is-hidden';
+            ? 'auth-controls is-visible' : 'auth-controls is-hidden';
 
         return (
             <header className="header">
+                <div className={logoutBtn}>
+                    <a className="auth" onClick={this.handleLogout}>Logout</a>
+                </div>
                 <div className="logo-text">
                     <a href="/kontakt">{ t('contactUs') }</a>
                     <span>{ t('emergency') }</span>
-                </div>
-                <div className="auth-controls">
-                    <a className={logoutBtn} onClick={this.handleLogout}>Logout</a>
                 </div>
                 <div className="contact">
                     <span>{ t('callUs') } 08.00 - 17.00</span>

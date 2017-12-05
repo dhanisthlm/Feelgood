@@ -44,3 +44,22 @@
     margin-bottom: 3px;
     margin-top: 5px;
 }
+
+@media only screen and (max-width: 500px) {
+    .contact .page-header {
+        background-color: #fff;
+        position: static;
+        display: block;
+        text-align: center;
+        padding-top: 20px;
+        padding-left: 0;
+    }
+
+    .contact .page-header h1 {
+        color: #C04C9C;
+    }
+
+    .contact .wrapper {
+        padding: 0;
+    }
+}

@@ -4,6 +4,10 @@
     padding-top: 100px;
 }
 
+.mobile-list {
+    display: none;
+}
+
 .admin-table td {
     text-align: center;
 }
@@ -41,4 +45,101 @@
     position: absolute;
     top: 187px;
     right: 67px;
+}
+
+@media only screen and (max-width: 500px) {
+    .admin .page-header {
+        background-color: #fff;
+        position: static;
+        display: block;
+        text-align: center;
+        padding-top: 20px;
+        padding-left: 0;
+    }
+
+    .admin-table {
+        display: none;
+    }
+
+    .mobile-list {
+        margin-top: 20px;
+        display: block;
+        list-style-type: none;
+        padding-left: 25px;
+    }
+
+    .mobile-list li {
+        margin-bottom: 20px;
+        width: 93%;
+        display: inline-block;
+    }
+
+    .admin .page-header h1 {
+        color: #C04C9C;
+    }
+
+    .mobile-list p {
+        margin-bottom: 5px;
+        margin-top: 5px;
+    }
+
+    .mobile-list p span {
+        color: #C04C9C;
+    }
+
+    .mobile-list p {
+        display: inline-block;
+    }
+    .mobile-list p:first-child {
+        width: 80px;
+        font-weight: 400;
+    }
+
+    .mobile-list .list-item div:nth-child(odd) {
+        background-color: #e9e9e9;
+        padding: 3px 10px;
+        border-bottom: 1px solid #fff;
+    }
+
+    .mobile-list .list-item div:nth-child(even) {
+        background-color: #f1f1f1;
+        padding: 3px 10px;
+        border-bottom: 1px solid #fff;
+    }
+
+    .mobile-list h3 {
+        color: #C04C9C;
+        margin: 15px 0 5px 0;
+    }
+
+    .export-button {
+        padding: 7px 15px;
+        border: none;
+        font-size: 20px;
+        font-weight: 200;
+        cursor: pointer;
+        outline: 0;
+        position: absolute;
+        top: 378px;
+        right: 21px;
+        color: #c04c9c;
+        background: none;
+    }
+
+    .header .auth-controls {
+        margin-bottom: 14px;
+        position: static;
+        background-color: #C04C9C;
+        display: inline-block;
+        border-radius: 15px;
+        padding: 0px 10px;
+        height: 30px;
+        line-height: 8px;
+    }
+
+    .header .auth-controls a {
+        color: #fff !important;
+        padding: 10px;
+        border-radius: 15px;
+    }
 }

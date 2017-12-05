@@ -68,7 +68,7 @@
 }
 
 .header .is-hidden {
-    display: none;
+    display: none !important;
 }
 
 .header .contact {
@@ -147,5 +147,13 @@
 
     .header .main-menu a:last-child {
         margin-right: 0;
+    }
+
+    .header .auth-controls a {
+        color: #fff !important;
+        padding: 10px;
+        border-radius: 15px;
+        margin-top: -1px;
+        float: left;
     }
 }

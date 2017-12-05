@@ -53,3 +53,18 @@
     margin-top: 16px;
     box-sizing: border-box;
 }
+
+@media only screen and (max-width: 500px) {
+    .login .page-header {
+        background-color: #fff;
+        position: static;
+        display: block;
+        text-align: center;
+        padding-top: 20px;
+        padding-left: 0;
+    }
+
+    .login .page-header h1 {
+        color: #C04C9C;
+    }
+}
