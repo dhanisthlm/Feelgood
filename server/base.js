@@ -51,6 +51,13 @@ exports.register = function (server, options, next) {
             handler: {
                 file: 'client/index.html'
             }
+        },
+        {
+            method: 'GET',
+            path: '/.well-known/pki-validation',
+            handler: {
+                file: 'client/.well-known/pki-validation/godaddy.html'
+            }
         }
     ]);
 
