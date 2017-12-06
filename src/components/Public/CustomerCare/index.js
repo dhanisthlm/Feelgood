@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux';
 import { translate } from 'react-i18next';
-import Header from '../Public/Header';
+import Header from '../Header/index';
 import styles from './styles.css';
 
 export class CustomerCare extends Component {

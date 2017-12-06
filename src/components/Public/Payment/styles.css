@@ -588,12 +588,12 @@
     }
 
     .payment .toggle_radios .small-skype p {
-       margin-top: 3px;
-        margin-left: 30px;
+        margin-top: 1px;
+        margin-left: 28px;
     }
 
     .payment .toggle_radios .large-skype p {
-        margin-top: 3px;
+        margin-top: 1px;
         margin-left: 21px;
     }
 
@@ -602,7 +602,7 @@
     }
 
     .payment .toggle_option_slider {
-        width: 145px;
+        width: 142px;
     }
 
     .payment .email .weeks > div {

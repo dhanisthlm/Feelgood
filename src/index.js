@@ -10,8 +10,8 @@ import App from './components/App';
 import Admin from './components/Admin';
 import Checkout from './components/Public/Checkout';
 import Login from './components/Login';
-import Blog from './components/Blog';
-import CustomerCare from './components/CustomerCare';
+import Blog from './components/Public/Blog';
+import CustomerCare from './components/Public/CustomerCare';
 import { hashLinkScroll } from '../helpers/hashLinkScroll';
 import styles from './styles.css';
 

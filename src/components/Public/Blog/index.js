@@ -1,8 +1,8 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux';
 import { translate } from 'react-i18next';
-import { getBlogs } from '../../actions/blog';
-import Header from '../Public/Header';
+import { getBlogs } from '../../../actions/blog';
+import Header from '../Header/index';
 import styles from './styles.css';
 
 export class Blog extends Component {

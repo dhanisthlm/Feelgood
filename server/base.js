@@ -49,14 +49,11 @@ exports.register = function (server, options, next) {
             method: 'GET',
             path: '/{path*}',
             handler: {
-                file: 'client/index.html'
-            }
-        },
-        {
-            method: 'GET',
-            path: '/.well-known/pki-validation',
-            handler: {
-                file: 'client/.well-known/pki-validation/godaddy.html'
+                file: function (request) {
+                    return (request.path.includes('pki-validation'))
+                        ? 'client/.well-known/pki-validation/godaddy.html'
+                        : 'client/index.html';
+                }
             }
         }
     ]);
