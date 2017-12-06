@@ -622,6 +622,7 @@
 
     .payment .toggle_radios {
         width: 94%;
+        margin-bottom: 20px;
     }
 
     .payment .heading {
