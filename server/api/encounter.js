@@ -49,7 +49,7 @@ const handleCharge = (request, reply) => {
     // Charge the user's card:
     striper.charges.create({
         amount: 1000,
-        currency: "bam",
+        currency: "BAM",
         description: "Example charge",
         source: token,
     }, function(err, charge) {

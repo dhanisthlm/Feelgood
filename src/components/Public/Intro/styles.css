@@ -1,13 +1,54 @@
+.introduction {
+    padding-top: 100px;
+}
+
 .introduction img {
     display: block;
     height: 405px;
-    margin-top: 10px;
 }
 
 .introduction .text-wrapper {
     padding: 20px 40px 25px 40px;
     background-color: #C04C9C;
     overflow: hidden;
+}
+
+.introduction .cookie-wrapper {
+    background-color: #731b58;
+    color: #fff;
+    font-weight: 300;
+    box-sizing: border-box;
+    overflow: hidden;
+    position: absolute;
+    width: 100%;
+    z-index: 0;
+    top: 45px;
+    padding: 15px 25px;
+    transition: all 2s;
+}
+
+.introduction .cookie-wrapper.visible {
+    top: 100px;
+}
+
+.introduction .cookie-wrapper p {
+    float: left;
+    margin: 0;
+    line-height: 24px;
+}
+
+.introduction .cookie-wrapper button {
+    width: 61px;
+    background-color: #c04c9c;
+    color: #fff;
+    border: 1px solid #fff;
+    font-size: 14px;
+    padding: 3px;
+    border-radius: 3px;
+    text-align: center;
+    font-weight: 300;
+    float: left;
+    margin-left: 21px;
 }
 
 .introduction .heading {
@@ -40,8 +81,25 @@
 }
 
 @media only screen and (max-width: 500px) {
+    .introduction {
+        padding-top: 229px;
+    }
+
     .introduction img {
         margin-top: 0;
+    }
+
+    .introduction .cookie-wrapper button {
+        width: 100%;
+        margin-left: 0;
+        float: none;
+        padding: 8px;
+        font-size: 16px;
+        margin-top: 11px;
+    }
+
+    .introduction .cookie-wrapper.visible {
+        top: 227px;
     }
 
     .introduction .heading {

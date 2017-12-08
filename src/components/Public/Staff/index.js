@@ -18,6 +18,7 @@ export class Staff extends Component {
 		this.openDiploma = this.openDiploma.bind(this);
 		this.closeDiploma = this.closeDiploma.bind(this);
 		this.createStaff = this.createStaff.bind(this);
+		this.renderPersonalText = this.renderPersonalText.bind(this);
 	}
 
 	componentDidMount() {
@@ -43,6 +44,12 @@ export class Staff extends Component {
         this.setState({ diploma: '', openDiploma: false });
 	}
 
+	renderPersonalText (person) {
+		return person.text.map((part, i) => {
+            return <p key={i}>{ person.text[i] }</p>;
+        });
+	}
+
 	render () {
 		const { t } = this.props;
 		const diploma = (this.state.openDiploma === true) ? 'diploma show-diploma' : 'diploma';
@@ -61,13 +68,13 @@ export class Staff extends Component {
 					</div>
 				</div>
 				<div className="cards">
-                    {this.props.staff.map(function(person, i) {
+                    {this.props.staff.map((person, i) => {
                     	const image = "./images/" + person.image;
                         return (
 							<div key={i} className="card">
 								<div className="photo-wrapper">
 									<div className="photo-info-wrapper">
-										<p>{person.text}</p>
+										{ this.renderPersonalText(person) }
 									</div>
 									<img className={`img-${person.name} ${person.direction}`} src={image}  />
 								</div>

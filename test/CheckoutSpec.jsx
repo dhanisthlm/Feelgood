@@ -89,20 +89,6 @@ const component = shallowWithStore(
     createMockStore()
 );
 
-/*
-const wrapper = shallow(
-    <Checkout
-        t={key => key}
-        getValidationMessages={ () => [] }
-        data={mockObj.data}
-        cost={mockObj.cost}
-        emailDiscount= '0.95'
-        dispatch={dispatch}
-        store={mockStore({ runtime: {} }) }
-    />
-);
-*/
-
 const store = mockStore({});
 
 beforeEach(() => {

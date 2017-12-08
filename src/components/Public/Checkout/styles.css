@@ -1,22 +1,22 @@
 .checkout {
-    margin-top: 3px;
+    padding-top: 100px;
 }
 
 .none {
     display: none;
 }
 
-.checkout .header {
+.checkout .page-header {
     padding-left: 0;
     height: 58px;
     background: #c04c9c;
-    margin-top: 7px;
 }
 
-.checkout .header h1 {
+.checkout .page-header h1 {
     text-align: center;
     color: #fff;
-    margin: 9px 0;
+    margin: 0;
+    line-height: 49px;
 }
 
 .checkout .left-col-wrapper {
@@ -61,7 +61,7 @@
 .checkout .basket .back {
     color: #c04c9c;
     display: inline-block;
-    margin-top: 7px;
+    margin-top: 20px;
 }
 
 .checkout .basket p {
@@ -517,6 +517,34 @@ thead tr {
 }
 
 @media only screen and (max-width: 500px) {
+    .checkout {
+        padding-top: 230px;
+    }
+
+    .checkout .page-header {
+        margin-top: 20px;
+        padding-left: 0;
+        height: 58px;
+        background: #fff;
+        color: #c04c9c;
+    }
+
+    .checkout .page-header h1 {
+        color: #C04C9C;
+    }
+
+    .checkout .left-col-wrapper {
+        float: none;
+    }
+
+    .checkout .basket .front {
+        float: none;
+        display: block;
+        color: #c04c9c;
+        font-size: 40px;
+        width: 85%;
+        margin: 25px auto;
+    }
 
     #breakpoints > div.breakpoint-small {
         display:block;

@@ -1,8 +1,8 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux';
 import { translate } from 'react-i18next';
-import { login } from '../../actions/auth';
-import Header from '../Public/Header';
+import { login } from '../../../actions/auth';
+import Header from '../../Public/Header/index';
 import styles from './styles.css';
 
 export class Login extends Component {

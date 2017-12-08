@@ -238,11 +238,12 @@ export class Payment extends Component {
         const skypeDuration = this.state.skypeDuration.s.active ? 's' : 'l';
 
         let emailCost = 0;
-        let emailWeeks = 1;
-        let emailCode = '00';
-
         let skypeCost = 0;
+
+        let emailWeeks = 1;
         let skypeWeeks = 1;
+
+        let emailCode = '00';
         let skypeCode = '0';
         let skypeDurationCode = '00';
 
@@ -291,7 +292,8 @@ export class Payment extends Component {
 
         if (email[size].week === 1 && type !== 'add') return;
 
-		email[size].week = email[size].week + factor;
+        email[size].week = email[size].week + factor;
+
         this.setState({ email });
         this.updateEncounter();
 	}
@@ -306,8 +308,10 @@ export class Payment extends Component {
 		const data = this.getData();
 		const email = this.state.email;
 		const cost = this.calculateCost();
-        const emailPackage = email[Object.keys(email).filter(key => email[key].active)[0]];
-        let emailDiscount = 0;
+		const emailPackage = email[Object.keys(email)
+			.filter(key => email[key].active)[0]];
+
+		let emailDiscount = 0;
         let promoDiscount = 0;
 
         if (this.state.enteredCode === this.state.promoCode) {
@@ -513,6 +517,6 @@ export class Payment extends Component {
 
 Payment.propTypes = { dispatch: PropTypes.func };
 
-const mapStateToProps = (state) => ({ });
+const mapStateToProps = (state) => ({});
 
 export default connect(mapStateToProps)(translate('paymentView')(Payment));

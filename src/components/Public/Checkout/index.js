@@ -17,14 +17,6 @@ export class Checkout extends FormComponent {
 		super(props);
 
 		this.state = {
-			name: '',
-			mail: '',
-			phone: '',
-			skype: '',
-			skypeId: '',
-			comment: '',
-			code: '',
-			data: '',
 			issue: 'Stres',
 			isOpen: false,
 			issues: [],
@@ -42,52 +34,20 @@ export class Checkout extends FormComponent {
 	componentWillMount () {
 		if (window.localStorage.getItem('order')) {
 			const cache = JSON.parse(window.localStorage.getItem('order'));
-
-            this.setState({
-                name: cache.name,
-                mail: cache.mail,
-                phone: cache.phone,
-                skype: cache.skype,
-                skypeId: cache.skypeId,
-                comment: cache.comment,
-                isOpen: false,
-                skype: cache.skype,
-                email: cache.email,
-                cost: cache.cost,
-				issue: cache.issue,
-				emailDiscount: cache.emailDiscount,
-                packageDiscount: cache.packageDiscount,
-                promoDiscount: cache.promoDiscount,
-                data: cache.data,
-				save: false
-            }, () => {
-            });
+            this.setState({ ...cache, save: false });
 		}
 	}
 
 	componentDidMount () {
-		if (!window.localStorage.getItem('order')) {
-            this.setState({
-                isOpen: true,
-                skype: this.props.data.skype,
-                email: this.props.data.email,
-                cost: this.props.cost,
-				emailDiscount: this.props.data.emailDiscount,
-                packageDiscount: this.props.data.packageDiscount,
-                promoDiscount: this.props.data.promoDiscount,
-                data: this.props.data
-            });
-        }
-
         this.props.dispatch(getIssues());
-        this.calculateWiewportSize();
+        this.calculateViewportSize();
         this.initStripe();
 	}
 
     componentWillReceiveProps (nextProps) {
 		this.setState({ issues: nextProps.issues });
 		if (nextProps.save === true) {
-			this.setState({ showSpinner: false });
+			this.setState({ showSpinner: false, save: true });
 		}
 	}
 
@@ -98,16 +58,12 @@ export class Checkout extends FormComponent {
      * @return {object}
      */
     initStripe () {
-        const style = {
-            base: {
-                fontSize: '16px',
-                color: "#32325d",
-            }
-        };
-
         const stripe = Stripe('pk_test_CxCOETD4ltbadc9SZWuF2jm9');
-        const elements = stripe.elements();
-        const card = elements.create('card', { style, placeholder: 'Card' });
+        const elements = stripe.elements({ locale: 'en' });
+        const card = elements.create('card', { placeholder: 'Card' });
+
+        this.card = card;
+        this.stripe = stripe;
 
         card.addEventListener('change', event => {
             const displayError = document.getElementById('card-errors');
@@ -115,9 +71,6 @@ export class Checkout extends FormComponent {
         });
 
         card.mount('#card-element');
-
-        this.card = card;
-        this.stripe = stripe;
     }
 
     /**
@@ -126,7 +79,7 @@ export class Checkout extends FormComponent {
      * @param {number} responseCode
      * @return {object}
      */
-    calculateWiewportSize () {
+    calculateViewportSize () {
         for (let item of this.breakpoints.children) {
             const width = (item.offsetParent !== null) ? item.dataset.size : '';
             if (width) this.width = width;
@@ -248,14 +201,18 @@ export class Checkout extends FormComponent {
      */
 	render () {
 		const { t } = this.props;
-        const front = (this.state.save === true) ? 'front none' : 'front';
+
+		const front = (this.state.save === true) ? 'front none' : 'front';
         const back = (this.state.save === false) ? 'back none' : 'back';
+
         const skypeCost = this.state.data.skype ? this.state.data.skype.cost : 0;
         const skypeDurationFactor = this.state.data.skypeDuration.factor;
 		const emailCost = this.state.data.email ? this.state.emailDiscount / this.state.data.email.week : 0;
 		const nWeeks = this.state.data.email ? this.state.data.email.week : 0;
+
 		const firstColSize = (this.width === 'small') ? '50%' : '60%';
 		const lastColSize = (this.width === 'small') ? '30%' : '20%';
+
 		const sumClass =
 			(typeof this.state.data.packageDiscount === 'undefined' &&
 			typeof this.state.data.promoDiscount === 'undefined')
@@ -275,8 +232,8 @@ export class Checkout extends FormComponent {
 				</div>
 				<Header location={this.props.location} />
 				<div ref={(checkout) => { this.checkout = checkout; }} className="checkout">
-					<div ref={(basket) => { this.basket = basket; }} className="basket">
-						<div className="header">
+					<div className="basket">
+						<div className="page-header">
 							<h1>{ t('heading') }</h1>
 						</div>
 						<div className="outer-frame">
@@ -383,6 +340,7 @@ export class Checkout extends FormComponent {
 											<input
 												onChange={ this.handleChange }
 												id="name"
+												className="name"
 												type="text"
 												value={ this.state.name }/>
 											{this.getValidationMessages('name')}
@@ -411,6 +369,7 @@ export class Checkout extends FormComponent {
 												onChange={ this.handleChange }
 												id="skypeId"
 												type="text"
+												value={ this.state.skypeId }
 											/>
 											{ this.getValidationMessages('skype') }
 										</div>
@@ -430,6 +389,7 @@ export class Checkout extends FormComponent {
 										<div className="form-element-wrapper">
 											<label htmlFor="comment">{ t('comment') }</label>
 											<textarea
+												id="comment"
 												className={ this.getValidatorData('comment') }
 												onChange={ this.handleChange }>
 												{ this.state.comment }
@@ -470,11 +430,8 @@ Checkout.propTypes = { dispatch: PropTypes.func };
 
 const mapStateToProps = (state) => ({
 	save: state.encounter.saved,
-	data: state.encounter.data,
 	cost: state.encounter.cost,
-	issues: state.issue.list,
-	emailDiscount: state.encounter.emailDiscount,
-	promoDiscount: state.encounter.promoDiscount
+	issues: state.issue.list
 });
 
 export default connect(mapStateToProps)(translate('checkoutView')(validation(strategy(i18nValidation()))(Checkout)));

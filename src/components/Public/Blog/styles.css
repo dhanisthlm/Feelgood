@@ -4,16 +4,17 @@
     display: block;
     text-align: center;
     padding-left: 0;
+    margin-top: 100px;
 }
 
 .blog .page-header h1 {
     color: #ffffff;
     padding: 7px 0;
-    margin-top: 8px;
+    margin: 8px 0 0 0;
 }
 
 .blog .blog-list {
-    padding: 30px 80px;
+    padding: 10px 80px;
 }
 
 .blog .blog-item {
@@ -49,6 +50,7 @@
         text-align: center;
         padding-top: 20px;
         padding-left: 0;
+        margin-top: 220px;
     }
 
     .blog .page-header h1 {

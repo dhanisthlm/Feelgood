@@ -20,9 +20,7 @@ export class Header extends Component {
     }
 
     componentWillReceiveProps (nextProps) {
-        this.setState({
-            logoutIsVisible: nextProps.isAuthenticated
-        });
+        this.setState({ logoutIsVisible: nextProps.isAuthenticated });
     }
 
     handleLogout (event) {
@@ -32,11 +30,14 @@ export class Header extends Component {
 
     render () {
         const { t } = this.props;
+        const headerClass = (this.props.location.pathname === '/admin')
+            ? 'header admin-header' : 'header';
+
         const logoutBtn = (this.props.location.pathname === '/admin')
             ? 'auth-controls is-visible' : 'auth-controls is-hidden';
 
         return (
-            <header className="header">
+            <header className={headerClass}>
                 <div className={logoutBtn}>
                     <a className="auth" onClick={this.handleLogout}>Logout</a>
                 </div>

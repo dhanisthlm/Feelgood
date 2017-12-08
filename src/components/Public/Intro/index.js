@@ -10,11 +10,22 @@ export class Hero extends Component {
         this.state = {};
     }
 
+    componentDidMount () {
+        setTimeout(() => {
+            const cookieWrapper = this.refs['cookie-wrapper'];
+            cookieWrapper.classList.add('visible');
+        }, 3000);
+    }
+
     render () {
         const { t } = this.props;
 
         return (
             <div className="introduction">
+                <div ref="cookie-wrapper" className="cookie-wrapper">
+                    <p>Vi använder cookies för att uppdatera pågående beästllning. Ingen data sparas och tas bort i samband med köp</p>
+                    <button>Okej</button>
+                </div>
                 <img src="/images/flowers.jpg" alt="hero-image" />
                 <div className="text-wrapper">
                     <h3 className="heading">{ t('heading') }</h3>

@@ -37,15 +37,10 @@ describe('Issue component', () => {
     });
 
     it('should update state issues', () => {
-        const issueSpy = sinon.spy(instance, 'handleSwipeLeft');
         const secondIssue = IssueComponent.state().issues[1];
-
-        instance.forceUpdate();
-        IssueComponent.update();
 
         // simulate btn-click
         IssueComponent.find('.issue-arrow-right').simulate('click');
         expect(IssueComponent.state().issues[0]).to.equal(secondIssue);
-        issueSpy.restore();
     });
 });

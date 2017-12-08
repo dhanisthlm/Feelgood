@@ -16,6 +16,11 @@ if (JSDOM) {
         Object.defineProperties(target, props);
     }
 
+    window.localStorage = {
+        setItem: function() {},
+        getItem: function() {}
+    };
+
     global.window = window;
     global.document = window.document;
     global.navigator = {userAgent: 'node.js'};

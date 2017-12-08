@@ -4,6 +4,7 @@
     display: block;
     text-align: center;
     padding-left: 0;
+    margin-top: 100px;
 }
 
 .login .page-header h1 {
@@ -62,9 +63,14 @@
         text-align: center;
         padding-top: 20px;
         padding-left: 0;
+        margin-top: 220px;
     }
 
     .login .page-header h1 {
         color: #C04C9C;
+    }
+
+    .login .login-wrapper {
+        margin: 0 auto;
     }
 }

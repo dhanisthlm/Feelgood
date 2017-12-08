@@ -4,11 +4,11 @@ import validation from 'react-validation-mixin';
 import strategy from 'joi-validation-strategy';
 import moment from 'moment';
 import TableToExcel from 'table-to-excel';
-import { getEncounters } from '../../actions/encounter';
-import Header from '../Public/Header';
+import { getEncounters } from '../../../actions/encounter';
+import Header from '../../Public/Header/index';
 import styles from './styles.css';
 
-export class Admin extends Component {
+export class Encounter extends Component {
     constructor (props) {
         super(props);
 
@@ -131,10 +131,10 @@ export class Admin extends Component {
     }
 }
 
-Admin.propTypes = { dispatch: PropTypes.func };
+Encounter.propTypes = { dispatch: PropTypes.func };
 
 const mapStateToProps = (state) => ({
     encounters: state.encounter.list
 });
 
-export default connect(mapStateToProps)(validation(strategy())(Admin));
+export default connect(mapStateToProps)(validation(strategy())(Encounter));

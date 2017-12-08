@@ -163,8 +163,8 @@ describe('Payment component', () => {
         instance.forceUpdate();
 
         expect(costSpy.returnValues[0].total).to.equal(151);
-        expect(costSpy.returnValues[0].email).to.equal(36);
-        expect(costSpy.returnValues[0].skype).to.equal(58);
+        expect(costSpy.returnValues[0].email).to.equal(18);
+        expect(costSpy.returnValues[0].skype).to.equal(29);
         costSpy.restore();
     });
 
