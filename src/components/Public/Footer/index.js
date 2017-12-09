@@ -30,17 +30,18 @@ export class Footer extends Component {
                         this.props.blogs.map((blog, i) => {
                             const href = `/blogovi#${blog.hash}`;
                             return (i < 5)
-                                ? <a className="link" href={href} key={i}>{blog.title}</a>
+                                ? <a className="link" href={href} key={i}>{blog.date} {blog.title}</a>
                                 : null;
                         })
                     }
                 </div>
                 <div className="col col-3">
                     <h3>Uslovi</h3>
-                    <p>Privacy policy</p>
-                    <p>Terms and conditions</p>
-                    <p>FAQ</p>
-                    <a className="link" href="/kontakt">Customer service</a>
+                    <p>Pravila o privatnosti</p>
+                    <p>Uslovi</p>
+                    <p>Izjava o kolačićima</p>
+                    <p>FAQ - Pitanja</p>
+                    <a className="link" href="/kontakt">Služba za korisnike</a>
                 </div>
             </footer>
         )

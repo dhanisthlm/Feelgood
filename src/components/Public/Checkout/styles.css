@@ -255,6 +255,50 @@
     cursor: pointer;
 }
 
+.activity-wrapper {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: #000000b3;
+    z-index: 999;
+    padding: 10px;
+}
+
+.activity-wrapper > div {
+    position: absolute;
+    background: #fff;
+    width: 450px;
+    padding: 25px;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    height: 149px;
+    font-size: 18px;
+    border-radius: 5px;
+    color: #333;
+}
+
+.activity-wrapper p {
+    margin: 0;
+}
+
+.activity-wrapper button {
+    background-color: #246cc7;
+    color: #fff;
+    border: 1px solid #fff;
+    font-size: 20px;
+    padding: 10px;
+    border-radius: 3px;
+    text-align: center;
+    font-weight: 300;
+    display: block;
+    width: 100%;
+    margin-top: 16px;
+    cursor: pointer;
+}
+
 .checkout .basket svg path {
     fill: #fff;
 }

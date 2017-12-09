@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux';
 import { translate } from 'react-i18next';
+import _ from 'lodash';
 import validation from 'react-validation-mixin';
 import strategy from 'joi-validation-strategy';
 import FormComponent from '../../FormComponent';
@@ -10,6 +11,7 @@ import { getIssues } from '../../../actions/issue';
 import { i18nValidation } from  '../../../../helpers/validation';
 import { saveEncounter, resetEncounter } from '../../../actions/encounter';
 import Header from '../Header';
+
 import styles from './styles.css';
 
 export class Checkout extends FormComponent {
@@ -20,7 +22,17 @@ export class Checkout extends FormComponent {
 			issue: 'Stres',
 			isOpen: false,
 			issues: [],
-			showSpinner: false
+			showSpinner: false,
+			activity: 0,
+			counter: 60,
+            showDialog: false,
+            startTime: null,
+            timeRemaining: '2:00',
+            idleTime: 0,
+            location: null,
+            countInactivity: true,
+            idleTtl: 10000,
+            tick: 10000
 		};
 
 		this.validatorTypes = encounterValidator;
@@ -29,6 +41,15 @@ export class Checkout extends FormComponent {
 		this.handleChange = this.handleChange.bind(this);
 		this.renderIssues = this.renderIssues.bind(this);
 		this.handleSelect = this.handleSelect.bind(this);
+		this.debounce = this.debounce.bind(this);
+        this.closeDialog = this.closeDialog.bind(this);
+        this.timeIncrement = this.timeIncrement.bind(this);
+        this.listenForActivity = this.listenForActivity.bind(this);
+        this.startCountInactivity = this.startCountInactivity.bind(this);
+        this.stopCountInactivity = this.stopCountInactivity.bind(this);
+        this.resetInactivity = this.resetInactivity.bind(this);
+        this.debounce = this.debounce.bind(this);
+        this.countDownToCancel = this.countDownToCancel.bind(this);
 	}
 
 	componentWillMount () {
@@ -39,6 +60,8 @@ export class Checkout extends FormComponent {
 	}
 
 	componentDidMount () {
+        this.startCountInactivity();
+        this.listenForActivity();
         this.props.dispatch(getIssues());
         this.calculateViewportSize();
         this.initStripe();
@@ -49,6 +72,98 @@ export class Checkout extends FormComponent {
 		if (nextProps.save === true) {
 			this.setState({ showSpinner: false, save: true });
 		}
+	}
+
+    closeDialog () {
+        clearInterval(this.countdownToLogoutInterval);
+        this.setState({ showDialog: false, timeRemaining: '' });
+        this.resetInactivity();
+        this.startCountInactivity();
+    }
+
+    startCountInactivity () {
+        if (!this.timerInterval) {
+            this.timerInterval = setInterval(this.timeIncrement.bind(this), this.state.tick);
+        }
+    }
+
+    debounce () {
+        this.setState({ idleTime: 0 });
+    }
+
+    listenForActivity () {
+        this.throttledDebounce = _.throttle(this.debounce, this.state.tick);
+        window.addEventListener('mousemove', this.throttledDebounce);
+        window.addEventListener('keydown', this.throttledDebounce);
+    }
+
+    stopCountInactivity () {
+        if (this.timerInterval) {
+            clearInterval(this.timerInterval);
+            delete this.timerInterval;
+        }
+    }
+
+    resetInactivity () {
+        this.setState({ idleTime: 0, showDialog: false });
+    }
+
+    timeIncrement () {
+        this.setState({ idleTime: parseInt(this.state.idleTime + parseInt(this.state.tick)) });
+        if (this.state.idleTime > parseInt(this.state.idleTtl)) {
+            this.stopCountInactivity();
+
+            this.setState({
+                startTime: Date.now(),
+                showDialog: true
+            }, () => {
+                this.countdownToLogoutInterval = setInterval(this.countDownToCancel, 1000);
+            });
+        }
+    }
+
+    resetOrder () {
+		clearInterval(this.countdownToLogoutInterval);
+		clearInterval(this.timerInterval);
+
+		this.setState({ showDialog: false });
+		this.stopCountInactivity();
+		this.setState({ countInactivity: false });
+		this.props.dispatch(routeActions.push('/anka'));
+		window.localStorage.removeItem('order');
+	}
+
+	countDownToCancel () {
+        const MODAL_COUNTDOWN_START = 120000; //2 minutes
+        const startTime = this.state.startTime;
+        const timeDiff = Date.now() - startTime;
+        const ns = (((MODAL_COUNTDOWN_START - timeDiff) / 1000) >> 0);
+        const m = (ns / 60) >> 0;
+        const s = ns - m * 60;
+
+        if (ns > 0) {
+            this.setState({ timeRemaining: m + ':' + (('' + s).length > 1 ? '' : '0') + s });
+        }
+
+        if (ns === 0) {
+            this.resetOrder();
+        }
+	}
+
+	initActivation () {
+		window.addEventListener('mousemove', () => {
+			this.setState({ activity: 0 });
+		});
+
+		this.activityLoop = setInterval(() => {
+            let activity = this.state.activity;
+            this.setState({ activity: activity + 10 });
+
+            if (this.state.activity === 10) {
+                clearInterval(this.activityLoop);
+                this.countDownToCancel();
+            }
+		}, 10000);
 	}
 
     /**
@@ -201,7 +316,6 @@ export class Checkout extends FormComponent {
      */
 	render () {
 		const { t } = this.props;
-
 		const front = (this.state.save === true) ? 'front none' : 'front';
         const back = (this.state.save === false) ? 'back none' : 'back';
 
@@ -222,6 +336,21 @@ export class Checkout extends FormComponent {
 
 		return (
 			<div className="page">
+                {(() => {
+                    if (this.state.showDialog === true) {
+                        return (
+							<div className="activity-wrapper">
+								<div className="box">
+									<p>Du har varit inaktiv en längre tid, om du inte klickar på forsätt mitt köp kommer
+										din påbörjade beställning att avslutas
+										och om {this.state.timeRemaining} minuter kommer du att dirigeras om till
+										startsidan.</p>
+									<button onClick={this.closeDialog}>Fortsätt</button>
+								</div>
+							</div>
+                        )
+                    }
+				})()}
 				<div className={spinnerClass}>
 					<div className="loader">
 						<svg className="circular" viewBox="25 25 50 50">
