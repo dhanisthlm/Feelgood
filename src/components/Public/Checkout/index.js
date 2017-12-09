@@ -56,24 +56,49 @@ export class Checkout extends FormComponent {
 		if (window.localStorage.getItem('order')) {
 			const cache = JSON.parse(window.localStorage.getItem('order'));
             this.setState({ ...cache, save: false });
-		}
+		} else {
+            this.props.dispatch(routeActions.push('/anka'));
+        }
 	}
 
 	componentDidMount () {
-        this.startCountInactivity();
-        this.listenForActivity();
-        this.props.dispatch(getIssues());
-        this.calculateViewportSize();
-        this.initStripe();
+        if (window.localStorage.getItem('order')) {
+            this.startCountInactivity();
+            this.listenForActivity();
+            this.props.dispatch(getIssues());
+            this.calculateViewportSize();
+            this.initStripe();
+        }
 	}
 
+    /**
+     * This callback type is called `requestCallback
+     * @callback requestCallback
+     * @param {number} responseCode
+     * @return {object}
+     */
     componentWillReceiveProps (nextProps) {
 		this.setState({ issues: nextProps.issues });
+
 		if (nextProps.save === true) {
+			window.localStorage.removeItem('order');
+            window.removeEventListener('mousemove', this.throttledDebounce);
+            window.removeEventListener('keydown', this.throttledDebounce);
+            this.stopCountInactivity();
 			this.setState({ showSpinner: false, save: true });
+		}
+
+		if (nextProps.errorMessage.length) {
+            this.setState({ showSpinner: false });
 		}
 	}
 
+    /**
+     * This callback type is called `requestCallback
+     * @callback requestCallback
+     * @param {number} responseCode
+     * @return {object}
+     */
     closeDialog () {
         clearInterval(this.countdownToLogoutInterval);
         this.setState({ showDialog: false, timeRemaining: '' });
@@ -81,22 +106,46 @@ export class Checkout extends FormComponent {
         this.startCountInactivity();
     }
 
+    /**
+     * This callback type is called `requestCallback
+     * @callback requestCallback
+     * @param {number} responseCode
+     * @return {object}
+     */
     startCountInactivity () {
         if (!this.timerInterval) {
             this.timerInterval = setInterval(this.timeIncrement.bind(this), this.state.tick);
         }
     }
 
+    /**
+     * This callback type is called `requestCallback
+     * @callback requestCallback
+     * @param {number} responseCode
+     * @return {object}
+     */
     debounce () {
         this.setState({ idleTime: 0 });
     }
 
+    /**
+     * This callback type is called `requestCallback
+     * @callback requestCallback
+     * @param {number} responseCode
+     * @return {object}
+     */
     listenForActivity () {
         this.throttledDebounce = _.throttle(this.debounce, this.state.tick);
         window.addEventListener('mousemove', this.throttledDebounce);
         window.addEventListener('keydown', this.throttledDebounce);
     }
 
+    /**
+     * This callback type is called `requestCallback
+     * @callback requestCallback
+     * @param {number} responseCode
+     * @return {object}
+     */
     stopCountInactivity () {
         if (this.timerInterval) {
             clearInterval(this.timerInterval);
@@ -104,10 +153,22 @@ export class Checkout extends FormComponent {
         }
     }
 
+    /**
+     * This callback type is called `requestCallback
+     * @callback requestCallback
+     * @param {number} responseCode
+     * @return {object}
+     */
     resetInactivity () {
         this.setState({ idleTime: 0, showDialog: false });
     }
 
+    /**
+     * This callback type is called `requestCallback
+     * @callback requestCallback
+     * @param {number} responseCode
+     * @return {object}
+     */
     timeIncrement () {
         this.setState({ idleTime: parseInt(this.state.idleTime + parseInt(this.state.tick)) });
         if (this.state.idleTime > parseInt(this.state.idleTtl)) {
@@ -122,6 +183,12 @@ export class Checkout extends FormComponent {
         }
     }
 
+    /**
+     * This callback type is called `requestCallback
+     * @callback requestCallback
+     * @param {number} responseCode
+     * @return {object}
+     */
     resetOrder () {
 		clearInterval(this.countdownToLogoutInterval);
 		clearInterval(this.timerInterval);
@@ -130,9 +197,18 @@ export class Checkout extends FormComponent {
 		this.stopCountInactivity();
 		this.setState({ countInactivity: false });
 		this.props.dispatch(routeActions.push('/anka'));
+
 		window.localStorage.removeItem('order');
+        window.removeEventListener('mousemove', this.throttledDebounce);
+        window.removeEventListener('keydown', this.throttledDebounce);
 	}
 
+    /**
+     * This callback type is called `requestCallback
+     * @callback requestCallback
+     * @param {number} responseCode
+     * @return {object}
+     */
 	countDownToCancel () {
         const MODAL_COUNTDOWN_START = 120000; //2 minutes
         const startTime = this.state.startTime;
@@ -148,22 +224,6 @@ export class Checkout extends FormComponent {
         if (ns === 0) {
             this.resetOrder();
         }
-	}
-
-	initActivation () {
-		window.addEventListener('mousemove', () => {
-			this.setState({ activity: 0 });
-		});
-
-		this.activityLoop = setInterval(() => {
-            let activity = this.state.activity;
-            this.setState({ activity: activity + 10 });
-
-            if (this.state.activity === 10) {
-                clearInterval(this.activityLoop);
-                this.countDownToCancel();
-            }
-		}, 10000);
 	}
 
     /**
@@ -315,9 +375,13 @@ export class Checkout extends FormComponent {
      * @return {object}
      */
 	render () {
+		if (!window.localStorage.getItem('order') && this.props.save === false) {
+			return null;
+		}
+
 		const { t } = this.props;
-		const front = (this.state.save === true) ? 'front none' : 'front';
-        const back = (this.state.save === false) ? 'back none' : 'back';
+		const front = (!window.localStorage.getItem('order')) ? 'front none' : 'front';
+        const back = (window.localStorage.getItem('order')) ? 'back none' : 'back';
 
         const skypeCost = this.state.data.skype ? this.state.data.skype.cost : 0;
         const skypeDurationFactor = this.state.data.skypeDuration.factor;
@@ -460,6 +524,17 @@ export class Checkout extends FormComponent {
 											})()}
 										</tbody>
 									</table>
+									<div>
+                                        {(() => {
+                                            if (this.props.errorMessage.length > 0) {
+                                            	return (
+                                            		<div className="card-error">
+														<p>Unformately we could not process your order, {this.props.errorMessage}.</p>
+													</div>
+												)
+											}
+										})()}
+									</div>
 								</div>
 
 								<div ref={(front) => { this.front = front; }} className={front}>
@@ -532,14 +607,11 @@ export class Checkout extends FormComponent {
 									</form>
 								</div>
 								<div className={back}>
-									<p>{ t('pleasePay') }</p>
-									<p>YYY YYY YYY YYY</p>
-									<p>{ t('includeIdData')}</p>
-									<p >{this.props.cost.code}</p>
-									<p>{ t('callbackAffirmation') }</p>
-									<p>{ t('invoiceAffirmation') }</p>
-									<p>Mnogo hvala, tim zdravilje</p>
-									<button onClick={ this.resetCheckout }>{ t('close') }</button>
+									<div>
+										<p>Your payment succeded and your card has been charged with</p>
+										<p>Mnogo hvala, tim zdravilje</p>
+										<button onClick={ this.resetCheckout }>{ t('close') }</button>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -560,7 +632,9 @@ Checkout.propTypes = { dispatch: PropTypes.func };
 const mapStateToProps = (state) => ({
 	save: state.encounter.saved,
 	cost: state.encounter.cost,
-	issues: state.issue.list
+	issues: state.issue.list,
+	stripe: state.encounter.stripe,
+	errorMessage: state.encounter.errorMessage
 });
 
 export default connect(mapStateToProps)(translate('checkoutView')(validation(strategy(i18nValidation()))(Checkout)));

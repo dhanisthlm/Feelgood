@@ -8,7 +8,7 @@ const getEncounters = (request, reply) => {
     });
 };
 
-const saveEncounter = (request, reply) => {
+const saveEncounter = (request, reply, charge) => {
     const encounter = new Encounter();
     let skypePrice = 0;
     let emailPrice = 0;
@@ -37,7 +37,7 @@ const saveEncounter = (request, reply) => {
     encounter.date = date.toUTCString();
 
     encounter.save();
-    return reply(200);
+    return reply(charge);
 };
 
 const handleCharge = (request, reply) => {
@@ -52,10 +52,13 @@ const handleCharge = (request, reply) => {
         currency: "BAM",
         description: "Example charge",
         source: token,
-    }, function(err, charge) {
-        console.log('err', err);
+    }, function(error, charge) {
+        if (error) return reply({
+            message: error.message, code: error.type
+        });
+
         if (charge.paid) {
-            saveEncounter(request, reply);
+            saveEncounter(request, reply, charge);
         }
     });
 };
@@ -72,6 +75,13 @@ exports.register = (server, options, next) => {
         {
             method: 'POST',
             path: '/encounter',
+            config: {
+                handler: handleCharge
+            }
+        },
+        {
+            method: 'POST',
+            path: '/checkout',
             config: {
                 handler: handleCharge
             }

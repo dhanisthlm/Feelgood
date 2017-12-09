@@ -7,9 +7,10 @@ export default handleActions({
             list: action.payload
         }
     },
-    ENCOUNTER_SAVED: (state) => {
+    ENCOUNTER_SAVED: (state, action) => {
         return {
             ...state,
+            stripe: action.payload,
             saved: true
         }
     },
@@ -27,12 +28,20 @@ export default handleActions({
             emailDiscount: action.payload.emailDiscount,
             promoDiscount: action.payload.promoDiscount
         }
+    },
+    CHECKOUT_ERROR: (state, action) => {
+        return {
+            ...state,
+            errorMessage: action.payload
+        }
     }
 }, {
     saved: false,
     list: [],
     data: {},
     cost: {},
+    stripe: {},
     emailDiscount: 0,
-    promoDiscount: 0
+    promoDiscount: 0,
+    errorMessage: ''
 })

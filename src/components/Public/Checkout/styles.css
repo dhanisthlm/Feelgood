@@ -12,6 +12,20 @@
     background: #c04c9c;
 }
 
+.checkout .card-error {
+    float: left;
+    margin-left: 61px;
+}
+
+.checkout .card-error p {
+    font-size: 18px !important;
+    color: #fff !important;
+    max-width: 400px;
+    padding: 10px;
+    border-radius: 3px;
+    background-color: #c04c9c;
+}
+
 .checkout .page-header h1 {
     text-align: center;
     color: #fff;

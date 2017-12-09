@@ -15,7 +15,11 @@ export const saveEncounter = (id, encounter) => (dispatch) => {
     return request
         .post('/encounter', { id, encounter })
         .then((data) => {
-            dispatch({ type: 'ENCOUNTER_SAVED' });
+            if (data.data.code === 'StripeCardError') {
+                dispatch({type: 'CHECKOUT_ERROR', payload: data.data.message });
+            } else {
+                dispatch({type: 'ENCOUNTER_SAVED', payload: data});
+            }
         })
         .catch((error) => {
             console.log('error', error);
