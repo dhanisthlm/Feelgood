@@ -629,6 +629,14 @@ export class Checkout extends FormComponent {
 								<div className={back}>
 									<div>
 										<p>Vaša uplata je uspješna i dobili smo vašu porudžbinu. Uskoro ćemo vas kontaktirati.</p>
+										<div className="rating">
+											<p className="rating-text">Betyp på zdravlje.nu</p>
+											<span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
+										</div>
+										<div className="rating">
+											<p className="rating-text">Upplevelse av betallösning</p>
+											<span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
+										</div>
 										<p>Mnogo hvala, tim zdravilje</p>
 										<button onClick={ this.resetCheckout }>Na prvu stranicu</button>
 									</div>

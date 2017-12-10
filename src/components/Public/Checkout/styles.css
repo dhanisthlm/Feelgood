@@ -212,6 +212,33 @@
     color: #c04c9c !important;
 }
 
+.checkout .rating {
+    unicode-bidi: bidi-override;
+    direction: rtl;
+    overflow: hidden;
+    margin-top: 13px;
+}
+
+.checkout .rating-text {
+    float: left;
+    margin: 0;
+    line-height: 43px;
+    font-size: 25px;
+    margin-top: 0 !important;
+}
+
+.checkout .rating > span {
+    display: inline-block;
+    position: relative;
+    width: 40px;
+    font-size: 34px;
+}
+.checkout .rating > span:hover:before,
+.checkout .rating > span:hover ~ span:before {
+    content: "\2605";
+    position: absolute;
+}
+
 .checkout .basket input {
     display: block;
     margin-bottom: 3px;
