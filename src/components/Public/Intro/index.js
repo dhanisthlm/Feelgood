@@ -23,8 +23,8 @@ export class Hero extends Component {
         return (
             <div className="introduction">
                 <div ref="cookie-wrapper" className="cookie-wrapper">
-                    <p>Vi använder cookies för att uppdatera pågående beästllning. Ingen data sparas och tas bort i samband med köp</p>
-                    <button>Okej</button>
+                    <p>Mi koristimo kolačiće za ažuriranje trenutnog porudžbina. Podaci se čuvaju samo privremeno i uklanjaju zajedno sa kompletnom kupovinom.</p>
+                    <button>OK</button>
                 </div>
                 <img src="/images/flowers.jpg" alt="hero-image" />
                 <div className="text-wrapper">
