@@ -54,7 +54,7 @@ const handleCharge = (request, reply) => {
         source: token,
     }, function(error, charge) {
         if (error) return reply({
-            message: error.message, code: error.type
+            message: error.code, code: error.type
         });
 
         if (charge.paid) {

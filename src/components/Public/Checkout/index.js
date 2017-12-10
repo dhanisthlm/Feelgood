@@ -405,11 +405,8 @@ export class Checkout extends FormComponent {
                         return (
 							<div className="activity-wrapper">
 								<div className="box">
-									<p>Du har varit inaktiv en längre tid, om du inte klickar på forsätt mitt köp kommer
-										din påbörjade beställning att avslutas
-										och om {this.state.timeRemaining} minuter kommer du att dirigeras om till
-										startsidan.</p>
-									<button onClick={this.closeDialog}>Fortsätt</button>
+									<p>Dugo ste bili neaktivni, ako ne kliknete na moju kupovinu, vaš započeti nalog će se završiti i u {this.state.timeRemaining} minuta ćete biti preusmereni na početnu stranicu.</p>
+									<button onClick={this.closeDialog}>Nastaviti</button>
 								</div>
 							</div>
                         )
@@ -420,7 +417,7 @@ export class Checkout extends FormComponent {
 						<svg className="circular" viewBox="25 25 50 50">
 							<circle className="path" cx="50" cy="50" r="20" fill="none" strokeWidth="2" strokeMiterlimit="10"/>
 						</svg>
-						<p className="processing-text">Processing purchase</p>
+						<p className="processing-text">Obrada nabavke</p>
 					</div>
 				</div>
 				<Header location={this.props.location} />
@@ -529,7 +526,7 @@ export class Checkout extends FormComponent {
                                             if (this.props.errorMessage.length > 0) {
                                             	return (
                                             		<div className="card-error">
-														<p>Unformately we could not process your order, {this.props.errorMessage}.</p>
+														<p>Neformalno smo mogli da obradimo vašu narudžbinu. {t(`stripe.${this.props.errorMessage}`)}</p>
 													</div>
 												)
 											}
