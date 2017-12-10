@@ -428,112 +428,135 @@ export class Checkout extends FormComponent {
 						</div>
 						<div className="outer-frame">
 							<div className="inner-frame">
-								<div className="left-col-wrapper">
-									<table>
-										<colgroup>
-											<col width={ firstColSize } />
-											<col width="20%" />
-											<col width={ lastColSize } />
-										</colgroup>
-										<thead>
-											<tr>
-												<th>{ t('item') }</th>
-												<th>{ t('weeks') }</th>
-												<th>{ t('price') }</th>
-											</tr>
-										</thead>
-										<tbody>
-											{(() => {
-												if (this.state.data.skype) {
-													return(
-														<tr>
-															<td>{ this.state.data.skype.description }</td>
-															<td className="center">{ this.state.data.skype.week }</td>
-															<td className="right">{ Math.round(skypeCost * skypeDurationFactor) } KM</td>
-														</tr>
-													)
-												}
-											})()}
-											{(() => {
-												if (this.state.data.email) {
-													return(
-														<tr>
-															<td>{this.state.data.email.description}</td>
-															<td className="center">{ this.state.data.email.week }</td>
-															<td className="right">{ this.state.data.email.cost } KM</td>
-														</tr>
-													)
-												}
-											})()}
-											<tr>
-												<td>&nbsp;</td>
-												<td>&nbsp;</td>
-												<td>&nbsp;</td>
-											</tr>
-											<tr>
-												<td className={sumClass} colSpan="2">{ t('sum') }</td>
-												<td className={sumClass}>{Math.round(skypeCost * skypeDurationFactor) + (emailCost * nWeeks)} KM</td>
-											</tr>
-											{(() => {
-												if (this.state.data.packageDiscount) {
-													return (
-														<tr>
-															<td className="right" colSpan="2">{ t('packageDiscount') }</td>
-															<td className="right">{ this.state.data.packageDiscount } KM</td>
-														</tr>
-													)
-												}
-											})()}
-											{(() => {
-												if (this.state.data.packageDiscount > 0) {
-													const className = this.state.data.promoDiscount
-														? 'right' : 'right heavy';
+                                {(() => {
+                                    if (window.localStorage.getItem('order')) {
+                                        return (
+											<div className="left-col-wrapper">
+												<table>
+													<colgroup>
+														<col width={ firstColSize }/>
+														<col width="20%"/>
+														<col width={ lastColSize }/>
+													</colgroup>
+													<thead>
+													<tr>
+														<th>{ t('item') }</th>
+														<th>{ t('weeks') }</th>
+														<th>{ t('price') }</th>
+													</tr>
+													</thead>
+													<tbody>
+                                                    {(() => {
+                                                        if (this.state.data.skype) {
+                                                            return (
+																<tr>
+																	<td>{ this.state.data.skype.description }</td>
+																	<td className="center">{ this.state.data.skype.week }</td>
+																	<td className="right">{ Math.round(skypeCost * skypeDurationFactor) }
+																		KM
+																	</td>
+																</tr>
+                                                            )
+                                                        }
+                                                    })()}
+                                                    {(() => {
+                                                        if (this.state.data.email) {
+                                                            return (
+																<tr>
+																	<td>{this.state.data.email.description}</td>
+																	<td className="center">{ this.state.data.email.week }</td>
+																	<td className="right">{ this.state.data.email.cost }
+																		KM
+																	</td>
+																</tr>
+                                                            )
+                                                        }
+                                                    })()}
+													<tr>
+														<td>&nbsp;</td>
+														<td>&nbsp;</td>
+														<td>&nbsp;</td>
+													</tr>
+													<tr>
+														<td className={sumClass} colSpan="2">{ t('sum') }</td>
+														<td className={sumClass}>{Math.round(skypeCost * skypeDurationFactor) + (emailCost * nWeeks)}
+															KM
+														</td>
+													</tr>
+                                                    {(() => {
+                                                        if (this.state.data.packageDiscount) {
+                                                            return (
+																<tr>
+																	<td className="right"
+																		colSpan="2">{ t('packageDiscount') }</td>
+																	<td className="right">{ this.state.data.packageDiscount }
+																		KM
+																	</td>
+																</tr>
+                                                            )
+                                                        }
+                                                    })()}
+                                                    {(() => {
+                                                        if (this.state.data.packageDiscount > 0) {
+                                                            const className = this.state.data.promoDiscount
+                                                                ? 'right' : 'right heavy';
 
-													return (
-														<tr>
-															<td className={className} colSpan="2">{ t('sumWithPackageDiscount')}</td>
-															<td className={className}>
-																{ (Math.round(this.state.data.skype.cost * skypeDurationFactor) + (emailCost * nWeeks)) - this.state.data.packageDiscount } KM
-															</td>
-														</tr>
-													)
-												}
-											})()}
-											{(() => {
-												if (this.state.data.promoDiscount) {
-													return(
-														<tr>
-															<td className="right" colSpan="2">{ t('voucherDiscount') }</td>
-															<td className="right">{ this.state.data.promoDiscount } KM</td>
-														</tr>
-													)
-												}
-											})()}
-											{(() => {
-												if (this.state.data.promoDiscount) {
-													return (
-														<tr>
-															<td className="right heavy" colSpan="2">{ t('total') }</td>
-															<td className="right heavy">{ this.state.cost.total } KM</td>
-														</tr>
-													)
-												}
-											})()}
-										</tbody>
-									</table>
-									<div>
-                                        {(() => {
-                                            if (this.props.errorMessage.length > 0) {
-                                            	return (
-                                            		<div className="card-error">
-														<p>Neformalno smo mogli da obradimo vašu narudžbinu. {t(`stripe.${this.props.errorMessage}`)}</p>
-													</div>
-												)
-											}
-										})()}
-									</div>
-								</div>
-
+                                                            return (
+																<tr>
+																	<td className={className}
+																		colSpan="2">{ t('sumWithPackageDiscount')}</td>
+																	<td className={className}>
+                                                                        { (Math.round(this.state.data.skype.cost * skypeDurationFactor) + (emailCost * nWeeks)) - this.state.data.packageDiscount }
+																		KM
+																	</td>
+																</tr>
+                                                            )
+                                                        }
+                                                    })()}
+                                                    {(() => {
+                                                        if (this.state.data.promoDiscount) {
+                                                            return (
+																<tr>
+																	<td className="right"
+																		colSpan="2">{ t('voucherDiscount') }</td>
+																	<td className="right">{ this.state.data.promoDiscount }
+																		KM
+																	</td>
+																</tr>
+                                                            )
+                                                        }
+                                                    })()}
+                                                    {(() => {
+                                                        if (this.state.data.promoDiscount) {
+                                                            return (
+																<tr>
+																	<td className="right heavy"
+																		colSpan="2">{ t('total') }</td>
+																	<td className="right heavy">{ this.state.cost.total }
+																		KM
+																	</td>
+																</tr>
+                                                            )
+                                                        }
+                                                    })()}
+													</tbody>
+												</table>
+												<div>
+                                                    {(() => {
+                                                        if (this.props.errorMessage.length > 0) {
+                                                            return (
+																<div className="card-error">
+																	<p>Neformalno smo mogli da obradimo vašu
+																		narudžbinu. {t(`stripe.${this.props.errorMessage}`)}</p>
+																</div>
+                                                            )
+                                                        }
+                                                    })()}
+												</div>
+											</div>
+                                        )
+                                    }
+                                })()}
 								<div ref={(front) => { this.front = front; }} className={front}>
 									<form id="payment-form" action="/charge" method="post">
 										<div className="form-element-wrapper">
@@ -605,9 +628,9 @@ export class Checkout extends FormComponent {
 								</div>
 								<div className={back}>
 									<div>
-										<p>Your payment succeded and your card has been charged with</p>
+										<p>Vaša uplata je uspješna i dobili smo vašu porudžbinu. Uskoro ćemo vas kontaktirati.</p>
 										<p>Mnogo hvala, tim zdravilje</p>
-										<button onClick={ this.resetCheckout }>{ t('close') }</button>
+										<button onClick={ this.resetCheckout }>Na prvu stranicu</button>
 									</div>
 								</div>
 							</div>

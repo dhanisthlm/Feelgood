@@ -7,7 +7,7 @@ export const i18nValidation = function () {
             string: {
                 regex: {
                     base: '!!Netačan format telefona',
-                    phone: '!!Netačan format telefona',
+                    phone: '!!Netačan format telefona'
                 },
                 email: '!!Netačan format e-pošte',
             },

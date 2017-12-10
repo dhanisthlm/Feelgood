@@ -11,6 +11,7 @@ export default handleActions({
         return {
             ...state,
             stripe: action.payload,
+            errorMessage: '',
             saved: true
         }
     },
@@ -26,7 +27,8 @@ export default handleActions({
             data: action.payload.data,
             cost: action.payload.cost,
             emailDiscount: action.payload.emailDiscount,
-            promoDiscount: action.payload.promoDiscount
+            promoDiscount: action.payload.promoDiscount,
+            errorMessage: ''
         }
     },
     CHECKOUT_ERROR: (state, action) => {

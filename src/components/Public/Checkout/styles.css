@@ -12,6 +12,11 @@
     background: #c04c9c;
 }
 
+.checkout .basket .back > div {
+    margin: 60px auto;
+    width: 500px;
+}
+
 .checkout .card-error {
     float: left;
     margin-left: 55px;
@@ -21,13 +26,13 @@
     color: #fff !important;
     margin-top: 27px;
     margin-bottom: 0;
-    text-align: left;
     box-sizing: border-box;
     font-size: 17px !important;
     max-width: 427px;
     padding: 12px 15px 14px 15px;
     border-radius: 3px;
     background-color: #731b58;
+    text-align: center;
 }
 
 .checkout .page-header h1 {
@@ -67,25 +72,31 @@
 }
 
 .checkout .basket .back {
-    color: #c04c9c;
-    margin-left: 55px;
-    float: left;
-    width: 40%;
-    margin-left: 55px;
-    margin-top: 20px;
+    //color: #c04c9c;
+    //margin-left: 55px;
+    //float: left;
+    //width: 40%;
+    //margin-left: 55px;
+    //margin-top: 20px;
 }
 
 .checkout .basket .front,
 .checkout .basket .back {
     color: #c04c9c;
-    display: inline-block;
-    margin-top: 20px;
+    //display: inline-block;
+    //margin-top: 20px;
 }
 
 .checkout .basket p {
     color: #333;
     font-size: 23px;
     font-weight: 300;
+}
+
+.checkout .basket > div p:first-child {
+    margin-bottom: 0;
+    text-align: left;
+    font-size: 22px;
 }
 
 .checkout .basket p:nth-child(1) {
@@ -95,11 +106,10 @@
 }
 
 .checkout .basket p:nth-child(2) {
-    margin: 7px 0 0;
     font-weight: 300;
     color: #c04c9c;
-    font-size: 27px;
-    text-align: center;
+    margin: 7px 0 0;
+    font-size: 22px;
 }
 
 .checkout .basket p:nth-child(3) {
@@ -199,6 +209,7 @@
     font-size: 14px;
     width: 100%;
     text-align: left;
+    color: #c04c9c !important;
 }
 
 .checkout .basket input {
@@ -659,11 +670,11 @@ thead tr {
     }
 
     .checkout .basket .back {
-        margin-left: 0;
-        width: 85%;
-        box-sizing: border-box;
-        margin: 0 auto;
-        display: block;
-        float: none;
+        //margin-left: 0;
+        //width: 85%;
+        //box-sizing: border-box;
+        //margin: 0 auto;
+        //display: block;
+        //float: none;
     }
 }
