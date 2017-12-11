@@ -15,7 +15,7 @@ export const saveRating = (encounterId, ratingObj) => (dispatch) => {
     const payload = { id: encounterId, ratingObj };
     return request
         .post('/rating', payload)
-        .then((data) => {
+        .then(() => {
             dispatch({ type: 'RATING_SAVED' });
         })
         .catch((error) => {

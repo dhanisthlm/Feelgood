@@ -15,9 +15,9 @@ const handleRating = (request, reply) => {
                web: request .payload.ratingObj.web,
                pay: request.payload.ratingObj.pay,
                comment: request.payload.ratingObj.comment
-           }
+           };
            encounter[0].save();
-           return reply(encounter);
+           return reply().code(200);
        }
    })
 };
