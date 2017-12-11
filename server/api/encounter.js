@@ -22,6 +22,13 @@ const handleRating = (request, reply) => {
    })
 };
 
+const handleErase = (request, reply) => {
+    Encounter.remove({ '_id': request.params.id }, (err, encounter) => {
+        if (err) return reply(err);
+        return reply().code(200);
+    })
+};
+
 const saveEncounter = (request, reply, charge) => {
     const encounter = new Encounter();
     let skypePrice = 0;
@@ -107,6 +114,13 @@ exports.register = (server, options, next) => {
             path: '/rating',
             config: {
                 handler: handleRating
+            }
+        },
+        {
+            method: 'DELETE',
+            path: '/encounter/{id}',
+            config: {
+                handler: handleErase
             }
         }
     ]);

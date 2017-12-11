@@ -13,7 +13,14 @@ export default handleActions({
             stripe: action.payload,
             errorMessage: '',
             saved: true,
-            rating: false
+            rating: false,
+            erased: false
+        }
+    },
+    ENCOUNTER_DELETED: (state, action) => {
+        return {
+            ...state,
+           erased: true
         }
     },
     RATING_SAVED: (state, action) => {
@@ -53,5 +60,6 @@ export default handleActions({
     emailDiscount: 0,
     promoDiscount: 0,
     errorMessage: '',
-    rating: false
+    rating: false,
+    erased: false
 })

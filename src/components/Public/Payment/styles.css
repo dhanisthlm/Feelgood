@@ -298,6 +298,7 @@
     float: right;
     margin-top: 1px;
     cursor: pointer;
+    border-radius: 3px;
 }
 
 .payment + .text-wrapper .total {

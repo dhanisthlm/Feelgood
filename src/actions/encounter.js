@@ -11,6 +11,17 @@ export const getEncounters = () => (dispatch) => {
         });
 };
 
+export const eraseEncounter = (id) => (dispatch) => {
+    return request
+        .delete(`/encounter/${id}`)
+        .then(() => {
+            dispatch({ type: 'ENCOUNTER_DELETED'});
+        })
+        .catch((error) => {
+            console.log('error', error);
+        });
+};
+
 export const saveRating = (encounterId, ratingObj) => (dispatch) => {
     const payload = { id: encounterId, ratingObj };
     return request

@@ -2,10 +2,14 @@
     margin-top: 100px;
 }
 
+.page.admin {
+    max-width: none !important;
+}
+
 .admin-table {
-    width: 90%;
-    margin-top: 0;
+    width: 95%;
     padding-top: 100px;
+    margin: 0 auto;
 }
 
 .mobile-list {
@@ -13,7 +17,25 @@
 }
 
 .admin-table td {
-    text-align: center;
+    text-align: center !important;
+    font-size: 14px;
+}
+
+.admin-table th {
+    margin-right: 70px;
+    margin-top: 109px;
+    margin-left: 45px;
+    width: 389px;
+    font-weight: 300;
+    font-size: 14px;
+    color: #fff;
+    padding: 5px;
+}
+
+.admin-table td svg {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
 }
 
 .admin-heading {
@@ -42,13 +64,14 @@
     background-color: #c04c9c;
     border: none;
     color: #fff;
-    font-size: 21px;
+    font-size: 17px;
     font-weight: 200;
     cursor: pointer;
     outline: 0;
     position: absolute;
     top: 187px;
     right: 67px;
+    border-radius: 3px;
 }
 
 @media only screen and (max-width: 500px) {
