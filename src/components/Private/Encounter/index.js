@@ -37,8 +37,6 @@ export class Encounter extends Component {
     }
 
     render () {
-        console.log(this.props.encounters);
-
         return (
             <div className="page admin">
                 <Header location={this.props.location} />

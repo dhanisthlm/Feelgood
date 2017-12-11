@@ -70,7 +70,7 @@ export class Checkout extends FormComponent {
 	}
 
 	componentDidMount () {
-        if (window.localStorage.getItem('order')) {
+        if (window.localStorage.getItem('order') && !window.localStorage.getItem('saved')) {
             this.startCountInactivity();
             this.listenForActivity();
             this.props.dispatch(getIssues());
@@ -89,11 +89,18 @@ export class Checkout extends FormComponent {
 		this.setState({ issues: nextProps.issues });
 
 		if (nextProps.rating === true) {
+            window.localStorage.removeItem('saved');
+            window.localStorage.removeItem('order');
+            window.localStorage.removeItem('stripe');
 			this.props.dispatch(routeActions.push('/anka'));
 		}
 
+		if (Object.keys(nextProps.stripe).length) {
+			window.localStorage.setItem('stripe', JSON.stringify(nextProps.stripe));
+		}
+
 		if (nextProps.save === true) {
-			window.localStorage.removeItem('order');
+			window.localStorage.setItem('saved', true);
             window.removeEventListener('mousemove', this.throttledDebounce);
             window.removeEventListener('keydown', this.throttledDebounce);
             this.stopCountInactivity();
@@ -106,8 +113,10 @@ export class Checkout extends FormComponent {
 	}
 
 	postRating () {
+    	const stripe = JSON.parse(window.localStorage.getItem('stripe'));
+    	const id = stripe.data.encounterId;
     	this.props.dispatch(saveRating(
-    		this.props.stripe.data.encounterId, {
+    		id, {
 				web: 5 - this.state.webRating +1,
 				pay: 10 - this.state.payRating + 1,
 				comment: this.state.ratingComment
@@ -267,6 +276,8 @@ export class Checkout extends FormComponent {
 		this.props.dispatch(routeActions.push('/anka'));
 
 		window.localStorage.removeItem('order');
+        window.localStorage.removeItem('stripe');
+        window.localStorage.removeItem('saved');
         window.removeEventListener('mousemove', this.throttledDebounce);
         window.removeEventListener('keydown', this.throttledDebounce);
 	}
@@ -301,6 +312,7 @@ export class Checkout extends FormComponent {
      * @return {object}
      */
     initStripe () {
+    	if (typeof Stripe === 'undefined') return;
         const stripe = Stripe('pk_test_CxCOETD4ltbadc9SZWuF2jm9');
         const elements = stripe.elements({ locale: 'en' });
         const card = elements.create('card', { placeholder: 'Card' });
@@ -444,12 +456,12 @@ export class Checkout extends FormComponent {
      */
 	render () {
 		if (!window.localStorage.getItem('order') && this.props.save === false) {
-			return null;
+			//return null;
 		}
 
 		const { t } = this.props;
-		const front = (!window.localStorage.getItem('order')) ? 'front none' : 'front';
-        const back = (window.localStorage.getItem('order')) ? 'back none' : 'back';
+		const front = (!window.localStorage.getItem('saved')) ? 'front' : 'front none';
+        const back = (window.localStorage.getItem('saved')) ? 'back' : 'back none';
 
         const skypeCost = this.state.data.skype ? this.state.data.skype.cost : 0;
         const skypeDurationFactor = this.state.data.skypeDuration.factor;
@@ -497,7 +509,7 @@ export class Checkout extends FormComponent {
 						<div className="outer-frame">
 							<div className="inner-frame">
                                 {(() => {
-                                    if (window.localStorage.getItem('order')) {
+                                    if (!window.localStorage.getItem('saved')) {
                                         return (
 											<div className="left-col-wrapper">
 												<table>

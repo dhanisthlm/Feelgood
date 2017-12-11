@@ -8,13 +8,29 @@ export class Hero extends Component {
         super(props);
 
         this.state = {};
+
+        this.handleCookie = this.handleCookie.bind(this);
     }
 
     componentDidMount () {
+        window.localStorage.removeItem('order');
+        window.localStorage.removeItem('saved');
+        window.localStorage.removeItem('stripe');
+
         setTimeout(() => {
+            const hasCookie = window.localStorage.getItem('cookie');
             const cookieWrapper = this.refs['cookie-wrapper'];
-            cookieWrapper.classList.add('visible');
-        }, 3000);
+
+            if (!hasCookie) {
+                cookieWrapper.classList.add('visible');
+            }
+        }, 2000);
+    }
+
+    handleCookie () {
+        const cookieWrapper = this.refs['cookie-wrapper'];
+        cookieWrapper.classList.remove('visible');
+        window.localStorage.setItem('cookie', true);
     }
 
     render () {
@@ -24,7 +40,7 @@ export class Hero extends Component {
             <div className="introduction">
                 <div ref="cookie-wrapper" className="cookie-wrapper">
                     <p>Mi koristimo kolačiće za ažuriranje trenutnog porudžbina. Podaci se čuvaju samo privremeno i uklanjaju zajedno sa kompletnom kupovinom.</p>
-                    <button>OK</button>
+                    <button onClick={this.handleCookie}>OK</button>
                 </div>
                 <img src="/images/flowers.jpg" alt="hero-image" />
                 <div className="text-wrapper">

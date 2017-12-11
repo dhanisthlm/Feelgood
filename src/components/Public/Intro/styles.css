@@ -49,6 +49,7 @@
     font-weight: 300;
     float: left;
     margin-left: 21px;
+    cursor: pointer;
 }
 
 .introduction .heading {

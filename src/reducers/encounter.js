@@ -4,7 +4,8 @@ export default handleActions({
     ENCOUNTERS: (state, action) => {
         return {
             ...state,
-            list: action.payload
+            list: action.payload,
+            erased: false
         }
     },
     ENCOUNTER_SAVED: (state, action) => {
@@ -15,6 +16,7 @@ export default handleActions({
             saved: true,
             rating: false,
             erased: false
+
         }
     },
     ENCOUNTER_DELETED: (state, action) => {
