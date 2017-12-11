@@ -15,6 +15,7 @@ module.exports = {
         new webpack.IgnorePlugin(/locale/, /moment$/),
         new webpack.optimize.DedupePlugin(),
         new webpack.optimize.OccurrenceOrderPlugin(),
+        new webpack.optimize.AggressiveMergingPlugin(),
         new webpack.DefinePlugin({
             'process.env.NODE_ENV': JSON.stringify('production'),
             'process.env.RAVEN_ENV': JSON.stringify('production'),
