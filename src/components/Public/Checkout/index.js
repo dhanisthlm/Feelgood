@@ -8,6 +8,7 @@ import FormComponent from '../../FormComponent';
 import { routeActions } from 'redux-simple-router';
 import { encounterValidator } from '../../../../validators/encounters';
 import { getIssues } from '../../../actions/issue';
+import { saveRating } from '../../../actions/encounter';
 import { i18nValidation } from  '../../../../helpers/validation';
 import { saveEncounter, resetEncounter } from '../../../actions/encounter';
 import Header from '../Header';
@@ -32,7 +33,10 @@ export class Checkout extends FormComponent {
             location: null,
             countInactivity: true,
             idleTtl: 10000,
-            tick: 10000
+            tick: 10000,
+			webRating: 0,
+			payRating: 0,
+            ratingComment: ''
 		};
 
 		this.validatorTypes = encounterValidator;
@@ -50,6 +54,10 @@ export class Checkout extends FormComponent {
         this.resetInactivity = this.resetInactivity.bind(this);
         this.debounce = this.debounce.bind(this);
         this.countDownToCancel = this.countDownToCancel.bind(this);
+        this.handleWebStar = this.handleWebStar.bind(this);
+        this.handlePayStar = this.handlePayStar.bind(this);
+        this.handleRatingComment = this.handleRatingComment.bind(this);
+        this.postRating = this.postRating.bind(this);
 	}
 
 	componentWillMount () {
@@ -80,6 +88,10 @@ export class Checkout extends FormComponent {
     componentWillReceiveProps (nextProps) {
 		this.setState({ issues: nextProps.issues });
 
+		if (nextProps.rating === true) {
+			this.props.dispatch(routeActions.push('/anka'));
+		}
+
 		if (nextProps.save === true) {
 			window.localStorage.removeItem('order');
             window.removeEventListener('mousemove', this.throttledDebounce);
@@ -92,6 +104,62 @@ export class Checkout extends FormComponent {
             this.setState({ showSpinner: false });
 		}
 	}
+
+	postRating () {
+    	this.props.dispatch(saveRating(
+    		this.props.stripe.data.encounterId, {
+				web: 5 - this.state.webRating +1,
+				pay: 10 - this.state.payRating + 1,
+				comment: this.state.ratingComment
+			}
+		))
+	}
+
+	handleRatingComment (event) {
+    	this.setState({ ratingComment: event.target.value });
+	}
+
+    /**
+     * This callback type is called `requestCallback
+     * @callback requestCallback
+     * @param {number} responseCode
+     * @return {object}
+     */
+	handleWebStar (event) {
+        const stars = document.querySelector('.stars-1');
+        const star = stars.querySelectorAll('.star');
+
+        for (let i = 1; i <= 5; i++) {
+            if (event.target.id <= i) {
+                star[i - 1].classList.add('filled');
+            } else {
+                star[i - 1].classList.remove('filled');
+            }
+        }
+
+        this.setState({ webRating: event.target.id });
+	}
+
+    /**
+     * This callback type is called `requestCallback
+     * @callback requestCallback
+     * @param {number} responseCode
+     * @return {object}
+     */
+    handlePayStar (event) {
+        const stars = document.querySelector('.stars-2');
+        const star = stars.querySelectorAll('.star');
+
+		for (let i = 6; i <= 10; i++) {
+            if (event.target.id <= i) {
+                star[i - 6].classList.add('filled');
+            } else {
+                star[i - 6].classList.remove('filled');
+			}
+		}
+
+		this.setState({ payRating: event.target.id });
+    }
 
     /**
      * This callback type is called `requestCallback
@@ -628,17 +696,31 @@ export class Checkout extends FormComponent {
 								</div>
 								<div className={back}>
 									<div>
-										<p>Vaša uplata je uspješna i dobili smo vašu porudžbinu. Uskoro ćemo vas kontaktirati.</p>
+										<h2 className="back-header">Mnogo hvala</h2>
+										<p className="preamble">Vaša uplata je uspješna i dobili smo vašu porudžbinu. Uskoro ćemo vas kontaktirati.</p>
 										<div className="rating">
-											<p className="rating-text">Betyp på zdravlje.nu</p>
-											<span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
+											<p className="rating-text">Kako doživljavate web stranicu &#63;</p>
+											<div ref="stars-1" className="stars stars-1">
+												<span id="1" ref="star star-1" className="star" onClick={ this.handleWebStar }>☆</span>
+												<span id="2" ref="star star-2" className="star" onClick={ this.handleWebStar }>☆</span>
+												<span id="3" ref="star star-3" className="star" onClick={ this.handleWebStar }>☆</span>
+												<span id="4" ref="star star-4" className="star" onClick={ this.handleWebStar }>☆</span>
+												<span id="5" ref="star star-5" className="star" onClick={ this.handleWebStar }>☆</span>
+											</div>
 										</div>
 										<div className="rating">
-											<p className="rating-text">Upplevelse av betallösning</p>
-											<span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
+											<p className="rating-text">Kako se doživljava plaćanja &#63;</p>
+											<div ref="stars-2" className="stars stars-2">
+												<span id="6" ref="star star-6" className="star" onClick={ this.handlePayStar }>☆</span>
+												<span id="7" ref="star star-7" className="star" onClick={ this.handlePayStar }>☆</span>
+												<span id="8" ref="star star-8" className="star" onClick={ this.handlePayStar }>☆</span>
+												<span id="9" ref="star star-9" className="star" onClick={ this.handlePayStar }>☆</span>
+												<span id="10" ref="star star-10" className="star" onClick={ this.handlePayStar }>☆</span>
+											</div>
 										</div>
-										<p>Mnogo hvala, tim zdravilje</p>
-										<button onClick={ this.resetCheckout }>Na prvu stranicu</button>
+										<label className="comment-label">Ostali komentari</label>
+										<textarea onChange={this.handleRatingComment}>{this.state.ratingComment}</textarea>
+										<button onClick={ this.postRating }>Na Prvu stranicu</button>
 									</div>
 								</div>
 							</div>
@@ -662,6 +744,7 @@ const mapStateToProps = (state) => ({
 	cost: state.encounter.cost,
 	issues: state.issue.list,
 	stripe: state.encounter.stripe,
+	rating: state.encounter.rating,
 	errorMessage: state.encounter.errorMessage
 });
 

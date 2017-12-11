@@ -22,6 +22,10 @@ export const encounterValidator = Joi.object().keys({
 
     comment: Joi
         .string()
+        .allow('', null),
+
+    rating: Joi
+        .object()
         .allow('', null)
 
 }).options({

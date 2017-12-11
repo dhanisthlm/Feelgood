@@ -14,7 +14,7 @@
 
 .checkout .basket .back > div {
     margin: 60px auto;
-    width: 500px;
+    width: 520px;
 }
 
 .checkout .card-error {
@@ -69,6 +69,7 @@
     margin-left: 55px;
     float: left;
     width: 50%;
+    margin-top: 25px;
 }
 
 .checkout .basket .back {
@@ -94,29 +95,32 @@
 }
 
 .checkout .basket > div p:first-child {
-    margin-bottom: 0;
+    margin-bottom: 70px;
     text-align: left;
     font-size: 22px;
+    margin-top: 13px;
+    float: left;
+    height: 25px;
 }
 
-.checkout .basket p:nth-child(1) {
-    margin-top: 27px;
-    margin-bottom: 0;
-    text-align: left;
+.checkout .back-header {
+    font-size: 29px;
+    margin-bottom: 5px;
 }
 
-.checkout .basket p:nth-child(2) {
+.checkout .back-header + p {
+    margin-bottom: 37px !important;
+    color: #333 !important;
+}
+
+.checkout .baseket .back h3 {
+    font-size: 25px;
     font-weight: 300;
-    color: #c04c9c;
-    margin: 7px 0 0;
-    font-size: 22px;
+    margin-top: 1px;
 }
 
-.checkout .basket p:nth-child(3) {
-    padding-top: 5px;
-    margin-top: -2px;
-    margin-bottom: 0;
-    text-align: left;
+.checkout .baseket .back .comment-label {
+    font-size: 22px !important;
 }
 
 .checkout .basket .back button {
@@ -137,31 +141,6 @@
 
 .checkout .none {
     display: none !important;
-}
-
-.checkout .basket label:nth-child(2) {
-    margin-top: 15px;
-    margin-bottom: 0;
-}
-
-.checkout .basket p:nth-child(5) {
-    margin: 4px 0 14px;
-    text-align: left;
-}
-
-.checkout .basket p:nth-child(6) {
-    margin: 4px 0 14px;
-    text-align: left;
-}
-
-.checkout .basket p:nth-child(7) {
-    margin: 16px 0 0 0;
-    text-align: left;
-}
-
-.checkout .basket p:nth-child(8) {
-    margin: 5px 0 0 0;
-    text-align: left;
 }
 
 .checkout .basket .front h1 {
@@ -213,10 +192,16 @@
 }
 
 .checkout .rating {
+    overflow: hidden;
+    margin-top: -24px;
+    display: inline-block;
+    height: 56px;
+}
+
+.checkout .rating .stars {
     unicode-bidi: bidi-override;
     direction: rtl;
-    overflow: hidden;
-    margin-top: 13px;
+    float: left;
 }
 
 .checkout .rating-text {
@@ -225,19 +210,34 @@
     line-height: 43px;
     font-size: 25px;
     margin-top: 0 !important;
+    width: 320px;
 }
 
-.checkout .rating > span {
+.checkout .back .preamble {
+    font-weight: 300;
+    color: #c04c9c;
+    margin: 7px 0 0;
+    font-size: 22px;
+}
+
+.checkout .rating .stars span {
     display: inline-block;
     position: relative;
     width: 40px;
-    font-size: 34px;
+    font-size: 28px;
+    height: 42px;
 }
-.checkout .rating > span:hover:before,
-.checkout .rating > span:hover ~ span:before {
+.checkout .rating .stars span:hover:before,
+.checkout .rating .stars span:hover ~ span:before {
+    //content: "\2605";
+    //position: absolute;
+}
+
+.checkout .rating .stars span.filled:before {
     content: "\2605";
     position: absolute;
 }
+
 
 .checkout .basket input {
     display: block;

@@ -7,16 +7,11 @@ import staff from './api/staff';
 import issue from './api/issue';
 import auth from './api/auth';
 import blog from './api/blog';
-import hapiGate from 'hapi-gate';
 import mongoose from 'mongoose';
 import config from 'config';
 
 mongoose.connect(config.get('database.host'));
 mongoose.connection.on('error', console.error.bind(console, 'db error:'));
-
-const redirectOpts = (process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'stage')
-    ? { https: true, www: true } : { https: false, www: false };
-
 
 const server = new Hapi.Server({
     connections: {
@@ -64,11 +59,7 @@ server.register([
   { register: staff },
   { register: issue },
   { register: auth },
-  { register: blog },
-  {
-    register: hapiGate,
-    options: redirectOpts
-  }
+  { register: blog }
 
 ], (error) => {
   if (error) throw error
@@ -76,4 +67,4 @@ server.register([
   server.start(() => {
     console.info('Sample stack listening at:', server.info.uri)
   })
-});
+})

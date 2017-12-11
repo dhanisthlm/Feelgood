@@ -8,6 +8,20 @@ const getEncounters = (request, reply) => {
     });
 };
 
+const handleRating = (request, reply) => {
+   Encounter.find({ '_id': request.payload.id }, (err, encounter) => {
+       if (encounter.length) {
+           encounter[0].rating = {
+               web: request .payload.ratingObj.web,
+               pay: request.payload.ratingObj.pay,
+               comment: request.payload.ratingObj.comment
+           }
+           encounter[0].save();
+           return reply(encounter);
+       }
+   })
+};
+
 const saveEncounter = (request, reply, charge) => {
     const encounter = new Encounter();
     let skypePrice = 0;
@@ -36,8 +50,10 @@ const saveEncounter = (request, reply, charge) => {
     const date = new Date();
     encounter.date = date.toUTCString();
 
-    encounter.save();
-    return reply(charge);
+    encounter.save((err, record) => {
+        charge.encounterId = record._id;
+        return reply(charge);
+    });
 };
 
 const handleCharge = (request, reply) => {
@@ -84,6 +100,13 @@ exports.register = (server, options, next) => {
             path: '/checkout',
             config: {
                 handler: handleCharge
+            }
+        },
+        {
+            method: 'POST',
+            path: '/rating',
+            config: {
+                handler: handleRating
             }
         }
     ]);

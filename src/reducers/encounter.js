@@ -12,7 +12,14 @@ export default handleActions({
             ...state,
             stripe: action.payload,
             errorMessage: '',
-            saved: true
+            saved: true,
+            rating: false
+        }
+    },
+    RATING_SAVED: (state, action) => {
+        return {
+            ...state,
+            rating: true
         }
     },
     RESET_ENCOUNTER: (state) => {
@@ -45,5 +52,6 @@ export default handleActions({
     stripe: {},
     emailDiscount: 0,
     promoDiscount: 0,
-    errorMessage: ''
+    errorMessage: '',
+    rating: false
 })

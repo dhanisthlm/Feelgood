@@ -52,6 +52,23 @@ const encounterSchema = Schema({
     },
     date: {
         type: Date
+    },
+    rating: {
+        type: Object,
+        default: {},
+
+        web: {
+            type: Number,
+            default: 0
+        },
+        pay: {
+            type: Number,
+            default: 0
+        },
+        comment: {
+            type: String,
+            default: ''
+        }
     }
 });
 

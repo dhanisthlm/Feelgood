@@ -104,6 +104,9 @@ export class Encounter extends Component {
                             <th>S-cost</th>
                             <th>S-weeks</th>
                             <th>Total</th>
+                            <th>Score web</th>
+                            <th>Score pay</th>
+                            <th>Score comment</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -121,6 +124,9 @@ export class Encounter extends Component {
                                     <td>{encounter.order.skype.cost}</td>
                                     <td>{encounter.order.skype.week}</td>
                                     <td>{encounter.price}</td>
+                                    <td>{encounter.rating.web}</td>
+                                    <td>{encounter.rating.pay}</td>
+                                    <td>{encounter.rating.comment}</td>
                                 </tr>
                             )
                         })}

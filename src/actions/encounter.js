@@ -11,6 +11,18 @@ export const getEncounters = () => (dispatch) => {
         });
 };
 
+export const saveRating = (encounterId, ratingObj) => (dispatch) => {
+    const payload = { id: encounterId, ratingObj };
+    return request
+        .post('/rating', payload)
+        .then((data) => {
+            dispatch({ type: 'RATING_SAVED' });
+        })
+        .catch((error) => {
+            console.log('error', error);
+        });
+};
+
 export const saveEncounter = (id, encounter) => (dispatch) => {
     return request
         .post('/encounter', { id, encounter })
@@ -18,7 +30,7 @@ export const saveEncounter = (id, encounter) => (dispatch) => {
             if (data.data.code === 'StripeCardError') {
                 dispatch({type: 'CHECKOUT_ERROR', payload: data.data.message });
             } else {
-                dispatch({type: 'ENCOUNTER_SAVED', payload: data});
+                dispatch({type: 'ENCOUNTER_SAVED', payload: data });
             }
         })
         .catch((error) => {
