@@ -113,7 +113,7 @@ export class Encounter extends Component {
                     </colgroup>
                     <thead>
                         <tr>
-                            <th>Name</th>
+                            <th>Ime</th>
                             <th>Email</th>
                             <th>Phone</th>
                             <th>Date</th>
