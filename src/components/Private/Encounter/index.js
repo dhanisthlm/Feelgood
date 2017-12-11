@@ -112,6 +112,9 @@ export class Encounter extends Component {
                     <tbody>
                         {this.props.encounters.map((encounter) => {
                             const localTime = moment(encounter.date).format('YYYY-MM-DD / HH:mm');
+                            const webRating = encounter.rating ? encounter.rating.web : 0;
+                            const payRating = encounter.rating ? encounter.rating.pay : 0;
+                            const ratingComment = encounter.rating ? encounter.rating.comment : '';
 
                             return (
                                 <tr>
@@ -124,9 +127,9 @@ export class Encounter extends Component {
                                     <td>{encounter.order.skype.cost}</td>
                                     <td>{encounter.order.skype.week}</td>
                                     <td>{encounter.price}</td>
-                                    <td>{encounter.rating.web}</td>
-                                    <td>{encounter.rating.pay}</td>
-                                    <td>{encounter.rating.comment}</td>
+                                    <td>{webRating}</td>
+                                    <td>{payRating}</td>
+                                    <td>{ratingComment}</td>
                                 </tr>
                             )
                         })}
