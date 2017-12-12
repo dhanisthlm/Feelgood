@@ -13,6 +13,7 @@ import { getStripeToken } from '../../../actions/config';
 import { i18nValidation } from  '../../../../helpers/validation';
 import { saveEncounter, resetEncounter } from '../../../actions/encounter';
 import Header from '../Header';
+import Footer from '../Footer';
 
 import styles from './styles.css';
 
@@ -735,6 +736,7 @@ export class Checkout extends FormComponent {
 						</div>
 					</div>
 				</div>
+				<Footer />
 				<div id="breakpoints" ref={(breakpoints) => { this.breakpoints = breakpoints; }}>
 					<div className="breakpoint-small" data-size="small" />
 					<div className="breakpoint-medium" data-size="medium" />

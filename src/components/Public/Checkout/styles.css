@@ -12,6 +12,11 @@
     background: #c04c9c;
 }
 
+.checkout .inner-frame {
+    overflow: hidden;
+    margin-bottom: 35px;
+}
+
 .checkout .basket .back > div {
     margin: 60px auto;
     width: 520px;
