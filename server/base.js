@@ -52,7 +52,7 @@ exports.register = function (server, options, next) {
             path: '/{path*}',
             handler: (request, reply) => {
                 if (process.env.NODE_ENV === 'production' && request.get('X-Forwarded-Proto')!='https' && request.get('X-Forwarded-Port')!='443') {
-                    return reply().redirect('https://www.zdravlje.nu/' + request.params.path);
+                    return reply().redirect(config.get('baseUrl') + '/' +  request.params.path);
                 } else {
                     return (request.path.includes('pki-validation'))
                         ? reply.file('client/.well-known/pki-validation/godaddy.html')
