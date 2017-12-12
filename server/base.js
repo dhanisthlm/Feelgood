@@ -52,6 +52,7 @@ exports.register = function (server, options, next) {
             path: '/{path*}',
             handler: (request, reply) => {
                 if (process.env.NODE_ENV === 'production') {
+                    consle.log(request.params.path, request);
                     return reply().redirect(config.get('baseUrl') + '/' + request.params.path);
                 } else {
                     return (request.path.includes('pki-validation'))
