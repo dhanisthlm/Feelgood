@@ -51,7 +51,7 @@ exports.register = function (server, options, next) {
             method: 'GET',
             path: '/{path*}',
             handler: (request, reply) => {
-                if (process.env.NODE_ENV === 'production' && request.get('X-Forwarded-Proto')!='https' && request.get('X-Forwarded-Port')!='443') {
+                if ((process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'stage') && request.get('X-Forwarded-Proto')!='https' && request.get('X-Forwarded-Port')!='443') {
                     return reply().redirect(config.get('baseUrl') + '/' +  request.params.path);
                 } else {
                     return (request.path.includes('pki-validation'))
