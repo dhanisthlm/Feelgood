@@ -52,8 +52,7 @@ exports.register = function (server, options, next) {
             path: '/{path*}',
             handler: (request, reply) => {
                 if (process.env.NODE_ENV === 'production') {
-                    consle.log(request.params.path, request);
-                    return reply().redirect(config.get('baseUrl') + '/' + request.params.path);
+                    return reply().redirect('https://www.zdravlje.nu/' + request.params.path);
                 } else {
                     return (request.path.includes('pki-validation'))
                         ? reply.file('client/.well-known/pki-validation/godaddy.html')
