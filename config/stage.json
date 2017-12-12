@@ -11,5 +11,6 @@
   "openTok": {
     "key": "45894982",
     "secret": "7677abae9f9357bf5b3e40b24f64f798d8a59838"
-  }
+  },
+  "baseUrl": "https://zdravlje.herokuapp.com"
 }

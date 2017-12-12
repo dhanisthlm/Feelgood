@@ -1,3 +1,5 @@
+import config from 'config';
+
 exports.register = function (server, options, next) {
     server.route([
         {
@@ -48,11 +50,13 @@ exports.register = function (server, options, next) {
         {
             method: 'GET',
             path: '/{path*}',
-            handler: {
-                file: function (request) {
+            handler: (request, reply) => {
+                if (process.env.NODE_ENV === 'stage' || process.env.NODE_ENV === 'production') {
+                    return reply().redirect(config.get('baseUrl') + request.params.path);
+                } else {
                     return (request.path.includes('pki-validation'))
-                        ? 'client/.well-known/pki-validation/godaddy.html'
-                        : 'client/index.html';
+                        ? reply.file('client/.well-known/pki-validation/godaddy.html')
+                        : reply.file('client/index.html');
                 }
             }
         }
