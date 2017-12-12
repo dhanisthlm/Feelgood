@@ -137,6 +137,8 @@
         "invalid_expiry_month": "Mjesec isteka kartice nije važeći.",
         "invalid_expiry_year": "Godina isteka kartice nije važeći.",
         "invalid_cvc": "Sigurnosni kod kartice je nevažeći.",
+        "incomplete_cvc": "Nepotpun cvc.",
+        "incomplete_zip": "Nepotpun zip",
         "invalid_swipe_data": "Swipe-podaci kartice su nevažeći.",
         "incorrect_number": "Broj kartice je netačan.",
         "expired_card": "Kartica je istekla.",
@@ -144,7 +146,18 @@
         "incorrect_zip": "Provjera zip-kod kartice nije uspjela.",
         "card_declined": "Kartica je odbijena.",
         "missing": "Nema kartice za kupca koji se naplaćuje.",
-        "processing_error": "Došlo je do greške u toku obradu kartice."
+        "processing_error": "Došlo je do greške u toku obradu kartice.",
+        "incomplete_expiry": "Nepotpun protek.",
+        "invalid_expiry_year_past": "Neispravna godina isteka."
+      },
+      "validation": {
+        "\"name\" is required": "Ime je obavezno",
+        "\"phone\" is required": "Telefon je potreban",
+        "\"phone\" is not allowed to be empty": "",
+        "\"mail\" is required": "E-pošta je potreban",
+        "\"mail\" must be a valid email": "E-pošta mora biti važeća adresa e-pošte",
+        "\"mail\" is not allowed to be empty": "E-pošta nije dozvoljena da bude prazna",
+        "wrongRegexFormat": "Greška, pogrešan format"
       },
       "issues": {
         "stress": {

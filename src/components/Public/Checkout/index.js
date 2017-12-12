@@ -9,6 +9,7 @@ import { routeActions } from 'redux-simple-router';
 import { encounterValidator } from '../../../../validators/encounters';
 import { getIssues } from '../../../actions/issue';
 import { saveRating } from '../../../actions/encounter';
+import { getStripeToken } from '../../../actions/config';
 import { i18nValidation } from  '../../../../helpers/validation';
 import { saveEncounter, resetEncounter } from '../../../actions/encounter';
 import Header from '../Header';
@@ -63,6 +64,7 @@ export class Checkout extends FormComponent {
 	componentWillMount () {
 		if (window.localStorage.getItem('order')) {
 			const cache = JSON.parse(window.localStorage.getItem('order'));
+            this.props.dispatch(getStripeToken());
             this.setState({ ...cache, save: false });
 		} else {
             this.props.dispatch(routeActions.push('/anka'));
@@ -94,6 +96,10 @@ export class Checkout extends FormComponent {
             window.localStorage.removeItem('stripe');
 			this.props.dispatch(routeActions.push('/anka'));
 		}
+
+		if (nextProps.stripeToken.length) {
+
+        }
 
 		if (Object.keys(nextProps.stripe).length) {
 			window.localStorage.setItem('stripe', JSON.stringify(nextProps.stripe));
@@ -313,6 +319,7 @@ export class Checkout extends FormComponent {
      */
     initStripe () {
     	if (typeof Stripe === 'undefined') return;
+    	const { t } = this.props;
         const stripe = Stripe('pk_test_CxCOETD4ltbadc9SZWuF2jm9');
         const elements = stripe.elements({ locale: 'en' });
         const card = elements.create('card', { placeholder: 'Card' });
@@ -322,7 +329,7 @@ export class Checkout extends FormComponent {
 
         card.addEventListener('change', event => {
             const displayError = document.getElementById('card-errors');
-            displayError.textContent = (event.error) ? event.error.message: '';
+            displayError.textContent = (event.error) ? t(`stripe.${event.error.code}`) : '';
         });
 
         card.mount('#card-element');
@@ -411,9 +418,11 @@ export class Checkout extends FormComponent {
      * @return {object}
      */
 	getValidationMessages (prop) {
+		const { t } = this.props;
 		return (
             this.props.getValidationMessages(prop).map((message, i) => {
-				return <span key={i} className="error">{message}</span>;
+            	const validationMessage = message.indexOf('pattern') > -1 ? t('validation.wrongRegexFormat') : t(`validation.${message}`);
+				return <span key={i} className="error">{validationMessage}</span>;
             })
 		)
 	}
@@ -532,9 +541,7 @@ export class Checkout extends FormComponent {
 																<tr>
 																	<td>{ this.state.data.skype.description }</td>
 																	<td className="center">{ this.state.data.skype.week }</td>
-																	<td className="right">{ Math.round(skypeCost * skypeDurationFactor) }
-																		KM
-																	</td>
+																	<td className="right">{ Math.round(skypeCost * skypeDurationFactor) }&nbsp;KM</td>
 																</tr>
                                                             )
                                                         }
@@ -545,9 +552,7 @@ export class Checkout extends FormComponent {
 																<tr>
 																	<td>{this.state.data.email.description}</td>
 																	<td className="center">{ this.state.data.email.week }</td>
-																	<td className="right">{ this.state.data.email.cost }
-																		KM
-																	</td>
+																	<td className="right">{ this.state.data.email.cost }&nbsp;KM</td>
 																</tr>
                                                             )
                                                         }
@@ -559,9 +564,7 @@ export class Checkout extends FormComponent {
 													</tr>
 													<tr>
 														<td className={sumClass} colSpan="2">{ t('sum') }</td>
-														<td className={sumClass}>{Math.round(skypeCost * skypeDurationFactor) + (emailCost * nWeeks)}
-															KM
-														</td>
+														<td className={sumClass}>{Math.round(skypeCost * skypeDurationFactor) + (emailCost * nWeeks)}&nbsp;KM</td>
 													</tr>
                                                     {(() => {
                                                         if (this.state.data.packageDiscount) {
@@ -569,9 +572,7 @@ export class Checkout extends FormComponent {
 																<tr>
 																	<td className="right"
 																		colSpan="2">{ t('packageDiscount') }</td>
-																	<td className="right">{ this.state.data.packageDiscount }
-																		KM
-																	</td>
+																	<td className="right">{ this.state.data.packageDiscount }&nbsp;KM</td>
 																</tr>
                                                             )
                                                         }
@@ -586,8 +587,7 @@ export class Checkout extends FormComponent {
 																	<td className={className}
 																		colSpan="2">{ t('sumWithPackageDiscount')}</td>
 																	<td className={className}>
-                                                                        { (Math.round(this.state.data.skype.cost * skypeDurationFactor) + (emailCost * nWeeks)) - this.state.data.packageDiscount }
-																		KM
+                                                                        { (Math.round(this.state.data.skype.cost * skypeDurationFactor) + (emailCost * nWeeks)) - this.state.data.packageDiscount }&nbsp;KM
 																	</td>
 																</tr>
                                                             )
@@ -599,9 +599,7 @@ export class Checkout extends FormComponent {
 																<tr>
 																	<td className="right"
 																		colSpan="2">{ t('voucherDiscount') }</td>
-																	<td className="right">{ this.state.data.promoDiscount }
-																		KM
-																	</td>
+																	<td className="right">{ this.state.data.promoDiscount }&nbsp;KM</td>
 																</tr>
                                                             )
                                                         }
@@ -612,9 +610,7 @@ export class Checkout extends FormComponent {
 																<tr>
 																	<td className="right heavy"
 																		colSpan="2">{ t('total') }</td>
-																	<td className="right heavy">{ this.state.cost.total }
-																		KM
-																	</td>
+																	<td className="right heavy">{ this.state.cost.total }&nbsp;KM</td>
 																</tr>
                                                             )
                                                         }
@@ -756,6 +752,7 @@ const mapStateToProps = (state) => ({
 	cost: state.encounter.cost,
 	issues: state.issue.list,
 	stripe: state.encounter.stripe,
+	stripeToken: state.encounter.stripeToken,
 	rating: state.encounter.rating,
 	errorMessage: state.encounter.errorMessage
 });

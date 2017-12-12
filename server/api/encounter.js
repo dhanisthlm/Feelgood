@@ -1,5 +1,6 @@
 import Encounter from '../models/encounter';
 import stripe from 'stripe';
+import config from 'config';
 
 const getEncounters = (request, reply) => {
     Encounter.find({}, (error, result) => {
@@ -29,6 +30,11 @@ const handleErase = (request, reply) => {
     })
 };
 
+const handleStripeToken = (request, reply) => {
+    const token = config.get('stripe.client');
+    return reply(token).code(200);
+};
+
 const saveEncounter = (request, reply, charge) => {
     const encounter = new Encounter();
     let skypePrice = 0;
@@ -47,7 +53,9 @@ const saveEncounter = (request, reply, charge) => {
         emailPrice = request.payload.encounter.data.email.cost;
     }
 
+    console.log(request.payload.encounter.phone)
     encounter.name = request.payload.encounter.name;
+    encounter.phone = request.payload.encounter.phone;
     encounter.skype = request.payload.encounter.skypeId;
     encounter.issue = request.payload.encounter.issue;
     encounter.mail = request.payload.encounter.mail;
@@ -66,7 +74,7 @@ const saveEncounter = (request, reply, charge) => {
 const handleCharge = (request, reply) => {
     // Token is created using Checkout or Elements!
     // Get the payment token ID submitted by the form:
-    const striper = stripe("sk_test_sa1eq6hSDY9aMKNp3jl9K4j1");
+    const striper = stripe(config.get('stripe.server'));
     const token = request.payload.id; //
 
     // Charge the user's card:
@@ -121,6 +129,13 @@ exports.register = (server, options, next) => {
             path: '/encounter/{id}',
             config: {
                 handler: handleErase
+            }
+        },
+        {
+            method: 'GET',
+            path: '/stripe',
+            config: {
+                handler: handleStripeToken
             }
         }
     ]);

@@ -45,18 +45,21 @@ export class Encounter extends Component {
                 </div>
                 <button className="export-button" onClick={ this.handleExport }>Izvoz u Excel</button>
                 <ul className="mobile-list">
-                    {this.props.encounters.map((encounter) => {
+                    {this.props.encounters.map((encounter, i) => {
                         const localTime = moment(encounter.date).format('YYYY-MM-DD / HH:mm');
+                        const webRating = encounter.rating ? encounter.rating.web : 0;
+                        const payRating = encounter.rating ? encounter.rating.pay : 0;
+                        const ratingComment = encounter.rating ? encounter.rating.comment : '';
 
                         return (
-                            <li className="list-item">
+                            <li key={i} className="list-item">
                                 <h3>informacije osobe</h3>
                                 <div>
                                     <p>Ime:</p>
                                     <p>{encounter.name}</p>
                                 </div>
                                 <div>
-                                    <p>E-posta:</p>
+                                    <p>E-pošta:</p>
                                     <p>{encounter.mail}</p>
                                 </div>
                                 <div>
@@ -64,30 +67,47 @@ export class Encounter extends Component {
                                     <p>{encounter.phone}</p>
                                 </div>
                                 <div>
-                                    <p>Date:</p>
+                                    <p>Problem:</p>
+                                    <p>{encounter.issue}</p>
+                                </div>
+                                <div>
+                                    <p>Datum:</p>
                                     <p>{localTime}</p>
                                 </div>
-                                <h3>E-posta</h3>
+                                <h3>E-pošta</h3>
                                 <div>
-                                    <p>Cost:</p>
+                                    <p>Cena:</p>
                                     <p>{encounter.order.email.cost}</p>
                                 </div>
                                 <div>
-                                    <p>Weeks:</p>
+                                    <p>Nedelje:</p>
                                     <p>{encounter.order.email.week}</p>
                                 </div>
                                 <h3>Skype</h3>
                                 <div>
-                                    <p>Cost:</p>
+                                    <p>Cena:</p>
                                     <p>{encounter.order.skype.cost}</p>
                                 </div>
                                 <div>
-                                    <p>Weeks:</p>
+                                    <p>Nedelje:</p>
                                     <p>{encounter.order.skype.week}</p>
                                 </div>
                                 <div>
-                                    <p>Price:</p>
+                                    <p>Ukupan:</p>
                                     <p>{encounter.order.price}</p>
+                                </div>
+                                <h3>Rajting</h3>
+                                <div>
+                                    <p>Web:</p>
+                                    <p>{webRating}</p>
+                                </div>
+                                <div>
+                                    <p>Plaćanje:</p>
+                                    <p>{payRating}</p>
+                                </div>
+                                <div>
+                                    <p>Komentar:</p>
+                                    <p>{ratingComment}</p>
                                 </div>
                             </li>
                         );
@@ -95,9 +115,10 @@ export class Encounter extends Component {
                 </ul>
                 <table id="admin-table" className="admin-table">
                     <colgroup>
-                        <col width="12%" />
                         <col width="10%" />
-                        <col width="12%" />
+                        <col width="10%" />
+                        <col width="10%" />
+                        <col width="10%" />
                         <col width="10%" />
                         <col width="5%" />
                         <col width="13%" />
@@ -108,7 +129,7 @@ export class Encounter extends Component {
                         <col width="3%" />
                         <col width="3%" />
                         <col width="3%" />
-                        <col width="13%" />
+                        <col width="10%" />
                         <col width="1%" />
                     </colgroup>
                     <thead>
@@ -116,6 +137,7 @@ export class Encounter extends Component {
                             <th>Ime</th>
                             <th>E-pošta</th>
                             <th>Telefon</th>
+                            <th>Problem</th>
                             <th>Datum</th>
                             <th>Skype</th>
                             <th>Komentar</th>
@@ -131,17 +153,18 @@ export class Encounter extends Component {
                         </tr>
                     </thead>
                     <tbody>
-                        {this.props.encounters.map((encounter) => {
+                        {this.props.encounters.map((encounter, i) => {
                             const localTime = moment(encounter.date).format('YYYY-MM-DD / HH:mm');
                             const webRating = encounter.rating ? encounter.rating.web : 0;
                             const payRating = encounter.rating ? encounter.rating.pay : 0;
                             const ratingComment = encounter.rating ? encounter.rating.comment : '';
 
                             return (
-                                <tr>
+                                <tr key={i}>
                                     <td>{encounter.name}</td>
                                     <td>{encounter.mail}</td>
                                     <td>{encounter.phone}</td>
+                                    <td>{encounter.issue}</td>
                                     <td>{localTime}</td>
                                     <td>{encounter.skype}</td>
                                     <td>{encounter.comment}</td>

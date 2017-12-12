@@ -5,7 +5,6 @@ export const login = (credentials) => (dispatch) => {
     return request
         .post('/auth/login', credentials)
         .then(({ data }) => {
-            console.log('data', data);
             dispatch(routeActions.replace('/admin'));
         })
         .catch((error) => {

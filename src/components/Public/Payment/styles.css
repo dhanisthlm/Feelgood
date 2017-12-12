@@ -455,8 +455,9 @@
 }
 
 .payment + .text-wrapper button.disabled {
-    background-color: #999;
     pointer-events: none !important;
+    background-color: #246cc7;
+    opacity: .5;
 }
 
 .payment .toggle_radios > * {

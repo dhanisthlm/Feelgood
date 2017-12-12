@@ -47,6 +47,12 @@ export default handleActions({
             errorMessage: ''
         }
     },
+    STRIPE_TOKEN: (state, action) => {
+        return {
+            ...state,
+           stripeToken: action.payload
+        }
+    },
     CHECKOUT_ERROR: (state, action) => {
         return {
             ...state,
@@ -63,5 +69,6 @@ export default handleActions({
     promoDiscount: 0,
     errorMessage: '',
     rating: false,
-    erased: false
+    erased: false,
+    stripeToken: ''
 })
