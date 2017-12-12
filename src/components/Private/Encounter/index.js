@@ -6,6 +6,7 @@ import moment from 'moment';
 import TableToExcel from 'table-to-excel';
 import { getEncounters, eraseEncounter } from '../../../actions/encounter';
 import Header from '../../Public/Header/index';
+import Footer from '../../Public/Footer/index';
 import styles from './styles.css';
 
 export class Encounter extends Component {

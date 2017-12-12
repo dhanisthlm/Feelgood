@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux';
 import { translate } from 'react-i18next';
 import Header from '../Header/index';
+import Footer from '../Footer/index';
 import styles from './styles.css';
 
 export class PrivacyPolicy extends Component {
@@ -94,6 +95,7 @@ export class PrivacyPolicy extends Component {
                     <p>Bosnia and Herzegovina</p>
                     <p>This Privacy notice was last updated on December 11 th 2017 and is deemed effective as of this date.</p>
                 </div>
+                <Footer />
             </div>
         );
     }

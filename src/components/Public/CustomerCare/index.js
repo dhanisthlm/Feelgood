@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux';
 import { translate } from 'react-i18next';
 import Header from '../Header/index';
+import Footer from '../Footer/index';
 import styles from './styles.css';
 
 export class CustomerCare extends Component {
@@ -31,6 +32,7 @@ export class CustomerCare extends Component {
                     <p className="text">Besplatan razgovor preko Skypea: <span className="skype">zdravlje.nu@hotmail.com</span></p>
                     <p className="text email">E-pošta: <span className="email">zdravlje.nu@hotmail.com</span></p>
                 </div>
+                <Footer />
             </div>
         )
     }

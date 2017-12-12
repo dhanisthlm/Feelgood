@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { translate } from 'react-i18next';
 import { login } from '../../../actions/auth';
 import Header from '../../Public/Header/index';
+import Footer from '../../Public/Footer/index';
 import styles from './styles.css';
 
 export class Login extends Component {
