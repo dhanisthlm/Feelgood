@@ -41,7 +41,7 @@ export class Encounter extends Component {
             <div className="page admin">
                 <Header location={this.props.location} />
                 <div className="page-header">
-                    <h1 className="admin-heading">Zdravlje - Susreti</h1>
+                    <h1 className="admin-heading">Rezervacije</h1>
                 </div>
                 <button className="export-button" onClick={ this.handleExport }>Izvoz u Excel</button>
                 <ul className="mobile-list">
@@ -100,33 +100,33 @@ export class Encounter extends Component {
                         <col width="12%" />
                         <col width="10%" />
                         <col width="5%" />
-                        <col width="15%" />
-                        <col width="2%" />
+                        <col width="13%" />
+                        <col width="4%" />
                         <col width="3%" />
                         <col width="3%" />
                         <col width="3%" />
-                        <col width="2%" />
                         <col width="3%" />
                         <col width="3%" />
-                        <col width="14%" />
-                        <col width="2%" />
+                        <col width="3%" />
+                        <col width="13%" />
+                        <col width="1%" />
                     </colgroup>
                     <thead>
                         <tr>
                             <th>Ime</th>
-                            <th>Email</th>
-                            <th>Phone</th>
-                            <th>Date</th>
+                            <th>E-pošta</th>
+                            <th>Telefon</th>
+                            <th>Datum</th>
                             <th>Skype</th>
-                            <th>Comment</th>
-                            <th>E-C</th>
-                            <th>E-W</th>
-                            <th>S-C</th>
-                            <th>S-W</th>
-                            <th>Total</th>
-                            <th>R-W</th>
-                            <th>R-P</th>
-                            <th>Rating comment</th>
+                            <th>Komentar</th>
+                            <th>Cena e-pošte</th>
+                            <th>E-mail nedelje</th>
+                            <th>Cena skype</th>
+                            <th>Skype nedelje</th>
+                            <th>Ukupan</th>
+                            <th>Rejting web</th>
+                            <th>Rejting plaćanje</th>
+                            <th>Rejting komentar</th>
                             <th />
                         </tr>
                     </thead>
