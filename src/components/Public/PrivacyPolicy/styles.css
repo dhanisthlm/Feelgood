@@ -1,0 +1,86 @@
+.privacy-policy .page-header {
+    background-color: #C04C9C;
+    position: static;
+    display: block;
+    text-align: center;
+    padding-left: 0;
+    margin-top: 100px;
+}
+
+.privacy-policy .page-header h1 {
+    color: #ffffff;
+    padding: 7px 0;
+    margin-top: 8px;
+}
+
+.privacy-policy h3 {
+    margin: 0;
+    color: #C04C9C;
+}
+
+.privacy-policy p {
+    margin-top: 5px;
+    margin-bottom: 25px;
+}
+
+.privacy-policy .privacy-wrapper {
+    padding: 20px 65px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.privacy-policy .preamble {
+    font-size: 18px;
+    line-height: 26px;
+}
+
+.privacy-policy p.contact {
+    margin-bottom: 10px;
+}
+
+.privacy-policy h4 {
+    margin-bottom: 12px;
+    color: #C04C9C;
+    font-size: 19px;
+}
+
+.privacy-policy p.address {
+    margin-bottom: 5px;
+}
+
+@media only screen and (max-width: 500px) {
+    .privacy-policy .page-header {
+        margin-top: 250px;
+        background-color: #ffffff;
+    }
+
+    .privacy-policy .page-header h1 {
+        color: #C04C9C;
+        padding: 7px 0;
+        margin-top: 8px;
+        margin-bottom: 4px;
+    }
+
+    .privacy-policy .privacy-wrapper {
+        padding: 0 34px;
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    .privacy-policy .preamble {
+        font-size: 18px;
+        line-height: 26px;
+    }
+
+    .privacy-policy h3 {
+        margin: 0;
+        color: #C04C9C;
+        font-size: 22px;
+    }
+
+    .privacy-policy p {
+        margin-top: 5px;
+        margin-bottom: 25px;
+        line-height: 22px;
+    }
+}
