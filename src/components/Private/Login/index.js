@@ -32,7 +32,7 @@ export class Login extends Component {
         const { t } = this.props;
 
         return (
-            <div className="page login admin">
+            <div className="page login">
                 <Header location={this.props.location} />
                 <div className="page-header"><h1>Login</h1></div>
                 <div className="login-wrapper">
