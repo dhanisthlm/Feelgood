@@ -1,5 +1,5 @@
 .how-it-works {
-    padding: 35px 35px;
+    padding: 35px 30px;
     text-align: center;
 }
 
@@ -17,6 +17,14 @@
     margin-top: 35px !important;
 }
 
+
+.how-it-works .row-2 {
+    margin-bottom: 0 !important;
+}
+
+.how-it-works .row-2 .step-wrapper {
+    margin-bottom: 0 !important;
+}
 
 .how-it-works .step-wrapper {
     display: inline-block;
@@ -39,7 +47,7 @@
     height: 180px;
     border-radius: 50%;
     background-color: #C04C9C;
-    margin: 0 auto 20px;
+    margin: 0 auto 25px;
     text-align: center;
 }
 

@@ -40,7 +40,6 @@ export class Issues extends Component {
 
 	handleMouseEnter (e) {
 		e.currentTarget.classList.add('show');
-
 	}
 
 	handleMouseLeave (e) {
@@ -78,8 +77,10 @@ export class Issues extends Component {
         const carousel = this.carousel;
         const issues = this.state.issues;
         const first = issues.pop();
+
         issues.unshift(first);
         this.setState({issues});
+
         carousel.classList.add('swipe-left');
         carousel.classList.add('swipe-zero');
     }
@@ -88,8 +89,10 @@ export class Issues extends Component {
 		const carousel = this.refs.carousel;
         const issues = this.state.issues;
         const first = issues.shift();
+
         issues.push(first);
         this.setState({issues});
+
         carousel.classList.add('swipe-left');
         carousel.classList.add('swipe-zero');
 	}

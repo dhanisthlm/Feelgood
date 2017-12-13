@@ -32,10 +32,8 @@ export class HowItWorks extends Component {
                                 <path d="M626 545.04V626H472.96l.5-.54c6.7-.16 13.91.33 20.54-1.04 5.37-.22 9.69-1.43 14.55-1.88 2.52-1.32 5.28-.55 7.9-2.08 1.98.2 2.66-1.4 4.55-1.05 5.57-1.82 9.87-2.49 15.45-4.95 3.97-.93 7.58-3.78 11.5-4.73 4.86-2.54 10.51-4.52 14.5-8.27 3.26-1.12 5.27-3.86 8.21-4.82 2.58-2.39 5.69-4.28 8.4-6.54 14.38-12.85 28.75-28.58 42.87-42.1.96-.96 2.54-3.56 4.07-2.96z" fill="transparent"/>
                             </svg>
                         </div>
-                        <p className="sub-heading">1. Procjena</p>
-                        <p className="description">
-                            Razgovarajte bez troška desetak minuta sa našim psiholozima preko telefona (+387 603 21 22 90 ili +387 66 23 60 83) ili proko Skypea (Skype adresa xxxx) kako biste utvrdili vaše savjetodavne potrebe.
-                        </p>
+                        <p className="sub-heading">{ t('step1.heading') }</p>
+                        <p className="description">{ t('step1.text') }</p>
                     </div>
                     <div className="step-wrapper">
                         <div className="circle">
@@ -46,10 +44,8 @@ export class HowItWorks extends Component {
                                 <path fill="transparent" d="M39 68.08c7.78 3.06 15.48 6.38 23.17 9.66-1.96 1.09-3.91 2.22-5.9 3.26H21.74c-1.99-1.05-3.94-2.17-5.91-3.26 7.7-3.28 15.39-6.6 23.17-9.66z"/>
                             </svg>
                         </div>
-                        <p className="sub-heading">2. Izaberite plan za vas</p>
-                        <p className="description">
-                            Izaberite plan plaćanja koji odgovara vašim potrebama i budžetu. Izaberite između Skype-razgovore, e-poštu ili kombinaciju oba. Možete platiti karticom ili paypal-om. Uskoro ćemo ponuditi plaćanje direktno banci.
-                        </p>
+                        <p className="sub-heading">{ t('step2.heading') }</p>
+                        <p className="description">{ t('step2.text') }</p>
                     </div>
                 </div>
                 <div className="row-2">
@@ -64,9 +60,9 @@ export class HowItWorks extends Component {
                                 <path d="M80.78 63.17c2.16 1.21 1.87 3.32.22 4.84-4.35 4.16-8.31 8.86-13.08 12.54-3.41-2.17-5.71-5.06-8.63-7.85-.85-.99-2.32-2.11-2.05-3.56.27-1.91 2.8-3.31 4.34-1.78 2.25 1.81 4.17 4.05 6.24 6.06 2.92-2.95 5.82-5.93 8.78-8.84 1.26-1.06 2.41-2.49 4.18-1.41z" fill="#ffffff"/>
                             </svg>
                         </div>
-                        <p className="sub-heading">3. Termin</p>
-                        <p className="description">Kada je uplata primljena, dobićete putom e-pošte termin po vašem izboru koji ste naveli prilikom naručivanja naših usluga.</p>
-                        <p className="description">Potrebno nam je najmanje 24 sata da nas obavjestite o mjenjane termina. Sve promjene u roka do 24 sata prije određenog Skype termina će imati 100% naknadu za otkazivanje. Promjene u roka do 24 sata prije određenog termina e-pošte će imati naknadu jedan dan od određenje sedmice.</p>
+                        <p className="sub-heading">{ t('step3.heading') }</p>
+                        <p className="description">{ t('step3.text1') }</p>
+                        <p className="description">{ t('step3.text2') }</p>
                     </div>
                     <div className="step-wrapper">
                         <div className="circle">
@@ -78,9 +74,9 @@ export class HowItWorks extends Component {
                                 <path fill="#C04C9C" d="M125.98 197.97c15.34.07 30.7.01 46.04.02 2.42-.09 4.22 1.18 6.4 2.09.31 2.94 1.68 5.76 1.64 8.7-.49 1.2-1.46 2.21-2.22 3.26-22.23-.09-44.57.05-66.78-.06-2.43.26-3.98-2.88-3.81-5.01.76-2.73 1.77-5.36 2.97-7.93 5.42.48 10.39-1.3 15.76-1.07z" />
                             </svg>
                         </div>
-                        <p className="sub-heading">4. Psiholosko savjetoanje </p>
-                        <p className="description">Standardna Skype konsultacija na Zdravlje.nu je 20 ili 45 minuta. Treba vam tiha, privatna osvijetljena soba, pouzdana internet konekcija i pametni telefon ili računar sa mikrofonom i web kamerom. Savjetovanje se takođe može uraditi putem e-pošte, samostalno ili u kombinaciji sa Skype pozivima.</p>
-                        <p className="description">U razgovoru dobićete pomoć da saznate svoje misli, osećanja i akcije. Zajedno istražujete šta je problem, kako se to desilo i šta možete učiniti da biste to promjenili.</p>
+                        <p className="sub-heading">{ t('step4.heading') }</p>
+                        <p className="description">{ t('step4.text1') }</p>
+                        <p className="description">{ t('step4.text2') }</p>
                     </div>
                 </div>
             </div>

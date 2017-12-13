@@ -46,9 +46,11 @@
 .footer .col h2 {
     margin-bottom: 6px;
     color: #fff !important;
-    margin-top: 25px;
-    font-size: 19px;
-    font-weight: normal;
+    font-size: 20px;
+}
+
+.footer .col > h2 {
+    margin-top: 0;
 }
 
 .footer .col h3 {
@@ -114,5 +116,25 @@
 
     .col-2:after {
         display: none;
+    }
+}
+
+@media only screen and (max-width: 950px) {
+    .footer .col {
+        width: 100%;
+    }
+}
+
+@media only screen and (max-width: 1100px) {
+    .footer {
+        padding: 10px 40px;
+    }
+    
+    .footer .col-1 {
+        margin-right: 6%
+    }
+
+    .footer .col-2 {
+        margin-right: 6%;
     }
 }

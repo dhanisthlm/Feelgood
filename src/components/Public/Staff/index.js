@@ -17,7 +17,6 @@ export class Staff extends Component {
 
 		this.openDiploma = this.openDiploma.bind(this);
 		this.closeDiploma = this.closeDiploma.bind(this);
-		this.createStaff = this.createStaff.bind(this);
 		this.renderPersonalText = this.renderPersonalText.bind(this);
 	}
 
@@ -26,8 +25,6 @@ export class Staff extends Component {
 	}
 
 	componentWillReceiveProps (nextProps) {}
-
-	createStaff () {}
 
 	openDiploma (e) {
         const diplomaDirection = e.currentTarget.getAttribute("data-direction");

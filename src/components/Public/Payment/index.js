@@ -63,7 +63,6 @@ export class Payment extends Component {
     /**
      * This callback type is called `requestCallback
      * @callback requestCallback
-     * @param {number} responseCode
 	 * @return {object}
      */
 	createInitialState () {
@@ -291,7 +290,6 @@ export class Payment extends Component {
         const factor = (type === 'add') ? 1 : -1;
 
         if (email[size].week === 1 && type !== 'add') return;
-
         email[size].week = email[size].week + factor;
 
         this.setState({ email });
@@ -325,7 +323,6 @@ export class Payment extends Component {
 
         this.setState({ cost });
         this.props.dispatch(setEncounterData(data, cost, emailDiscount, promoDiscount));
-
     }
 
     /**
@@ -500,7 +497,7 @@ export class Payment extends Component {
 					<button
 						className={buttonStyle}
 						onClick={ this.handleCheckout }>
-						Zakažite
+						{ t('purchase') }
 					</button>
 					<div className="promo-textfield">
 						<input type="text"

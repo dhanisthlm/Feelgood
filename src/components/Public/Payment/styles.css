@@ -306,7 +306,6 @@
     font-size: 40px;
     color: #fff;
     letter-spacing: 2px;
-    font-weight: 600;
     margin: 0;
     margin-left: 73px;
     min-width: 320px;
@@ -391,6 +390,7 @@
     font-size: 30px;
     display: block;
     margin-bottom: 3px;
+    font-weight: 500;
 }
 
 .info-text .launch {
@@ -406,7 +406,7 @@
     font-size: 30px;
     margin-top: 4px;
     margin-bottom: 8px;
-    font-weight: 300;
+    font-weight: 500;
 }
 
 .info-text .launch-date {
@@ -694,7 +694,6 @@
         color: #fff;
         margin-top: 31px;
         font-size: 33px;
-        font-weight: 600;
         margin: 0;
         min-width: 320px;
         text-align: left;

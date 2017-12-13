@@ -19,7 +19,8 @@
     "introView": {
       "heading": "Psihološko savjetovanje za svakodnevne probleme",
       "preamble": "Ovdje smo za vas ako trebate s kim razgovarat. Zdravlje.nu vam nudi psihološke savjetovanje diskretno i po razumnoj cijeni. U razgovoru prepoznajemo koje misli i emocije vas sprečavaju da se osjećate dobro i budete uspješni u životu, te radimo na promjeni.",
-      "start": "Zapocnite"
+      "start": "Započnite",
+      "cookieText": "Mi koristimo kolačiće za ažuriranje trenutnog porudžbina. Podaci se čuvaju samo privremeno i uklanjaju zajedno sa kompletnom kupovinom."
     },
     "issueView": {
       "heading": "Uzmite prvi korak za bolje sutra",
@@ -84,7 +85,26 @@
     },
     "howItWorksView": {
       "heading": "Kako radi",
-      "intro": "Ovdje možete naručiti psihološko savjetovanje. Cijenu za vase izbore mozete naci u doljnem dio stranice. Izaberite Skype-poziv, e-postu ili kombinaciju Skype-poziv i e-postu. Što više poziva ili sedmica e-poste odlučite da kupite, sto jeftinija je cena po pozivu i po sedmicu e-poste."
+      "intro": "Ovdje možete naručiti psihološko savjetovanje. Cijenu za vase izbore mozete naci u doljnem dio stranice. Izaberite Skype-poziv, e-postu ili kombinaciju Skype-poziv i e-postu. Što više poziva ili sedmica e-poste odlučite da kupite, sto jeftinija je cena po pozivu i po sedmicu e-poste.",
+      "step1": {
+        "heading": "1. Procjena",
+        "text": "Razgovarajte bez troška desetak minuta sa našim psiholozima preko telefona (+387 603 21 22 90 ili +387 66 23 60 83) ili proko Skypea (Skype adresa xxxx) kako biste utvrdili vaše savjetodavne potrebe."
+      },
+      "step2": {
+        "heading": "2. Izaberite plan za vas",
+        "text": "Izaberite plan plaćanja koji odgovara vašim potrebama i budžetu. Izaberite između Skype-razgovore, e-poštu ili kombinaciju oba. Možete platiti karticom ili paypal-om. Uskoro ćemo ponuditi plaćanje direktno banci."
+      },
+      "step3": {
+        "heading": "3. Termin",
+        "text1": "Kada je uplata primljena, dobićete putom e-pošte termin po vašem izboru koji ste naveli prilikom naručivanja naših usluga.",
+        "text2": "Potrebno nam je najmanje 24 sata da nas obavjestite o mjenjane termina. Sve promjene u roka do 24 sata prije određenog Skype termina će imati 100% naknadu za otkazivanje. Promjene u roka do 24 sata prije određenog termina e-pošte će imati naknadu jedan dan od određenje sedmice."
+      },
+      "step4": {
+        "heading": "4. Psiholosko savjetoanje",
+        "text1": "Standardna Skype konsultacija na Zdravlje.nu je 20 ili 45 minuta. Treba vam tiha, privatna osvijetljena soba, pouzdana internet konekcija i pametni telefon ili računar sa mikrofonom i web kamerom. Savjetovanje se takođe može uraditi putem e-pošte, samostalno ili u kombinaciji sa Skype pozivima.",
+        "text2": "U razgovoru dobićete pomoć da saznate svoje misli, osećanja i akcije. Zajedno istražujete šta je problem, kako se to desilo i šta možete učiniti da biste to promjenili."
+      }
+
     },
     "paymentView": {
       "heading": "Koliko kosta psihološko savjetovanje?",
@@ -107,7 +127,8 @@
       "until": "Vazi do kraja",
       "year": "god",
       "price": "Cijena",
-      "writeCode": "Unesite kod"
+      "writeCode": "Unesite kod",
+      "purchase": "Zakažite"
     },
     "privacyPolicyView": {
       "heading": "Baunad privacy policy",
