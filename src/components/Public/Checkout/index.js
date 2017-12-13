@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux';
 import { translate } from 'react-i18next';
 import _ from 'lodash';
+import PaypalExpressBtn from 'react-paypal-express-checkout';
 import validation from 'react-validation-mixin';
 import strategy from 'joi-validation-strategy';
 import FormComponent from '../../FormComponent';
@@ -488,7 +489,14 @@ export class Checkout extends FormComponent {
 
 		const spinnerClass = this.state.showSpinner ? 'showbox' : 'none';
 
-		return (
+        const client = {
+            sandbox:    'ASjq_5LtraMQlFGyiih32_C8F-Yh_k1-jfGa54hGrXDPJ0PdeGV861q2kv3ez_QTsOAMxSm_eNChI1ha',
+            production: 'AdHHMFOsZkPDUuMIuqtVycTd5cybDC_IaFRsJn1hCOsb6wQKTTTiT-SbIL6YqxP2SY3N6bPRzEfDT01_',
+        };
+
+		// <PaypalExpressBtn client={client} currency={'BAM'} total={1.00} />
+
+        return (
 			<div className="page">
                 {(() => {
                     if (this.state.showDialog === true) {
