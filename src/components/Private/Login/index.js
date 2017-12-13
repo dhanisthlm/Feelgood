@@ -55,7 +55,9 @@ export class Login extends Component {
                         />
                     </div>
                     <button onClick={ this.handleSubmit }>Login</button>
+                    <div className="push" />
                 </div>
+                <Footer />
             </div>
         )
     }

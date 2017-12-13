@@ -3,6 +3,11 @@
     background-color: #c04c9c;
     padding: 40px 80px;
     color: #fff;
+    text-align: center;
+}
+
+.footer > div * {
+    text-align: left;
 }
 
 .footer .col-1 {

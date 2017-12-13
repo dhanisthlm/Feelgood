@@ -12,6 +12,14 @@
     margin: 0 auto;
 }
 
+.admin .admin-wrapper {
+    margin: 0 auto;
+}
+
+.admin .push {
+    height: 160px;
+}
+
 .mobile-list {
     display: none;
 }

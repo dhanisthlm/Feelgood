@@ -15,7 +15,16 @@
 
 .login .login-wrapper {
     width: 300px;
-    margin: 40px auto;
+    margin: 80px auto;
+    min-height: 100%;
+
+    /* Equal to height of footer */
+    /* But also accounting for potential margin-bottom of last child */
+    //margin-bottom: -310px;
+}
+
+.login .push {
+    height: 160px;
 }
 
 .login label {
