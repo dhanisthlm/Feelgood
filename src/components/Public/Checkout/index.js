@@ -31,7 +31,7 @@ export class Checkout extends FormComponent {
             },
             env: 'sandbox',
             commit: true,
-			issue: 'Välj kategori',
+			issue: '',
 			isOpen: false,
 			issues: [],
 			showSpinner: false,
@@ -48,7 +48,11 @@ export class Checkout extends FormComponent {
 			webRating: 0,
 			payRating: 0,
             ratingComment: '',
-            paymentType: 'credit'
+            paymentType: 'credit',
+            timeframe: '',
+            timeframes: ['Pre ručka', 'Poslije ručka', 'Veče'],
+            country: 'Bosnia and Herzegovina',
+            newsletter: true
 		};
 
 		this.validatorTypes = encounterValidator;
@@ -74,25 +78,29 @@ export class Checkout extends FormComponent {
         this.payment = this.payment.bind(this);
         this.onAuthorize = this.onAuthorize.bind(this);
         this.validate = this.validate.bind(this);
+        this.handleTimePreference = this.handleTimePreference.bind(this);
+        this.handleSelectTime = this.handleSelectTime.bind(this);
+        this.handleSelectCountry = this.handleSelectCountry.bind(this);
+        this.handleNewsletter = this.handleNewsletter.bind(this);
 	}
 
 	componentWillMount () {
-		if (window.localStorage.getItem('order')) {
+		if (window.localStorage.getItem('order') !== null) {
 			const cache = JSON.parse(window.localStorage.getItem('order'));
             this.props.dispatch(getStripeToken());
             this.setState({ ...cache, save: false });
-		} else {
-            this.props.dispatch(routeActions.push('/anka'));
-        }
+		}
 	}
 
 	componentDidMount () {
-        if (window.localStorage.getItem('order') && !window.localStorage.getItem('saved')) {
+        if (window.localStorage.getItem('order')) {
             this.startCountInactivity();
             this.listenForActivity();
             this.props.dispatch(getIssues());
             this.calculateViewportSize();
             this.initStripe();
+        } else {
+            this.props.dispatch(routeActions.push('/anka'));
         }
 	}
 
@@ -105,16 +113,12 @@ export class Checkout extends FormComponent {
     componentWillReceiveProps (nextProps) {
 		this.setState({ issues: nextProps.issues });
 
-        if (nextProps.paypalId.length) {
-            //this.payment();
-        }
-
-		if (nextProps.rating === true) {
+		if (window.localStorage.getItem('order') === null) {
             window.localStorage.removeItem('saved');
             window.localStorage.removeItem('order');
             window.localStorage.removeItem('stripe');
-			this.props.dispatch(routeActions.push('/anka'));
-		}
+            this.props.dispatch(routeActions.push('/anka'));
+        }
 
 		if (Object.keys(nextProps.stripe).length) {
 			window.localStorage.setItem('stripe', JSON.stringify(nextProps.stripe));
@@ -122,6 +126,7 @@ export class Checkout extends FormComponent {
 
 		if (nextProps.save === true) {
 			window.localStorage.setItem('saved', true);
+            window.localStorage.setItem('rating', true);
             window.removeEventListener('mousemove', this.throttledDebounce);
             window.removeEventListener('keydown', this.throttledDebounce);
             this.stopCountInactivity();
@@ -133,6 +138,12 @@ export class Checkout extends FormComponent {
 		}
 	}
 
+	handleNewsletter () {
+        const newsletter = this.state.newsletter;
+        this.setState({ newsletter: !newsletter });
+        window.location.setItem('newsletter', newsletter);
+    }
+
 	handlePaymentType (event) {
         const id = event.target.id;
         const options = document.getElementById('payment-options');
@@ -143,6 +154,12 @@ export class Checkout extends FormComponent {
        });
     }
 
+    handleTimePreference (event) {
+        const id = event.target.id;
+        this.setState({timePreference: id});
+    }
+
+
 	postRating () {
     	const stripe = JSON.parse(window.localStorage.getItem('stripe'));
     	const id = stripe.data.encounterId;
@@ -152,7 +169,9 @@ export class Checkout extends FormComponent {
 				pay: 10 - this.state.payRating + 1,
 				comment: this.state.ratingComment
 			}
-		))
+		));
+
+        window.localStorage.removeItem('order');
 	}
 
 	handleRatingComment (event) {
@@ -412,13 +431,15 @@ export class Checkout extends FormComponent {
 		const cache = JSON.parse(window.localStorage.getItem('order'));
 		cache[e.target.id] = e.target.value;
 		window.localStorage.setItem('order', JSON.stringify(cache));
-		this.setState({ [e.target.id]: e.target.value })
+		this.setState({ [e.target.id]: e.target.value });
 
-        this.props.validate((error) => {
-            if (error) {
-                this.actions.disable();
-            }
-        })
+        if (this.state.paymentType === 'paypal') {
+            this.props.validate((error) => {
+                if (error) {
+                    this.actions.disable();
+                }
+            })
+        }
 	}
 
     /**
@@ -472,11 +493,16 @@ export class Checkout extends FormComponent {
      * @return {object}
      */
   	handleSelect (event) {
-        const cache = JSON.parse(window.localStorage.getItem('order'));
-        cache.issue = event.target.value;
-        window.localStorage.setItem('order', JSON.stringify(cache));
     	this.setState({ issue: event.target.value });
 	}
+
+    handleSelectTime (event) {
+        this.setState({ timeframe: event.target.value });
+    }
+
+    handleSelectCountry (event) {
+        this.setState({ country: event.target.value });
+    }
 
     payment(data, actions) {
   	    //this.props.dispatch(payPaypal());
@@ -511,6 +537,24 @@ export class Checkout extends FormComponent {
 
     }
 
+    renderTimeframes () {
+  	    const timeframes = ['Odaberite vreme', ...this.state.timeframes];
+  	    let frameName;
+  	    let frameValue;
+
+        return timeframes.map((frame, i) => {
+            if (i > 0) {
+                frameName = frame;
+                frameValue = frame;
+            } else {
+                frameName = frame;
+                frameValue = '';
+            }
+
+            return <option key={i} value={frameValue}>{frameName}</option>
+        });
+    }
+
     /**
      * This callback type is called `requestCallback
      * @callback requestCallback
@@ -519,18 +563,21 @@ export class Checkout extends FormComponent {
      */
 	renderIssues () {
 		const { t } = this.props;
-		const issues = ['Välj kategori', ...this.state.issues];
+		const issues = ['Izaberite temu', ...this.state.issues];
 		let issueName;
+		let issueValue;
 
 		return issues.map((issue, i) => {
-		    if (issue.name) {
+		    if (i > 0) {
                 issueName = `issues.${issue.name}.name`;
+                issueValue = `issues.${issue.name}.name`;
             } else {
 		        issueName = issue;
+                issueValue = '';
             }
 
 			return (
-				<option key={i} value={t(issueName)}>{t(issueName)}</option>
+				<option key={i} value={t(issueValue)}>{t(issueName)}</option>
 			)
 		})
 	}
@@ -752,44 +799,8 @@ export class Checkout extends FormComponent {
 												value={ this.state.name }/>
 											{this.getValidationMessages('name')}
 										</div>
-										<div className="form-element-wrapper">
-											<label htmlFor="phone">{ t('phone') }</label>
-											<input
-												onChange={ this.handleChange }
-												id="phone"
-												type="text"
-												value={ this.state.phone }/>
-											{ this.getValidationMessages('phone') }
-										</div>
-										<div className="form-element-wrapper">
-											<label htmlFor="email">{ t('email') }</label>
-											<input
-												onChange={ this.handleChange }
-												id="mail"
-												type="text"
-												value={ this.state.mail }/>
-											{ this.getValidationMessages('mail') }
-										</div>
-										<div className="form-element-wrapper">
-											<label htmlFor="skype">Skype ID</label>
-											<input
-												onChange={ this.handleChange }
-												id="skypeId"
-												type="text"
-												value={ this.state.skypeId }
-											/>
-											{ this.getValidationMessages('skype') }
-										</div>
-										<div className="form-element-wrapper">
-											<label htmlFor="skype">{t('issue')}</label>
-											<div className="select-style">
-												<select id="issue" onChange={ this.handleSelect } value={ this.state.issue }>
-													{ this.renderIssues() }
-												</select>
-											</div>
-										</div>
                                         <div className="form-element-wrapper">
-                                            <label htmlFor="adress">Street</label>
+                                            <label htmlFor="adress">Ulica</label>
                                             <input
                                                 onChange={ this.handleChange }
                                                 id="street"
@@ -800,7 +811,7 @@ export class Checkout extends FormComponent {
                                         </div>
                                         <div className="city-wrapper">
                                             <div className="form-element-wrapper">
-                                                <label htmlFor="postal">Postal code</label>
+                                                <label htmlFor="postal">Poštanski broj</label>
                                                 <input
                                                     onChange={ this.handleChange }
                                                     id="postal"
@@ -821,16 +832,62 @@ export class Checkout extends FormComponent {
                                             </div>
                                         </div>
                                         <div className="form-element-wrapper">
-                                            <label htmlFor="country">Country</label>
+                                            <label htmlFor="country">Zemlju</label>
                                             <div className="select-style">
-                                                <select id="country" onChange={ this.handleSelect } value={ this.state.issue }>
+                                                <select value={this.state.country} id="country" onChange={ this.handleSelectCountry }>
                                                     { this.renderCountries() }
                                                 </select>
                                             </div>
                                         </div>
+                                        <div className="form-element-wrapper">
+                                            <label htmlFor="phone">{ t('phone') }</label>
+                                            <input
+                                                onChange={ this.handleChange }
+                                                id="phone"
+                                                type="text"
+                                                value={ this.state.phone }/>
+                                            { this.getValidationMessages('phone') }
+                                        </div>
+                                        <div className="form-element-wrapper">
+                                            <label htmlFor="email">{ t('email') }</label>
+                                            <input
+                                                onChange={ this.handleChange }
+                                                id="mail"
+                                                type="text"
+                                                value={ this.state.mail }/>
+                                            { this.getValidationMessages('mail') }
+                                        </div>
+										<div className="form-element-wrapper">
+											<label htmlFor="issue">{t('issue')}</label>
+											<div className="select-style">
+												<select id="issue" onChange={ this.handleSelect }>
+													{ this.renderIssues() }
+												</select>
+											</div>
+                                            {this.getValidationMessages('issue')}
+										</div>
+                                        <div className="form-element-wrapper">
+                                            <label htmlFor="skype">Skype ID</label>
+                                            <input
+                                                onChange={ this.handleChange }
+                                                id="skypeId"
+                                                type="text"
+                                                value={ this.state.skypeId }
+                                            />
+                                            { this.getValidationMessages('skype') }
+                                        </div>
+                                        <div className="form-element-wrapper">
+                                            <label htmlFor="timeframe">Vremenska preferencija</label>
+                                            <div className="select-style">
+                                                <select id="timeframe" onChange={ this.handleSelectTime }>
+                                                    { this.renderTimeframes() }
+                                                </select>
+                                            </div>
+                                            {this.getValidationMessages('timeframe')}
+                                        </div>
                                         <div className="form-element-wrapper payment-type">
                                             <fieldset id="payment-options">
-                                                <legend className="payment-type-header">Payment type</legend>
+                                                <legend className="payment-type-header">Tip plaćanja</legend>
                                                 <div className="payment-type-wrapper">
                                                     <label htmlFor="credit">
                                                         <img className="card" src="/images/visa.png" />
@@ -853,7 +910,7 @@ export class Checkout extends FormComponent {
                                                     if (this.state.paymentType === 'faktura') {
                                                         return (
                                                             <div className="faktura-info">
-                                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus aliquid architecto autem consectetur dolorem eveniet explicabo fuga ipsa, maiores nisi odio soluta tenetur! Aliquid aspernatur et labore mollitia nemo nulla quo tenetur. Consequatur earum hic laudantium natus recusandae. Debitis deleniti ducimus earum eligendi, eos esse eum facere iste laborum libero quam, quidem sequi soluta tenetur voluptate. Atque debitis dolores fugiat iusto neque nulla numquam quisquam veritatis. Accusantium autem dolores, illo praesentium sed tenetur totam voluptatibus.</p>
+                                                                <p>{ t('invoiceText') }</p>
                                                             </div>
                                                         )
                                                     }
@@ -864,7 +921,7 @@ export class Checkout extends FormComponent {
                                             if (this.state.paymentType === 'credit') {
                                                 return (
                                                     <div className="stripe form-element-wrapper">
-                                                        <label htmlFor="card-element">Creadit card</label>
+                                                        <label htmlFor="card-element">Kreditna kartica</label>
                                                         <div id="card-element"/>
                                                         <div id="card-errors" role="alert"/>
                                                     </div>
@@ -881,6 +938,18 @@ export class Checkout extends FormComponent {
 											</textarea>
 											{this.getValidationMessages('comment')}
 										</div>
+                                        <div className="form-element-wrapper">
+                                            <input checked={ this.state.newsletter === true} onClick={ this.handleNewsletter } className="checkbox" type="checkbox" />
+                                            <label className="checkbox" htmlFor="comment">Da, hvala, hoću biltene, popuste i druge ponude iz zdravlje.nu.</label>
+                                        </div>
+                                        <div className="form-element-wrapper">
+                                            <input className="checkbox" type="checkbox" />
+                                            <label className="checkbox" htmlFor="comment">Jag godkänner Privacy policy och Terms and Conditions. (länkar till dokumenten)</label>
+                                        </div>
+                                        <div className="form-element-wrapper">
+                                            <input className="checkbox" type="checkbox" />
+                                            <label className="checkbox" htmlFor="comment">Razumem da imam 24-časovno besplatnu rezervaciju.</label>
+                                        </div>
 										<div className="form-buttons">
 											<button onClick={ this.resetCheckout }>{ t('back') }</button>
                                             {(() => {

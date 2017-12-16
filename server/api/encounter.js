@@ -1,4 +1,5 @@
 import Encounter from '../models/encounter';
+import Newsletter from '../models/newsletter';
 import request from 'request';
 import stripe from 'stripe';
 import config from 'config';
@@ -54,12 +55,23 @@ const saveEncounter = (request, reply, charge) => {
         emailPrice = request.payload.encounter.data.email.cost;
     }
 
+    if (request.payload.encounter.newsletter === true) {
+        Newsletter.find({ email: request.payload.encounter.mail }, (err, result) => {
+            if (result.length === 0) {
+                const newsletter = new Newsletter();
+                newsletter.email = request.payload.encounter.mail;
+                newsletter.save();
+            }
+        });
+    }
+
     encounter.name = request.payload.encounter.name;
     encounter.street = request.payload.encounter.street;
     encounter.postalCode = request.payload.encounter.postalCode;
     encounter.city = request.payload.encounter.city;
     encounter.country = request.payload.encounter.country;
     encounter.phone = request.payload.encounter.phone;
+    encounter.timeframe = request.payload.encounter.timeframe;
     encounter.skype = request.payload.encounter.skypeId;
     encounter.issue = request.payload.encounter.issue;
     encounter.mail = request.payload.encounter.mail;

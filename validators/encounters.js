@@ -40,6 +40,18 @@ export const encounterValidator = Joi.object().keys({
         .email()
         .required(),
 
+    issue: Joi
+        .string()
+        .required(),
+
+    timeframe: Joi
+        .string()
+        .required(),
+
+    newsletter: Joi
+        .boolean()
+        .required(),
+
     comment: Joi
         .string()
         .allow('', null),

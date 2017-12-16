@@ -31,6 +31,12 @@ export default handleActions({
             rating: true
         }
     },
+    RESET_RATING: (state, action) => {
+        return {
+            ...state,
+            rating: false
+        }
+    },
     RESET_ENCOUNTER: (state) => {
         return {
             ...state,

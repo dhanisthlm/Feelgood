@@ -32,6 +32,9 @@ const encounterSchema = Schema({
     comment: {
         type: String
     },
+    newsletter: {
+        type: Boolean
+    },
     order: {
         skype: {
             week: {

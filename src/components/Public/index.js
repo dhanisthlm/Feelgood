@@ -21,7 +21,7 @@ export class Main extends Component {
         return (
             <div className="page">
                 <Header location={this.props.location} />
-                <Hero />
+                <Hero location={this.props.location} />
                 <Quote />
                 <Traitments />
                 <Payment />

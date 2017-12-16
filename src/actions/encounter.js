@@ -77,3 +77,7 @@ export const setEncounterData = (data, cost, emailDiscount, promoDiscount) => (d
 export const resetEncounter = () => (dispatch) => {
     dispatch({ type: 'RESET_ENCOUNTER' })
 };
+
+export const resetRating = () => (dispatch) => {
+    dispatch({ type: 'RESET_RATING' })
+};

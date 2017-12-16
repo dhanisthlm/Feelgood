@@ -255,14 +255,13 @@
     margin-top: 19px;
     margin-left: -1px;
     height: 47px;
-}
-
-.checkout .basket p:nth-child(4) {
-    //color: #c04c9c;
-    //font-size: 30px;
-    //margin: 7px 0 6px 0;
-    //text-align: center;
-    //font-weight: 300;
+    background-color: #c04c9c;
+    border: none;
+    color: #fff;
+    font-size: 21px;
+    font-weight: 200;
+    cursor: pointer;
+    outline: 0;
 }
 
 .checkout .none {
@@ -348,6 +347,8 @@
     font-size: 20px;
     margin-top: 0 !important;
     width: 320px;
+    color: #333;
+    font-weight: 300;
 }
 
 .checkout .back .preamble {
@@ -377,7 +378,7 @@
 }
 
 
-.checkout .basket input {
+.checkout .basket input[type="text"] {
     display: block;
     margin-bottom: 3px;
     height: 42px;
@@ -389,6 +390,12 @@
     font-size: 16px;
     font-weight: 200;
     outline: 0;
+}
+
+.checkout .checkbox {
+    float: left;
+    display: inline;
+    width: auto;
 }
 
 .checkout .basket textarea {
@@ -407,6 +414,17 @@
 
 .checkout .form-buttons {
     width: 100%;
+    margin-top: 17px;
+}
+
+.checkout .payment-type-wrapper input[type="radio"] {
+    width: auto;
+    height: auto;
+    vertical-align: middle;
+}
+
+.checkout .time-preference input[type="radio"] {
+    margin-top: 1px !important;
 }
 
 .checkout .form-buttons button:first-child {
@@ -623,7 +641,7 @@ thead tr {
 }
 
 .showbox {
-    position: absolute;
+    position: fixed;
     top: 0;
     bottom: 0;
     left: 0;

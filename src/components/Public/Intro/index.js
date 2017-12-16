@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux';
 import { translate } from 'react-i18next';
+import { resetRating } from '../../../actions/encounter';
 import styles from './styles.css';
 
 export class Hero extends Component {
@@ -13,10 +14,6 @@ export class Hero extends Component {
     }
 
     componentDidMount () {
-        window.localStorage.removeItem('order');
-        window.localStorage.removeItem('saved');
-        window.localStorage.removeItem('stripe');
-
         setTimeout(() => {
             const hasCookie = window.localStorage.getItem('cookie');
             const cookieWrapper = this.refs['cookie-wrapper'];
