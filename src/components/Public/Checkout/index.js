@@ -2,28 +2,36 @@ import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux';
 import { translate } from 'react-i18next';
 import _ from 'lodash';
-import PaypalExpressBtn from 'react-paypal-express-checkout';
 import validation from 'react-validation-mixin';
 import strategy from 'joi-validation-strategy';
 import FormComponent from '../../FormComponent';
 import { routeActions } from 'redux-simple-router';
+import ReactDOM from 'react-dom'
 import { encounterValidator } from '../../../../validators/encounters';
 import { getIssues } from '../../../actions/issue';
 import { saveRating } from '../../../actions/encounter';
 import { getStripeToken } from '../../../actions/config';
 import { i18nValidation } from  '../../../../helpers/validation';
-import { saveEncounter, resetEncounter } from '../../../actions/encounter';
+import { saveEncounter, resetEncounter, payPaypal } from '../../../actions/encounter';
+import { getCountries } from '../../../../helpers/countries';
 import Header from '../Header';
 import Footer from '../Footer';
-
 import styles from './styles.css';
+
+let PayPalButton = paypal.Button.driver('react', { React, ReactDOM });
 
 export class Checkout extends FormComponent {
 	constructor (props) {
 		super(props);
 
 		this.state = {
-			issue: 'Stres',
+            client: {
+                sandbox:    'ASjq_5LtraMQlFGyiih32_C8F-Yh_k1-jfGa54hGrXDPJ0PdeGV861q2kv3ez_QTsOAMxSm_eNChI1ha',
+                production: 'AdHHMFOsZkPDUuMIuqtVycTd5cybDC_IaFRsJn1hCOsb6wQKTTTiT-SbIL6YqxP2SY3N6bPRzEfDT01_',
+            },
+            env: 'sandbox',
+            commit: true,
+			issue: 'Välj kategori',
 			isOpen: false,
 			issues: [],
 			showSpinner: false,
@@ -36,10 +44,11 @@ export class Checkout extends FormComponent {
             location: null,
             countInactivity: true,
             idleTtl: 10000,
-            tick: 10000,
+            tick: 1000000,
 			webRating: 0,
 			payRating: 0,
-            ratingComment: ''
+            ratingComment: '',
+            paymentType: 'credit'
 		};
 
 		this.validatorTypes = encounterValidator;
@@ -61,6 +70,10 @@ export class Checkout extends FormComponent {
         this.handlePayStar = this.handlePayStar.bind(this);
         this.handleRatingComment = this.handleRatingComment.bind(this);
         this.postRating = this.postRating.bind(this);
+        this.handlePaymentType = this.handlePaymentType.bind(this);
+        this.payment = this.payment.bind(this);
+        this.onAuthorize = this.onAuthorize.bind(this);
+        this.validate = this.validate.bind(this);
 	}
 
 	componentWillMount () {
@@ -92,16 +105,16 @@ export class Checkout extends FormComponent {
     componentWillReceiveProps (nextProps) {
 		this.setState({ issues: nextProps.issues });
 
+        if (nextProps.paypalId.length) {
+            //this.payment();
+        }
+
 		if (nextProps.rating === true) {
             window.localStorage.removeItem('saved');
             window.localStorage.removeItem('order');
             window.localStorage.removeItem('stripe');
 			this.props.dispatch(routeActions.push('/anka'));
 		}
-
-		if (nextProps.stripeToken.length) {
-
-        }
 
 		if (Object.keys(nextProps.stripe).length) {
 			window.localStorage.setItem('stripe', JSON.stringify(nextProps.stripe));
@@ -119,6 +132,16 @@ export class Checkout extends FormComponent {
             this.setState({ showSpinner: false });
 		}
 	}
+
+	handlePaymentType (event) {
+        const id = event.target.id;
+        const options = document.getElementById('payment-options');
+       this.setState({ paymentType: id }, () => {
+           if (id === 'credit') {
+               this.initStripe();
+           }
+       });
+    }
 
 	postRating () {
     	const stripe = JSON.parse(window.localStorage.getItem('stripe'));
@@ -199,7 +222,7 @@ export class Checkout extends FormComponent {
      */
     startCountInactivity () {
         if (!this.timerInterval) {
-            this.timerInterval = setInterval(this.timeIncrement.bind(this), this.state.tick);
+            //this.timerInterval = setInterval(this.timeIncrement.bind(this), this.state.tick);
         }
     }
 
@@ -320,21 +343,28 @@ export class Checkout extends FormComponent {
      * @return {object}
      */
     initStripe () {
-    	if (typeof Stripe === 'undefined') return;
+    	if (typeof Stripe === 'undefined') {
+    	    return;
+        }
+
     	const { t } = this.props;
-        const stripe = Stripe('pk_test_CxCOETD4ltbadc9SZWuF2jm9');
-        const elements = stripe.elements({ locale: 'en' });
-        const card = elements.create('card', { placeholder: 'Card' });
+    	const element = document.getElementById('card-element');
 
-        this.card = card;
-        this.stripe = stripe;
+    	if (element) {
+            const stripe = Stripe('pk_test_CxCOETD4ltbadc9SZWuF2jm9');
+            const elements = stripe.elements({locale: 'en'});
+            const card = elements.create('card', {placeholder: 'Card'});
 
-        card.addEventListener('change', event => {
-            const displayError = document.getElementById('card-errors');
-            displayError.textContent = (event.error) ? t(`stripe.${event.error.code}`) : '';
-        });
+            this.card = card;
+            this.stripe = stripe;
 
-        card.mount('#card-element');
+            card.addEventListener('change', event => {
+                const displayError = document.getElementById('card-errors');
+                displayError.textContent = (event.error) ? t(`stripe.${event.error.code}`) : '';
+            });
+
+            card.mount('#card-element');
+        }
     }
 
     /**
@@ -383,6 +413,12 @@ export class Checkout extends FormComponent {
 		cache[e.target.id] = e.target.value;
 		window.localStorage.setItem('order', JSON.stringify(cache));
 		this.setState({ [e.target.id]: e.target.value })
+
+        this.props.validate((error) => {
+            if (error) {
+                this.actions.disable();
+            }
+        })
 	}
 
     /**
@@ -406,7 +442,7 @@ export class Checkout extends FormComponent {
                     } else {
                     	this.setState({ showSpinner: true });
                         // Send the token to your server
-                        this.props.dispatch(saveEncounter(result.token.id, this.state));
+                        this.props.dispatch(saveEncounter(this.state, result.token.id));
                     }
                 });
 			}
@@ -442,6 +478,39 @@ export class Checkout extends FormComponent {
     	this.setState({ issue: event.target.value });
 	}
 
+    payment(data, actions) {
+  	    //this.props.dispatch(payPaypal());
+       this.props.validate((error) => {
+
+          if (Object.keys(error).length === 0) {
+              console.log('is here')
+              return actions.payment.create({
+                  transactions: [
+                      {
+                          amount: { total: '0.01', currency: 'EUR' }
+                      }
+                  ]
+              });
+          }
+       });
+    }
+
+    onAuthorize(data, actions) {
+  	    console.log('authorize', data, actions)
+        return actions.payment.execute().then(function(paymentData) {
+            console.log('executed', paymentData)
+            this.props.dispatch(saveEncounter(this.state));
+        });
+    }
+
+    onError(data, actions) {
+
+    }
+
+    onCancel(data, actions) {
+
+    }
+
     /**
      * This callback type is called `requestCallback
      * @callback requestCallback
@@ -450,9 +519,16 @@ export class Checkout extends FormComponent {
      */
 	renderIssues () {
 		const { t } = this.props;
+		const issues = ['Välj kategori', ...this.state.issues];
+		let issueName;
 
-		return this.state.issues.map((issue, i) => {
-			const issueName = `issues.${issue.name}.name`;
+		return issues.map((issue, i) => {
+		    if (issue.name) {
+                issueName = `issues.${issue.name}.name`;
+            } else {
+		        issueName = issue;
+            }
+
 			return (
 				<option key={i} value={t(issueName)}>{t(issueName)}</option>
 			)
@@ -465,11 +541,31 @@ export class Checkout extends FormComponent {
      * @param {number} responseCode
      * @return {object}
      */
-	render () {
-		if (!window.localStorage.getItem('order') && this.props.save === false) {
-			//return null;
-		}
+    renderCountries () {
+        const { t } = this.props;
 
+        return getCountries().map((country, i) => {
+            return <option key={i} value={country.name}>{country.name}</option>;
+        })
+    }
+
+    validate (actions) {
+        this.props.validate((error) => {
+           if (!error) {
+               actions.enable();
+           } else {
+               actions.disable();
+           }
+        });
+    }
+
+    /**
+     * This callback type is called `requestCallback
+     * @callback requestCallback
+     * @param {number} responseCode
+     * @return {object}
+     */
+	render () {
 		const { t } = this.props;
 		const front = (!window.localStorage.getItem('saved')) ? 'front' : 'front none';
         const back = (window.localStorage.getItem('saved')) ? 'back' : 'back none';
@@ -489,12 +585,14 @@ export class Checkout extends FormComponent {
 
 		const spinnerClass = this.state.showSpinner ? 'showbox' : 'none';
 
-        const client = {
-            sandbox:    'ASjq_5LtraMQlFGyiih32_C8F-Yh_k1-jfGa54hGrXDPJ0PdeGV861q2kv3ez_QTsOAMxSm_eNChI1ha',
-            production: 'AdHHMFOsZkPDUuMIuqtVycTd5cybDC_IaFRsJn1hCOsb6wQKTTTiT-SbIL6YqxP2SY3N6bPRzEfDT01_',
+        const paypalStyle = {
+            lable: 'en_US',
+            size: 'large',
+            color: 'blue',
+            shape: 'rect',
+            label: 'paypal',
+            tagline: false
         };
-
-		// <PaypalExpressBtn client={client} currency={'BAM'} total={1.00} />
 
         return (
 			<div className="page">
@@ -690,11 +788,89 @@ export class Checkout extends FormComponent {
 												</select>
 											</div>
 										</div>
-										<div className="stripe form-element-wrapper">
-											<label htmlFor="card-element">Payment</label>
-											<div id="card-element" />
-											<div id="card-errors" role="alert" />
-										</div>
+                                        <div className="form-element-wrapper">
+                                            <label htmlFor="adress">Street</label>
+                                            <input
+                                                onChange={ this.handleChange }
+                                                id="street"
+                                                className="street"
+                                                type="text"
+                                                value={ this.state.street }/>
+                                            {this.getValidationMessages('street')}
+                                        </div>
+                                        <div className="city-wrapper">
+                                            <div className="form-element-wrapper">
+                                                <label htmlFor="postal">Postal code</label>
+                                                <input
+                                                    onChange={ this.handleChange }
+                                                    id="postal"
+                                                    className="postal"
+                                                    type="text"
+                                                    value={ this.state.postal }/>
+                                                {this.getValidationMessages('postal')}
+                                            </div>
+                                            <div className="form-element-wrapper">
+                                                <label htmlFor="city">Grad</label>
+                                                <input
+                                                    onChange={ this.handleChange }
+                                                    id="city"
+                                                    className="city"
+                                                    type="text"
+                                                    value={ this.state.city }/>
+                                                {this.getValidationMessages('city')}
+                                            </div>
+                                        </div>
+                                        <div className="form-element-wrapper">
+                                            <label htmlFor="country">Country</label>
+                                            <div className="select-style">
+                                                <select id="country" onChange={ this.handleSelect } value={ this.state.issue }>
+                                                    { this.renderCountries() }
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div className="form-element-wrapper payment-type">
+                                            <fieldset id="payment-options">
+                                                <legend className="payment-type-header">Payment type</legend>
+                                                <div className="payment-type-wrapper">
+                                                    <label htmlFor="credit">
+                                                        <img className="card" src="/images/visa.png" />
+                                                        <img className="card" src="/images/master.png" />
+                                                        <img className="card" src="/images/ae.png" />
+                                                    </label>
+                                                    <input id="credit" className="card-radio" checked={ this.state.paymentType === 'credit' } type="radio" name="payment-type" onClick={ this.handlePaymentType } />
+                                                </div>
+                                                <div className="payment-type-wrapper">
+                                                    <label htmlFor="paypal">
+                                                        <img className="card" src="/images/paypal.png" />
+                                                    </label>
+                                                    <input id="paypal" className="card-radio" checked={ this.state.paymentType === 'paypal' } type="radio" name="payment-type" onClick={ this.handlePaymentType } />
+                                                </div>
+                                                <div className="payment-type-wrapper faktura-wrapper">
+                                                    <label htmlFor="paypal">Faktura</label>
+                                                    <input id="faktura" checked={ this.state.paymentType === 'faktura' } type="radio" name="payment-type" onClick={ this.handlePaymentType } />
+                                                </div>
+                                                {(() => {
+                                                    if (this.state.paymentType === 'faktura') {
+                                                        return (
+                                                            <div className="faktura-info">
+                                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus aliquid architecto autem consectetur dolorem eveniet explicabo fuga ipsa, maiores nisi odio soluta tenetur! Aliquid aspernatur et labore mollitia nemo nulla quo tenetur. Consequatur earum hic laudantium natus recusandae. Debitis deleniti ducimus earum eligendi, eos esse eum facere iste laborum libero quam, quidem sequi soluta tenetur voluptate. Atque debitis dolores fugiat iusto neque nulla numquam quisquam veritatis. Accusantium autem dolores, illo praesentium sed tenetur totam voluptatibus.</p>
+                                                            </div>
+                                                        )
+                                                    }
+                                                })()}
+                                            </fieldset>
+                                        </div>
+                                        {(() => {
+                                            if (this.state.paymentType === 'credit') {
+                                                return (
+                                                    <div className="stripe form-element-wrapper">
+                                                        <label htmlFor="card-element">Creadit card</label>
+                                                        <div id="card-element"/>
+                                                        <div id="card-errors" role="alert"/>
+                                                    </div>
+                                                )
+                                            }
+                                        })()}
 										<div className="form-element-wrapper">
 											<label htmlFor="comment">{ t('comment') }</label>
 											<textarea
@@ -707,7 +883,27 @@ export class Checkout extends FormComponent {
 										</div>
 										<div className="form-buttons">
 											<button onClick={ this.resetCheckout }>{ t('back') }</button>
-											<button onClick={ this.handleSubmit }>{ t('placeOrder') }</button>
+                                            {(() => {
+                                                if (this.state.paymentType === 'credit' || this.state.paymentType === 'faktura') {
+                                                    return <button className="stripe-button" onClick={this.handleSubmit}>{ t('placeOrder') }</button>;
+                                                }
+                                            })()}
+                                            {(() => {
+                                                if (this.state.paymentType === 'paypal') {
+                                                    return (
+                                                        <PayPalButton
+                                                        style={paypalStyle}
+                                                        locale="en_US"
+                                                        commit={ this.state.commit }
+                                                        env={ this.state.env }
+                                                        client={ this.state.client }
+                                                        validate={ (data, actions) => this.validate(data, actions) }
+                                                        payment={ (data, actions) => this.payment(data, actions) }
+                                                        onAuthorize={ (data, actions) => this.onAuthorize(data, actions) }
+                                                        />
+                                                    );
+                                                }
+                                            })()}
 										</div>
 									</form>
 								</div>
@@ -764,7 +960,8 @@ const mapStateToProps = (state) => ({
 	stripe: state.encounter.stripe,
 	stripeToken: state.encounter.stripeToken,
 	rating: state.encounter.rating,
-	errorMessage: state.encounter.errorMessage
+	errorMessage: state.encounter.errorMessage,
+    paypalId: state.encounter.paypalId
 });
 
 export default connect(mapStateToProps)(translate('checkoutView')(validation(strategy(i18nValidation()))(Checkout)));

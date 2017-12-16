@@ -208,8 +208,11 @@
       "validation": {
         "\"name\" is required": "Ime je obavezno",
         "\"phone\" is required": "Telefon je potreban",
+        "\"street\" is required": "Ulica je potrebna",
+        "\"postal\" is required": "Poštanski broj je potreban",
         "\"phone\" is not allowed to be empty": "",
-        "\"mail\" is required": "E-pošta je potreban",
+        "\"city\" is required": "Grad je potreban",
+        "\"mail\" is required": "E-pošta je potrebna",
         "\"mail\" must be a valid email": "E-pošta mora biti važeća adresa e-pošte",
         "\"mail\" is not allowed to be empty": "E-pošta nije dozvoljena da bude prazna",
         "wrongRegexFormat": "Greška, pogrešan format"

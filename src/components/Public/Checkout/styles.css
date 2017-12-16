@@ -17,6 +17,41 @@
     margin-bottom: 35px;
 }
 
+.checkout .city-wrapper {
+    overflow: hidden;
+}
+
+.checkout .city-wrapper {
+    overflow: hidden;
+}
+
+.checkout .city-wrapper div:first-child {
+    float: left;
+    width: 30%;
+    margin-right: 3%;
+}
+
+.checkout .city-wrapper div:last-child {
+    float: left;
+    width: 67%;
+}
+
+.checkout .faktura-info {
+    float: left;
+    margin-top: 10px;
+    margin: 0;
+}
+
+.checkout .faktura-info p {
+    height: auto;
+    border-radius: 5px;
+    line-height: 21px;
+    color: #c04c9c;
+    font-weight: 300;
+    font-size: 15px;
+    margin: 8px 0 10px 4px;
+}
+
 .checkout .basket .back > div {
     margin: 60px auto;
     width: 520px;
@@ -49,6 +84,7 @@
 
 .checkout .left-col-wrapper {
     float: left;
+    width: 40%;
 }
 
 .checkout .stripe {
@@ -60,6 +96,7 @@
     padding: 12px;
     border: 1px solid #999;
     border-radius: 5px;
+    min-height: 16px;
 }
 
 .checkout .center {
@@ -91,19 +128,105 @@
     color: #c04c9c;
 }
 
-.checkout .basket p {
-    color: #333;
-    font-size: 23px;
+.xcomponent-outlet {
+    width: 100%;
+    height: 68px;
+}
+
+.checkout .payment-type-wrapper {
+    float: left;
+    margin-right: 20px;
+}
+
+.checkout .payment-type-wrapper.faktura-wrapper {
+    margin-top: 7px;
+}
+
+.checkout .payment-type-wrapper.faktura-wrapper label {
+    margin-top: 2px;
+}
+
+.xcomponent-outlet {
+    width: 100% !important;
+    height: 68px !important;
+}
+
+.payment-type {
+    transition: all 7s;
+}
+
+.checkout .payment-type {
+    margin-top: 17px !important;
+}
+
+.checkout fieldset {
+    border: 1px solid #999;
+    border-radius: 3px;
+    padding: 13px 25px;
+    //max-height: 400px;
+    //height: 45px;
+    //transition: all 2s ease-in-out;
+}
+
+.checkout fieldset.expand {
+    height: 230px;
+}
+
+.checkout fieldset label {
+    color: #333 !important;
+}
+
+.checkout legend {
     font-weight: 300;
+    padding: 0 7px;
+    font-size: 15px;
+    color: #c04c9c;
+}
+
+.checkout .payment-type-wrapper label {
+    float: left;
+    margin-right: 5px;
+    margin-bottom: 0 !important;
+}
+
+.checkout .payment.type-wrapper + p {
+    margin: 8px 0 10px 4px;
+}
+
+.payment-type-header {
+    display: block;
+    margin-top: 11px;
+}
+
+.checkout .payment-type-wrapper input {
+    float: left;
+    width: 20px !important;
+    height: 20px !important;
+    vertical-align: top;
+}
+
+.checkout .paypal-button {
+
+}
+
+.checkout .form-buttons button:first-child + div {
+    float: left;
+    width: 68%;
+}
+
+.checkout .basket p {
+    //color: #333;
+    //font-size: 23px;
+    //font-weight: 300;
 }
 
 .checkout .basket > div p:first-child {
-    margin-bottom: 70px;
-    text-align: left;
-    font-size: 22px;
-    margin-top: 13px;
-    float: left;
-    height: 25px;
+    //margin-bottom: 70px;
+    //text-align: left;
+    //font-size: 22px;
+    //margin-top: 13px;
+    //float: left;
+    //height: 25px;
 }
 
 .checkout .back-header {
@@ -135,11 +258,11 @@
 }
 
 .checkout .basket p:nth-child(4) {
-    color: #c04c9c;
-    font-size: 30px;
-    margin: 7px 0 6px 0;
-    text-align: center;
-    font-weight: 300;
+    //color: #c04c9c;
+    //font-size: 30px;
+    //margin: 7px 0 6px 0;
+    //text-align: center;
+    //font-weight: 300;
 }
 
 .checkout .none {
@@ -168,7 +291,7 @@
 .checkout .basket label {
     color: #c04c9c;
     display: block;
-    font-size: 19px;
+    font-size: 15px;
     margin-bottom: 5px;
     margin-left: 3px;
     font-weight: 300;
@@ -185,13 +308,24 @@
     overflow: hidden;
 }
 
+.checkout .card {
+    width: auto;
+    height: 32px;
+    margin-right: 8px;
+    float: left;
+}
+
+.checkout .card-radio {
+    margin-top: 9px;
+}
+
 .checkout .error {
     display: blocK;
     float: left;
     font-size: 14px;
     width: 100%;
     text-align: left;
-    color: #c04c9c !important;
+    color: red !important;
 }
 
 .checkout .rating {
@@ -277,7 +411,7 @@
 
 .checkout .form-buttons button:first-child {
     width: 30%;
-    margin-right: 11px;
+    margin-right: 2%;
     background: #c2519e8c;
     margin-bottom: 40px;
 }
@@ -290,12 +424,16 @@
     float: left
 }
 
-.checkout .form-buttons button:last-child {
-    width: 68%;
+.checkout .form-buttons .paypal-button {
+    //width: 68% !important;
 }
 
-.checkout .basket button {
-    width: 351px;
+.checkout .form-buttons .stripe-button {
+    width: 68% !important;
+}
+
+.checkout .form-buttons button {
+    //width: 351px;
     height: 47px;
     background-color: #c04c9c;
     border: none;
@@ -445,7 +583,7 @@ thead tr {
 }
 
 .select-style select {
-    padding: 0 0 0 20px;
+    padding: 0 0 0 10px;
     width: 100%;
     border: none;
     box-shadow: none;

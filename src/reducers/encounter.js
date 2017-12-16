@@ -58,6 +58,13 @@ export default handleActions({
             ...state,
             errorMessage: action.payload
         }
+    },
+    PAYPAL: (state, action) => {
+        console.log('r', action.payload)
+        return {
+            ...state,
+            paypalId: action.payload
+        }
     }
 }, {
     saved: false,
@@ -70,5 +77,6 @@ export default handleActions({
     errorMessage: '',
     rating: false,
     erased: false,
-    stripeToken: ''
+    stripeToken: '',
+    paypalId: ''
 })

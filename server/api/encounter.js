@@ -1,4 +1,5 @@
 import Encounter from '../models/encounter';
+import request from 'request';
 import stripe from 'stripe';
 import config from 'config';
 
@@ -53,8 +54,11 @@ const saveEncounter = (request, reply, charge) => {
         emailPrice = request.payload.encounter.data.email.cost;
     }
 
-    console.log(request.payload.encounter.phone)
     encounter.name = request.payload.encounter.name;
+    encounter.street = request.payload.encounter.street;
+    encounter.postalCode = request.payload.encounter.postalCode;
+    encounter.city = request.payload.encounter.city;
+    encounter.country = request.payload.encounter.country;
     encounter.phone = request.payload.encounter.phone;
     encounter.skype = request.payload.encounter.skypeId;
     encounter.issue = request.payload.encounter.issue;
@@ -66,31 +70,79 @@ const saveEncounter = (request, reply, charge) => {
     encounter.date = date.toUTCString();
 
     encounter.save((err, record) => {
-        charge.encounterId = record._id;
-        return reply(charge);
+        if (charge) {
+            charge.encounterId = record._id;
+            return reply(charge);
+        } else {
+            return reply(record);
+        }
     });
 };
 
 const handleCharge = (request, reply) => {
-    // Token is created using Checkout or Elements!
-    // Get the payment token ID submitted by the form:
-    const striper = stripe(config.get('stripe.server'));
-    const token = request.payload.id; //
+    if (request.payload.id !== null) {
+        // Token is created using Checkout or Elements!
+        // Get the payment token ID submitted by the form:
+        const striper = stripe(config.get('stripe.server'));
+        const token = request.payload.id; //
 
-    // Charge the user's card:
-    striper.charges.create({
-        amount: 1000,
-        currency: "BAM",
-        description: "Example charge",
-        source: token,
-    }, function(error, charge) {
-        if (error) return reply({
-            message: error.code, code: error.type
+        // Charge the user's card:
+        striper.charges.create({
+            amount: 1000,
+            currency: "BAM",
+            description: "Example charge",
+            source: token,
+        }, function (error, charge) {
+            if (error) return reply({
+                message: error.code, code: error.type
+            });
+
+            if (charge.paid) {
+                saveEncounter(request, reply, charge);
+            }
         });
+    } else {
+        saveEncounter(request, reply, null);
+    }
+};
 
-        if (charge.paid) {
-            saveEncounter(request, reply, charge);
-        }
+const handlePaypal = (req, reply) => {
+    let oauth = new Promise((resolve, reject) => {
+        request.post({
+            uri:  'https://api.paypal.com/v1/oauth2/token',
+            body: 'grant_type=client_credentials',
+            auth: {
+                user: config.get('paypal.production'),
+                pass: config.get('paypal.secret')
+            },
+        },
+        function (error, response, body) {
+            resolve(response)
+        });
+    });
+
+    oauth.then((response) => {
+        let payment = request.post({
+            uri: 'https://api.paypal.com/v1/payments/payment',
+            auth: { bearer: JSON.parse(response.body).access_token },
+            json: true,
+            body: {
+                intent: 'sale',
+                payer: {
+                    payment_method: 'paypal'
+                },
+                transactions: [{
+                    amount: { total: '0.01', currency: 'EUR' }
+                }],
+                redirect_urls: {
+                    return_url: 'https://www.zdravlje.nu/checkout',
+                    cancel_url: 'https://www.zdravlje.nu/checkout'
+                }
+            }
+        }, function (error, response) {
+            console.log(response.body);
+            return reply({ id: response.body.id });
+        });
     });
 };
 
@@ -136,6 +188,13 @@ exports.register = (server, options, next) => {
             path: '/stripe',
             config: {
                 handler: handleStripeToken
+            }
+        },
+        {
+            method: 'POST',
+            path: '/paypal',
+            config: {
+                handler: handlePaypal
             }
         }
     ]);

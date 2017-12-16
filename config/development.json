@@ -16,5 +16,10 @@
     "stripe": {
         "client": "pk_test_CxCOETD4ltbadc9SZWuF2jm9",
         "server": "sk_test_sa1eq6hSDY9aMKNp3jl9K4j1"
+    },
+    "paypal": {
+        "sandbox": "ASjq_5LtraMQlFGyiih32_C8F-Yh_k1-jfGa54hGrXDPJ0PdeGV861q2kv3ez_QTsOAMxSm_eNChI1ha",
+        "production": "AdHHMFOsZkPDUuMIuqtVycTd5cybDC_IaFRsJn1hCOsb6wQKTTTiT-SbIL6YqxP2SY3N6bPRzEfDT01_",
+        "secret": "EBFBcTtOlf3USaGDseHvHoy-DhIHIqZ8PNCpnQ4nbK0YhV5WssCIq7gNUMIJO76p2Jrj5W68QTKi1aKO"
     }
 }

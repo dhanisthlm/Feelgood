@@ -6,6 +6,26 @@ export const encounterValidator = Joi.object().keys({
         .trim()
         .required(),
 
+    street: Joi
+        .string()
+        .trim()
+        .required(),
+
+    postal: Joi
+        .string()
+        .trim()
+        .required(),
+
+    city: Joi
+        .string()
+        .trim()
+        .required(),
+
+    country: Joi
+        .string()
+        .trim()
+        .required(),
+
     skypeId: Joi
         .string()
         .allow('', null),

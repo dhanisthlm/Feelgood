@@ -11,6 +11,18 @@ export const getEncounters = () => (dispatch) => {
         });
 };
 
+export const payPaypal = () => (dispatch) => {
+    return request
+        .post('/paypal')
+        .then((data) => {
+            const id = data.data.id;
+            dispatch({ type: 'PAYPAL', payload: id });
+        })
+        .catch((error) => {
+            console.log('error', error);
+        });
+};
+
 export const eraseEncounter = (id) => (dispatch) => {
     return request
         .delete(`/encounter/${id}`)
@@ -34,7 +46,8 @@ export const saveRating = (encounterId, ratingObj) => (dispatch) => {
         });
 };
 
-export const saveEncounter = (id, encounter) => (dispatch) => {
+export const saveEncounter = (encounter, id) => (dispatch) => {
+    id = id || null;
     return request
         .post('/encounter', { id, encounter })
         .then((data) => {

@@ -4,6 +4,18 @@ const encounterSchema = Schema({
     name: {
       type: String
     },
+    street: {
+      type: String
+    },
+    postalCode: {
+      type: String
+    },
+    city: {
+      type: String
+    },
+    country: {
+      type: String
+    },
     skype: {
         type: String,
         default: ''
