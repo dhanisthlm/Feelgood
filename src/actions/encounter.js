@@ -39,6 +39,7 @@ export const saveRating = (encounterId, ratingObj) => (dispatch) => {
     return request
         .post('/rating', payload)
         .then(() => {
+             console.log('save rating')
             dispatch({ type: 'RATING_SAVED' });
         })
         .catch((error) => {

@@ -28,13 +28,15 @@ export default handleActions({
     RATING_SAVED: (state, action) => {
         return {
             ...state,
-            rating: true
+            rating: true,
+            saved: false
         }
     },
     RESET_RATING: (state, action) => {
         return {
             ...state,
-            rating: false
+            rating: false,
+            stripe: {}
         }
     },
     RESET_ENCOUNTER: (state) => {
@@ -66,7 +68,6 @@ export default handleActions({
         }
     },
     PAYPAL: (state, action) => {
-        console.log('r', action.payload)
         return {
             ...state,
             paypalId: action.payload

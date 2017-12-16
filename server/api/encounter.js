@@ -12,7 +12,9 @@ const getEncounters = (request, reply) => {
 };
 
 const handleRating = (request, reply) => {
+    console.log(request.payload.id)
    Encounter.find({ '_id': request.payload.id }, (err, encounter) => {
+        console.log(encounter);
        if (encounter.length) {
            encounter[0].rating = {
                web: request .payload.ratingObj.web,
@@ -96,13 +98,15 @@ const handleCharge = (request, reply) => {
         // Token is created using Checkout or Elements!
         // Get the payment token ID submitted by the form:
         const striper = stripe(config.get('stripe.server'));
-        const token = request.payload.id; //
+        const token = request.payload.id;
 
         // Charge the user's card:
+        // request.payload.cost
         striper.charges.create({
-            amount: 1000,
-            currency: "BAM",
-            description: "Example charge",
+            amount: 3 * 100,
+            //amount: request.payload.encounter.cost * 100,
+            currency: request.payload.encounter.currency,
+            description: "zdravlje.nu",
             source: token,
         }, function (error, charge) {
             if (error) return reply({

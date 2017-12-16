@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { translate } from 'react-i18next';
 import { routeActions } from 'redux-simple-router';
 import { setEncounterData } from '../../../actions/encounter';
-import Checkout from '../Checkout';
 import styles from './styles.css';
 
 export class Payment extends Component {
@@ -56,6 +55,7 @@ export class Payment extends Component {
     handleCheckout () {
     	this.setState({ data: this.getData() }, () => {
             window.localStorage.setItem('order', JSON.stringify(this.state));
+            window.localStorage.setItem('step', '1');
             this.props.dispatch(routeActions.push('/checkout'));
         });
 	}
@@ -514,6 +514,8 @@ export class Payment extends Component {
 
 Payment.propTypes = { dispatch: PropTypes.func };
 
-const mapStateToProps = (state) => ({});
+const mapStateToProps = (state) => ({
+	stripeToken: state.encounter.stripeToken
+});
 
 export default connect(mapStateToProps)(translate('paymentView')(Payment));

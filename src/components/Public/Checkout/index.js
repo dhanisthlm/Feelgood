@@ -9,11 +9,12 @@ import { routeActions } from 'redux-simple-router';
 import ReactDOM from 'react-dom'
 import { encounterValidator } from '../../../../validators/encounters';
 import { getIssues } from '../../../actions/issue';
-import { saveRating } from '../../../actions/encounter';
+import { saveRating, resetRating } from '../../../actions/encounter';
 import { getStripeToken } from '../../../actions/config';
 import { i18nValidation } from  '../../../../helpers/validation';
-import { saveEncounter, resetEncounter, payPaypal } from '../../../actions/encounter';
+import { saveEncounter, resetEncounter } from '../../../actions/encounter';
 import { getCountries } from '../../../../helpers/countries';
+import { getCurrency } from '../../../../helpers/currencies';
 import Header from '../Header';
 import Footer from '../Footer';
 import styles from './styles.css';
@@ -52,7 +53,9 @@ export class Checkout extends FormComponent {
             timeframe: '',
             timeframes: ['Pre ručka', 'Poslije ručka', 'Veče'],
             country: 'Bosnia and Herzegovina',
-            newsletter: true
+            newsletter: true,
+            currency: 'BAM',
+            cost: 0
 		};
 
 		this.validatorTypes = encounterValidator;
@@ -98,7 +101,6 @@ export class Checkout extends FormComponent {
             this.listenForActivity();
             this.props.dispatch(getIssues());
             this.calculateViewportSize();
-            this.initStripe();
         } else {
             this.props.dispatch(routeActions.push('/anka'));
         }
@@ -111,31 +113,26 @@ export class Checkout extends FormComponent {
      * @return {object}
      */
     componentWillReceiveProps (nextProps) {
-		this.setState({ issues: nextProps.issues });
+		this.setState({
+            issues: nextProps.issues,
+            cost: JSON.parse(window.localStorage.getItem('order')).cost.total
+		});
 
-		if (window.localStorage.getItem('order') === null) {
-            window.localStorage.removeItem('saved');
-            window.localStorage.removeItem('order');
-            window.localStorage.removeItem('stripe');
+        if (window.localStorage.getItem('step') === null) {
             this.props.dispatch(routeActions.push('/anka'));
         }
 
-		if (Object.keys(nextProps.stripe).length) {
-			window.localStorage.setItem('stripe', JSON.stringify(nextProps.stripe));
-		}
-
-		if (nextProps.save === true) {
-			window.localStorage.setItem('saved', true);
-            window.localStorage.setItem('rating', true);
-            window.removeEventListener('mousemove', this.throttledDebounce);
-            window.removeEventListener('keydown', this.throttledDebounce);
-            this.stopCountInactivity();
-			this.setState({ showSpinner: false, save: true });
-		}
-
-		if (nextProps.errorMessage.length) {
+        if (nextProps.errorMessage.length) {
             this.setState({ showSpinner: false });
-		}
+        }
+
+        if (nextProps.stripeToken.length) {
+            window.localStorage.setItem('st', nextProps.stripeToken);
+            this.initStripe();
+        }
+
+        this.handleRating(nextProps);
+        this.handleSave(nextProps);
 	}
 
 	handleNewsletter () {
@@ -147,7 +144,8 @@ export class Checkout extends FormComponent {
 	handlePaymentType (event) {
         const id = event.target.id;
         const options = document.getElementById('payment-options');
-       this.setState({ paymentType: id }, () => {
+
+        this.setState({ paymentType: id }, () => {
            if (id === 'credit') {
                this.initStripe();
            }
@@ -159,10 +157,20 @@ export class Checkout extends FormComponent {
         this.setState({timePreference: id});
     }
 
+    handleSave (nextProps) {
+        if (nextProps.save === true) {
+            window.localStorage.setItem('step', '2');
+            window.removeEventListener('mousemove', this.throttledDebounce);
+            window.removeEventListener('keydown', this.throttledDebounce);
+            this.stopCountInactivity();
+            this.setState({ showSpinner: false, save: true });
+        }
+    }
 
 	postRating () {
     	const stripe = JSON.parse(window.localStorage.getItem('stripe'));
     	const id = stripe.data.encounterId;
+
     	this.props.dispatch(saveRating(
     		id, {
 				web: 5 - this.state.webRating +1,
@@ -170,9 +178,21 @@ export class Checkout extends FormComponent {
 				comment: this.state.ratingComment
 			}
 		));
+    }
 
-        window.localStorage.removeItem('order');
-	}
+    handleRating (nextProps) {
+        if (nextProps.rating === true) {
+            window.localStorage.removeItem('step');
+            window.localStorage.removeItem('order');
+            window.localStorage.removeItem('stripe');
+            this.props.dispatch(resetRating());
+            this.props.dispatch(routeActions.push('/anka'));
+        } else {
+            if (Object.keys(nextProps.stripe).length) {
+                window.localStorage.setItem('stripe', JSON.stringify(nextProps.stripe));
+            }
+        }
+    }
 
 	handleRatingComment (event) {
     	this.setState({ ratingComment: event.target.value });
@@ -370,7 +390,7 @@ export class Checkout extends FormComponent {
     	const element = document.getElementById('card-element');
 
     	if (element) {
-            const stripe = Stripe('pk_test_CxCOETD4ltbadc9SZWuF2jm9');
+            const stripe = Stripe(window.localStorage.getItem('st'));
             const elements = stripe.elements({locale: 'en'});
             const card = elements.create('card', {placeholder: 'Card'});
 
@@ -501,7 +521,9 @@ export class Checkout extends FormComponent {
     }
 
     handleSelectCountry (event) {
-        this.setState({ country: event.target.value });
+  	    const countryObj = getCountries().filter((countryObj) => countryObj.name === event.target.value)[0];
+  	    const currency = getCurrency()[countryObj.code];
+        this.setState({ country: event.target.value, currency });
     }
 
     payment(data, actions) {
@@ -509,7 +531,6 @@ export class Checkout extends FormComponent {
        this.props.validate((error) => {
 
           if (Object.keys(error).length === 0) {
-              console.log('is here')
               return actions.payment.create({
                   transactions: [
                       {
@@ -522,19 +543,10 @@ export class Checkout extends FormComponent {
     }
 
     onAuthorize(data, actions) {
-  	    console.log('authorize', data, actions)
         return actions.payment.execute().then(function(paymentData) {
             console.log('executed', paymentData)
             this.props.dispatch(saveEncounter(this.state));
         });
-    }
-
-    onError(data, actions) {
-
-    }
-
-    onCancel(data, actions) {
-
     }
 
     renderTimeframes () {
@@ -592,7 +604,7 @@ export class Checkout extends FormComponent {
         const { t } = this.props;
 
         return getCountries().map((country, i) => {
-            return <option key={i} value={country.name}>{country.name}</option>;
+            return <option data-id={country.code} key={i} value={country.name}>{country.name}</option>;
         })
     }
 
@@ -613,9 +625,13 @@ export class Checkout extends FormComponent {
      * @return {object}
      */
 	render () {
+	    if (window.localStorage.getItem('order') === null) {
+	        return null;
+        }
+
 		const { t } = this.props;
-		const front = (!window.localStorage.getItem('saved')) ? 'front' : 'front none';
-        const back = (window.localStorage.getItem('saved')) ? 'back' : 'back none';
+		const front = (window.localStorage.getItem('step') === '1') ? 'front' : 'front none';
+        const back = (window.localStorage.getItem('step') === '2') ? 'back' : 'back none';
 
         const skypeCost = this.state.data.skype ? this.state.data.skype.cost : 0;
         const skypeDurationFactor = this.state.data.skypeDuration.factor;
@@ -672,7 +688,7 @@ export class Checkout extends FormComponent {
 						<div className="outer-frame">
 							<div className="inner-frame">
                                 {(() => {
-                                    if (!window.localStorage.getItem('saved')) {
+                                    if (window.localStorage.getItem('step') === '1') {
                                         return (
 											<div className="left-col-wrapper">
 												<table>
@@ -834,7 +850,7 @@ export class Checkout extends FormComponent {
                                         <div className="form-element-wrapper">
                                             <label htmlFor="country">Zemlju</label>
                                             <div className="select-style">
-                                                <select value={this.state.country} id="country" onChange={ this.handleSelectCountry }>
+                                                <select data-id={this.state.currency} value={this.state.country} id="country" onChange={ this.handleSelectCountry }>
                                                     { this.renderCountries() }
                                                 </select>
                                             </div>

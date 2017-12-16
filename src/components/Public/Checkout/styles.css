@@ -651,6 +651,10 @@ thead tr {
     z-index: 9999;
 }
 
+#card-errors {
+    color: red !important;
+}
+
 .loader {
     position: absolute;
     margin: auto;

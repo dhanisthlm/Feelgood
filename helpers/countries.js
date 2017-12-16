@@ -1,5 +1,6 @@
 export const getCountries = () => {
     return [
+        {name: 'Izaberite zemlju', code: ''},
         {name: 'Afghanistan', code: 'AF'},
         {name: 'Åland Islands', code: 'AX'},
         {name: 'Albania', code: 'AL'},

@@ -14,7 +14,7 @@
   },
   "baseUrl": "https://www.zdravlje.nu",
   "stripe": {
-    "client": "pk_test_CxCOETD4ltbadc9SZWuF2jm9",
-    "server": "sk_test_sa1eq6hSDY9aMKNp3jl9K4j1"
+    "client": "pk_live_kjV0R984b9982v5iBAz64yI2",
+    "server": "sk_live_MWMGHbzOIh6yBAWlLGTrRMno"
   }
 }
