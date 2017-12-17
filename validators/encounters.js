@@ -42,11 +42,11 @@ export const encounterValidator = Joi.object().keys({
 
     issue: Joi
         .string()
-        .required(),
+        .allow('', null),
 
     timeframe: Joi
         .string()
-        .required(),
+        .allow('', null),
 
     newsletter: Joi
         .boolean()

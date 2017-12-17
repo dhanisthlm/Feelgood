@@ -39,6 +39,11 @@ const handleStripeToken = (request, reply) => {
     return reply(token).code(200);
 };
 
+const handlePaypalEnv = (request, reply) => {
+    const env = config.get('paypal');
+    return reply(env).code(200);
+};
+
 const saveEncounter = (request, reply, charge) => {
     const encounter = new Encounter();
     let skypePrice = 0;
@@ -204,6 +209,13 @@ exports.register = (server, options, next) => {
             path: '/stripe',
             config: {
                 handler: handleStripeToken
+            }
+        },
+        {
+            method: 'GET',
+            path: '/paypal',
+            config: {
+                handler: handlePaypalEnv
             }
         },
         {

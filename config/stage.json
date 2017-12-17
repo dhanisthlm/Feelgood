@@ -16,5 +16,6 @@
   "stripe": {
     "client": "pk_test_CxCOETD4ltbadc9SZWuF2jm9",
     "server": "sk_test_sa1eq6hSDY9aMKNp3jl9K4j1"
-  }
+  },
+  "paypal": "sandbox"
 }

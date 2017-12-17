@@ -26,7 +26,7 @@ export class Checkout extends FormComponent {
 
 		this.state = {
             client: {
-                sandbox:    'ASjq_5LtraMQlFGyiih32_C8F-Yh_k1-jfGa54hGrXDPJ0PdeGV861q2kv3ez_QTsOAMxSm_eNChI1ha',
+                sandbox: 'ASjq_5LtraMQlFGyiih32_C8F-Yh_k1-jfGa54hGrXDPJ0PdeGV861q2kv3ez_QTsOAMxSm_eNChI1ha',
                 production: 'AdHHMFOsZkPDUuMIuqtVycTd5cybDC_IaFRsJn1hCOsb6wQKTTTiT-SbIL6YqxP2SY3N6bPRzEfDT01_',
             },
             env: 'sandbox',
@@ -49,7 +49,6 @@ export class Checkout extends FormComponent {
 			payRating: 0,
             ratingComment: '',
             paymentType: 'credit',
-            timeframe: '',
             timeframes: ['Pre ručka', 'Poslije ručka', 'Veče'],
             country: 'Bosnia and Herzegovina',
             newsletter: true,
@@ -79,27 +78,29 @@ export class Checkout extends FormComponent {
         this.handlePaymentType = this.handlePaymentType.bind(this);
         this.payment = this.payment.bind(this);
         this.onAuthorize = this.onAuthorize.bind(this);
+        this.onCancel = this.onCancel.bind(this);
         this.validate = this.validate.bind(this);
         this.handleTimePreference = this.handleTimePreference.bind(this);
         this.handleSelectTime = this.handleSelectTime.bind(this);
         this.handleSelectCountry = this.handleSelectCountry.bind(this);
         this.handleNewsletter = this.handleNewsletter.bind(this);
-	}
+    }
 
 	componentWillMount () {
 		if (window.localStorage.getItem('order') !== null) {
 			const cache = JSON.parse(window.localStorage.getItem('order'));
             this.setState({ ...cache, save: false });
+            this.props.dispatch(getIssues());
         }
 	}
 
 	componentDidMount () {
         if (window.localStorage.getItem('order')) {
             this.initStripe();
-            this.props.dispatch(getIssues());
             this.startCountInactivity();
             this.listenForActivity();
             this.calculateViewportSize();
+            this.setState({ env: window.localStorage.getItem('pe') });
         } else {
             this.props.dispatch(routeActions.push('/anka'));
         }
@@ -224,7 +225,6 @@ export class Checkout extends FormComponent {
             window.localStorage.removeItem('step');
             window.localStorage.removeItem('order');
             window.localStorage.removeItem('stripe');
-            window.localStorage.removeItem('st');
             this.props.dispatch(resetRating());
             this.props.dispatch(routeActions.push('/anka'));
         } else {
@@ -394,7 +394,6 @@ export class Checkout extends FormComponent {
 		window.localStorage.removeItem('order');
         window.localStorage.removeItem('stripe');
         window.localStorage.removeItem('saved');
-        window.localStorage.removeItem('st');
         window.removeEventListener('mousemove', this.throttledDebounce);
         window.removeEventListener('keydown', this.throttledDebounce);
 	}
@@ -499,15 +498,20 @@ export class Checkout extends FormComponent {
 		cache[e.target.id] = e.target.value;
 		window.localStorage.setItem('order', JSON.stringify(cache));
 		this.setState({ [e.target.id]: e.target.value });
+        this.handlePaypal ();
+    }
 
+	handlePaypal () {
         if (this.state.paymentType === 'paypal') {
             this.props.validate((error) => {
                 if (error) {
-                    this.actions.disable();
+                     this.actions.disable();
+                } else {
+                     this.actions.enable();
                 }
             })
         }
-	}
+    }
 
     /**
      * This callback type is called `requestCallback
@@ -560,7 +564,7 @@ export class Checkout extends FormComponent {
      * @return {object}
      */
   	handleSelect (event) {
-    	this.setState({ issue: event.target.value });
+        this.setState({ issue: event.target.value });
 	}
 
     /**
@@ -585,6 +589,14 @@ export class Checkout extends FormComponent {
         this.setState({ country: event.target.value, currency });
     }
 
+    onCancel (data) {
+
+    }
+
+    onError (data) {
+
+    }
+
     /**
      * This callback type is called `requestCallback
      * @callback requestCallback
@@ -592,19 +604,13 @@ export class Checkout extends FormComponent {
      * @return {object}
      */
     payment(data, actions) {
-  	    //this.props.dispatch(payPaypal());
-       this.props.validate((error) => {
-
-          if (Object.keys(error).length === 0) {
-              return actions.payment.create({
-                  transactions: [
-                      {
-                          amount: { total: '0.01', currency: 'EUR' }
-                      }
-                  ]
-              });
-          }
-       });
+          return actions.payment.create({
+              transactions: [
+                  {
+                      amount: { total: '1', currency: 'EUR' }
+                  }
+              ]
+          });
     }
 
     /**
@@ -692,13 +698,8 @@ export class Checkout extends FormComponent {
      * @return {object}
      */
     validate (actions) {
-        this.props.validate((error) => {
-           if (!error) {
-               actions.enable();
-           } else {
-               actions.disable();
-           }
-        });
+        this.actions = actions;
+        this.handlePaypal(actions);
     }
 
     /**
@@ -1065,8 +1066,9 @@ export class Checkout extends FormComponent {
                                                             commit={ this.state.commit }
                                                             env={ this.state.env }
                                                             client={ this.state.client }
-                                                            validate={ (data, actions) => this.validate(data, actions) }
+                                                            validate={ (actions) => this.validate(actions) }
                                                             payment={ (data, actions) => this.payment(data, actions) }
+                                                            onCancel={ (data) => this.onCancel(data) }
                                                             onAuthorize={ (data, actions) => this.onAuthorize(data, actions) }
                                                         />
                                                     );

@@ -10,3 +10,15 @@ export const getStripeToken = () => (dispatch) => {
             console.log('error', error);
         });
 };
+
+
+export const getPaypalEnv = () => (dispatch) => {
+    return request
+        .get('/paypal')
+        .then((data) => {
+            dispatch({ type: 'PAYPAL_ENV', payload: data.data });
+        })
+        .catch((error) => {
+            console.log('error', error);
+        });
+};

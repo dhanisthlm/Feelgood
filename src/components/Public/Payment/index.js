@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { translate } from 'react-i18next';
 import { routeActions } from 'redux-simple-router';
 import { setEncounterData } from '../../../actions/encounter';
-import { getStripeToken } from '../../../actions/config';
+import { getStripeToken, getPaypalEnv } from '../../../actions/config';
 import styles from './styles.css';
 
 export class Payment extends Component {
@@ -24,10 +24,12 @@ export class Payment extends Component {
 	componentWillMount () {
 		this.setState(this.createInitialState());
 		this.props.dispatch(getStripeToken());
+        this.props.dispatch(getPaypalEnv());
 	}
 
 	componentWillReceiveProps (nextProps) {
 		window.localStorage.setItem('st', nextProps.stripeToken);
+        window.localStorage.setItem('pe', nextProps.paypalEnv);
 	}
 
     /**
@@ -521,7 +523,8 @@ export class Payment extends Component {
 Payment.propTypes = { dispatch: PropTypes.func };
 
 const mapStateToProps = (state) => ({
-	stripeToken: state.encounter.stripeToken
+	stripeToken: state.encounter.stripeToken,
+	paypalEnv: state.encounter.paypalEnv
 });
 
 export default connect(mapStateToProps)(translate('paymentView')(Payment));

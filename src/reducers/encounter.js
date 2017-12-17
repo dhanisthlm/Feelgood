@@ -72,6 +72,12 @@ export default handleActions({
             ...state,
             paypalId: action.payload
         }
+    },
+    PAYPAL_ENV: (state, action) => {
+        return {
+            ...state,
+            paypalEnv: action.payload
+        }
     }
 }, {
     saved: false,
@@ -85,5 +91,6 @@ export default handleActions({
     rating: false,
     erased: false,
     stripeToken: '',
-    paypalId: ''
+    paypalId: '',
+    paypalEnv: ''
 })

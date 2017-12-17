@@ -16,5 +16,6 @@
   "stripe": {
     "client": "pk_live_kjV0R984b9982v5iBAz64yI2",
     "server": "sk_live_MWMGHbzOIh6yBAWlLGTrRMno"
-  }
+  },
+  "paypal": "production"
 }
