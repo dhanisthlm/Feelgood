@@ -20,8 +20,6 @@ export class Faq extends Component {
                 <Header location={this.props.location} />
                 <div className="page-header"><h1>{ t('heading') }</h1></div>
                 <div className="privacy-wrapper">
-                    <p className="preamble">{ t('preamble') }</p>
-
                     <h3>{ t('individualCouncelling.heading') }</h3>
                     <p>{ t('individualCouncelling.text') }</p>
 
@@ -35,7 +33,11 @@ export class Faq extends Component {
                     <p>{ t('rebook.text') }</p>
 
                     <h3>{ t('book.heading') }</h3>
-                    <p>{ t('book.text') }</p>
+                    <p>{ t('book.text1') }</p>
+                    <p className="narrow">E-posta: <span className="emphazised">info@zdravlje.nu</span></p>
+                    <p className="narrow">Telefon: <span className="emphazised">+387 603 21 22 90</span> or <span className="emphazised">+387 66 23 60 83</span></p>
+                    <p>Skype: <span className="emphazised">zdravlje.nu</span></p>
+                    <p>{ t('book.text2') }</p>
 
                     <h3>{ t('safe.heading') }</h3>
                     <p>{ t('safe.text') }</p>
@@ -45,7 +47,7 @@ export class Faq extends Component {
 
                     <h3>{ t('getStarted.heading') }</h3>
                     <p>{ t('getStarted.text1') }</p>
-                    <p className="narrow">{ t('getStarted.text2') } <a href="https://www.skype.com">skype web stranicu</a></p>
+                    <p className="narrow">{ t('getStarted.text2') } <a className="emphazised" href="https://www.skype.com">skype web stranicu</a></p>
                     <p>{ t('getStarted.text3') }</p>
 
                     <h3>{ t('session.heading') }</h3>
