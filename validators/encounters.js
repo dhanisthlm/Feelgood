@@ -58,7 +58,7 @@ export const encounterValidator = Joi.object().keys({
 
     rating: Joi
         .object()
-        .allow('', null)
+        .allow('', null),
 
 }).options({
     stripUnknown: true,

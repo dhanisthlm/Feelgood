@@ -54,7 +54,11 @@ export class Checkout extends FormComponent {
             newsletter: true,
             currency: 'BAM',
             cost: 0,
-            paypalFactor: 1
+            paypalFactor: 1,
+            subscribe: 'on',
+            terms: 'off',
+            termsIsDirty: false,
+            subscribeIsDirty: false
 		};
 
 		this.validatorTypes = encounterValidator;
@@ -87,6 +91,7 @@ export class Checkout extends FormComponent {
         this.handleNewsletter = this.handleNewsletter.bind(this);
         this.onCancel = this.onCancel.bind(this);
         this.onError = this.onError.bind(this);
+        this.handleCheckbox = this.handleCheckbox.bind(this);
     }
 
 	componentWillMount () {
@@ -151,9 +156,11 @@ export class Checkout extends FormComponent {
      * @return {object}
      */
 	handleNewsletter () {
-        const newsletter = this.state.newsletter;
-        this.setState({ newsletter: !newsletter });
-        window.location.setItem('newsletter', newsletter);
+       const newsletter = this.state.newsletter;
+       const subscribe = this.state.subscribe === 'on' ? 'off' : 'on';
+       this.setState({ subscribe });
+       this.setState({ newsletter: this.state.subscribe === 'on', subscribeIsDirty: true });
+        window.localStorage.setItem('newsletter', newsletter);
     }
 
     /**
@@ -174,11 +181,10 @@ export class Checkout extends FormComponent {
 
            if (id === 'paypal') {
                paypalFactor = 2;
+               this.setState({ termsIsDirty: true, subscribeIsDirty: true })
            }
 
            this.setState({ paypalFactor })
-
-
        });
     }
 
@@ -243,10 +249,22 @@ export class Checkout extends FormComponent {
             this.props.dispatch(routeActions.push('/anka'));
         } else {
             if (Object.keys(nextProps.stripe).length) {
-                console.log(nextProps.sripe)
                 window.localStorage.setItem('stripe', JSON.stringify(nextProps.stripe));
             }
         }
+    }
+
+    /**
+     * This callback type is called `requestCallback
+     * @callback requestCallback
+     * @param {number} responseCode
+     * @return {object}
+     */
+    handleCheckbox () {
+            const terms = this.state.terms === 'on' ? 'off' : 'on';
+            this.setState({ terms });
+            this.setState({ termsIsDirty: true });
+
     }
 
     /**
@@ -519,7 +537,7 @@ export class Checkout extends FormComponent {
 	handlePaypal () {
         if (this.state.paymentType === 'paypal') {
             this.props.validate((error) => {
-                if (error) {
+                if (error || (this.state.termsIsDirty && this.state.terms === 'off') ||(this.state.subscribeIsDirty && this.state.subscribe === 'off')) {
                      this.actions.disable();
                 } else {
                      this.actions.enable();
@@ -536,11 +554,12 @@ export class Checkout extends FormComponent {
      */
 	handleSubmit (event) {
 		event.preventDefault();
+        this.setState({ termsIsDirty: true, subscribeIsDirty: true });
 
 		this.props.validate((error) => {
 			const { t } = this.props;
 
-            if (!error) {
+            if (!error && this.state.subscribe !== 'off' && this.state.terms !== 'off') {
                 this.stripe.createToken(this.card).then(result => {
                     if (result.error) {
                         // Inform the customer that there was an error
@@ -754,6 +773,8 @@ export class Checkout extends FormComponent {
 		const firstColSize = (this.width === 'small') ? '50%' : '60%';
 		const lastColSize = (this.width === 'small') ? '30%' : '20%';
 		const currency = this.state.paypalFactor === 1 ? 'KM' : 'EUR';
+        const termErrorMsg = this.state.terms === 'off' && this.state.termsIsDirty ? 'Ovo polje je obavezno' : '';
+        const subscribeError = this.state.subscribe === 'off' && this.state.subscribeIsDirty ? 'Ovo polje je obavezno' : '';
 
 		const sumClass =
 			(typeof this.state.data.packageDiscount === 'undefined' &&
@@ -1069,12 +1090,18 @@ export class Checkout extends FormComponent {
 											{this.getValidationMessages('comment')}
 										</div>
                                         <div className="form-element-wrapper">
-                                            <input checked={ this.state.newsletter === true} onClick={ this.handleNewsletter } className="checkbox" type="checkbox" />
-                                            <label className="checkbox" htmlFor="comment">Da, hvala, hoću biltene, popuste i druge ponude iz zdravlje.nu.</label>
+                                            <div className="check-wrapper">
+                                                <input id="subscribe" checked={ this.state.subscribe === 'on' } value={this.state.subscribe} onClick={ this.handleNewsletter } className="checkbox" type="checkbox" />
+                                                <label className="checkbox" htmlFor="comment">Da, hvala, hoću biltene, popuste i druge ponude iz zdravlje.nu.</label>
+                                            </div>
+                                            <span className="error checkbox">{subscribeError}</span>
                                         </div>
                                         <div className="form-element-wrapper">
-                                            <input className="checkbox" type="checkbox" />
-                                            <label className="checkbox" htmlFor="comment">Jag godkänner Privacy policy och Terms and Conditions. (länkar till dokumenten)</label>
+                                            <div className="check-wrapper">
+                                                <input ref="terms" id="terms" checked={this.state.terms === 'on'} value={this.state.terms} onClick={ this.handleCheckbox } className="checkbox" type="checkbox" />
+                                                <label className="checkbox" htmlFor="comment">Jag godkänner Privacy policy och Terms and Conditions. (länkar till dokumenten)</label>
+                                            </div>
+                                            <span className="error checkbox">{termErrorMsg}</span>
                                         </div>
                                         <div className="form-element-wrapper">
                                             <input className="checkbox" type="checkbox" />

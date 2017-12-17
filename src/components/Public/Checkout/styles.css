@@ -42,6 +42,14 @@
     margin: 0;
 }
 
+.checkout .check-wrapper {
+    overflow: hidden;
+}
+
+.error.checkbox {
+    margin-left: 22px;
+}
+
 .checkout .faktura-info p {
     height: auto;
     border-radius: 5px;
