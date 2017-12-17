@@ -48,7 +48,6 @@ export const saveRating = (encounterId, ratingObj) => (dispatch) => {
 };
 
 export const saveEncounter = (encounter, id) => (dispatch) => {
-    id = id || null;
     return request
         .post('/encounter', { id, encounter })
         .then((data) => {

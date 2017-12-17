@@ -84,6 +84,8 @@ export class Checkout extends FormComponent {
         this.handleSelectTime = this.handleSelectTime.bind(this);
         this.handleSelectCountry = this.handleSelectCountry.bind(this);
         this.handleNewsletter = this.handleNewsletter.bind(this);
+        this.onCancel = this.onCancel.bind(this);
+        this.onError = this.onError.bind(this);
     }
 
 	componentWillMount () {
@@ -125,6 +127,8 @@ export class Checkout extends FormComponent {
      * @return {object}
      */
 	prepInit (nextProps) {
+	    if (nextProps.issues === this.props.issues) return;
+
         this.setState({
             issues: nextProps.issues,
             cost: JSON.parse(window.localStorage.getItem('order')).cost.total
@@ -621,9 +625,9 @@ export class Checkout extends FormComponent {
      * @return {object}
      */
     onAuthorize(data, actions) {
-        return actions.payment.execute().then(function(paymentData) {
-            console.log('executed', paymentData)
-            this.props.dispatch(saveEncounter(this.state));
+        return actions.payment.execute().then((paymentData) => {
+            console.log('executed', this.props);
+            this.props.dispatch(saveEncounter(this.state, null));
         });
     }
 
@@ -1070,6 +1074,7 @@ export class Checkout extends FormComponent {
                                                             validate={ (actions) => this.validate(actions) }
                                                             payment={ (data, actions) => this.payment(data, actions) }
                                                             onCancel={ (data) => this.onCancel(data) }
+                                                            onError={ (data) => this.onError(data) }
                                                             onAuthorize={ (data, actions) => this.onAuthorize(data, actions) }
                                                         />
                                                     );
