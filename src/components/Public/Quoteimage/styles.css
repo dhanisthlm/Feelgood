@@ -4,6 +4,36 @@
     position: relative;
 }
 
+.quote-image p:first-child {
+    font-size: 47px;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: 40px auto 0;
+}
+
+.quote-image p:nth-child(2) {
+    font-size: 47px;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: 101px auto 0;
+}
+
+.quote-image p:nth-child(3) {
+    display: block;
+    right: 12%;
+    font-size: 21px;
+    font-weight: 300;
+    top: 142px;
+    color: #fff;
+    text-shadow: none;
+    margin-left: 0;
+    left: auto;
+}
+
 .quote-image img {
     display: block;
     width: 100%;

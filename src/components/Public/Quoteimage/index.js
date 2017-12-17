@@ -15,7 +15,9 @@ export class QuoteImage extends Component {
 
         return (
 			<div className="quote-image">
-				<p>{ t('quote') }</p>
+				<p>{ t('quote1') }</p>
+                <p>{ t('quote2') }</p>
+                <p>{ t('signature') }</p>
 				<img className="quote-image-desktop" src="/images/reader.jpg"/>
 			</div>
         );

@@ -11,9 +11,14 @@
     text-align: center;
 }
 
+.staff .link {
+    color: #fff !important;
+    text-decoration: underline;
+}
+
 .staff .preamble {
     color: #fff;
-    margin: 0 auto 25px;
+    margin: 0 auto 15px;
     text-align: center;
     width: 70%;
     line-height: 25px;

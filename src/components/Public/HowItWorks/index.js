@@ -61,7 +61,10 @@ export class HowItWorks extends Component {
                             </svg>
                         </div>
                         <p className="sub-heading">{ t('step3.heading') }</p>
-                        <p className="description">{ t('step3.text1') }</p>
+                        <p className="description narrow">{ t('step3.text1') }</p>
+                        <p className="narrow">E-pošta: info@zdravlje.nu</p>
+                        <p className="narrow"> Telefon: +387 603 21 22 90 ili +387 66 23 60 83</p>
+                        <p className="narrow">Skype-ime: zdravlje.nu</p>
                         <p className="description">{ t('step3.text2') }</p>
                     </div>
                     <div className="step-wrapper">

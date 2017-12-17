@@ -74,30 +74,34 @@
       }
     },
     "quoteView": {
-      "quote": "Ono što mislite da postanete"
+      "quote1": "\"Sreća je kada ono što misliš,",
+      "quote2": " šta kažeš i šta radiš je u harmoniji.\"",
+      "signature": "Mahatma Ghandi"
     },
     "quoteImageView": {
-      "quote": "Ono što mislite da postanete"
+      "quote1": "\"Tajna promjena je da fokusirate svu svoju energiju,",
+      "quote2": " ne na borbu sa starim, već na izgradnji novog.\"",
+      "signature": "Sokrates"
     },
     "staffView": {
       "heading": "Ko smo mi",
-      "preamble": "Ovdje smo za vas, ako trebate s kim razgovarati. Zdravlje.nu nudi vam terapiju diskretno i po razumnoj cijeni. Nu nudi vam terapiju diskretno i po razumnoj cijeni"
+      "preamble": "Nasi psiholozi su svi uključenje u društvo psihologa Federacije BiH,"
     },
     "howItWorksView": {
       "heading": "Kako radi",
-      "intro": "Ovdje možete naručiti psihološko savjetovanje. Cijenu za vase izbore mozete naci u doljnem dio stranice. Izaberite Skype-poziv, e-postu ili kombinaciju Skype-poziv i e-postu. Što više poziva ili sedmica e-poste odlučite da kupite, sto jeftinija je cena po pozivu i po sedmicu e-poste.",
+      "intro": "Ako ste spremni da istražite način na koji razmišljate i osjećate, ovdje smo opisali korake kako ćete omogućiti da dobijete psihološko savjetovanje sa zdravlje.nu.",
       "step1": {
         "heading": "1. Procjena",
-        "text": "Razgovarajte bez troška desetak minuta sa našim psiholozima preko telefona (+387 603 21 22 90 ili +387 66 23 60 83) ili proko Skypea (Skype adresa xxxx) kako biste utvrdili vaše savjetodavne potrebe."
+        "text": "Razgovarajte bez troška deset do petnest minuta sa našim psiholozima preko telefona (+387 603 21 22 90 ili +387 66 23 60 83) ili proko Skypea (Skype adresa xxxx) kako biste utvrdili vaše savjetodavne potrebe."
       },
       "step2": {
         "heading": "2. Izaberite plan za vas",
-        "text": "Izaberite plan plaćanja koji odgovara vašim potrebama i budžetu. Izaberite između Skype-razgovore, e-poštu ili kombinaciju oba. Možete platiti karticom ili paypal-om. Uskoro ćemo ponuditi plaćanje direktno banci."
+        "text": "Izaberite plan plaćanja koji odgovara vašim potrebama i budžetu. Izaberite između Skype-razgovore, e-poštu ili kombinaciju oba. Možete platiti karticom, paypal-om ili fakturom."
       },
       "step3": {
         "heading": "3. Termin",
-        "text1": "Kada je uplata primljena, dobićete putom e-pošte termin po vašem izboru koji ste naveli prilikom naručivanja naših usluga.",
-        "text2": "Potrebno nam je najmanje 24 sata da nas obavjestite o mjenjane termina. Sve promjene u roka do 24 sata prije određenog Skype termina će imati 100% naknadu za otkazivanje. Promjene u roka do 24 sata prije određenog termina e-pošte će imati naknadu jedan dan od određenje sedmice."
+        "text1": "Kontaktirajte nas da zakažete termin:",
+        "text2": "Alternativno možete unaprijed platiti za psihološko savjetovanje. Nakon što smo primili vašu uplatu, mi ćemo vas kontaktirat za inicijalnu besplatnu procjenu i za zakazivanje termina"
       },
       "step4": {
         "heading": "4. Psiholosko savjetoanje",
@@ -129,6 +133,116 @@
       "price": "Cijena",
       "writeCode": "Unesite kod",
       "purchase": "Zakažite"
+    },
+    "tacView": {
+      "heading": "Terms and conditions",
+      "preamble": {
+        "text1": "Baunad doo Tuzla is the author and publisher of the internet resource zdravlje.nu, a portal providing counselling services through web, mobile, audio and video. Baunad is a limited company with its registered office at Marsala Tita 109, 75000 Tuzla, Bosna and Herzegovina.",
+        "text2": "The terms “Baunad”, “we” and “our” refer to Baunad doo Tuzla. The terms “you,” “your,” and “yourself” refer to the individual user of the services.",
+        "text3": "If you have any questions about any part of the terms and conditions, or if you have ideas as to how we can improve our services, feel free to contact us at info@zdravlje.nu or +387 603 21 22 90; +387 66 23 60 83.",
+        "text4": "These terms and conditions were last updated on December 15 th 2017."
+      },
+      "services": {
+        "heading": "Services offered",
+        "text1": "Our objective is to make access to counselling services easier and more cost effective. We want to ensure that you experience the best in ethical, legal and professional standards and that you have the service that is right for you.",
+        "text2": "Our counselling services are conducted by psychologists who are registered by xxx in Bosnia and Hercegovina. You can be informed about the diplomas and certifications of our psychologists by browsing their profiles.",
+        "text3": "You can avail of online counselling services from our panel of psychologists through texting, email, audio and/or video conferencing after online payment. Apart from electronic audio-video consultations, online sessions, texts and email, you may use resources such as blogs on topics of general interest and awareness about mental health, and read questions and answers in the “Q&amp;A” section.",
+        "text4": "Baunad cannot and does not assume any responsibility for any loss, damages or liabilities arising from your misuse of any advise, ideas, information, instructions or guidelines accessed through the service.",
+        "text5": "Our services are primarily provided in Bosnian and English. We will always try to help you to see a psychologist who suits your particular needs, however, we can only provide a closest match and cannot promise that you will be able to see a psychologist who can speak your native language or who has direct experience of the culture or country in which you live or have grown up.",
+        "text6": "If you believe that our services have not met the standard of reasonable skilled and qualified professionals, then please contact us to let us know. We will treat your concerns seriously. Should we agree that standards are not being met, we will be happy to fix, refund or re-perform the service we have provided.",
+        "text7": "Psychologist cannot prescribe medicines, as it is not within their authority to do so.",
+        "text8": "The services may change from time to time, at the sole discretion of Baunad, and the agreement will apply to your visit to and your use of the zdravlje.nu website to avail the services, as well as to all information provided by you on the website at any given point in time."
+      },
+      "terms": {
+        "heading": "Client terms of use",
+        "preamble": {
+          "text1": "THE USE OF OUR ONLINE SERVICES IS NOT MEANT FOR EMERGENCIES.",
+          "text2": "IF YOU ARE THINKING ABOUT SUICIDE OR IF YOU ARE CONSIDERING TAKING ACTIONS THAT MAY CAUSE HARM TO YOU OR TO OTHERS OR IF YOU FEEL THAT YOU OR ANY OTHER PERSON MAY BE IN ANY DANGER OR IF YOU HAVE ANY MEDICAL EMERGENCY, YOU MUST IMMEDIATELY CALL THE EMERGENCY SERVICE NUMBER AND NOTIFY THE RELEVANT AUTHORITIES."
+        },
+        "text1": "In order to be eligible to use our services, you must not have a serious mental health issue, e.g. diagnosed with schizophrenia, bipolar disorder, or drug or alcohol dependence.",
+        "text2": "The terms and conditions are applicable to your using (including browsing) of the zdravlje.nu website and/or availing of any of our services through the website or otherwise. By accessing or using our services, you irrevocably accept all the terms and conditions stipulated in this document and agree to abide by them. If you do not agree to all of these terms and conditions, you are not authorized to use our services. So, please read the terms and conditions carefully.",
+        "text3": "You must be 18 years of age or older to register, use the services, or visit or use the website zdravlje.nu in any manner. By registering, visiting and using the website zdravlje.nu or accepting this agreement, you represent and warrant to Baunad that you are 18 years of age or older, and that you have the right, authority and capacity to use the website zdravlje.nu and the services available through the website, and agree to and abide by this agreement.",
+        "text4": "You hereby certify that you are over the age of eighteen (18). In the event that your certification is inaccurate, you agree to indemnify Baunad from any resulting damages, costs, or claims.",
+        "text5": "Baunad reserves the right to suspend access to the website and our services, and terminate association with any user/client who violates the terms and conditions of the zdravlje.nu website or disturbs the smooth functioning of the website and the dissemination of its services or disturbs other users or professionals in their activities, at its sole discretion.",
+        "text6": "We do not tolerate abuse or offensive behaviour towards our psychologists.",
+        "text7": "Baunad reserves the right to stop access to the zdravlje.nu website and services, and terminate association with any user/client who is suspected to be illegal and/or fraudulent and/or abusive and/or competitive and may be referred to appropriate law enforcement authorities. You shall be liable to indemnify Baunad for any losses incurred as a result of any action that has adversely affected Baunad or its users/clients."
+      },
+      "changes": {
+        "heading": "Changes to terms and conditions",
+        "text1": "Baunad reserves the right to modify or totally change this “Terms and Conditions” anytime and as many times without giving any prior notice.",
+        "text2": "You have to review the “Terms and Conditions” from time to time to find out about the changes in it.",
+        "text3": "Visiting, using the resources, and/or availing the service/s from zdravlje.nu after any change in “Terms and Conditions” has been made, means you have acknowledged and agreed to the changes made in it."
+      },
+      "payment": {
+        "heading": "Payment",
+        "text1": "The payment for any session is always payable prior to the appointment. If we do not receive payment before the time of the appointment, with funds cleared into our bank, the appointment will be cancelled or postponed.",
+        "text2": "If your appointment lasts longer than the allotted time, you will be liable for a charge of 2 BAM per minute for the extra time taken.",
+        "text3": "If your appointment lasts shorter than the allotted time, and the reason is on your side, then we are not responsible to refund charges or compensate you. If, however, the appointment lasts shorter with two (2) minutes or more and the reason is on our side, then you will be compensated with another, equal session.",
+        "text4": "Baunad offers three ways to pay for our services:",
+        "text5": "The invoice has information on how to make payment to a bank in Bosnia and Herzegovina. In case wrong bank account details are entered on a payment slip, we will not be responsible for loss of money, if any.",
+        "text6": "In case of there being any technical failure, at the time of transaction and there is a problem in making payment, you could contact info@zdravlje.nu.",
+        "creditcard": "credit / debit card",
+        "invoice": "invoice"
+      },
+      "failure": {
+        "heading": "Failure to attend a consultation",
+        "text": "Should you fail to attend a consultation without giving at least 24 hours notice, though we will listen sympathetically to any reasons that you may give for not attending, the full cost of the appointment will be chargeable. Any decision to refund any or all of the cost of the consultation will be at our discretion."
+      },
+      "cancel": {
+        "heading": "Cancellations",
+        "text1": "A full 24 hours notice is required for cancelling appointments without cost.",
+        "text2": "Appointments cancelled with at least 24 hours notice can be rescheduled or refunded. Any refunds will be deducted an administrative cost of 20 KM and any nonrefundable payment costs.",
+        "text3": "If you cancel with less than 24 hours before your appointment time, you will be billed for the full cost of your scheduled session."
+      },
+      "disclaimer": {
+        "heading": "Disclaimers",
+        "text1": "You should never rely on or make health or well-being decisions purely on the use of zdravlje.nu. Never disregard, avoid, or delay in obtaining medical advice from your doctor because of information or advice you received through zdravlje.nu.",
+        "text2": "None of the service content represents or warrants that any particular treatment is safe, appropriate, or effective for you. You should always talk to an appropriately qualified health care professional for diagnosis and treatment, including information regarding which medications or treatment may be appropriate for you.",
+        "text3": "We do not warrant that our services will meet your specific needs or requirements, nor do we warrant that the quality of our services will meet your expectations."
+      },
+      "access": {
+        "heading": "Accessing our services",
+        "text1": "Access to our services and the information contained therein is provided “as-is” and “as available” without any warranty of any kind, express or implied. Baunad does not warrant that access to the service will be uninterrupted or error-free, or that defects, if any, will be corrected. You expressly agree that your use of the service and your reliance upon any of its content is at your sole risk.",
+        "text2": "Baunad has no responsibility for technical failures or faults arising out of causes over which we have no control and we are not responsible to refund charges or compensate you if they occur. You shall be solely and fully responsible for any damage to the service or any computer system, any loss of data, or any improper use or disclosure of information on the service caused by you or any person using your username or password. Baunad cannot and does not assume any responsibility for any loss, damages or liabilities arising from the failure of any telecommunications infrastructure, or the internet or for your misuse of any protected health information, advise, ideas, information, instructions or guidelines accessed through the service. If you are dissatisfied with the zdravlje.nu website, your sole remedy is to discontinue using the website.",
+        "text3": "Technical or security threats or issues affecting the infrastructure may require us to suspend our services and postpone consultations in order to ensure they are secure and/or operating optimally. We will minimise these suspensions, but are not responsible to refund charges or compensate you if they occur, unless they exceed 30 days in length, in which event you may cancel your agreement to take a consultation with us and receive a full refund.",
+        "text4": "Anti-virus and anti-malware software is in use on the website, but we cannot guarantee that the website will be free from viruses or malicious software so please ensure anti-virus and anti-malware software are in operation on any device with which you use to access our website.",
+        "text5": "You are responsible for any data usage fees and other third party charges you incur in connection with your access to our services, including the fees that may be charged by your internet service provider and/or other service providers.",
+        "text6": "Members of our psychologist team may not always be available to provide services to you and in the unlikely event that there is a possible delay of more than 30 days to service performance, you may cancel your agreement with us (and we may do the same) and receive a full refund.",
+        "text7": "Our services are personalised and so you may only transfer your rights or obligations to another person if we agree to it."
+      },
+      "parties": {
+        "heading": "Third parties",
+        "text": "The zdravlje.nu website may be linked to the website of third parties, affiliates and business partners. Baunad has no control over, and not liable or responsible for content, accuracy, validity, reliability, quality of such websites or made available by/through our website. Inclusion of any link on the zdravlje.nu website does not imply that Baunad endorses the linked site. You may use the links and these services at your own risk."
+      },
+      "recordings": {
+        "heading": "Recordings",
+        "text1": "We never record video sessions to protect your identity.",
+        "text2": "If it would come to Baunad’s knowledge that you have recorded online session(s) and published on social media or any other media sharing platforms, then we reserve the right to suspend services, terminate your account and possibly take legal action against you."
+      },
+      "limitation": {
+        "heading": "Limitation of liability",
+        "text1": "Where we are permitted by Bosnian and Hercegovina’s law, we exclude all conditions, warranties, representations or other terms which may apply whether expressed or implied. Even though we accept clients from outside of Bosnia and Hercegovina, we can’t take responsibility for any laws outside Bosnia and Hercegovina regarding access to and use of our services.",
+        "text2": "In no event, including but not limited to negligence, shall Baunad, or any of its directors and employees, or content or service providers, be liable for any direct, indirect, special, incidental or consequential matter relating to the Zdravlje.nu website or our services.",
+        "text3": "The services supplied are for personal use and we are not responsible for any business-related losses arising out of the use of our services.",
+        "text4": "If you have failed to adhere to our instructions or advice on use and your device suffers any damage from defective digital content, we are not responsible for compensation.",
+        "text5": "Our total liability to you in respect of all losses arising under or in connection with these terms shall in no circumstances exceed the price you have paid to us for the services."
+      },
+      "property": {
+        "heading": "Intellectual property rights",
+        "text1": "We own copyright and other intellectual property rights on the zdravlje.nu website, for our services and their content.",
+        "text2": "You are permitted to use our website and consultation system in order to receive our services. You are not permitted to copy, distribute or make any business use of zdravlje.nu."
+      },
+      "complaints": {
+        "heading": "Complaints and Disputes",
+        "text1": "What to do if you have a complaint with regards to our services:",
+        "text2": "These terms and conditions are governed by Bosnian and Herzegovina’s law. This means that any dispute or claim arising out of it will be governed by Bosnian and Herzegovina’s law and the court in Tuzla will have exclusive jurisdiction over",
+        "list1": "Give us feedback on our services by contacting us at info@zdravlje.nu.",
+        "list2": "Please tell us about any complaints you might have as soon as possible, so we are able to resolve it as soon as possible.",
+        "list3": "If you have a complaint, we may ask you for certain details about you and your complaint in order to address it. Please provide these as soon as possible so that we can handle your complaint quickly.",
+        "list4": "We will investigate any complaint and keep you updated on the results of the investigation.",
+        "list5": "We shall also discuss the investigation with you. If we are in the wrong, we shall apologise to you.",
+        "list6": "If the subject of your complaint is to do with the professional standards or behaviour of one of our psychologists, we will treat your concern seriously. Should we agree that standards are not being met, we will be happy to fix, refund or re-perform the service we have provided."
+      }
     },
     "faqView": {
       "heading": "Frequently asked questions",
@@ -253,7 +367,7 @@
       "placeOrder": "Zakažite",
       "close": "Blizu",
       "issue": "Tema",
-      "invoiceText": "Sa fakturom, odlučite da platite naše usluge na isti način na koji plaćate druge račune, odnosno putem banke ili pošte. Dobićete fakturu poslatu na vašu adresu e-pošte sa uputstvima za plaćanje. Kada primimo uplatu na naš bankovni račun, kontaktiraćemo vas kako bismo zadržali vreme za vaše psihološko savjetovanje.",
+      "invoiceText": "Dobićete fakturu sa uputstvima za plaćanje na Vašoj e-pošta (email) adresi.  Kada primimo uplatu na naš bankovni račun, kontaktiraćemo vas kako bismo zakazali termin za vaše psihološko savjetovanje.",
       "stripe": {
         "invalid_number": "Broj kartice nije važeći broj kreditne kartice.",
         "incomplete_number": "Broj kartice nije važeći broj kreditne kartice.",

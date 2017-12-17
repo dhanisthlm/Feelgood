@@ -55,7 +55,7 @@ export class Staff extends Component {
 		return (
 			<div id="kosmomi" className="staff">
 				<h3 className="heading">{ t('heading') }</h3>
-				<p className="preamble">{ t('preamble') }</p>
+				<p className="preamble">{ t('preamble') } <a className="link" href="http://www.dpfbih.ba">www.dpfbih.ba</a>.</p>
 				<div id="diploma-wrapper" onClick={ this.closeDiploma } className={diploma}>
 					<div id="inner-wrapper" className={`diploma-open-wrapper diploma-wrapper-${this.state.direction}`}>
 						<img className={`diploma-${this.state.direction}`} src={`images/diplom-${this.state.diploma}.jpg`} />

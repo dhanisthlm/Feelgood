@@ -3,8 +3,17 @@
     text-align: center;
 }
 
+.how-it-works .step-wrapper p {
+    text-align: left;
+}
+
 .how-it-works .row-1 {
     margin-top: 50px;
+}
+
+.how-it-works .narrow {
+    margin-bottom: 10px !important;
+    margin-top: 10px !important;
 }
 
 .how-it-works .step-4 {

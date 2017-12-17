@@ -14,6 +14,8 @@ import Blog from './components/Public/Blog';
 import CustomerCare from './components/Public/CustomerCare';
 import PrivacyPolicy from './components/Public/PrivacyPolicy';
 import Faq from './components/Public/Faq';
+import Tac from './components/Public/Tac';
+import Cookies from './components/Public/Cookies';
 import { hashLinkScroll } from '../helpers/hashLinkScroll';
 import styles from './styles.css';
 
@@ -29,6 +31,8 @@ render((
               <Route path="/kontakt" component={CustomerCare} />
               <Route path="/politika-privatnosti" component={PrivacyPolicy} />
               <Route path="/faq" component={Faq} />
+              <Route path="/tac" component={Tac} />
+              <Route path="/cookies" component={Cookies} />
           </Route>
         </Router>
       </I18nextProvider>

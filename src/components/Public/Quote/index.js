@@ -15,7 +15,9 @@ export class Quote extends Component {
 
 		return (
 			<div className="quote">
-				<p>{ t('quote') }</p>
+				<p>{ t('quote1') }</p>
+				<p>{ t('quote2') }</p>
+				<span>{ t('signature') }</span>
 			</div>
 		);
 	}

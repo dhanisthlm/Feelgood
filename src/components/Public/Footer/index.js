@@ -45,9 +45,9 @@ export class Footer extends Component {
                 </div>
                 <div className="col col-3">
                     <h2>Uslovi</h2>
-                    <a className="link" href="/politika-privatnosti">Pravila o privatnosti</a>
-                    <p className="link">Uslovi</p>
-                    <p className="link">Izjava o kolačićima</p>
+                    <a className="link" href="/politika-privatnosti">Politika privatnosti</a>
+                    <a className="link" href="/tac">Pravila i uslove</a>
+                    <a className="link" href="/cookies">Politika kolačića</a>
                     <a className="link" href="/faq">FAQ - Pitanja</a>
                     <a className="link" href="/kontakt">Služba za korisnike</a>
                 </div>
