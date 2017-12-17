@@ -130,6 +130,73 @@
       "writeCode": "Unesite kod",
       "purchase": "Zakažite"
     },
+    "faqView": {
+      "heading": "Frequently asked questions",
+      "preamble": "You will be asked to complete an evaluation form once your sessions come to an end, this will enable us to better our service.",
+      "individualCouncelling": {
+        "heading": "What is individual councelling",
+        "text": "Counselling is a form of talking therapy which allows the individual to express their problems, feelings and negative thoughts in a dependable and confidential environment. Counsellors aim to listen and to help you identify and taking the right steps to deal with any issues you may be facing. Counselling provides a safe and confidential space to enable clients to explore ways to deal with situations and crises you may be facing. It is a place to be listened to and obtain support, a place to work on your fears and anxieties and how these affect your life and relationships. Most importantly, it is place to help us realize that we do have choices and that by defining the life we want to live, we can create possibilities in our lives to live a more fulfilled life of our choice."
+      },
+      "forMe": {
+        "heading": "How can I be sure counselling is for me?",
+        "text": "You have the opportunity to receive an introduction to counselling free of charge for ten to fifteen minutes by telephone. Call us on +387 603 21 22 90 or +387 66 23 60 83 or via Skype (Skype name zdravlje.nu) and talk to one of our psychologists. S/he will discuss with you about your needs, current situation and your counselling goals and explain how online counselling is done at zdravlje.nu. There is a possibility to book an appointment during the call if you feel we could be of help for you. Kindly note this appointment will only be temporary and will be cancelled if we do not receive payment before the session."
+      },
+      "discretion": {
+        "heading": "Will anybody know that I am talking with a counsellor?",
+        "text": "You can talk to our counsellors from the comfort of your own home, your family and friends none the wiser you are doing so. Confidentiality will be maintained at all times and we shall always protect your personal information. Any and all information collected through our Internet sites and counselling sessions will be strictly confidential and will not be sold, rented, or otherwise disclosed to any third party not actively engaged in providing services to our customers. To protect you, our psychologists will not write notes into our computer system during counselling sessions, only in their note books. These notebooks have your identity coded and are locked when not used for preparations or in sessions with you. We also never record video sessions to protect your identity. To best serve you, your psychologist may discuss your case with other psychologists at zdravlje.nu without revealing your identity. This way you will benefit from the skills and experiences of more psychologists than the one you are talking to."
+      },
+      "rebook": {
+        "heading": "Can I rebook or cancel a counselling session?",
+        "text": "Of course it is possible, we have 24 hours free rebooking and cancellation policy."
+      },
+      "book": {
+        "heading": "How do I book an appointment?",
+        "text": "You book an appointment by contacting us at:",
+        "text2": "Alternately you can prepay for counselling on zdravlje.nu and we will contact you after we have received the payment. During the payment process you will have the option to choose time slots that would suit you best."
+      },
+      "safe": {
+        "heading": "Is it safe to pay online?",
+        "text": "We use Stripe and PayPal for online payments. They both take security seriously and are used by many businesses worldwide. The credit or debit card data that you enter on zdravlje.nu is never sent to our servers, instead the data is sent directly to Stripe. This is important, because this way we will not handle any sensitive credit or debit card data on our servers. You can read more about how Stripe handles payment data on https://stripe.com/docs/security. If you choose to pay with PayPal, you will be redirected to a secure PayPal payment page. Again, no sensitive payment data will be handled on our servers. We are using SSL certificate on our website zdravlje.nu. SSL is a standard security technology that establishes a secure link (i.e. encrypted channel) between your web browser and our website zdravlje.nu. All communication transmitted through this link is encrypted, making the information private and secure. You will know the SSL is working if you find a small green lock icon in the address bar area."
+      },
+      "eligible": {
+        "heading": "Who is eligible to use services at zdravlje.nu?",
+        "text": "Our counselling services are for anybody wanting to live a more fulfilled life by working on their everyday issues. In order to be eligible to use our services, you must not have a serious mental health issue, e.g. diagnosed with schizophrenia, bipolar disorder, drug or alcohol dependence, or any other mental diagnosis. Kindly note the use of our online services is not meant for emergencies. If you are thinking about suicide or if you are considering taking actions that may cause harm to you or to others or if you feel that you or any other person may be in any danger or if you have any medical emergency, you must immediately call the emergency service number and notify relevant authorities. You must be 18 years of age or older to use our services, or visit or use the website zdravlje.nu in any manner."
+      },
+      "getStarted": {
+        "heading": "What do I need to get started?",
+        "text1": "For Skype calls you will need a stable, reasonably high-speed internet access, a computer or smart phone with built in camera and audio capability, a quiet, private room, and a working Skype application." ,
+        "text2": "To get the application Skype installed, visit",
+        "text3": "For counselling through email, you will need a private email address."
+      },
+      "session": {
+        "heading": "How long is one session?",
+        "text": "At zdravlje.nu we offer 20 minutes and 45 minutes sessions. Sometimes there is no time available for the normal 45 minutes long session, e.g. during working hours, therefore we offer the shorter 20 minutes option."
+      },
+      "satisfied": {
+        "heading": "What if I am not happy with my counsellor?",
+        "text": "A good fit between client and counsellor is important, that is why we are happy to change your counsellor without any explicit reason from your side. It is vital that you feel a sense of connection and trust with your counsellor. Please send us an email to info@zdravlje.nu to initiate a change of counsellor."
+      },
+      "pay": {
+        "heading": "How do I pay?",
+        "text": "We have three different options for payment, with credit/debit card, PayPal or invoice. With the credit/debit card and PayPal options you pay online on our website zdravlje.nu. We are using SSL certificate, which creates an encrypted channel between your web browser and our server, making the information you give us private and secure. Credit / debit card numbers are never entering our servers at zdravlje.nu."
+      },
+      "payAfter": {
+        "heading": "Can I pay after the session?",
+        "text": "The payment for any session is always payable prior to the appointment. If we do not receive payment before the time of the appointment, with funds cleared into our bank, the appointment will be cancelled or postponed. If your appointment lasts longer than the allotted time, you will be liable for a charge of 2 BAM per minute for the extra time taken."
+      },
+      "missSession": {
+        "heading": "What happens if I miss my session?",
+        "text": "Should you fail to attend a session, though we will listen sympathetically to any reasons that you may give for not attending, the full cost of the appointment will be chargeable. Any decision to refund any or all of the cost of the session will be at our discretion."
+      },
+      "prescriptions": {
+        "heading": "Do you offer prescriptions as part of the counselling?",
+        "text": "No, a counsellor is not a medicinal doctor and cannot prescribe medicines. Counselling is a form of talking therapy which allows the individual to express their problems, feelings and negative thoughts in a dependable and confidential environment."
+      },
+      "troubles": {
+        "heading": "Will I get rid of my troubles?",
+        "text": "There is no method or treatment, whether medical or psychological, which provides guaranteed help for all people. This is regardless of whether counselling is online or on-site. Nobody can guarantee you will get 100% free from your problems. However, we can guarantee that we will provide you with the best possible help based on the methods that have been proven to produce the best results for different areas of research."
+      }
+    },
     "privacyPolicyView": {
       "heading": "Politika privatnosti",
       "preamble": "Vaša privatnost nam je jako bitna. Osmislili smo našu Politiku privatnosti da bismo Vam mogli prenijeti informacije o tome kako koristiti Zdravlje.nu i o načinu na koji prikupljamo i koristimo Vaš sadržaj i informacije. Podstičemo Vas da pročitate Politiku privatnosti u potpunosti. Zdravlje.nu je podružnica firme Baunad doo Tuzla.",

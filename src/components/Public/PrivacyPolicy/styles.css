@@ -25,6 +25,10 @@
     margin-bottom: 25px;
 }
 
+.privacy-policy p.narrow {
+    margin-bottom: 5px;
+}
+
 .privacy-policy .privacy-wrapper {
     padding: 20px 0;
     max-width: 930px;

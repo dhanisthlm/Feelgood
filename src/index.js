@@ -13,6 +13,7 @@ import Login from './components/Private/Login';
 import Blog from './components/Public/Blog';
 import CustomerCare from './components/Public/CustomerCare';
 import PrivacyPolicy from './components/Public/PrivacyPolicy';
+import Faq from './components/Public/Faq';
 import { hashLinkScroll } from '../helpers/hashLinkScroll';
 import styles from './styles.css';
 
@@ -27,6 +28,7 @@ render((
               <Route path="/blogovi" component={Blog} />
               <Route path="/kontakt" component={CustomerCare} />
               <Route path="/politika-privatnosti" component={PrivacyPolicy} />
+              <Route path="/faq" component={Faq} />
           </Route>
         </Router>
       </I18nextProvider>
