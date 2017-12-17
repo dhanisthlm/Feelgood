@@ -611,6 +611,7 @@ export class Checkout extends FormComponent {
                   }
               ]
           });
+          
     }
 
     /**
