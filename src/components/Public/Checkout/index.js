@@ -10,7 +10,6 @@ import ReactDOM from 'react-dom'
 import { encounterValidator } from '../../../../validators/encounters';
 import { getIssues } from '../../../actions/issue';
 import { saveRating, resetRating } from '../../../actions/encounter';
-import { getStripeToken } from '../../../actions/config';
 import { i18nValidation } from  '../../../../helpers/validation';
 import { saveEncounter, resetEncounter } from '../../../actions/encounter';
 import { getCountries } from '../../../../helpers/countries';
@@ -90,21 +89,21 @@ export class Checkout extends FormComponent {
 	componentWillMount () {
 		if (window.localStorage.getItem('order') !== null) {
 			const cache = JSON.parse(window.localStorage.getItem('order'));
-            this.props.dispatch(getStripeToken());
             this.setState({ ...cache, save: false });
-		}
+        }
 	}
 
 	componentDidMount () {
         if (window.localStorage.getItem('order')) {
+            this.initStripe();
+            this.props.dispatch(getIssues());
             this.startCountInactivity();
             this.listenForActivity();
-            this.props.dispatch(getIssues());
             this.calculateViewportSize();
         } else {
             this.props.dispatch(routeActions.push('/anka'));
         }
-	}
+    }
 
     /**
      * This callback type is called `requestCallback
@@ -113,10 +112,22 @@ export class Checkout extends FormComponent {
      * @return {object}
      */
     componentWillReceiveProps (nextProps) {
-		this.setState({
+        this.prepInit(nextProps);
+        this.handleRating(nextProps);
+        this.handleSave(nextProps);
+	}
+
+    /**
+     * This callback type is called `requestCallback
+     * @callback requestCallback
+     * @param {number} responseCode
+     * @return {object}
+     */
+	prepInit (nextProps) {
+        this.setState({
             issues: nextProps.issues,
             cost: JSON.parse(window.localStorage.getItem('order')).cost.total
-		});
+        });
 
         if (window.localStorage.getItem('step') === null) {
             this.props.dispatch(routeActions.push('/anka'));
@@ -125,22 +136,26 @@ export class Checkout extends FormComponent {
         if (nextProps.errorMessage.length) {
             this.setState({ showSpinner: false });
         }
+    }
 
-        if (nextProps.stripeToken.length) {
-            window.localStorage.setItem('st', nextProps.stripeToken);
-            this.initStripe();
-        }
-
-        this.handleRating(nextProps);
-        this.handleSave(nextProps);
-	}
-
+    /**
+     * This callback type is called `requestCallback
+     * @callback requestCallback
+     * @param {number} responseCode
+     * @return {object}
+     */
 	handleNewsletter () {
         const newsletter = this.state.newsletter;
         this.setState({ newsletter: !newsletter });
         window.location.setItem('newsletter', newsletter);
     }
 
+    /**
+     * This callback type is called `requestCallback
+     * @callback requestCallback
+     * @param {number} responseCode
+     * @return {object}
+     */
 	handlePaymentType (event) {
         const id = event.target.id;
         const options = document.getElementById('payment-options');
@@ -152,11 +167,23 @@ export class Checkout extends FormComponent {
        });
     }
 
+    /**
+     * This callback type is called `requestCallback
+     * @callback requestCallback
+     * @param {number} responseCode
+     * @return {object}
+     */
     handleTimePreference (event) {
         const id = event.target.id;
         this.setState({timePreference: id});
     }
 
+    /**
+     * This callback type is called `requestCallback
+     * @callback requestCallback
+     * @param {number} responseCode
+     * @return {object}
+     */
     handleSave (nextProps) {
         if (nextProps.save === true) {
             window.localStorage.setItem('step', '2');
@@ -167,6 +194,12 @@ export class Checkout extends FormComponent {
         }
     }
 
+    /**
+     * This callback type is called `requestCallback
+     * @callback requestCallback
+     * @param {number} responseCode
+     * @return {object}
+     */
 	postRating () {
     	const stripe = JSON.parse(window.localStorage.getItem('stripe'));
     	const id = stripe.data.encounterId;
@@ -180,11 +213,18 @@ export class Checkout extends FormComponent {
 		));
     }
 
+    /**
+     * This callback type is called `requestCallback
+     * @callback requestCallback
+     * @param {number} responseCode
+     * @return {object}
+     */
     handleRating (nextProps) {
         if (nextProps.rating === true) {
             window.localStorage.removeItem('step');
             window.localStorage.removeItem('order');
             window.localStorage.removeItem('stripe');
+            window.localStorage.removeItem('st');
             this.props.dispatch(resetRating());
             this.props.dispatch(routeActions.push('/anka'));
         } else {
@@ -194,6 +234,12 @@ export class Checkout extends FormComponent {
         }
     }
 
+    /**
+     * This callback type is called `requestCallback
+     * @callback requestCallback
+     * @param {number} responseCode
+     * @return {object}
+     */
 	handleRatingComment (event) {
     	this.setState({ ratingComment: event.target.value });
 	}
@@ -348,6 +394,7 @@ export class Checkout extends FormComponent {
 		window.localStorage.removeItem('order');
         window.localStorage.removeItem('stripe');
         window.localStorage.removeItem('saved');
+        window.localStorage.removeItem('st');
         window.removeEventListener('mousemove', this.throttledDebounce);
         window.removeEventListener('keydown', this.throttledDebounce);
 	}
@@ -516,16 +563,34 @@ export class Checkout extends FormComponent {
     	this.setState({ issue: event.target.value });
 	}
 
+    /**
+     * This callback type is called `requestCallback
+     * @callback requestCallback
+     * @param {number} responseCode
+     * @return {object}
+     */
     handleSelectTime (event) {
         this.setState({ timeframe: event.target.value });
     }
 
+    /**
+     * This callback type is called `requestCallback
+     * @callback requestCallback
+     * @param {number} responseCode
+     * @return {object}
+     */
     handleSelectCountry (event) {
   	    const countryObj = getCountries().filter((countryObj) => countryObj.name === event.target.value)[0];
   	    const currency = getCurrency()[countryObj.code];
         this.setState({ country: event.target.value, currency });
     }
 
+    /**
+     * This callback type is called `requestCallback
+     * @callback requestCallback
+     * @param {number} responseCode
+     * @return {object}
+     */
     payment(data, actions) {
   	    //this.props.dispatch(payPaypal());
        this.props.validate((error) => {
@@ -542,6 +607,12 @@ export class Checkout extends FormComponent {
        });
     }
 
+    /**
+     * This callback type is called `requestCallback
+     * @callback requestCallback
+     * @param {number} responseCode
+     * @return {object}
+     */
     onAuthorize(data, actions) {
         return actions.payment.execute().then(function(paymentData) {
             console.log('executed', paymentData)
@@ -549,6 +620,12 @@ export class Checkout extends FormComponent {
         });
     }
 
+    /**
+     * This callback type is called `requestCallback
+     * @callback requestCallback
+     * @param {number} responseCode
+     * @return {object}
+     */
     renderTimeframes () {
   	    const timeframes = ['Odaberite vreme', ...this.state.timeframes];
   	    let frameName;
@@ -608,6 +685,12 @@ export class Checkout extends FormComponent {
         })
     }
 
+    /**
+     * This callback type is called `requestCallback
+     * @callback requestCallback
+     * @param {number} responseCode
+     * @return {object}
+     */
     validate (actions) {
         this.props.validate((error) => {
            if (!error) {
@@ -977,14 +1060,14 @@ export class Checkout extends FormComponent {
                                                 if (this.state.paymentType === 'paypal') {
                                                     return (
                                                         <PayPalButton
-                                                        style={paypalStyle}
-                                                        locale="en_US"
-                                                        commit={ this.state.commit }
-                                                        env={ this.state.env }
-                                                        client={ this.state.client }
-                                                        validate={ (data, actions) => this.validate(data, actions) }
-                                                        payment={ (data, actions) => this.payment(data, actions) }
-                                                        onAuthorize={ (data, actions) => this.onAuthorize(data, actions) }
+                                                            style={paypalStyle}
+                                                            locale="en_US"
+                                                            commit={ this.state.commit }
+                                                            env={ this.state.env }
+                                                            client={ this.state.client }
+                                                            validate={ (data, actions) => this.validate(data, actions) }
+                                                            payment={ (data, actions) => this.payment(data, actions) }
+                                                            onAuthorize={ (data, actions) => this.onAuthorize(data, actions) }
                                                         />
                                                     );
                                                 }

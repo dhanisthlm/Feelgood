@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { translate } from 'react-i18next';
 import { routeActions } from 'redux-simple-router';
 import { setEncounterData } from '../../../actions/encounter';
+import { getStripeToken } from '../../../actions/config';
 import styles from './styles.css';
 
 export class Payment extends Component {
@@ -22,6 +23,11 @@ export class Payment extends Component {
 
 	componentWillMount () {
 		this.setState(this.createInitialState());
+		this.props.dispatch(getStripeToken());
+	}
+
+	componentWillReceiveProps (nextProps) {
+		window.localStorage.setItem('st', nextProps.stripeToken);
 	}
 
     /**
