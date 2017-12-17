@@ -207,7 +207,7 @@ export class Checkout extends FormComponent {
      */
 	postRating () {
     	const stripe = JSON.parse(window.localStorage.getItem('stripe'));
-    	const id = stripe.data.encounterId;
+    	const id = (stripe.data.encounterId) ? stripe.data.encounterId : stripe.data._id;
 
     	this.props.dispatch(saveRating(
     		id, {
@@ -233,6 +233,7 @@ export class Checkout extends FormComponent {
             this.props.dispatch(routeActions.push('/anka'));
         } else {
             if (Object.keys(nextProps.stripe).length) {
+                console.log(nextProps.sripe)
                 window.localStorage.setItem('stripe', JSON.stringify(nextProps.stripe));
             }
         }
