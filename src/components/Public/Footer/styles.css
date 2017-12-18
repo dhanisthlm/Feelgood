@@ -3,22 +3,30 @@
     padding: 40px 80px;
     color: #fff;
     text-align: center;
+    height: 310px;
 }
 
 .footer > div * {
     text-align: left;
 }
 
+.footer .address {
+    position: absolute;
+    height: 40px;
+    bottom: -57px;
+    width: 600px;
+}
+
 .footer .col-1 {
-    width: 350px;
+    width: 381px;
     margin-right: 9%;
     display: inline-block;
     vertical-align: top;
 }
 
 .footer .col-2 {
-    width: 240px;
-    margin-right: 9%;
+    width: 302px;
+    margin-right: 4%;
     display: inline-block;
     vertical-align: top;
 }
@@ -34,17 +42,18 @@
     margin-bottom: 0;
     margin-top: 5px;
     font-weight: 300;
+    line-height: 25px;
 }
 
 .footer .col-2 p,
 .footer .col-3 p {
-    margin-bottom: 12px;
+    margin-bottom: 11px;
     margin-top: 5px;
     font-weight: 300;
 }
 
 .footer .col h2 {
-    margin-bottom: 6px;
+    margin-bottom: 10px;
     color: #fff !important;
     font-size: 20px;
 }
@@ -85,7 +94,7 @@
 
 .footer .link {
     color: #fff;
-    margin-bottom: 12px;
+    margin-bottom: 11px;
     font-size: 16px;
     display: block;
     font-weight: 300;
