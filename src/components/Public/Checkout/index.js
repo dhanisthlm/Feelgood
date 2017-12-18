@@ -650,11 +650,13 @@ export class Checkout extends FormComponent {
      * @return {object}
      */
     payment(data, actions) {
-          return actions.payment.create({
-              // amount: { total: this.state.cost, currency: this.state.currency }
+        // amount: { total: '1', currency: 'EUR' }
+        const totalEur = Math.round(this.state.cost / 2);
+
+        return actions.payment.create({
               transactions: [
                   {
-                      amount: { total: '1', currency: 'EUR' }
+                      amount: { total: totalEur, currency: 'EUR' }
                   }
               ]
           });
