@@ -43,7 +43,7 @@ export class Header extends Component {
                 </div>
                 <div className="logo-text">
                     <a href="/kontakt">{ t('contactUs') }</a>
-                    <span>{ t('emergency') }</span>
+                    <a href="/hitna-pomoc">{ t('emergency') }</a>
                 </div>
                 <div className="contact">
                     <span>{ t('callUs') } 08.00 - 17.00</span>

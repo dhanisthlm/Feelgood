@@ -16,6 +16,7 @@ import PrivacyPolicy from './components/Public/PrivacyPolicy';
 import Faq from './components/Public/Faq';
 import Tac from './components/Public/Tac';
 import Cookies from './components/Public/Cookies';
+import Emergency from './components/Public/Emergency';
 import { hashLinkScroll } from '../helpers/hashLinkScroll';
 import styles from './styles.css';
 
@@ -33,6 +34,7 @@ render((
               <Route path="/faq" component={Faq} />
               <Route path="/tac" component={Tac} />
               <Route path="/cookies" component={Cookies} />
+              <Route path="/hitna-pomoc" component={Emergency} />
           </Route>
         </Router>
       </I18nextProvider>
