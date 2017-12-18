@@ -487,7 +487,6 @@ export class Payment extends Component {
 									<span className="percent-text">50% { t('discount') }</span>
 									<span className="launch">{ t('forCelecrationLaunch') }</span>
 									<span className="web-adress">Zdravlje.nu</span>
-									<span className="launch-date">{ t('starts')} 16og dec!</span>
 									<span className="kod-text">{ t('enterCode') } </span>
 									<span className="kod-text2">Zdravlje.nu</span>
 									<span className="year-1">{ t('until') } 2017 { t('year') }</span>

@@ -1101,7 +1101,7 @@ export class Checkout extends FormComponent {
                                         <div className="form-element-wrapper">
                                             <div className="check-wrapper">
                                                 <input ref="terms" id="terms" checked={this.state.terms === 'on'} value={this.state.terms} onClick={ this.handleCheckbox } className="checkbox" type="checkbox" />
-                                                <label className="checkbox" htmlFor="comment">Jag godkänner Privacy policy och Terms and Conditions. (länkar till dokumenten)</label>
+                                                <label className="checkbox" htmlFor="comment">Jag godkänner <a className="checkout-link" target="blank" href="/politika-privatnosti">Privacy policy</a> och <a className="checkout-link" target="blank" href="/tac">Terms and Conditions</a>.</label>
                                             </div>
                                             <span className="error checkbox">{termErrorMsg}</span>
                                         </div>

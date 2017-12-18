@@ -60,6 +60,11 @@
     margin: 20px 0 10px 4px;
 }
 
+.checkout .checkout-link {
+    color: #c04c9c;
+    text-decoration: underline;
+}
+
 .checkout .basket .back > div {
     margin: 60px auto;
     width: 520px;
