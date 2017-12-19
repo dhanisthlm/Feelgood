@@ -128,12 +128,12 @@
     },
     "introView": {
       "heading": "Psihološko savjetovanje za svakodnevne probleme",
-      "preamble": "Ovdje smo za vas ako trebate s kim razgovarat. Zdravlje.nu vam nudi psihološke savjetovanje diskretno i po razumnoj cijeni. U razgovoru prepoznajemo koje misli i emocije vas sprečavaju da se osjećate dobro i budete uspješni u životu, te radimo na promjeni.",
+      "preamble": "Ovdje smo za vas ako trebate s nekim razgovarat. Zdravlje.nu vam nudi psihološko savjetovanje diskretno i po razumnoj cijeni. U razgovoru prepoznajemo koje misli i emocije vas sprečavaju da se osjećate dobro i budete uspješni u životu, te radimo na promjeni.",
       "start": "Započnite",
       "cookieText": "Mi koristimo kolačiće za ažuriranje trenutnog porudžbina. Podaci se čuvaju samo privremeno i uklanjaju zajedno sa kompletnom kupovinom."
     },
     "issueView": {
-      "heading": "Uzmite prvi korak za bolje sutra",
+      "heading": "Napravite prvi korak za bolje sutra",
       "preamble": "Da biste pronašli rješenja za svoju situaciju, može vam biti korisno potražiti stručnu podršku i pomoć. Kontaktirajte nas, mi možemo pomoći.",
       "contactUs": "Kontaktirajte nas",
       "issues": {
@@ -158,11 +158,11 @@
           "description": "Osjećate li se tužno ili depresivno?"
         },
         "kids": {
-          "name": "Diete",
+          "name": "Dijete",
           "description": "Da li vaše dijete ima izlive bijesa?"
         },
         "weight": {
-          "name": "Tezina",
+          "name": "Težina",
           "description": "Imate li problema sa tjelesnom težinom?"
         },
         "panic": {
@@ -178,7 +178,7 @@
           "description": "Ulazite li lako u sukobe i jeste li frustrirani?"
         },
         "stuck": {
-          "name": "Zaglavili",
+          "name": "Životna kriza",
           "description": "Jeste li zaglavili osobno ili profesionalno?"
         }
       }
@@ -195,7 +195,7 @@
     },
     "staffView": {
       "heading": "Ko smo mi",
-      "preamble": "Nasi psiholozi su svi uključenje u društvo psihologa Federacije BiH,"
+      "preamble": "Nasi psiholozi su uključenje u društvo psihologa Federacije BiH,"
     },
     "howItWorksView": {
       "heading": "Kako radi",
@@ -516,7 +516,7 @@
       "issues": {
         "stress": {
           "name": "Stres",
-          "description": "Jeste li pod stresom i imate li poteškoće u rješavanju istih?"
+          "description": "Jeste li pod stresom i imate li poteškoće u smanjenjem istih?"
         },
         "anxiety": {
           "name": "Sikiracija",
@@ -531,7 +531,7 @@
           "description": "Trebate li pomoć o olakšavanju bola?"
         },
         "depression": {
-          "name": "Depresivno",
+          "name": "Depresija",
           "description": "Osjećate li se tužno ili depresivno?"
         },
         "kids": {
@@ -543,7 +543,7 @@
           "description": "Imate li problema sa tjelesnom težinom?"
         },
         "panic": {
-          "name": "Panic",
+          "name": "Panika",
           "description": "Osjecate li anksioznost ili napad panike?"
         },
         "fobia": {

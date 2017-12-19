@@ -14,7 +14,11 @@
     position: absolute;
     height: 40px;
     bottom: -57px;
-    width: 600px;
+    width: 800px;
+}
+
+.footer .address .heading {
+    font-weight: bold;
 }
 
 .footer .col-1 {
