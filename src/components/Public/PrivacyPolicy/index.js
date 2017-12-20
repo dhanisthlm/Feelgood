@@ -23,28 +23,38 @@ export class PrivacyPolicy extends Component {
                     <p className="preamble">{ t('preamble') }</p>
 
                     <h3>{ t('disclosure.heading') }</h3>
-                    <p>{ t('disclosure.text') }</p>
+                    <p className="narrow">{ t('disclosure.text1') }</p>
+                    <p className="narrow">{ t('disclosure.text2') }</p>
+                    <p>{ t('disclosure.text3') }</p>
 
                     <h3>{ t('security.heading') }</h3>
-                    <p>{ t('security.text') }</p>
+                    <p className="narrow">{ t('security.text1') }</p>
+                    <p className="narrow">{ t('security.text2') }</p>
+                    <p>{ t('security.text3') }</p>
 
                     <h3>{ t('payment.heading') }</h3>
-                    <p>{ t('payment.text') }</p>
+                    <p className="narrow">{ t('payment.text1') }</p>
+                    <p>{ t('payment.text2') }</p>
 
                     <h3>{ t('information.heading') }</h3>
-                    <p>{ t('information.text') }</p>
+                    <p className="narrow">{ t('information.text1') }</p>
+                    <p>{ t('information.text2') }</p>
 
                     <h3>{ t('browser.heading') }</h3>
-                    <p>{ t('browser.text') }</p>
+                    <p className="narrow">{ t('browser.text1') }</p>
+                    <p className="narrow">{ t('browser.text2') }</p>
+                    <p className="narrow">{ t('browser.text3') }</p>
+                    <p>{ t('browser.text4') }</p>
 
                     <h3>{ t('consent.heading') }</h3>
-                    <p>{ t('consent.text') }</p>
+                    <p className="narrow">{ t('consent.text1') }</p>
+                    <p>{ t('consent.text2') }</p>
 
                     <h3>{ t('contact.heading') }</h3>
                     <p>{ t('contact.text') }</p>
 
-                    <p className="contact">Email:</p>
-                    <p className="contact">Phone:</p>
+                    <p className="contact">Email: info@zdravlje.nu</p>
+                    <p className="contact">Phone: +387 603 21 22 90, +387 66 23 60 83</p>
                     <h4>{ t('address') }</h4>
                     <p className="address">Baunad doo Tuzla</p>
                     <p className="address">Zdravlje.nu</p>
