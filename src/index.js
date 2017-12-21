@@ -23,7 +23,7 @@ import styles from './styles.css';
 render((
   <Provider store={store}>
       <I18nextProvider i18n={i18n}>
-        <Router history={browserHistory} onUpdate={hashLinkScroll}>
+        <Router history={browserHistory} onUpdate={() => { window.scrollTo(0, 0); hashLinkScroll()} }>
           <Route path="/anka" component={App}>
               <Route path='/checkout' component={Checkout}/>
               <Route path='/admin' onEnter={requireAuth} component={Admin}/>
