@@ -570,23 +570,27 @@ export class Checkout extends FormComponent {
      */
 	handleSubmit (event) {
 		event.preventDefault();
-        this.setState({ termsIsDirty: true, subscribeIsDirty: true, cancelIsDirty: true });
+        this.setState({ termsIsDirty: true, cancelIsDirty: true });
 
 		this.props.validate((error) => {
 			const { t } = this.props;
 
-            if (!error && this.state.subscribe !== 'off' && this.state.terms !== 'off' && this.state.cancel !== 'off') {
-                this.stripe.createToken(this.card).then(result => {
-                    if (result.error) {
-                        // Inform the customer that there was an error
-                        const errorElement = document.getElementById('card-errors');
-                        errorElement.textContent = t(`stripe.${result.error.code}`);
-                    } else {
-                    	this.setState({ showSpinner: true });
-                        // Send the token to your server
-                        this.props.dispatch(saveEncounter(this.state, result.token.id));
-                    }
-                });
+            if (!error && this.state.terms !== 'off' && this.state.cancel !== 'off') {
+                if (this.state.paymentType === 'credit') {
+                    this.stripe.createToken(this.card).then(result => {
+                        if (result.error) {
+                            // Inform the customer that there was an error
+                            const errorElement = document.getElementById('card-errors');
+                            errorElement.textContent = t(`stripe.${result.error.code}`);
+                        } else {
+                            this.setState({showSpinner: true});
+                            // Send the token to your server
+                            this.props.dispatch(saveEncounter(this.state, result.token.id));
+                        }
+                    });
+                } else {
+                    this.props.dispatch(saveEncounter(this.state, null));
+                }
 			}
         })
 	}
@@ -793,7 +797,6 @@ export class Checkout extends FormComponent {
 		const currency = this.state.paypalFactor === 1 ? 'KM' : 'EUR';
         const termErrorMsg = this.state.terms === 'off' && this.state.termsIsDirty ? 'Ovo polje je obavezno' : '';
         const cancelErrorMsg = this.state.cancel === 'off' && this.state.cancelIsDirty ? 'Ovo polje je obavezno' : '';
-        const subscribeError = this.state.subscribe === 'off' && this.state.subscribeIsDirty ? 'Ovo polje je obavezno' : '';
 
 		const sumClass =
 			(typeof this.state.data.packageDiscount === 'undefined' &&
@@ -1113,7 +1116,6 @@ export class Checkout extends FormComponent {
                                                 <input id="subscribe" checked={ this.state.subscribe === 'on' } value={this.state.subscribe} onClick={ this.handleNewsletter } className="checkbox" type="checkbox" />
                                                 <label className="checkbox" htmlFor="comment">Da, hvala, želim da dobijam informacije o popustima i drugim ponudama od zdravlje.nu.</label>
                                             </div>
-                                            <span className="error checkbox">{subscribeError}</span>
                                         </div>
                                         <div className="form-element-wrapper">
                                             <div className="check-wrapper">

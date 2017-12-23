@@ -27,12 +27,19 @@ export class Blog extends Component {
                 <ul className="blog-list">
                 {
                     this.props.blogs.map((blog, i) => {
+                        console.log(blog)
                         return(
                             <li key={i} id={blog.hash} className="blog-item">
                                 <h2>{blog.title}</h2>
                                 <p className="author">Pisac: {blog.author}</p>
                                 <p className="date">Datum: {blog.date}</p>
-                                <p>{blog.text}</p>
+                                {
+                                    blog.text.map((paragraph) => {
+                                        return (
+                                            <p>{paragraph}</p>
+                                        )
+                                    })
+                                }
                             </li>
                         )
                     })

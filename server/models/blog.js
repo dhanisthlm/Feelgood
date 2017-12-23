@@ -5,7 +5,7 @@ const blogSchema = Schema({
         type: String
     },
     text: {
-        type: String
+        type: Array
     },
     author: {
         type: String
