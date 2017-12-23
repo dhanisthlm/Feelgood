@@ -35,6 +35,12 @@ const encounterSchema = Schema({
     newsletter: {
         type: Boolean
     },
+    paymentType: {
+        type: String
+    },
+    timeframe: {
+        type: String
+    },
     order: {
         skype: {
             week: {

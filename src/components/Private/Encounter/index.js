@@ -60,6 +60,30 @@ export class Encounter extends Component {
                                     <p>{encounter.name}</p>
                                 </div>
                                 <div>
+                                    <p>Ulica</p>
+                                    <p>{encounter.street}</p>
+                                </div>
+                                <div>
+                                    <p>Poštanski broj</p>
+                                    <p>{encounter.postalCode}</p>
+                                </div>
+                                <div>
+                                    <p>Grad</p>
+                                    <p>{encounter.city}</p>
+                                </div>
+                                <div>
+                                    <p>Zemlja</p>
+                                    <p>{encounter.country}</p>
+                                </div>
+                                <div>
+                                    <p>Tip plaćanja</p>
+                                    <p>{encounter.paymentType}</p>
+                                </div>
+                                <div>
+                                    <p>Odaberite vrijeme</p>
+                                    <p>{encounter.timeframe}</p>
+                                </div>
+                                <div>
                                     <p>E-pošta:</p>
                                     <p>{encounter.mail}</p>
                                 </div>
@@ -68,7 +92,7 @@ export class Encounter extends Component {
                                     <p>{encounter.phone}</p>
                                 </div>
                                 <div>
-                                    <p>Problem:</p>
+                                    <p>Tema:</p>
                                     <p>{encounter.issue}</p>
                                 </div>
                                 <div>
@@ -119,9 +143,12 @@ export class Encounter extends Component {
                         <colgroup>
                             <col width="10%" />
                             <col width="10%" />
-                            <col width="10%" />
-                            <col width="10%" />
-                            <col width="10%" />
+                            <col width="6%" />
+                            <col width="6%" />
+                            <col width="6%" />
+                            <col width="6%" />
+                            <col width="6%" />
+                            <col width="6%" />
                             <col width="5%" />
                             <col width="13%" />
                             <col width="4%" />
@@ -137,9 +164,15 @@ export class Encounter extends Component {
                         <thead>
                             <tr>
                                 <th>Ime</th>
+                                <th>Ulica</th>
+                                <th>Poštanski broj</th>
+                                <th>Grad</th>
+                                <th>Zemlja</th>
+                                <th>Tip plaćanja</th>
+                                <th>Odaberite vrijeme</th>
                                 <th>E-pošta</th>
                                 <th>Telefon</th>
-                                <th>Problem</th>
+                                <th>Tema</th>
                                 <th>Datum</th>
                                 <th>Skype</th>
                                 <th>Komentar</th>
@@ -164,6 +197,12 @@ export class Encounter extends Component {
                                 return (
                                     <tr key={i}>
                                         <td>{encounter.name}</td>
+                                        <td>{encounter.street}</td>
+                                        <td>{encounter.postalCode}</td>
+                                        <td>{encounter.city}</td>
+                                        <td>{encounter.country}</td>
+                                        <td>{encounter.paymentType}</td>
+                                        <td>{encounter.timeframe}</td>
                                         <td>{encounter.mail}</td>
                                         <td>{encounter.phone}</td>
                                         <td>{encounter.issue}</td>

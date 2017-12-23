@@ -44,6 +44,10 @@ export const encounterValidator = Joi.object().keys({
         .string()
         .allow('', null),
 
+    paymentType: Joi
+        .string()
+        .required(),
+
     timeframe: Joi
         .string()
         .allow('', null),

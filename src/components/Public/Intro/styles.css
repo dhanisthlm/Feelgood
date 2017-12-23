@@ -22,7 +22,7 @@
     position: absolute;
     width: 100%;
     z-index: 0;
-    top: 45px;
+    top: 20px;
     padding: 15px 25px;
     transition: all 2s;
 }
@@ -35,6 +35,7 @@
     float: left;
     margin: 0;
     line-height: 24px;
+    max-width: 800px;
 }
 
 .introduction .cookie-wrapper button {
@@ -50,6 +51,7 @@
     float: left;
     margin-left: 21px;
     cursor: pointer;
+    margin-top: 12px;
 }
 
 .introduction .heading {

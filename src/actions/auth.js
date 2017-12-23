@@ -27,7 +27,7 @@ export const logout = (auth) => (dispatch) => {
     return request
         .get('auth/logout')
         .then(({ data }) => {
-            dispatch(routeActions.replace('/anka'));
+            dispatch(routeActions.replace('/'));
             dispatch({
                 type: 'AUTH_LOGOUT',
                 payload: data

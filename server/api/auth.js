@@ -54,7 +54,7 @@ const signup = function (request, reply) {
 
 const logout = function (request, reply) {
     request.cookieAuth.clear();
-    return reply.redirect('/anka');
+    return reply.redirect('/');
 };
 
 const ping = (request, reply) => {

@@ -12,9 +12,7 @@ const getEncounters = (request, reply) => {
 };
 
 const handleRating = (request, reply) => {
-    console.log(request.payload.id)
    Encounter.find({ '_id': request.payload.id }, (err, encounter) => {
-        console.log(encounter);
        if (encounter.length) {
            encounter[0].rating = {
                web: request .payload.ratingObj.web,
@@ -74,10 +72,11 @@ const saveEncounter = (request, reply, charge) => {
 
     encounter.name = request.payload.encounter.name;
     encounter.street = request.payload.encounter.street;
-    encounter.postalCode = request.payload.encounter.postalCode;
+    encounter.postalCode = request.payload.encounter.postal;
     encounter.city = request.payload.encounter.city;
     encounter.country = request.payload.encounter.country;
     encounter.phone = request.payload.encounter.phone;
+    encounter.paymentType = request.payload.encounter.paymentType;
     encounter.timeframe = request.payload.encounter.timeframe;
     encounter.skype = request.payload.encounter.skypeId;
     encounter.issue = request.payload.encounter.issue;
@@ -162,7 +161,7 @@ const handlePaypal = (req, reply) => {
                 }
             }
         }, function (error, response) {
-            console.log(response.body);
+            //console.log(response.body);
             return reply({ id: response.body.id });
         });
     });

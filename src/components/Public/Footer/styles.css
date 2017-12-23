@@ -118,13 +118,7 @@
     }
 }
 
-@media only screen and (max-width: 950px) {
-    .footer .col {
-        width: 100%;
-    }
-}
-
-@media only screen and (max-width: 500px) {
+@media only screen and (max-width: 1150px) {
     .footer {
         padding: 40px;
         height: auto;
@@ -157,5 +151,11 @@
 
     .col-2:after {
         display: none;
+    }
+
+    @media only screen and (max-width: 950px) {
+        .footer .col {
+            width: 100%;
+        }
     }
 }

@@ -10,7 +10,7 @@ export const requireAuth = (nextState, replace, callback) => {
             body.classList.add('inside');
 
             if (data.isAuthenticated === false) {
-                replace('/anka');
+                replace('/');
             }
             store.dispatch({
                 type: 'AUTH_INFO',

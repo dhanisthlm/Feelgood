@@ -113,7 +113,7 @@ export class Checkout extends FormComponent {
             this.calculateViewportSize();
             this.setState({ env: window.localStorage.getItem('pe') });
         } else {
-            this.props.dispatch(routeActions.push('/anka'));
+            this.props.dispatch(routeActions.push('/'));
         }
     }
 
@@ -144,7 +144,7 @@ export class Checkout extends FormComponent {
         });
 
         if (window.localStorage.getItem('step') === null) {
-            this.props.dispatch(routeActions.push('/anka'));
+            this.props.dispatch(routeActions.push('/'));
         }
 
         if (nextProps.errorMessage.length) {
@@ -249,7 +249,7 @@ export class Checkout extends FormComponent {
             window.localStorage.removeItem('order');
             window.localStorage.removeItem('stripe');
             this.props.dispatch(resetRating());
-            this.props.dispatch(routeActions.push('/anka'));
+            this.props.dispatch(routeActions.push('/'));
         } else {
             if (Object.keys(nextProps.stripe).length) {
                 window.localStorage.setItem('stripe', JSON.stringify(nextProps.stripe));
@@ -438,7 +438,7 @@ export class Checkout extends FormComponent {
 		this.setState({ showDialog: false });
 		this.stopCountInactivity();
 		this.setState({ countInactivity: false });
-		this.props.dispatch(routeActions.push('/anka'));
+		this.props.dispatch(routeActions.push('/'));
 
 		window.localStorage.removeItem('order');
         window.localStorage.removeItem('stripe');
@@ -533,7 +533,7 @@ export class Checkout extends FormComponent {
 	resetCheckout () {
 		window.localStorage.removeItem('order');
 		this.props.dispatch(resetEncounter());
-        this.props.dispatch(routeActions.push('/anka'));
+        this.props.dispatch(routeActions.push('/'));
 	}
 
     /**
@@ -1161,10 +1161,11 @@ export class Checkout extends FormComponent {
 								</div>
 								<div className={back}>
 									<div>
-										<h2 className="back-header">Mnogo hvala</h2>
-										<p className="preamble">Vaša uplata je uspješna i dobili smo vašu porudžbinu. Uskoro ćemo vas kontaktirati.</p>
-										<div className="rating">
-											<p className="rating-text">Kako doživljavate web stranicu &#63;</p>
+										<h2 className="back-header">Hvala vam na nalogu</h2>
+										<p className="preamble">Vaša kupovina je uspješna i dobili smo vašu narudžbinu. Uskoro ćemo Vas kontaktirat za inicijalnu besplatnu procjenu i za zakazivanje termina.</p>
+                                        <p className="preamble">Molimo Vas, uzmite trenutak da nam date povratne informacije:</p>
+                                        <div className="rating">
+											<p className="rating-text">Kakav je vaš utisak od web stranice &#63;</p>
 											<div ref="stars-1" className="stars stars-1">
 												<span id="1" ref="star star-1" className="star" onClick={ this.handleWebStar }>☆</span>
 												<span id="2" ref="star star-2" className="star" onClick={ this.handleWebStar }>☆</span>
@@ -1174,7 +1175,7 @@ export class Checkout extends FormComponent {
 											</div>
 										</div>
 										<div className="rating">
-											<p className="rating-text">Kako se doživljava plaćanja &#63;</p>
+											<p className="rating-text">Kakav je vaš utisak o postupku plaćanja &#63;</p>
 											<div ref="stars-2" className="stars stars-2">
 												<span id="6" ref="star star-6" className="star" onClick={ this.handlePayStar }>☆</span>
 												<span id="7" ref="star star-7" className="star" onClick={ this.handlePayStar }>☆</span>
@@ -1185,7 +1186,8 @@ export class Checkout extends FormComponent {
 										</div>
 										<label className="comment-label">Ostali komentari</label>
 										<textarea onChange={this.handleRatingComment}>{this.state.ratingComment}</textarea>
-										<button onClick={ this.postRating }>Na Prvu stranicu</button>
+										<button onClick={ this.postRating }>OK</button>
+                                        <p>Vratit ćete se natrag na početnu stranicu kada pritisnete ok.</p>
 									</div>
 								</div>
 							</div>
