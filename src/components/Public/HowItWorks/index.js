@@ -80,6 +80,7 @@ export class HowItWorks extends Component {
                         <p className="sub-heading">{ t('step4.heading') }</p>
                         <p className="description">{ t('step4.text1') }</p>
                         <p className="description">{ t('step4.text2') }</p>
+                        <p className="description">{ t('step4.text3') }</p>
                     </div>
                 </div>
             </div>

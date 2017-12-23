@@ -266,14 +266,14 @@
     },
     "howItWorksView": {
       "heading": "Kako radi",
-      "intro": "Ako ste spremni da istražite način na koji razmišljate i osjećate, ovdje smo opisali korake kako ćete omogućiti da dobijete psihološko savjetovanje sa zdravlje.nu.",
+      "intro": "Ako ste spremni da istražite način na koji razmišljate i osjećate, ovdje smo opisali korake koji će omogućiti da dobijete psihološko savjetovanje u zdravlje.nu.",
       "step1": {
         "heading": "1. Procjena",
-        "text": "Razgovarajte bez troška deset do petnest minuta sa našim psiholozima preko telefona (+387 603 21 22 90 ili +387 66 23 60 83) ili proko Skypea (Skype adresa xxxx) kako biste utvrdili vaše savjetodavne potrebe."
+        "text": "Razgovarajte bez troška, deset do petnaest minuta sa našim psiholozima preko telefona (+387 603 21 22 90 ili +387 66 23 60 83) ili preko Skypea (Skype adresa xxxx) kako biste utvrdili vaše savjetodavne potrebe."
       },
       "step2": {
         "heading": "2. Izaberite plan za vas",
-        "text": "Izaberite plan plaćanja koji odgovara vašim potrebama i budžetu. Izaberite između Skype-razgovore, e-poštu ili kombinaciju oba. Možete platiti karticom, paypal-om ili fakturom."
+        "text": "Izaberite plan plaćanja koji odgovara vašim potrebama i budžetu. Izaberite Skype razgovore, e-poštu ili kombinaciju ove dvije usluge. Možete platiti karticom, paypal-om ili fakturom."
       },
       "step3": {
         "heading": "3. Termin",
@@ -282,8 +282,9 @@
       },
       "step4": {
         "heading": "4. Psihološko savjetovanje",
-        "text1": "Standardna Skype konsultacija na Zdravlje.nu je 20 ili 45 minuta. Treba vam tiha, privatna osvijetljena soba, pouzdana internet konekcija i pametni telefon ili računar sa mikrofonom i web kamerom. Savjetovanje se takođe može uraditi putem e-pošte, samostalno ili u kombinaciji sa Skype pozivima.",
-        "text2": "U razgovoru dobićete pomoć da saznate svoje misli, osećanja i akcije. Zajedno istražujete šta je problem, kako se to desilo i šta možete učiniti da biste to promjenili."
+        "text1": "Možete razgovarati sa našim psiholozima iz ugodnosti Vaše kuće, bez znanja Vaše porodice ili prijatelja.",
+        "text2": "Za Skype pozive trebat ćete stabilnu i relativno brzu internet vezu, kompjuter ili mobitel sa ugrađenom kamerom i mogućnošću prenošenja zvuka, tihu i privatnu sobu, kao i Skype aplikaciju. ",
+        "text3": "Za usluge savjetovanja putem e-maila, trebat ćete privatnu e-mail adresu."
       }
 
     },
