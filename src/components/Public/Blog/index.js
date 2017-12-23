@@ -27,7 +27,6 @@ export class Blog extends Component {
                 <ul className="blog-list">
                 {
                     this.props.blogs.map((blog, i) => {
-                        console.log(blog)
                         return(
                             <li key={i} id={blog.hash} className="blog-item">
                                 <h2>{blog.title}</h2>

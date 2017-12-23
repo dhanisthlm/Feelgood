@@ -210,6 +210,7 @@ export class Checkout extends FormComponent {
      */
     handleSave (nextProps) {
         if (nextProps.save === true) {
+            window.scrollTo(0, 0);
             window.localStorage.setItem('step', '2');
             window.removeEventListener('mousemove', this.throttledDebounce);
             window.removeEventListener('keydown', this.throttledDebounce);
@@ -553,7 +554,7 @@ export class Checkout extends FormComponent {
 	handlePaypal () {
         if (this.state.paymentType === 'paypal') {
             this.props.validate((error) => {
-                if (error || (this.state.termsIsDirty && this.state.terms === 'off') || (this.state.subscribeIsDirty && this.state.subscribe === 'off') || (this.state.cancelIsDirty && this.state.cancel === 'off')) {
+                if (error || (this.state.termsIsDirty && this.state.terms === 'off') || (this.state.cancelIsDirty && this.state.cancel === 'off')) {
                      this.actions.disable();
                 } else {
                      this.actions.enable();
@@ -578,13 +579,13 @@ export class Checkout extends FormComponent {
             if (!error && this.state.terms !== 'off' && this.state.cancel !== 'off') {
                 if (this.state.paymentType === 'credit') {
                     this.stripe.createToken(this.card).then(result => {
+                        // Inform the customer that there was an error
                         if (result.error) {
-                            // Inform the customer that there was an error
                             const errorElement = document.getElementById('card-errors');
                             errorElement.textContent = t(`stripe.${result.error.code}`);
                         } else {
-                            this.setState({showSpinner: true});
                             // Send the token to your server
+                            this.setState({showSpinner: true});
                             this.props.dispatch(saveEncounter(this.state, result.token.id));
                         }
                     });

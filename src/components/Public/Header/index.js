@@ -59,10 +59,10 @@ export class Header extends Component {
                     </a>
                 </h1>
                 <nav className="main-menu">
-                    <a href="#usluge">{ t('services') }</a>
-                    <a href="#cijene">{ t('prices') }</a>
-                    <a href="#kakoradi">{ t('howWork') }</a>
-                    <a href="#kosmomi">{ t('whoAreWe')}</a>
+                    <a href="/#usluge">{ t('services') }</a>
+                    <a href="/#cijene">{ t('prices') }</a>
+                    <a href="/#kakoradi">{ t('howWork') }</a>
+                    <a href="/#kosmomi">{ t('whoAreWe')}</a>
                 </nav>
             </header>
         )
