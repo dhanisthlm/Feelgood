@@ -22,9 +22,9 @@ export class Footer extends Component {
             <footer className="footer">
                 <div className="col col-1">
                     <h2>O Zdravlje.nu</h2>
-                    <p>Mi smo praksa za svakodnevne probleme koje većina nas susreće u našim životima. Naš cilj je da savjetodavne usluge budu pristupačne za sve, diskretno i po razumnoj cijeni. Korišćenjem naučnih i evidencijom dokazane interventcije, možemo pomoći ljudima da nauče da prevaziđu svoje probleme i nauče da žive život koji žele živjeti, udobno i samopouzdano.</p>
+                    <p>{ t('about') }</p>
                     <div className="address">
-                        <p><span className="heading">Adresa:</span> Baunad doo Tuzla, Zdravlje.nu, Maršala Tita 109, 75000 Tuzla, Bosna i Hercegovina.</p>
+                        <p><span className="heading">Adresa:</span> Baunad doo Tuzla, Zdravlje.nu, Maršala Tita 109, 75000 Tuzla, Bosna i Hercegovina</p>
                     </div>
                 </div>
                 <div className="col col-2">
@@ -57,5 +57,5 @@ const mapStateToProps = (state) => ({
     blogs: state.blog.list
 });
 
-export default connect(mapStateToProps)(translate('headerView')(Footer))
+export default connect(mapStateToProps)(translate('footerView')(Footer))
 

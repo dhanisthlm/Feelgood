@@ -20,7 +20,8 @@ export class PrivacyPolicy extends Component {
                 <Header location={this.props.location} />
                 <div className="page-header"><h1>{ t('heading') }</h1></div>
                 <div className="privacy-wrapper">
-                    <p className="preamble">{ t('preamble') }</p>
+                    <p className="preamble narrow">{ t('preamble1') }</p>
+                    <p className="preamble">{ t('preamble2') }</p>
 
                     <h3>{ t('disclosure.heading') }</h3>
                     <p className="narrow">{ t('disclosure.text1') }</p>

@@ -83,7 +83,7 @@
 
 @media only screen and (max-width: 500px) {
     .introduction {
-        padding-top: 229px;
+        padding-top: 227px;
     }
 
     .introduction img {
@@ -97,6 +97,10 @@
         padding: 8px;
         font-size: 16px;
         margin-top: 11px;
+    }
+
+    .introduction .text-wrapper {
+        padding: 30px 40px 33px;
     }
 
     .introduction .cookie-wrapper.visible {

@@ -419,24 +419,34 @@
 
 .info-text .kod-text {
     display: inline;
-    font-size: 19px;
     margin-top: 6px;
     font-weight: 300;
+    font-size: 19px;
+    margin-bottom: 5px;
 }
 
 .info-text .kod-text2 {
     display: inline;
     font-size: 19px;
     margin-top: 6px;
-    font-weight: 400;
+    font-weight: 300;
 }
 
 
 .info-text .year-1 {
     display: block;
-    font-size: 16px;
     margin-top: 2px;
     font-weight: 300;
+    font-size: 19px;
+    margin-bottom: 6px;
+}
+
+.info-text .last {
+    display: block;
+    font-weight: 300;
+    font-size: 16px;
+    margin-bottom: 6px;
+    margin-top: 5px;
 }
 
 .info-text .year-2 {
@@ -448,7 +458,7 @@
 .payment .promo-text {
     position: absolute;
     width: 228px;
-    top: 109px;
+    top: 100px;
     left: 86px;
     color: #fff;
     text-align: center;

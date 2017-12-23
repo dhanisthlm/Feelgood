@@ -49,7 +49,7 @@ export class Checkout extends FormComponent {
 			payRating: 0,
             ratingComment: '',
             paymentType: 'credit',
-            timeframes: ['Pre ručka', 'Poslije ručka', 'Veče'],
+            timeframes: ['Jutro', 'Popodne', 'Veče', 'Kada bilo'],
             country: 'Bosnia and Herzegovina',
             newsletter: true,
             currency: 'BAM',
@@ -57,8 +57,10 @@ export class Checkout extends FormComponent {
             paypalFactor: 1,
             subscribe: 'on',
             terms: 'off',
+            cancel: 'off',
             termsIsDirty: false,
-            subscribeIsDirty: false
+            subscribeIsDirty: false,
+            cancelIsDirty: false
 		};
 
 		this.validatorTypes = encounterValidator;
@@ -92,6 +94,7 @@ export class Checkout extends FormComponent {
         this.onCancel = this.onCancel.bind(this);
         this.onError = this.onError.bind(this);
         this.handleCheckbox = this.handleCheckbox.bind(this);
+        this.handleCancel = this.handleCancel.bind(this);
     }
 
 	componentWillMount () {
@@ -181,7 +184,7 @@ export class Checkout extends FormComponent {
 
            if (id === 'paypal') {
                paypalFactor = 2;
-               this.setState({ termsIsDirty: true, subscribeIsDirty: true })
+               this.setState({ termsIsDirty: true, subscribeIsDirty: true, cancelIsDirty: true })
            }
 
            this.setState({ paypalFactor })
@@ -273,6 +276,19 @@ export class Checkout extends FormComponent {
      * @param {number} responseCode
      * @return {object}
      */
+    handleCancel () {
+        const cancel = this.state.cancel === 'on' ? 'off' : 'on';
+        this.setState({ cancel });
+        this.setState({ cancelIsDirty: true });
+
+    }
+
+    /**
+     * This callback type is called `requestCallback
+     * @callback requestCallback
+     * @param {number} responseCode
+     * @return {object}
+     */
 	handleRatingComment (event) {
     	this.setState({ ratingComment: event.target.value });
 	}
@@ -340,7 +356,7 @@ export class Checkout extends FormComponent {
      */
     startCountInactivity () {
         if (!this.timerInterval) {
-            //this.timerInterval = setInterval(this.timeIncrement.bind(this), this.state.tick);
+            this.timerInterval = setInterval(this.timeIncrement.bind(this), this.state.tick);
         }
     }
 
@@ -537,7 +553,7 @@ export class Checkout extends FormComponent {
 	handlePaypal () {
         if (this.state.paymentType === 'paypal') {
             this.props.validate((error) => {
-                if (error || (this.state.termsIsDirty && this.state.terms === 'off') ||(this.state.subscribeIsDirty && this.state.subscribe === 'off')) {
+                if (error || (this.state.termsIsDirty && this.state.terms === 'off') || (this.state.subscribeIsDirty && this.state.subscribe === 'off') || (this.state.cancelIsDirty && this.state.cancel === 'off')) {
                      this.actions.disable();
                 } else {
                      this.actions.enable();
@@ -554,12 +570,12 @@ export class Checkout extends FormComponent {
      */
 	handleSubmit (event) {
 		event.preventDefault();
-        this.setState({ termsIsDirty: true, subscribeIsDirty: true });
+        this.setState({ termsIsDirty: true, subscribeIsDirty: true, cancelIsDirty: true });
 
 		this.props.validate((error) => {
 			const { t } = this.props;
 
-            if (!error && this.state.subscribe !== 'off' && this.state.terms !== 'off') {
+            if (!error && this.state.subscribe !== 'off' && this.state.terms !== 'off' && this.state.cancel !== 'off') {
                 this.stripe.createToken(this.card).then(result => {
                     if (result.error) {
                         // Inform the customer that there was an error
@@ -683,7 +699,7 @@ export class Checkout extends FormComponent {
      * @return {object}
      */
     renderTimeframes () {
-  	    const timeframes = ['Odaberite vreme', ...this.state.timeframes];
+  	    const timeframes = ['Odaberite vrijeme', ...this.state.timeframes];
   	    let frameName;
   	    let frameValue;
 
@@ -776,6 +792,7 @@ export class Checkout extends FormComponent {
 		const lastColSize = (this.width === 'small') ? '30%' : '20%';
 		const currency = this.state.paypalFactor === 1 ? 'KM' : 'EUR';
         const termErrorMsg = this.state.terms === 'off' && this.state.termsIsDirty ? 'Ovo polje je obavezno' : '';
+        const cancelErrorMsg = this.state.cancel === 'off' && this.state.cancelIsDirty ? 'Ovo polje je obavezno' : '';
         const subscribeError = this.state.subscribe === 'off' && this.state.subscribeIsDirty ? 'Ovo polje je obavezno' : '';
 
 		const sumClass =
@@ -985,7 +1002,7 @@ export class Checkout extends FormComponent {
                                             </div>
                                         </div>
                                         <div className="form-element-wrapper">
-                                            <label htmlFor="country">Zemlju</label>
+                                            <label htmlFor="country">Zemlja</label>
                                             <div className="select-style">
                                                 <select data-id={this.state.currency} value={this.state.country} id="country" onChange={ this.handleSelectCountry }>
                                                     { this.renderCountries() }
@@ -1030,7 +1047,7 @@ export class Checkout extends FormComponent {
                                             { this.getValidationMessages('skype') }
                                         </div>
                                         <div className="form-element-wrapper">
-                                            <label htmlFor="timeframe">Vremenska preferencija</label>
+                                            <label htmlFor="timeframe">Odaberite vrijeme</label>
                                             <div className="select-style">
                                                 <select id="timeframe" onChange={ this.handleSelectTime }>
                                                     { this.renderTimeframes() }
@@ -1094,20 +1111,23 @@ export class Checkout extends FormComponent {
                                         <div className="form-element-wrapper">
                                             <div className="check-wrapper">
                                                 <input id="subscribe" checked={ this.state.subscribe === 'on' } value={this.state.subscribe} onClick={ this.handleNewsletter } className="checkbox" type="checkbox" />
-                                                <label className="checkbox" htmlFor="comment">Da, hvala, hoću biltene, popuste i druge ponude iz zdravlje.nu.</label>
+                                                <label className="checkbox" htmlFor="comment">Da, hvala, želim da dobijam informacije o popustima i drugim ponudama od zdravlje.nu.</label>
                                             </div>
                                             <span className="error checkbox">{subscribeError}</span>
                                         </div>
                                         <div className="form-element-wrapper">
                                             <div className="check-wrapper">
                                                 <input ref="terms" id="terms" checked={this.state.terms === 'on'} value={this.state.terms} onClick={ this.handleCheckbox } className="checkbox" type="checkbox" />
-                                                <label className="checkbox" htmlFor="comment">Jag godkänner <a className="checkout-link" target="blank" href="/politika-privatnosti">Privacy policy</a> och <a className="checkout-link" target="blank" href="/tac">Terms and Conditions</a>.</label>
+                                                <label className="checkbox" htmlFor="comment">Slažem se sa <a className="checkout-link" target="blank" href="/politika-privatnosti">Politikom privatnosti</a> i <a className="checkout-link" target="blank" href="/tac">Pravilama i uslovima.</a>.</label>
                                             </div>
                                             <span className="error checkbox">{termErrorMsg}</span>
                                         </div>
                                         <div className="form-element-wrapper">
-                                            <input className="checkbox" type="checkbox" />
-                                            <label className="checkbox" htmlFor="comment">Razumem da imam 24-časovno besplatnu rezervaciju.</label>
+                                            <div className="check-wrapper">
+                                                <input checked={this.state.cancel === 'on'} value={this.state.cancel} onClick={ this.handleCancel } className="checkbox" type="checkbox" />
+                                                <label className="checkbox" htmlFor="comment">Razumijem da imam besplatnu promjenu termina najkasnije 24 sata do početka samog termina.</label>
+                                            </div>
+                                            <span className="error checkbox">{cancelErrorMsg}</span>
                                         </div>
 										<div className="form-buttons">
 											<button onClick={ this.resetCheckout }>{ t('back') }</button>

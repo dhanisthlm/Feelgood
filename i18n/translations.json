@@ -2,6 +2,73 @@
   "en-US": {
     "common": {
     },
+    "faqView": {
+      "heading": "Frequently asked questions",
+      "preamble": "You will be asked to complete an evaluation form once your sessions come to an end, this will enable us to better our service.",
+      "individualCouncelling": {
+        "heading": "What is individual councelling",
+        "text": "Counselling is a form of talking therapy which allows the individual to express their problems, feelings and negative thoughts in a dependable and confidential environment. Counsellors aim to listen and to help you identify and taking the right steps to deal with any issues you may be facing. Counselling provides a safe and confidential space to enable clients to explore ways to deal with situations and crises you may be facing. It is a place to be listened to and obtain support, a place to work on your fears and anxieties and how these affect your life and relationships. Most importantly, it is place to help us realize that we do have choices and that by defining the life we want to live, we can create possibilities in our lives to live a more fulfilled life of our choice."
+      },
+      "forMe": {
+        "heading": "How can I be sure counselling is for me?",
+        "text": "You have the opportunity to receive an introduction to counselling free of charge for ten to fifteen minutes by telephone. Call us on +387 603 21 22 90 or +387 66 23 60 83 or via Skype (Skype name zdravlje.nu) and talk to one of our psychologists. S/he will discuss with you about your needs, current situation and your counselling goals and explain how online counselling is done at zdravlje.nu. There is a possibility to book an appointment during the call if you feel we could be of help for you. Kindly note this appointment will only be temporary and will be cancelled if we do not receive payment before the session."
+      },
+      "discretion": {
+        "heading": "Will anybody know that I am talking with a counsellor?",
+        "text": "You can talk to our counsellors from the comfort of your own home, your family and friends none the wiser you are doing so. Confidentiality will be maintained at all times and we shall always protect your personal information. Any and all information collected through our Internet sites and counselling sessions will be strictly confidential and will not be sold, rented, or otherwise disclosed to any third party not actively engaged in providing services to our customers. To protect you, our psychologists will not write notes into our computer system during counselling sessions, only in their note books. These notebooks have your identity coded and are locked when not used for preparations or in sessions with you. We also never record video sessions to protect your identity. To best serve you, your psychologist may discuss your case with other psychologists at zdravlje.nu without revealing your identity. This way you will benefit from the skills and experiences of more psychologists than the one you are talking to."
+      },
+      "rebook": {
+        "heading": "Can I rebook or cancel a counselling session?",
+        "text": "Of course it is possible, we have 24 hours free rebooking and cancellation policy."
+      },
+      "book": {
+        "heading": "How do I book an appointment?",
+        "text1": "You book an appointment by contacting us at:",
+        "text2": "Alternately you can prepay for counselling on zdravlje.nu and we will contact you after we have received the payment. During the payment process you will have the option to choose time slots that would suit you best."
+      },
+      "safe": {
+        "heading": "Is it safe to pay online?",
+        "text": "We use Stripe and PayPal for online payments. They both take security seriously and are used by many businesses worldwide. The credit or debit card data that you enter on zdravlje.nu is never sent to our servers, instead the data is sent directly to Stripe. This is important, because this way we will not handle any sensitive credit or debit card data on our servers. You can read more about how Stripe handles payment data on https://stripe.com/docs/security. If you choose to pay with PayPal, you will be redirected to a secure PayPal payment page. Again, no sensitive payment data will be handled on our servers. We are using SSL certificate on our website zdravlje.nu. SSL is a standard security technology that establishes a secure link (i.e. encrypted channel) between your web browser and our website zdravlje.nu. All communication transmitted through this link is encrypted, making the information private and secure. You will know the SSL is working if you find a small green lock icon in the address bar area."
+      },
+      "eligible": {
+        "heading": "Who is eligible to use services at zdravlje.nu?",
+        "text": "Our counselling services are for anybody wanting to live a more fulfilled life by working on their everyday issues. In order to be eligible to use our services, you must not have a serious mental health issue, e.g. diagnosed with schizophrenia, bipolar disorder, drug or alcohol dependence, or any other mental diagnosis. Kindly note the use of our online services is not meant for emergencies. If you are thinking about suicide or if you are considering taking actions that may cause harm to you or to others or if you feel that you or any other person may be in any danger or if you have any medical emergency, you must immediately call the emergency service number and notify relevant authorities. You must be 18 years of age or older to use our services, or visit or use the website zdravlje.nu in any manner."
+      },
+      "getStarted": {
+        "heading": "What do I need to get started?",
+        "text1": "For Skype calls you will need a stable, reasonably high-speed internet access, a computer or smart phone with built in camera and audio capability, a quiet, private room, and a working Skype application." ,
+        "text2": "To get the application Skype installed, visit",
+        "text3": "For counselling through email, you will need a private email address."
+      },
+      "session": {
+        "heading": "How long is one session?",
+        "text": "At zdravlje.nu we offer 20 minutes and 45 minutes sessions. Sometimes there is no time available for the normal 45 minutes long session, e.g. during working hours, therefore we offer the shorter 20 minutes option."
+      },
+      "satisfied": {
+        "heading": "What if I am not happy with my counsellor?",
+        "text": "A good fit between client and counsellor is important, that is why we are happy to change your counsellor without any explicit reason from your side. It is vital that you feel a sense of connection and trust with your counsellor. Please send us an email to info@zdravlje.nu to initiate a change of counsellor."
+      },
+      "pay": {
+        "heading": "How do I pay?",
+        "text": "We have three different options for payment, with credit/debit card, PayPal or invoice. With the credit/debit card and PayPal options you pay online on our website zdravlje.nu. We are using SSL certificate, which creates an encrypted channel between your web browser and our server, making the information you give us private and secure. Credit / debit card numbers are never entering our servers at zdravlje.nu."
+      },
+      "payAfter": {
+        "heading": "Can I pay after the session?",
+        "text": "The payment for any session is always payable prior to the appointment. If we do not receive payment before the time of the appointment, with funds cleared into our bank, the appointment will be cancelled or postponed. If your appointment lasts longer than the allotted time, you will be liable for a charge of 2 BAM per minute for the extra time taken."
+      },
+      "missSession": {
+        "heading": "What happens if I miss my session?",
+        "text": "Should you fail to attend a session, though we will listen sympathetically to any reasons that you may give for not attending, the full cost of the appointment will be chargeable. Any decision to refund any or all of the cost of the session will be at our discretion."
+      },
+      "prescriptions": {
+        "heading": "Do you offer prescriptions as part of the counselling?",
+        "text": "No, a counsellor is not a medicinal doctor and cannot prescribe medicines. Counselling is a form of talking therapy which allows the individual to express their problems, feelings and negative thoughts in a dependable and confidential environment."
+      },
+      "troubles": {
+        "heading": "Will I get rid of my troubles?",
+        "text": "There is no method or treatment, whether medical or psychological, which provides guaranteed help for all people. This is regardless of whether counselling is online or on-site. Nobody can guarantee you will get 100% free from your problems. However, we can guarantee that we will provide you with the best possible help based on the methods that have been proven to produce the best results for different areas of research."
+      }
+    },
     "tacView": {
       "heading": "Terms and conditions",
       "preamble": {
@@ -118,8 +185,8 @@
     },
     "headerView": {
       "contactUs": "Kontaktirajte nas",
-      "emergency": "Hitna pomoc",
-      "callUs": "Zovnite nas",
+      "emergency": "Hitna pomoć",
+      "callUs": "Pozovite",
       "phone": "Telefon",
       "services": "Usluge",
       "prices": "Cijene",
@@ -139,7 +206,7 @@
       "issues": {
         "stress": {
           "name": "Stres",
-          "description": "Jeste li pod stresom i imate li poteškoće u rješavanju istih?"
+          "description": "Jeste li pod stresom i imate li poteškoće u smanjenjem istih?"
         },
         "anxiety": {
           "name": "Sikiracija",
@@ -154,7 +221,7 @@
           "description": "Trebate li pomoć o olakšavanju bola?"
         },
         "depression": {
-          "name": "Depresivno",
+          "name": "Depresija",
           "description": "Osjećate li se tužno ili depresivno?"
         },
         "kids": {
@@ -162,12 +229,12 @@
           "description": "Da li vaše dijete ima izlive bijesa?"
         },
         "weight": {
-          "name": "Težina",
+          "name": "Tezina",
           "description": "Imate li problema sa tjelesnom težinom?"
         },
         "panic": {
-          "name": "Panic",
-          "description": "Osjećate li anksioznost ili napad panike?"
+          "name": "Panika",
+          "description": "Osjecate li anksioznost ili napad panike?"
         },
         "fobia": {
           "name": "Fobia",
@@ -184,13 +251,13 @@
       }
     },
     "quoteView": {
-      "quote1": "\"Sreća je kada ono što misliš,",
-      "quote2": " šta kažeš i šta radiš je u harmoniji.\"",
+      "quote1": "\"Sreća je kad je usklađeno ono što misliš,",
+      "quote2": "ono što govoriš i ono što radiš.\"",
       "signature": "Mahatma Ghandi"
     },
     "quoteImageView": {
-      "quote1": "\"Tajna promjene je da fokusirate svu svoju energiju,",
-      "quote2": " ne na borbu sa starim, već na izgradnji novog.\"",
+      "quote1": "\"Tajna promjene jest fokusirati svu svoju energiju,",
+      "quote2": "ne na borbu protiv starog, već na gradnju novog.\"",
       "signature": "Sokrates"
     },
     "staffView": {
@@ -214,15 +281,27 @@
         "text2": "Alternativno možete unaprijed platiti za psihološko savjetovanje. Nakon što smo primili vašu uplatu, mi ćemo vas kontaktirat za inicijalnu besplatnu procjenu i za zakazivanje termina"
       },
       "step4": {
-        "heading": "4. Psiholosko savjetoanje",
+        "heading": "4. Psihološko savjetovanje",
         "text1": "Standardna Skype konsultacija na Zdravlje.nu je 20 ili 45 minuta. Treba vam tiha, privatna osvijetljena soba, pouzdana internet konekcija i pametni telefon ili računar sa mikrofonom i web kamerom. Savjetovanje se takođe može uraditi putem e-pošte, samostalno ili u kombinaciji sa Skype pozivima.",
         "text2": "U razgovoru dobićete pomoć da saznate svoje misli, osećanja i akcije. Zajedno istražujete šta je problem, kako se to desilo i šta možete učiniti da biste to promjenili."
       }
 
     },
+    "customerCareView": {
+      "heading": "Služba za korisnike",
+      "preamble1": "Naša služba za korisnike stoji Vam na raspolaganju svakim radnim danom od 08.00 do 17.00 za sve informacije i savjete.",
+      "preamble2": "Mi u zdravlje.nu smo posvećeni pružanju najbolje moguće usluge psihološkog savjetovanja za sve naše klijente. Da bismo to postigli, uvijek se trudimo poboljšati usluge koje nudimo te stoga cjenimo sve povratne informacije, i dobre i loše.",
+      "contactText": "Našu službu za korisnike možete kontaktirati putem email-a, Skype-a ili pozivom na sljedeće telefonske brojeve:"
+    },
+    "emergencyView": {
+      "heading": "Hitna pomoć",
+      "text1": "Molimo Vas da razumijete da naše usluge nisu namjenjene hitnim slučajevima.",
+      "text2": "Ukoliko razmišljate o samoubistvu ili poduzimanju mjera i akcija koje mogu uzrokovati ozbiljnu štetu Vama ili drugima, ukoliko osjećate da ste Vi ili neka druga osoba u opasnosti ili ako imate zdravstveno hitan slučaj, morate se obratiti službi za tu vrstu hitnih slučajeva i obavijestiti relevantne autoritete. ",
+      "text3": "Naše savjetodavne usluge su otvorene za svakoga ko želi živjeti ispunjenijim životom radeći na svakodnevnim situacijama i problemima s kojiima se suočava. Ukoliko imate ozbiljne mentalne probleme, npr. dijagnozu shizofrenije, bipolarnog poremećaja ličnosti ili ste ovisni o alkoholu ili drogama, te ukoliko imate bilo koju drugu dijagnozu mentalnog poremećaja – ne smijete korisiti naše usluge."
+    },
     "paymentView": {
-      "heading": "Koliko kosta psihološko savjetovanje?",
-      "intro": "Ovdje možete naručiti psihološko savjetovanje. Cijenu za vase izbore mozete naci u doljnem dio stranice. Izaberite Skype-poziv, e-postu ili kombinaciju Skype-poziv i e-postu. Što više poziva ili sedmica e-poste odlučite da kupite, sto jeftinija je cena po pozivu i po sedmicu e-poste.",
+      "heading": "Koliko košta psihološko savjetovanje?",
+      "intro": "Ovdje možete naručiti psihološko savjetovanje. Cijenu za Vaše izbore možete naći na donjem dijelu stranice. Kliknite na označenu tipku da izaberete Skype poziv, e-poštu ili kombinaciju Skype poziva i e-pošte (u tom slučaju kliknite na obje tipke). Ukoliko odlučite da kupite više Skype poziva ili sedmica u kojima biste koristili uslugu e-poštom, to je pojedinačna cijena tih usluga jeftinija. Tokom biranja možete pratiti jasno naznačenu ukupnu i pojedinačnu cijenu svih usluga koje odaberete.",
       "skypeWeek": "skype poziv",
       "skypeWeeks": "skype poziva",
       "packageWith": "Paket za",
@@ -231,18 +310,22 @@
       "email": "E-pošta",
       "answerWithin": "Odgovar u toku",
       "emailSmallText": "Neograničen broj e-pošte, odgovor u toku 24h. Možete kombinovati sa Skype-pozivom.",
-      "emailLargeText": "Neograničen broj e-pošte, odgovor u toku 4h radnim danima 07.00-22.00, vikend i praznik 09.00-18.00.",
+      "emailLargeText": "Neograničen broj e-pošte, odgovor u toku 4h radnim danima: 07.00-22.00, vikendom i praznikom: 09.00-18.00.",
       "number": "Broj",
       "week": "sedmica",
       "discount": "popust",
       "forCelecrationLaunch": "za slavlje lansiranja",
       "starts": "Otvaram",
-      "enterCode": "Konristite kod",
-      "until": "Vazi do kraja",
+      "enterCode": "Koristite kod:",
+      "weOpen": "Otvaramo 8. januara 2018!",
+      "until": "Važi do 31/1-2018 god.",
       "year": "god",
       "price": "Cijena",
       "writeCode": "Unesite kod",
       "purchase": "Zakažite"
+    },
+    "footerView": {
+      "about": "Mi smo usmjereni na svakodnevne probleme sa kojima se većina nas susreće tokom života. Mi težimo da naše savjetodavne usluge budu pristupačne za sve, diskretno i po razumnoj cijeni. Korišćenjem teorijskih znanja i naučno dokazanih intervencija, možemo pomoći ljudima da prevazidju svoje probleme i da nauće da žive život koji žele, udobno i samopouzdano."
     },
     "tacView": {
       "heading": "Pravila i uslovi",
@@ -343,7 +426,7 @@
         "text2": "Dozvoljeno vam je da koristite našu web stranicu i sistem konsultacija kako biste primili naše usluge. Nije vam dozvoljeno kopirati,distribuirati ili koristiti Zdravlje.nu u bilo koje poslovne svrhe."
       },
       "complaints": {
-        "heading": "Žalbe I sporovi",
+        "heading": "Žalbe i sporovi",
         "text1": "Šta uraditi ako imate žalbu u vezi sa našim uslugama:",
         "text2": "Ovi pravila i uslovi su regulisani zakonom Bosne i Hercegovine. To znači da će svaki spor ili tužbeni zahtjev koji proizilazi iz njega biti regulisan bosanskohercegovačkim zakonima, a sud u Tuzli imaće isključivu nadležnost nad tim.",
         "list1": "Pošaljite nam povratnu informaciju o našim uslugama na e-mail info@zdravlje.nu.",
@@ -355,75 +438,96 @@
       }
     },
     "faqView": {
-      "heading": "Frequently asked questions",
+      "heading": "Često postavljena pitanja",
       "preamble": "You will be asked to complete an evaluation form once your sessions come to an end, this will enable us to better our service.",
       "individualCouncelling": {
-        "heading": "What is individual councelling",
-        "text": "Counselling is a form of talking therapy which allows the individual to express their problems, feelings and negative thoughts in a dependable and confidential environment. Counsellors aim to listen and to help you identify and taking the right steps to deal with any issues you may be facing. Counselling provides a safe and confidential space to enable clients to explore ways to deal with situations and crises you may be facing. It is a place to be listened to and obtain support, a place to work on your fears and anxieties and how these affect your life and relationships. Most importantly, it is place to help us realize that we do have choices and that by defining the life we want to live, we can create possibilities in our lives to live a more fulfilled life of our choice."
+        "heading": "Šta je individualno savjetovanje?",
+        "text1": "Savjetovanje je forma terapije razgovorom koja omogućava pojedincu da verbalizira i izrazi svoje probleme, osjećanja i negativne misli u sigurnom i povjerljivom okruženju. Savjetodavatelji su tu da Vas saslušaju i pomognu Vam identificirati problem, kao i da omoguće pronalaženje pravih koraka u nošenju sa problemom s kojim se suočavate.",
+        "text2": "Savjetovanje pruža siguran i povjerljiv prostor koji podstiče klijente da istraže načine pomoću kojih se mogu suočiti sa životnim situacijama ili krizama u kojima se zateknu. To je prostor u kojem ćete biti saslušani i kroz koji možete dobiti podršku, prostor da radite na strahovima i brigama i uvidite načine na koji oni mogu uticati na Vaš život i međuljudske veze.",
+        "text3": "Najvažnije, to je prostor u kojem dobijamo pomoć koja nas vodi ka razumjevanju toga da imamo izbore i da možemo oblikovati naše živote na način koji odgovara nama, te da možemo otvoriti mogućnosti da živimo ispunjenjiji život."
       },
       "forMe": {
-        "heading": "How can I be sure counselling is for me?",
-        "text": "You have the opportunity to receive an introduction to counselling free of charge for ten to fifteen minutes by telephone. Call us on +387 603 21 22 90 or +387 66 23 60 83 or via Skype (Skype name zdravlje.nu) and talk to one of our psychologists. S/he will discuss with you about your needs, current situation and your counselling goals and explain how online counselling is done at zdravlje.nu. There is a possibility to book an appointment during the call if you feel we could be of help for you. Kindly note this appointment will only be temporary and will be cancelled if we do not receive payment before the session."
+        "heading": "Kako da budem siguran/na da je savjetovanje dobar izbor za mene?",
+        "text1": "Imate priliku da dobijete uvod u savjetovanje besplatno, putem 10 do 15-minutnog telefonskog razgovora. Možete nas pozvati na +387 603 21 22 90 ili +387 66 23 60 83, ili putem Skype-a (korisničko Skype ime: zdravlje.nu) i razgovarati sa nekim od naših psihologa. On ili ona će razgovarati o Vašim potrebama, trenutnoj situaciji i terapijskom cilju, te će Vam objasniti kako funkcioniše online savjetovanje u zdravlje.nu.",
+        "text2": "Ukoliko osjetite da bismo Vam mogli biti na usluzi i pomoći, otvorena Vam je mogućnost da rezervišete i prijavite termin savjetovanja tokom tog poziva. Molimo Vas da imate razumjevanja da je takva rezervacija privremena, te da će biti otkazana ukoliko ne primimo uplatu do dogovorenog termina sesije."
       },
       "discretion": {
-        "heading": "Will anybody know that I am talking with a counsellor?",
-        "text": "You can talk to our counsellors from the comfort of your own home, your family and friends none the wiser you are doing so. Confidentiality will be maintained at all times and we shall always protect your personal information. Any and all information collected through our Internet sites and counselling sessions will be strictly confidential and will not be sold, rented, or otherwise disclosed to any third party not actively engaged in providing services to our customers. To protect you, our psychologists will not write notes into our computer system during counselling sessions, only in their note books. These notebooks have your identity coded and are locked when not used for preparations or in sessions with you. We also never record video sessions to protect your identity. To best serve you, your psychologist may discuss your case with other psychologists at zdravlje.nu without revealing your identity. This way you will benefit from the skills and experiences of more psychologists than the one you are talking to."
+        "heading": "Da li će neko znati da razgovaram sa psihologom?",
+        "text1": "Možete razgovarati sa našim psiholozima iz ugodnosti Vaše kuće, bez znanja Vaše porodice ili prijatelja.",
+        "text2": "Povjerljivost od strane psihologa će biti održavana sve vrijeme i mi ćemo štititi Vaše lične informacije. Sve informacije koje prikupimo putem naše internet stranice i savjetodavateljskih sesija će biti strogo povjerljive i zaštićene, te neće biti prodavane, iznajmljivane ili na neki drugi način otkrivane trećim licima koja nisu aktivno uključena u pružanje usluga našim klijentima.",
+        "text3": "Da bismo Vas zaštitili, naši psiholozi tokom sesija neće pisati bilješke na našem računarskom sistemu nego jedino u njihove bilježnike. U ovim bilježnicima će stojati samo Vaše identifikacijske šifre, te će oni biti pod ključem kada ih psiholog ne koristi za pripremu ili tokom sesije. Nikada ne snimamo video niti audio snimke sesija, da bismo zaštitili Vaš identitet.",
+        "text4": "Da bi Vam ponudio što bolju uslugu, Vaš psiholog može raspravljati o Vašem slučaju unutar zdravlje.nu, ali bez otkrivanja Vašeg identiteta. Na ovaj način možete imati koristi od vještina i iskustava više psihologa nego samo onog s kojim trenutno radite."
       },
       "rebook": {
-        "heading": "Can I rebook or cancel a counselling session?",
-        "text": "Of course it is possible, we have 24 hours free rebooking and cancellation policy."
+        "heading": "Mogu li pomjeriti ili otkazati dogovoreni savjetodavni termin?",
+        "text": "Naravno, moguće je pomjeriti i otkazati dogovoreni termin, vodimo se pravilom besplatnog pomjeranja i otkazivanja barem 24 sata prije samog termina."
       },
       "book": {
-        "heading": "How do I book an appointment?",
-        "text1": "You book an appointment by contacting us at:",
-        "text2": "Alternately you can prepay for counselling on zdravlje.nu and we will contact you after we have received the payment. During the payment process you will have the option to choose time slots that would suit you best."
+        "heading": "Kako da rezervišem termin?",
+        "text1": "Termin možete rezervisati tako što ćete nas kontaktirati na:",
+        "text2": "Drugi način rezervacije je uplata jednog od savjetodavnih paketa ili pojedinačnog savjetovanja kako su ponuđeni na web stranici zdravlje.nu, nakon čega ćete biti kontaktirani čim primimo Vašu uplatu. Tokom takve rezervacije možete odabrati vremenske intervale koji bi Vam najviše odgovarali za termine savjetovanja."
       },
       "safe": {
-        "heading": "Is it safe to pay online?",
-        "text": "We use Stripe and PayPal for online payments. They both take security seriously and are used by many businesses worldwide. The credit or debit card data that you enter on zdravlje.nu is never sent to our servers, instead the data is sent directly to Stripe. This is important, because this way we will not handle any sensitive credit or debit card data on our servers. You can read more about how Stripe handles payment data on https://stripe.com/docs/security. If you choose to pay with PayPal, you will be redirected to a secure PayPal payment page. Again, no sensitive payment data will be handled on our servers. We are using SSL certificate on our website zdravlje.nu. SSL is a standard security technology that establishes a secure link (i.e. encrypted channel) between your web browser and our website zdravlje.nu. All communication transmitted through this link is encrypted, making the information private and secure. You will know the SSL is working if you find a small green lock icon in the address bar area."
+        "heading": "Da li je online plaćanje sigurno?",
+        "text1": "Mi koristimo Stripe i Paypal za online usluge plaćanja. Obje ove stranice uzimaju sigurnost jako ozbiljno, te se njima koriste mnoge organizacije i pojednici širom svijeta.",
+        "text2": "Podaci Vaših kreditnih ili debitnih kartica koje unesete na zdravlje.nu se nikada ne šalju našim serverima, nego direktno Stripe-u. Ovo je bitno jer na taj način mi ne dolazimo u dodir sa osjetljivim podacima Vaših kreditnih i debitnih kartica putem naših servera.",
+        "text3": "Možete saznati više o tome kako Stripe rukovodi Vašim podacima preko linka:",
+        "text4": "Ukoliko se odlučite platiti putem Paypal-a, bićete preusmjereni na sigurnu Paypal stranicu za uplatu. Ponovo, nikakvi osjetljivi podaci Vaših kartica neće biti rukovođeni putem naših servera.",
+        "text5": "Web stranica zdravlje.nu koristi SSL certifikat. SSL je standardna sigurnosna tehnologija koja uspostavlja sigurnu vezu (šifrirani kanal) između Vašeg internet pretraživača i naše stranice zdravlje.nu. Sva komunikacija prenešena ovim kanalom se prenosi šifrirano, što informacije unutar nje čini sigurnim i privatnim. Znaćete da je SSL uključen i radi ako vidite ikonu malog zelenog katanca u desnom uglu područja trake sa adresom stranice (address bar) zdravlje.nu."
       },
       "eligible": {
-        "heading": "Who is eligible to use services at zdravlje.nu?",
-        "text": "Our counselling services are for anybody wanting to live a more fulfilled life by working on their everyday issues. In order to be eligible to use our services, you must not have a serious mental health issue, e.g. diagnosed with schizophrenia, bipolar disorder, drug or alcohol dependence, or any other mental diagnosis. Kindly note the use of our online services is not meant for emergencies. If you are thinking about suicide or if you are considering taking actions that may cause harm to you or to others or if you feel that you or any other person may be in any danger or if you have any medical emergency, you must immediately call the emergency service number and notify relevant authorities. You must be 18 years of age or older to use our services, or visit or use the website zdravlje.nu in any manner."
+        "heading": "Ko može koristiti usluge zdravlje.nu?",
+        "text1": "Naše savjetodavne usluge su otvorene za svakoga ko želi živjeti ispunjenijim životom radeći na svakodnevnim situacijama i problemima s kojiima se suočava. Ukoliko imate ozbiljne mentalne probleme, npr. dijagnozu shizofrenije, bipolarnog poremećaja ličnosti ili ste ovisni o alkoholu ili drogama, te ukoliko imate bilo koju drugu dijagnozu mentalnog poremećaja – ne smijete korisiti naše usluge.",
+        "text2": "Molimo Vas da razumijete da naše usluge nisu namjenjene hitnim slučajevima.",
+        "text3": "Ukoliko razmišljate o samoubistvu ili poduzimanju mjera i akcija koje mogu uzrokovati ozbiljnu štetu Vama ili drugima, ukoliko osjećate da ste Vi ili neka druga osoba u opasnosti ili ako imate zdravstveno hitan slučaj, morate se obratiti službi za tu vrstu hitnih slučajeva i obavijestiti relevantne autoritete.",
+        "text4": "Morate imati 18 ili više godina da biste mogli koristiti naše usluge, kao i posjećivati i koristiti web stranicu zdravlje.nu na bilo koji način."
       },
       "getStarted": {
-        "heading": "What do I need to get started?",
-        "text1": "For Skype calls you will need a stable, reasonably high-speed internet access, a computer or smart phone with built in camera and audio capability, a quiet, private room, and a working Skype application." ,
-        "text2": "To get the application Skype installed, visit",
-        "text3": "For counselling through email, you will need a private email address."
+        "heading": "Šta mi treba da započnem?",
+        "text1": "Za Skype pozive trebat ćete stabilnu i relativno brzu internet vezu, kompjuter ili mobitel sa ugrađenom kamerom i mogućnošću prenošenja zvuka, tihu i privatnu sobu, kao i Skype aplikaciju." ,
+        "text2": "Da instalirate Skype, posjetite",
+        "text3": "Za usluge savjetovanja putem e-maila, trebat ćete privatnu e-mail adresu."
       },
       "session": {
-        "heading": "How long is one session?",
-        "text": "At zdravlje.nu we offer 20 minutes and 45 minutes sessions. Sometimes there is no time available for the normal 45 minutes long session, e.g. during working hours, therefore we offer the shorter 20 minutes option."
+        "heading": "Koliko dugo traje jedna sesija?",
+        "text1": "Zdravlje.nu. Vam nudi 20-minutne i 45-minutne sesije.",
+        "text2": "Ukoliko nekada ne budete imali vremena za standardnu dužinu sesije od 45 minuta, npr. tokom radnih sati, nudimo Vam kraću, 20-minutnu opciju."
       },
       "satisfied": {
-        "heading": "What if I am not happy with my counsellor?",
-        "text": "A good fit between client and counsellor is important, that is why we are happy to change your counsellor without any explicit reason from your side. It is vital that you feel a sense of connection and trust with your counsellor. Please send us an email to info@zdravlje.nu to initiate a change of counsellor."
+        "heading": "Šta ako nisam zadovoljan/na svojim psihologom?",
+        "text1": "Dobar odnos između klijenta i psihologa jako je važan, zato će nam biti drago promijeniti Vam psihologa bez nekog posebnog razloga sa Vaše strane. Od važnosti je da imate osjećaj povezanosti i povjerenja sa Vašim psihologom.",
+        "text2": "Ukoliko budete željeli mjenjati Vašeg psihologa možete nas kontaktirati na:",
+        "text3": "Nakon završetka zadnje dogovorene sesije od Vas će biti traženo da popunite evaluacijski formular, što će nam omogućiti da poboljšamo svoje usluge."
       },
       "pay": {
-        "heading": "How do I pay?",
-        "text": "We have three different options for payment, with credit/debit card, PayPal or invoice. With the credit/debit card and PayPal options you pay online on our website zdravlje.nu. We are using SSL certificate, which creates an encrypted channel between your web browser and our server, making the information you give us private and secure. Credit / debit card numbers are never entering our servers at zdravlje.nu."
+        "heading": "Kako platiti?",
+        "text1": "Imamo tri opcije plaćanja, kreditnom/debitnom karticom, PayPal-om ili preko računa u banci.",
+        "text2": "Sa opcijama plaćanja kreditnom/debitnom karticom i PayPal-om, plaćate online na našoj web stranici, zdravlje.nu. Koristimo SSL certifikat, koji kreira šifrirani kanal između web browsera i našeg servera, čineći informacije koje nam dajete privatnim i sigurnim.",
+        "text3": "Brojevi kreditnih/debitnih kartica nikada se ne zapisuju na našim serverima u zdravlje.nu."
       },
       "payAfter": {
-        "heading": "Can I pay after the session?",
-        "text": "The payment for any session is always payable prior to the appointment. If we do not receive payment before the time of the appointment, with funds cleared into our bank, the appointment will be cancelled or postponed. If your appointment lasts longer than the allotted time, you will be liable for a charge of 2 BAM per minute for the extra time taken."
+        "heading": "Mogu li platiti poslije sesije?",
+        "text1": "Plaćanje za sesije uvijek se obavlja prije zakazanog termina. Ako ne primimo uplatu prije zakazanog termina, sa informacijom da su sredstva uplaćena na naš račun, zakazani termin bit će otkazan ili pomjeren.",
+        "text2": "Ako Vaš zakazani termin traje duže od planiranog, obavezni ste platiti 2KM za svaku dodatnu minutu. Ukoliko Vaš termin savjetovanja bude trajao kraće od predviđenog vremena, a razlog tome je sa Vaše strane, nismo odgovorni da Vam refundiramo uplaćeni iznos ili da kompenziramo na drugi način. Međutim, ukoliko Vaš termin savjetovanja bude skraćen za dvije (2) minute i više od predviđenog vremena, a razlog tome je sa naše strane, bićete kompenzirani sa novom sesijom."
       },
       "missSession": {
-        "heading": "What happens if I miss my session?",
-        "text": "Should you fail to attend a session, though we will listen sympathetically to any reasons that you may give for not attending, the full cost of the appointment will be chargeable. Any decision to refund any or all of the cost of the session will be at our discretion."
+        "heading": "Šta ako propustim svoju sesiju?",
+        "text": "Ako propustite zakazanu sesiju, bez 24-satnog obavještenja, iako ćemo uvažiti svaki razlog zbog kojeg se niste pojavili, bit će Vam naplaćena puna cijena zakazanog termina. Bilo koja odluka da Vam refundiramo dio novca ili cijenu cijele sesije bit će rezultat naše vlastite procjene."
       },
       "prescriptions": {
-        "heading": "Do you offer prescriptions as part of the counselling?",
-        "text": "No, a counsellor is not a medicinal doctor and cannot prescribe medicines. Counselling is a form of talking therapy which allows the individual to express their problems, feelings and negative thoughts in a dependable and confidential environment."
+        "heading": "Da li nudite recepte za lijekove kao dio savjetovanja?",
+        "text1": "Ne, psiholog nije ljekar i ne može propisivati lijekove.",
+        "text2": "Savjetovanje je forma govorne terapije koja omogućuje pojedincu da iznese svoje probleme, osjećaje i negativne misli u pouzdanom i povjerljivom okruženju."
       },
       "troubles": {
-        "heading": "Will I get rid of my troubles?",
-        "text": "There is no method or treatment, whether medical or psychological, which provides guaranteed help for all people. This is regardless of whether counselling is online or on-site. Nobody can guarantee you will get 100% free from your problems. However, we can guarantee that we will provide you with the best possible help based on the methods that have been proven to produce the best results for different areas of research."
+        "heading": "Da li ću se riješiti svojih poteškoća?",
+        "text": "Ne postoji metod ili tretman, bilo medicinski ili psihološki, koji omogućuje zagarantovanu pomoć za sve ljude. Ovo je neovisno o tome da li se savjetovanje odvija putem interneta ili uživo. Niko Vam ne može garantovati da ćete se riješiti svojih problema. Međutim, možemo Vam garantirati da ćemo se uvijek truditi pružiti Vam uslugu koja je zasnovana na istraživanjima i rezultatima truda i saznanja psihološke nauke i njenih teorija i praksi."
       }
     },
     "privacyPolicyView": {
       "heading": "Politika privatnosti",
-      "preamble": "Vaša privatnost nam je jako bitna. Osmislili smo našu Politiku privatnosti da bismo Vam mogli prenijeti informacije o tome kako koristiti Zdravlje.nu i o načinu na koji prikupljamo i koristimo Vaš sadržaj i informacije. Podstičemo Vas da pročitate Politiku privatnosti u potpunosti. Zdravlje.nu je podružnica firme Baunad doo Tuzla.",
+      "preamble1": "Vaša privatnost nam je jako bitna. Osmislili smo našu Politiku privatnosti da bismo Vam mogli prenijeti informacije o tome kako koristiti Zdravlje.nu i o načinu na koji prikupljamo i koristimo Vaš sadržaj i informacije. Podstičemo Vas da pročitate Politiku privatnosti u potpunosti.",
+      "preamble2": "Zdravlje.nu je podružnica firme Baunad doo Tuzla.",
       "disclosure": {
         "heading": "Čuvanje podataka",
         "text1": "Sve informacije koje prikupimo putem naše internet stranice i sesija sa klijentima su strogo povjerljive, te neće biti prodavane, iznajmljivane ili na neki drugi način dostupne trećim licima koja nisu aktivno uključena u pružanje usluga našim klijentima.",
@@ -479,7 +583,7 @@
       "sumWithPackageDiscount": "Suma iza kominacijskog popusta",
       "voucherDiscount": "Voucher popust",
       "total": "Ukupno",
-      "name": "Ime / prezime",
+      "name": "Ime i prezime",
       "phone": "Telefon",
       "email": "E-pošta",
       "comment": "Komentar",
@@ -487,7 +591,7 @@
       "placeOrder": "Zakažite",
       "close": "Blizu",
       "issue": "Tema",
-      "invoiceText": "Dobićete fakturu sa uputstvima za plaćanje na Vašoj e-pošta (email) adresi.  Kada primimo uplatu na naš bankovni račun, kontaktiraćemo vas kako bismo zakazali termin za vaše psihološko savjetovanje.",
+      "invoiceText": "Dobićete fakturu poslani na Vašu e-poštu adresu sa uputama za plaćanje. Kada izvršite uplatu na naš bankovni račun, kontaktirat ćemo Vas za Vaše psihološko savjetovanje.",
       "stripe": {
         "invalid_number": "Broj kartice nije važeći broj kreditne kartice.",
         "incomplete_number": "Broj kartice nije važeći broj kreditne kartice.",
@@ -508,11 +612,11 @@
         "invalid_expiry_year_past": "Neispravna godina isteka."
       },
       "validation": {
-        "\"name\" is required": "Ime / prezime je obavezno",
+        "\"name\" is required": "Ime i prezime je obavezno",
         "\"name\" is not allowed to be empty": "Ime / prezime je obavezno",
         "\"phone\" is required": "Telefon je potreban",
         "\"phone\" is not allowed to be empty": "Telefon je potreban",
-        "\"street\" is required": "Ulica je potreban",
+        "\"street\" is required": "Ulica je potrebna",
         "\"street\" is not allowed to be empty": "Ulica je potreban",
         "\"postal\" is required": "Poštanski broj je potreban",
         "\"postal\" is not allowed to be empty": "Poštanski broj je potreban",

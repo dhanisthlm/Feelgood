@@ -21,13 +21,19 @@ export class Faq extends Component {
                 <div className="page-header"><h1>{ t('heading') }</h1></div>
                 <div className="privacy-wrapper">
                     <h3>{ t('individualCouncelling.heading') }</h3>
-                    <p>{ t('individualCouncelling.text') }</p>
+                    <p className="narrow">{ t('individualCouncelling.text1') }</p>
+                    <p className="narrow">{ t('individualCouncelling.text2') }</p>
+                    <p>{ t('individualCouncelling.text3') }</p>
 
                     <h3>{ t('forMe.heading') }</h3>
-                    <p>{ t('forMe.text') }</p>
+                    <p className="narrow">{ t('forMe.text1') }</p>
+                    <p>{ t('forMe.text2') }</p>
 
                     <h3>{ t('discretion.heading') }</h3>
-                    <p>{ t('discretion.text') }</p>
+                    <p className="narrow">{ t('discretion.text1') }</p>
+                    <p className="narrow">{ t('discretion.text2') }</p>
+                    <p className="narrow">{ t('discretion.text3') }</p>
+                    <p>{ t('discretion.text4') }</p>
 
                     <h3>{ t('rebook.heading') }</h3>
                     <p>{ t('rebook.text') }</p>
@@ -40,10 +46,17 @@ export class Faq extends Component {
                     <p>{ t('book.text2') }</p>
 
                     <h3>{ t('safe.heading') }</h3>
-                    <p>{ t('safe.text') }</p>
+                    <p className="narrow">{ t('safe.text1') }</p>
+                    <p className="narrow">{ t('safe.text2') }</p>
+                    <p className="narrow">{ t('safe.text3') }</p>
+                    <p className="narrow">{ t('safe.text4') }</p>
+                    <p>{ t('safe.text5') }</p>
 
                     <h3>{ t('eligible.heading') }</h3>
-                    <p>{ t('eligible.text') }</p>
+                    <p className="narrow">{ t('eligible.text1') }</p>
+                    <p className="narrow">{ t('eligible.text2') }</p>
+                    <p className="narrow">{ t('eligible.text3') }</p>
+                    <p>{ t('eligible.text4') }</p>
 
                     <h3>{ t('getStarted.heading') }</h3>
                     <p>{ t('getStarted.text1') }</p>
@@ -51,22 +64,29 @@ export class Faq extends Component {
                     <p>{ t('getStarted.text3') }</p>
 
                     <h3>{ t('session.heading') }</h3>
-                    <p>{ t('session.text') }</p>
+                    <p className="narrow">{ t('session.text1') }</p>
+                    <p>{ t('session.text2') }</p>
 
                     <h3>{ t('satisfied.heading') }</h3>
-                    <p>{ t('satisfied.text') }</p>
+                    <p className="narrow">{ t('satisfied.text1') }</p>
+                    <p className="narrow">{ t('satisfied.text2') }</p>
+                    <p>{ t('satisfied.text3') }</p>
 
                     <h3>{ t('pay.heading') }</h3>
-                    <p>{ t('pay.text') }</p>
+                    <p className="narrow">{ t('pay.text1') }</p>
+                    <p className="narrow">{ t('pay.text2') }</p>
+                    <p>{ t('pay.text3') }</p>
 
                     <h3>{ t('payAfter.heading') }</h3>
-                    <p>{ t('payAfter.text') }</p>
+                    <p className="narrow">{ t('payAfter.text1') }</p>
+                    <p>{ t('payAfter.text2') }</p>
 
                     <h3>{ t('missSession.heading') }</h3>
                     <p>{ t('missSession.text') }</p>
 
                     <h3>{ t('prescriptions.heading') }</h3>
-                    <p>{ t('prescriptions.text') }</p>
+                    <p className="narrow">{ t('prescriptions.text1') }</p>
+                    <p>{ t('prescriptions.text2') }</p>
 
                     <h3>{ t('troubles.heading') }</h3>
                     <p>{ t('troubles.text') }</p>

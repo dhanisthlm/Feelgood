@@ -39,11 +39,6 @@
     margin-top: -10px;
 }
 
-.contact .email,
-.contact .skype {
-    color: #C04C9C;
-}
-
 .contact .text {
     font-size: 16px;
     line-height: 26px;
@@ -52,6 +47,7 @@
 .contact .phone-number {
     margin-bottom: 3px;
     margin-top: 5px;
+    padding-left: 20px;
 }
 
 @media only screen and (max-width: 500px) {
