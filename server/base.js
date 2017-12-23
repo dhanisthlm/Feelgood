@@ -53,7 +53,7 @@ exports.register = function (server, options, next) {
             handler: (request, reply) => {
                 if ((process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'stage') &&
                     request.headers['x-forwarded-proto'] && request.headers['x-forwarded-proto'] === "http") {
-                    return reply().redirect(config.get('baseUrl') + '/' +  request.params.path);
+                    return reply().redirect(config.get('baseUrl'));
                 } else {
                     return (request.path.includes('pki-validation'))
                         ? reply.file('client/.well-known/pki-validation/godaddy.html')
