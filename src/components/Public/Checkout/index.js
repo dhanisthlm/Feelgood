@@ -59,7 +59,6 @@ export class Checkout extends FormComponent {
             terms: 'off',
             cancel: 'off',
             termsIsDirty: false,
-            subscribeIsDirty: false,
             cancelIsDirty: false
 		};
 
@@ -162,7 +161,7 @@ export class Checkout extends FormComponent {
        const newsletter = this.state.newsletter;
        const subscribe = this.state.subscribe === 'on' ? 'off' : 'on';
        this.setState({ subscribe });
-       this.setState({ newsletter: this.state.subscribe === 'on', subscribeIsDirty: true });
+       this.setState({ newsletter: this.state.subscribe === 'on' });
         window.localStorage.setItem('newsletter', newsletter);
     }
 
@@ -184,7 +183,7 @@ export class Checkout extends FormComponent {
 
            if (id === 'paypal') {
                paypalFactor = 2;
-               this.setState({ termsIsDirty: true, subscribeIsDirty: true, cancelIsDirty: true })
+               this.setState({ termsIsDirty: true, cancelIsDirty: true })
            }
 
            this.setState({ paypalFactor })
@@ -268,7 +267,7 @@ export class Checkout extends FormComponent {
             const terms = this.state.terms === 'on' ? 'off' : 'on';
             this.setState({ terms });
             this.setState({ termsIsDirty: true });
-
+            this.handlePaypal ();
     }
 
     /**
@@ -281,7 +280,7 @@ export class Checkout extends FormComponent {
         const cancel = this.state.cancel === 'on' ? 'off' : 'on';
         this.setState({ cancel });
         this.setState({ cancelIsDirty: true });
-
+        this.handlePaypal ();
     }
 
     /**
