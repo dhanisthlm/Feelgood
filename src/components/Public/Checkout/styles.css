@@ -825,7 +825,7 @@ thead tr {
     }
 
  .page-header h1 {
-        color: #C04C9C;
+        color: #C04C9C !important;
         text-align: left !important;
         margin-left: 37px !important;
     }
