@@ -41,7 +41,7 @@ export const logout = (auth) => (dispatch) => {
 };
 
 export const gotoLogout = () => (dispatch) => {
-    dispatch(routeActions.replace('/anka'));
+    dispatch(routeActions.replace('/'));
 };
 
 

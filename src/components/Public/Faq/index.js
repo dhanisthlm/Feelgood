@@ -19,7 +19,7 @@ export class Faq extends Component {
             <div className="page privacy-policy">
                 <Header location={this.props.location} />
                 <div className="page-header"><h1>{ t('heading') }</h1></div>
-                <div className="privacy-wrapper">
+                <div className="privacy-wrapper faq-wrapper">
                     <h3>{ t('individualCouncelling.heading') }</h3>
                     <p className="narrow">{ t('individualCouncelling.text1') }</p>
                     <p className="narrow">{ t('individualCouncelling.text2') }</p>

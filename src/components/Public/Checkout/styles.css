@@ -227,19 +227,8 @@
     width: 68%;
 }
 
-.checkout .basket p {
-    //color: #333;
-    //font-size: 23px;
-    //font-weight: 300;
-}
-
-.checkout .basket > div p:first-child {
-    //margin-bottom: 70px;
-    //text-align: left;
-    //font-size: 22px;
-    //margin-top: 13px;
-    //float: left;
-    //height: 25px;
+.error.checkbox {
+    margin-left: 0;
 }
 
 .checkout .back-header {
@@ -465,7 +454,6 @@
 }
 
 .checkout .form-buttons button {
-    //width: 351px;
     height: 47px;
     background-color: #c04c9c;
     border: none;
@@ -670,7 +658,7 @@ thead tr {
 }
 
 .loader {
-    position: absolute;
+    position: fixed;
     margin: auto;
     z-index: 999;
     background: #fff;
@@ -820,6 +808,14 @@ thead tr {
         padding-top: 230px;
     }
 
+    .checkout .back > div {
+        width: 100% !important;
+        padding: 0 37px;
+        box-sizing: border-box;
+        margin-top: 0 !important;
+        margin-bottom: 0 !important;
+    }
+
     .checkout .page-header {
         margin-top: 20px;
         padding-left: 0;
@@ -828,12 +824,20 @@ thead tr {
         color: #c04c9c;
     }
 
-    .checkout .page-header h1 {
+ .page-header h1 {
         color: #C04C9C;
+        text-align: left !important;
+        margin-left: 37px !important;
+    }
+
+    .checkout .payment-type-wrapper.credit-wrapper {
+        margin-right: 0;
+        margin-bottom: 17px;
     }
 
     .checkout .left-col-wrapper {
         float: none;
+        width: 100%;
     }
 
     .checkout .basket .front {
@@ -843,6 +847,16 @@ thead tr {
         font-size: 40px;
         width: 85%;
         margin: 25px auto;
+    }
+
+    .checkout .inner-frame {
+        //margin-bottom: 0;
+    }
+
+    #card-errors {
+        color: #f00 !important;
+        font-size: 15px;
+        margin-top: 5px;
     }
 
     #breakpoints > div.breakpoint-small {
@@ -875,6 +889,45 @@ thead tr {
         margin: 9px auto 25px;
     }
 
+    .checkout .back-header {
+        margin-top: 10px;
+        font-weight: 300;
+        font-size: 26px;
+        padding-left: 2px;
+    }
+
+    .checkout .back .preamble {
+        margin-bottom: 20px !important;
+        line-height: 25px;
+    }
+
+    .checkout .rating {
+        width: 100%;
+        overflow: auto;
+        margin-top: 0;
+        height: auto;
+        margin-bottom: 5px;
+    }
+
+    .checkout .basket label.checkbox {
+        width: 87%;
+        float: left;
+        margin-top: 0;
+    }
+
+    .checkout .rating .stars {
+        margin-left: -10px;
+    }
+
+    .checkout .rating-text {
+        width: auto;
+        line-height: 25px;
+    }
+
+    .checkout .back > div p {
+        padding-left: 2px;
+    }
+
     .checkout .basket .front {
         float: none;
         display: block;
@@ -885,22 +938,53 @@ thead tr {
         margin: 0 auto;
     }
 
+    .checkout .card-radio {
+        //margin-top: 17px;
+    }
+
+    .checkout .check-wrapper + .error {
+        margin-left: 24px;
+    }
+
+    .checkout .basket .credit-wrapper label {
+        margin-top: 0 !important;
+    }
+
+    .checkout .basket .credit-wrapper {
+        margin-bottom: 15px;
+    }
+
+    .checkout .back > div p.close-button-explanation {
+        margin-bottom: 0 !important;
+    }
+
+    .checkout .basket .faktura-wrapper label {
+        margin-top: 4px;
+    }
+
+    .checkout fieldset {
+        padding: 15px;
+    }
+
+    .checkout .faktura-wrapper input {
+        //margin-top: 10px !important;
+    }
+
     .checkout .form-buttons button:first-child {
         width: 100%;
         margin-bottom: 10px;
     }
 
     .checkout .form-buttons button:last-child {
-        width: 100%;
-        margin-bottom: 40px;
+        width: 100% !important;
+        margin-bottom: 0;
     }
 
-    .checkout .basket .back {
-        //margin-left: 0;
-        //width: 85%;
-        //box-sizing: border-box;
-        //margin: 0 auto;
-        //display: block;
-        //float: none;
+    .checkout .city-wrapper div:first-child {
+        width: 40%;
+    }
+
+    .checkout .city-wrapper div:last-child {
+        width: 55%;
     }
 }

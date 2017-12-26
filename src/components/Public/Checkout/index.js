@@ -1061,7 +1061,7 @@ export class Checkout extends FormComponent {
                                         <div className="form-element-wrapper payment-type">
                                             <fieldset id="payment-options">
                                                 <legend className="payment-type-header">Tip plaćanja</legend>
-                                                <div className="payment-type-wrapper">
+                                                <div className="payment-type-wrapper credit-wrapper">
                                                     <label htmlFor="credit">
                                                         <img className="card" src="/images/visa.png" />
                                                         <img className="card" src="/images/master.png" />
@@ -1187,7 +1187,7 @@ export class Checkout extends FormComponent {
 										<label className="comment-label">Ostali komentari</label>
 										<textarea onChange={this.handleRatingComment}>{this.state.ratingComment}</textarea>
 										<button onClick={ this.postRating }>OK</button>
-                                        <p>Vratit ćete se natrag na početnu stranicu kada pritisnete ok.</p>
+                                        <p className="close-button-explanation">Vratit ćete se natrag na početnu stranicu kada pritisnete ok.</p>
 									</div>
 								</div>
 							</div>

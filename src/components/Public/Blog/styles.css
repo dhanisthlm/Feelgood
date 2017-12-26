@@ -62,7 +62,13 @@
     }
 
     .blog .blog-list {
-        padding: 0 20px;
+        padding: 0 37px;
+        margin-bottom: 30px;
+    }
+
+    .blog .blog-list li {
+        width: 100%;
+        line-height: 24px;
     }
 
     .blog .blog-item p:last-child {

@@ -9,17 +9,17 @@ export const encounterValidator = Joi.object().keys({
     street: Joi
         .string()
         .trim()
-        .required(),
+        .allow('', null),
 
     postal: Joi
         .string()
         .trim()
-        .required(),
+        .allow('', null),
 
     city: Joi
         .string()
         .trim()
-        .required(),
+        .allow('', null),
 
     country: Joi
         .string()
@@ -54,7 +54,7 @@ export const encounterValidator = Joi.object().keys({
 
     newsletter: Joi
         .boolean()
-        .required(),
+        .allow('', null),
 
     comment: Joi
         .string()
