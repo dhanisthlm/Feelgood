@@ -36,7 +36,7 @@ export class Header extends Component {
         const logoutBtn = (this.props.location.pathname === '/admin')
             ? 'auth-controls is-visible' : 'auth-controls is-hidden';
 
-        const issueHref = typeof window.orientation !== 'undefined' ? '/#usluge' : '/#usluge-mobile';
+        const issueHref = typeof window.orientation !== 'undefined' ? '/#usluge-mobile' : '/#usluge';
 
         return (
             <header className={headerClass}>
