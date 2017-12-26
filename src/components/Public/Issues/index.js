@@ -235,7 +235,7 @@ export class Issues extends Component {
 						</div>
 					</div>
 				</div>
-				<div className="issues mobile-issues">
+				<div id="usluge-mobile" className="issues mobile-issues">
 					<div id="left" onClick={this.handleSwipeRight} className="issue-arrow-left" />
 					<div ref="carousel" className="issue-carousel">
                         { this.renderMobileIssues() }

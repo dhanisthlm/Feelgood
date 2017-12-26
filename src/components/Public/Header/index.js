@@ -36,6 +36,8 @@ export class Header extends Component {
         const logoutBtn = (this.props.location.pathname === '/admin')
             ? 'auth-controls is-visible' : 'auth-controls is-hidden';
 
+        const issueHref = typeof window.orientation !== 'undefined' ? '/#usluge' : '/#usluge-mobile';
+
         return (
             <header className={headerClass}>
                 <div className={logoutBtn}>
@@ -59,7 +61,7 @@ export class Header extends Component {
                     </a>
                 </h1>
                 <nav className="main-menu">
-                    <a href="/#usluge">{ t('services') }</a>
+                    <a href={issueHref}>{ t('services') }</a>
                     <a href="/#cijene">{ t('prices') }</a>
                     <a href="/#kakoradi">{ t('howWork') }</a>
                     <a href="/#kosmomi">{ t('whoAreWe')}</a>
