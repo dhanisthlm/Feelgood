@@ -253,6 +253,10 @@
         display: none;
     }
 
+    .staff .card .diploma-wrapper {
+        display: none;
+    }
+
     .staff .photo-info-wrapper {
         display: none;
     }

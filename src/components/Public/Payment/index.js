@@ -430,7 +430,6 @@ export class Payment extends Component {
 									);
 								}
                             })()}
-
 						</div>
 						<div className="email">
 							<h4 className="category-heading">{ t('email') }</h4>
