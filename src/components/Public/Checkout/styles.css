@@ -808,6 +808,10 @@ thead tr {
         padding-top: 230px;
     }
 
+    .checkout .form-buttons button:first-child + div {
+        width: 100%;
+    }
+
     .checkout .back > div {
         width: 100% !important;
         padding: 0 37px;

@@ -172,3 +172,15 @@
         float: left;
     }
 }
+
+@media only screen and (max-width: 400px) {
+    .header .main-menu a {
+        margin-right: 15px;
+    }
+}
+
+@media only screen and (max-width: 350px) {
+      .header .main-menu a {
+          margin-right: 11px;
+      }
+}

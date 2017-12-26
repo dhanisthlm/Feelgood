@@ -448,3 +448,14 @@
         display: block;
     }
 }
+
+@media only screen and (max-width: 400px) {
+    .issues .text-wrapper-mobile {
+        padding: 20px 20px 0 20px;
+        margin-bottom: 0;
+    }
+
+    .issues .issue-text {
+        padding: 0 30px;
+    }
+}

@@ -610,20 +610,20 @@
 
     .payment .toggle_radios .small-skype p {
         margin-top: 1px;
-        margin-left: 28px;
+        margin-left: 20px;
     }
 
     .payment .toggle_radios .large-skype p {
         margin-top: 1px;
-        margin-left: 21px;
+        margin-left: 16px;
     }
 
     .payment .toggle_radios label {
-        width: 137px !important;
+        width: 50% !important;
     }
 
     .payment .toggle_option_slider {
-        width: 142px;
+        width: 49%;
     }
 
     .payment .email .weeks > div {
@@ -759,5 +759,16 @@
         border: 1px solid #0000;
         box-shadow: none;
         margin-bottom: 10px;
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    .payment {
+        padding: 0 20px 0 20px;
+        margin-bottom: 18px;
+    }
+
+    .payment + .text-wrapper {
+        padding: 25px 20px 21px 20px;
     }
 }
