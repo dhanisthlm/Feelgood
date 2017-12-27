@@ -86,8 +86,8 @@ export class Payment extends Component {
             code: '',
             skype: {
                 s: { active: false, cost: 60, week: 1, code: '1', description: '1 Skype poziva' },
-                m: { active: false, cost: 174, week: 3, code: '3', description: 'Paket za 3 skype poziva' },
-                l: { active: false, cost: 448, week: 8, code: '8', description: 'Paket za 8 Skype poziva' }
+                m: { active: false, cost: 171, week: 3, code: '3', description: 'Paket za 3 skype poziva' },
+                l: { active: false, cost: 444, week: 8, code: '8', description: 'Paket za 8 Skype poziva' }
             },
             email: {
                 s: { active: false, cost: 40, week: 1, code: '24', description: 'E-posta, odgovor u toku 24 sata'},
@@ -153,22 +153,22 @@ export class Payment extends Component {
 
 		switch (true) {
 			case (_package.week === 2):
-				factor = .95;
+				factor = .05;
 				break;
 			case (_package.week === 3):
-				factor = .925;
+				factor = .075;
 				break;
 			case (_package.week === 4):
-				factor = .9;
+				factor = .1;
 				break;
 			case (_package.week > 4):
-				factor = .875;
+				factor = .125;
 				break;
 			default:
-				factor = 1;
+				factor = 0;
 		}
 
-		return Math.round(_package.cost * factor) * _package.week;
+		return _package.cost * (1 - factor) * _package.week;
 	}
 
     /**
@@ -277,8 +277,8 @@ export class Payment extends Component {
 
         const discount = this.calculateDiscounts(skypeCost, emailCost);
 
-        amount.skype = Math.round((skypeCost / skypeWeeks) * discount.promoFactor);
-        amount.email = Math.round((emailCost / emailWeeks) * discount.promoFactor);
+        amount.skype = Math.round((skypeCost / skypeWeeks) * discount.promoFactor * discount.packageFactor);
+        amount.email = Math.round((emailCost / emailWeeks) * discount.promoFactor * discount.packageFactor);
         amount.code = skypeCode + '' + skypeDurationCode + '' + emailCode;
         amount.total = Math.round((emailCost + skypeCost) * discount.promoFactor * discount.packageFactor);
 
