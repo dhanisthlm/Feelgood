@@ -812,6 +812,24 @@ thead tr {
         width: 100%;
     }
 
+    .activity-wrapper {
+        padding: 0;
+    }
+
+    .activity-wrapper > div {
+        width: 80%;
+        padding: 20px;
+        box-sizing: border-box;
+        overflow: hidden;
+        height: fit-content;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+    }
+
     .checkout .back > div {
         width: 100% !important;
         padding: 0 37px;
