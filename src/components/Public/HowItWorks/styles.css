@@ -3,6 +3,11 @@
     text-align: center;
 }
 
+.how-it-works a {
+    color: #333;
+    text-decoration: underline;
+}
+
 .how-it-works .step-wrapper p {
     text-align: left;
 }

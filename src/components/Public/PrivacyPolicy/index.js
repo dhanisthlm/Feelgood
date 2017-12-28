@@ -54,7 +54,7 @@ export class PrivacyPolicy extends Component {
                     <h3>{ t('contact.heading') }</h3>
                     <p>{ t('contact.text') }</p>
 
-                    <p className="contact">Email: info@zdravlje.nu</p>
+                    <p className="contact">Email: <a href="mailto:info@zdravlje.nu">info@zdravlje.nu</a></p>
                     <p className="contact">Phone: +387 603 21 22 90, +387 66 23 60 83</p>
                     <h4>{ t('address') }</h4>
                     <p className="address">Baunad doo Tuzla</p>

@@ -40,9 +40,9 @@ export class Faq extends Component {
 
                     <h3>{ t('book.heading') }</h3>
                     <p>{ t('book.text1') }</p>
-                    <p className="narrow">E-posta: <span className="emphazised">info@zdravlje.nu</span></p>
-                    <p className="narrow">Telefon: <span className="emphazised">+387 603 21 22 90</span> or <span className="emphazised">+387 66 23 60 83</span></p>
-                    <p>Skype: <span className="emphazised">zdravlje.nu</span></p>
+                    <p className="narrow">E-posta: <span><a href="mailto:info@zdravlje.nu">info@zdravlje.nu</a></span></p>
+                    <p className="narrow">Telefon: <span>+387 603 21 22 90</span> or <span>+387 66 23 60 83</span></p>
+                    <p>Skype: <span>info@zdravlje.nu</span></p>
                     <p>{ t('book.text2') }</p>
 
                     <h3>{ t('safe.heading') }</h3>

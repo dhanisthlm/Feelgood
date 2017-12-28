@@ -2,6 +2,11 @@
     color: #C04C9C !important;
 }
 
+.faq-wrapper a {
+    color: #333;
+    text-decoration: underline;
+}
+
 @media only screen and (max-width: 500px) {
     .faq-wrapper {
         margin-top: 20px !important;

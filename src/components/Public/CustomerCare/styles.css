@@ -50,6 +50,11 @@
     padding-left: 20px;
 }
 
+.contact a {
+    color: #333;
+    text-decoration: underline;
+}
+
 @media only screen and (max-width: 500px) {
     .contact .page-header {
         background-color: #fff;
