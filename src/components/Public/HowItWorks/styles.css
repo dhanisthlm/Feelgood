@@ -42,14 +42,14 @@
 
 .how-it-works .step-wrapper {
     display: inline-block;
-    width: 42%;
+    width: 45%;
     margin-bottom: 35px;
     box-sizing: border-box;
     vertical-align: top;
 }
 
 .how-it-works .step-wrapper:first-child {
-    padding: 0 50px 0 20px;
+    //padding: 0 50px 0 20px;
 }
 
 .how-it-works .step-wrapper:last-child {
@@ -75,9 +75,10 @@
 .how-it-works .description {
     margin-top: 0;
     text-align: left;
-    font-size: 17px;
     font-weight: 400;
-    margin-bottom: 15px;
+    margin-bottom: 14px;
+    font-size: 16px;
+    line-height: 22px;
 }
 
 .how-it-works .circle svg {
@@ -102,10 +103,10 @@
 
 .how-it-works .preamble {
     margin: 0 auto 10px;
-    text-align: center;
-    width: 70%;
+    text-align: left;
+    width: 90%;
     line-height: 25px;
-    font-size: 18px;
+    font-size: 17px;
 }
 
 

@@ -23,10 +23,10 @@
 
 .payment .preamble {
     margin: 0 auto 38px;
-    text-align: center;
-    width: 70%;
+    text-align: left;
+    width: 94%;
     line-height: 25px;
-    font-size: 18px;
+    font-size: 17px;
 }
 
 .payment-type-wrapper {
@@ -57,9 +57,8 @@
 }
 
 .payment .skype {
-    position: relative;
     margin-top: -15px;
-    margin-left: 45px;
+    margin-left: 31px;
 }
 
 .payment .email {
@@ -427,7 +426,7 @@
 
 .info-text .kod-text2 {
     display: inline;
-    font-size: 19px;
+    font-size: 18px;
     margin-top: 6px;
     font-weight: 300;
 }
@@ -437,7 +436,7 @@
     display: block;
     margin-top: 2px;
     font-weight: 300;
-    font-size: 19px;
+    font-size: 18px;
     margin-bottom: 6px;
 }
 
@@ -572,6 +571,11 @@
         padding: 0;
     }
 
+    .payment .category-heading {
+        text-align: center;
+        margin-left: 0 !important;
+    }
+
     .payment .payment-type-wrapper .skype,
     .payment .payment-type-wrapper .email {
         display: inline-block;
@@ -694,8 +698,10 @@
         width: 228px;
         color: #fff;
         text-align: center;
-        left: 31px !important;
-        top: 81px !important;
+        left: 0;
+        top: 75px !important;
+        right: 0;
+        margin: auto;
     }
 
     .payment + .text-wrapper .total {

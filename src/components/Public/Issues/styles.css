@@ -131,7 +131,7 @@
 }
 
 .issues + .text-wrapper {
-    padding: 20px 40px 25px 40px;
+    padding: 30px 70px 32px 75px;
     background-color: #C04C9C;
     overflow: hidden;
 }
@@ -144,11 +144,12 @@
 
 .issues + .text-wrapper .preamble {
     float: left;
-    font-size: 18px;
+    font-size: 17px;
     margin: 0;
     color: #fff;
     line-height: 25px;
     max-width: 800px;
+    font-weight: 300;
 }
 
 .issues + .text-wrapper .issue-button {
@@ -432,7 +433,7 @@
         float: left;
         margin-top: 10px;
         cursor: pointer;
-        top: 113px;
+        top: 107px;
         right: 41px;
     }
 

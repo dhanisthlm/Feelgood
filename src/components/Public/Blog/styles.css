@@ -14,13 +14,12 @@
 }
 
 .blog .blog-list {
-    padding: 10px 80px;
+    padding: 10px 90px;
 }
 
 .blog .blog-item {
     list-style-type: none;
     margin: 0 auto;
-    width: 85%;
 }
 
 .blog  .blog-item h2 {
@@ -29,7 +28,8 @@
 
 .blog .blog-item p {
     white-space: pre-wrap;
-    max-width: 900px;
+    font-size: 15px;
+    line-height: 23px;
 }
 
 .blog .date {

@@ -23,6 +23,8 @@
 .privacy-policy p {
     margin-top: 5px;
     margin-bottom: 25px;
+    line-height: 23px;
+    font-size: 15px;
 }
 
 .privacy-policy p.narrow {
@@ -30,8 +32,7 @@
 }
 
 .privacy-policy .privacy-wrapper {
-    padding: 20px 0;
-    max-width: 930px;
+    padding: 20px 90px;
     margin: 0 auto;
 }
 

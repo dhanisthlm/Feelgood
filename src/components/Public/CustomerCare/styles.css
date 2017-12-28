@@ -14,13 +14,14 @@
 }
 
 .contact .wrapper {
-    padding: 10px 80px 40px;
-    max-width: 930px;
+    padding: 10px 90px 40px;
     margin: 0 auto;
 }
 
 .contact .contact-text {
     margin-top: 5px;
+    font-size: 15px;
+    line-height: 26px;
 }
 
 .contact .phone-header,
