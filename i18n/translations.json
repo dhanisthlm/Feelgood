@@ -262,7 +262,7 @@
     },
     "staffView": {
       "heading": "Ko smo mi",
-      "preamble": "Nasi psiholozi su uključenje u društvo psihologa Federacije BiH,"
+      "preamble": "Nasi psiholozi su uključeni u Društvo psihologa Federacije BiH"
     },
     "howItWorksView": {
       "heading": "Kako radi",
@@ -309,7 +309,7 @@
       "selectPackageText": "Izaberite jedan Skype-poziv ili paket sa više Skype-poziva. Možete kombinovati sa e-poštom.",
       "call": "poziv",
       "email": "E-pošta",
-      "answerWithin": "Odgovar u toku",
+      "answerWithin": "Odgovor u toku",
       "emailSmallText": "Neograničen broj e-pošte, odgovor u toku 24h. Možete kombinovati sa Skype-pozivom.",
       "emailLargeText": "Neograničen broj e-pošte, odgovor u toku 4h radnim danima: 07.00-22.00, vikendom i praznikom: 09.00-18.00.",
       "number": "Broj",
@@ -592,7 +592,7 @@
       "placeOrder": "Zakažite",
       "close": "Blizu",
       "issue": "Tema",
-      "invoiceText": "Dobićete fakturu poslani na Vašu e-poštu adresu sa uputama za plaćanje. Kada izvršite uplatu na naš bankovni račun, kontaktirat ćemo Vas za Vaše psihološko savjetovanje.",
+      "invoiceText": "Dobićete fakturu poslanu na Vašu e-poštu sa uputama za plaćanje. Kada izvršite uplatu na naš bankovni račun, kontaktirat ćemo Vas za Vaše psihološko savjetovanje.",
       "stripe": {
         "invalid_number": "Broj kartice nije važeći broj kreditne kartice.",
         "incomplete_number": "Broj kartice nije važeći broj kreditne kartice.",

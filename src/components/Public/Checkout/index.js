@@ -49,7 +49,7 @@ export class Checkout extends FormComponent {
 			payRating: 0,
             ratingComment: '',
             paymentType: 'credit',
-            timeframes: ['Jutro', 'Popodne', 'Veče', 'Kada bilo'],
+            timeframes: ['Jutro', 'Popodne', 'Veče', 'Bilo kada'],
             country: 'Bosnia and Herzegovina',
             newsletter: true,
             currency: 'BAM',
@@ -1127,7 +1127,7 @@ export class Checkout extends FormComponent {
                                         <div className="form-element-wrapper">
                                             <div className="check-wrapper">
                                                 <input ref="terms" id="terms" checked={this.state.terms === 'on'} value={this.state.terms} onClick={ this.handleCheckbox } className="checkbox" type="checkbox" />
-                                                <label className="checkbox" htmlFor="comment">Slažem se sa <a className="checkout-link" target="blank" href="/politika-privatnosti">Politikom privatnosti</a> i <a className="checkout-link" target="blank" href="/tac">Pravilama i uslovima.</a>.</label>
+                                                <label className="checkbox" htmlFor="comment">Slažem se sa <a className="checkout-link" target="blank" href="/politika-privatnosti">Politikom privatnosti</a> i <a className="checkout-link" target="blank" href="/tac">Pravilima i uslovima.</a>.</label>
                                             </div>
                                             <span className="error checkbox">{termErrorMsg}</span>
                                         </div>
@@ -1169,10 +1169,10 @@ export class Checkout extends FormComponent {
 								<div className={back}>
 									<div>
 										<h2 className="back-header">Hvala vam na nalogu</h2>
-										<p className="preamble">Vaša kupovina je uspješna i dobili smo vašu narudžbinu. Uskoro ćemo Vas kontaktirat za inicijalnu besplatnu procjenu i za zakazivanje termina.</p>
+										<p className="preamble">Vaša kupovina je uspješna i dobili smo Vašu narudžbu. Uskoro ćemo Vas kontaktirat za inicijalnu besplatnu procjenu i za zakazivanje termina.</p>
                                         <p className="preamble">Molimo Vas, uzmite trenutak da nam date povratne informacije:</p>
                                         <div className="rating">
-											<p className="rating-text">Kakav je vaš utisak od web stranice &#63;</p>
+											<p className="rating-text">Kakav je vaš utisak o web stranici &#63;</p>
 											<div ref="stars-1" className="stars stars-1">
 												<span id="1" ref="star star-1" className="star" onClick={ this.handleWebStar }>☆</span>
 												<span id="2" ref="star star-2" className="star" onClick={ this.handleWebStar }>☆</span>
