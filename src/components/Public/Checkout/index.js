@@ -280,7 +280,7 @@ export class Checkout extends FormComponent {
         const cancel = this.state.cancel === 'on' ? 'off' : 'on';
         this.setState({ cancel });
         this.setState({ cancelIsDirty: true });
-        this.handlePaypal ();
+        this.handlePaypal();
     }
 
     /**
@@ -969,7 +969,7 @@ export class Checkout extends FormComponent {
                                     }
                                 })()}
 								<div ref={(front) => { this.front = front; }} className={front}>
-									<form id="payment-form" action="/charge" method="post">
+									<form id="payment-form">
 										<div className="form-element-wrapper">
 											<label htmlFor="name">{ t('name') }</label>
 											<input

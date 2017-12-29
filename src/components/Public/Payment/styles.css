@@ -584,7 +584,8 @@
     }
 
     #duration-l:checked ~ .toggle_option_slider{
-        left: 132px;
+        //right: 3px;
+        left: 50%;
     }
 
     .payment  .payment-type-wrapper .skype label,
@@ -613,13 +614,15 @@
     }
 
     .payment .toggle_radios .small-skype p {
-        margin-top: 1px;
-        margin-left: 20px;
+        left: 0;
+        right: 0;
+        margin: 2px auto;
     }
 
     .payment .toggle_radios .large-skype p {
-        margin-top: 1px;
-        margin-left: 16px;
+        left: 0;
+        right: 0;
+        margin: 2px auto;
     }
 
     .payment .toggle_radios label {
