@@ -790,6 +790,7 @@ export class Checkout extends FormComponent {
         const skypeCost = this.state.data.skype ? this.state.data.skype.cost : 0;
         const skypeDurationFactor = this.state.data.skypeDuration.factor;
 		const emailCost = this.state.data.email ? this.state.emailDiscount / this.state.data.email.week : 0;
+		const emailSumCost = this.state.data.email ? this.state.data.email.cost * this.state.data.email.week : 0;
 		const nWeeks = this.state.data.email ? this.state.data.email.week : 0;
 
 		const firstColSize = (this.width === 'small') ? '50%' : '60%';
@@ -891,7 +892,7 @@ export class Checkout extends FormComponent {
 													</tr>
 													<tr>
 														<td className={sumClass} colSpan="2">{ t('sum') }</td>
-														<td className={sumClass}>{ (Math.round((skypeCost * skypeDurationFactor) + (emailCost * nWeeks)) / this.state.paypalFactor) }&nbsp;{ currency }</td>
+														<td className={sumClass}>{ (Math.round((skypeCost * skypeDurationFactor) + (emailSumCost)) / this.state.paypalFactor) }&nbsp;{ currency }</td>
 													</tr>
                                                     {(() => {
                                                         if (this.state.data.packageDiscount) {
