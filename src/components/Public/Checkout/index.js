@@ -891,7 +891,7 @@ export class Checkout extends FormComponent {
 													</tr>
 													<tr>
 														<td className={sumClass} colSpan="2">{ t('sum') }</td>
-														<td className={sumClass}>{ (Math.round((skypeCost * skypeDurationFactor) + (this.state.data.email.cost * this.state.data.email.week)) / this.state.paypalFactor) }&nbsp;{ currency }</td>
+														<td className={sumClass}>{ (Math.round((skypeCost * skypeDurationFactor) + (emailCost * nWeeks)) / this.state.paypalFactor) }&nbsp;{ currency }</td>
 													</tr>
                                                     {(() => {
                                                         if (this.state.data.packageDiscount) {
