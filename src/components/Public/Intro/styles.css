@@ -83,6 +83,16 @@
     font-weight: 300;
 }
 
+@media only screen and (max-width: 768px) {
+    .introduction .intro-button {
+        float: none;
+        display: inline-block;
+        box-sizing: border-box;
+        width: 100%;
+        margin-top: 20px;
+    }
+}
+
 @media only screen and (max-width: 500px) {
     .introduction {
         padding-top: 227px;

@@ -98,7 +98,7 @@
     display: none !important;
 }
 
-@media only screen and (max-width: 500px) {
+@media only screen and (max-width: 768px) {
     .header {
         background-color: #fff;
         position: absolute;

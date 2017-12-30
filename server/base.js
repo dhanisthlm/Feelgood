@@ -55,9 +55,13 @@ exports.register = function (server, options, next) {
                     request.headers['x-forwarded-proto'] && request.headers['x-forwarded-proto'] === "http") {
                     return reply().redirect(config.get('baseUrl'));
                 } else {
-                    return (request.path.includes('pki-validation'))
-                        ? reply.file('client/.well-known/pki-validation/godaddy.html')
-                        : reply.file('client/index.html');
+                    if (request.path.includes('pki-validation')) {
+                        return reply.file('client/.well-known/pki-validation/godaddy.html');
+                    } else if (request.path.includes('bing')) {
+                        return reply.file('client/bing/BingSiteAuth.xml');
+                    } else {
+                        return reply.file('client/index.html');
+                    }
                 }
             }
         }
