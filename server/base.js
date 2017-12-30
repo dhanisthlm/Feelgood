@@ -52,12 +52,10 @@ exports.register = function (server, options, next) {
             path: '/{path*}',
             handler: (request, reply) => {
                 if (process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'stage') {
-                    if (request.headers['x-forwarded-proto'] && request.headers['x-forwarded-proto'] === "http") {
-                        return reply().redirect(config.get('baseUrl'));
-                    }
-
-                    if (request.headers['x-forwarded-proto'] && !request.headers["host"].match(/^www\..*/i)) {
-                        return reply().redirect(config.get('baseUrl'));
+                    if (request.headers['x-forwarded-proto']) {
+                        if (request.headers['x-forwarded-proto'] === "http" || !request.headers["host"].match(/^www\..*/i)) {
+                            return reply().redirect(config.get('baseUrl'));
+                        }
                     }
                 } else {
                     return (request.path.includes('pki-validation'))
