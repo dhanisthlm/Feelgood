@@ -59,7 +59,8 @@ export class Checkout extends FormComponent {
             terms: 'off',
             cancel: 'off',
             termsIsDirty: false,
-            cancelIsDirty: false
+            cancelIsDirty: false,
+            comment: null
 		};
 
 		this.validatorTypes = encounterValidator;
@@ -1079,7 +1080,7 @@ export class Checkout extends FormComponent {
                                                         <img className="card" src="/images/ae.png" />
                                                     </label>
                                                 </div>
-                                                <div className="payment-type-wrapper">
+                                                <div className="payment-type-wrapper paypal-wrapper">
                                                     <input id="paypal" className="card-radio" checked={ this.state.paymentType === 'paypal' } type="radio" name="payment-type" />
                                                     <label data-id="paypal" onClick={ this.handlePaymentType } htmlFor="paypal">
                                                         <img className="card" src="/images/paypal.png" />
@@ -1123,21 +1124,21 @@ export class Checkout extends FormComponent {
 										</div>
                                         <div className="form-element-wrapper">
                                             <div className="check-wrapper">
-                                                <input checked={ this.state.subscribe === 'on' } value={this.state.subscribe} className="checkbox" type="checkbox" />
-                                                <label id="subscribe" onClick={ this.handleNewsletter } className="checkbox" htmlFor="comment">Da, hvala, želim da dobijam informacije o popustima i drugim ponudama od zdravlje.nu.</label>
+                                                <input id="subscription" checked={ this.state.subscribe === 'on' } value={this.state.subscribe} className="checkbox" type="checkbox" />
+                                                <label id="subscribe" onClick={ this.handleNewsletter } className="checkbox" htmlFor="subscription">Da, hvala, želim da dobijam informacije o popustima i drugim ponudama od zdravlje.nu.</label>
                                             </div>
                                         </div>
                                         <div className="form-element-wrapper">
                                             <div className="check-wrapper">
-                                                <input ref="terms" checked={this.state.terms === 'on'} value={this.state.terms} className="checkbox" type="checkbox" />
-                                                <label id="terms" onClick={ this.handleCheckbox } className="checkbox" htmlFor="comment">Slažem se sa <a className="checkout-link" target="blank" href="/politika-privatnosti">Politikom privatnosti</a> i <a className="checkout-link" target="blank" href="/tac">Pravilima i uslovima.</a>.</label>
+                                                <input id="conditions" ref="terms" checked={this.state.terms === 'on'} value={this.state.terms} className="checkbox" type="checkbox" />
+                                                <label id="terms" onClick={ this.handleCheckbox } className="checkbox" htmlFor="conditions">Slažem se sa <a className="checkout-link" target="blank" href="/politika-privatnosti">Politikom privatnosti</a> i <a className="checkout-link" target="blank" href="/tac">Pravilima i uslovima.</a>.</label>
                                             </div>
                                             <span className="error checkbox">{termErrorMsg}</span>
                                         </div>
                                         <div className="form-element-wrapper">
                                             <div className="check-wrapper">
-                                                <input checked={this.state.cancel === 'on'} value={this.state.cancel} className="checkbox" type="checkbox" />
-                                                <label onClick={ this.handleCancel } className="checkbox" htmlFor="comment">Razumijem da imam besplatnu promjenu termina najkasnije 24 sata do početka samog termina.</label>
+                                                <input id="cancel" checked={this.state.cancel === 'on'} value={this.state.cancel} className="checkbox" type="checkbox" />
+                                                <label onClick={ this.handleCancel } className="checkbox" htmlFor="cancel">Razumijem da imam besplatnu promjenu termina najkasnije 24 sata do početka samog termina.</label>
                                             </div>
                                             <span className="error checkbox">{cancelErrorMsg}</span>
                                         </div>

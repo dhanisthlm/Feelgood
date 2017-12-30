@@ -1146,7 +1146,7 @@ thead tr {
     .checkout .payment-type-wrapper input[type="radio"] + label:before, .checkout .payment-type-wrapper input[type="radio"] + label:after {
         content: '';
         position: absolute;
-        top: 3px;
+        top: 4px;
         right: -26px;
         width: 1em;
         height: 1em;
@@ -1164,6 +1164,10 @@ thead tr {
 
     .checkout .payment-type-wrapper.faktura-wrapper label:after, .checkout .payment-type-wrapper.faktura-wrapper label:before {
         right: -33px !important;
-        top: -7px !important;
+        top: -8px !important;
+    }
+
+    .paypal-wrapper {
+        margin-right: 28px !important;
     }
 }
