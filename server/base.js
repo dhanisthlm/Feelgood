@@ -54,12 +54,13 @@ exports.register = function (server, options, next) {
                 if (process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'stage') {
                     if (request.headers['x-forwarded-proto']) {
                         if (request.headers['x-forwarded-proto'] === "http") {
+                            console.log(request.headers["host"].match(/^www\..*/i), request.headers["host"]);
                             return reply().redirect(config.get('baseUrl'));
                         }
 
-                        if (!request.headers["host"].match(/^www\..*/i)) {
-                            return reply().redirect(config.get('baseUrl'));
-                        }
+                        //if (!request.headers["host"].match(/^www\..*/i)) {
+                            //return reply().redirect(config.get('baseUrl'));
+                        //}
                     }
                 } else {
                     return (request.path.includes('pki-validation'))
