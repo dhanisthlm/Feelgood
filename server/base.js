@@ -59,6 +59,8 @@ exports.register = function (server, options, next) {
                         return reply.file('client/.well-known/pki-validation/godaddy.html');
                     } else if (request.path.includes('BingSiteAuth')) {
                         return reply.file('client/BingSiteAuth.xml');
+                    } else if (request.path.includes('google43bf8a2e6701fef2')) {
+                        return reply.file('client/google43bf8a2e6701fef2.html');
                     } else {
                         return reply.file('client/index.html');
                     }
