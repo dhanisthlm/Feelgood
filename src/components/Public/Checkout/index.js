@@ -172,9 +172,11 @@ export class Checkout extends FormComponent {
      * @return {object}
      */
 	handlePaymentType (event) {
-        const id = event.target.id;
+        const id = event.currentTarget.getAttribute('data-id');
         const options = document.getElementById('payment-options');
         let paypalFactor = 1;
+
+        console.log('id', id, event.currentTarget)
 
         this.setState({ paymentType: id }, () => {
            if (id === 'credit') {
@@ -1070,22 +1072,22 @@ export class Checkout extends FormComponent {
                                             <fieldset id="payment-options">
                                                 <legend className="payment-type-header">Tip plaćanja</legend>
                                                 <div className="payment-type-wrapper credit-wrapper">
-                                                    <label htmlFor="credit">
+                                                    <input id="credit" className="card-radio" checked={ this.state.paymentType === 'credit' } type="radio" name="payment-type" />
+                                                    <label data-id="credit" onClick={ this.handlePaymentType } htmlFor="credit">
                                                         <img className="card" src="/images/visa.png" />
                                                         <img className="card" src="/images/master.png" />
                                                         <img className="card" src="/images/ae.png" />
                                                     </label>
-                                                    <input id="credit" className="card-radio" checked={ this.state.paymentType === 'credit' } type="radio" name="payment-type" onClick={ this.handlePaymentType } />
                                                 </div>
                                                 <div className="payment-type-wrapper">
-                                                    <label htmlFor="paypal">
+                                                    <input id="paypal" className="card-radio" checked={ this.state.paymentType === 'paypal' } type="radio" name="payment-type" />
+                                                    <label data-id="paypal" onClick={ this.handlePaymentType } htmlFor="paypal">
                                                         <img className="card" src="/images/paypal.png" />
                                                     </label>
-                                                    <input id="paypal" className="card-radio" checked={ this.state.paymentType === 'paypal' } type="radio" name="payment-type" onClick={ this.handlePaymentType } />
                                                 </div>
                                                 <div className="payment-type-wrapper faktura-wrapper">
-                                                    <label htmlFor="paypal">Faktura</label>
-                                                    <input id="faktura" checked={ this.state.paymentType === 'faktura' } type="radio" name="payment-type" onClick={ this.handlePaymentType } />
+                                                    <input id="faktura" checked={ this.state.paymentType === 'faktura' } type="radio" name="payment-type" />
+                                                    <label data-id="faktura" onClick={ this.handlePaymentType } htmlFor="paypal">Faktura</label>
                                                 </div>
                                                 {(() => {
                                                     if (this.state.paymentType === 'faktura') {
@@ -1121,21 +1123,21 @@ export class Checkout extends FormComponent {
 										</div>
                                         <div className="form-element-wrapper">
                                             <div className="check-wrapper">
-                                                <input id="subscribe" checked={ this.state.subscribe === 'on' } value={this.state.subscribe} onClick={ this.handleNewsletter } className="checkbox" type="checkbox" />
-                                                <label className="checkbox" htmlFor="comment">Da, hvala, želim da dobijam informacije o popustima i drugim ponudama od zdravlje.nu.</label>
+                                                <input checked={ this.state.subscribe === 'on' } value={this.state.subscribe} className="checkbox" type="checkbox" />
+                                                <label id="subscribe" onClick={ this.handleNewsletter } className="checkbox" htmlFor="comment">Da, hvala, želim da dobijam informacije o popustima i drugim ponudama od zdravlje.nu.</label>
                                             </div>
                                         </div>
                                         <div className="form-element-wrapper">
                                             <div className="check-wrapper">
-                                                <input ref="terms" id="terms" checked={this.state.terms === 'on'} value={this.state.terms} onClick={ this.handleCheckbox } className="checkbox" type="checkbox" />
-                                                <label className="checkbox" htmlFor="comment">Slažem se sa <a className="checkout-link" target="blank" href="/politika-privatnosti">Politikom privatnosti</a> i <a className="checkout-link" target="blank" href="/tac">Pravilima i uslovima.</a>.</label>
+                                                <input ref="terms" checked={this.state.terms === 'on'} value={this.state.terms} className="checkbox" type="checkbox" />
+                                                <label id="terms" onClick={ this.handleCheckbox } className="checkbox" htmlFor="comment">Slažem se sa <a className="checkout-link" target="blank" href="/politika-privatnosti">Politikom privatnosti</a> i <a className="checkout-link" target="blank" href="/tac">Pravilima i uslovima.</a>.</label>
                                             </div>
                                             <span className="error checkbox">{termErrorMsg}</span>
                                         </div>
                                         <div className="form-element-wrapper">
                                             <div className="check-wrapper">
-                                                <input checked={this.state.cancel === 'on'} value={this.state.cancel} onClick={ this.handleCancel } className="checkbox" type="checkbox" />
-                                                <label className="checkbox" htmlFor="comment">Razumijem da imam besplatnu promjenu termina najkasnije 24 sata do početka samog termina.</label>
+                                                <input checked={this.state.cancel === 'on'} value={this.state.cancel} className="checkbox" type="checkbox" />
+                                                <label onClick={ this.handleCancel } className="checkbox" htmlFor="comment">Razumijem da imam besplatnu promjenu termina najkasnije 24 sata do početka samog termina.</label>
                                             </div>
                                             <span className="error checkbox">{cancelErrorMsg}</span>
                                         </div>
