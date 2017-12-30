@@ -56,7 +56,7 @@ exports.register = function (server, options, next) {
                         return reply().redirect(config.get('baseUrl'));
                     }
 
-                    if (!request.headers("host").match(/^www\..*/i)) {
+                    if (!request.headers["host"].match(/^www\..*/i)) {
                         return reply().redirect(config.get('baseUrl'));
                     }
                 } else {
