@@ -51,14 +51,14 @@ exports.register = function (server, options, next) {
             method: 'GET',
             path: '/{path*}',
             handler: (request, reply) => {
-                    if ((process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'stage') &&
+                if ((process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'stage') &&
                     request.headers['x-forwarded-proto'] && request.headers['x-forwarded-proto'] === "http") {
                     return reply().redirect(config.get('baseUrl'));
                 } else {
                     if (request.path.includes('pki-validation')) {
                         return reply.file('client/.well-known/pki-validation/godaddy.html');
-                    } else if (request.path.includes('bing')) {
-                        return reply.file('client/bing/BingSiteAuth.xml');
+                    } else if (request.url.includes('BingSiteAuth')) {
+                        return reply.file('client/BingSiteAuth.xml');
                     } else {
                         return reply.file('client/index.html');
                     }
