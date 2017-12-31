@@ -928,6 +928,16 @@ thead tr {
         line-height: 57px;
     }
 
+    .checkout .basket .back > div {
+        margin: 0;
+        width: auto;
+    }
+
+    .basket .back {
+        color: #c04c9c;
+        padding: 0 40px;
+    }
+
     table {
         margin-top: 10px;
     }
@@ -990,6 +1000,17 @@ thead tr {
 @media only screen and (max-width: 500px) {
     .checkout {
         padding-top: 230px;
+    }
+
+    .checkout .basket .back > div {
+        margin: 0;
+        padding: 0;
+        width: auto;
+    }
+
+    .basket .back {
+        color: #c04c9c;
+        padding: 0 30px;
     }
 
     .checkout .form-buttons button:first-child + div {
