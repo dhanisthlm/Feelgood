@@ -63,13 +63,14 @@
 }
 
 .issues .issue-text {
-    display: none;
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
     height: 80px;
     width: 80px;
     margin: 0;
     font-size: 12px;
     font-weight: 300;
-    transition: all 1s;
     cursor: default;
     vertical-align: middle;
 }
@@ -79,8 +80,16 @@
 }
 
 .issues .issue.show .issue-text {
-    display: table-cell;
+    position: static !important;
+    display: table-cell !important;
+    height: inherit !important;
+    margin: initial !important;
+    opacity: 1 !important;
     color: #F6ABE1;
+}
+
+.issues .issue.iscrpljenost.show .issue-text {
+    vertical-align: top;
 }
 
 .issues .issue.show svg {
@@ -88,7 +97,7 @@
 }
 
 .issues .iscrpljenost:after {
-    content: 'Iscrpljenost';
+    //content: 'Iscrpljenost';
 }
 
 .issues .iscrpljenost svg {
@@ -117,13 +126,25 @@
     margin-left: 8px;
 }
 
+.issues .issue svg + p {
+    position: absolute;
+    top: 104px;
+    left: 0;
+    right: 0;
+}
+
+.issues .issue:hover svg + p {
+    color: #F6ABE1;
+    font-weight: 300;
+}
+
 .issues .fobia svg {
     width: 67px !important;
     margin-left: 6px !important;
 }
 
 .issues .issue:after {
-    content: attr(id);
+    //content: attr(id);
 }
 
 .issues .issue.show:after {
@@ -265,7 +286,7 @@
         z-index: 9;
         border-radius: 50%;
         border: 9px solid #fff;
-        transition: transform .5s;
+        //transition: transform .5s;
         padding: 15px;
         text-align: center;
         color: #C04C9C;
@@ -282,6 +303,7 @@
     }
 
     .issues .issue-text {
+        position: static;
         display: block;
         margin-bottom: 0;
         color: #fff;

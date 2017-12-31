@@ -172,6 +172,13 @@
     }
 }
 
+@media only screen and (max-width: 600px) and (orientation: landscape) {
+    .how-it-works .step-wrapper {
+        width: 90%;
+        padding: 0;
+    }
+}
+
 
 @media only screen and (max-width: 500px) {
     .how-it-works {

@@ -807,6 +807,11 @@ export class Checkout extends FormComponent {
 			typeof this.state.data.promoDiscount === 'undefined')
 				? 'right heavy' : 'right';
 
+        const centerClass =
+            (typeof this.state.data.packageDiscount === 'undefined' &&
+            typeof this.state.data.promoDiscount === 'undefined')
+                ? 'center heavy' : 'center';
+
 		const spinnerClass = this.state.showSpinner ? 'showbox' : 'none';
 
         const paypalStyle = {
@@ -872,7 +877,7 @@ export class Checkout extends FormComponent {
 																<tr>
 																	<td>{ this.state.data.skype.description }</td>
 																	<td className="center">{ this.state.data.skype.week }</td>
-																	<td className="right">{ Math.round(skypeCost * skypeDurationFactor / this.state.paypalFactor) }&nbsp;{ currency }</td>
+																	<td className="center">{ Math.round(skypeCost * skypeDurationFactor / this.state.paypalFactor) }&nbsp;{ currency }</td>
 																</tr>
                                                             )
                                                         }
@@ -883,7 +888,7 @@ export class Checkout extends FormComponent {
 																<tr>
 																	<td>{this.state.data.email.description}</td>
 																	<td className="center">{ this.state.data.email.week }</td>
-																	<td className="right">{ this.state.data.email.cost * this.state.data.email.week / this.state.paypalFactor }&nbsp;{ currency }</td>
+																	<td className="center">{ this.state.data.email.cost * this.state.data.email.week / this.state.paypalFactor }&nbsp;{ currency }</td>
 																</tr>
                                                             )
                                                         }
@@ -895,7 +900,7 @@ export class Checkout extends FormComponent {
 													</tr>
 													<tr>
 														<td className={sumClass} colSpan="2">{ t('sum') }</td>
-														<td className={sumClass}>{ (Math.round((skypeCost * skypeDurationFactor) + (emailSumCost)) / this.state.paypalFactor) }&nbsp;{ currency }</td>
+														<td className={centerClass}>{ (Math.round((skypeCost * skypeDurationFactor) + (emailSumCost)) / this.state.paypalFactor) }&nbsp;{ currency }</td>
 													</tr>
                                                     {(() => {
                                                         if (this.state.data.packageDiscount) {
@@ -906,7 +911,7 @@ export class Checkout extends FormComponent {
 																<tr>
 																	<td className="right"
 																		colSpan="2">{ t('packageDiscount') }</td>
-																	<td className="right">{ packageDiscount }&nbsp;{ currency }</td>
+																	<td className="center">{ packageDiscount }&nbsp;{ currency }</td>
 																</tr>
                                                             )
                                                         }
@@ -914,7 +919,7 @@ export class Checkout extends FormComponent {
                                                     {(() => {
                                                         if (this.state.data.packageDiscount > 0) {
                                                             const className = this.state.data.promoDiscount
-                                                                ? 'right' : 'right heavy';
+                                                                ? 'center' : 'center heavy';
 
                                                             const total = !this.state.data.promoDiscount
                                                                 ? this.state.cost / this.state.paypalFactor
@@ -937,7 +942,7 @@ export class Checkout extends FormComponent {
 																<tr>
 																	<td className="right"
 																		colSpan="2">{ t('voucherDiscount') }</td>
-																	<td className="right">{ Math.round(this.state.data.promoDiscount / this.state.paypalFactor) }&nbsp;{ currency }</td>
+																	<td className="center">{ Math.round(this.state.data.promoDiscount / this.state.paypalFactor) }&nbsp;{ currency }</td>
 																</tr>
                                                             )
                                                         }
@@ -948,7 +953,7 @@ export class Checkout extends FormComponent {
 																<tr>
 																	<td className="right heavy"
 																		colSpan="2">{ t('total') }</td>
-																	<td className="right heavy">{ Math.round(this.state.cost / this.state.paypalFactor) }&nbsp;{ currency }</td>
+																	<td className="center heavy">{ Math.round(this.state.cost / this.state.paypalFactor) }&nbsp;{ currency }</td>
 																</tr>
                                                             )
                                                         }

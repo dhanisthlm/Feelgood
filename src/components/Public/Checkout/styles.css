@@ -12,6 +12,10 @@
     background: #c04c9c;
 }
 
+.center {
+    text-align: center !important;
+}
+
 .checkout .inner-frame {
     overflow: hidden;
     margin-bottom: 35px;
@@ -885,12 +889,14 @@ thead tr {
     .checkout .left-col-wrapper {
         float: none;
         margin: 0 auto;
-        width: 550px;
+        width: 100%;
+        padding: 0 40px;
+        box-sizing: border-box;
     }
 
     table {
         margin-left: 0;
-        width: 550px;
+        width: 100%;
     }
 
     .checkout .basket .front {
@@ -898,7 +904,9 @@ thead tr {
         margin-top: 32px;
         margin-left: 0;
         margin: 40px auto;
-        width: 550px;
+        width: 100%;
+        padding: 0 40px;
+        box-sizing: border-box;
     }
 }
 
@@ -945,6 +953,37 @@ thead tr {
 
     table {
         margin-top: 10px;
+    }
+
+    .checkout .basket .back > div {
+        margin: 20px auto;
+        width: 100%;
+        padding: 0 30px;
+        box-sizing: border-box;
+    }
+
+    .checkout .rating-text {
+        float: left;
+        margin: 0;
+        line-height: 30px;
+        font-size: 18px;
+        margin-top: 0 !important;
+        width: 375px;
+        color: #333;
+        font-weight: 300;
+        max-width: 300px;
+    }
+
+    .checkout .basket label {
+        color: #c04c9c;
+        display: block;
+        font-size: 15px;
+        margin-bottom: 5px;
+        margin-left: 3px;
+        font-weight: 300;
+        text-align: left;
+        max-width: 550px;
+        margin-top: 20px;
     }
 }
 

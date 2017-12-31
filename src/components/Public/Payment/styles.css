@@ -78,7 +78,7 @@
 .payment .email:after {
     content: '';
     position: absolute;
-    right: 14%;
+    right: 27px;
     top: 10px;
     width: 2px;
     height: 300px;
@@ -1000,6 +1000,20 @@
         display: block;
         margin: 0 auto 10px;
         padding: 0;
+    }
+}
+
+@media only screen and (max-width: 600px) and (orientation: landscape) {
+    .payment .toggle_radios {
+        width: 98%;
+        margin-bottom: 20px;
+    }
+
+    .payment + .text-wrapper .spec {
+        width: 250px;
+        display: block;
+        margin: 10px auto;
+        text-align: center;
     }
 }
 
