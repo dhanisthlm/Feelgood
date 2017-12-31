@@ -56,10 +56,25 @@
     text-decoration: underline;
 }
 
-@media only screen and (max-width: 1024px) and (orientation: landscape) {
+@media only screen and (max-width: 1024px) {
+    .push {
+        height: 50px !important;
+    }
+
     .contact .wrapper {
         padding: 10px 40px 40px;
         margin: 0 auto;
+    }
+}
+
+@media only screen and (max-width: 768px) and (orientation: landscape) {
+    .contact .wrapper {
+        padding: 10px 40px 40px;
+        margin: 0 auto;
+    }
+
+    .push {
+        height: 0;
     }
 
     .contact .page-header {

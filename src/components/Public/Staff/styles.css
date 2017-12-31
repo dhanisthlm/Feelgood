@@ -346,7 +346,7 @@
     }
 
     .staff .card {
-        width: 100%;
+        //width: 100%;
         box-sizing: border-box;
         margin: 0 0 20px 0;
         height: auto;
@@ -375,6 +375,15 @@
 
     .staff .card .title-wrapper p:last-child {
         margin-bottom: 0;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .staff .heading {
+        color: #fff;
+        font-size: 30px;
+        margin: 24px 0 7px 0;
+        text-align: center;
     }
 }
 

@@ -227,6 +227,13 @@
     }
 }
 
+@media only screen and (max-width: 768px) and (orientation: landscape) {
+    .issues .text-wrapper .heading {
+        text-align: left !important;
+        font-size: 27px !important;
+    }
+}
+
 @media only screen and (max-width: 768px) {
     .issues.desktop-issues {
         display: none;
@@ -510,5 +517,11 @@
 
     .issues .issue-text {
         padding: 0 30px;
+    }
+
+    .issues .text-wrapper .heading {
+        font-size: 27px;
+        margin: 0 0 10px 0;
+        text-align: left;
     }
 }
