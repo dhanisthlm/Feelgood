@@ -52,7 +52,7 @@ exports.register = function (server, options, next) {
             path: '/{path*}',
             handler: (request, reply) => {
                 if ((process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'stage') &&
-                    request.headers['x-forwarded-proto'] && request.headers['referer'].indexOf("http") > -1) {
+                    request.headers['x-forwarded-proto'] && request.headers['x-forwarded-proto'] === 'http') {
                         if (request.path.includes('google43bf8a2e6701fef2')) {
                             return reply.file('client/google43bf8a2e6701fef2.html');
                         } else {
