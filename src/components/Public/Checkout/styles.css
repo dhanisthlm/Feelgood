@@ -890,7 +890,7 @@ thead tr {
         float: none;
         margin: 0 auto;
         width: 100%;
-        padding: 0 40px;
+        padding: 0 30px;
         box-sizing: border-box;
     }
 
@@ -905,7 +905,7 @@ thead tr {
         margin-left: 0;
         margin: 40px auto;
         width: 100%;
-        padding: 0 40px;
+        padding: 0 30px;
         box-sizing: border-box;
     }
 }
@@ -1072,7 +1072,7 @@ thead tr {
         display: block;
         color: #c04c9c;
         font-size: 40px;
-        width: 85%;
+        width: 199%;
         margin: 25px auto;
     }
 
@@ -1111,7 +1111,7 @@ thead tr {
     .checkout table {
         float: none;
         margin-top: 0;
-        width: 85%;
+        width: 100%;
         box-sizing: border-box;
         margin: 9px auto 25px;
     }
@@ -1161,7 +1161,7 @@ thead tr {
         color: #c04c9c;
         font-size: 40px;
         margin-top: 7px;
-        width: 85%;
+        width: 100%;
         margin: 0 auto;
     }
 
@@ -1216,7 +1216,7 @@ thead tr {
     }
 
     .checkout .page-header h1 {
-        margin-left: 30px !important;
+        margin-left: 35px !important;
     }
 
     .checkout .basket input[type="checkbox"]:checked + label:before {
