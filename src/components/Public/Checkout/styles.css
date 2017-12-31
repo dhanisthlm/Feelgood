@@ -902,7 +902,30 @@ thead tr {
     }
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 768px) and (orientation: portrait) {
+    .checkout {
+        padding-top: 250px;
+    }
+
+    .checkout .page-header {
+        padding-left: 0;
+        height: 58px;
+        background: #fff;
+    }
+
+    .checkout .page-header h1 {
+        text-align: center;
+        color: #C04C9C !important;
+        margin: 0;
+        line-height: 57px;
+    }
+
+    table {
+        margin-top: 10px;
+    }
+}
+
+@media only screen and (max-width: 768px) and (orientation: landscape) {
     .checkout {
         padding-top: 250px;
     }

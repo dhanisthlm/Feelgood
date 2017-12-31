@@ -115,7 +115,31 @@
     }
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 1024px) and (orientation: landscape) {
+    .privacy-policy .privacy-wrapper {
+        padding: 10px 40px;
+        margin: 0;
+    }
+
+    .privacy-policy .page-header {
+        background-color: #fff;
+        position: static;
+        display: block;
+        text-align: center;
+        padding-left: 0;
+        margin-top: 250px;
+    }
+
+    .privacy-policy .page-header h1 {
+        color: #C04C9C;
+        padding: 7px 0;
+        margin-top: 8px;
+        margin-bottom: 0;
+    }
+}
+
+
+@media only screen and (max-width: 768px) and (orientation: portrait) {
     .privacy-policy .privacy-wrapper {
         padding: 0 40px;
     }

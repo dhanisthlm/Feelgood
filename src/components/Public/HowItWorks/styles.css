@@ -109,6 +109,32 @@
     font-size: 17px;
 }
 
+@media only screen and (max-width: 1024px) and (orientation: landscape) {
+    .how-it-works .step-wrapper {
+        display: inline-block;
+        width: 48%;
+        margin-bottom: 35px;
+        box-sizing: border-box;
+        vertical-align: top;
+    }
+
+    .how-it-works .heading {
+        color: #C04C9C;
+        margin-top: 10px;
+        font-size: 37px;
+        text-align: center;
+        margin-bottom: 10px;
+        margin-top: 0;
+    }
+
+    .how-it-works .preamble {
+        margin: 0 auto 10px;
+        text-align: left;
+        width: 95%;
+        line-height: 25px;
+        font-size: 17px;
+    }
+}
 
 @media only screen and (max-width: 768px) {
     .how-it-works {

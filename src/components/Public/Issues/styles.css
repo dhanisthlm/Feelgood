@@ -188,6 +188,24 @@
     }
 }
 
+@media only screen and (max-width: 1024px) and (orientation: landscape) {
+    .issues + .text-wrapper .preamble {
+        max-width: 700px;
+    }
+
+    .issues + .text-wrapper {
+        padding: 30px 40px 32px 40px;
+        background-color: #C04C9C;
+        overflow: hidden;
+    }
+
+    .issues + .text-wrapper .heading {
+        color: #fff;
+        font-size: 30px;
+        margin: 0 0 7px 0;
+    }
+}
+
 @media only screen and (max-width: 768px) {
     .issues.desktop-issues {
         display: none;

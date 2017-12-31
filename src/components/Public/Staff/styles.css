@@ -218,7 +218,89 @@
     pointer-events: none;
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 1024px) and (orientation: landscape) {
+    .staff .heading {
+        color: #fff;
+        font-size: 35px;
+        margin: 24px 0 7px 0;
+        text-align: center;
+    }
+
+    .staff .cards {
+        display: inline-block;
+        margin-left: -25px;
+    }
+
+    .staff .card {
+        display: inline-block;
+        margin: 0 0 0 2%;
+        margin-top: 25px;
+        overflow: hidden;
+        height: 406px;
+        box-shadow: 2px 2px 7px 1px rgba(0, 0, 0, 0.5);
+        border: 8px solid #fff;
+        background-color: #fff;
+        width: 29%;
+    }
+
+    .staff .card .photo-wrapper {
+        height: 340px;
+        overflow: hidden;
+        position: relative;
+        border: 1px solid #fff;
+    }
+
+    .staff .card .photo-wrapper img {
+        width: 270px;
+        height: auto;
+    }
+
+    .staff .card .info-wrapper {
+        width: 100%;
+        background-color: #fff;
+        height: 47px;
+        border-radius: 0 0 5px 5px;
+        padding: 10px;
+        position: relative;
+        box-sizing: border-box;
+    }
+
+    .staff .card .diploma-wrapper {
+        position: relative;
+        cursor: pointer;
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 768px) and (orientation: landscape) {
+    .staff .card {
+        display: inline-block;
+        margin: 0 0 0 4%;
+        margin-top: 25px;
+        overflow: hidden;
+        height: 406px;
+        box-shadow: 2px 2px 7px 1px rgba(0, 0, 0, 0.5);
+        border: 8px solid #fff;
+        background-color: #fff;
+        width: 42%;
+    }
+
+    .staff .card .photo-wrapper img {
+        width: 290px;
+        height: auto;
+    }
+
+    .staff .preamble {
+        color: #fff;
+        margin: 0 auto 15px;
+        text-align: center;
+        width: auto;
+        line-height: 25px;
+        font-size: 17px;
+    }
+}
+
+@media only screen and (max-width: 768px) and (orientation: portrait) {
     .staff {
         padding: 5px 35px 35px;
     }

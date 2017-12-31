@@ -42,7 +42,33 @@
     color: #C04C9C;
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 1024px) and (orientation: landscape) {
+    .blog .blog-list {
+        padding: 10px 40px;
+        margin-top: 0;
+    }
+
+    .blog .page-header {
+        background-color: #fff;
+        position: static;
+        display: block;
+        text-align: center;
+        padding-left: 0;
+        margin-top: 250px;
+    }
+
+    .blog .page-header h1 {
+        color: #C04C9C;
+        padding: 7px 0;
+        margin: 8px 0 0 0;
+    }
+
+    .cookies-wrapper .push {
+        height: 150px !important;
+    }
+}
+
+@media only screen and (max-width: 768px) and (orientation: portrait) {
     .blog .blog-list {
         padding: 0 40px;
     }
