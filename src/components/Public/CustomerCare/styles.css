@@ -56,6 +56,33 @@
     text-decoration: underline;
 }
 
+@media only screen and (max-width: 768px) {
+    .contact .page-header {
+        background-color: #fff;
+        position: static;
+        display: block;
+        text-align: center;
+        padding-left: 0;
+        margin-top: 250px;
+    }
+
+    .contact .page-header h1 {
+        color: #fff;
+        padding-top: 7px;
+        margin-top: 8px;
+        margin-bottom: 0;
+    }
+
+    .contact .wrapper {
+        padding: 10px 40px 40px;
+        margin: 0 auto;
+    }
+
+    .contact .push {
+        height: 0;
+    }
+}
+
 @media only screen and (max-width: 500px) {
     .contact .page-header {
         background-color: #fff;

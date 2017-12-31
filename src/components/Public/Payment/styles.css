@@ -559,6 +559,167 @@
     }
 }
 
+@media only screen and (max-width: 768px) {
+    .payment {
+        padding-left: 40px;
+        padding-right: 40px;
+        padding-top: 0;
+    }
+
+    .payment .heading {
+        color: #C04C9C;
+        margin-bottom: 10px;
+        text-align: center;
+        font-size: 30px;
+        margin-top: 0;
+    }
+
+    .payment .preamble {
+        margin: 0 auto 51px;
+        text-align: left;
+        width: 100%;
+        line-height: 25px;
+        font-size: 17px;
+    }
+
+    .payment-type-wrapper {
+        display: block;
+    }
+
+    .payment .skype {
+        width: 100% !important;
+        float: none !important;
+        margin-left: 0 !important;
+        margin-bottom: 45px;
+    }
+
+    .payment .email {
+        width: 100% !important;
+        position: static !important;
+        margin-top: 26px !important;
+    }
+
+    .payment .category-heading {
+        margin-left: 0 !important;
+        text-align: center;
+    }
+
+    .payment .duration-text {
+        width: 100%;
+        text-align: center;
+        margin-left: 0;
+    }
+
+    .payment .toggle_radios {
+       width: 99%;
+    }
+
+    .payment .skype .wrapper label, .payment .email .wrapper label {
+        width: 100%;
+        box-sizing: border-box;
+        text-align: center;
+    }
+
+    .payment .toggle_option_slider {
+        width: 49%;
+    }
+
+    #duration-l:checked ~ .toggle_option_slider{
+        left: 50.5%;
+    }
+
+    .payment .toggle_radios label {
+        width: 49% !important;
+    }
+
+    .payment .toggle_radios .small-skype p {
+        left: 0;
+        right: 0;
+        margin: 2px auto;
+        width: 100%;
+        text-align: center;
+    }
+
+    .payment .toggle_radios .large-skype p {
+        width: 100%;
+        left: 0;
+        right: 0;
+        margin: 2px auto;
+        text-align: center;
+    }
+
+    .payment .week-text {
+       width: 90%;
+        margin: 0 auto;
+        margin-bottom: 13px;
+    }
+
+    .payment .skype:after, .payment .email:after {
+       display: none;
+    }
+
+    .payment .weeks {
+        margin: 0 auto;
+        padding: 0;
+    }
+
+    .payment .info-text {
+        width: 100%;
+    }
+
+    .payment .info-text .promo {
+        margin-bottom: 11px;
+        position: static;
+        top: auto;
+        margin-bottom: 11px;
+        top: auto;
+        margin: auto;
+        height: 335px;
+        background-position: center;
+        margin-top: -20px;
+    }
+
+    .payment .promo-text {
+        position: absolute;
+        top: 69px;
+        left: 0;
+        color: #fff;
+        text-align: center;
+        right: 0;
+        margin: auto;
+    }
+
+    .payment + .text-wrapper .spec {
+        display: block;
+        margin: 10px auto 10px;
+        width: 350px;
+    }
+
+    .payment + .text-wrapper .spec span:first-child {
+        float: left;
+        margin-right: 20px;
+    }
+
+    .payment + .text-wrapper button {
+        float: none;
+        width: 70%;
+        margin-bottom: 5px;
+        margin-top: 5px;
+    }
+
+    .payment + .text-wrapper .promo-textfield {
+        margin: 2px auto 10px;
+        float: none;
+        width: 70%;
+    }
+
+    .payment + .text-wrapper .promo-textfield input {
+       height: 43px;
+        width: 100%;
+        margin-top: 0;
+    }
+}
+
 @media only screen and (max-width: 500px) {
     .payment {
         padding: 0 40px 0 40px;
@@ -720,7 +881,9 @@
     }
 
     .payment + .text-wrapper .spec {
-        width: auto;
+        width: 200px;
+        margin-top: 2px;
+        display: inline-block;
     }
 
     .payment + .text-wrapper .spec span:first-child {
@@ -729,6 +892,7 @@
         font-size: 18px;
         margin-top: 5px;
         font-weight: 300;
+        float: none;
     }
 
     .payment + .text-wrapper .checkout-button {
@@ -741,6 +905,7 @@
         font-size: 18px;
         display: inline;
         font-weight: 300;
+        float: none;
     }
 
     .payment + .text-wrapper button {
@@ -760,6 +925,12 @@
     .payment + .text-wrapper .promo-textfield {
         float: none;
         margin-right: 0;
+        margin: 0;
+        width: 100%;
+    }
+
+    .payment + .text-wrapper button {
+        margin: 0 !important;
     }
 
     .payment + .text-wrapper .promo-textfield input {

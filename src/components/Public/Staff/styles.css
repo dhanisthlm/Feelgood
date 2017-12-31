@@ -218,6 +218,16 @@
     pointer-events: none;
 }
 
+@media only screen and (max-width: 768px) {
+    .staff {
+        padding: 5px 35px 35px;
+    }
+
+    .staff .preamble {
+        width: 100%;
+    }
+}
+
 @media only screen and (max-width: 500px) {
     .staff {
         padding: 5px 40px 20px;

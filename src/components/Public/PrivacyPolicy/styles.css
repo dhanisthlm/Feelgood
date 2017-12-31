@@ -115,6 +115,25 @@
     }
 }
 
+@media only screen and (max-width: 768px) {
+    .privacy-policy .privacy-wrapper {
+        padding: 0 40px;
+    }
+
+    .page-header h1 {
+        color: #C04C9C !important;
+    }
+
+    .privacy-policy .page-header {
+        background-color: #fff;
+        position: static;
+        display: block;
+        text-align: center;
+        padding-left: 0;
+        margin-top: 250px;
+    }
+}
+
 @media only screen and (max-width: 400px) {
     .privacy-policy .privacy-wrapper {
         padding: 0 20px;

@@ -902,6 +902,29 @@ thead tr {
     }
 }
 
+@media only screen and (max-width: 768px) {
+    .checkout {
+        padding-top: 250px;
+    }
+
+    .checkout .page-header {
+        padding-left: 0;
+        height: 58px;
+        background: #fff;
+    }
+
+    .checkout .page-header h1 {
+        text-align: center;
+        color: #C04C9C !important;
+        margin: 0;
+        line-height: 57px;
+    }
+
+    table {
+        margin-top: 10px;
+    }
+}
+
 @media only screen and (max-width: 500px) {
     .checkout {
         padding-top: 230px;
@@ -1109,6 +1132,9 @@ thead tr {
         width: 55%;
     }
 
+    .checkout .page-header h1 {
+        margin-left: 30px !important;
+    }
 
     .checkout .basket input[type="checkbox"]:checked + label:before {
         content: '✗';

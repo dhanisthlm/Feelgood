@@ -84,12 +84,40 @@
 }
 
 @media only screen and (max-width: 768px) {
+    .introduction {
+        padding-top: 220px;
+    }
+
     .introduction .intro-button {
         float: none;
         display: inline-block;
         box-sizing: border-box;
         width: 100%;
         margin-top: 20px;
+    }
+
+    .introduction .text-wrapper {
+        padding: 30px 40px 32px 40px;
+        background-color: #C04C9C;
+        overflow: hidden;
+    }
+
+    .introduction .heading {
+        color: #fff;
+        font-size: 30px;
+        text-align: center;
+        margin: 0 0 7px 0;
+    }
+
+    .introduction .preamble {
+        font-size: 17px;
+        margin: 0;
+        font-weight: 300;
+        color: #fff;
+        line-height: 25px;
+        max-width: 800px;
+        display: block;
+        float: none;
     }
 }
 
