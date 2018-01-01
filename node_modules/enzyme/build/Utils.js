@@ -54,6 +54,8 @@ var _validateAdapter = require('./validateAdapter');
 
 var _validateAdapter2 = _interopRequireDefault(_validateAdapter);
 
+var _RSTTraversal = require('./RSTTraversal');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -201,7 +203,7 @@ function nodeEqual(a, b) {
 }
 
 function containsChildrenSubArray(match, node, subArray) {
-  var children = childrenOfNode(node);
+  var children = (0, _RSTTraversal.childrenOfNode)(node);
   var checker = function checker(_, i) {
     return arraysEqual(match, children.slice(i, i + subArray.length), subArray);
   };
@@ -249,13 +251,6 @@ function childrenToSimplifiedArray(nodeChildren) {
   }
 
   return simplifiedArray;
-}
-
-function childrenOfNode(node) {
-  var props = propsOfNode(node);
-  var children = props.children;
-
-  return childrenToArray(children);
 }
 
 function isTextualNode(node) {

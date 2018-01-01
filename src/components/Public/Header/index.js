@@ -44,7 +44,7 @@ export class Header extends Component {
         nav.classList.remove('show');
         nav.classList.add('close');
         header.classList.add('close');
-        menuText.style.opacity = 0;
+        menuText.style.opacity = 1;
     }
 
     navToggle() {

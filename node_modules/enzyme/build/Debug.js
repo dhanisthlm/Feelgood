@@ -26,9 +26,31 @@ var _functionPrototype = require('function.prototype.name');
 
 var _functionPrototype2 = _interopRequireDefault(_functionPrototype);
 
+var _isString = require('is-string');
+
+var _isString2 = _interopRequireDefault(_isString);
+
+var _isNumberObject = require('is-number-object');
+
+var _isNumberObject2 = _interopRequireDefault(_isNumberObject);
+
+var _isCallable = require('is-callable');
+
+var _isCallable2 = _interopRequireDefault(_isCallable);
+
+var _isBooleanObject = require('is-boolean-object');
+
+var _isBooleanObject2 = _interopRequireDefault(_isBooleanObject);
+
+var _objectInspect = require('object-inspect');
+
+var _objectInspect2 = _interopRequireDefault(_objectInspect);
+
 var _RSTTraversal = require('./RSTTraversal');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+var booleanValue = Function.bind.call(Function.call, Boolean.prototype.valueOf);
 
 function typeName(node) {
   return typeof node.type === 'function' ? node.type.displayName || (0, _functionPrototype2['default'])(node.type) || 'Component' : node.type;
@@ -45,19 +67,22 @@ function indent(depth, string) {
 }
 
 function propString(prop) {
-  switch (typeof prop === 'undefined' ? 'undefined' : _typeof(prop)) {
-    case 'function':
-      return '{[Function]}';
-    case 'string':
-      return '"' + String(prop) + '"';
-    case 'number':
-    case 'boolean':
-      return '{' + String(prop) + '}';
-    case 'object':
-      return '{{...}}';
-    default:
-      return '{[' + (typeof prop === 'undefined' ? 'undefined' : _typeof(prop)) + ']}';
+  if ((0, _isString2['default'])(prop)) {
+    return (0, _objectInspect2['default'])(String(prop), { quoteStyle: 'double' });
   }
+  if ((0, _isNumberObject2['default'])(prop)) {
+    return '{' + String((0, _objectInspect2['default'])(Number(prop))) + '}';
+  }
+  if ((0, _isBooleanObject2['default'])(prop)) {
+    return '{' + String((0, _objectInspect2['default'])(booleanValue(prop))) + '}';
+  }
+  if ((0, _isCallable2['default'])(prop)) {
+    return '{' + String((0, _objectInspect2['default'])(prop)) + '}';
+  }
+  if ((typeof prop === 'undefined' ? 'undefined' : _typeof(prop)) === 'object') {
+    return '{{...}}';
+  }
+  return '{[' + (typeof prop === 'undefined' ? 'undefined' : _typeof(prop)) + ']}';
 }
 
 function propsString(node) {
