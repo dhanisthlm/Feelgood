@@ -29,13 +29,47 @@ export class Blog extends Component {
                     this.props.blogs.map((blog, i) => {
                         return(
                             <li key={i} id={blog.hash} className="blog-item">
+                                <div className="top-wrapper">
+                                    <div className="author-wrapper">
+                                        <img src={`/images/${blog.author.image}`} />
+                                    </div>
+                                    <div className="author-date-wrapper">
+                                        <p className="author">Pisac: {blog.author.name}</p>
+                                        <p className="author">Zvanje: {blog.author.title}</p>
+                                        <p className="date">Datum: {blog.date}</p>
+                                    </div>
+                                </div>
                                 <h2>{blog.title}</h2>
-                                <p className="author">Pisac: {blog.author}</p>
-                                <p className="date">Datum: {blog.date}</p>
                                 {
-                                    blog.text.map((paragraph) => {
+                                    blog.text.map((paragraph, j) => {
+                                        const heading = paragraph.heading.length ? paragraph.heading : null;
+                                        if (j == blog.image[0].iterator) {
+                                            return (
+                                                <div>
+                                                    <img className="blog-image" src={`/images/${blog.image[0].filename}`} />
+                                                    <caption className="blog-caption">{blog.image[0].caption}</caption>
+                                                    {(() => {
+                                                        if (paragraph.heading.length) {
+                                                            return <h3 className="blog-sub-heading">{heading}</h3>;
+                                                        } else {
+                                                            return null;
+                                                        }
+                                                    })()}
+                                                    <p>{paragraph.textItem}</p>
+                                                </div>
+                                            );
+                                        }
                                         return (
-                                            <p>{paragraph}</p>
+                                            <div>
+                                                {(() => {
+                                                    if (paragraph.heading.length) {
+                                                        return <h3 className="blog-sub-heading">{heading}</h3>;
+                                                    } else {
+                                                        return null;
+                                                    }
+                                                })()}
+                                                <p>{paragraph.textItem}</p>
+                                            </div>
                                         )
                                     })
                                 }

@@ -7,6 +7,20 @@
     margin-top: 100px;
 }
 
+.blog .blog-sub-heading {
+    color: #C04C9C;
+    margin-bottom: 5px;
+    font-size: 22px;
+}
+
+.blog .blog-caption {
+    width: 100%;
+    display: block;
+    text-align: left;
+    font-weight: 300;
+    margin-top: 3px;
+}
+
 .blog .page-header h1 {
     color: #ffffff;
     padding: 7px 0;
@@ -14,22 +28,67 @@
 }
 
 .blog .blog-list {
-    padding: 10px 90px;
+    padding: 20px 90px;
 }
 
 .blog .blog-item {
     list-style-type: none;
-    margin: 0 auto;
+    margin: 0 auto 41px;
+    border-bottom: 6px solid #C04C9C;
+}
+
+.blog .blog-item:last-child {
+    border: none;
+    margin-bottom: 0;
 }
 
 .blog  .blog-item h2 {
     color: #C04C9C;
+    font-size: 35px;
+    margin-bottom: 5px;
+    margin-top: 0;
+}
+
+.blog  .blog-item p:last-child {
+    margin-bottom: 35px;
+}
+
+.blog .author-wrapper {
+    width: 95px;
+    float: left;
+    height: 91px;
+    overflow: hidden;
+    border-radius: 7px;
+}
+
+.blog .author-wrapper img {
+    margin-right: 20px;
+    width: 127px;
+    margin-right: 20px;
+    margin-left: -12px;
+    margin-top: -1px;
+}
+
+.blog .top-wrapper {
+    overflow: hidden;
+    margin-bottom: 5px;
+}
+
+.blog .author-date-wrapper {
+    float: left;
+    margin-left: 16px;
+    margin-top: 10px;
+}
+
+.blog .author-date-wrapper p:last-child {
+    margin-bottom: 0 !important;
 }
 
 .blog .blog-item p {
     white-space: pre-wrap;
     font-size: 15px;
     line-height: 23px;
+    margin-top: 0;
 }
 
 .blog .date {
@@ -40,6 +99,10 @@
 .blog .author {
     margin: 0;
     color: #C04C9C;
+}
+
+.blog .blog-image {
+    width: 100%;
 }
 
 @media only screen and (max-width: 1024px) and (orientation: landscape) {
@@ -114,6 +177,14 @@
         padding-top: 20px;
         padding-left: 0;
         margin-top: 220px;
+    }
+
+    .blog .blog-item h2 {
+        color: #C04C9C;
+        font-size: 25px;
+        margin-bottom: 16px;
+        margin-top: 15px;
+        line-height: 30px;
     }
 
     .blog .page-header h1 {

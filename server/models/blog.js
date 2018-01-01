@@ -8,7 +8,7 @@ const blogSchema = Schema({
         type: Array
     },
     author: {
-        type: String
+        type: Object
     },
     hash: {
         type: String
@@ -17,7 +17,7 @@ const blogSchema = Schema({
         type: String
     },
     image: {
-        type: String
+        type: Array
     },
     video: {
         type: String
