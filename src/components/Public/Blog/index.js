@@ -42,15 +42,13 @@ export class Blog extends Component {
                                 <h2>{blog.title}</h2>
                                 {
                                     blog.text.map((paragraph, j) => {
-                                        const heading = paragraph.heading.length ? paragraph.heading : null;
                                         if (j == blog.image[0].iterator) {
                                             return (
                                                 <div>
                                                     <img className="blog-image" src={`/images/${blog.image[0].filename}`} />
-                                                    <caption className="blog-caption">{blog.image[0].caption}</caption>
                                                     {(() => {
                                                         if (paragraph.heading.length) {
-                                                            return <h3 className="blog-sub-heading">{heading}</h3>;
+                                                            return <h3 className="blog-sub-heading">{paragraph.heading}</h3>;
                                                         } else {
                                                             return null;
                                                         }
@@ -63,7 +61,7 @@ export class Blog extends Component {
                                             <div>
                                                 {(() => {
                                                     if (paragraph.heading.length) {
-                                                        return <h3 className="blog-sub-heading">{heading}</h3>;
+                                                        return <h3 className="blog-sub-heading">{paragraph.heading}</h3>;
                                                     } else {
                                                         return null;
                                                     }

@@ -65,6 +65,7 @@ export class Header extends Component {
                     <a href="/#cijene">{ t('prices') }</a>
                     <a href="/#kakoradi">{ t('howWork') }</a>
                     <a href="/#kosmomi">{ t('whoAreWe')}</a>
+                    <a href="/blogovi">Blogovi</a>
                 </nav>
             </header>
         )

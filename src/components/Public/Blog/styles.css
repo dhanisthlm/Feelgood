@@ -42,14 +42,14 @@
     margin-bottom: 0;
 }
 
-.blog  .blog-item h2 {
+.blog .blog-item h2 {
     color: #C04C9C;
     font-size: 35px;
     margin-bottom: 5px;
-    margin-top: 0;
+    margin-top: 20px;
 }
 
-.blog  .blog-item p:last-child {
+.blog  .blog-item > div:last-child p {
     margin-bottom: 35px;
 }
 
@@ -80,7 +80,7 @@
     margin-top: 10px;
 }
 
-.blog .author-date-wrapper p:last-child {
+.blog .author-date-wrapper > p:last-child {
     margin-bottom: 0 !important;
 }
 
@@ -103,6 +103,7 @@
 
 .blog .blog-image {
     width: 100%;
+    margin: 5px 0 15px 0;
 }
 
 @media only screen and (max-width: 1024px) and (orientation: landscape) {
@@ -205,7 +206,7 @@
         line-height: 24px;
     }
 
-    .blog .blog-item p:last-child {
+    .blog .blog-item > p:last-child {
         line-height: 22px;
     }
 }
