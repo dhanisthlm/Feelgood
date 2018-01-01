@@ -1002,6 +1002,10 @@ thead tr {
         padding-top: 230px;
     }
 
+    .header.show + .checkout {
+        padding-top: 10px !important;
+    }
+
     .checkout .basket .back > div {
         margin: 0;
         padding: 0;
