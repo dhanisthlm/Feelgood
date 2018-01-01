@@ -80,7 +80,7 @@
 
 @media only screen and (max-width: 500px) {
     .privacy-policy .page-header {
-        margin-top: 250px;
+        margin-top: 220px;
         background-color: #ffffff;
     }
 
@@ -134,7 +134,7 @@
         display: block;
         text-align: center;
         padding-left: 0;
-        margin-top: 250px;
+        margin-top: 220px;
     }
 
     .privacy-policy .page-header h1 {
@@ -161,7 +161,8 @@
         display: block;
         text-align: center;
         padding-left: 0;
-        margin-top: 250px;
+        margin-top: 220px;
+        padding-top: 20px;
     }
 }
 

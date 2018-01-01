@@ -9,10 +9,13 @@ export class Header extends Component {
         super(props);
 
         this.state = {
-            logoutIsVisible: false
+            logoutIsVisible: false,
+            menu: 'close'
         };
 
         this.handleLogout = this.handleLogout.bind(this);
+        this.navToggle = this.navToggle.bind(this);
+        this.closeMobileMenu = this.closeMobileMenu.bind(this);
     }
 
     componentDidMount () {
@@ -23,7 +26,57 @@ export class Header extends Component {
         this.setState({ logoutIsVisible: nextProps.isAuthenticated });
     }
 
-    handleLogout (event) {
+    closeMobileMenu () {
+        const nav = document.getElementById("topNav");
+        const close = document.getElementById("closebtn");
+        const header = document.querySelector('.header');
+        const menuText = document.querySelector('.menu-text');
+        const menuIcon = close.children;
+
+        if (this.props.location.pathname !== '/') return;
+
+        for (let i = 0; i < menuIcon.length; i++){
+            menuIcon[i].classList.remove("active");
+        }
+
+        this.setState({ menu: 'close' });
+        header.classList.remove('show');
+        nav.classList.remove('show');
+        nav.classList.add('close');
+        header.classList.add('close');
+        menuText.style.opacity = 0;
+    }
+
+    navToggle() {
+        const nav = document.getElementById("topNav");
+        const close = document.getElementById("closebtn");
+        const header = document.querySelector('.header');
+        const menuText = document.querySelector('.menu-text');
+        const menuIcon = close.children;
+
+        for (let i = 0; i < menuIcon.length; i++){
+            menuIcon[i].classList.toggle("active");
+        }
+
+        if (this.state.menu === 'close') {
+            this.setState({ menu: 'show'});
+            header.classList.remove('close');
+            nav.classList.remove('close');
+            header.classList.add('show');
+            nav.classList.add('show');
+            menuText.style.opacity = 0;
+        } else if (this.state.menu === 'show') {
+            this.setState({ menu: 'close'});
+            header.classList.remove('show');
+            nav.classList.remove('show');
+            nav.classList.add('close');
+            header.classList.add('close');
+            menuText.style.opacity = 1;
+        }
+};
+
+
+handleLogout (event) {
         event.preventDefault();
         this.props.dispatch(logout());
     }
@@ -67,6 +120,21 @@ export class Header extends Component {
                     <a href="/#kosmomi">{ t('whoAreWe')}</a>
                     <a href="/blogovi">Blogovi</a>
                 </nav>
+                <div id="topNav" className="navigation">
+                    <span id="closebtn" onClick={this.navToggle}>
+                        <span className="line1" />
+                        <span className="line2" />
+                        <span className="line3" />
+                        <span className="menu-text">Meni</span>
+                    </span>
+                    <ul className="menulist">
+                        <li><a onClick={this.closeMobileMenu} className="menuitems" href={issueHref}>{ t('services') }</a></li>
+                        <li><a onClick={this.closeMobileMenu} className="menuitems" href="/#cijene">{ t('prices') }</a></li>
+                        <li><a onClick={this.closeMobileMenu} className="menuitems" href="/#kakoradi">{ t('howWork') }</a></li>
+                        <li><a onClick={this.closeMobileMenu} className="menuitems" href="/#kosmomi">{ t('whoAreWe')}</a></li>
+                        <li><a className="menuitems" href="/blogovi">Blogovi</a></li>
+                    </ul>
+                </div>
             </header>
         )
     }
