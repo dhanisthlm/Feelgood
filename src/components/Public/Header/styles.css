@@ -231,6 +231,10 @@
         height: 190px;
     }
 
+    #topNav {
+        display: block;
+    }
+
     .navigation .menulist {
         //opacity: 0;
         width:200px;
