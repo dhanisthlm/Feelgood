@@ -13,7 +13,6 @@ export class Header extends Component {
             menu: 'close'
         };
 
-        this.endScroll = 0;
         this.handleLogout = this.handleLogout.bind(this);
         this.navToggle = this.navToggle.bind(this);
         this.closeMobileMenu = this.closeMobileMenu.bind(this);
@@ -21,78 +20,10 @@ export class Header extends Component {
 
     componentDidMount () {
         this.props.dispatch(ping());
-        const nav = document.getElementById("topNav");
-        this.navPosition =  this.offset(nav).top;
-        this.isScrolling;
-        var transitionEvent = this.whichTransitionEvent();
-        transitionEvent && nav.addEventListener(transitionEvent, () => {
-            setTimeout(() => {
-                this.clicked = false;
-            }, 100);
-        });
-
-        document.addEventListener('scroll', this.addScroll.bind(this), false);
     }
 
     componentWillReceiveProps (nextProps) {
         this.setState({ logoutIsVisible: nextProps.isAuthenticated });
-    }
-
-    addScroll () {
-        const nav = document.getElementById("topNav");
-        const header = document.getElementsByTagName('header')[0];
-        const introduction = document.querySelector('.introduction');
-        const scrollPosition = document.documentElement.scrollTop;
-
-        if (this.clicked === false ) {
-            header.classList.add('scroll');
-            nav.classList.remove('show');
-            this.closeMobileMenu();
-        }
-
-        if (scrollPosition >= this.navPosition) {
-            nav.classList.add('fixed');
-            header.classList.add('fixed');
-            this.setState({'fixed': true });
-        } else {
-            this.setState({'fixed': false });
-            header.classList.remove('fixed');
-            nav.classList.remove('fixed');
-        }
-
-        window.clearTimeout(this.isScrolling);
-
-        this.isScrolling = setTimeout(() => {
-            nav.classList.remove('scroll');
-            header.classList.remove('scroll');
-        }, 60);
-
-
-
-    }
-
-    whichTransitionEvent(){
-    var t;
-    var el = document.createElement('fakeelement');
-    var transitions = {
-        'transition':'transitionend',
-        'OTransition':'oTransitionEnd',
-        'MozTransition':'transitionend',
-        'WebkitTransition':'webkitTransitionEnd'
-    }
-
-    for(t in transitions){
-        if( el.style[t] !== undefined ){
-            return transitions[t];
-        }
-    }
-}
-
-    offset(el) {
-        const rect = el.getBoundingClientRect();
-        const scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
-        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        return { top: rect.top + scrollTop, left: rect.left + scrollLeft }
     }
 
     closeMobileMenu () {
@@ -101,6 +32,8 @@ export class Header extends Component {
         const header = document.querySelector('.header');
         const menuText = document.querySelector('.menu-text');
         const menuIcon = close.children;
+
+        if (this.props.location.pathname !== '/') return;
 
         for (let i = 0; i < menuIcon.length; i++){
             menuIcon[i].classList.remove("active");
@@ -115,14 +48,11 @@ export class Header extends Component {
     }
 
     navToggle() {
-        const body = document.getElementsByTagName('body')[0];
         const nav = document.getElementById("topNav");
         const close = document.getElementById("closebtn");
         const header = document.querySelector('.header');
         const menuText = document.querySelector('.menu-text');
         const menuIcon = close.children;
-
-        this.clicked = true;
 
         for (let i = 0; i < menuIcon.length; i++){
             menuIcon[i].classList.toggle("active");
@@ -143,7 +73,7 @@ export class Header extends Component {
             header.classList.add('close');
             menuText.style.opacity = 1;
         }
-    };
+};
 
 
 handleLogout (event) {

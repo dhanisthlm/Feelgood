@@ -129,28 +129,8 @@
         margin-top: 384px;
     }
 
-    .header.show.fixed + .introduction {
-        padding-top: 0 !important;
-    }
-
-    .header.show.fixed + div {
-        margin-top: 227px !important;
-    }
-
     .header + div {
         transition: all 0.4s ease-in-out;
-    }
-
-    .header.scroll.fixed + div {
-        transition: none !important;
-    }
-
-    .header.scroll.fixed #topNav {
-        transition: none;
-    }
-
-    .header.scroll.fixed .menuitems {
-        transition: none !important;
     }
 
     .admin-header {
@@ -225,7 +205,7 @@
         top: 170px;
         left: 0;
         overflow: hidden;
-        transition: height 0.4s ease-in-out;
+        transition: all 0.4s ease-in-out;
         float: none;
         margin-top: 0;
         background-color: #C04C9C;
@@ -253,21 +233,6 @@
 
     #topNav {
         display: block;
-    }
-
-    #topNav.fixed {
-        position: fixed !important;
-        top: 0 !important;
-        box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.8);
-        z-index: 9999999999;
-    }
-
-    #topNav.scroll {
-        transition: none;
-    }
-
-    #topNav.scroll .menuitems {
-        transition: none;
     }
 
     .navigation .menulist {
