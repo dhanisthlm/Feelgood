@@ -29,6 +29,11 @@
     font-size: 17px;
 }
 
+.form-element-wrapper {
+    margin-top: 10px;
+    overflow: hidden;
+}
+
 .payment-type-wrapper {
     display: flex;
     display: -webkit-flex;
@@ -293,29 +298,28 @@
     padding: 10px;
     display: inline-block;
     vertical-align: text-bottom;
-    width: 165px;
-    float: right;
-    margin-top: 1px;
+    width: 150px;
     cursor: pointer;
     border-radius: 3px;
+    vertical-align: top;
 }
 
 .payment + .text-wrapper .total {
-    display: inline;
     font-size: 40px;
     color: #fff;
     letter-spacing: 2px;
-    margin: 0;
-    margin-left: 73px;
     min-width: 320px;
-    margin-right: 25px;
-    text-align: left;
+    vertical-align: top;
+    display: inline;
+    margin-right: 18px;
 }
 
 .payment + .text-wrapper .spec {
     width: 200px;
-    margin-top: 2px;
+    margin-top: 3px;
     display: inline-block;
+    vertical-align: top;
+    margin-right: 69px;
 }
 
 .payment + .text-wrapper .spec span {
@@ -323,6 +327,7 @@
     color: #fff;
     text-align: left;
     margin-bottom: 3px;
+    font-weight: 300;
 }
 
 .payment .radio-wrapper {
@@ -345,8 +350,9 @@
 }
 
 .payment + .text-wrapper .promo-textfield {
-    float: right;
-    margin-right: 160px;
+    margin-right: 25px;
+    display: inline-block;
+    vertical-align: top;
 }
 
 .payment + .text-wrapper .promo-textfield span {
@@ -370,9 +376,65 @@
     margin-bottom: 3px;
 }
 
+.currency-wrapper {
+    width: 100px;
+    margin-right: 25px;
+    margin-top: 2px;
+    display: inline-block;
+}
+
+.currency-wrapper .select-style {
+    height: 40px;
+    margin-top: 20px;
+    padding: 0;
+    margin: 0;
+    border-radius: 3px;
+    overflow: hidden;
+    background-color: #fff;
+    position: relative;
+    color: #333;
+    border: 1px solid #fff;
+}
+
+.currency-wrapper .select-style select {
+    color: #333;
+    vertical-align: top;
+    width: 100%;
+    border: none;
+    box-shadow: none;
+    background-image: none;
+    -webkit-appearance: none;
+    appearance: none;
+    font-size: 16px;
+    height: 100%;
+    line-height: 40px;
+    box-sizing: border-box;
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-weight: 300;
+    padding: 0 0 0 18px;
+}
+
+.currency-wrapper .select-style:after {
+    top: 50%;
+    right: 15px;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+    border-top-color: #333;
+    border-width: 7px;
+    margin-top: -2px;
+    z-index: 100;
+}
+
+
+
 .payment + .text-wrapper .promo-textfield input {
     display: block;
-    width: 156px;
+    width: 150px;
     height: 40px;
     border: 1px solid #888;
     box-sizing: border-box;
@@ -382,7 +444,7 @@
     border-radius: 3px;
     text-align: center;
     font-weight: 200;
-    margin-top: 5px;
+    margin-top: 3px;
 }
 
 .info-text .percent-text {
@@ -560,6 +622,14 @@
 }
 
 @media only screen and (max-width: 768px) and (orientation: portrait) {
+    .currency-wrapper {
+        text-align-last: center;
+        padding: 0;
+        margin: 0;
+        float: none;
+        width: 70%;
+    }
+
     .payment {
         padding-left: 40px;
         padding-right: 40px;
@@ -721,6 +791,13 @@
 }
 
 @media only screen and (max-width: 1024px) and (orientation: landscape) {
+    .currency-wrapper {
+        width: 100%;
+        text-align-last: center;
+        margin-bottom: 7px;
+        padding: 0;
+    }
+
     .payment {
         overflow: hidden;
         margin-bottom: 25px;
@@ -759,6 +836,17 @@
 }
 
 @media only screen and (max-width: 768px) and (orientation: landscape) {
+    .currency-wrapper {
+        width: 100%;
+        text-align-last: center;
+        margin-bottom: 0;
+        padding: 0;
+    }
+
+    .payment + .text-wrapper .checkout-button {
+        margin: 0;
+    }
+
     .payment {
         padding: 0 40px 0 40px;
         margin-bottom: 18px;
@@ -935,7 +1023,7 @@
     }
 
     .payment + .text-wrapper .checkout-button {
-        margin: 15px 0;
+        margin: 8px 0;
     }
 
     .payment + .text-wrapper .spec span:last-child {
@@ -1004,6 +1092,12 @@
 }
 
 @media only screen and (max-width: 600px) and (orientation: landscape) {
+    .currency-wrapper .select-style select {
+        width: 100%;
+        text-align-last: center;
+        padding: 0;
+    }
+
     .payment .toggle_radios {
         width: 98%;
         margin-bottom: 20px;
@@ -1018,6 +1112,13 @@
 }
 
 @media only screen and (max-width: 500px) {
+    .currency-wrapper {
+        width: 100%;
+        text-align-last: center;
+        margin-bottom: 7px;
+        padding: 0;
+    }
+
     .payment {
         padding: 0 40px 0 40px;
         margin-bottom: 18px;
@@ -1193,7 +1294,7 @@
     }
 
     .payment + .text-wrapper .checkout-button {
-        margin: 15px 0;
+        margin: 0;
     }
 
     .payment + .text-wrapper .spec span:last-child {
@@ -1240,12 +1341,19 @@
 }
 
 @media only screen and (max-width: 400px) {
+    .currency-wrapper {
+        width: 100%;
+        text-align-last: center;
+        margin-bottom: 7px;
+        padding: 0;
+    }
+
     .payment {
         padding: 0 20px 0 20px;
         margin-bottom: 18px;
     }
 
     .payment + .text-wrapper {
-        padding: 25px 20px 21px 20px;
+        padding: 15px 20px 21px 20px;
     }
 }

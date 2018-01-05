@@ -391,4 +391,12 @@
     .staff {
         padding: 5px 20px 20px;
     }
+
+    .staff .card .photo-wrapper {
+        height: 240px;
+    }
+
+    .staff .card .photo-wrapper img {
+       width: 100%;
+    }
 }

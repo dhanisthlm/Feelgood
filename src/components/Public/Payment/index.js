@@ -10,7 +10,38 @@ export class Payment extends Component {
 	constructor (props) {
 		super(props);
 
-		this.state = {};
+		this.state = {
+			language: 'KM',
+			isDirty: false,
+			languages: [
+                {
+                    code: 'bam',
+                    currency: 'KM',
+                    rate: 1
+                },
+				{
+					code: 'sek',
+					currency: 'kr',
+					rate: .2
+				},
+                {
+                    code: 'eur',
+                    currency: 'EUR',
+                    rate: 2
+                },
+
+                {
+                    code: 'hrk',
+                    currency: 'kn',
+                    rate: .4
+                },
+                {
+                    code: 'rsd',
+                    currency: 'RSD',
+                    rate: .3
+                }
+			]
+		};
 
 		this.handlePackage = this.handlePackage.bind(this);
 		this.handleWeeks = this.handleWeeks.bind(this);
@@ -19,6 +50,9 @@ export class Payment extends Component {
 		this.resetCheckout = this.resetCheckout.bind(this);
 		this.getData = this.getData.bind(this);
 		this.handlePromoCode = this.handlePromoCode.bind(this);
+		this.renderCurrencies = this.renderCurrencies.bind(this);
+		this.getSelectedCurrency = this.getSelectedCurrency.bind(this);
+		this.handleSelect = this.handleSelect.bind(this);
 	}
 
 	componentWillMount () {
@@ -277,11 +311,12 @@ export class Payment extends Component {
 
         const discount = this.calculateDiscounts(skypeCost, emailCost);
 
-        amount.skype = Math.round((skypeCost / skypeWeeks) * discount.promoFactor * discount.packageFactor);
-        amount.email = Math.round((emailCost / emailWeeks) * discount.promoFactor * discount.packageFactor);
+        amount.skype = Math.round(((skypeCost / skypeWeeks) * discount.promoFactor * discount.packageFactor) / this.getSelectedCurrency()[0].rate);
+        amount.email = Math.round(((emailCost / emailWeeks) * discount.promoFactor * discount.packageFactor) / this.getSelectedCurrency()[0].rate);
         amount.code = skypeCode + '' + skypeDurationCode + '' + emailCode;
-        amount.total = Math.round((emailCost + skypeCost) * discount.promoFactor * discount.packageFactor);
+        amount.total = Math.round(((emailCost + skypeCost) * (discount.promoFactor * discount.packageFactor)) / this.getSelectedCurrency()[0].rate);
 
+        console.log(amount, this.getSelectedCurrency()[0].rate)
         return amount;
 	}
 
@@ -366,6 +401,24 @@ export class Payment extends Component {
 		this.updateEncounter();
 	}
 
+	handleSelect (e) {
+		const children = Array.prototype.slice.call(e.target.children);
+        const currency = children.filter(child => child.selected === true);
+		this.setState({language: currency[0]['attributes']['data-id']['nodeValue'], isDirty: true});
+	}
+
+	getSelectedCurrency () {
+		return this.state.languages.filter((country) => {
+			return country.currency === this.state.language;
+		});
+	}
+
+	renderCurrencies () {
+		return this.state.languages.map((country) => {
+			return <option data-id={country.currency} selected={this.state.language === country.currency} value={country.code}>{country.code.toUpperCase()}</option>;
+		})
+	}
+
     /**
      * This callback type is called `requestCallback
      * @callback requestCallback
@@ -376,6 +429,8 @@ export class Payment extends Component {
 		const { t } = this.props;
 		const order = this.calculateCost();
 		const buttonStyle = (order.total === 0) ? 'checkout-button disabled' : 'checkout-button';
+
+		console.log(this.state)
 
 		return (
 			<div>
@@ -496,23 +551,30 @@ export class Payment extends Component {
 					</div>
 				</div>
 				<div className="text-wrapper">
-					<h2 className="total">{ t('price') }: { this.calculateCost().total } KM</h2>
+					<h2 className="total">{ t('price') }: { this.calculateCost().total }{this.state.language}</h2>
 					<div className="spec">
-						<span>Skype: { this.calculateCost().skype } KM / { t('call') }</span>
-						<span>{ t('email') }: { this.calculateCost().email } KM / { t('week') }</span>
+						<span>Skype: { this.calculateCost().skype } {this.state.language} / { t('call') }</span>
+						<span>{ t('email') }: { this.calculateCost().email } {this.state.language} / { t('week') }</span>
+					</div>
+					<div className="promo-textfield">
+						<input type="text"
+							   onChange={ this.handlePromoCode }
+							   placeholder={ t('writeCode') }
+							   value={this.state.enteredCode}
+						/>
+					</div>
+					<div className="form-element-wrapper currency-wrapper">
+						<div className="select-style">
+							<select onChange={this.handleSelect}>
+								{this.renderCurrencies()}
+							</select>
+						</div>
 					</div>
 					<button
 						className={buttonStyle}
 						onClick={ this.handleCheckout }>
 						{ t('purchase') }
 					</button>
-					<div className="promo-textfield">
-						<input type="text"
-							onChange={ this.handlePromoCode }
-							placeholder={ t('writeCode') }
-							value={this.state.enteredCode}
-						/>
-					</div>
 				</div>
 			</div>
 		);
