@@ -83,7 +83,7 @@
 .payment .email:after {
     content: '';
     position: absolute;
-    right: 27px;
+    right: 13%;
     top: 10px;
     width: 2px;
     height: 300px;
@@ -314,8 +314,16 @@
     margin-right: 18px;
 }
 
+.payment + .text-wrapper .total span {
+    vertical-align: top;
+    font-size: 25px;
+    padding-top: 13px;
+    padding-left: 3px;
+    display: inline-block;
+}
+
 .payment + .text-wrapper .spec {
-    width: 200px;
+    min-width: 200px;
     margin-top: 3px;
     display: inline-block;
     vertical-align: top;
@@ -613,11 +621,15 @@
 
 @media only screen and (max-width: 1100px) {
     .payment + .text-wrapper .total {
-      margin-left: 0;
+        margin-left: 0;
     }
 
     .payment + .text-wrapper .promo-textfield {
-       margin-right: 50px;
+        margin-right: 50px;
+    }
+
+    .payment .skype:after, .payment .email:after {
+        right: 10%;
     }
 }
 
@@ -672,6 +684,10 @@
     .payment .category-heading {
         margin-left: 0 !important;
         text-align: center;
+    }
+
+    .currency-wrapper .select-style select {
+        padding: 0;
     }
 
     .payment .duration-text {
@@ -762,7 +778,7 @@
     .payment + .text-wrapper .spec {
         display: block;
         margin: 10px auto 10px;
-        width: 350px;
+        min-width: 350px;
     }
 
     .payment + .text-wrapper .spec span:first-child {
@@ -1008,7 +1024,7 @@
     }
 
     .payment + .text-wrapper .spec {
-        width: 200px;
+        min-width: 200px;
         display: block;
         margin: 10px auto;
     }
@@ -1104,7 +1120,7 @@
     }
 
     .payment + .text-wrapper .spec {
-        width: 250px;
+        min-width: 250px;
         display: block;
         margin: 10px auto;
         text-align: center;
@@ -1276,6 +1292,10 @@
         min-width: 320px;
         text-align: left;
         letter-spacing: 0;
+    }
+
+    .payment + .text-wrapper .total span {
+        vertical-align: top;
     }
 
     .payment + .text-wrapper .spec {

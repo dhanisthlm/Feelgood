@@ -12,6 +12,8 @@ export class Payment extends Component {
 
 		this.state = {
 			language: 'KM',
+			packageFactor: 0.05,
+			durationSkype: 's',
 			isDirty: false,
 			languages: [
                 {
@@ -19,31 +21,30 @@ export class Payment extends Component {
                     currency: 'KM',
                     rate: 1
                 },
-				{
-					code: 'sek',
-					currency: 'kr',
-					rate: .2
-				},
                 {
                     code: 'eur',
-                    currency: 'EUR',
+                    currency: '€',
                     rate: 2
                 },
-
                 {
                     code: 'hrk',
                     currency: 'kn',
-                    rate: .4
+                    rate: 1/4
                 },
                 {
                     code: 'rsd',
                     currency: 'RSD',
-                    rate: .3
+                    rate: 1/60
                 },
+				{
+					code: 'sek',
+					currency: 'kr',
+					rate: 1/5
+				},
                 {
                     code: 'usd',
                     currency: '$',
-                    rate: 1.45
+                    rate: 1.6
                 }
 			]
 		};
@@ -321,7 +322,6 @@ export class Payment extends Component {
         amount.code = skypeCode + '' + skypeDurationCode + '' + emailCode;
         amount.total = Math.round(((emailCost + skypeCost) * (discount.promoFactor * discount.packageFactor)) / this.getSelectedCurrency()[0].rate);
 
-        console.log(amount, this.getSelectedCurrency()[0].rate)
         return amount;
 	}
 
@@ -434,8 +434,6 @@ export class Payment extends Component {
 		const { t } = this.props;
 		const order = this.calculateCost();
 		const buttonStyle = (order.total === 0) ? 'checkout-button disabled' : 'checkout-button';
-
-		console.log(this.state)
 
 		return (
 			<div>
@@ -556,7 +554,7 @@ export class Payment extends Component {
 					</div>
 				</div>
 				<div className="text-wrapper">
-					<h2 className="total">{ t('price') }: { this.calculateCost().total }{this.state.language}</h2>
+					<h2 className="total">{ t('price') }: { this.calculateCost().total }<span>{this.state.language}</span></h2>
 					<div className="spec">
 						<span>Skype: { this.calculateCost().skype } {this.state.language} / { t('call') }</span>
 						<span>{ t('email') }: { this.calculateCost().email } {this.state.language} / { t('week') }</span>

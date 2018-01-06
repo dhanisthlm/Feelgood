@@ -61,8 +61,8 @@ export class Checkout extends FormComponent {
             termsIsDirty: false,
             cancelIsDirty: false,
             comment: null,
-            paypalCurrencies: ['EUR', '$', 'kn', 'RSD', 'kr'],
-            invoiceCurrencies: ['EUR', 'KM']
+            paypalCurrencies: ['€', '$', 'kn', 'kr'],
+            invoiceCurrencies: ['€', 'KM']
 		};
 
 		this.validatorTypes = encounterValidator;
@@ -193,7 +193,7 @@ export class Checkout extends FormComponent {
            }
 
            if (paypalFactor !== 1) {
-               this.setState({ language: 'EUR' });
+               this.setState({ language: '€' });
            }
 
            this.setState({ paypalFactor })
@@ -684,13 +684,12 @@ export class Checkout extends FormComponent {
      * @return {object}
      */
     payment(data, actions) {
-        // amount: { total: '1', currency: 'EUR' }
-        const total= this.state.paypalFactor !== 1 ? Math.round(this.state.cost.total / 2) : this.getCurrencied(this.state.cost.total);
+        const amount = this.state.paypalFactor === 1 ? this.getCurrencied(this.state.cost.total) : this.state.cost.total / this.getSelectedCurrency()[0].rate / 2;
 
         return actions.payment.create({
               transactions: [
                   {
-                      amount: { total: total, currency: this.getSelectedCurrency()[0].code.toUpperCase() }
+                      amount: { total: amount, currency: this.getSelectedCurrency()[0].code.toUpperCase() }
                   }
               ]
           });
@@ -805,11 +804,12 @@ export class Checkout extends FormComponent {
      * @return {object}
      */
     getCurrencied (value) {
-        return Math.round(value / this.getSelectedCurrency()[0].rate);
+        return (value / this.getSelectedCurrency()[0].rate).toFixed(0);
     }
 
     getSkypeCost() {
-        const skypeCost = this.state.data.skype ? this.state.data.skype.cost : 0;
+        if (!this.state.data.skype) return 0;
+        const skypeCost = this.state.data.skype ? 60 * this.state.data.skype.week : 0;
         const skypeDurationFactor = this.state.data.skypeDuration.factor;
         const skype = skypeCost * skypeDurationFactor;
         return this.getCurrencied(skype) / this.state.paypalFactor;
@@ -821,13 +821,9 @@ export class Checkout extends FormComponent {
      * @param {number} responseCode
      * @return {object}
      */
-    getSum () {
-        const skypeCost = this.state.data.skype ? this.state.data.skype.cost : 0;
-        const skypeDurationFactor = this.state.data.skypeDuration.factor;
-        const skype = skypeCost * skypeDurationFactor;
-        const email = this.state.data.email ? this.state.emailDiscount / this.state.data.email.week : 0;
-
-        return (skype + email) / this.state.paypalFactor;
+    getEmailCost() {
+        if (!this.state.data.email) return 0;
+        return this.getCurrencied(this.state.data.email.cost * this.state.data.email.week) / this.state.paypalFactor;
     }
 
     /**
@@ -836,13 +832,46 @@ export class Checkout extends FormComponent {
      * @param {number} responseCode
      * @return {object}
      */
-    getPackageSum () {
-        const discount = this.state.data.packageDiscount || 0;
-        return this.getCurrencied(this.getSum()) - this.getCurrencied(discount) / this.state.paypalFactor;
+    getSum () {
+        const skype = this.state.data.skype ? this.getSkypeCost() : 0;
+        const email = this.state.data.email ? this.getEmailCost() : 0;
+        return (skype + email);
     }
 
+    /**
+     * This callback type is called `requestCallback
+     * @callback requestCallback
+     * @param {number} responseCode
+     * @return {object}
+     */
+    getPackageSum() {
+        return Math.floor(this.getSum() - this.getPackageDiscount() / this.state.paypalFactor);
+    }
+
+    /**
+     * This callback type is called `requestCallback
+     * @callback requestCallback
+     * @param {number} responseCode
+     * @return {object}
+     */
+    getPackageDiscount() {
+        const skypeCost = this.state.data.skype ? this.state.data.skype.cost * this.state.data.skypeDuration.factor : 0;
+        const skypeDiscount = this.getSkypeCost() - this.getCurrencied(skypeCost);
+        const emailDiscount = this.getEmailCost() - this.getCurrencied(this.state.emailDiscount);
+        const packageDiscount = this.state.data.email && this.state.data.skype ? (this.getEmailCost() + this.getSkypeCost() - skypeDiscount - emailDiscount) * 0.05 : 0;
+        return parseInt(packageDiscount) + parseInt(skypeDiscount) + parseInt(emailDiscount);
+    }
+
+    /**
+     * This callback type is called `requestCallback
+     * @callback requestCallback
+     * @param {number} responseCode
+     * @return {object}
+     */
     getVoucherDiscount () {
-        return this.state.data.promoDiscount ? Math.round(this.getPackageSum() / 2) : this.getCurrencied(this.getSum() / 2);
+        return this.state.data.promoDiscount > 0
+            ? Math.round(this.getPackageSum() / 2)
+            : 0;
     }
 
     /**
@@ -852,7 +881,7 @@ export class Checkout extends FormComponent {
      * @return {object}
      */
     getTotal () {
-        return this.getPackageSum()  - this.getVoucherDiscount();
+        return this.getVoucherDiscount() > 0 ? this.getPackageSum() - this.getVoucherDiscount() : this.getPackageSum();
     }
 
     /**
@@ -869,10 +898,9 @@ export class Checkout extends FormComponent {
 		const { t } = this.props;
 		const front = (window.localStorage.getItem('step') === '1') ? 'front' : 'front none';
         const back = (window.localStorage.getItem('step') === '2') ? 'back' : 'back none';
-
 		const firstColSize = (this.width === 'small') ? '50%' : '60%';
 		const lastColSize = (this.width === 'small') ? '30%' : '20%';
-		const currency = this.state.paypalFactor === 1 ? this.state.language : 'EUR';
+		const currency = this.state.paypalFactor === 1 ? this.state.language : '€';
         const termErrorMsg = this.state.terms === 'off' && this.state.termsIsDirty ? 'Ovo polje je obavezno' : '';
         const cancelErrorMsg = this.state.cancel === 'off' && this.state.cancelIsDirty ? 'Ovo polje je obavezno' : '';
 
@@ -890,7 +918,7 @@ export class Checkout extends FormComponent {
 
         const paypalStyle = {
             lable: 'en_US',
-            size: 'large',
+            size: 'responsive',
             color: 'blue',
             shape: 'rect',
             label: 'paypal',
@@ -962,7 +990,7 @@ export class Checkout extends FormComponent {
 																<tr>
 																	<td>{this.state.data.email.description}</td>
 																	<td className="center">{ this.state.data.email.week }</td>
-																	<td className="center">{ Math.round(this.state.data.email.cost * this.state.data.email.week / this.state.paypalFactor / this.getSelectedCurrency()[0].rate)}&nbsp;{ currency }</td>
+																	<td className="center">{ this.getEmailCost() }&nbsp;{ currency }</td>
 																</tr>
                                                             )
                                                         }
@@ -974,21 +1002,21 @@ export class Checkout extends FormComponent {
 													</tr>
 													<tr>
 														<td className={sumClass} colSpan="2">{ t('sum') }</td>
-														<td className={centerClass}>{ this.getCurrencied(this.getSum()) }&nbsp;{ currency }</td>
+														<td className={centerClass}>{ this.getSum() }&nbsp;{ currency }</td>
 													</tr>
                                                     {(() => {
-                                                        if (this.state.data.packageDiscount) {
+                                                        if (this.state.data.packageDiscount || this.state.data.skype && this.state.data.skype.week > 1 || this.state.data.email && this.state.data.email.week > 1) {
                                                             return (
 																<tr>
 																	<td className="right"
 																		colSpan="2">{ t('packageDiscount') }</td>
-																	<td className="center">{ this.getCurrencied(this.state.data.packageDiscount) / this.state.paypalFactor }&nbsp;{ currency }</td>
+																	<td className="center">{ this.getPackageDiscount() }&nbsp;{ currency }</td>
 																</tr>
                                                             )
                                                         }
                                                     })()}
                                                     {(() => {
-                                                        if (this.state.data.packageDiscount > 0) {
+                                                        if (this.state.data.packageDiscount > 0 || this.state.data.skype && this.state.data.skype.week > 1 || this.state.data.email && this.state.data.email.week > 1) {
                                                             const labelName = this.state.data.promoDiscount
                                                                 ? 'right' : 'right heavy';
 
@@ -1018,7 +1046,7 @@ export class Checkout extends FormComponent {
                                                         }
                                                     })()}
                                                     {(() => {
-                                                        if (this.state.data.promoDiscount) {
+                                                        if (this.state.data.promoDiscount || this.state.data.skype && this.state.data.skype.week > 1 || this.state.data.email && this.state.data.email.week > 1) {
                                                             return (
 																<tr>
 																	<td className="right heavy"
@@ -1048,8 +1076,7 @@ export class Checkout extends FormComponent {
                                                         if (this.props.errorMessage.length > 0) {
                                                             return (
 																<div className="card-error">
-																	<p>Neformalno smo mogli da obradimo vašu
-																		narudžbinu. {t(`stripe.${this.props.errorMessage}`)}</p>
+																	<p>Neformalno smo mogli da obradimo vašu narudžbinu. {t(`stripe.${this.props.errorMessage}`)}</p>
 																</div>
                                                             )
                                                         }
