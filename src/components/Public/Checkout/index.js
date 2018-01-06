@@ -60,7 +60,9 @@ export class Checkout extends FormComponent {
             cancel: 'off',
             termsIsDirty: false,
             cancelIsDirty: false,
-            comment: null
+            comment: null,
+            paypalCurrencies: ['EUR', '$', 'kn', 'RSD', 'kr'],
+            invoiceCurrencies: ['EUR', 'KM']
 		};
 
 		this.validatorTypes = encounterValidator;
@@ -140,7 +142,8 @@ export class Checkout extends FormComponent {
 
         this.setState({
             issues: nextProps.issues,
-            cost: JSON.parse(window.localStorage.getItem('order')).cost.total
+            language: JSON.parse(window.localStorage.getItem('order')).language,
+            cost: JSON.parse(window.localStorage.getItem('order')).cost
         });
 
         if (window.localStorage.getItem('step') === null) {
@@ -177,16 +180,20 @@ export class Checkout extends FormComponent {
         const options = document.getElementById('payment-options');
         let paypalFactor = 1;
 
-        console.log('id', id, event.currentTarget)
-
         this.setState({ paymentType: id }, () => {
            if (id === 'credit') {
                this.initStripe();
            }
 
            if (id === 'paypal') {
-               paypalFactor = 2;
+               paypalFactor = (this.state.paypalCurrencies.indexOf(this.state.language) > -1) ? 1 : 2;
                this.setState({ termsIsDirty: true, cancelIsDirty: true })
+           } else if (id === 'faktura') {
+               paypalFactor = (this.state.invoiceCurrencies.indexOf(this.state.language) > -1) ? 1 : 2;
+           }
+
+           if (paypalFactor !== 1) {
+               this.setState({ language: 'EUR' });
            }
 
            this.setState({ paypalFactor })
@@ -573,7 +580,11 @@ export class Checkout extends FormComponent {
      */
 	handleSubmit (event) {
 		event.preventDefault();
-        this.setState({ termsIsDirty: true, cancelIsDirty: true });
+        this.setState({
+            termsIsDirty: true,
+            cancelIsDirty: true,
+            currency: this.getSelectedCurrency()[0].code.toUpperCase()
+        });
 
 		this.props.validate((error) => {
 			const { t } = this.props;
@@ -674,12 +685,12 @@ export class Checkout extends FormComponent {
      */
     payment(data, actions) {
         // amount: { total: '1', currency: 'EUR' }
-        const totalEur = Math.round(this.state.cost / 2);
+        const total= this.state.paypalFactor !== 1 ? Math.round(this.state.cost.total / 2) : this.getCurrencied(this.state.cost.total);
 
         return actions.payment.create({
               transactions: [
                   {
-                      amount: { total: totalEur, currency: 'EUR' }
+                      amount: { total: total, currency: this.getSelectedCurrency()[0].code.toUpperCase() }
                   }
               ]
           });
@@ -775,10 +786,73 @@ export class Checkout extends FormComponent {
         this.handlePaypal(actions);
     }
 
+    /**
+     * This callback type is called `requestCallback
+     * @callback requestCallback
+     * @param {number} responseCode
+     * @return {object}
+     */
     getSelectedCurrency () {
         return this.state.languages.filter((country) => {
             return country.currency === this.state.language;
         });
+    }
+
+    /**
+     * This callback type is called `requestCallback
+     * @callback requestCallback
+     * @param {number} responseCode
+     * @return {object}
+     */
+    getCurrencied (value) {
+        return Math.round(value / this.getSelectedCurrency()[0].rate);
+    }
+
+    getSkypeCost() {
+        const skypeCost = this.state.data.skype ? this.state.data.skype.cost : 0;
+        const skypeDurationFactor = this.state.data.skypeDuration.factor;
+        const skype = skypeCost * skypeDurationFactor;
+        return this.getCurrencied(skype) / this.state.paypalFactor;
+    }
+
+    /**
+     * This callback type is called `requestCallback
+     * @callback requestCallback
+     * @param {number} responseCode
+     * @return {object}
+     */
+    getSum () {
+        const skypeCost = this.state.data.skype ? this.state.data.skype.cost : 0;
+        const skypeDurationFactor = this.state.data.skypeDuration.factor;
+        const skype = skypeCost * skypeDurationFactor;
+        const email = this.state.data.email ? this.state.emailDiscount / this.state.data.email.week : 0;
+
+        return (skype + email) / this.state.paypalFactor;
+    }
+
+    /**
+     * This callback type is called `requestCallback
+     * @callback requestCallback
+     * @param {number} responseCode
+     * @return {object}
+     */
+    getPackageSum () {
+        const discount = this.state.data.packageDiscount || 0;
+        return this.getCurrencied(this.getSum()) - this.getCurrencied(discount) / this.state.paypalFactor;
+    }
+
+    getVoucherDiscount () {
+        return this.state.data.promoDiscount ? Math.round(this.getPackageSum() / 2) : this.getCurrencied(this.getSum() / 2);
+    }
+
+    /**
+     * This callback type is called `requestCallback
+     * @callback requestCallback
+     * @param {number} responseCode
+     * @return {object}
+     */
+    getTotal () {
+        return this.getPackageSum()  - this.getVoucherDiscount();
     }
 
     /**
@@ -795,12 +869,6 @@ export class Checkout extends FormComponent {
 		const { t } = this.props;
 		const front = (window.localStorage.getItem('step') === '1') ? 'front' : 'front none';
         const back = (window.localStorage.getItem('step') === '2') ? 'back' : 'back none';
-
-        const skypeCost = this.state.data.skype ? this.state.data.skype.cost : 0;
-        const skypeDurationFactor = this.state.data.skypeDuration.factor;
-		const emailCost = this.state.data.email ? this.state.emailDiscount / this.state.data.email.week : 0;
-		const emailSumCost = this.state.data.email ? this.state.data.email.cost * this.state.data.email.week : 0;
-		const nWeeks = this.state.data.email ? this.state.data.email.week : 0;
 
 		const firstColSize = (this.width === 'small') ? '50%' : '60%';
 		const lastColSize = (this.width === 'small') ? '30%' : '20%';
@@ -883,7 +951,7 @@ export class Checkout extends FormComponent {
 																<tr>
 																	<td>{ this.state.data.skype.description }</td>
 																	<td className="center">{ this.state.data.skype.week }</td>
-																	<td className="center">{ Math.round(skypeCost * skypeDurationFactor / this.state.paypalFactor / this.getSelectedCurrency()[0].rate) }&nbsp;{ currency }</td>
+																	<td className="center">{ this.getSkypeCost() }&nbsp;{ currency }</td>
                                                         </tr>
                                                             )
                                                         }
@@ -894,7 +962,7 @@ export class Checkout extends FormComponent {
 																<tr>
 																	<td>{this.state.data.email.description}</td>
 																	<td className="center">{ this.state.data.email.week }</td>
-																	<td className="center">{ this.state.data.email.cost * this.state.data.email.week / this.state.paypalFactor / this.getSelectedCurrency()[0].rate}&nbsp;{ currency }</td>
+																	<td className="center">{ Math.round(this.state.data.email.cost * this.state.data.email.week / this.state.paypalFactor / this.getSelectedCurrency()[0].rate)}&nbsp;{ currency }</td>
 																</tr>
                                                             )
                                                         }
@@ -906,18 +974,15 @@ export class Checkout extends FormComponent {
 													</tr>
 													<tr>
 														<td className={sumClass} colSpan="2">{ t('sum') }</td>
-														<td className={centerClass}>{ (Math.round((skypeCost * skypeDurationFactor) + (emailSumCost)) / this.state.paypalFactor / this.getSelectedCurrency()[0].rate) }&nbsp;{ currency }</td>
+														<td className={centerClass}>{ this.getCurrencied(this.getSum()) }&nbsp;{ currency }</td>
 													</tr>
                                                     {(() => {
                                                         if (this.state.data.packageDiscount) {
-                                                            const packageDiscount = this.state.data.promoDiscount
-                                                                ?   Math.round((((skypeCost * skypeDurationFactor) + (this.state.data.email.cost * this.state.data.email.week) / this.state.paypalFactor) - ((this.state.data.skype.cost * skypeDurationFactor) + (emailCost * nWeeks) - this.state.data.packageDiscount)) / this.getSelectedCurrency()[0].rate)
-                                                                :   Math.round((((skypeCost * skypeDurationFactor) + (this.state.data.email.cost * this.state.data.email.week) / this.state.paypalFactor) - Math.round(this.state.cost)) / this.getSelectedCurrency()[0].rate);
                                                             return (
 																<tr>
 																	<td className="right"
 																		colSpan="2">{ t('packageDiscount') }</td>
-																	<td className="center">{ packageDiscount }&nbsp;{ currency }</td>
+																	<td className="center">{ this.getCurrencied(this.state.data.packageDiscount) / this.state.paypalFactor }&nbsp;{ currency }</td>
 																</tr>
                                                             )
                                                         }
@@ -930,16 +995,12 @@ export class Checkout extends FormComponent {
                                                             const valueName = this.state.data.promoDiscount
                                                                 ? 'center' : 'center heavy';
 
-                                                            const total = !this.state.data.promoDiscount
-                                                                ? Math.round((this.state.cost / this.state.paypalFactor) / this.getSelectedCurrency()[0].rate)
-                                                                : Math.round((Math.round((this.state.data.skype.cost * skypeDurationFactor) + (emailCost * nWeeks)) - this.state.data.packageDiscount) / this.state.paypalFactor / this.getSelectedCurrency()[0].rate);
-
                                                             return (
 																<tr>
 																	<td className={labelName}
 																		colSpan="2">{ t('sumWithPackageDiscount')}</td>
 																	<td className={valueName}>
-                                                                        { total }&nbsp;{ currency }
+                                                                        { this.getPackageSum() }&nbsp;{ currency }
 																	</td>
 																</tr>
                                                             )
@@ -951,7 +1012,7 @@ export class Checkout extends FormComponent {
 																<tr>
 																	<td className="right"
 																		colSpan="2">{ t('voucherDiscount') }</td>
-																	<td className="center">{ Math.round(this.state.data.promoDiscount / this.state.paypalFactor / this.getSelectedCurrency()[0].rate) }&nbsp;{ currency }</td>
+																	<td className="center">{ this.getVoucherDiscount() }&nbsp;{ currency }</td>
 																</tr>
                                                             )
                                                         }
@@ -962,13 +1023,26 @@ export class Checkout extends FormComponent {
 																<tr>
 																	<td className="right heavy"
 																		colSpan="2">{ t('total') }</td>
-																	<td className="center heavy">{ Math.round(this.state.cost / this.state.paypalFactor / this.getSelectedCurrency()[0].rate) }&nbsp;{ currency }</td>
+																	<td className="center heavy">{ this.getTotal() }&nbsp;{ currency }</td>
 																</tr>
                                                             )
                                                         }
                                                     })()}
 													</tbody>
 												</table>
+                                                <div className="disclaimer">
+                                                    {(() => {
+                                                        if (this.state.paypalFactor !== 1) {
+                                                            return(
+                                                                <div>
+                                                                    <p className="paypal">
+                                                                        Nažalost, model plaćanja ne podržava odabranu valutu, stoga će se iznos koji će biti isplaćen EUR.
+                                                                    </p>
+                                                                </div>
+                                                            )
+                                                        }
+                                                    })()}
+                                                </div>
 												<div>
                                                     {(() => {
                                                         if (this.props.errorMessage.length > 0) {

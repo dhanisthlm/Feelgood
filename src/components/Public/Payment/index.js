@@ -39,6 +39,11 @@ export class Payment extends Component {
                     code: 'rsd',
                     currency: 'RSD',
                     rate: .3
+                },
+                {
+                    code: 'usd',
+                    currency: '$',
+                    rate: 1.45
                 }
 			]
 		};

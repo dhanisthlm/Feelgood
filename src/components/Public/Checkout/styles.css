@@ -6,6 +6,12 @@
     display: none;
 }
 
+.checkout .disclaimer p {
+    color: #f00 !important;
+    font-size: 15px;
+    margin-left: 58px;
+}
+
 .checkout .page-header {
     padding-left: 0;
     height: 58px;

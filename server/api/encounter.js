@@ -109,8 +109,8 @@ const handleCharge = (request, reply) => {
         // amount: 3 * 100,
         // currency: request.payload.encounter.currency,
         striper.charges.create({
-            amount: request.payload.encounter.cost * 100,
-            currency: 'BAM',
+            amount: request.payload.encounter.cost.total * 100,
+            currency: request.payload.encounter.currency,
             description: "zdravlje.nu",
             source: token,
         }, function (error, charge) {
