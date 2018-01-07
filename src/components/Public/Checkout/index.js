@@ -692,7 +692,7 @@ export class Checkout extends FormComponent {
 
         const currency = this.state.paypalCurrencies.indexOf(this.getSelectedCurrency()[0].currency) > -1
             ? this.getSelectedCurrency()[0].code.toUpperCase() : 'EUR';
-        
+
         return actions.payment.create({
               transactions: [
                   {
@@ -1058,13 +1058,16 @@ export class Checkout extends FormComponent {
 																<tr>
 																	<td className="right heavy"
 																		colSpan="2">{ t('total') }</td>
-																	<td className="center heavy">{ this.getTotal() }&nbsp;{ currency }</td>
+																	<td className="center heavy">{ this.getTotal() }&nbsp;{ currency }<span className="asterix">*</span></td>
 																</tr>
                                                             )
                                                         }
                                                     })()}
 													</tbody>
 												</table>
+                                                <p className="asterix-text">
+                                                    <span>*</span>Mogu se pojaviti određeni krugovi
+                                                </p>
                                                 <div className="disclaimer">
                                                     {(() => {
                                                         if (this.state.paypalFactor !== 1) {

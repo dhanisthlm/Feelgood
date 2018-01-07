@@ -327,7 +327,7 @@
     margin-top: 3px;
     display: inline-block;
     vertical-align: top;
-    margin-right: 69px;
+    margin-right: 45px;
 }
 
 .payment + .text-wrapper .spec span {
@@ -624,10 +624,6 @@
         margin-left: 0;
     }
 
-    .payment + .text-wrapper .promo-textfield {
-        margin-right: 50px;
-    }
-
     .payment .skype:after, .payment .email:after {
         right: 10%;
     }
@@ -782,8 +778,11 @@
     }
 
     .payment + .text-wrapper .spec span:first-child {
-        float: left;
         margin-right: 20px;
+    }
+
+    .payment + .text-wrapper .spec span {
+        display: inline-block;
     }
 
     .payment + .text-wrapper button {
@@ -807,13 +806,6 @@
 }
 
 @media only screen and (max-width: 1024px) and (orientation: landscape) {
-    .currency-wrapper {
-        width: 100%;
-        text-align-last: center;
-        margin-bottom: 7px;
-        padding: 0;
-    }
-
     .payment {
         overflow: hidden;
         margin-bottom: 25px;
@@ -887,7 +879,6 @@
     }
 
     #duration-l:checked ~ .toggle_option_slider{
-    //right: 3px;
         left: 50%;
     }
 
@@ -1135,6 +1126,10 @@
         padding: 0;
     }
 
+    .payment + .text-wrapper .total span {
+        padding-top: 8px;
+    }
+
     .payment {
         padding: 0 40px 0 40px;
         margin-bottom: 18px;
@@ -1159,7 +1154,6 @@
     }
 
     #duration-l:checked ~ .toggle_option_slider{
-        //right: 3px;
         left: 50%;
     }
 
@@ -1259,6 +1253,11 @@
 
     .payment .info-text .promo-text {
         left: 40px;
+    }
+
+    .payment + .text-wrapper .spec span {
+        display: block;
+        font-size: 15px !important;
     }
 
     .payment .info-text .promo {

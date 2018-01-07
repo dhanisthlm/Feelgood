@@ -248,7 +248,7 @@
     }
 
     .issues .issue-text {
-        height: auto;
+        height: 30px;
     }
 
     .issues.mobile-issues {
@@ -293,7 +293,6 @@
         z-index: 9;
         border-radius: 50%;
         border: 9px solid #fff;
-        //transition: transform .5s;
         padding: 15px;
         text-align: center;
         color: #C04C9C;
@@ -506,6 +505,12 @@
         background-color: #fff;
         overflow: hidden;
         display: block;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    .issues .issue-text {
+        height: 72px;
     }
 }
 
