@@ -60,7 +60,7 @@ export class Checkout extends FormComponent {
             cancel: 'off',
             termsIsDirty: false,
             cancelIsDirty: false,
-            comment: null,
+            comment: '',
             paypalCurrencies: ['€', '$', 'kn', 'kr'],
             invoiceCurrencies: ['€', 'KM']
 		};
@@ -106,6 +106,10 @@ export class Checkout extends FormComponent {
             this.props.dispatch(getIssues());
         }
 	}
+
+	componentWillUnmount () {
+	    this.resetOrder();
+    }
 
 	componentDidMount () {
         if (window.localStorage.getItem('order')) {
@@ -190,10 +194,8 @@ export class Checkout extends FormComponent {
                this.setState({ termsIsDirty: true, cancelIsDirty: true })
            } else if (id === 'faktura') {
                paypalFactor = (this.state.invoiceCurrencies.indexOf(this.state.language) > -1) ? 1 : 2;
-           }
-
-           if (paypalFactor !== 1) {
-               this.setState({ language: '€' });
+           } else {
+               paypalFactor = 1;
            }
 
            this.setState({ paypalFactor })
@@ -684,12 +686,17 @@ export class Checkout extends FormComponent {
      * @return {object}
      */
     payment(data, actions) {
-        const amount = this.state.paypalFactor === 1 ? this.getCurrencied(this.state.cost.total) : this.state.cost.total / this.getSelectedCurrency()[0].rate / 2;
+        const amount = this.state.paypalFactor === 1
+            ? this.getCurrencied(this.state.cost.total)
+            : this.state.cost.total / this.getSelectedCurrency()[0].rate / 2;
 
+        const currency = this.state.paypalCurrencies.indexOf(this.getSelectedCurrency()[0].currency) > -1
+            ? this.getSelectedCurrency()[0].code.toUpperCase() : 'EUR';
+        
         return actions.payment.create({
               transactions: [
                   {
-                      amount: { total: amount, currency: this.getSelectedCurrency()[0].code.toUpperCase() }
+                      amount: { total: amount, currency }
                   }
               ]
           });
@@ -804,7 +811,7 @@ export class Checkout extends FormComponent {
      * @return {object}
      */
     getCurrencied (value) {
-        return (value / this.getSelectedCurrency()[0].rate).toFixed(0);
+        return this.state.paypalFactor === 1 ? (value / this.getSelectedCurrency()[0].rate).toFixed(0) : (value).toFixed(0);
     }
 
     getSkypeCost() {
@@ -845,7 +852,7 @@ export class Checkout extends FormComponent {
      * @return {object}
      */
     getPackageSum() {
-        return Math.floor(this.getSum() - this.getPackageDiscount() / this.state.paypalFactor);
+        return Math.round(this.getSum() - this.getPackageDiscount());
     }
 
     /**
@@ -856,10 +863,10 @@ export class Checkout extends FormComponent {
      */
     getPackageDiscount() {
         const skypeCost = this.state.data.skype ? this.state.data.skype.cost * this.state.data.skypeDuration.factor : 0;
-        const skypeDiscount = this.getSkypeCost() - this.getCurrencied(skypeCost);
-        const emailDiscount = this.getEmailCost() - this.getCurrencied(this.state.emailDiscount);
+        const skypeDiscount = this.getSkypeCost() - (this.getCurrencied(skypeCost) / this.state.paypalFactor);
+        const emailDiscount = this.getEmailCost() - (this.getCurrencied(this.state.emailDiscount) / this.state.paypalFactor);
         const packageDiscount = this.state.data.email && this.state.data.skype ? (this.getEmailCost() + this.getSkypeCost() - skypeDiscount - emailDiscount) * 0.05 : 0;
-        return parseInt(packageDiscount) + parseInt(skypeDiscount) + parseInt(emailDiscount);
+        return Math.floor(Math.round(packageDiscount) + parseFloat(skypeDiscount) + parseFloat(emailDiscount));
     }
 
     /**
@@ -870,7 +877,7 @@ export class Checkout extends FormComponent {
      */
     getVoucherDiscount () {
         return this.state.data.promoDiscount > 0
-            ? Math.round(this.getPackageSum() / 2)
+            ? Math.floor(this.getPackageSum() / 2)
             : 0;
     }
 
@@ -1232,9 +1239,8 @@ export class Checkout extends FormComponent {
 											<textarea
 												id="comment"
 												className={ this.getValidatorData('comment') }
-												onChange={ this.handleChange }>
-												{ this.state.comment }
-											</textarea>
+												onChange={ this.handleChange }
+                                                value={ this.state.comment } />
 											{this.getValidationMessages('comment')}
 										</div>
                                         <div className="form-element-wrapper">
@@ -1311,7 +1317,7 @@ export class Checkout extends FormComponent {
 											</div>
 										</div>
 										<label className="comment-label">Ostali komentari</label>
-										<textarea onChange={this.handleRatingComment}>{this.state.ratingComment}</textarea>
+										<textarea onChange={this.handleRatingComment} value={this.state.ratingComment} />
 										<button onClick={ this.postRating }>OK</button>
                                         <p className="close-button-explanation">Vratit ćete se natrag na početnu stranicu kada pritisnete ok.</p>
 									</div>

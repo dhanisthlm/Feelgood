@@ -419,8 +419,8 @@ export class Payment extends Component {
 	}
 
 	renderCurrencies () {
-		return this.state.languages.map((country) => {
-			return <option data-id={country.currency} selected={this.state.language === country.currency} value={country.code}>{country.code.toUpperCase()}</option>;
+		return this.state.languages.map((country, i) => {
+			return <option key={i} data-id={country.currency} selected={this.state.language === country.currency} value={country.code}>{country.code.toUpperCase()}</option>;
 		})
 	}
 
