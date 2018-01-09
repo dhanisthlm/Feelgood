@@ -875,7 +875,7 @@ export class Checkout extends FormComponent {
      */
     getVoucherDiscount () {
         return this.state.data.promoDiscount > 0
-            ? Math.floor(this.getPackageSum() / 2)
+            ? Math.round(this.getPackageSum() / 2)
             : 0;
     }
 
