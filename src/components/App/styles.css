@@ -18,6 +18,7 @@ h4 {
 
 input[type="text"] {
     color: #000 !important;
+    font-weight: 400 !important;
 }
 
 @media only screen and (max-width: 500px) {
