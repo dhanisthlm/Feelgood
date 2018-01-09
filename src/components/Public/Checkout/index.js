@@ -686,9 +686,7 @@ export class Checkout extends FormComponent {
      * @return {object}
      */
     payment(data, actions) {
-        const amount = this.state.paypalFactor === 1
-            ? this.getCurrencied(this.state.cost.total)
-            : this.state.cost.total / this.getSelectedCurrency()[0].rate / 2;
+        const amount = this.getTotal();
 
         const currency = this.state.paypalCurrencies.indexOf(this.getSelectedCurrency()[0].currency) > -1
             ? this.getSelectedCurrency()[0].code.toUpperCase() : 'EUR';
@@ -852,7 +850,7 @@ export class Checkout extends FormComponent {
      * @return {object}
      */
     getPackageSum() {
-        return Math.round(this.getSum() - this.getPackageDiscount());
+        return Math.floor(this.getSum() - this.getPackageDiscount());
     }
 
     /**
@@ -1058,16 +1056,13 @@ export class Checkout extends FormComponent {
 																<tr>
 																	<td className="right heavy"
 																		colSpan="2">{ t('total') }</td>
-																	<td className="center heavy">{ this.getTotal() }&nbsp;{ currency }<span className="asterix">*</span></td>
+																	<td className="center heavy">{ this.getTotal() }&nbsp;{ currency }</td>
 																</tr>
                                                             )
                                                         }
                                                     })()}
 													</tbody>
 												</table>
-                                                <p className="asterix-text">
-                                                    <span>*</span>Mogu se pojaviti određeni krugovi
-                                                </p>
                                                 <div className="disclaimer">
                                                     {(() => {
                                                         if (this.state.paypalFactor !== 1) {

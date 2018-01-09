@@ -62,9 +62,13 @@ export class Payment extends Component {
 	}
 
 	componentWillMount () {
-		this.setState(this.createInitialState());
-		this.props.dispatch(getStripeToken());
-        this.props.dispatch(getPaypalEnv());
+		this.setState(this.createInitialState(), () => {
+            let skype = this.state.skype
+            skype.s.active = true;
+            this.setState({ skype });
+            this.props.dispatch(getStripeToken());
+            this.props.dispatch(getPaypalEnv());
+		});
 	}
 
 	componentWillReceiveProps (nextProps) {
