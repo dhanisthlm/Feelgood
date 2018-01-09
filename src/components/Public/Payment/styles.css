@@ -584,7 +584,7 @@
     margin: 0;
     font-family: lato, 'sans-serif', 'arial';
     display: inline-block;
-    line-height: 41px;
+    line-height: 38px;
     font-size: 17px;
     margin-left: 18px;
     position: absolute;
@@ -1218,7 +1218,7 @@
     }
 
     .payment .toggle_radios {
-        width: 94%;
+        width: 96%;
         margin-bottom: 20px;
     }
 
@@ -1370,6 +1370,12 @@
     .payment {
         padding: 0 20px 0 20px;
         margin-bottom: 18px;
+    }
+
+    .payment .duration-text {
+        width: initial;
+        text-align: left;
+        margin-left: 13px;
     }
 
     .payment + .text-wrapper {

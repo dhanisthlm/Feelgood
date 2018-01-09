@@ -63,7 +63,7 @@ export class Payment extends Component {
 
 	componentWillMount () {
 		this.setState(this.createInitialState(), () => {
-            let skype = this.state.skype
+            let skype = this.state.skype;
             skype.s.active = true;
             this.setState({ skype });
             this.props.dispatch(getStripeToken());
@@ -126,7 +126,7 @@ export class Payment extends Component {
             promoCode: 'zdravlje.nu',
             promoDiscountFactor: 0.5,
             enteredCode: '',
-			durationText: true,
+			durationText: false,
             code: '',
             skype: {
                 s: { active: false, cost: 60, week: 1, code: '1', description: '1 Skype poziva' },
