@@ -584,7 +584,7 @@
     margin: 0;
     font-family: lato, 'sans-serif', 'arial';
     display: inline-block;
-    line-height: 38px;
+    line-height: 41px;
     font-size: 17px;
     margin-left: 18px;
     position: absolute;
@@ -1124,6 +1124,10 @@
         text-align-last: center;
         margin-bottom: 7px;
         padding: 0;
+    }
+
+    .payment .toggle_radios label p {
+        line-height: 38px;
     }
 
     .payment + .text-wrapper .total span {

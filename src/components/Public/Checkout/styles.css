@@ -445,7 +445,8 @@
 }
 
 .checkout .form-buttons button {
-    float: left
+    float: left;
+    border-radius: 3px;
 }
 
 .checkout .form-buttons .stripe-button {
