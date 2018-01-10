@@ -14,6 +14,7 @@ import { i18nValidation } from  '../../../../helpers/validation';
 import { saveEncounter, resetEncounter } from '../../../actions/encounter';
 import { getCountries } from '../../../../helpers/countries';
 import { getCurrency } from '../../../../helpers/currencies';
+import { getSkypeCost, getEmailCost, getPackageDiscount, getVoucherDiscount, getSum, getTotal, getPackageSum } from '../../../../helpers/payment';
 import Header from '../Header';
 import Footer from '../Footer';
 import styles from './styles.css';
@@ -686,7 +687,7 @@ export class Checkout extends FormComponent {
      * @return {object}
      */
     payment(data, actions) {
-        const amount = this.getTotal();
+        const amount = getTotal(this.state);
 
         const currency = this.state.paypalCurrencies.indexOf(this.getSelectedCurrency()[0].currency) > -1
             ? this.getSelectedCurrency()[0].code.toUpperCase() : 'EUR';
@@ -796,105 +797,6 @@ export class Checkout extends FormComponent {
      * @param {number} responseCode
      * @return {object}
      */
-    getSelectedCurrency () {
-        return this.state.languages.filter((country) => {
-            return country.currency === this.state.language;
-        });
-    }
-
-    /**
-     * This callback type is called `requestCallback
-     * @callback requestCallback
-     * @param {number} responseCode
-     * @return {object}
-     */
-    getCurrencied (value) {
-        return this.state.paypalFactor === 1 ? (value / this.getSelectedCurrency()[0].rate).toFixed(0) : (value).toFixed(0);
-    }
-
-    getSkypeCost() {
-        if (!this.state.data.skype) return 0;
-        const skypeCost = this.state.data.skype ? 60 * this.state.data.skype.week : 0;
-        const skypeDurationFactor = this.state.data.skypeDuration.factor;
-        const skype = skypeCost * skypeDurationFactor;
-        return this.getCurrencied(skype) / this.state.paypalFactor;
-    }
-
-    /**
-     * This callback type is called `requestCallback
-     * @callback requestCallback
-     * @param {number} responseCode
-     * @return {object}
-     */
-    getEmailCost() {
-        if (!this.state.data.email) return 0;
-        return this.getCurrencied(this.state.data.email.cost * this.state.data.email.week) / this.state.paypalFactor;
-    }
-
-    /**
-     * This callback type is called `requestCallback
-     * @callback requestCallback
-     * @param {number} responseCode
-     * @return {object}
-     */
-    getSum () {
-        const skype = this.state.data.skype ? this.getSkypeCost() : 0;
-        const email = this.state.data.email ? this.getEmailCost() : 0;
-        return (skype + email);
-    }
-
-    /**
-     * This callback type is called `requestCallback
-     * @callback requestCallback
-     * @param {number} responseCode
-     * @return {object}
-     */
-    getPackageSum() {
-        return Math.floor(this.getSum() - this.getPackageDiscount());
-    }
-
-    /**
-     * This callback type is called `requestCallback
-     * @callback requestCallback
-     * @param {number} responseCode
-     * @return {object}
-     */
-    getPackageDiscount() {
-        const skypeCost = this.state.data.skype ? this.state.data.skype.cost * this.state.data.skypeDuration.factor : 0;
-        const skypeDiscount = this.getSkypeCost() - (this.getCurrencied(skypeCost) / this.state.paypalFactor);
-        const emailDiscount = this.getEmailCost() - (this.getCurrencied(this.state.emailDiscount) / this.state.paypalFactor);
-        const packageDiscount = this.state.data.email && this.state.data.skype ? (this.getEmailCost() + this.getSkypeCost() - skypeDiscount - emailDiscount) * 0.05 : 0;
-        return Math.floor(Math.round(packageDiscount) + parseFloat(skypeDiscount) + parseFloat(emailDiscount));
-    }
-
-    /**
-     * This callback type is called `requestCallback
-     * @callback requestCallback
-     * @param {number} responseCode
-     * @return {object}
-     */
-    getVoucherDiscount () {
-        return this.state.data.promoDiscount > 0
-            ? Math.round(this.getPackageSum() / 2)
-            : 0;
-    }
-
-    /**
-     * This callback type is called `requestCallback
-     * @callback requestCallback
-     * @param {number} responseCode
-     * @return {object}
-     */
-    getTotal () {
-        return this.getVoucherDiscount() > 0 ? this.getPackageSum() - this.getVoucherDiscount() : this.getPackageSum();
-    }
-
-    /**
-     * This callback type is called `requestCallback
-     * @callback requestCallback
-     * @param {number} responseCode
-     * @return {object}
-     */
 	render () {
 	    if (window.localStorage.getItem('order') === null) {
 	        return null;
@@ -984,7 +886,7 @@ export class Checkout extends FormComponent {
 																<tr>
 																	<td>{ this.state.data.skype.description }</td>
 																	<td className="center">{ this.state.data.skype.week }</td>
-																	<td className="center">{ this.getSkypeCost() }&nbsp;{ currency }</td>
+																	<td className="center">{ getSkypeCost(this.state) }&nbsp;{ currency }</td>
                                                         </tr>
                                                             )
                                                         }
@@ -995,7 +897,7 @@ export class Checkout extends FormComponent {
 																<tr>
 																	<td>{this.state.data.email.description}</td>
 																	<td className="center">{ this.state.data.email.week }</td>
-																	<td className="center">{ this.getEmailCost() }&nbsp;{ currency }</td>
+																	<td className="center">{ getEmailCost(this.state) }&nbsp;{ currency }</td>
 																</tr>
                                                             )
                                                         }
@@ -1007,7 +909,7 @@ export class Checkout extends FormComponent {
 													</tr>
 													<tr>
 														<td className={sumClass} colSpan="2">{ t('sum') }</td>
-														<td className={centerClass}>{ this.getSum() }&nbsp;{ currency }</td>
+														<td className={centerClass}>{ getSum(this.state) }&nbsp;{ currency }</td>
 													</tr>
                                                     {(() => {
                                                         if (this.state.data.packageDiscount || this.state.data.skype && this.state.data.skype.week > 1 || this.state.data.email && this.state.data.email.week > 1) {
@@ -1015,7 +917,7 @@ export class Checkout extends FormComponent {
 																<tr>
 																	<td className="right"
 																		colSpan="2">{ t('packageDiscount') }</td>
-																	<td className="center">{ this.getPackageDiscount() }&nbsp;{ currency }</td>
+																	<td className="center">{ getPackageDiscount(this.state) }&nbsp;{ currency }</td>
 																</tr>
                                                             )
                                                         }
@@ -1033,7 +935,7 @@ export class Checkout extends FormComponent {
 																	<td className={labelName}
 																		colSpan="2">{ t('sumWithPackageDiscount')}</td>
 																	<td className={valueName}>
-                                                                        { this.getPackageSum() }&nbsp;{ currency }
+                                                                        { getPackageSum(this.state) }&nbsp;{ currency }
 																	</td>
 																</tr>
                                                             )
@@ -1045,7 +947,7 @@ export class Checkout extends FormComponent {
 																<tr>
 																	<td className="right"
 																		colSpan="2">{ t('voucherDiscount') }</td>
-																	<td className="center">{ this.getVoucherDiscount() }&nbsp;{ currency }</td>
+																	<td className="center">{ getVoucherDiscount(this.state) }&nbsp;{ currency }</td>
 																</tr>
                                                             )
                                                         }
@@ -1056,7 +958,7 @@ export class Checkout extends FormComponent {
 																<tr>
 																	<td className="right heavy"
 																		colSpan="2">{ t('total') }</td>
-																	<td className="center heavy">{ this.getTotal() }&nbsp;{ currency }</td>
+																	<td className="center heavy">{ getTotal(this.state) }&nbsp;{ currency }</td>
 																</tr>
                                                             )
                                                         }

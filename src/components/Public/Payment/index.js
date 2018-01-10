@@ -4,6 +4,7 @@ import { translate } from 'react-i18next';
 import { routeActions } from 'redux-simple-router';
 import { setEncounterData } from '../../../actions/encounter';
 import { getStripeToken, getPaypalEnv } from '../../../actions/config';
+import { getSkypeCost, getEmailCost, getPackageDiscount, getVoucherDiscount, getSum, getTotal, getPackageSum } from '../../../../helpers/payment';
 import styles from './styles.css';
 
 export class Payment extends Component {
@@ -13,6 +14,7 @@ export class Payment extends Component {
 		this.state = {
 			language: 'KM',
 			packageFactor: 0.05,
+			paypalFactor: 1,
 			durationSkype: 's',
 			isDirty: false,
 			languages: [
@@ -66,6 +68,7 @@ export class Payment extends Component {
             let skype = this.state.skype;
             skype.s.active = true;
             this.setState({ skype });
+            this.setState({ data: this.getData() });
             this.props.dispatch(getStripeToken());
             this.props.dispatch(getPaypalEnv());
 		});
@@ -308,14 +311,11 @@ export class Payment extends Component {
 
         if (this.skypePackage) {
             skypeWeeks = this.skypePackage.week;
-            skypeCode = this.skypePackage.code;
             skypeCost = this.skypePackage.cost * this.state.skypeDuration[skypeDuration].factor;
-            skypeDurationCode = this.state.skypeDuration[skypeDuration].code;
         }
 
         if (this.emailPackage) {
             emailWeeks = this.emailPackage.week;
-            emailCode = this.emailPackage.code;
             emailCost = this.calculateEmailDiscount(this.emailPackage);
 		}
 
@@ -323,8 +323,7 @@ export class Payment extends Component {
 
         amount.skype = Math.round(((skypeCost / skypeWeeks) * discount.promoFactor * discount.packageFactor) / this.getSelectedCurrency()[0].rate);
         amount.email = Math.round(((emailCost / emailWeeks) * discount.promoFactor * discount.packageFactor) / this.getSelectedCurrency()[0].rate);
-        amount.code = skypeCode + '' + skypeDurationCode + '' + emailCode;
-        amount.total = Math.round(((emailCost + skypeCost) * (discount.promoFactor * discount.packageFactor)) / this.getSelectedCurrency()[0].rate);
+        amount.total = getTotal(this.state);
 
         return amount;
 	}
@@ -373,7 +372,7 @@ export class Payment extends Component {
             this.setState({ emailDiscount })
         }
 
-        this.setState({ cost });
+        this.setState({ data, cost });
         this.props.dispatch(setEncounterData(data, cost, emailDiscount, promoDiscount));
     }
 
