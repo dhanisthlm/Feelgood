@@ -971,7 +971,7 @@ export class Checkout extends FormComponent {
                                                             return(
                                                                 <div>
                                                                     <p className="paypal">
-                                                                        Nažalost, model plaćanja ne podržava odabranu valutu, stoga će se iznos koji će biti isplaćen EUR.
+                                                                        Izabrana valuta nije podržana.
                                                                     </p>
                                                                 </div>
                                                             )
