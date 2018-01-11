@@ -15,6 +15,7 @@ import { saveEncounter, resetEncounter } from '../../../actions/encounter';
 import { getCountries } from '../../../../helpers/countries';
 import { getCurrency } from '../../../../helpers/currencies';
 import { getSkypeCost, getEmailCost, getPackageDiscount, getVoucherDiscount, getSum, getTotal, getPackageSum, getSelectedCurrency } from '../../../../helpers/payment';
+import { InactivityModal } from '../../InactiveDialog';
 import Header from '../Header';
 import Footer from '../Footer';
 import styles from './styles.css';
@@ -38,7 +39,7 @@ export class Checkout extends FormComponent {
 			showSpinner: false,
 			activity: 0,
 			counter: 60,
-            showDialog: false,
+            showDialog: true,
             startTime: null,
             timeRemaining: '2:00',
             idleTime: 0,
@@ -72,15 +73,6 @@ export class Checkout extends FormComponent {
 		this.handleChange = this.handleChange.bind(this);
 		this.renderIssues = this.renderIssues.bind(this);
 		this.handleSelect = this.handleSelect.bind(this);
-		this.debounce = this.debounce.bind(this);
-        this.closeDialog = this.closeDialog.bind(this);
-        this.timeIncrement = this.timeIncrement.bind(this);
-        this.listenForActivity = this.listenForActivity.bind(this);
-        this.startCountInactivity = this.startCountInactivity.bind(this);
-        this.stopCountInactivity = this.stopCountInactivity.bind(this);
-        this.resetInactivity = this.resetInactivity.bind(this);
-        this.debounce = this.debounce.bind(this);
-        this.countDownToCancel = this.countDownToCancel.bind(this);
         this.handleWebStar = this.handleWebStar.bind(this);
         this.handlePayStar = this.handlePayStar.bind(this);
         this.handleRatingComment = this.handleRatingComment.bind(this);
@@ -98,6 +90,7 @@ export class Checkout extends FormComponent {
         this.onError = this.onError.bind(this);
         this.handleCheckbox = this.handleCheckbox.bind(this);
         this.handleCancel = this.handleCancel.bind(this);
+        this.resetOrder = this.resetOrder.bind(this);
     }
 
 	componentWillMount () {
@@ -115,8 +108,6 @@ export class Checkout extends FormComponent {
 	componentDidMount () {
         if (window.localStorage.getItem('order')) {
             this.initStripe();
-            this.startCountInactivity();
-            this.listenForActivity();
             this.calculateViewportSize();
             this.setState({ env: window.localStorage.getItem('pe') });
         } else {
@@ -224,9 +215,6 @@ export class Checkout extends FormComponent {
         if (nextProps.save === true) {
             window.scrollTo(0, 0);
             window.localStorage.setItem('step', '2');
-            window.removeEventListener('mousemove', this.throttledDebounce);
-            window.removeEventListener('keydown', this.throttledDebounce);
-            this.stopCountInactivity();
             this.setState({ showSpinner: false, save: true });
         }
     }
@@ -354,133 +342,11 @@ export class Checkout extends FormComponent {
      * @param {number} responseCode
      * @return {object}
      */
-    closeDialog () {
-        clearInterval(this.countdownToLogoutInterval);
-        this.setState({ showDialog: false, timeRemaining: '' });
-        this.resetInactivity();
-        this.startCountInactivity();
-    }
-
-    /**
-     * This callback type is called `requestCallback
-     * @callback requestCallback
-     * @param {number} responseCode
-     * @return {object}
-     */
-    startCountInactivity () {
-        if (!this.timerInterval) {
-            this.timerInterval = setInterval(this.timeIncrement.bind(this), this.state.tick);
-        }
-    }
-
-    /**
-     * This callback type is called `requestCallback
-     * @callback requestCallback
-     * @param {number} responseCode
-     * @return {object}
-     */
-    debounce () {
-        this.setState({ idleTime: 0 });
-    }
-
-    /**
-     * This callback type is called `requestCallback
-     * @callback requestCallback
-     * @param {number} responseCode
-     * @return {object}
-     */
-    listenForActivity () {
-        this.throttledDebounce = _.throttle(this.debounce, this.state.tick);
-        window.addEventListener('mousemove', this.throttledDebounce);
-        window.addEventListener('keydown', this.throttledDebounce);
-    }
-
-    /**
-     * This callback type is called `requestCallback
-     * @callback requestCallback
-     * @param {number} responseCode
-     * @return {object}
-     */
-    stopCountInactivity () {
-        if (this.timerInterval) {
-            clearInterval(this.timerInterval);
-            delete this.timerInterval;
-        }
-    }
-
-    /**
-     * This callback type is called `requestCallback
-     * @callback requestCallback
-     * @param {number} responseCode
-     * @return {object}
-     */
-    resetInactivity () {
-        this.setState({ idleTime: 0, showDialog: false });
-    }
-
-    /**
-     * This callback type is called `requestCallback
-     * @callback requestCallback
-     * @param {number} responseCode
-     * @return {object}
-     */
-    timeIncrement () {
-        this.setState({ idleTime: parseInt(this.state.idleTime + parseInt(this.state.tick)) });
-        if (this.state.idleTime > parseInt(this.state.idleTtl)) {
-            this.stopCountInactivity();
-
-            this.setState({
-                startTime: Date.now(),
-                showDialog: true
-            }, () => {
-                this.countdownToLogoutInterval = setInterval(this.countDownToCancel, 1000);
-            });
-        }
-    }
-
-    /**
-     * This callback type is called `requestCallback
-     * @callback requestCallback
-     * @param {number} responseCode
-     * @return {object}
-     */
     resetOrder () {
-		clearInterval(this.countdownToLogoutInterval);
-		clearInterval(this.timerInterval);
-
-		this.setState({ showDialog: false });
-		this.stopCountInactivity();
-		this.setState({ countInactivity: false });
 		this.props.dispatch(routeActions.push('/'));
-
 		window.localStorage.removeItem('order');
         window.localStorage.removeItem('stripe');
         window.localStorage.removeItem('saved');
-        window.removeEventListener('mousemove', this.throttledDebounce);
-        window.removeEventListener('keydown', this.throttledDebounce);
-	}
-
-    /**
-     * This callback type is called `requestCallback
-     * @callback requestCallback
-     * @param {number} responseCode
-     * @return {object}
-     */
-	countDownToCancel () {
-        const MODAL_COUNTDOWN_START = 120000; //2 minutes
-        const startTime = this.state.startTime;
-        const timeDiff = Date.now() - startTime;
-        const ns = (((MODAL_COUNTDOWN_START - timeDiff) / 1000) >> 0);
-        const m = (ns / 60) >> 0;
-        const s = ns - m * 60;
-
-        if (ns > 0) {
-            this.setState({ timeRemaining: m + ':' + (('' + s).length > 1 ? '' : '0') + s });
-        }
-
-        if (ns === 0) {
-            this.resetOrder();
-        }
 	}
 
     /**
@@ -834,18 +700,7 @@ export class Checkout extends FormComponent {
 
         return (
 			<div className="page">
-                {(() => {
-                    if (this.state.showDialog === true) {
-                        return (
-							<div className="activity-wrapper">
-								<div className="box">
-									<p>Dugo ste bili neaktivni, ako ne kliknete na moju kupovinu, vaš započeti nalog će se završiti i u {this.state.timeRemaining} minuta ćete biti preusmereni na početnu stranicu.</p>
-									<button onClick={this.closeDialog}>Nastaviti</button>
-								</div>
-							</div>
-                        )
-                    }
-				})()}
+                <InactivityModal resetOrder={this.resetOrder} />
 				<div className={spinnerClass}>
 					<div className="loader">
 						<svg className="circular" viewBox="25 25 50 50">
