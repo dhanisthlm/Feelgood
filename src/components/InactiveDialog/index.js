@@ -16,7 +16,7 @@ export class InactivityModal extends Component {
             idleTime: 0,
             location: null,
             countInactivity: true,
-            idleTtl: 3000,
+            idleTtl: 300000,
             tick: 10000,
         };
 

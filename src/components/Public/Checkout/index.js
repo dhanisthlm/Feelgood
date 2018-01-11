@@ -849,7 +849,7 @@ export class Checkout extends FormComponent {
                                     }
                                 })()}
 								<div ref={(front) => { this.front = front; }} className={front}>
-									<form id="payment-form">
+									<div id="payment-form">
 										<div className="form-element-wrapper">
 											<label htmlFor="name">{ t('name') }</label>
 											<input
@@ -1044,7 +1044,7 @@ export class Checkout extends FormComponent {
                                                 }
                                             })()}
 										</div>
-									</form>
+									</div>
 								</div>
 								<div className={back}>
 									<div>
