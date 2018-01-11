@@ -14,7 +14,7 @@ import { i18nValidation } from  '../../../../helpers/validation';
 import { saveEncounter, resetEncounter } from '../../../actions/encounter';
 import { getCountries } from '../../../../helpers/countries';
 import { getCurrency } from '../../../../helpers/currencies';
-import { getSkypeCost, getEmailCost, getPackageDiscount, getVoucherDiscount, getSum, getTotal, getPackageSum } from '../../../../helpers/payment';
+import { getSkypeCost, getEmailCost, getPackageDiscount, getVoucherDiscount, getSum, getTotal, getPackageSum, getSelectedCurrency } from '../../../../helpers/payment';
 import Header from '../Header';
 import Footer from '../Footer';
 import styles from './styles.css';
@@ -586,7 +586,7 @@ export class Checkout extends FormComponent {
         this.setState({
             termsIsDirty: true,
             cancelIsDirty: true,
-            currency: this.getSelectedCurrency()[0].code.toUpperCase()
+            currency: getSelectedCurrency(this.state)[0].code.toUpperCase()
         });
 
 		this.props.validate((error) => {
@@ -689,8 +689,8 @@ export class Checkout extends FormComponent {
     payment(data, actions) {
         const amount = getTotal(this.state);
 
-        const currency = this.state.paypalCurrencies.indexOf(this.getSelectedCurrency()[0].currency) > -1
-            ? this.getSelectedCurrency()[0].code.toUpperCase() : 'EUR';
+        const currency = this.state.paypalCurrencies.indexOf(getSelectedCurrency(this.state)[0].currency) > -1
+            ? getSelectedCurrency(this.state)[0].code.toUpperCase() : 'EUR';
 
         return actions.payment.create({
               transactions: [

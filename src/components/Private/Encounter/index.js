@@ -140,27 +140,7 @@ export class Encounter extends Component {
                 </ul>
                 <div className="admin-wrapper">
                     <table id="admin-table" className="admin-table">
-                        <colgroup>
-                            <col width="10%" />
-                            <col width="10%" />
-                            <col width="6%" />
-                            <col width="6%" />
-                            <col width="6%" />
-                            <col width="6%" />
-                            <col width="6%" />
-                            <col width="6%" />
-                            <col width="5%" />
-                            <col width="13%" />
-                            <col width="4%" />
-                            <col width="3%" />
-                            <col width="3%" />
-                            <col width="3%" />
-                            <col width="3%" />
-                            <col width="3%" />
-                            <col width="3%" />
-                            <col width="10%" />
-                            <col width="1%" />
-                        </colgroup>
+
                         <thead>
                             <tr>
                                 <th>Ime</th>

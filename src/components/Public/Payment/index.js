@@ -4,7 +4,7 @@ import { translate } from 'react-i18next';
 import { routeActions } from 'redux-simple-router';
 import { setEncounterData } from '../../../actions/encounter';
 import { getStripeToken, getPaypalEnv } from '../../../actions/config';
-import { getSkypeCost, getEmailCost, getPackageDiscount, getVoucherDiscount, getSum, getTotal, getPackageSum } from '../../../../helpers/payment';
+import { getTotal, getSelectedCurrency } from '../../../../helpers/payment';
 import styles from './styles.css';
 
 export class Payment extends Component {
@@ -59,7 +59,6 @@ export class Payment extends Component {
 		this.getData = this.getData.bind(this);
 		this.handlePromoCode = this.handlePromoCode.bind(this);
 		this.renderCurrencies = this.renderCurrencies.bind(this);
-		this.getSelectedCurrency = this.getSelectedCurrency.bind(this);
 		this.handleSelect = this.handleSelect.bind(this);
 	}
 
@@ -297,10 +296,6 @@ export class Payment extends Component {
         let emailWeeks = 1;
         let skypeWeeks = 1;
 
-        let emailCode = '00';
-        let skypeCode = '0';
-        let skypeDurationCode = '00';
-
         const amount = {};
 
         this.skypePackage = skype[Object.keys(skype)
@@ -321,8 +316,8 @@ export class Payment extends Component {
 
         const discount = this.calculateDiscounts(skypeCost, emailCost);
 
-        amount.skype = Math.round(((skypeCost / skypeWeeks) * discount.promoFactor * discount.packageFactor) / this.getSelectedCurrency()[0].rate);
-        amount.email = Math.round(((emailCost / emailWeeks) * discount.promoFactor * discount.packageFactor) / this.getSelectedCurrency()[0].rate);
+        amount.skype = Math.round(((skypeCost / skypeWeeks) * discount.promoFactor * discount.packageFactor) / getSelectedCurrency(this.state)[0].rate);
+        amount.email = Math.round(((emailCost / emailWeeks) * discount.promoFactor * discount.packageFactor) / getSelectedCurrency(this.state)[0].rate);
         amount.total = getTotal(this.state);
 
         return amount;
@@ -413,12 +408,6 @@ export class Payment extends Component {
 		const children = Array.prototype.slice.call(e.target.children);
         const currency = children.filter(child => child.selected === true);
 		this.setState({language: currency[0]['attributes']['data-id']['nodeValue'], isDirty: true});
-	}
-
-	getSelectedCurrency () {
-		return this.state.languages.filter((country) => {
-			return country.currency === this.state.language;
-		});
 	}
 
 	renderCurrencies () {
