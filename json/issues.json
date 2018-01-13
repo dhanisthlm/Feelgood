@@ -1,0 +1,37 @@
+{
+  "issues": [
+    {
+      "name": "stress"
+    },
+    {
+      "name": "anxiety"
+    },
+    {
+      "name": "exhaustion"
+    },
+    {
+      "name": "backPain"
+    },
+    {
+      "name": "depression"
+    },
+    {
+      "name": "fobia"
+    },
+    {
+      "name": "panic"
+    },
+    {
+      "name": "kids"
+    },
+    {
+      "name": "weight"
+    },
+    {
+      "name": "violence"
+    },
+    {
+      "name": "stuck"
+    }
+  ]
+}

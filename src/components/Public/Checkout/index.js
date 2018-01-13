@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux';
 import { translate } from 'react-i18next';
-import _ from 'lodash';
 import validation from 'react-validation-mixin';
 import strategy from 'joi-validation-strategy';
 import FormComponent from '../../FormComponent';
@@ -18,6 +17,7 @@ import { getSkypeCost, getEmailCost, getPackageDiscount, getVoucherDiscount, get
 import { InactivityModal } from '../../InactiveDialog';
 import Header from '../Header';
 import Footer from '../Footer';
+import issueObj from '../../../../json/issues.json';
 import styles from './styles.css';
 
 let PayPalButton = paypal.Button.driver('react', { React, ReactDOM });
@@ -613,7 +613,7 @@ export class Checkout extends FormComponent {
      */
 	renderIssues () {
 		const { t } = this.props;
-		const issues = ['Izaberite temu', ...this.state.issues];
+		const issues = ['Izaberite temu', ...issueObj.issues];
 		let issueName;
 		let issueValue;
 

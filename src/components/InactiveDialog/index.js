@@ -45,13 +45,7 @@ export class InactivityModal extends Component {
     }
 
     componentWillUnmount () {
-        clearInterval(this.timerInterval);
-        clearInterval(this.countdownToLogoutInterval);
-
-        window.removeEventListener('mousemove', this.throttledDebounce);
-        window.removeEventListener('keydown', this.throttledDebounce);
-
-        this.throttledDebounce.cancel();
+       this.logoutUser();
     }
 
     /**
@@ -134,7 +128,9 @@ export class InactivityModal extends Component {
 
         this.setState({ showDialog: false });
         this.setState({ countInactivity: false });
+
         this.stopCountInactivity();
+        this.throttledDebounce.cancel();
 
         this.props.resetOrder();
     }
