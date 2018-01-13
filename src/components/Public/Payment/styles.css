@@ -697,6 +697,19 @@
        width: 99%;
     }
 
+    .payment + .text-wrapper .total {
+        color: #fff;
+        font-size: 33px;
+        letter-spacing: 0;
+        float: none;
+        width: 100%;
+        display: block;
+        text-align: center;
+        margin: 0;
+        padding: 0;
+        min-width: 0;
+    }
+
     .payment .skype .wrapper label, .payment .email .wrapper label {
         width: 100%;
         box-sizing: border-box;

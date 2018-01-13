@@ -96,10 +96,6 @@
     display: none;
 }
 
-.issues .iscrpljenost:after {
-    //content: 'Iscrpljenost';
-}
-
 .issues .iscrpljenost svg {
     width: 75px !important;
     margin-top: -4px !important;
@@ -141,10 +137,6 @@
 .issues .fobia svg {
     width: 67px !important;
     margin-left: 6px !important;
-}
-
-.issues .issue:after {
-    //content: attr(id);
 }
 
 .issues .issue.show:after {
@@ -249,6 +241,10 @@
 
     .issues .issue-text {
         height: 30px;
+    }
+
+    .issues .issue:hover {
+        transform: none;
     }
 
     .issues.mobile-issues {
