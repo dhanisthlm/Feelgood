@@ -419,7 +419,7 @@
           "description": "Da li vaše dijete ima izlive bijesa?"
         },
         "weight": {
-          "name": "Tezina",
+          "name": "Težina",
           "description": "Imate li problema sa tjelesnom težinom?"
         },
         "panic": {
@@ -431,8 +431,8 @@
           "description": "Imate li fobije koje vas sprječavaju u životu?"
         },
         "violence": {
-          "name": "Sukob",
-          "description": "Ulazite li lako u sukobe i jeste li frustrirani?"
+          "name": "Konflikt",
+          "description": "Ulazite li lako u konflikte i jeste li frustrirani?"
         },
         "stuck": {
           "name": "Životna kriza",
@@ -844,7 +844,7 @@
           "description": "Da li vaše dijete ima izlive bijesa?"
         },
         "weight": {
-          "name": "Tezina",
+          "name": "Težina",
           "description": "Imate li problema sa tjelesnom težinom?"
         },
         "panic": {
@@ -856,8 +856,8 @@
           "description": "Imate li fobije koje vas sprječavaju u životu?"
         },
         "violence": {
-          "name": "Sukob",
-          "description": "Ulazite li lako u sukobe i jeste li frustrirani?"
+          "name": "Konflikt",
+          "description": "Ulazite li lako u konflikte i jeste li frustrirani?"
         },
         "stuck": {
           "name": "Zaglavili",
