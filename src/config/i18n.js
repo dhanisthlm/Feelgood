@@ -4,7 +4,7 @@ import * as resources from '../../i18n/translations.json';
 export const defaultLocale = 'ba-BA';
 
 export const supportedLocales = [
-    'sv-SE',
+    'en-US',
     'ba-BA'
 ];
 

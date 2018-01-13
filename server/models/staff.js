@@ -17,7 +17,7 @@ const staffSchema = Schema({
         type: String
     },
     text: {
-        type: Array
+        type: Object
     }
 });
 

@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux';
 import { translate } from 'react-i18next';
 import { getStaff } from '../../../actions/staff';
-import { createStaff } from '../../../actions/staff';
+import i18n from '../../../config/i18n';
 import styles from './styles.css';
 
 export class Staff extends Component {
@@ -22,6 +22,7 @@ export class Staff extends Component {
 
 	componentDidMount() {
 		this.props.dispatch(getStaff());
+		this.setState({ locale: i18n['language'] });
 	}
 
 	componentWillReceiveProps (nextProps) {}
@@ -42,8 +43,8 @@ export class Staff extends Component {
 	}
 
 	renderPersonalText (person) {
-		return person.text.map((part, i) => {
-            return <p key={i}>{ person.text[i] }</p>;
+		return person.text[this.state.locale].map((part, i) => {
+            return <p key={i}>{ person.text[this.state.locale][i] }</p>;
         });
 	}
 
