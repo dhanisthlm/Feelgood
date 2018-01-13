@@ -396,7 +396,7 @@
       "issues": {
         "stress": {
           "name": "Stres",
-          "description": "Jeste li pod stresom i imate li poteškoće u smanjenjem istih?"
+          "description": "Jeste li pod stresom i imate li poteškoće u smanjenjem istog?"
         },
         "anxiety": {
           "name": "Sikiracija",
@@ -424,11 +424,11 @@
         },
         "panic": {
           "name": "Panika",
-          "description": "Osjecate li anksioznost ili napad panike?"
+          "description": "Osjećate li anksioznost ili napad panike?"
         },
         "fobia": {
-          "name": "Fobia",
-          "description": "Imate li fobije koje vas sprečavaju u životu?"
+          "name": "Fobija",
+          "description": "Imate li fobije koje vas sprječavaju u životu?"
         },
         "violence": {
           "name": "Sukob",
@@ -821,7 +821,7 @@
       "issues": {
         "stress": {
           "name": "Stres",
-          "description": "Jeste li pod stresom i imate li poteškoće u smanjenjem istih?"
+          "description": "Jeste li pod stresom i imate li poteškoće u smanjenjem istog?"
         },
         "anxiety": {
           "name": "Sikiracija",
@@ -849,11 +849,11 @@
         },
         "panic": {
           "name": "Panika",
-          "description": "Osjecate li anksioznost ili napad panike?"
+          "description": "Osjećate li anksioznost ili napad panike?"
         },
         "fobia": {
-          "name": "Fobia",
-          "description": "Imate li fobije koje vas sprečavaju u životu?"
+          "name": "Fobija",
+          "description": "Imate li fobije koje vas sprječavaju u životu?"
         },
         "violence": {
           "name": "Sukob",
