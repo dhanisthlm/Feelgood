@@ -43,8 +43,9 @@ export class Staff extends Component {
 	}
 
 	renderPersonalText (person) {
-		return person.text[this.state.locale].map((part, i) => {
-            return <p key={i}>{ person.text[this.state.locale][i] }</p>;
+		const locale = this.state.locale || i18n.language;
+		return person.text[locale].map((part, i) => {
+            return <p key={i}>{ person.text[locale][i] }</p>;
         });
 	}
 
