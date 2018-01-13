@@ -48,6 +48,10 @@ export const encounterValidator = Joi.object().keys({
         .string()
         .required(),
 
+    currency: Joi
+        .string()
+        .required(),
+
     timeframe: Joi
         .string()
         .allow('', null),

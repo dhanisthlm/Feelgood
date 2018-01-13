@@ -76,6 +76,10 @@ export class Encounter extends Component {
                                     <p>{encounter.country}</p>
                                 </div>
                                 <div>
+                                    <p>Valuta</p>
+                                    <p>{encounter.currency}</p>
+                                </div>
+                                <div>
                                     <p>Tip plaćanja</p>
                                     <p>{encounter.paymentType}</p>
                                 </div>
@@ -154,6 +158,7 @@ export class Encounter extends Component {
                                 <th>Telefon</th>
                                 <th>Tema</th>
                                 <th>Datum</th>
+                                <th>Valuta</th>
                                 <th>Skype</th>
                                 <th>Komentar</th>
                                 <th>Cena e-pošte</th>
@@ -187,6 +192,7 @@ export class Encounter extends Component {
                                         <td>{encounter.phone}</td>
                                         <td>{encounter.issue}</td>
                                         <td>{localTime}</td>
+                                        <td>{encounter.currency}</td>
                                         <td>{encounter.skype}</td>
                                         <td>{encounter.comment}</td>
                                         <td>{encounter.order.email.cost}</td>

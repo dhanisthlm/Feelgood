@@ -82,6 +82,7 @@ const saveEncounter = (request, reply, charge) => {
     encounter.issue = request.payload.encounter.issue;
     encounter.mail = request.payload.encounter.mail;
     encounter.comment = request.payload.encounter.comment;
+    encounter.currency = request.payload.encounter.currency;
     encounter.price = skypePrice + emailPrice;
 
     const date = new Date();
