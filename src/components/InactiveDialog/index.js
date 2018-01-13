@@ -77,6 +77,8 @@ export class InactivityModal extends Component {
 
     listenForActivity () {
         this.throttledDebounce = _.throttle(this.debounce, this.state.tick);
+        window.addEventListener('touchstart', this.throttledDebounce);
+        window.addEventListener('touchmove', this.throttledDebounce);
         window.addEventListener('mousemove', this.throttledDebounce);
         window.addEventListener('keydown', this.throttledDebounce);
     }
@@ -120,6 +122,8 @@ export class InactivityModal extends Component {
     }
 
     logoutUser () {
+        window.removeEventListener('touchstart', this.throttledDebounce);
+        window.removeEventListener('touchmove', this.throttledDebounce);
         window.removeEventListener('mousemove', this.throttledDebounce);
         window.removeEventListener('keydown', this.throttledDebounce);
 

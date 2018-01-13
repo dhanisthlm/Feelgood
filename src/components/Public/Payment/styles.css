@@ -704,10 +704,10 @@
         float: none;
         width: 100%;
         display: block;
-        text-align: center;
+        text-align: center !important;
         margin: 0;
         padding: 0;
-        min-width: 0;
+        min-width: 0 !important;
     }
 
     .payment .skype .wrapper label, .payment .email .wrapper label {

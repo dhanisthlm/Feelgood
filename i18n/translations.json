@@ -2,6 +2,151 @@
   "en-US": {
     "common": {
     },
+    "headerView": {
+      "contactUs": "Contact us",
+      "emergency": "Emergency",
+      "callUs": "Call us",
+      "phone": "Phone",
+      "services": "Services",
+      "prices": "Prices",
+      "howWork": "How it works",
+      "whoAreWe": "Who are we"
+    },
+    "introView": {
+      "heading": "Psihološko savjetovanje za svakodnevne probleme",
+      "preamble": "Tu smo za Vas, ako trebate s nekim razgovarati. Zdravlje.nu Vam nudi psihološko savjetovanje, diskretno i po razumnoj cijeni. U razgovoru prepoznajemo koje misli i emocije Vas sprječavaju da se osjećate dobro i budete uspješni u životu, te radimo na promjeni.",
+      "start": "Započnite",
+      "cookieText": "Kolačiće koristimo radi pravilnog funkcionisanja određenih ulsuga. Oni su privremeni i nestaju kada isključite browser. Korištenjem ove web stranice prihvaćate korištenje kolačića."
+    },
+    "issueView": {
+      "heading": "Napravite prvi korak za bolje sutra",
+      "preamble": "Da biste pronašli rješenja za svoju situaciju, može vam biti korisno potražiti stručnu podršku i pomoć. Kontaktirajte nas, mi možemo pomoći.",
+      "contactUs": "Contact us",
+      "issues": {
+        "stress": {
+          "name": "Stress",
+          "description": "Jeste li pod stresom i imate li poteškoće u smanjenjem istih?"
+        },
+        "anxiety": {
+          "name": "Anxiety",
+          "description": "Osjećate li da se sikirate i da ne možete podnijeti brigu?"
+        },
+        "exhaustion": {
+          "name": "Exhaustion",
+          "description": "Imate li poteškoća sa spavanjem, umorom i iscrpljenjošću?"
+        },
+        "backPain": {
+          "name": "Back pain",
+          "description": "Trebate li pomoć o olakšavanju bola?"
+        },
+        "depression": {
+          "name": "Depression",
+          "description": "Osjećate li se tužno ili sumorno?"
+        },
+        "kids": {
+          "name": "Kids",
+          "description": "Da li vaše dijete ima izlive bijesa?"
+        },
+        "weight": {
+          "name": "Weight",
+          "description": "Imate li problema sa tjelesnom težinom?"
+        },
+        "panic": {
+          "name": "Panic",
+          "description": "Osjecate li anksioznost ili napad panike?"
+        },
+        "fobia": {
+          "name": "Fobia",
+          "description": "Imate li fobije koje vas sprečavaju u životu?"
+        },
+        "violence": {
+          "name": "Violence",
+          "description": "Ulazite li lako u sukobe i jeste li frustrirani?"
+        },
+        "stuck": {
+          "name": "Life crisis",
+          "description": "Jeste li zaglavili osobno ili profesionalno?"
+        }
+      }
+    },
+    "quoteView": {
+      "quote1": "\"Sreća je kad je usklađeno ono što misliš,",
+      "quote2": "ono što govoriš i ono što radiš.\"",
+      "signature": "Mahatma Ghandi"
+    },
+    "quoteImageView": {
+      "quote1": "\"Tajna promjene jest fokusirati svu svoju energiju,",
+      "quote2": "ne na borbu protiv starog, već na gradnju novog.\"",
+      "signature": "Sokrates"
+    },
+    "staffView": {
+      "heading": "Ko smo mi",
+      "preamble": "Nasi psiholozi su uključeni u Društvo psihologa Federacije BiH"
+    },
+    "howItWorksView": {
+      "heading": "Kako radi",
+      "intro": "Ako ste spremni da istražite način na koji razmišljate i osjećate, ovdje smo opisali korake koji će omogućiti da dobijete psihološko savjetovanje u zdravlje.nu. Ako ste spremni da istražite način na koji razmišljate i osjećate, ovdje smo opisali korake koji će omogućiti da dobijete psihološko savjetovanje u zdravlje.nu. Često postavljana pitanja možete naći",
+      "step1": {
+        "heading": "1. Procjena",
+        "text": "Razgovarajte bez troška, deset do petnaest minuta sa našim psiholozima preko telefona (+387 603 21 22 90 ili +387 66 23 60 83) ili preko Skypea (Skype adresa info@zdravlje.nu) kako biste utvrdili vaše savjetodavne potrebe."
+      },
+      "step2": {
+        "heading": "2. Izaberite plan za vas",
+        "text": "Izaberite plan plaćanja koji odgovara vašim potrebama i budžetu. Izaberite Skype razgovore, e-poštu ili kombinaciju ove dvije usluge. Možete platiti karticom, paypal-om ili fakturom."
+      },
+      "step3": {
+        "heading": "3. Termin",
+        "text1": "Kontaktirajte nas da zakažete termin:",
+        "text2": "Alternativno možete unaprijed platiti za psihološko savjetovanje. Nakon što smo primili vašu uplatu, mi ćemo vas kontaktirat za inicijalnu besplatnu procjenu i za zakazivanje termina"
+      },
+      "step4": {
+        "heading": "4. Psihološko savjetovanje",
+        "text1": "Možete razgovarati sa našim psiholozima iz ugodnosti Vaše kuće, bez znanja Vaše porodice ili prijatelja.",
+        "text2": "Za Skype pozive trebat ćete stabilnu i relativno brzu internet vezu, kompjuter ili mobitel sa ugrađenom kamerom i mogućnošću prenošenja zvuka, tihu i privatnu sobu, kao i Skype aplikaciju. ",
+        "text3": "Za usluge savjetovanja putem e-maila, trebat ćete privatnu e-mail adresu."
+      }
+
+    },
+    "customerCareView": {
+      "heading": "Služba za korisnike",
+      "preamble1": "Naša služba za korisnike stoji Vam na raspolaganju svakim radnim danom od 08.00 do 17.00 za sve informacije i savjete.",
+      "preamble2": "Mi u zdravlje.nu smo posvećeni pružanju najbolje moguće usluge psihološkog savjetovanja za sve naše klijente. Da bismo to postigli, uvijek se trudimo poboljšati usluge koje nudimo te stoga cjenimo sve povratne informacije, i dobre i loše.",
+      "contactText": "Našu službu za korisnike možete kontaktirati putem email-a, Skype-a ili pozivom na sljedeće telefonske brojeve:"
+    },
+    "emergencyView": {
+      "heading": "Hitna pomoć",
+      "text1": "Molimo Vas da razumijete da naše usluge nisu namjenjene hitnim slučajevima.",
+      "text2": "Ukoliko razmišljate o samoubistvu ili poduzimanju mjera i akcija koje mogu uzrokovati ozbiljnu štetu Vama ili drugima, ukoliko osjećate da ste Vi ili neka druga osoba u opasnosti ili ako imate zdravstveno hitan slučaj, morate se obratiti službi za tu vrstu hitnih slučajeva i obavijestiti relevantne autoritete. ",
+      "text3": "Naše savjetodavne usluge su otvorene za svakoga ko želi živjeti ispunjenijim životom radeći na svakodnevnim situacijama i problemima s kojiima se suočava. Ukoliko imate ozbiljne mentalne probleme, npr. dijagnozu shizofrenije, bipolarnog poremećaja ličnosti ili ste ovisni o alkoholu ili drogama, te ukoliko imate bilo koju drugu dijagnozu mentalnog poremećaja – ne smijete korisiti naše usluge."
+    },
+    "paymentView": {
+      "heading": "Zakažite psihološko savjetovanje",
+      "intro": "Ovdje možete zakazati psihološko savjetovanje. Cijenu za Vaše izbore možete naći na donjem dijelu stranice. Kliknite na označenu tipku da izaberete Skype poziv, e-poštu ili kombinaciju Skype poziva i e-pošte (u tom slučaju kliknite na obje tipke). Ukoliko odlučite da kupite više Skype poziva ili sedmica u kojima biste koristili uslugu e-poštom, to je pojedinačna cijena tih usluga jeftinija. Tokom biranja možete pratiti jasno naznačenu ukupnu i pojedinačnu cijenu svih usluga koje odaberete.",
+      "skypeWeek": "skype poziv",
+      "skypeWeeks": "skype poziva",
+      "packageWith": "Paket za",
+      "selectPackageText": "Izaberite jedan Skype-poziv ili paket sa više Skype-poziva. Možete kombinovati sa e-poštom.",
+      "call": "poziv",
+      "email": "E-pošta",
+      "answerWithin": "Odgovor u toku",
+      "emailSmallText": "Neograničen broj e-pošte, odgovor u toku 24h. Možete kombinovati sa Skype-pozivom.",
+      "emailLargeText": "Neograničen broj e-pošte, odgovor u toku 4h radnim danima: 07.00-22.00, vikendom i praznikom: 09.00-18.00.",
+      "number": "Broj",
+      "week": "sedmica",
+      "discount": "popust",
+      "forCelecrationLaunch": "za slavlje lansiranja",
+      "starts": "Otvaram",
+      "enterCode": "Koristite kod:",
+      "weOpen": "Otvaramo 8. januara 2018!",
+      "until": "Važi do 31/1-2018 god.",
+      "year": "god",
+      "price": "Cijena",
+      "writeCode": "Unesite kod",
+      "purchase": "Zakažite"
+    },
+    "footerView": {
+      "about": "Mi smo usmjereni na svakodnevne probleme sa kojima se većina nas susreće tokom života. Mi težimo da naše savjetodavne usluge budu pristupačne za sve, diskretno i po razumnoj cijeni. Korišćenjem teorijskih znanja i naučno dokazanih intervencija, možemo pomoći ljudima da prevazidju svoje probleme i da nauće da žive život koji žele, udobno i samopouzdano."
+    },
     "faqView": {
       "heading": "Frequently asked questions",
       "preamble": "You will be asked to complete an evaluation form once your sessions come to an end, this will enable us to better our service.",
