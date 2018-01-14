@@ -118,7 +118,7 @@ handleLogout (event) {
                     <a href="/#cijene">{ t('prices') }</a>
                     <a href="/#kakoradi">{ t('howWork') }</a>
                     <a href="/#kosmomi">{ t('whoAreWe')}</a>
-                    <a href="/blogovi">Blogovi</a>
+                    <a href="/blogovi">{ t('blog') }</a>
                 </nav>
                 <div id="topNav" className="navigation">
                     <span id="closebtn" onClick={this.navToggle}>
