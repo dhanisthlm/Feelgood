@@ -63,8 +63,8 @@ exports.register = function (server, options, next) {
                         return reply.file('client/.well-known/pki-validation/godaddy.html');
                     } else if (request.path.includes('BingSiteAuth')) {
                         return reply.file('client/BingSiteAuth.xml');
-                    } else if (request.path.includes('favicon')) {
-                        return reply.file('client/favicon.ico');
+                    } else if (request.path.includes('icon')) {
+                        return reply.file('client/icon/' + request.path.split('/').pop());
                     } else {
                         return reply.file('client/index.html');
                     }
