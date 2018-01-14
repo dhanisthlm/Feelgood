@@ -1,6 +1,7 @@
 {
   "en-US": {
     "common": {
+      "email": "E-mail"
     },
     "headerView": {
       "contactUs": "Contact us",
@@ -10,7 +11,9 @@
       "services": "Services",
       "prices": "Prices",
       "howWork": "How it works",
-      "whoAreWe": "Who are we"
+      "whoAreWe": "Who are we",
+      "blog": "Blog",
+      "menu": "Menu"
     },
     "introView": {
       "heading": "Psychological counseling for everyday problems",
@@ -80,8 +83,8 @@
       "signature": "Sokrates"
     },
     "staffView": {
-      "heading": "Ko smo mi",
-      "preamble": "Naši psiholozi su uključeni u Društvo psihologa Federacije BiH"
+      "heading": "Who are we?",
+      "preamble": "Our psychologists are involved in the Society of Psychologists of the Federation of BiH"
     },
     "howItWorksView": {
       "heading": "How does it work",
@@ -108,6 +111,7 @@
     },
     "customerCareView": {
       "heading": "Customer Service",
+      "skypeChat": "Free skype chat:",
       "preamble1": "Our customer service is available to you every working day from 08:00 to 17:00 for all information and advice.",
       "preamble2": "We are committed to providing the best possible psychological counseling services for all our clients. In order to achieve this, we always strive to improve the services we offer and therefore we value all feedback, both good and bad.",
       "contactText": "You can contact our customer service by email, Skype or by calling the following phone numbers:"
@@ -144,73 +148,102 @@
       "purchase": "Schedule"
     },
     "footerView": {
-      "about": "We are focused on the everyday problems that most of us face during our lifetime. We strive to make our advisory services accessible to everyone, discreetly and at a reasonable price. By using theoretical knowledge and scientifically proven interventions, we can help people overcome their problems and learn to live a life that they want, comfortable and confident."
+      "aboutWord": "About",
+      "about": "We are focused on the everyday problems that most of us face during our lifetime. We strive to make our advisory services accessible to everyone, discreetly and at a reasonable price. By using theoretical knowledge and scientifically proven interventions, we can help people overcome their problems and learn to live a life that they want, comfortable and confident.",
+      "blog": "Blog",
+      "conditions": "Conditions",
+      "privacyPolicy": "Privacy policy",
+      "tac": "Terms and conditions",
+      "cookiePolicy": "Cookie policy",
+      "questions": "Questions",
+      "customerService": "Customer Service",
+      "address": "Address"
     },
     "faqView": {
-      "heading": "Frequently asked questions",
+      "heading": "Frequently Asked Questions",
       "preamble": "You will be asked to complete an evaluation form once your sessions come to an end, this will enable us to better our service.",
       "individualCouncelling": {
-        "heading": "What is individual councelling",
-        "text": "Counselling is a form of talking therapy which allows the individual to express their problems, feelings and negative thoughts in a dependable and confidential environment. Counsellors aim to listen and to help you identify and taking the right steps to deal with any issues you may be facing. Counselling provides a safe and confidential space to enable clients to explore ways to deal with situations and crises you may be facing. It is a place to be listened to and obtain support, a place to work on your fears and anxieties and how these affect your life and relationships. Most importantly, it is place to help us realize that we do have choices and that by defining the life we want to live, we can create possibilities in our lives to live a more fulfilled life of our choice."
+        "heading": "What is individual counseling?",
+        "text1": "Counseling is a form of therapy with a conversation that allows the individual to verbalize and express his / her problems, feelings and negative thoughts in a safe and confidential environment. The counselors are there to listen to you and help you identify the problem, as well as to enable you to find the right steps to handle the problem you are facing.",
+        "text2": "Counseling provides a safe and confidential space that encourages clients to explore ways in which they can face life situations or crises in which they find themselves. It is a place where you will be heard and through which you can get the support, the space to work with fears and concerns and see the ways in which they can affect your life and interpersonal relationships.",
+        "text3": "Most importantly, this is the space in which we receive help that leads us to understand that we have choices and that we can shape our lives in a way that suits us, and that we can open up opportunities to live a more fulfilling life."
       },
       "forMe": {
-        "heading": "How can I be sure counselling is for me?",
-        "text": "You have the opportunity to receive an introduction to counselling free of charge for ten to fifteen minutes by telephone. Call us on +387 603 21 22 90 or +387 66 23 60 83 or via Skype (Skype name zdravlje.nu) and talk to one of our psychologists. S/he will discuss with you about your needs, current situation and your counselling goals and explain how online counselling is done at zdravlje.nu. There is a possibility to book an appointment during the call if you feel we could be of help for you. Kindly note this appointment will only be temporary and will be cancelled if we do not receive payment before the session."
+        "heading": "How can I be sure that counseling is a good choice for me?",
+        "text1": "You have the opportunity to get an introduction to counseling for free, through a 10 to 15-minute telephone conversation. You can call us at +387 603 21 22 90 or +387 66 23 60 83, or via Skype (user Skype name: zdravlje.nu) and talk to one of our psychologists. He or she will discuss your needs, the current situation and the therapeutic goal, and will explain how online counseling works in health.",
+        "text2": "If you feel that we could be at your service and help, you have the opportunity to book and report the appointment of counsel during that call. Please understand that such a reservation is temporary and will be canceled if we do not receive payment until the agreed date of the session."
       },
       "discretion": {
-        "heading": "Will anybody know that I am talking with a counsellor?",
-        "text": "You can talk to our counsellors from the comfort of your own home, your family and friends none the wiser you are doing so. Confidentiality will be maintained at all times and we shall always protect your personal information. Any and all information collected through our Internet sites and counselling sessions will be strictly confidential and will not be sold, rented, or otherwise disclosed to any third party not actively engaged in providing services to our customers. To protect you, our psychologists will not write notes into our computer system during counselling sessions, only in their note books. These notebooks have your identity coded and are locked when not used for preparations or in sessions with you. We also never record video sessions to protect your identity. To best serve you, your psychologist may discuss your case with other psychologists at zdravlje.nu without revealing your identity. This way you will benefit from the skills and experiences of more psychologists than the one you are talking to."
+        "heading": "Will somebody know how to talk to a psychologist?",
+        "text1": "You can talk to our psychologists from the benefits of your home, without the knowledge of your family or friends.",
+        "text2": "Confidentiality by psychologists will be maintained all the time and we will protect your personal information. All information we collect through our website and advisory sessions will be strictly confidential and protected, and will not be sold, rented or otherwise disclosed to third parties not actively involved in the provision of services to our clients.",
+        "text3": "In order to protect you, our psychologists during the sessions will not write notes on our computer system, but only in their notebooks. These notebooks will only have your identification codes, and they will be under the key when they are not used by the psychologist for preparation or during the session. We never make video or audio recordings of sessions in order to protect your identity.",
+        "text4": "In order to offer you a better service, your psychologist can discuss your case within health, but without revealing your identity. In this way you can benefit from the skills and experience of more psychologists than just the one you are currently working with."
       },
       "rebook": {
-        "heading": "Can I rebook or cancel a counselling session?",
-        "text": "Of course it is possible, we have 24 hours free rebooking and cancellation policy."
+        "heading": "Can I move or cancel an agreed advisory term?",
+        "text": "Of course, it is possible to move and cancel the agreed term, we are guided by the rule of free movement and cancellation at least 24 hours before the term itself."
       },
       "book": {
         "heading": "How do I book an appointment?",
-        "text1": "You book an appointment by contacting us at:",
-        "text2": "Alternately you can prepay for counselling on zdravlje.nu and we will contact you after we have received the payment. During the payment process you will have the option to choose time slots that would suit you best."
+        "text1": "You can reserve the term by contacting us at:",
+        "text2": "The second method of booking is the payment of one of the advisory packages or individual counseling as they are offered on the health.nu website, after which you will be contacted as soon as we receive your payment. During such a reservation, you can select the time intervals that would best suit you for the terms of the consultation."
       },
       "safe": {
-        "heading": "Is it safe to pay online?",
-        "text": "We use Stripe and PayPal for online payments. They both take security seriously and are used by many businesses worldwide. The credit or debit card data that you enter on zdravlje.nu is never sent to our servers, instead the data is sent directly to Stripe. This is important, because this way we will not handle any sensitive credit or debit card data on our servers. You can read more about how Stripe handles payment data on https://stripe.com/docs/security. If you choose to pay with PayPal, you will be redirected to a secure PayPal payment page. Again, no sensitive payment data will be handled on our servers. We are using SSL certificate on our website zdravlje.nu. SSL is a standard security technology that establishes a secure link (i.e. encrypted channel) between your web browser and our website zdravlje.nu. All communication transmitted through this link is encrypted, making the information private and secure. You will know the SSL is working if you find a small green lock icon in the address bar area."
+        "heading": "Is online payment safe?",
+        "text1": "We use Stripe and Paypal for online payment services. Both of these sites take security very seriously and are used by many organizations and individuals around the world.",
+        "text2": "The data of your credit or debit cards that you enter on health. Are never sent to our servers, but directly to Stripe. This is important because in this way we do not come into contact with sensitive data of your credit and debit cards through our servers.",
+        "text3": "You can learn more about how Stripe manages your data via a link:",
+        "text4": "If you choose to pay via Paypal, you will be redirected to a secure Paypal payment page. Again, no sensitive information on your cards will be handled by our server.",
+        "text5": "The website zdravlje.nu uses an SSL certificate. SSL is a standard security technology that establishes a secure connection (encrypted channel) between your Internet browser and our health.nu web site. All communications transmitted by this channel are transmitted encrypted, making the information inside it safer and private. You will know that SSL is turned on and running if you see a small green pad icon in the right corner of the bar area with the address bar of zdravlje.nu."
       },
       "eligible": {
-        "heading": "Who is eligible to use services at zdravlje.nu?",
-        "text": "Our counselling services are for anybody wanting to live a more fulfilled life by working on their everyday issues. In order to be eligible to use our services, you must not have a serious mental health issue, e.g. diagnosed with schizophrenia, bipolar disorder, drug or alcohol dependence, or any other mental diagnosis. Kindly note the use of our online services is not meant for emergencies. If you are thinking about suicide or if you are considering taking actions that may cause harm to you or to others or if you feel that you or any other person may be in any danger or if you have any medical emergency, you must immediately call the emergency service number and notify relevant authorities. You must be 18 years of age or older to use our services, or visit or use the website zdravlje.nu in any manner."
+        "heading": "Who can use zdravlje.nu services?",
+        "text1": "Our advisory services are open to anyone who wants to live a more fulfilling life by working in everyday situations and problems he faces. If you have serious mental problems, e.g. a diagnosis of schizophrenia, a bipolar personality disorder, or you are addicted to alcohol or drugs, and if you have any other diagnosis of a mental disorder - you must not use our services.",
+        "text2": "Please understand that our services are not for emergency purposes.",
+        "text3": "If you are thinking about suicide or taking measures and actions that can cause serious harm to yourself or others, if you feel that you or someone else is in danger or if you have a medical emergency, you must contact the emergency department and inform the relevant authorities.",
+        "text4": "You must have 18 years or more to be able to use our services, as well as visit and use the website health.nu in any way."
       },
       "getStarted": {
-        "heading": "What do I need to get started?",
-        "text1": "For Skype calls you will need a stable, reasonably high-speed internet access, a computer or smart phone with built in camera and audio capability, a quiet, private room, and a working Skype application." ,
-        "text2": "To get the application Skype installed, visit",
-        "text3": "For counselling through email, you will need a private email address."
+        "heading": "What do I need to start?",
+        "text1": "For Skype calls, you will need a stable and relatively fast internet connection, a computer or mobile phone with built-in camera and sound transmission, a quiet and private room, as well as a Skype application." ,
+        "text2": "To install Skype, visit",
+        "text3": "For email counseling services, you will need a private e-mail address."
       },
       "session": {
-        "heading": "How long is one session?",
-        "text": "At zdravlje.nu we offer 20 minutes and 45 minutes sessions. Sometimes there is no time available for the normal 45 minutes long session, e.g. during working hours, therefore we offer the shorter 20 minutes option."
+        "heading": "How long does a session last?",
+        "text1": "Zdravlje.nu offers you 20-minute and 45-minute sessions.",
+        "text2": "If you do not have time for a standard session length of 45 minutes, e.g. During working hours, we offer you a shorter, 20-minute option."
       },
       "satisfied": {
-        "heading": "What if I am not happy with my counsellor?",
-        "text": "A good fit between client and counsellor is important, that is why we are happy to change your counsellor without any explicit reason from your side. It is vital that you feel a sense of connection and trust with your counsellor. Please send us an email to info@zdravlje.nu to initiate a change of counsellor."
+        "heading": "What if I'm not satisfied with my psychologist?",
+        "text1": "A good relationship between a client and a psychologist is very important, so it will be a pleasure for you to change your psychologist for no special reason on your part. It is important that you have a sense of connection and trust with your psychologist.",
+        "text2": "If you want to change your psychologist, you can contact us at:",
+        "text3": "Upon completion of the last agreed session, you will be asked to complete the evaluation form, which will enable us to improve our services."
       },
       "pay": {
-        "heading": "How do I pay?",
-        "text": "We have three different options for payment, with credit/debit card, PayPal or invoice. With the credit/debit card and PayPal options you pay online on our website zdravlje.nu. We are using SSL certificate, which creates an encrypted channel between your web browser and our server, making the information you give us private and secure. Credit / debit card numbers are never entering our servers at zdravlje.nu."
+        "heading": "How to pay?",
+        "text1": "We have three payment options, credit / debit card, PayPal or through a bank account.",
+        "text2": "With Credit / Debit and PayPal payment options, you pay online on our website, zdravlje.nu. We use the SSL certificate, which creates an encrypted channel between the web browser and our server, making the information you give us private and secure.",
+        "text3": "Credit / debit card numbers are never recorded on our servers at zdravlje.nu."
       },
       "payAfter": {
         "heading": "Can I pay after the session?",
-        "text": "The payment for any session is always payable prior to the appointment. If we do not receive payment before the time of the appointment, with funds cleared into our bank, the appointment will be cancelled or postponed. If your appointment lasts longer than the allotted time, you will be liable for a charge of 2 BAM per minute for the extra time taken."
+        "text1": "Payment for sessions is always done before the scheduled appointment. If we do not receive a payment before the scheduled date, with the information that the funds are paid into our account, the scheduled term will be canceled or moved.",
+        "text2": "If your scheduled term lasts longer than planned, you are required to pay 2KM for each additional minute. If your appointment is shorter than foreseen, and the reason for this is on your part, we are not responsible for refunding your paid amount or compensating otherwise. However, if your appointment is shortened by two (2) minutes and more than the foreseen time, and the reason for this is from our side, you will be compensated with a new session."
       },
       "missSession": {
-        "heading": "What happens if I miss my session?",
-        "text": "Should you fail to attend a session, though we will listen sympathetically to any reasons that you may give for not attending, the full cost of the appointment will be chargeable. Any decision to refund any or all of the cost of the session will be at our discretion."
+        "heading": "What if I miss my session?",
+        "text": "If you miss the scheduled session, without a 24-hour notice, although we will respect any reason you did not appear, you will be charged a full price of the scheduled term. Any decision to refund you a portion of the money or the cost of the entire session will be the result of our own assessment."
       },
       "prescriptions": {
-        "heading": "Do you offer prescriptions as part of the counselling?",
-        "text": "No, a counsellor is not a medicinal doctor and cannot prescribe medicines. Counselling is a form of talking therapy which allows the individual to express their problems, feelings and negative thoughts in a dependable and confidential environment."
+        "heading": "Do you offer prescription medication as part of counseling?",
+        "text1": "No, a psychologist is not a doctor and can not prescribe drugs.",
+        "text2": "Counseling is a form of speech therapy that enables an individual to present her problems, feelings and negative thoughts in a trusted and confidential environment."
       },
       "troubles": {
-        "heading": "Will I get rid of my troubles?",
-        "text": "There is no method or treatment, whether medical or psychological, which provides guaranteed help for all people. This is regardless of whether counselling is online or on-site. Nobody can guarantee you will get 100% free from your problems. However, we can guarantee that we will provide you with the best possible help based on the methods that have been proven to produce the best results for different areas of research."
+        "heading": "Will I be able to solve my problems?",
+        "text": "There is no method or treatment, either medically or psychologically, which provides guaranteed assistance to all people. This is independent of whether counseling takes place via the Internet or live. No one can guarantee you to solve your problems. However, we can guarantee that we will always try to provide you with a service that is based on research and the results of effort and knowledge of psychological science and its theories and practices."
       }
     },
     "tacView": {
@@ -323,9 +356,59 @@
         "list6": "If the subject of your complaint is to do with the professional standards or behaviour of one of our psychologists, we will treat your concern seriously. Should we agree that standards are not being met, we will be happy to fix, refund or re-perform the service we have provided."
       }
     },
+    "privacyPolicyView": {
+      "heading": "Privacy Policy",
+      "preamble1": "Your privacy is important to us. We have designed our Privacy Policy so that we can share information on how to use Health and how we collect and use your content and information. We encourage you to read the Privacy Policy in full.",
+      "preamble2": "Zdravlje.nu is a subsidiary of Baunad doo Tuzla.",
+      "disclosure": {
+        "heading": "Data storage",
+        "text1": "All information we collect through our website and client sessions is strictly confidential and will not be sold, leased or otherwise available to third parties not actively involved in the provision of services to our clients.",
+        "text2": "We will always protect your private information. Baunad doo Tuzla will disclose personal information only if the user shows a serious intention to list himself or herself, in the event of being suspected of being a victim of a child / child, and if the person's information is requested by a court order and is required by a legal procedure leads against a person.",
+        "text3": "Baunad doo Tuzla is not responsible for your disclosure of information about yourself when using our services and / or public forums, or because of the unreliability of protecting your password while accessing the site."
+      },
+      "security": {
+        "heading": "Data security",
+        "text1": "Our policy is to protect your information from unauthorized access and abuse. Therefore, we take care to protect this information through a number of technologically available security measures.",
+        "text2": "We never make sound or video clips of your online sessions to protect your privacy.",
+        "text3": "The employees of Baunad doo Tuzla are familiar with and have experience with regulations and security measures. They fully understand that any failure in keeping your information on their behalf results in strong disciplinary measures as well as the possible termination of business within Baunad doo Tuzla."
+      },
+      "payment": {
+        "heading": "Payment Information",
+        "text1": "The credit card number and / or other financial information will be collected for the purpose of the payment and charging process, including but not limited to the use and disclosure of such information to third parties necessary for the performance of collection operations. Credit and debit card details will be transferred to secure pages with a proven secure authorization system and payment gateway systems that are digitally encrypted, and thus provide the highest possible degree of protection available through current technology.",
+        "text2": "Baunad doo Tuzla will not store information about your credit and debit cards."
+      },
+      "information": {
+        "heading": "Delete and edit data",
+        "text1": "We never record video sessions to protect client's identity.",
+        "text2": "We will delete any private information from our system if we receive a written request from you to do so. In that case, all your personal information will be deleted from our system without delay, unless we have been disabled by law. Please keep in mind that we need to keep some of the information for keeping a record of business. Some of these residual information will always remain in our records even though we delete all that can be deleted."
+      },
+      "browser": {
+        "heading": "Internet browser and usage information",
+        "text1": "We collect information about internet browsers such as IP addresses, browser type, geographic location, time spent on individual pages, hardware information (in case of using mobile devices when accessing a page) and information about the operating system, in order to analyze the profiles of our users and their users online behavior; especially the choice of content and services. Analyzing this data allows us to better understand our visitors as well as to improve our content and service.",
+        "text2": "The information we have about user behavior helps us in finding technological problems and solving potential mistakes in the process of payment and charging.",
+        "text3": "Your personal information and identification data will not be matched with the information collected and the results of anonymous and merged data.",
+        "text4": "We are not bound by the Privacy Policy of other sites and external service providers that you use while using our services."
+      },
+      "consent": {
+        "heading": "Consistency with this privacy policy",
+        "text1": "By using our services and providing your information, we will consider that you have read, understood and agreed with our policies and the manner of work set out in this Privacy Policy, and that it applies to you as a user of our services. You hereby consent to the collection, use and sharing, as well as the transmission of your information in the manner described by this policy. We reserve the right to modify, supplement or delete certain parts of the Privacy Policy at our sole discretion at any time. If you do not agree with this Privacy Policy, your choice is not to use our services and not give us your information.",
+        "text2": "If you use our services on behalf of someone else, e.g. Your child or another entity, such as an employer, we consider that you are authorized by such an entity to do so, (i) accept this Privacy Policy on their behalf, (ii) consent to the collection, use and sharing, and the transmission of information by persons you represent in the manner described in this Privacy Policy."
+      },
+      "contact": {
+        "heading": "Contact us",
+        "text": "For inquiries and information on privacy issues, you can contact us at:"
+      },
+      "address": "The address of our office is:",
+      "updated": "This document was last amended on December 11, 2017, when it enters into force."
+    },
+    "cookieView": {
+      "heading": "Cookie policy",
+      "text": "Cookies are used for the proper functioning of certain ulcers. They are temporary and disappear when you turn off the browser. By using this site, you accept the use of cookies."
+    },
     "blogView": {
       "heading": "Blog",
-      "author": "Author"
+      "author": "Author",
+      "title": "Title"
     },
     "issues": {
       "stress": {
@@ -435,6 +518,7 @@
   },
   "ba-BA": {
     "common": {
+      "email": "E-pošta"
     },
     "headerView": {
       "contactUs": "Kontaktirajte nas",
@@ -444,7 +528,9 @@
       "services": "Usluge",
       "prices": "Cijene",
       "howWork": "Kako radi",
-      "whoAreWe": "Ko smo mi"
+      "whoAreWe": "Ko smo mi",
+      "blog": "Blogovi",
+      "menu": "Meni"
     },
     "introView": {
       "heading": "Psihološko savjetovanje za svakodnevne probleme",
@@ -542,6 +628,7 @@
 
     },
     "customerCareView": {
+      "skypeChat": "Besplatan razgovor preko Skypea:",
       "heading": "Služba za korisnike",
       "preamble1": "Naša služba za korisnike stoji Vam na raspolaganju svakim radnim danom od 08.00 do 17.00 za sve informacije i savjete.",
       "preamble2": "Mi u zdravlje.nu smo posvećeni pružanju najbolje moguće usluge psihološkog savjetovanja za sve naše klijente. Da bismo to postigli, uvijek se trudimo poboljšati usluge koje nudimo te stoga cjenimo sve povratne informacije, i dobre i loše.",
@@ -555,7 +642,8 @@
     },
     "blogView": {
       "heading": "Blogovi",
-      "author": "Pisac"
+      "author": "Pisac",
+      "title": "Zvanje"
     },
     "paymentView": {
       "heading": "Zakažite psihološko savjetovanje",
@@ -583,7 +671,20 @@
       "purchase": "Zakažite"
     },
     "footerView": {
-      "about": "Mi smo usmjereni na svakodnevne probleme sa kojima se većina nas susreće tokom života. Mi težimo da naše savjetodavne usluge budu pristupačne za sve, diskretno i po razumnoj cijeni. Korištenjem teorijskih znanja i naučno dokazanih intervencija, možemo pomoći ljudima da prevaziđu svoje probleme i da nauče da žive život koji žele, udobno i samopouzdano."
+      "aboutWord": "O",
+      "about": "Mi smo usmjereni na svakodnevne probleme sa kojima se većina nas susreće tokom života. Mi težimo da naše savjetodavne usluge budu pristupačne za sve, diskretno i po razumnoj cijeni. Korištenjem teorijskih znanja i naučno dokazanih intervencija, možemo pomoći ljudima da prevaziđu svoje probleme i da nauče da žive život koji žele, udobno i samopouzdano.",
+      "blog": "Blogovi",
+      "conditions": "Uslovi",
+      "privacyPolicy": "Politika privatnosti",
+      "toc": "Pravila i uslovi",
+      "cookiePolicy": "Politika kolačića",
+      "questions": "Pitanja",
+      "customerService": "Služba za korisnike",
+      "address": "Adresa"
+    },
+    "cookieView": {
+      "heading": "Politika kolačića",
+      "text": "Kolačiće koristimo radi pravilnog funkcionisanja određenih ulsuga. Oni su privremeni i nestaju kada isključite browser. Korištenjem ove web stranice prihvaćate korištenje kolačića."
     },
     "tacView": {
       "heading": "Pravila i uslovi",
@@ -697,7 +798,7 @@
     },
     "faqView": {
       "heading": "Često postavljena pitanja",
-      "preamble": "You will be asked to complete an evaluation form once your sessions come to an end, this will enable us to better our service.",
+      "preamble": "Od vas će biti zatraženo da popunite formular za evaluaciju kada se vaše sesije završe, što će nam omogućiti da poboljšamo našu uslugu.",
       "individualCouncelling": {
         "heading": "Šta je individualno savjetovanje?",
         "text1": "Savjetovanje je forma terapije razgovorom koja omogućava pojedincu da verbalizira i izrazi svoje probleme, osjećanja i negativne misli u sigurnom i povjerljivom okruženju. Savjetodavatelji su tu da Vas saslušaju i pomognu Vam identificirati problem, kao i da omoguće pronalaženje pravih koraka u nošenju sa problemom s kojim se suočavate.",
