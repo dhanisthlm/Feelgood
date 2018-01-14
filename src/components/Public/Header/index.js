@@ -118,21 +118,21 @@ handleLogout (event) {
                     <a href="/#cijene">{ t('prices') }</a>
                     <a href="/#kakoradi">{ t('howWork') }</a>
                     <a href="/#kosmomi">{ t('whoAreWe')}</a>
-                    <a href="/blogovi">Blogovi</a>
+                    <a href="/blogovi">{ t('blog') }</a>
                 </nav>
                 <div id="topNav" className="navigation">
                     <span id="closebtn" onClick={this.navToggle}>
                         <span className="line1" />
                         <span className="line2" />
                         <span className="line3" />
-                        <span className="menu-text">Meni</span>
+                        <span className="menu-text">{ t('menu') }</span>
                     </span>
                     <ul className="menulist">
                         <li><a onClick={this.closeMobileMenu} className="menuitems" href={issueHref}>{ t('services') }</a></li>
                         <li><a onClick={this.closeMobileMenu} className="menuitems" href="/#cijene">{ t('prices') }</a></li>
                         <li><a onClick={this.closeMobileMenu} className="menuitems" href="/#kakoradi">{ t('howWork') }</a></li>
                         <li><a onClick={this.closeMobileMenu} className="menuitems" href="/#kosmomi">{ t('whoAreWe')}</a></li>
-                        <li><a className="menuitems" href="/blogovi">Blogovi</a></li>
+                        <li><a className="menuitems" href="/blogovi">{ t('blog') }</a></li>
                     </ul>
                 </div>
             </header>

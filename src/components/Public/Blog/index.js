@@ -4,6 +4,7 @@ import { translate } from 'react-i18next';
 import { getBlogs } from '../../../actions/blog';
 import Header from '../Header/index';
 import Footer from '../Footer/index';
+import i18n from '../../../config/i18n';
 import styles from './styles.css';
 
 export class Blog extends Component {
@@ -19,11 +20,12 @@ export class Blog extends Component {
 
     render () {
         const { t } = this.props;
+        const locale = this.state.locale || i18n.language;
 
         return (
             <div className="page blog">
                 <Header location={this.props.location} />
-                <div className="page-header"><h1>Blogovi</h1></div>
+                <div className="page-header"><h1>{ t('heading') }</h1></div>
                 <ul className="blog-list">
                 {
                     this.props.blogs.map((blog, i) => {
@@ -34,14 +36,14 @@ export class Blog extends Component {
                                         <img src={`/images/${blog.author.image}`} />
                                     </div>
                                     <div className="author-date-wrapper">
-                                        <p className="author">Pisac: {blog.author.name}</p>
-                                        <p className="author">Zvanje: {blog.author.title}</p>
+                                        <p className="author">{ t('author') }: {blog.author.name}</p>
+                                        <p className="author">{ t('title') }e: {blog.author.title[locale]}</p>
                                         <p className="date">Datum: {blog.date}</p>
                                     </div>
                                 </div>
-                                <h2>{blog.title}</h2>
+                                <h2>{blog.title[locale]}</h2>
                                 {
-                                    blog.text.map((paragraph, j) => {
+                                    blog.text[locale].map((paragraph, j) => {
                                         if (j == blog.image[0].iterator) {
                                             return (
                                                 <div>
@@ -88,5 +90,5 @@ const mapStateToProps = (state) => ({
     blogs: state.blog.list
 });
 
-export default connect(mapStateToProps)(translate('headerView')(Blog))
+export default connect(mapStateToProps)(translate('blogView')(Blog))
 

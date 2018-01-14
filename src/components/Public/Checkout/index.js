@@ -588,7 +588,8 @@ export class Checkout extends FormComponent {
      * @return {object}
      */
     renderTimeframes () {
-  	    const timeframes = ['Odaberite vrijeme', ...this.state.timeframes];
+        const { t } = this.props;
+  	    const timeframes = [t('chooseTime'), ...this.state.timeframes];
   	    let frameName;
   	    let frameValue;
 
@@ -613,7 +614,7 @@ export class Checkout extends FormComponent {
      */
 	renderIssues () {
 		const { t } = this.props;
-		const issues = ['Izaberite temu', ...issueObj.issues];
+		const issues = [t('chooseTheme'), ...issueObj.issues];
 		let issueName;
 		let issueValue;
 
@@ -861,7 +862,7 @@ export class Checkout extends FormComponent {
 											{this.getValidationMessages('name')}
 										</div>
                                         <div className="form-element-wrapper">
-                                            <label htmlFor="adress">Ulica</label>
+                                            <label htmlFor="adress">{ t('street') }</label>
                                             <input
                                                 onChange={ this.handleChange }
                                                 id="street"
@@ -872,7 +873,7 @@ export class Checkout extends FormComponent {
                                         </div>
                                         <div className="city-wrapper">
                                             <div className="form-element-wrapper">
-                                                <label htmlFor="postal">Poštanski broj</label>
+                                                <label htmlFor="postal">{ t('postal') }</label>
                                                 <input
                                                     onChange={ this.handleChange }
                                                     id="postal"
@@ -882,7 +883,7 @@ export class Checkout extends FormComponent {
                                                 {this.getValidationMessages('postal')}
                                             </div>
                                             <div className="form-element-wrapper">
-                                                <label htmlFor="city">Grad</label>
+                                                <label htmlFor="city">{ t('city') }</label>
                                                 <input
                                                     onChange={ this.handleChange }
                                                     id="city"
@@ -893,7 +894,7 @@ export class Checkout extends FormComponent {
                                             </div>
                                         </div>
                                         <div className="form-element-wrapper">
-                                            <label htmlFor="country">Zemlja</label>
+                                            <label htmlFor="country">{ t('country') }</label>
                                             <div className="select-style">
                                                 <select data-id={this.state.currency} value={this.state.country} id="country" onChange={ this.handleSelectCountry }>
                                                     { this.renderCountries() }
@@ -938,7 +939,7 @@ export class Checkout extends FormComponent {
                                             { this.getValidationMessages('skype') }
                                         </div>
                                         <div className="form-element-wrapper">
-                                            <label htmlFor="timeframe">Odaberite vrijeme</label>
+                                            <label htmlFor="timeframe">{ t('chooseTime') }</label>
                                             <div className="select-style">
                                                 <select id="timeframe" onChange={ this.handleSelectTime }>
                                                     { this.renderTimeframes() }
@@ -948,7 +949,7 @@ export class Checkout extends FormComponent {
                                         </div>
                                         <div className="form-element-wrapper payment-type">
                                             <fieldset id="payment-options">
-                                                <legend className="payment-type-header">Tip plaćanja</legend>
+                                                <legend className="payment-type-header">{ t('paymentType') }</legend>
                                                 <div className="payment-type-wrapper credit-wrapper">
                                                     <input id="credit" className="card-radio" checked={ this.state.paymentType === 'credit' } type="radio" name="payment-type" />
                                                     <label data-id="credit" onClick={ this.handlePaymentType } htmlFor="credit">
@@ -965,7 +966,7 @@ export class Checkout extends FormComponent {
                                                 </div>
                                                 <div className="payment-type-wrapper faktura-wrapper">
                                                     <input id="faktura" checked={ this.state.paymentType === 'faktura' } type="radio" name="payment-type" />
-                                                    <label data-id="faktura" onClick={ this.handlePaymentType } htmlFor="paypal">Faktura</label>
+                                                    <label data-id="faktura" onClick={ this.handlePaymentType } htmlFor="paypal">{ t('invoice') }</label>
                                                 </div>
                                                 {(() => {
                                                     if (this.state.paymentType === 'faktura') {
@@ -982,7 +983,7 @@ export class Checkout extends FormComponent {
                                             if (this.state.paymentType === 'credit') {
                                                 return (
                                                     <div className="stripe form-element-wrapper">
-                                                        <label htmlFor="card-element">Kreditna kartica</label>
+                                                        <label htmlFor="card-element">{ t('creditCard')}</label>
                                                         <div id="card-element"/>
                                                         <div id="card-errors" role="alert"/>
                                                     </div>
@@ -1001,20 +1002,20 @@ export class Checkout extends FormComponent {
                                         <div className="form-element-wrapper">
                                             <div className="check-wrapper">
                                                 <input id="subscription" checked={ this.state.subscribe === 'on' } value={this.state.subscribe} className="checkbox" type="checkbox" />
-                                                <label id="subscribe" onClick={ this.handleNewsletter } className="checkbox" htmlFor="subscription">Da, hvala, želim da dobijam informacije o popustima i drugim ponudama od zdravlje.nu.</label>
+                                                <label id="subscribe" onClick={ this.handleNewsletter } className="checkbox" htmlFor="subscription">{ t('newsletter') }</label>
                                             </div>
                                         </div>
                                         <div className="form-element-wrapper">
                                             <div className="check-wrapper">
                                                 <input id="conditions" ref="terms" checked={this.state.terms === 'on'} value={this.state.terms} className="checkbox" type="checkbox" />
-                                                <label id="terms" onClick={ this.handleCheckbox } className="checkbox" htmlFor="conditions">Slažem se sa <a className="checkout-link" target="blank" href="/politika-privatnosti">Politikom privatnosti</a> i <a className="checkout-link" target="blank" href="/tac">Pravilima i uslovima.</a>.</label>
+                                                <label id="terms" onClick={ this.handleCheckbox } className="checkbox" htmlFor="conditions">{ t('agree') } <a className="checkout-link" target="blank" href="/politika-privatnosti">{ t('privacyPolicy') }</a> { t('and') } <a className="checkout-link" target="blank" href="/tac">{ t('rules') }.</a>.</label>
                                             </div>
                                             <span className="error checkbox">{termErrorMsg}</span>
                                         </div>
                                         <div className="form-element-wrapper">
                                             <div className="check-wrapper">
                                                 <input id="cancel" checked={this.state.cancel === 'on'} value={this.state.cancel} className="checkbox" type="checkbox" />
-                                                <label onClick={ this.handleCancel } className="checkbox" htmlFor="cancel">Razumijem da imam besplatnu promjenu termina najkasnije 24 sata do početka samog termina.</label>
+                                                <label onClick={ this.handleCancel } className="checkbox" htmlFor="cancel">{ t('understand') }.</label>
                                             </div>
                                             <span className="error checkbox">{cancelErrorMsg}</span>
                                         </div>
@@ -1048,11 +1049,11 @@ export class Checkout extends FormComponent {
 								</div>
 								<div className={back}>
 									<div>
-										<h2 className="back-header">Hvala vam na nalogu</h2>
-										<p className="preamble">Vaša kupovina je uspješna i dobili smo Vašu narudžbu. Uskoro ćemo Vas kontaktirat za inicijalnu besplatnu procjenu i za zakazivanje termina.</p>
-                                        <p className="preamble">Molimo Vas, uzmite trenutak da nam date povratne informacije:</p>
+										<h2 className="back-header">{ t('thankYou') }</h2>
+										<p className="preamble">{ t('successfulOrder') }</p>
+                                        <p className="preamble">{ t('feedback') }:</p>
                                         <div className="rating">
-											<p className="rating-text">Kakav je vaš utisak o web stranici &#63;</p>
+											<p className="rating-text">{ t('impressionWeb') } &#63;</p>
 											<div ref="stars-1" className="stars stars-1">
 												<span id="1" ref="star star-1" className="star" onClick={ this.handleWebStar }>☆</span>
 												<span id="2" ref="star star-2" className="star" onClick={ this.handleWebStar }>☆</span>
@@ -1062,7 +1063,7 @@ export class Checkout extends FormComponent {
 											</div>
 										</div>
 										<div className="rating">
-											<p className="rating-text">Kakav je vaš utisak o postupku plaćanja &#63;</p>
+											<p className="rating-text">{ t('impressionPayment') } &#63;</p>
 											<div ref="stars-2" className="stars stars-2">
 												<span id="6" ref="star star-6" className="star" onClick={ this.handlePayStar }>☆</span>
 												<span id="7" ref="star star-7" className="star" onClick={ this.handlePayStar }>☆</span>
@@ -1071,10 +1072,10 @@ export class Checkout extends FormComponent {
 												<span id="10" ref="star star-10" className="star" onClick={ this.handlePayStar }>☆</span>
 											</div>
 										</div>
-										<label className="comment-label">Ostali komentari</label>
+										<label className="comment-label">{ t('otherComments') }</label>
 										<textarea onChange={this.handleRatingComment} value={this.state.ratingComment} />
 										<button onClick={ this.postRating }>OK</button>
-                                        <p className="close-button-explanation">Vratit ćete se natrag na početnu stranicu kada pritisnete ok.</p>
+                                        <p className="close-button-explanation">{ t('redirected') }.</p>
 									</div>
 								</div>
 							</div>

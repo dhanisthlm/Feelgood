@@ -88,7 +88,7 @@
 
 .checkout .basket .back > div {
     margin: 60px auto;
-    width: 575px;
+    width: 620px;
 }
 
 .checkout .card-error {
@@ -358,7 +358,7 @@
     line-height: 38px;
     font-size: 18px;
     margin-top: 0 !important;
-    width: 375px;
+    width: 415px;
     color: #333;
     font-weight: 300;
 }

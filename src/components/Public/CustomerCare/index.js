@@ -12,8 +12,6 @@ export class CustomerCare extends Component {
         this.state = {};
     }
 
-    componentDidMount () {}
-
     render () {
         const { t } = this.props;
 
@@ -27,8 +25,8 @@ export class CustomerCare extends Component {
                     <p className="contact-text text">{ t('contactText') }</p>
                     <p className="text phone-number">+387 603 21 22 90</p>
                     <p className="text phone-number">+387 66 23 60 83</p>
-                    <p className="text">Besplatan razgovor preko Skypea: <span className="skype">info@zdravlje.nu</span></p>
-                    <p className="text email">E-pošta: <span className="email"><a href="mailto:info@zdravlje.nu">info@zdravlje.nu</a></span></p>
+                    <p className="text">{ t('skypeChat') } <span className="skype">info@zdravlje.nu</span></p>
+                    <p className="text email">{ t('email')} <span className="email"><a href="mailto:info@zdravlje.nu">info@zdravlje.nu</a></span></p>
                     <div className="push" />
                 </div>
                 <Footer />

@@ -18,9 +18,9 @@ export class Cookies extends Component {
         return (
             <div className="page privacy-policy cookies-wrapper">
                 <Header location={this.props.location} />
-                <div className="page-header"><h1>Politika kolačića</h1></div>
+                <div className="page-header"><h1>{ t('heading') }</h1></div>
                 <div className="privacy-wrapper">
-                    <p>Kolačiće koristimo radi pravilnog funkcionisanja određenih ulsuga. Oni su privremeni i nestaju kada isključite browser. Korištenjem ove web stranice prihvaćate korištenje kolačića.</p>
+                    <p>{ t('text') }</p>
                     <div className="push" />
                 </div>
                 <Footer />
@@ -33,5 +33,5 @@ Cookies.propTypes = { dispatch: PropTypes.func };
 
 const mapStateToProps = (state) => ({});
 
-export default connect(mapStateToProps)(translate('faqView')(Cookies))
+export default connect(mapStateToProps)(translate('cookieView')(Cookies))
 

@@ -2,10 +2,10 @@ import mongoose, { Schema } from 'mongoose'
 
 const blogSchema = Schema({
     title: {
-        type: String
+        type: Object
     },
     text: {
-        type: Array
+        type: Object
     },
     author: {
         type: Object
