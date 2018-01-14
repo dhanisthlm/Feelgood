@@ -16,7 +16,7 @@ export class InactivityModal extends Component {
             idleTime: 0,
             location: null,
             countInactivity: true,
-            idleTtl: 3000,
+            idleTtl: 300000,
             tick: 10000,
         };
 
@@ -77,6 +77,7 @@ export class InactivityModal extends Component {
 
     listenForActivity () {
         this.throttledDebounce = _.throttle(this.debounce, this.state.tick);
+        window.addEventListener('keypress', this.throttledDebounce);
         window.addEventListener('touchstart', this.throttledDebounce);
         window.addEventListener('touchmove', this.throttledDebounce);
         window.addEventListener('mousemove', this.throttledDebounce);
@@ -122,6 +123,7 @@ export class InactivityModal extends Component {
     }
 
     logoutUser () {
+        window.removeEventListener('keypress', this.throttledDebounce);
         window.removeEventListener('touchstart', this.throttledDebounce);
         window.removeEventListener('touchmove', this.throttledDebounce);
         window.removeEventListener('mousemove', this.throttledDebounce);
