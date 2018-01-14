@@ -23,7 +23,7 @@ export class Blog extends Component {
         return (
             <div className="page blog">
                 <Header location={this.props.location} />
-                <div className="page-header"><h1>Blogovi</h1></div>
+                <div className="page-header"><h1>{ t('header') }</h1></div>
                 <ul className="blog-list">
                 {
                     this.props.blogs.map((blog, i) => {
@@ -34,7 +34,7 @@ export class Blog extends Component {
                                         <img src={`/images/${blog.author.image}`} />
                                     </div>
                                     <div className="author-date-wrapper">
-                                        <p className="author">Pisac: {blog.author.name}</p>
+                                        <p className="author">{ t('author') }: {blog.author.name}</p>
                                         <p className="author">Zvanje: {blog.author.title}</p>
                                         <p className="date">Datum: {blog.date}</p>
                                     </div>
@@ -88,5 +88,5 @@ const mapStateToProps = (state) => ({
     blogs: state.blog.list
 });
 
-export default connect(mapStateToProps)(translate('headerView')(Blog))
+export default connect(mapStateToProps)(translate('blogView')(Blog))
 

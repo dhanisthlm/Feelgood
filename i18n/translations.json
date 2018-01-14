@@ -323,6 +323,10 @@
         "list6": "If the subject of your complaint is to do with the professional standards or behaviour of one of our psychologists, we will treat your concern seriously. Should we agree that standards are not being met, we will be happy to fix, refund or re-perform the service we have provided."
       }
     },
+    "blogView": {
+      "heading": "Blog",
+      "author": "Author"
+    },
     "issues": {
       "stress": {
         "name": "Stress",
@@ -548,6 +552,10 @@
       "text1": "Molimo Vas da razumijete da naše usluge nisu namjenjene hitnim slučajevima.",
       "text2": "Ukoliko razmišljate o samoubistvu ili poduzimanju mjera i akcija koje mogu uzrokovati ozbiljnu štetu Vama ili drugima, ukoliko osjećate da ste Vi ili neka druga osoba u opasnosti ili ako imate zdravstveno hitan slučaj, morate se obratiti službi za tu vrstu hitnih slučajeva i obavijestiti relevantne autoritete. ",
       "text3": "Naše savjetodavne usluge su otvorene za svakoga ko želi živjeti ispunjenijim životom radeći na svakodnevnim situacijama i problemima s kojiima se suočava. Ukoliko imate ozbiljne mentalne probleme, npr. dijagnozu shizofrenije, bipolarnog poremećaja ličnosti ili ste ovisni o alkoholu ili drogama, te ukoliko imate bilo koju drugu dijagnozu mentalnog poremećaja – ne smijete korisiti naše usluge."
+    },
+    "blogView": {
+      "heading": "Blogovi",
+      "author": "Pisac"
     },
     "paymentView": {
       "heading": "Zakažite psihološko savjetovanje",
