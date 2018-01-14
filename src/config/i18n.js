@@ -1,7 +1,7 @@
 import i18next from 'i18next';
 import * as resources from '../../i18n/translations.json';
 
-export const defaultLocale = 'en-US';
+export const defaultLocale = 'ba-BA';
 
 export const supportedLocales = [
     'en-US',
