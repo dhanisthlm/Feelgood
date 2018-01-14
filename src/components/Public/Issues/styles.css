@@ -96,10 +96,6 @@
     display: none;
 }
 
-.issues .iscrpljenost:after {
-    //content: 'Iscrpljenost';
-}
-
 .issues .iscrpljenost svg {
     width: 75px !important;
     margin-top: -4px !important;
@@ -141,10 +137,6 @@
 .issues .fobia svg {
     width: 67px !important;
     margin-left: 6px !important;
-}
-
-.issues .issue:after {
-    //content: attr(id);
 }
 
 .issues .issue.show:after {
@@ -248,7 +240,11 @@
     }
 
     .issues .issue-text {
-        height: auto;
+        height: 30px;
+    }
+
+    .issues .issue:hover {
+        transform: none;
     }
 
     .issues.mobile-issues {
@@ -293,7 +289,6 @@
         z-index: 9;
         border-radius: 50%;
         border: 9px solid #fff;
-        //transition: transform .5s;
         padding: 15px;
         text-align: center;
         color: #C04C9C;
@@ -506,6 +501,12 @@
         background-color: #fff;
         overflow: hidden;
         display: block;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    .issues .issue-text {
+        height: 72px;
     }
 }
 

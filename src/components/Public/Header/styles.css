@@ -116,7 +116,6 @@
     }
 
     .header.show {
-        //min-height: 427px;
         min-height: 384px;
     }
 
@@ -125,7 +124,6 @@
     }
 
     .header.show + div {
-        //margin-top: 388px;
         margin-top: 384px;
     }
 
@@ -211,6 +209,10 @@
         background-color: #C04C9C;
         padding: 12px 0;
         height: 33px;
+    }
+
+    .admin .navigation {
+        top: 220px;
     }
 
     .navigation a {

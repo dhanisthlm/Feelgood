@@ -4,13 +4,52 @@ import { translate } from 'react-i18next';
 import { routeActions } from 'redux-simple-router';
 import { setEncounterData } from '../../../actions/encounter';
 import { getStripeToken, getPaypalEnv } from '../../../actions/config';
+import { getTotal, getSelectedCurrency } from '../../../../helpers/payment';
 import styles from './styles.css';
 
 export class Payment extends Component {
 	constructor (props) {
 		super(props);
 
-		this.state = {};
+		this.state = {
+			language: 'KM',
+			packageFactor: 0.05,
+			paypalFactor: 1,
+			durationSkype: 's',
+			isDirty: false,
+			languages: [
+                {
+                    code: 'bam',
+                    currency: 'KM',
+                    rate: 1
+                },
+                {
+                    code: 'eur',
+                    currency: '€',
+                    rate: 2
+                },
+                {
+                    code: 'hrk',
+                    currency: 'kn',
+                    rate: 1/4
+                },
+                {
+                    code: 'rsd',
+                    currency: 'RSD',
+                    rate: 1/60
+                },
+				{
+					code: 'sek',
+					currency: 'kr',
+					rate: 1/5
+				},
+                {
+                    code: 'usd',
+                    currency: '$',
+                    rate: 1.6
+                }
+			]
+		};
 
 		this.handlePackage = this.handlePackage.bind(this);
 		this.handleWeeks = this.handleWeeks.bind(this);
@@ -19,12 +58,19 @@ export class Payment extends Component {
 		this.resetCheckout = this.resetCheckout.bind(this);
 		this.getData = this.getData.bind(this);
 		this.handlePromoCode = this.handlePromoCode.bind(this);
+		this.renderCurrencies = this.renderCurrencies.bind(this);
+		this.handleSelect = this.handleSelect.bind(this);
 	}
 
 	componentWillMount () {
-		this.setState(this.createInitialState());
-		this.props.dispatch(getStripeToken());
-        this.props.dispatch(getPaypalEnv());
+		this.setState(this.createInitialState(), () => {
+            let skype = this.state.skype;
+            skype.s.active = true;
+            this.setState({ skype });
+            this.setState({ data: this.getData() });
+            this.props.dispatch(getStripeToken());
+            this.props.dispatch(getPaypalEnv());
+		});
 	}
 
 	componentWillReceiveProps (nextProps) {
@@ -82,7 +128,7 @@ export class Payment extends Component {
             promoCode: 'zdravlje.nu',
             promoDiscountFactor: 0.5,
             enteredCode: '',
-			durationText: true,
+			durationText: false,
             code: '',
             skype: {
                 s: { active: false, cost: 60, week: 1, code: '1', description: '1 Skype poziva' },
@@ -250,10 +296,6 @@ export class Payment extends Component {
         let emailWeeks = 1;
         let skypeWeeks = 1;
 
-        let emailCode = '00';
-        let skypeCode = '0';
-        let skypeDurationCode = '00';
-
         const amount = {};
 
         this.skypePackage = skype[Object.keys(skype)
@@ -264,23 +306,19 @@ export class Payment extends Component {
 
         if (this.skypePackage) {
             skypeWeeks = this.skypePackage.week;
-            skypeCode = this.skypePackage.code;
             skypeCost = this.skypePackage.cost * this.state.skypeDuration[skypeDuration].factor;
-            skypeDurationCode = this.state.skypeDuration[skypeDuration].code;
         }
 
         if (this.emailPackage) {
             emailWeeks = this.emailPackage.week;
-            emailCode = this.emailPackage.code;
             emailCost = this.calculateEmailDiscount(this.emailPackage);
 		}
 
         const discount = this.calculateDiscounts(skypeCost, emailCost);
 
-        amount.skype = Math.round((skypeCost / skypeWeeks) * discount.promoFactor * discount.packageFactor);
-        amount.email = Math.round((emailCost / emailWeeks) * discount.promoFactor * discount.packageFactor);
-        amount.code = skypeCode + '' + skypeDurationCode + '' + emailCode;
-        amount.total = Math.round((emailCost + skypeCost) * discount.promoFactor * discount.packageFactor);
+        amount.skype = Math.round(((skypeCost / skypeWeeks) * discount.promoFactor * discount.packageFactor) / getSelectedCurrency(this.state)[0].rate);
+        amount.email = Math.round(((emailCost / emailWeeks) * discount.promoFactor * discount.packageFactor) / getSelectedCurrency(this.state)[0].rate);
+        amount.total = getTotal(this.state);
 
         return amount;
 	}
@@ -329,7 +367,7 @@ export class Payment extends Component {
             this.setState({ emailDiscount })
         }
 
-        this.setState({ cost });
+        this.setState({ data, cost });
         this.props.dispatch(setEncounterData(data, cost, emailDiscount, promoDiscount));
     }
 
@@ -364,6 +402,18 @@ export class Payment extends Component {
 
 		this.setState({ skypeDuration });
 		this.updateEncounter();
+	}
+
+	handleSelect (e) {
+		const children = Array.prototype.slice.call(e.target.children);
+        const currency = children.filter(child => child.selected === true);
+		this.setState({language: currency[0]['attributes']['data-id']['nodeValue'], isDirty: true});
+	}
+
+	renderCurrencies () {
+		return this.state.languages.map((country, i) => {
+			return <option key={i} data-id={country.currency} selected={this.state.language === country.currency} value={country.code}>{country.code.toUpperCase()}</option>;
+		})
 	}
 
     /**
@@ -496,23 +546,30 @@ export class Payment extends Component {
 					</div>
 				</div>
 				<div className="text-wrapper">
-					<h2 className="total">{ t('price') }: { this.calculateCost().total } KM</h2>
+					<h2 className="total">{ t('price') }: { this.calculateCost().total }<span>{this.state.language}</span></h2>
 					<div className="spec">
-						<span>Skype: { this.calculateCost().skype } KM / { t('call') }</span>
-						<span>{ t('email') }: { this.calculateCost().email } KM / { t('week') }</span>
+						<span>Skype: { this.calculateCost().skype } {this.state.language} / { t('call') }</span>
+						<span>{ t('email') }: { this.calculateCost().email } {this.state.language} / { t('week') }</span>
+					</div>
+					<div className="promo-textfield">
+						<input type="text"
+							   onChange={ this.handlePromoCode }
+							   placeholder={ t('writeCode') }
+							   value={this.state.enteredCode}
+						/>
+					</div>
+					<div className="form-element-wrapper currency-wrapper">
+						<div className="select-style">
+							<select onChange={this.handleSelect}>
+								{this.renderCurrencies()}
+							</select>
+						</div>
 					</div>
 					<button
 						className={buttonStyle}
 						onClick={ this.handleCheckout }>
 						{ t('purchase') }
 					</button>
-					<div className="promo-textfield">
-						<input type="text"
-							onChange={ this.handlePromoCode }
-							placeholder={ t('writeCode') }
-							value={this.state.enteredCode}
-						/>
-					</div>
 				</div>
 			</div>
 		);

@@ -6,6 +6,23 @@
     display: none;
 }
 
+.checkout .disclaimer p {
+    color: #f00 !important;
+    font-size: 15px;
+    margin-left: 58px;
+}
+
+.checkout .asterix {
+    font-weight: 300;
+    padding-left: 2px;
+    position: absolute;
+}
+
+.checkout .asterix-text {
+    margin: 6px 0 0 59px;
+    font-size: 15px;
+}
+
 .checkout .page-header {
     padding-left: 0;
     height: 58px;
@@ -131,15 +148,6 @@
     margin-top: 25px;
 }
 
-.checkout .basket .back {
-    //color: #c04c9c;
-    //margin-left: 55px;
-    //float: left;
-    //width: 40%;
-    //margin-left: 55px;
-    //margin-top: 20px;
-}
-
 .checkout .basket .front,
 .checkout .basket .back {
     color: #c04c9c;
@@ -180,9 +188,6 @@
     border: 1px solid #999;
     border-radius: 3px;
     padding: 13px 25px;
-    //max-height: 400px;
-    //height: 45px;
-    //transition: all 2s ease-in-out;
 }
 
 .checkout fieldset.expand {
@@ -372,11 +377,6 @@
     font-size: 28px;
     height: 42px;
 }
-.checkout .rating .stars span:hover:before,
-.checkout .rating .stars span:hover ~ span:before {
-    //content: "\2605";
-    //position: absolute;
-}
 
 .checkout .rating .stars span.filled:before {
     content: "\2605";
@@ -445,11 +445,8 @@
 }
 
 .checkout .form-buttons button {
-    float: left
-}
-
-.checkout .form-buttons .paypal-button {
-    //width: 68% !important;
+    float: left;
+    border-radius: 3px;
 }
 
 .checkout .form-buttons .stripe-button {
@@ -488,7 +485,7 @@
 .activity-wrapper > div {
     position: absolute;
     background: #fff;
-    width: 450px;
+    width: 400px;
     padding: 25px;
     left: 0;
     right: 0;
@@ -789,6 +786,7 @@ thead tr {
 .checkout .basket input[type="checkbox"] {
     display: none;
 }
+
 .checkout .payment-type-wrapper input[type="radio"] + label {
     position: relative;
     display: inline-block;
@@ -811,6 +809,7 @@ thead tr {
     margin-bottom: 0;
     line-height: 25px;
 }
+
 .checkout .basket input[type="checkbox"] + label:before,
 .checkout .basket input[type="checkbox"] + label:after {
     content: '';
@@ -852,28 +851,32 @@ thead tr {
     -webkit-box-shadow: inset 0 0 0 0.2em white, inset 0 0 0 1em white;
     box-shadow: inset 0 0 0 0.2em white, inset 0 0 0 1em white;
 }
+
 .checkout .payment-type-wrapper input[type="radio"] + label:hover:before {
     -webkit-transition: all .3s ease;
     transition: all .3s ease;
     -webkit-box-shadow: inset 0 0 0 0.3em white, inset 0 0 0 1em #c04c9c;;
     box-shadow: inset 0 0 0 0.3em white, inset 0 0 0 1em #c04c9c;;
 }
+
 .checkout .payment-type-wrapper input[type="radio"]:checked + label:before {
     -webkit-transition: all .3s ease;
     transition: all .3s ease;
     -webkit-box-shadow: inset 0 0 0 0.2em white, inset 0 0 0 1em #c04c9c;
     box-shadow: inset 0 0 0 0.2em white, inset 0 0 0 1em #c04c9c;
 }
+
 .checkout .basket input[type="checkbox"] + label:before {
     content: '✗';
     border-radius: 4px;
-    //background-color: #c04c9c;
     color: white;
     border: 2px solid #c04c9c;
 }
+
 .checkout .basket input[type="checkbox"] + label:hover:before {
     color: #c04c9c;
 }
+
 .checkout .basket input[type="checkbox"]:checked + label:before {
     background-color: #c04c9c;
     color: white;
@@ -892,6 +895,10 @@ thead tr {
         width: 100%;
         padding: 0 30px;
         box-sizing: border-box;
+    }
+
+    .checkout .asterix-text {
+        margin: 6px 0 0 0;
     }
 
     table {
@@ -913,6 +920,10 @@ thead tr {
 @media only screen and (max-width: 768px) and (orientation: portrait) {
     .checkout {
         padding-top: 250px;
+    }
+
+    .checkout .asterix-text {
+        margin: 6px 0 0 0;
     }
 
     .checkout .page-header {
@@ -946,6 +957,10 @@ thead tr {
 @media only screen and (max-width: 768px) and (orientation: landscape) {
     .checkout {
         padding-top: 250px;
+    }
+
+    .checkout .asterix-text {
+        margin: 6px 0 0 0;
     }
 
     .checkout .page-header {
@@ -1000,6 +1015,18 @@ thead tr {
 @media only screen and (max-width: 500px) {
     .checkout {
         padding-top: 230px;
+    }
+
+    .checkout #payment-form {
+        margin-top: 25px;
+    }
+
+    .checkout .asterix-text {
+        margin: -17px 0 5px 0;
+    }
+
+    .checkout .disclaimer p {
+        margin: 8px 0 5px 0;
     }
 
     .header.show + .checkout {

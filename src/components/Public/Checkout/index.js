@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux';
 import { translate } from 'react-i18next';
-import _ from 'lodash';
 import validation from 'react-validation-mixin';
 import strategy from 'joi-validation-strategy';
 import FormComponent from '../../FormComponent';
@@ -14,8 +13,11 @@ import { i18nValidation } from  '../../../../helpers/validation';
 import { saveEncounter, resetEncounter } from '../../../actions/encounter';
 import { getCountries } from '../../../../helpers/countries';
 import { getCurrency } from '../../../../helpers/currencies';
+import { getSkypeCost, getEmailCost, getPackageDiscount, getVoucherDiscount, getSum, getTotal, getPackageSum, getSelectedCurrency } from '../../../../helpers/payment';
+import { InactivityModal } from '../../InactiveDialog';
 import Header from '../Header';
 import Footer from '../Footer';
+import issueObj from '../../../../json/issues.json';
 import styles from './styles.css';
 
 let PayPalButton = paypal.Button.driver('react', { React, ReactDOM });
@@ -37,7 +39,7 @@ export class Checkout extends FormComponent {
 			showSpinner: false,
 			activity: 0,
 			counter: 60,
-            showDialog: false,
+            showDialog: true,
             startTime: null,
             timeRemaining: '2:00',
             idleTime: 0,
@@ -60,7 +62,9 @@ export class Checkout extends FormComponent {
             cancel: 'off',
             termsIsDirty: false,
             cancelIsDirty: false,
-            comment: null
+            comment: '',
+            paypalCurrencies: ['€', '$', 'kn', 'kr'],
+            invoiceCurrencies: ['€', 'KM']
 		};
 
 		this.validatorTypes = encounterValidator;
@@ -69,15 +73,6 @@ export class Checkout extends FormComponent {
 		this.handleChange = this.handleChange.bind(this);
 		this.renderIssues = this.renderIssues.bind(this);
 		this.handleSelect = this.handleSelect.bind(this);
-		this.debounce = this.debounce.bind(this);
-        this.closeDialog = this.closeDialog.bind(this);
-        this.timeIncrement = this.timeIncrement.bind(this);
-        this.listenForActivity = this.listenForActivity.bind(this);
-        this.startCountInactivity = this.startCountInactivity.bind(this);
-        this.stopCountInactivity = this.stopCountInactivity.bind(this);
-        this.resetInactivity = this.resetInactivity.bind(this);
-        this.debounce = this.debounce.bind(this);
-        this.countDownToCancel = this.countDownToCancel.bind(this);
         this.handleWebStar = this.handleWebStar.bind(this);
         this.handlePayStar = this.handlePayStar.bind(this);
         this.handleRatingComment = this.handleRatingComment.bind(this);
@@ -95,6 +90,7 @@ export class Checkout extends FormComponent {
         this.onError = this.onError.bind(this);
         this.handleCheckbox = this.handleCheckbox.bind(this);
         this.handleCancel = this.handleCancel.bind(this);
+        this.resetOrder = this.resetOrder.bind(this);
     }
 
 	componentWillMount () {
@@ -105,11 +101,13 @@ export class Checkout extends FormComponent {
         }
 	}
 
+	componentWillUnmount () {
+	    this.resetOrder();
+    }
+
 	componentDidMount () {
         if (window.localStorage.getItem('order')) {
             this.initStripe();
-            this.startCountInactivity();
-            this.listenForActivity();
             this.calculateViewportSize();
             this.setState({ env: window.localStorage.getItem('pe') });
         } else {
@@ -140,7 +138,8 @@ export class Checkout extends FormComponent {
 
         this.setState({
             issues: nextProps.issues,
-            cost: JSON.parse(window.localStorage.getItem('order')).cost.total
+            language: JSON.parse(window.localStorage.getItem('order')).language,
+            cost: JSON.parse(window.localStorage.getItem('order')).cost
         });
 
         if (window.localStorage.getItem('step') === null) {
@@ -177,16 +176,18 @@ export class Checkout extends FormComponent {
         const options = document.getElementById('payment-options');
         let paypalFactor = 1;
 
-        console.log('id', id, event.currentTarget)
-
         this.setState({ paymentType: id }, () => {
            if (id === 'credit') {
                this.initStripe();
            }
 
            if (id === 'paypal') {
-               paypalFactor = 2;
+               paypalFactor = (this.state.paypalCurrencies.indexOf(this.state.language) > -1) ? 1 : 2;
                this.setState({ termsIsDirty: true, cancelIsDirty: true })
+           } else if (id === 'faktura') {
+               paypalFactor = (this.state.invoiceCurrencies.indexOf(this.state.language) > -1) ? 1 : 2;
+           } else {
+               paypalFactor = 1;
            }
 
            this.setState({ paypalFactor })
@@ -214,9 +215,6 @@ export class Checkout extends FormComponent {
         if (nextProps.save === true) {
             window.scrollTo(0, 0);
             window.localStorage.setItem('step', '2');
-            window.removeEventListener('mousemove', this.throttledDebounce);
-            window.removeEventListener('keydown', this.throttledDebounce);
-            this.stopCountInactivity();
             this.setState({ showSpinner: false, save: true });
         }
     }
@@ -344,133 +342,11 @@ export class Checkout extends FormComponent {
      * @param {number} responseCode
      * @return {object}
      */
-    closeDialog () {
-        clearInterval(this.countdownToLogoutInterval);
-        this.setState({ showDialog: false, timeRemaining: '' });
-        this.resetInactivity();
-        this.startCountInactivity();
-    }
-
-    /**
-     * This callback type is called `requestCallback
-     * @callback requestCallback
-     * @param {number} responseCode
-     * @return {object}
-     */
-    startCountInactivity () {
-        if (!this.timerInterval) {
-            this.timerInterval = setInterval(this.timeIncrement.bind(this), this.state.tick);
-        }
-    }
-
-    /**
-     * This callback type is called `requestCallback
-     * @callback requestCallback
-     * @param {number} responseCode
-     * @return {object}
-     */
-    debounce () {
-        this.setState({ idleTime: 0 });
-    }
-
-    /**
-     * This callback type is called `requestCallback
-     * @callback requestCallback
-     * @param {number} responseCode
-     * @return {object}
-     */
-    listenForActivity () {
-        this.throttledDebounce = _.throttle(this.debounce, this.state.tick);
-        window.addEventListener('mousemove', this.throttledDebounce);
-        window.addEventListener('keydown', this.throttledDebounce);
-    }
-
-    /**
-     * This callback type is called `requestCallback
-     * @callback requestCallback
-     * @param {number} responseCode
-     * @return {object}
-     */
-    stopCountInactivity () {
-        if (this.timerInterval) {
-            clearInterval(this.timerInterval);
-            delete this.timerInterval;
-        }
-    }
-
-    /**
-     * This callback type is called `requestCallback
-     * @callback requestCallback
-     * @param {number} responseCode
-     * @return {object}
-     */
-    resetInactivity () {
-        this.setState({ idleTime: 0, showDialog: false });
-    }
-
-    /**
-     * This callback type is called `requestCallback
-     * @callback requestCallback
-     * @param {number} responseCode
-     * @return {object}
-     */
-    timeIncrement () {
-        this.setState({ idleTime: parseInt(this.state.idleTime + parseInt(this.state.tick)) });
-        if (this.state.idleTime > parseInt(this.state.idleTtl)) {
-            this.stopCountInactivity();
-
-            this.setState({
-                startTime: Date.now(),
-                showDialog: true
-            }, () => {
-                this.countdownToLogoutInterval = setInterval(this.countDownToCancel, 1000);
-            });
-        }
-    }
-
-    /**
-     * This callback type is called `requestCallback
-     * @callback requestCallback
-     * @param {number} responseCode
-     * @return {object}
-     */
     resetOrder () {
-		clearInterval(this.countdownToLogoutInterval);
-		clearInterval(this.timerInterval);
-
-		this.setState({ showDialog: false });
-		this.stopCountInactivity();
-		this.setState({ countInactivity: false });
 		this.props.dispatch(routeActions.push('/'));
-
 		window.localStorage.removeItem('order');
         window.localStorage.removeItem('stripe');
         window.localStorage.removeItem('saved');
-        window.removeEventListener('mousemove', this.throttledDebounce);
-        window.removeEventListener('keydown', this.throttledDebounce);
-	}
-
-    /**
-     * This callback type is called `requestCallback
-     * @callback requestCallback
-     * @param {number} responseCode
-     * @return {object}
-     */
-	countDownToCancel () {
-        const MODAL_COUNTDOWN_START = 120000; //2 minutes
-        const startTime = this.state.startTime;
-        const timeDiff = Date.now() - startTime;
-        const ns = (((MODAL_COUNTDOWN_START - timeDiff) / 1000) >> 0);
-        const m = (ns / 60) >> 0;
-        const s = ns - m * 60;
-
-        if (ns > 0) {
-            this.setState({ timeRemaining: m + ':' + (('' + s).length > 1 ? '' : '0') + s });
-        }
-
-        if (ns === 0) {
-            this.resetOrder();
-        }
 	}
 
     /**
@@ -573,7 +449,11 @@ export class Checkout extends FormComponent {
      */
 	handleSubmit (event) {
 		event.preventDefault();
-        this.setState({ termsIsDirty: true, cancelIsDirty: true });
+        this.setState({
+            termsIsDirty: true,
+            cancelIsDirty: true,
+            currency: getSelectedCurrency(this.state)[0].code.toUpperCase()
+        });
 
 		this.props.validate((error) => {
 			const { t } = this.props;
@@ -673,13 +553,15 @@ export class Checkout extends FormComponent {
      * @return {object}
      */
     payment(data, actions) {
-        // amount: { total: '1', currency: 'EUR' }
-        const totalEur = Math.round(this.state.cost / 2);
+        const amount = getTotal(this.state);
+
+        const currency = this.state.paypalCurrencies.indexOf(getSelectedCurrency(this.state)[0].currency) > -1
+            ? getSelectedCurrency(this.state)[0].code.toUpperCase() : 'EUR';
 
         return actions.payment.create({
               transactions: [
                   {
-                      amount: { total: totalEur, currency: 'EUR' }
+                      amount: { total: amount, currency }
                   }
               ]
           });
@@ -731,7 +613,7 @@ export class Checkout extends FormComponent {
      */
 	renderIssues () {
 		const { t } = this.props;
-		const issues = ['Izaberite temu', ...this.state.issues];
+		const issues = ['Izaberite temu', ...issueObj.issues];
 		let issueName;
 		let issueValue;
 
@@ -789,16 +671,9 @@ export class Checkout extends FormComponent {
 		const { t } = this.props;
 		const front = (window.localStorage.getItem('step') === '1') ? 'front' : 'front none';
         const back = (window.localStorage.getItem('step') === '2') ? 'back' : 'back none';
-
-        const skypeCost = this.state.data.skype ? this.state.data.skype.cost : 0;
-        const skypeDurationFactor = this.state.data.skypeDuration.factor;
-		const emailCost = this.state.data.email ? this.state.emailDiscount / this.state.data.email.week : 0;
-		const emailSumCost = this.state.data.email ? this.state.data.email.cost * this.state.data.email.week : 0;
-		const nWeeks = this.state.data.email ? this.state.data.email.week : 0;
-
 		const firstColSize = (this.width === 'small') ? '50%' : '60%';
 		const lastColSize = (this.width === 'small') ? '30%' : '20%';
-		const currency = this.state.paypalFactor === 1 ? 'KM' : 'EUR';
+		const currency = this.state.paypalFactor === 1 ? this.state.language : '€';
         const termErrorMsg = this.state.terms === 'off' && this.state.termsIsDirty ? 'Ovo polje je obavezno' : '';
         const cancelErrorMsg = this.state.cancel === 'off' && this.state.cancelIsDirty ? 'Ovo polje je obavezno' : '';
 
@@ -816,7 +691,7 @@ export class Checkout extends FormComponent {
 
         const paypalStyle = {
             lable: 'en_US',
-            size: 'large',
+            size: 'responsive',
             color: 'blue',
             shape: 'rect',
             label: 'paypal',
@@ -825,18 +700,7 @@ export class Checkout extends FormComponent {
 
         return (
 			<div className="page">
-                {(() => {
-                    if (this.state.showDialog === true) {
-                        return (
-							<div className="activity-wrapper">
-								<div className="box">
-									<p>Dugo ste bili neaktivni, ako ne kliknete na moju kupovinu, vaš započeti nalog će se završiti i u {this.state.timeRemaining} minuta ćete biti preusmereni na početnu stranicu.</p>
-									<button onClick={this.closeDialog}>Nastaviti</button>
-								</div>
-							</div>
-                        )
-                    }
-				})()}
+                <InactivityModal resetOrder={this.resetOrder} />
 				<div className={spinnerClass}>
 					<div className="loader">
 						<svg className="circular" viewBox="25 25 50 50">
@@ -877,8 +741,8 @@ export class Checkout extends FormComponent {
 																<tr>
 																	<td>{ this.state.data.skype.description }</td>
 																	<td className="center">{ this.state.data.skype.week }</td>
-																	<td className="center">{ Math.round(skypeCost * skypeDurationFactor / this.state.paypalFactor) }&nbsp;{ currency }</td>
-																</tr>
+																	<td className="center">{ getSkypeCost(this.state) }&nbsp;{ currency }</td>
+                                                        </tr>
                                                             )
                                                         }
                                                     })()}
@@ -888,7 +752,7 @@ export class Checkout extends FormComponent {
 																<tr>
 																	<td>{this.state.data.email.description}</td>
 																	<td className="center">{ this.state.data.email.week }</td>
-																	<td className="center">{ this.state.data.email.cost * this.state.data.email.week / this.state.paypalFactor }&nbsp;{ currency }</td>
+																	<td className="center">{ getEmailCost(this.state) }&nbsp;{ currency }</td>
 																</tr>
                                                             )
                                                         }
@@ -900,37 +764,33 @@ export class Checkout extends FormComponent {
 													</tr>
 													<tr>
 														<td className={sumClass} colSpan="2">{ t('sum') }</td>
-														<td className={centerClass}>{ (Math.round((skypeCost * skypeDurationFactor) + (emailSumCost)) / this.state.paypalFactor) }&nbsp;{ currency }</td>
+														<td className={centerClass}>{ getSum(this.state) }&nbsp;{ currency }</td>
 													</tr>
                                                     {(() => {
-                                                        if (this.state.data.packageDiscount) {
-                                                            const packageDiscount = this.state.data.promoDiscount
-                                                                ?   ((Math.round((skypeCost * skypeDurationFactor) + (this.state.data.email.cost * this.state.data.email.week)) / this.state.paypalFactor)) - Math.round((Math.round((this.state.data.skype.cost * skypeDurationFactor) + (emailCost * nWeeks)) - this.state.data.packageDiscount) / this.state.paypalFactor)
-                                                                :   ((Math.round((skypeCost * skypeDurationFactor) + (this.state.data.email.cost * this.state.data.email.week)) / this.state.paypalFactor)) - Math.round(this.state.cost / this.state.paypalFactor);
+                                                        if (this.state.data.packageDiscount || this.state.data.skype && this.state.data.skype.week > 1 || this.state.data.email && this.state.data.email.week > 1) {
                                                             return (
 																<tr>
 																	<td className="right"
 																		colSpan="2">{ t('packageDiscount') }</td>
-																	<td className="center">{ packageDiscount }&nbsp;{ currency }</td>
+																	<td className="center">{ getPackageDiscount(this.state) }&nbsp;{ currency }</td>
 																</tr>
                                                             )
                                                         }
                                                     })()}
                                                     {(() => {
-                                                        if (this.state.data.packageDiscount > 0) {
-                                                            const className = this.state.data.promoDiscount
-                                                                ? 'center' : 'center heavy';
+                                                        if (this.state.data.packageDiscount > 0 || this.state.data.skype && this.state.data.skype.week > 1 || this.state.data.email && this.state.data.email.week > 1) {
+                                                            const labelName = this.state.data.promoDiscount
+                                                                ? 'right' : 'right heavy';
 
-                                                            const total = !this.state.data.promoDiscount
-                                                                ? this.state.cost / this.state.paypalFactor
-                                                                : Math.round((Math.round((this.state.data.skype.cost * skypeDurationFactor) + (emailCost * nWeeks)) - this.state.data.packageDiscount) / this.state.paypalFactor);
+                                                            const valueName = this.state.data.promoDiscount
+                                                                ? 'center' : 'center heavy';
 
                                                             return (
 																<tr>
-																	<td className={className}
+																	<td className={labelName}
 																		colSpan="2">{ t('sumWithPackageDiscount')}</td>
-																	<td className={className}>
-                                                                        { total }&nbsp;{ currency }
+																	<td className={valueName}>
+                                                                        { getPackageSum(this.state) }&nbsp;{ currency }
 																	</td>
 																</tr>
                                                             )
@@ -942,31 +802,43 @@ export class Checkout extends FormComponent {
 																<tr>
 																	<td className="right"
 																		colSpan="2">{ t('voucherDiscount') }</td>
-																	<td className="center">{ Math.round(this.state.data.promoDiscount / this.state.paypalFactor) }&nbsp;{ currency }</td>
+																	<td className="center">{ getVoucherDiscount(this.state) }&nbsp;{ currency }</td>
 																</tr>
                                                             )
                                                         }
                                                     })()}
                                                     {(() => {
-                                                        if (this.state.data.promoDiscount) {
+                                                        if (this.state.data.promoDiscount || this.state.data.skype && this.state.data.skype.week > 1 || this.state.data.email && this.state.data.email.week > 1) {
                                                             return (
 																<tr>
 																	<td className="right heavy"
 																		colSpan="2">{ t('total') }</td>
-																	<td className="center heavy">{ Math.round(this.state.cost / this.state.paypalFactor) }&nbsp;{ currency }</td>
+																	<td className="center heavy">{ getTotal(this.state) }&nbsp;{ currency }</td>
 																</tr>
                                                             )
                                                         }
                                                     })()}
 													</tbody>
 												</table>
+                                                <div className="disclaimer">
+                                                    {(() => {
+                                                        if (this.state.paypalFactor !== 1) {
+                                                            return(
+                                                                <div>
+                                                                    <p className="paypal">
+                                                                        Izabrana valuta nije podržana.
+                                                                    </p>
+                                                                </div>
+                                                            )
+                                                        }
+                                                    })()}
+                                                </div>
 												<div>
                                                     {(() => {
                                                         if (this.props.errorMessage.length > 0) {
                                                             return (
 																<div className="card-error">
-																	<p>Neformalno smo mogli da obradimo vašu
-																		narudžbinu. {t(`stripe.${this.props.errorMessage}`)}</p>
+																	<p>Neformalno smo mogli da obradimo vašu narudžbinu. {t(`stripe.${this.props.errorMessage}`)}</p>
 																</div>
                                                             )
                                                         }
@@ -977,7 +849,7 @@ export class Checkout extends FormComponent {
                                     }
                                 })()}
 								<div ref={(front) => { this.front = front; }} className={front}>
-									<form id="payment-form">
+									<div id="payment-form">
 										<div className="form-element-wrapper">
 											<label htmlFor="name">{ t('name') }</label>
 											<input
@@ -1122,9 +994,8 @@ export class Checkout extends FormComponent {
 											<textarea
 												id="comment"
 												className={ this.getValidatorData('comment') }
-												onChange={ this.handleChange }>
-												{ this.state.comment }
-											</textarea>
+												onChange={ this.handleChange }
+                                                value={ this.state.comment } />
 											{this.getValidationMessages('comment')}
 										</div>
                                         <div className="form-element-wrapper">
@@ -1173,7 +1044,7 @@ export class Checkout extends FormComponent {
                                                 }
                                             })()}
 										</div>
-									</form>
+									</div>
 								</div>
 								<div className={back}>
 									<div>
@@ -1201,7 +1072,7 @@ export class Checkout extends FormComponent {
 											</div>
 										</div>
 										<label className="comment-label">Ostali komentari</label>
-										<textarea onChange={this.handleRatingComment}>{this.state.ratingComment}</textarea>
+										<textarea onChange={this.handleRatingComment} value={this.state.ratingComment} />
 										<button onClick={ this.postRating }>OK</button>
                                         <p className="close-button-explanation">Vratit ćete se natrag na početnu stranicu kada pritisnete ok.</p>
 									</div>

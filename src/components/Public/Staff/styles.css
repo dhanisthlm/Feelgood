@@ -346,7 +346,6 @@
     }
 
     .staff .card {
-        //width: 100%;
         box-sizing: border-box;
         margin: 0 0 20px 0;
         height: auto;
@@ -390,5 +389,23 @@
 @media only screen and (max-width: 400px) {
     .staff {
         padding: 5px 20px 20px;
+    }
+
+    .staff .card {
+        width: 100%;
+    }
+
+    .staff .card .photo-wrapper {
+        height: 350px;
+    }
+
+    .staff .card .photo-wrapper img {
+       width: 100%;
+    }
+}
+
+@media only screen and (max-width: 350px) {
+    .staff .card .photo-wrapper {
+        height: 300px;
     }
 }

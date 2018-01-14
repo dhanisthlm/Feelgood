@@ -21,7 +21,7 @@ export class Footer extends Component {
         return (
             <footer className="footer">
                 <div className="col col-1">
-                    <h2>O Zdravlje.nu</h2>
+                    <h2>O zdravlje.nu</h2>
                     <p>{ t('about') }</p>
                     <div className="address">
                         <p><span className="heading">Adresa:</span> Baunad doo Tuzla, Zdravlje.nu, Maršala Tita 109, 75000 Tuzla, Bosna i Hercegovina</p>
@@ -41,7 +41,7 @@ export class Footer extends Component {
                 <div className="col col-3">
                     <h2>Uslovi</h2>
                     <a className="link" href="/politika-privatnosti">Politika privatnosti</a>
-                    <a className="link" href="/tac">Pravila i uslove</a>
+                    <a className="link" href="/tac">Pravila i uslovi</a>
                     <a className="link" href="/cookies">Politika kolačića</a>
                     <a className="link" href="/faq">FAQ - Pitanja</a>
                     <a className="link" href="/kontakt">Služba za korisnike</a>

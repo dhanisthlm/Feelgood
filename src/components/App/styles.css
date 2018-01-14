@@ -16,6 +16,15 @@ h4 {
     font-weight: 500;
 }
 
+input[type="text"] {
+    color: #000 !important;
+    font-weight: 400 !important;
+}
+
+button, select {
+    font-weight: 400;
+}
+
 @media only screen and (max-width: 500px) {
     body {
         background: #fff;

@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux';
 import { translate } from 'react-i18next';
 import { getStaff } from '../../../actions/staff';
-import { createStaff } from '../../../actions/staff';
+import i18n from '../../../config/i18n';
 import styles from './styles.css';
 
 export class Staff extends Component {
@@ -22,6 +22,7 @@ export class Staff extends Component {
 
 	componentDidMount() {
 		this.props.dispatch(getStaff());
+		this.setState({ locale: i18n['language'] });
 	}
 
 	componentWillReceiveProps (nextProps) {}
@@ -42,8 +43,9 @@ export class Staff extends Component {
 	}
 
 	renderPersonalText (person) {
-		return person.text.map((part, i) => {
-            return <p key={i}>{ person.text[i] }</p>;
+		const locale = this.state.locale || i18n.language;
+		return person.text[locale].map((part, i) => {
+            return <p key={i}>{ person.text[locale][i] }</p>;
         });
 	}
 
@@ -66,7 +68,8 @@ export class Staff extends Component {
 				</div>
 				<div className="cards">
                     {this.props.staff.map((person, i) => {
-                    	const image = "./images/" + person.image;
+                        const locale = this.state.locale || i18n.language;
+                        const image = "./images/" + person.image;
                         return (
 							<div key={i} className="card">
 								<div className="photo-wrapper">
@@ -78,7 +81,7 @@ export class Staff extends Component {
 								<div className="info-wrapper">
 									<div className="title-wrapper">
 										<p>{person.fullName}</p>
-										<p>{person.title}</p>
+										<p>{person.title[locale]}</p>
 									</div>
 									<div id={person.name} data-direction={person.direction} className="diploma-wrapper" onClick={ self.openDiploma } >
 										<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">

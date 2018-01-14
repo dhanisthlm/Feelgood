@@ -38,6 +38,9 @@ const encounterSchema = Schema({
     paymentType: {
         type: String
     },
+    currency: {
+        type: String
+    },
     timeframe: {
         type: String
     },
