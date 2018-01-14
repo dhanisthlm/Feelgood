@@ -16,7 +16,7 @@ export class InactivityModal extends Component {
             idleTime: 0,
             location: null,
             countInactivity: true,
-            idleTtl: 300000,
+            idleTtl: 3000,
             tick: 10000,
         };
 
@@ -147,7 +147,8 @@ export class InactivityModal extends Component {
                         return (
                             <div className="activity-wrapper">
                                 <div className="box">
-                                    <p>Dugo ste bili neaktivni, ako ne kliknete na moju kupovinu, vaš započeti nalog će se završiti i u {this.state.timeRemaining} minuta ćete biti preusmereni na početnu stranicu.</p>
+                                    <p>Dugo ste bili neaktivni, ako ne kliknete na oznaku Nastaviti - Vaš započeti nalog će se poništiti.</p>
+                                    <p>Za {this.state.timeRemaining} minuta ćete biti preusmjereni na početnu stranicu.</p>
                                     <button onClick={this.closeDialog}>Nastaviti</button>
                                 </div>
                             </div>

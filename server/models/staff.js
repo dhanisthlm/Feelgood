@@ -14,7 +14,7 @@ const staffSchema = Schema({
         type: String
     },
     title: {
-        type: String
+        type: Object
     },
     text: {
         type: Object
