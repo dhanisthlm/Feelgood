@@ -20,6 +20,7 @@
     float: left;
     border: 1px solid #aaa;
     cursor: pointer;
+    min-width: 125px;
 }
 
 .flag-wrapper img {
