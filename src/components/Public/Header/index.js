@@ -15,12 +15,12 @@ export class Header extends Component {
             languages: [
                 {
                     code: "ba-BA",
-                    name: "Bosanski",
+                    name: "bosnian",
                     flag: "https://lipis.github.io/flag-icon-css/flags/4x3/ba.svg"
                 },
                 {
                     code: "en-US",
-                    name: "Engleski",
+                    name: "english",
                     flag: "https://lipis.github.io/flag-icon-css/flags/4x3/um.svg"
                 }
             ]
@@ -68,6 +68,8 @@ export class Header extends Component {
     }
 
     renderFlags() {
+        const { t } = this.props;
+
         return this.state.languages.map((item, i) => {
             return (
                 <span key={i} onClick={this.updateLanguage} id={item.code}>
@@ -75,7 +77,7 @@ export class Header extends Component {
                         <div className="flag-wrapper">
                             <img src={item.flag} />
                         </div>
-                        {item.name}
+                        {t(`${item.name}`)}
                     </li>
                 </span>
             )

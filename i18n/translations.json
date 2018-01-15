@@ -1,7 +1,9 @@
 {
   "en-US": {
     "common": {
-      "email": "E-mail"
+      "email": "E-mail",
+      "english": "English",
+      "bosnian": "Bosnian"
     },
     "headerView": {
       "contactUs": "Contact us",
@@ -540,7 +542,9 @@
   },
   "ba-BA": {
     "common": {
-      "email": "E-pošta"
+      "email": "E-pošta",
+      "english": "Engleski",
+      "bosnian": "Bosanski"
     },
     "headerView": {
       "contactUs": "Kontaktirajte nas",
