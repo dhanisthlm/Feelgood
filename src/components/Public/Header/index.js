@@ -36,6 +36,11 @@ export class Header extends Component {
 
     componentDidMount () {
         this.props.dispatch(ping());
+
+        if (window.localStorage.getItem('lang')) {
+            console.log(JSON.parse(window.localStorage.getItem('lang')));
+            this.updateLanguage(JSON.parse(window.localStorage.getItem('lang')));
+        }
     }
 
     componentWillReceiveProps (nextProps) {
@@ -51,6 +56,8 @@ export class Header extends Component {
         const id = event.currentTarget.id;
         const languages = this.state.languages;
         const i = this.state.languages.map(lang => lang.code).indexOf(id);
+        const storage = { currentTarget: { id }};
+        const stringified = JSON.stringify(storage);
         const objectFound = languages[i];
 
         if (i === 0) return;
@@ -63,6 +70,7 @@ export class Header extends Component {
         languages.length = Math.min( languages.length, 2 );
 
         this.setState({ languages }, () => {
+            window.localStorage.setItem('lang', stringified);
             i18n.changeLanguage(id);
         });
     }
