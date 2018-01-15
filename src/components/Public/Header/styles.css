@@ -301,7 +301,7 @@
     }
 
     .navigation ul {
-        padding: 17px 0 0 0;
+        padding: 53px 0 0 0;
         margin-top: 0;
         text-align:center;
         list-style:none;
@@ -362,7 +362,7 @@
     }
 
     .navigation.show .menuitems {
-        padding-top: 5px;
+        padding-top: 1px;
     }
 
     .menuitems {
