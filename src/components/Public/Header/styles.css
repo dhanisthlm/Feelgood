@@ -9,8 +9,9 @@
 }
 
 .languagepicker {
+    display: none;
     background-color: #FFF;
-    display: inline-block;
+    //display: inline-block;
     padding: 0;
     height: 40px;
     overflow: hidden;
