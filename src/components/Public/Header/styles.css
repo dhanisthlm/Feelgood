@@ -1,12 +1,87 @@
 .header {
     padding-left: 300px;
-    overflow: hidden;
     background-color: #FFF;
     position: absolute;
     width: 100%;
     height: 100px;
     z-index: 99;
     box-sizing: border-box;
+}
+
+.languagepicker {
+    display: none;
+    background-color: #FFF;
+    //display: inline-block;
+    padding: 0;
+    height: 40px;
+    overflow: hidden;
+    transition: all .3s ease;
+    margin: 0 50px 10px 0;
+    vertical-align: top;
+    float: left;
+    border: 1px solid #aaa;
+    cursor: pointer;
+    min-width: 125px;
+}
+
+.flag-wrapper img {
+    height: 100%;
+}
+
+.flag-wrapper {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-top: 5px;
+    float: left;
+    margin-right: 10px;
+}
+
+.languagepicker.open {
+    height: 81px;
+}
+
+.languagepicker a{
+    color: #000;
+    text-decoration: none;
+}
+
+.languagepicker li {
+    display: block;
+    padding: 0px 10px;
+    line-height: 40px;
+    border-top: 1px solid #EEE;
+}
+
+.languagepicker li:hover{
+    background-color: #EEE;
+}
+
+.languagepicker span:first-child li:hover{
+    background-color: #fff !important;
+}
+
+.languagepicker a:first-child li {
+    border: none;
+    background: #FFF !important;
+}
+
+.languagepicker li img {
+    margin-right: 5px;
+}
+
+.roundborders {
+    border-radius: 5px;
+}
+
+.language {
+    position: absolute;
+    top: 12px;
+}
+
+.language ul {
+    border: 1px solid #ccc;
 }
 
 #topNav {
@@ -211,6 +286,13 @@
         height: 33px;
     }
 
+    .language {
+        position: absolute;
+        top: 177px;
+        right: -27px;
+        z-index: 999;
+    }
+
     .admin .navigation {
         top: 220px;
     }
@@ -220,7 +302,7 @@
     }
 
     .navigation ul {
-        padding: 17px 0 0 0;
+        padding: 53px 0 0 0;
         margin-top: 0;
         text-align:center;
         list-style:none;
@@ -281,7 +363,7 @@
     }
 
     .navigation.show .menuitems {
-        padding-top: 5px;
+        padding-top: 1px;
     }
 
     .menuitems {

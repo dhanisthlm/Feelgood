@@ -1,5 +1,5 @@
 export const getSkypeCost = (state) => {
-    if (!state.data || !state.data.skype) {
+    if (!state.data || !state.data.skype || state.skype.active === false) {
         return 0;
     }
 
@@ -17,7 +17,7 @@ export const getSkypeCost = (state) => {
  * @return {object}
  */
 export const getEmailCost = (state) => {
-    if (!state.data || !state.data.email) {
+    if (!state.data || !state.data.email || state.email.active === false) {
         return 0;
     }
 
@@ -61,9 +61,18 @@ export const getPackageDiscount = (state) => {
     }
 
     const costSkype = state.data.skype ? state.data.skype.cost * state.data.skypeDuration.factor : 0;
-    const discountSkype = getSkypeCost(state) - (exchange(costSkype, state) / state.paypalFactor);
-    const discountEmail = getEmailCost(state) - (exchange(state.emailDiscount, state) / state.paypalFactor);
+    let discountSkype = getSkypeCost(state) - (exchange(costSkype, state) / state.paypalFactor);
+    let discountEmail = getEmailCost(state) - (exchange(state.emailDiscount, state) / state.paypalFactor);
     const discountPackage = (state.data.email && state.data.skype) ? (getEmailCost(state) + getSkypeCost(state)) * 0.05 : 0;
+
+    if (discountEmail < 0) {
+        discountEmail = 0;
+    }
+
+    if (discountSkype < 0) {
+        discountSkype = 0;
+    }
+
     return Math.floor(Math.round(discountPackage) + parseFloat(discountSkype) + parseFloat(discountEmail));
 };
 
@@ -97,7 +106,9 @@ export const getTotal = (state) => {
  * @return {object}
  */
 export const exchange = (cost, state) => {
-    return state.paypalFactor === 1 ? parseInt((cost / getSelectedCurrency(state)[0].rate).toFixed(0)) : parseInt((cost).toFixed(0));
+    return state.paypalFactor === 1
+        ? parseInt((cost / getSelectedCurrency(state)[0].rate).toFixed(0))
+        : parseInt((cost).toFixed(0));
 };
 
 /**

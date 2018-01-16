@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux';
 import { translate } from 'react-i18next';
 import { ping, logout } from '../../../actions/auth';
+import i18n from '../../../config/i18n';
 import styles from './styles.css';
 
 export class Header extends Component {
@@ -10,20 +11,84 @@ export class Header extends Component {
 
         this.state = {
             logoutIsVisible: false,
-            menu: 'close'
+            menu: 'close',
+            languages: [
+                {
+                    code: "ba-BA",
+                    name: "bosnian",
+                    flag: "https://lipis.github.io/flag-icon-css/flags/4x3/ba.svg"
+                },
+                {
+                    code: "en-US",
+                    name: "english",
+                    flag: "https://lipis.github.io/flag-icon-css/flags/4x3/um.svg"
+                }
+            ]
         };
 
         this.handleLogout = this.handleLogout.bind(this);
         this.navToggle = this.navToggle.bind(this);
         this.closeMobileMenu = this.closeMobileMenu.bind(this);
+        this.renderFlags = this.renderFlags.bind(this);
+        this.updateLanguage = this.updateLanguage.bind(this);
+        this.openLanguage = this.openLanguage.bind(this);
     }
 
     componentDidMount () {
         this.props.dispatch(ping());
+
+        if (window.localStorage.getItem('lang')) {
+            this.updateLanguage(JSON.parse(window.localStorage.getItem('lang')));
+        }
     }
 
     componentWillReceiveProps (nextProps) {
         this.setState({ logoutIsVisible: nextProps.isAuthenticated });
+    }
+
+    openLanguage() {
+        const picker = document.querySelector('.languagepicker');
+        picker.classList.toggle('open');
+    }
+
+    updateLanguage(event) {
+        const id = event.currentTarget.id;
+        const languages = this.state.languages;
+        const i = this.state.languages.map(lang => lang.code).indexOf(id);
+        const storage = { currentTarget: { id }};
+        const stringified = JSON.stringify(storage);
+        const objectFound = languages[i];
+
+        if (i === 0) return;
+
+        if (i > 0) {
+            languages.splice( i, 1 );
+        }
+
+        languages.unshift( objectFound );
+        languages.length = Math.min( languages.length, 2 );
+
+        this.setState({ languages }, () => {
+            window.localStorage.setItem('lang', stringified);
+            i18n.changeLanguage(id);
+        });
+    }
+
+    renderFlags() {
+        const { t } = this.props;
+
+        return this.state.languages.map((item, i) => {
+            return (
+                <span key={i} onClick={this.updateLanguage} id={item.code}>
+                    <li>
+                        <div className="flag-wrapper">
+                            <img src={item.flag} />
+                        </div>
+                        {t(`${item.name}`)}
+                    </li>
+                </span>
+            )
+        })
     }
 
     closeMobileMenu () {
@@ -133,6 +198,11 @@ handleLogout (event) {
                         <li><a onClick={this.closeMobileMenu} className="menuitems" href="/#kakoradi">{ t('howWork') }</a></li>
                         <li><a onClick={this.closeMobileMenu} className="menuitems" href="/#kosmomi">{ t('whoAreWe')}</a></li>
                         <li><a className="menuitems" href="/blogovi">{ t('blog') }</a></li>
+                    </ul>
+                </div>
+                <div className="language">
+                    <ul onClick={this.openLanguage} className="languagepicker roundborders large">
+                        {this.renderFlags()}
                     </ul>
                 </div>
             </header>
