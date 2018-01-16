@@ -38,7 +38,6 @@ export class Header extends Component {
         this.props.dispatch(ping());
 
         if (window.localStorage.getItem('lang')) {
-            console.log(JSON.parse(window.localStorage.getItem('lang')));
             this.updateLanguage(JSON.parse(window.localStorage.getItem('lang')));
         }
     }
