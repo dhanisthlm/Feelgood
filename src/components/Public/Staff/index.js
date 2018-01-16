@@ -22,7 +22,6 @@ export class Staff extends Component {
 
 	componentDidMount() {
 		this.props.dispatch(getStaff());
-		this.setState({ locale: i18n['language'] });
 	}
 
 	componentWillReceiveProps (nextProps) {}
@@ -70,6 +69,7 @@ export class Staff extends Component {
                     {this.props.staff.map((person, i) => {
                         const locale = this.state.locale || i18n.language;
                         const image = "./images/" + person.image;
+
                         return (
 							<div key={i} className="card">
 								<div className="photo-wrapper">
