@@ -261,9 +261,10 @@
 }
 
 .payment .info-text p {
-    font-size: 17px;
+    font-size: 20px;
     margin-top: 0;
     line-height: 25px;
+    margin-bottom: 0;
 }
 
 .payment + .text-wrapper {
@@ -457,25 +458,29 @@
 }
 
 .info-text .percent-text {
-    font-size: 30px;
+    font-size: 23px;
     display: block;
     margin-bottom: 3px;
-    font-weight: 500;
+    font-weight: 300;
 }
 
 .info-text .launch {
     display: block;
-    font-size: 19px;
-    font-weight: 300;
+    font-size: 29px;
+    font-weight: 500;
     margin-top: 0px;
     margin-bottom: 5px;
 }
 
 .info-text .web-adress {
     display: block;
-    font-size: 30px;
+    font-size: 23px;
     margin-top: 4px;
     margin-bottom: 8px;
+    font-weight: 300;
+}
+
+.info-text .web-adress span{
     font-weight: 500;
 }
 
@@ -496,12 +501,19 @@
 }
 
 .info-text .kod-text2 {
-    display: inline;
     font-size: 18px;
     margin-top: 6px;
     font-weight: 300;
 }
 
+.kod-text span,
+.kod-text2 span {
+    font-weight: 500;
+}
+
+.info-text .kod-text2 span {
+    font-weight: 500;
+}
 
 .info-text .year-1 {
     display: block;
@@ -513,10 +525,10 @@
 
 .info-text .last {
     display: block;
-    font-weight: 300;
-    font-size: 16px;
+    font-weight: 500;
+    font-size: 20px;
     margin-bottom: 6px;
-    margin-top: 5px;
+    margin-top: 2px;
 }
 
 .info-text .year-2 {
@@ -528,7 +540,7 @@
 .payment .promo-text {
     position: absolute;
     width: 228px;
-    top: 100px;
+    top: 95px;
     left: 86px;
     color: #fff;
     text-align: center;
@@ -694,7 +706,7 @@
     }
 
     .payment .toggle_radios {
-       width: 99%;
+        width: 99%;
     }
 
     .payment + .text-wrapper .total {
@@ -745,13 +757,13 @@
     }
 
     .payment .week-text {
-       width: 90%;
+        width: 90%;
         margin: 0 auto;
         margin-bottom: 13px;
     }
 
     .payment .skype:after, .payment .email:after {
-       display: none;
+        display: none;
     }
 
     .payment .weeks {
@@ -813,7 +825,7 @@
     }
 
     .payment + .text-wrapper .promo-textfield input {
-       height: 43px;
+        height: 43px;
         width: 100%;
         margin-top: 0;
     }
@@ -1199,7 +1211,7 @@
 
     .payment .skype:after,
     .payment .email:after {
-      display: none;
+        display: none;
     }
 
     .payment .skype {

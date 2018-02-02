@@ -8,16 +8,16 @@ import { getTotal, getSelectedCurrency } from '../../../../helpers/payment';
 import styles from './styles.css';
 
 export class Payment extends Component {
-	constructor (props) {
-		super(props);
+    constructor (props) {
+        super(props);
 
-		this.state = {
-			language: 'KM',
-			packageFactor: 0.05,
-			paypalFactor: 1,
-			durationSkype: 's',
-			isDirty: false,
-			languages: [
+        this.state = {
+            language: 'KM',
+            packageFactor: 0.05,
+            paypalFactor: 1,
+            durationSkype: 's',
+            isDirty: false,
+            languages: [
                 {
                     code: 'bam',
                     currency: 'KM',
@@ -38,45 +38,45 @@ export class Payment extends Component {
                     currency: 'RSD',
                     rate: 1/60
                 },
-				{
-					code: 'sek',
-					currency: 'kr',
-					rate: 1/5
-				},
+                {
+                    code: 'sek',
+                    currency: 'kr',
+                    rate: 1/5
+                },
                 {
                     code: 'usd',
                     currency: '$',
                     rate: 1.6
                 }
-			]
-		};
+            ]
+        };
 
-		this.handlePackage = this.handlePackage.bind(this);
-		this.handleWeeks = this.handleWeeks.bind(this);
-		this.handleSkypeDuration = this.handleSkypeDuration.bind(this);
-		this.handleCheckout = this.handleCheckout.bind(this);
-		this.resetCheckout = this.resetCheckout.bind(this);
-		this.getData = this.getData.bind(this);
-		this.handlePromoCode = this.handlePromoCode.bind(this);
-		this.renderCurrencies = this.renderCurrencies.bind(this);
-		this.handleSelect = this.handleSelect.bind(this);
-	}
+        this.handlePackage = this.handlePackage.bind(this);
+        this.handleWeeks = this.handleWeeks.bind(this);
+        this.handleSkypeDuration = this.handleSkypeDuration.bind(this);
+        this.handleCheckout = this.handleCheckout.bind(this);
+        this.resetCheckout = this.resetCheckout.bind(this);
+        this.getData = this.getData.bind(this);
+        this.handlePromoCode = this.handlePromoCode.bind(this);
+        this.renderCurrencies = this.renderCurrencies.bind(this);
+        this.handleSelect = this.handleSelect.bind(this);
+    }
 
-	componentWillMount () {
-		this.setState(this.createInitialState(), () => {
+    componentWillMount () {
+        this.setState(this.createInitialState(), () => {
             let skype = this.state.skype;
             skype.s.active = true;
             this.setState({ skype });
             this.setState({ data: this.getData() });
             this.props.dispatch(getStripeToken());
             this.props.dispatch(getPaypalEnv());
-		});
-	}
+        });
+    }
 
-	componentWillReceiveProps (nextProps) {
-		window.localStorage.setItem('st', nextProps.stripeToken);
+    componentWillReceiveProps (nextProps) {
+        window.localStorage.setItem('st', nextProps.stripeToken);
         window.localStorage.setItem('pe', nextProps.paypalEnv);
-	}
+    }
 
     /**
      * This callback type is called `requestCallback
@@ -87,7 +87,7 @@ export class Payment extends Component {
     handlePromoCode (e) {
         this.setState({ enteredCode: e.target.value }, () => {
             this.updateEncounter();
-		});
+        });
     }
 
     /**
@@ -107,28 +107,28 @@ export class Payment extends Component {
      * @return {void}
      */
     handleCheckout () {
-    	this.setState({ data: this.getData() }, () => {
+        this.setState({ data: this.getData() }, () => {
             window.localStorage.setItem('order', JSON.stringify(this.state));
             window.localStorage.setItem('step', '1');
             this.props.dispatch(routeActions.push('/checkout'));
         });
-	}
+    }
 
     /**
      * This callback type is called `requestCallback
      * @callback requestCallback
-	 * @return {object}
+     * @return {object}
      */
-	createInitialState () {
-		return {
+    createInitialState () {
+        return {
             checkout: false,
             combinationDiscount: 0,
             promoDiscount: 0,
-			emailDiscount: 0,
+            emailDiscount: 0,
             promoCode: 'zdravlje.nu',
             promoDiscountFactor: 0.5,
             enteredCode: '',
-			durationText: false,
+            durationText: false,
             code: '',
             skype: {
                 s: { active: false, cost: 60, week: 1, code: '1', description: '1 Skype poziva' },
@@ -154,14 +154,14 @@ export class Payment extends Component {
      * @return {void}
      */
     resetPackage (type, lastSize) {
-    	const resetObj = this.state[type];
+        const resetObj = this.state[type];
 
         if (lastSize[type].length) {
             resetObj[lastSize[type]] = this.createInitialState()[type][lastSize[type]];
         }
 
         this.setState({ resetObj })
-	}
+    }
 
     /**
      * This callback type is called `requestCallback
@@ -174,15 +174,15 @@ export class Payment extends Component {
         const size = e.target.id.split('-')[1];
         const lastSize = this.state.lastSize;
 
-		if ( size !== lastSize[type]  || e.currentTarget.checked) {
-			this.resetPackage(type, lastSize);
-		}
+        if ( size !== lastSize[type]  || e.currentTarget.checked) {
+            this.resetPackage(type, lastSize);
+        }
 
         this.setCategorySize(size, type);
         const cost = this.calculateCost();
 
         const showDurationText = (this.skypePackage)
-			? this.skypePackage.cost === 0 : true;
+            ? this.skypePackage.cost === 0 : true;
 
         this.setState({ durationText: showDurationText, cost });
         this.updateEncounter();
@@ -194,28 +194,28 @@ export class Payment extends Component {
      * @param {number} responseCode
      * @return {number}
      */
-	calculateEmailDiscount (_package) {
-		let factor;
+    calculateEmailDiscount (_package) {
+        let factor;
 
-		switch (true) {
-			case (_package.week === 2):
-				factor = .05;
-				break;
-			case (_package.week === 3):
-				factor = .075;
-				break;
-			case (_package.week === 4):
-				factor = .1;
-				break;
-			case (_package.week > 4):
-				factor = .125;
-				break;
-			default:
-				factor = 0;
-		}
+        switch (true) {
+            case (_package.week === 2):
+                factor = .05;
+                break;
+            case (_package.week === 3):
+                factor = .075;
+                break;
+            case (_package.week === 4):
+                factor = .1;
+                break;
+            case (_package.week > 4):
+                factor = .125;
+                break;
+            default:
+                factor = 0;
+        }
 
-		return _package.cost * (1 - factor) * _package.week;
-	}
+        return _package.cost * (1 - factor) * _package.week;
+    }
 
     /**
      * This callback type is called `requestCallback
@@ -224,41 +224,41 @@ export class Payment extends Component {
      * @return {object} data
      */
     getData () {
-		const active = {};
-		const keys= [
-			'skype',
-			'email',
-			'skypeDuration'
-		];
+        const active = {};
+        const keys= [
+            'skype',
+            'email',
+            'skypeDuration'
+        ];
 
-		Object.keys(this.state).filter((key) => {
-			return Object.keys(this.state[key]).filter((subKey) => {
-				if (keys.includes(key)) {
+        Object.keys(this.state).filter((key) => {
+            return Object.keys(this.state[key]).filter((subKey) => {
+                if (keys.includes(key)) {
                     if (this.state[key][subKey].active === true) {
-						active[key] = this.state[key][subKey];
+                        active[key] = this.state[key][subKey];
                     }
                 }
-			})
-		});
+            })
+        });
 
-		active.packageDiscount = this.packageDiscount;
-		active.promoDiscount = this.promoDiscount;
+        active.packageDiscount = this.packageDiscount;
+        active.promoDiscount = this.promoDiscount;
 
-		return active;
-	}
+        return active;
+    }
 
-	calculateDiscounts (skypeCost, emailCost) {
-    	let packageFactor = 1;
-    	let promoFactor = 1;
-    	let skypeDiscount = 0;
-    	let emailDiscount = 0;
+    calculateDiscounts (skypeCost, emailCost) {
+        let packageFactor = 1;
+        let promoFactor = 1;
+        let skypeDiscount = 0;
+        let emailDiscount = 0;
 
         if (skypeCost > 0 && emailCost > 0) {
             packageFactor = 0.95;
             this.packageDiscount = Math.round(
-				emailCost - Math.round(emailCost * 0.95) +
-				skypeCost - Math.round(skypeCost * 0.95)
-			);
+                emailCost - Math.round(emailCost * 0.95) +
+                skypeCost - Math.round(skypeCost * 0.95)
+            );
         } else {
             delete this.packageDiscount;
         }
@@ -271,7 +271,7 @@ export class Payment extends Component {
             this.promoDiscount = (skypeCost > 0 && emailCost > 0)
                 ? Math.round((emailDiscount + skypeDiscount) * 0.95)
                 : Math.round(emailDiscount + skypeDiscount);
-		} else {
+        } else {
             promoFactor = 1;
             delete this.promoDiscount;
         }
@@ -285,7 +285,7 @@ export class Payment extends Component {
      * @param {number} responseCode
      * @return {object} cost
      */
-	calculateCost () {
+    calculateCost () {
         const email = this.state.email;
         const skype = this.state.skype;
         const skypeDuration = this.state.skypeDuration.s.active ? 's' : 'l';
@@ -299,10 +299,10 @@ export class Payment extends Component {
         const amount = {};
 
         this.skypePackage = skype[Object.keys(skype)
-			.filter(key => skype[key].active)[0]];
+            .filter(key => skype[key].active)[0]];
 
         this.emailPackage = email[Object.keys(email)
-			.filter(key => email[key].active)[0]];
+            .filter(key => email[key].active)[0]];
 
         if (this.skypePackage) {
             skypeWeeks = this.skypePackage.week;
@@ -312,7 +312,7 @@ export class Payment extends Component {
         if (this.emailPackage) {
             emailWeeks = this.emailPackage.week;
             emailCost = this.calculateEmailDiscount(this.emailPackage);
-		}
+        }
 
         const discount = this.calculateDiscounts(skypeCost, emailCost);
 
@@ -321,7 +321,7 @@ export class Payment extends Component {
         amount.total = getTotal(this.state);
 
         return amount;
-	}
+    }
 
     /**
      * This callback type is called `requestCallback
@@ -329,9 +329,9 @@ export class Payment extends Component {
      * @param {number} responseCode
      * @return {void}
      */
-	handleWeeks (e) {
-		const type = e.target.id.split('-')[0];
-		const size = e.target.id.split('-')[1];
+    handleWeeks (e) {
+        const type = e.target.id.split('-')[0];
+        const size = e.target.id.split('-')[1];
         const email = this.state.email;
         const factor = (type === 'add') ? 1 : -1;
 
@@ -340,7 +340,7 @@ export class Payment extends Component {
 
         this.setState({ email });
         this.updateEncounter();
-	}
+    }
 
     /**
      * This callback type is called `requestCallback
@@ -348,21 +348,21 @@ export class Payment extends Component {
      * @param {number} responseCode
      * @return {void}
      */
-	updateEncounter () {
-		const data = this.getData();
-		const email = this.state.email;
-		const cost = this.calculateCost();
-		const emailPackage = email[Object.keys(email)
-			.filter(key => email[key].active)[0]];
+    updateEncounter () {
+        const data = this.getData();
+        const email = this.state.email;
+        const cost = this.calculateCost();
+        const emailPackage = email[Object.keys(email)
+            .filter(key => email[key].active)[0]];
 
-		let emailDiscount = 0;
+        let emailDiscount = 0;
         let promoDiscount = 0;
 
         if (this.state.enteredCode === this.state.promoCode) {
-        	promoDiscount = this.state.promoDiscount;
-		}
+            promoDiscount = this.state.promoDiscount;
+        }
 
-		if (emailPackage) {
+        if (emailPackage) {
             emailDiscount = this.calculateEmailDiscount(emailPackage);
             this.setState({ emailDiscount })
         }
@@ -377,15 +377,15 @@ export class Payment extends Component {
      * @param {number} responseCode
      * @return {void}
      */
-	setCategorySize (size, type) {
-		let category = this.state[type];
+    setCategorySize (size, type) {
+        let category = this.state[type];
         let lastSize = this.state.lastSize;
 
         category[size].active = !category[size].active;
-		lastSize[type] = size;
+        lastSize[type] = size;
 
-		this.setState({ category, lastSize });
-	}
+        this.setState({ category, lastSize });
+    }
 
     /**
      * This callback type is called `requestCallback
@@ -393,28 +393,28 @@ export class Payment extends Component {
      * @param {number} responseCode
      * @return {void}
      */
-	handleSkypeDuration (e) {
-		const size = e.currentTarget.id.split('-')[1];
-		const skypeDuration = this.state.skypeDuration;
+    handleSkypeDuration (e) {
+        const size = e.currentTarget.id.split('-')[1];
+        const skypeDuration = this.state.skypeDuration;
 
-		skypeDuration.s.active = size === 's';
-		skypeDuration.l.active = size === 'l';
+        skypeDuration.s.active = size === 's';
+        skypeDuration.l.active = size === 'l';
 
-		this.setState({ skypeDuration });
-		this.updateEncounter();
-	}
+        this.setState({ skypeDuration });
+        this.updateEncounter();
+    }
 
-	handleSelect (e) {
-		const children = Array.prototype.slice.call(e.target.children);
+    handleSelect (e) {
+        const children = Array.prototype.slice.call(e.target.children);
         const currency = children.filter(child => child.selected === true);
-		this.setState({language: currency[0]['attributes']['data-id']['nodeValue'], isDirty: true});
-	}
+        this.setState({language: currency[0]['attributes']['data-id']['nodeValue'], isDirty: true});
+    }
 
-	renderCurrencies () {
-		return this.state.languages.map((country, i) => {
-			return <option key={i} data-id={country.currency} selected={this.state.language === country.currency} value={country.code}>{country.code.toUpperCase()}</option>;
-		})
-	}
+    renderCurrencies () {
+        return this.state.languages.map((country, i) => {
+            return <option key={i} data-id={country.currency} selected={this.state.language === country.currency} value={country.code}>{country.code.toUpperCase()}</option>;
+        })
+    }
 
     /**
      * This callback type is called `requestCallback
@@ -422,12 +422,12 @@ export class Payment extends Component {
      * @param {number} responseCode
      * @return {node}
      */
-	render () {
-		const { t } = this.props;
-		const order = this.calculateCost();
-		const buttonStyle = (order.total === 0) ? 'checkout-button disabled' : 'checkout-button';
+    render () {
+        const { t } = this.props;
+        const order = this.calculateCost();
+        const buttonStyle = (order.total === 0) ? 'checkout-button disabled' : 'checkout-button';
 
-		return (
+        return (
 			<div>
 				<div id="cijene" className="payment">
 					<h3 className="heading">{ t('heading') }</h3>
@@ -477,8 +477,8 @@ export class Payment extends Component {
 											<label id="duration-l" onClick={ this.handleSkypeDuration } className="large-skype" htmlFor="duration-l"><p>45 min { t('call') }</p></label>
 											<div className="toggle_option_slider" />
 										</div>
-									);
-								}
+                                    );
+                                }
                             })()}
 						</div>
 						<div className="email">
@@ -530,19 +530,19 @@ export class Payment extends Component {
 								</div>
 							</div>
 						</div>
-						<div className="info-text">
+						<a href="https://www.facebook.com/zdravljenu-158721211521168" target="blank" className="info-text">
 							<div className="promo">
 								<div className="promo-text">
-									<span className="percent-text">50% { t('discount') }</span>
-									<span className="launch">{ t('forCelecrationLaunch') }</span>
-									<span className="web-adress">Zdravlje.nu</span>
-									<span className="year-1">{ t('weOpen') }</span>
-									<span className="kod-text">{ t('enterCode') } </span>
-									<span className="kod-text2">zdravlje.nu</span>
-									<span className="last">{ t('until') }</span>
+									<span className="percent-text">Poklanjamo</span>
+									<span className="launch">Life-coaching</span>
+									<p className="web-adress">sesiju <span>svakog petka!</span></p>
+									<span className="year-1">Kliknite ovdje da biste</span>
+									<p className="kod-text">došli do <span>nagradne</span></p>
+									<p className="kod-text2"><span>igre</span> na našem</p>
+									<span className="last">FaceBook!</span>
 								</div>
 							</div>
-						</div>
+						</a>
 					</div>
 				</div>
 				<div className="text-wrapper">
@@ -561,26 +561,26 @@ export class Payment extends Component {
 					<div className="form-element-wrapper currency-wrapper">
 						<div className="select-style">
 							<select onChange={this.handleSelect}>
-								{this.renderCurrencies()}
+                                {this.renderCurrencies()}
 							</select>
 						</div>
 					</div>
 					<button
 						className={buttonStyle}
 						onClick={ this.handleCheckout }>
-						{ t('purchase') }
+                        { t('purchase') }
 					</button>
 				</div>
 			</div>
-		);
-	}
+        );
+    }
 }
 
 Payment.propTypes = { dispatch: PropTypes.func };
 
 const mapStateToProps = (state) => ({
-	stripeToken: state.encounter.stripeToken,
-	paypalEnv: state.encounter.paypalEnv
+    stripeToken: state.encounter.stripeToken,
+    paypalEnv: state.encounter.paypalEnv
 });
 
 export default connect(mapStateToProps)(translate('paymentView')(Payment));
