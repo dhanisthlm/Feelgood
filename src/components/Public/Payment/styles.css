@@ -247,6 +247,13 @@
     text-indent: -3px;
 }
 
+.payment .promo-text {
+    display: inline-block;
+    margin-top: 92px;
+    color: #fff;
+    text-align: center;
+}
+
 .payment .n-weeks span {
     font-size: 41px;
     font-weight: 600;
@@ -378,6 +385,7 @@
     position: absolute;
     top: -77px;
     left: -51px;
+    text-align: center;
 }
 
 .info-text .percent {
@@ -537,15 +545,6 @@
     font-weight: 300;
 }
 
-.payment .promo-text {
-    position: absolute;
-    width: 228px;
-    top: 95px;
-    left: 86px;
-    color: #fff;
-    text-align: center;
-}
-
 .payment + .text-wrapper button.disabled {
     pointer-events: none !important;
     background-color: #246cc7;
@@ -635,6 +634,13 @@
 @media only screen and (max-width: 1100px) {
     .payment + .text-wrapper .total {
         margin-left: 0;
+    }
+
+    .payment .promo-text {
+        display: inline-block;
+        margin-top: 92px;
+        color: #fff;
+        text-align: center;
     }
 
     .payment .skype:after, .payment .email:after {
@@ -775,6 +781,13 @@
         width: 100%;
     }
 
+    .payment .promo-text {
+        display: inline-block;
+        margin-top: 74px;
+        color: #fff;
+        text-align: center;
+    }
+
     .payment .info-text .promo {
         margin-bottom: 11px;
         position: static;
@@ -785,16 +798,7 @@
         height: 335px;
         background-position: center;
         margin-top: -20px;
-    }
-
-    .payment .promo-text {
-        position: absolute;
-        top: 69px;
-        left: 0;
-        color: #fff;
         text-align: center;
-        right: 0;
-        margin: auto;
     }
 
     .payment + .text-wrapper .spec {
@@ -838,6 +842,13 @@
         padding: 20px 40px 0;
     }
 
+
+    .payment .promo-text {
+        display: inline-block;
+        margin-top: 92px;
+        color: #fff;
+        text-align: center;
+    }
     .payment .heading {
         color: #C04C9C;
         margin-bottom: 10px;
@@ -1032,15 +1043,11 @@
         position: static;
     }
 
-    .payment .info-text .promo-text {
-        position: absolute;
-        width: 228px;
+    .payment .promo-text {
+        display: inline-block;
+        margin-top: 74px;
         color: #fff;
         text-align: center;
-        left: 0;
-        top: 75px !important;
-        right: 0;
-        margin: auto;
     }
 
     .payment + .text-wrapper .total {
@@ -1297,10 +1304,6 @@
         background-size: 376px
     }
 
-    .payment .info-text .promo-text {
-        left: 40px;
-    }
-
     .payment + .text-wrapper .spec span {
         display: block;
         font-size: 15px !important;
@@ -1316,17 +1319,6 @@
         background-size: 400px;
         background-position: center;
         position: static;
-    }
-
-    .payment .info-text .promo-text {
-        position: absolute;
-        width: 228px;
-        color: #fff;
-        text-align: center;
-        left: 0;
-        top: 75px !important;
-        right: 0;
-        margin: auto;
     }
 
     .payment + .text-wrapper .total {
