@@ -125,8 +125,8 @@ export class Payment extends Component {
             combinationDiscount: 0,
             promoDiscount: 0,
             emailDiscount: 0,
-            promoCode: 'zdravlje.nu',
-            promoDiscountFactor: 0.5,
+            promoCode: 'zdr12',
+            promoDiscountFactor: 0.33,
             enteredCode: '',
             durationText: false,
             code: '',
@@ -266,7 +266,7 @@ export class Payment extends Component {
         if (this.state.enteredCode.toLowerCase() === this.state.promoCode) {
             skypeDiscount = skypeCost * this.state.promoDiscountFactor;
             emailDiscount = emailCost * this.state.promoDiscountFactor;
-            promoFactor = 0.5;
+            promoFactor = 0.33;
 
             this.promoDiscount = (skypeCost > 0 && emailCost > 0)
                 ? Math.round((emailDiscount + skypeDiscount) * 0.95)

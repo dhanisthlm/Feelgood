@@ -85,7 +85,7 @@ export const getPackageDiscount = (state) => {
 export const getVoucherDiscount = (state) => {
     const data = state.data || state;
     return data.promoDiscount > 0
-        ? Math.round(getPackageSum(state) / 2)
+        ? Math.round(getPackageSum(state) * 0.33)
         : 0;
 };
 
