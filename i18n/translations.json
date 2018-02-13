@@ -3,7 +3,8 @@
     "common": {
       "email": "E-mail",
       "english": "English",
-      "bosnian": "Bosnian"
+      "bosnian": "Bosnian",
+      "here": "here"
     },
     "headerView": {
       "contactUs": "Contact us",
@@ -544,7 +545,8 @@
     "common": {
       "email": "E-pošta",
       "english": "Engleski",
-      "bosnian": "Bosanski"
+      "bosnian": "Bosanski",
+      "here": "ovdje"
     },
     "headerView": {
       "contactUs": "Kontaktirajte nas",
@@ -702,7 +704,7 @@
       "blog": "Blogovi",
       "conditions": "Uslovi",
       "privacyPolicy": "Politika privatnosti",
-      "toc": "Pravila i uslovi",
+      "tac": "Pravila i uslovi",
       "cookiePolicy": "Politika kolačića",
       "questions": "Pitanja",
       "customerService": "Služba za korisnike",
@@ -977,7 +979,7 @@
       "email": "E-pošta",
       "chooseTheme": "Izaberite temu",
       "chooseTime": "Odaberite vrijeme",
-      "newsLetter": "Da, hvala, želim da dobijam informacije o popustima i drugim ponudama od zdravlje.nu.",
+      "newsletter": "Da, hvala, želim da dobijam informacije o popustima i drugim ponudama od zdravlje.nu.",
       "agree": "Slažem se sa",
       "i": "i",
       "privacyPolicy": "Politika privatnosti",
@@ -1023,14 +1025,14 @@
         "\"name\" is not allowed to be empty": "Ime / prezime je obavezno",
         "\"phone\" is required": "Telefon je potreban",
         "\"phone\" is not allowed to be empty": "Telefon je potreban",
-        "\"street\" is required": "Ulica je potrebna",
+        "\"street\" is required": "Ulica je potreban",
         "\"street\" is not allowed to be empty": "Ulica je potreban",
         "\"postal\" is required": "Poštanski broj je potreban",
         "\"postal\" is not allowed to be empty": "Poštanski broj je potreban",
         "\"city\" is required": "Grad je potreban",
         "\"city\" is not allowed to be empty": "Grad je potreban",
-        "\"mail\" is required": "E-pošta je potrebna",
-        "\"mail\" is not allowed to be empty": "E-pošta je potrebna",
+        "\"mail\" is required": "E-pošta je potreban",
+        "\"mail\" is not allowed to be empty": "E-pošta je potreban",
         "\"mail\" must be a valid email": "E-pošta mora biti važeća adresa e-pošte",
         "wrongRegexFormat": "Greška, pogrešan format"
       },

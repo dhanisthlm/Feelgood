@@ -1085,7 +1085,7 @@ thead tr {
  .page-header h1 {
         color: #C04C9C !important;
         text-align: left !important;
-        margin-left: 37px !important;
+        margin-left: 10px !important;
     }
 
     .checkout .payment-type-wrapper.credit-wrapper {
@@ -1096,6 +1096,7 @@ thead tr {
     .checkout .left-col-wrapper {
         float: none;
         width: 100%;
+        padding: 0 20px !important;
     }
 
     .checkout .basket .front {
@@ -1105,10 +1106,7 @@ thead tr {
         font-size: 40px;
         width: 199%;
         margin: 25px auto;
-    }
-
-    .checkout .inner-frame {
-        //margin-bottom: 0;
+        padding: 0 20px;
     }
 
     #card-errors {
@@ -1224,10 +1222,6 @@ thead tr {
         padding: 15px;
     }
 
-    .checkout .faktura-wrapper input {
-        //margin-top: 10px !important;
-    }
-
     .checkout .form-buttons button:first-child {
         width: 100%;
         margin-bottom: 10px;
@@ -1245,11 +1239,7 @@ thead tr {
     .checkout .city-wrapper div:last-child {
         width: 55%;
     }
-
-    .checkout .page-header h1 {
-        margin-left: 35px !important;
-    }
-
+    
     .checkout .basket input[type="checkbox"]:checked + label:before {
         content: '✗';
         background-color: #c04c9c;
