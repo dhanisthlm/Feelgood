@@ -16,7 +16,7 @@ export class HowItWorks extends Component {
         return (
             <div id="kakoradi" className="how-it-works">
                 <h3 className="heading">{ t('heading') }</h3>
-                <p className="preamble">{ t('intro') } <a href="/faq">ovdje</a>.</p>
+                <p className="preamble">{ t('intro') } <a href="/faq">{t('here')}</a>.</p>
                 <div className="row-1">
                     <div className="step-wrapper">
                         <div className="circle">
