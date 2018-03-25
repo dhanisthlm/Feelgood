@@ -552,7 +552,7 @@ export class Checkout extends FormComponent {
      * @param {number} responseCode
      * @return {object}
      */
-    payment(data, actions) {
+    payment(actions) {
         const amount = getTotal(this.state);
 
         const currency = this.state.paypalCurrencies.indexOf(getSelectedCurrency(this.state)[0].currency) > -1
