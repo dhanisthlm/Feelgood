@@ -10,6 +10,9 @@ const staffSchema = Schema({
     direction: {
         type: String
     },
+    active: {
+        type: Boolean
+    },
     image: {
         type: String
     },

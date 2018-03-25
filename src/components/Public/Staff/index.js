@@ -70,27 +70,33 @@ export class Staff extends Component {
                         const locale = this.state.locale || i18n.language;
                         const image = "./images/" + person.image;
 
-                        return (
-							<div key={i} className="card">
-								<div className="photo-wrapper">
-									<div className="photo-info-wrapper">
-										{ this.renderPersonalText(person) }
+                        if (person.active === true) {
+                            return (
+								<div key={i} className="card">
+									<div className="photo-wrapper">
+										<div className="photo-info-wrapper">
+                                            { this.renderPersonalText(person) }
+										</div>
+										<img className={`img-${person.name} ${person.direction}`} src={image}/>
 									</div>
-									<img className={`img-${person.name} ${person.direction}`} src={image}  />
+									<div className="info-wrapper">
+										<div className="title-wrapper">
+											<p>{person.fullName}</p>
+											<p>{person.title[locale]}</p>
+										</div>
+										<div id={person.name} data-direction={person.direction}
+											 className="diploma-wrapper" onClick={ self.openDiploma }>
+											<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512"
+												 height="512">
+												<path
+													d="M486.4 51.2H25.6C12.8 51.2 0 64 0 76.8v358.4c0 12.8 12.8 25.6 25.6 25.6h460.8c15.36 0 25.6-12.8 25.6-25.6V76.8c0-12.8-10.24-25.6-25.6-25.6zM58.88 135.68h153.6c15.36 0 25.6 10.24 25.6 25.6 0 15.36-10.24 25.6-25.6 25.6H58.88c-15.36 0-25.6-12.8-25.6-25.6 0-15.36 10.24-25.6 25.6-25.6zm0 102.4h153.6c15.36 0 25.6 10.24 25.6 25.6 0 15.36-10.24 25.6-25.6 25.6H58.88c-15.36 0-25.6-12.8-25.6-25.6 0-15.36 10.24-25.6 25.6-25.6zm256 153.6h-256c-15.36 0-25.6-10.24-25.6-25.6 0-15.36 10.24-25.6 25.6-25.6h256c15.36 0 25.6 10.24 25.6 25.6 0 12.8-12.8 25.6-25.6 25.6zM435.2 256L384 222.72 332.8 256l12.8-51.2-38.4-51.2h53.76L384 102.4l23.04 51.2h53.76l-38.4 51.2 12.8 51.2z"
+													fill="#6393cf"/>
+											</svg>
+										</div>
+									</div>
 								</div>
-								<div className="info-wrapper">
-									<div className="title-wrapper">
-										<p>{person.fullName}</p>
-										<p>{person.title[locale]}</p>
-									</div>
-									<div id={person.name} data-direction={person.direction} className="diploma-wrapper" onClick={ self.openDiploma } >
-										<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
-											<path d="M486.4 51.2H25.6C12.8 51.2 0 64 0 76.8v358.4c0 12.8 12.8 25.6 25.6 25.6h460.8c15.36 0 25.6-12.8 25.6-25.6V76.8c0-12.8-10.24-25.6-25.6-25.6zM58.88 135.68h153.6c15.36 0 25.6 10.24 25.6 25.6 0 15.36-10.24 25.6-25.6 25.6H58.88c-15.36 0-25.6-12.8-25.6-25.6 0-15.36 10.24-25.6 25.6-25.6zm0 102.4h153.6c15.36 0 25.6 10.24 25.6 25.6 0 15.36-10.24 25.6-25.6 25.6H58.88c-15.36 0-25.6-12.8-25.6-25.6 0-15.36 10.24-25.6 25.6-25.6zm256 153.6h-256c-15.36 0-25.6-10.24-25.6-25.6 0-15.36 10.24-25.6 25.6-25.6h256c15.36 0 25.6 10.24 25.6 25.6 0 12.8-12.8 25.6-25.6 25.6zM435.2 256L384 222.72 332.8 256l12.8-51.2-38.4-51.2h53.76L384 102.4l23.04 51.2h53.76l-38.4 51.2 12.8 51.2z" fill="#6393cf"/>
-										</svg>
-									</div>
-								</div>
-							</div>
-						);
+                            );
+                        }
                     })}
 				</div>
 			</div>

@@ -602,7 +602,7 @@ export class Checkout extends FormComponent {
                 frameValue = '';
             }
 
-            return <option key={i} value={frameValue}>{frameName}</option>
+            return <option key={i} value={frameValue}>{t(`${frameName}`)}</option>
         });
     }
 
@@ -740,7 +740,7 @@ export class Checkout extends FormComponent {
                                                         if (this.state.data.skype) {
                                                             return (
 																<tr>
-																	<td>{ this.state.data.skype.description }</td>
+																	<td>{ `${this.state.data.skype.description.split(' ').shift()} ${t('skypeWeeks')}`}</td>
 																	<td className="center">{ this.state.data.skype.week }</td>
 																	<td className="center">{ getSkypeCost(this.state) }&nbsp;{ currency }</td>
                                                         </tr>
@@ -749,9 +749,10 @@ export class Checkout extends FormComponent {
                                                     })()}
                                                     {(() => {
                                                         if (this.state.data.email) {
+                                                            const duration = this.state.data.email.description.match(/\d+/g).map(Number)[0].toString();
                                                             return (
 																<tr>
-																	<td>{this.state.data.email.description}</td>
+																	<td>{`${t('email')} ${t('emailResponse')} ${duration} ${t('hours')}`}</td>
 																	<td className="center">{ this.state.data.email.week }</td>
 																	<td className="center">{ getEmailCost(this.state) }&nbsp;{ currency }</td>
 																</tr>

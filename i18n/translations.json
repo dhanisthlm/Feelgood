@@ -4,7 +4,58 @@
       "email": "E-mail",
       "english": "English",
       "bosnian": "Bosnian",
-      "here": "here"
+      "here": "here",
+      "skypeWeek": "skype week",
+      "skypeWeeks": "skype weeks",
+      "emailResponse": "answer within",
+      "hours": "hours",
+      "Jutro": "Morning",
+      "issues": {
+        "stress": {
+          "name": "Stress",
+          "description": "Are you under stress and do you have difficulty in reducing it?"
+        },
+        "anxiety": {
+          "name": "Anxiety",
+          "description": "Do you feel like shaking and you can not take care?"
+        },
+        "exhaustion": {
+          "name": "Exhaustion",
+          "description": "Do you have difficulty with sleeping, feeling tired and exhausted?"
+        },
+        "backPain": {
+          "name": "Pain",
+          "description": "Do you need help with pain relief?"
+        },
+        "depression": {
+          "name": "Depression",
+          "description": "Do you feel sad or gloomy?"
+        },
+        "kids": {
+          "name": "Kids",
+          "description": "Does your child have an outburst of anger?"
+        },
+        "weight": {
+          "name": "Weight",
+          "description": "Do you have problems with body weight?"
+        },
+        "panic": {
+          "name": "Panic",
+          "description": "Do you feel anxiety or panic attack?"
+        },
+        "fobia": {
+          "name": "Fobia",
+          "description": "Do you have phobias that keep you alive?"
+        },
+        "violence": {
+          "name": "Violence",
+          "description": "Are you getting into conflicts easily and are you frustrated?"
+        },
+        "stuck": {
+          "name": "Life crisis",
+          "description": "Have you been stuck personally or professionally?"
+        }
+      }
     },
     "headerView": {
       "contactUs": "Contact us",
@@ -546,7 +597,11 @@
       "email": "E-pošta",
       "english": "Engleski",
       "bosnian": "Bosanski",
-      "here": "ovdje"
+      "here": "ovdje",
+      "skypeWeek": "skype poziv",
+      "skypeWeeks": "skype poziva",
+      "emailResponse": "odgovor u toku",
+      "hours": "sata"
     },
     "headerView": {
       "contactUs": "Kontaktirajte nas",
