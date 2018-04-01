@@ -6,6 +6,7 @@ export const getSkypeCost = (state) => {
     const cost = 60 * state.data.skype.week;
     const duration = state.data.skypeDuration.factor;
     const sum = cost * duration;
+    
     return exchange(sum, state) / state.paypalFactor;
 };
 
