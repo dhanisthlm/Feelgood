@@ -1,6 +1,13 @@
 import { handleActions } from 'redux-actions'
 
 export default handleActions({
+    WORKSHOPS: (state, action) => {
+        return {
+            ...state,
+            workshops: action.payload,
+            workshopErased: false
+        }
+    },
     ENCOUNTERS: (state, action) => {
         return {
             ...state,
@@ -92,5 +99,7 @@ export default handleActions({
     erased: false,
     stripeToken: '',
     paypalId: '',
-    paypalEnv: ''
+    paypalEnv: '',
+    workshops: [],
+    workshopErased: false
 })

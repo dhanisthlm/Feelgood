@@ -1,10 +1,32 @@
 import * as request from 'axios';
 
+export const getWorkshops = () => (dispatch) => {
+    return request
+        .get('/workshops')
+        .then((data) => {
+            dispatch({ type: 'WORKSHOPS', payload: data.data });
+        })
+        .catch((error) => {
+            console.log('error', error);
+        });
+};
+
 export const getEncounters = () => (dispatch) => {
     return request
         .get('/encounters')
         .then((data) => {
             dispatch({ type: 'ENCOUNTERS', payload: data.data });
+        })
+        .catch((error) => {
+            console.log('error', error);
+        });
+};
+
+export const eraseWorkshop = (id) => (dispatch) => {
+    return request
+        .delete(`/workshop/${id}`)
+        .then(() => {
+            dispatch({ type: 'WORKSHOP_DELETED'});
         })
         .catch((error) => {
             console.log('error', error);

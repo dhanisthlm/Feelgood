@@ -6,14 +6,15 @@ import strategy from 'joi-validation-strategy';
 import FormComponent from '../../FormComponent';
 import { routeActions } from 'redux-simple-router';
 import ReactDOM from 'react-dom'
-import { encounterValidator } from '../../../../validators/encounters';
+import { encounterValidator, workshopValidator } from '../../../../validators/encounters';
 import { getIssues } from '../../../actions/issue';
 import { saveRating, resetRating } from '../../../actions/encounter';
 import { i18nValidation } from  '../../../../helpers/validation';
 import { saveEncounter, resetEncounter } from '../../../actions/encounter';
 import { getCountries } from '../../../../helpers/countries';
 import { getCurrency } from '../../../../helpers/currencies';
-import { getSkypeCost, getEmailCost, getPackageDiscount, getVoucherDiscount, getSum, getTotal, getPackageSum, getSelectedCurrency } from '../../../../helpers/payment';
+import { getStripeToken, getPaypalEnv } from '../../../actions/config';
+import { getSkypeCost, getEmailCost, getPackageDiscount, getVoucherDiscount, getSum, getTotal, getPackageSum, getSelectedCurrency, getWorkshopCost } from '../../../../helpers/payment';
 import { InactivityModal } from '../../InactiveDialog';
 import Header from '../Header';
 import Footer from '../Footer';
@@ -23,22 +24,22 @@ import styles from './styles.css';
 let PayPalButton = paypal.Button.driver('react', { React, ReactDOM });
 
 export class Checkout extends FormComponent {
-	constructor (props) {
-		super(props);
+    constructor (props) {
+        super(props);
 
-		this.state = {
+        this.state = {
             client: {
                 sandbox: 'ASjq_5LtraMQlFGyiih32_C8F-Yh_k1-jfGa54hGrXDPJ0PdeGV861q2kv3ez_QTsOAMxSm_eNChI1ha',
                 production: 'AdHHMFOsZkPDUuMIuqtVycTd5cybDC_IaFRsJn1hCOsb6wQKTTTiT-SbIL6YqxP2SY3N6bPRzEfDT01_',
             },
             env: 'sandbox',
             commit: true,
-			issue: '',
-			isOpen: false,
-			issues: [],
-			showSpinner: false,
-			activity: 0,
-			counter: 60,
+            issue: '',
+            isOpen: false,
+            issues: [],
+            showSpinner: false,
+            activity: 0,
+            counter: 60,
             showDialog: true,
             startTime: null,
             timeRemaining: '2:00',
@@ -47,32 +48,68 @@ export class Checkout extends FormComponent {
             countInactivity: true,
             idleTtl: 300000,
             tick: 10000,
-			webRating: 0,
-			payRating: 0,
+            webRating: 0,
+            location: '',
+            payRating: 0,
+            workshop: false,
             ratingComment: '',
             paymentType: 'credit',
             timeframes: ['Jutro', 'Popodne', 'Veče', 'Bilo kada'],
             country: 'Bosnia and Herzegovina',
             newsletter: true,
             currency: 'BAM',
-            cost: 0,
             paypalFactor: 1,
             subscribe: 'on',
             terms: 'off',
             cancel: 'off',
+            cost: 0,
             termsIsDirty: false,
             cancelIsDirty: false,
             comment: '',
             paypalCurrencies: ['€', '$', 'kn', 'kr'],
-            invoiceCurrencies: ['€', 'KM']
-		};
+            invoiceCurrencies: ['€', 'KM'],
+            languages: [
+                {
+                    code: 'bam',
+                    currency: 'KM',
+                    rate: 1
+                },
+                {
+                    code: 'eur',
+                    currency: '€',
+                    rate: 2
+                },
+                {
+                    code: 'hrk',
+                    currency: 'kn',
+                    rate: 1/4
+                },
+                {
+                    code: 'rsd',
+                    currency: 'RSD',
+                    rate: 1/60
+                },
+                {
+                    code: 'sek',
+                    currency: 'kr',
+                    rate: 1/5
+                },
+                {
+                    code: 'usd',
+                    currency: '$',
+                    rate: 1.6
+                }
+            ]
+        };
 
-		this.validatorTypes = encounterValidator;
-		this.resetCheckout = this.resetCheckout.bind(this);
-		this.handleSubmit = this.handleSubmit.bind(this);
-		this.handleChange = this.handleChange.bind(this);
-		this.renderIssues = this.renderIssues.bind(this);
-		this.handleSelect = this.handleSelect.bind(this);
+        this.validatorTypes = this.props.location.query.workshop
+            ? workshopValidator : encounterValidator;
+
+        this.resetCheckout = this.resetCheckout.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleChange = this.handleChange.bind(this);
+        this.renderIssues = this.renderIssues.bind(this);
+        this.handleSelect = this.handleSelect.bind(this);
         this.handleWebStar = this.handleWebStar.bind(this);
         this.handlePayStar = this.handlePayStar.bind(this);
         this.handleRatingComment = this.handleRatingComment.bind(this);
@@ -93,24 +130,59 @@ export class Checkout extends FormComponent {
         this.resetOrder = this.resetOrder.bind(this);
     }
 
-	componentWillMount () {
-		if (window.localStorage.getItem('order') !== null) {
-			const cache = JSON.parse(window.localStorage.getItem('order'));
+    componentWillMount () {
+        const { location } = this.props;
+
+        if (window.localStorage.getItem('order') !== null) {
+            const cache = JSON.parse(window.localStorage.getItem('order'));
             this.setState({ ...cache, save: false });
+        }
+
+        if (window.localStorage.getItem('order') !== null) {
             this.props.dispatch(getIssues());
         }
-	}
 
-	componentWillUnmount () {
-	    this.resetOrder();
+        if (location.query.workshop) {
+            this.setState({
+                language: this.props.location.query.currency,
+                cancel: 'on',
+                cost: {
+                    total: parseInt(location.query.price)
+                }
+            }, () => {
+                this.props.dispatch(getStripeToken());
+                this.props.dispatch(getPaypalEnv());
+            });
+
+        }
     }
 
-	componentDidMount () {
-        if (window.localStorage.getItem('order')) {
-            this.initStripe();
+
+    componentWillUnmount () {
+        this.resetOrder();
+    }
+
+    componentDidMount () {
+        const { location } = this.props;
+
+        if (location.query.workshop) {
             this.calculateViewportSize();
-            this.setState({ env: window.localStorage.getItem('pe') });
+            this.setState({
+                workshop: true,
+                workshopName: location.query.workshop,
+                location: location.query.location,
+                month: location.query.month,
+                day: location.query.day
+            });
         } else {
+            this.initStripe();
+        }
+
+        if (window.localStorage.getItem('order') && !location.query.workshop) {
+            this.setState({ env: window.localStorage.getItem('pe') });
+        }
+
+        if (!window.localStorage.getItem('order') && !location.query.workshop) {
             this.props.dispatch(routeActions.push('/'));
         }
     }
@@ -122,10 +194,23 @@ export class Checkout extends FormComponent {
      * @return {object}
      */
     componentWillReceiveProps (nextProps) {
+        const { location } = nextProps;
+
+        if (location.query.workshop) {
+            this.setState({
+                stripeToken: nextProps.stripeToken,
+                paypalEnv: nextProps.paypalEnv
+            }, () => {
+                setTimeout(() => {
+                    this.initStripe();
+                }, 1000)
+            });
+        }
+
         this.prepInit(nextProps);
         this.handleRating(nextProps);
         this.handleSave(nextProps);
-	}
+    }
 
     /**
      * This callback type is called `requestCallback
@@ -133,16 +218,21 @@ export class Checkout extends FormComponent {
      * @param {number} responseCode
      * @return {object}
      */
-	prepInit (nextProps) {
-	    if (nextProps.issues === this.props.issues) return;
+    prepInit (nextProps) {
+        const { location } = nextProps;
+
+        if (nextProps.issues === this.props.issues) return;
 
         this.setState({
             issues: nextProps.issues,
-            language: JSON.parse(window.localStorage.getItem('order')).language,
-            cost: JSON.parse(window.localStorage.getItem('order')).cost
+            language: window.localStorage.getItem('order') ? JSON.parse(window.localStorage.getItem('order')).language : this.state.language,
         });
 
-        if (window.localStorage.getItem('step') === null) {
+        if (!location.query.workshop) {
+            this.setState({ cost: JSON.parse(window.localStorage.getItem('order')).cost });
+        }
+
+        if (window.localStorage.getItem('step') === null && !location.query.workshop) {
             this.props.dispatch(routeActions.push('/'));
         }
 
@@ -157,11 +247,11 @@ export class Checkout extends FormComponent {
      * @param {number} responseCode
      * @return {object}
      */
-	handleNewsletter () {
-       const newsletter = this.state.newsletter;
-       const subscribe = this.state.subscribe === 'on' ? 'off' : 'on';
-       this.setState({ subscribe });
-       this.setState({ newsletter: this.state.subscribe === 'on' });
+    handleNewsletter () {
+        const newsletter = this.state.newsletter;
+        const subscribe = this.state.subscribe === 'on' ? 'off' : 'on';
+        this.setState({ subscribe });
+        this.setState({ newsletter: this.state.subscribe === 'on' });
         window.localStorage.setItem('newsletter', newsletter);
     }
 
@@ -171,27 +261,27 @@ export class Checkout extends FormComponent {
      * @param {number} responseCode
      * @return {object}
      */
-	handlePaymentType (event) {
+    handlePaymentType (event) {
         const id = event.currentTarget.getAttribute('data-id');
         const options = document.getElementById('payment-options');
         let paypalFactor = 1;
 
         this.setState({ paymentType: id }, () => {
-           if (id === 'credit') {
-               this.initStripe();
-           }
+            if (id === 'credit') {
+                this.initStripe();
+            }
 
-           if (id === 'paypal') {
-               paypalFactor = (this.state.paypalCurrencies.indexOf(this.state.language) > -1) ? 1 : 2;
-               this.setState({ termsIsDirty: true, cancelIsDirty: true })
-           } else if (id === 'faktura') {
-               paypalFactor = (this.state.invoiceCurrencies.indexOf(this.state.language) > -1) ? 1 : 2;
-           } else {
-               paypalFactor = 1;
-           }
+            if (id === 'paypal') {
+                paypalFactor = (this.state.paypalCurrencies.indexOf(this.state.language) > -1) ? 1 : 2;
+                this.setState({ termsIsDirty: true, cancelIsDirty: true });
+            } else if (id === 'faktura') {
+                paypalFactor = (this.state.invoiceCurrencies.indexOf(this.state.language) > -1) ? 1 : 2;
+            } else {
+                paypalFactor = 1;
+            }
 
-           this.setState({ paypalFactor })
-       });
+            this.setState({ paypalFactor })
+        });
     }
 
     /**
@@ -225,17 +315,18 @@ export class Checkout extends FormComponent {
      * @param {number} responseCode
      * @return {object}
      */
-	postRating () {
-    	const stripe = JSON.parse(window.localStorage.getItem('stripe'));
-    	const id = (stripe.data.encounterId) ? stripe.data.encounterId : stripe.data._id;
+    postRating () {
+        const stripe = JSON.parse(window.localStorage.getItem('stripe')) || this.state.stripeToken;
+        const id = (stripe.data.encounterId) ? stripe.data.encounterId : stripe.data._id;
 
-    	this.props.dispatch(saveRating(
-    		id, {
-				web: 5 - this.state.webRating +1,
-				pay: 10 - this.state.payRating + 1,
-				comment: this.state.ratingComment
-			}
-		));
+        this.props.dispatch(saveRating(
+            id, {
+                workshop: this.state.workshop,
+                web: 5 - this.state.webRating +1,
+                pay: 10 - this.state.payRating + 1,
+                comment: this.state.ratingComment
+            }
+        ));
     }
 
     /**
@@ -265,10 +356,10 @@ export class Checkout extends FormComponent {
      * @return {object}
      */
     handleCheckbox () {
-            const terms = this.state.terms === 'on' ? 'off' : 'on';
-            this.setState({ terms });
-            this.setState({ termsIsDirty: true });
-            this.handlePaypal ();
+        const terms = this.state.terms === 'on' ? 'off' : 'on';
+        this.setState({ terms });
+        this.setState({ termsIsDirty: true });
+        this.handlePaypal ();
     }
 
     /**
@@ -290,9 +381,9 @@ export class Checkout extends FormComponent {
      * @param {number} responseCode
      * @return {object}
      */
-	handleRatingComment (event) {
-    	this.setState({ ratingComment: event.target.value });
-	}
+    handleRatingComment (event) {
+        this.setState({ ratingComment: event.target.value });
+    }
 
     /**
      * This callback type is called `requestCallback
@@ -300,7 +391,7 @@ export class Checkout extends FormComponent {
      * @param {number} responseCode
      * @return {object}
      */
-	handleWebStar (event) {
+    handleWebStar (event) {
         const stars = document.querySelector('.stars-1');
         const star = stars.querySelectorAll('.star');
 
@@ -313,7 +404,7 @@ export class Checkout extends FormComponent {
         }
 
         this.setState({ webRating: event.target.id });
-	}
+    }
 
     /**
      * This callback type is called `requestCallback
@@ -325,15 +416,15 @@ export class Checkout extends FormComponent {
         const stars = document.querySelector('.stars-2');
         const star = stars.querySelectorAll('.star');
 
-		for (let i = 6; i <= 10; i++) {
+        for (let i = 6; i <= 10; i++) {
             if (event.target.id <= i) {
                 star[i - 6].classList.add('filled');
             } else {
                 star[i - 6].classList.remove('filled');
-			}
-		}
+            }
+        }
 
-		this.setState({ payRating: event.target.id });
+        this.setState({ payRating: event.target.id });
     }
 
     /**
@@ -343,11 +434,11 @@ export class Checkout extends FormComponent {
      * @return {object}
      */
     resetOrder () {
-		this.props.dispatch(routeActions.push('/'));
-		window.localStorage.removeItem('order');
+        this.props.dispatch(routeActions.push('/'));
+        window.localStorage.removeItem('order');
         window.localStorage.removeItem('stripe');
         window.localStorage.removeItem('saved');
-	}
+    }
 
     /**
      * This callback type is called `requestCallback
@@ -356,15 +447,15 @@ export class Checkout extends FormComponent {
      * @return {object}
      */
     initStripe () {
-    	if (typeof Stripe === 'undefined') {
-    	    return;
+        if (typeof Stripe === 'undefined') {
+            return;
         }
 
-    	const { t } = this.props;
-    	const element = document.getElementById('card-element');
+        const { t } = this.props;
+        const element = document.getElementById('card-element');
 
-    	if (element) {
-            const stripe = Stripe(window.localStorage.getItem('st'));
+        if (element) {
+            const stripe = Stripe(window.localStorage.getItem('st') || this.state.stripeToken);
             const elements = stripe.elements({locale: 'en'});
             const card = elements.create('card', {placeholder: 'Card'});
 
@@ -387,11 +478,13 @@ export class Checkout extends FormComponent {
      * @return {object}
      */
     calculateViewportSize () {
+        if (!this.breakpoints) return;
+
         for (let item of this.breakpoints.children) {
             const width = (item.offsetParent !== null) ? item.dataset.size : '';
             if (width) this.width = width;
         }
-	}
+    }
 
     /**
      * This callback type is called `requestCallback
@@ -409,11 +502,11 @@ export class Checkout extends FormComponent {
      * @param {number} responseCode
      * @return {object}
      */
-	resetCheckout () {
-		window.localStorage.removeItem('order');
-		this.props.dispatch(resetEncounter());
+    resetCheckout () {
+        window.localStorage.removeItem('order');
+        this.props.dispatch(resetEncounter());
         this.props.dispatch(routeActions.push('/'));
-	}
+    }
 
     /**
      * This callback type is called `requestCallback
@@ -421,21 +514,23 @@ export class Checkout extends FormComponent {
      * @param {number} responseCode
      * @return {object}
      */
-	handleChange (e) {
-		const cache = JSON.parse(window.localStorage.getItem('order'));
-		cache[e.target.id] = e.target.value;
-		window.localStorage.setItem('order', JSON.stringify(cache));
-		this.setState({ [e.target.id]: e.target.value });
+    handleChange (e) {
+        if (!this.props.location.query.workshop) {
+            const cache = JSON.parse(window.localStorage.getItem('order'));
+            cache[e.target.id] = e.target.value;
+            window.localStorage.setItem('order', JSON.stringify(cache));
+        }
+        this.setState({ [e.target.id]: e.target.value });
         this.handlePaypal ();
     }
 
-	handlePaypal () {
+    handlePaypal () {
         if (this.state.paymentType === 'paypal') {
             this.props.validate((error) => {
                 if (error || (this.state.termsIsDirty && this.state.terms === 'off') || (this.state.cancelIsDirty && this.state.cancel === 'off')) {
-                     this.actions.disable();
+                    this.actions.disable();
                 } else {
-                     this.actions.enable();
+                    this.actions.enable();
                 }
             })
         }
@@ -447,16 +542,17 @@ export class Checkout extends FormComponent {
      * @param {number} responseCode
      * @return {object}
      */
-	handleSubmit (event) {
-		event.preventDefault();
+    handleSubmit (event) {
+        event.preventDefault();
+
         this.setState({
             termsIsDirty: true,
             cancelIsDirty: true,
             currency: getSelectedCurrency(this.state)[0].code.toUpperCase()
         });
 
-		this.props.validate((error) => {
-			const { t } = this.props;
+        this.props.validate((error) => {
+            const { t } = this.props;
 
             if (!error && this.state.terms !== 'off' && this.state.cancel !== 'off') {
                 if (this.state.paymentType === 'credit') {
@@ -474,9 +570,9 @@ export class Checkout extends FormComponent {
                 } else {
                     this.props.dispatch(saveEncounter(this.state, null));
                 }
-			}
+            }
         })
-	}
+    }
 
     /**
      * This callback type is called `requestCallback
@@ -484,15 +580,15 @@ export class Checkout extends FormComponent {
      * @param {number} responseCode
      * @return {object}
      */
-	getValidationMessages (prop) {
-		const { t } = this.props;
-		return (
+    getValidationMessages (prop) {
+        const { t } = this.props;
+        return (
             this.props.getValidationMessages(prop).map((message, i) => {
-            	const validationMessage = message.indexOf('pattern') > -1 ? t('validation.wrongRegexFormat') : t(`validation.${message}`);
-				return <span key={i} className="error">{validationMessage}</span>;
+                const validationMessage = message.indexOf('pattern') > -1 ? t('validation.wrongRegexFormat') : t(`validation.${message}`);
+                return <span key={i} className="error">{validationMessage}</span>;
             })
-		)
-	}
+        )
+    }
 
     /**
      * This callback type is called `requestCallback
@@ -500,9 +596,9 @@ export class Checkout extends FormComponent {
      * @param {number} responseCode
      * @return {object}
      */
-  	handleSelect (event) {
+    handleSelect (event) {
         this.setState({ issue: event.target.value });
-	}
+    }
 
     /**
      * This callback type is called `requestCallback
@@ -521,8 +617,8 @@ export class Checkout extends FormComponent {
      * @return {object}
      */
     handleSelectCountry (event) {
-  	    const countryObj = getCountries().filter((countryObj) => countryObj.name === event.target.value)[0];
-  	    const currency = getCurrency()[countryObj.code];
+        const countryObj = getCountries().filter((countryObj) => countryObj.name === event.target.value)[0];
+        const currency = getCurrency()[countryObj.code];
         this.setState({ country: event.target.value, currency });
     }
 
@@ -553,19 +649,26 @@ export class Checkout extends FormComponent {
      * @return {object}
      */
     payment(actions) {
-        const amount = getTotal(this.state);
+        let amount, currency;
 
-        const currency = this.state.paypalCurrencies.indexOf(getSelectedCurrency(this.state)[0].currency) > -1
-            ? getSelectedCurrency(this.state)[0].code.toUpperCase() : 'EUR';
+        if (!this.props.location.query.workshop) {
+            amount = getTotal(this.state);
+
+            currency = this.state.paypalCurrencies.indexOf(getSelectedCurrency(this.state)[0].currency) > -1
+                ? getSelectedCurrency(this.state)[0].code.toUpperCase() : 'EUR';
+        } else {
+            amount = getWorkshopCost(this.state.cost.total, this.state);
+            currency = this.state.paypalCurrencies.indexOf(this.state.currency.toLowerCase()) > -1 ? this.state.currency : 'EUR';
+        }
 
         return actions.payment.create({
-              transactions: [
-                  {
-                      amount: { total: amount, currency }
-                  }
-              ]
-          });
-          
+            transactions: [
+                {
+                    amount: { total: amount, currency }
+                }
+            ]
+        });
+
     }
 
     /**
@@ -589,9 +692,9 @@ export class Checkout extends FormComponent {
      */
     renderTimeframes () {
         const { t } = this.props;
-  	    const timeframes = [t('chooseTime'), ...this.state.timeframes];
-  	    let frameName;
-  	    let frameValue;
+        const timeframes = [t('chooseTime'), ...this.state.timeframes];
+        let frameName;
+        let frameValue;
 
         return timeframes.map((frame, i) => {
             if (i > 0) {
@@ -612,26 +715,26 @@ export class Checkout extends FormComponent {
      * @param {number} responseCode
      * @return {object}
      */
-	renderIssues () {
-		const { t } = this.props;
-		const issues = [t('chooseTheme'), ...issueObj.issues];
-		let issueName;
-		let issueValue;
+    renderIssues () {
+        const { t } = this.props;
+        const issues = [t('chooseTheme'), ...issueObj.issues];
+        let issueName;
+        let issueValue;
 
-		return issues.map((issue, i) => {
-		    if (i > 0) {
+        return issues.map((issue, i) => {
+            if (i > 0) {
                 issueName = `issues.${issue.name}.name`;
                 issueValue = `issues.${issue.name}.name`;
             } else {
-		        issueName = issue;
+                issueName = issue;
                 issueValue = '';
             }
 
-			return (
-				<option key={i} value={t(issueValue)}>{t(issueName)}</option>
-			)
-		})
-	}
+            return (
+                <option key={i} value={t(issueValue)}>{t(issueName)}</option>
+            )
+        })
+    }
 
     /**
      * This callback type is called `requestCallback
@@ -664,34 +767,39 @@ export class Checkout extends FormComponent {
      * @param {number} responseCode
      * @return {object}
      */
-	render () {
-	    if (window.localStorage.getItem('order') === null) {
-	        return null;
+    render () {
+        const { t, location } = this.props;
+
+        if (window.localStorage.getItem('order') === null && !location.query) {
+            return null;
         }
 
-		const { t } = this.props;
-		const front = (window.localStorage.getItem('step') === '1') ? 'front' : 'front none';
+        const front = ((window.localStorage.getItem('step') === '1') || location.query) && window.localStorage.getItem('step') !== '2' ? 'front' : 'front none';
         const back = (window.localStorage.getItem('step') === '2') ? 'back' : 'back none';
-		const firstColSize = (this.width === 'small') ? '50%' : '60%';
-		const lastColSize = (this.width === 'small') ? '30%' : '20%';
-		const currency = this.state.paypalFactor === 1 ? this.state.language : '€';
+        const firstColSize = (this.width === 'small') ? '50%' : '60%';
+        const lastColSize = (this.width === 'small') ? '30%' : '20%';
+        const currency = this.state.paypalFactor === 1 ? this.state.language : '€';
         const termErrorMsg = this.state.terms === 'off' && this.state.termsIsDirty ? 'Ovo polje je obavezno' : '';
         const cancelErrorMsg = this.state.cancel === 'off' && this.state.cancelIsDirty ? 'Ovo polje je obavezno' : '';
 
-		const sumClass =
-			(typeof this.state.data.packageDiscount === 'undefined' &&
-			typeof this.state.data.promoDiscount === 'undefined')
-				? 'right heavy' : 'right';
+        let sumClass, centerClass;
 
-        const centerClass =
-            (typeof this.state.data.packageDiscount === 'undefined' &&
-            typeof this.state.data.promoDiscount === 'undefined')
-                ? 'center heavy' : 'center';
+        if (window.localStorage.getItem('order')) {
+            sumClass =
+                (typeof this.state.data.packageDiscount === 'undefined' &&
+                typeof this.state.data.promoDiscount === 'undefined')
+                    ? 'right heavy' : 'right';
 
-		const spinnerClass = this.state.showSpinner ? 'showbox' : 'none';
+            centerClass =
+                (typeof this.state.data.packageDiscount === 'undefined' &&
+                typeof this.state.data.promoDiscount === 'undefined')
+                    ? 'center heavy' : 'center';
+        }
+
+        const spinnerClass = this.state.showSpinner ? 'showbox' : 'none';
 
         const paypalStyle = {
-            lable: 'en_US',
+            label: 'en_US',
             size: 'responsive',
             color: 'blue',
             shape: 'rect',
@@ -700,128 +808,173 @@ export class Checkout extends FormComponent {
         };
 
         return (
-			<div className="page">
+            <div className="page">
                 <InactivityModal resetOrder={this.resetOrder} />
-				<div className={spinnerClass}>
-					<div className="loader">
-						<svg className="circular" viewBox="25 25 50 50">
-							<circle className="path" cx="50" cy="50" r="20" fill="none" strokeWidth="2" strokeMiterlimit="10"/>
-						</svg>
-						<p className="processing-text">Obrada nabavke</p>
-					</div>
-				</div>
-				<Header location={this.props.location} />
-				<div ref={(checkout) => { this.checkout = checkout; }} className="checkout">
-					<div className="basket">
-						<div className="page-header">
-							<h1>{ t('heading') }</h1>
-						</div>
-						<div className="outer-frame">
-							<div className="inner-frame">
+                <div className={spinnerClass}>
+                    <div className="loader">
+                        <svg className="circular" viewBox="25 25 50 50">
+                            <circle className="path" cx="50" cy="50" r="20" fill="none" strokeWidth="2" strokeMiterlimit="10"/>
+                        </svg>
+                        <p className="processing-text">Obrada nabavke</p>
+                    </div>
+                </div>
+                <Header location={this.props.location} />
+                <div ref={(checkout) => { this.checkout = checkout; }} className="checkout">
+                    <div className="basket">
+                        <div className="page-header">
+                            <h1>{ t('heading') }</h1>
+                        </div>
+                        <div className="outer-frame">
+                            <div className="inner-frame">
                                 {(() => {
-                                    if (window.localStorage.getItem('step') === '1') {
+                                    if ((window.localStorage.getItem('step') === '1' || location.query.workshop) && window.localStorage.getItem('step') !== '2') {
                                         return (
-											<div className="left-col-wrapper">
-												<table>
-													<colgroup>
-														<col width={ firstColSize }/>
-														<col width="20%"/>
-														<col width={ lastColSize }/>
-													</colgroup>
-													<thead>
-													<tr>
-														<th>{ t('item') }</th>
-														<th>{ t('weeks') }</th>
-														<th>{ t('price') }</th>
-													</tr>
-													</thead>
-													<tbody>
+                                            <div className="left-col-wrapper">
+                                                <table>
+                                                    <colgroup>
+                                                        <col width={ firstColSize }/>
+                                                        <col width="20%"/>
+                                                        <col width={ lastColSize }/>
+                                                    </colgroup>
+                                                    <thead>
                                                     {(() => {
-                                                        if (this.state.data.skype) {
+                                                        if (!location.query.workshop) {
+                                                            return(
+                                                                <tr>
+                                                                    <th>{ t('item') }</th>
+                                                                    <th>{ t('weeks') }</th>
+                                                                    <th>{ t('price') }</th>
+                                                                </tr>
+                                                            );
+                                                        } else {
+                                                            return(
+                                                                <tr>
+                                                                    <th>Radionica</th>
+                                                                    <th>{ t('price') }</th>
+                                                                </tr>
+                                                            )
+                                                        }
+                                                    })()}
+                                                    </thead>
+                                                    <tbody>
+                                                    {(() => {
+                                                        if (!location.query.workshop) {
+                                                            if (this.state.data.skype) {
+                                                                return (
+                                                                    <tr>
+                                                                        <td>{ `${this.state.data.skype.description.split(' ').shift()} ${t('skypeWeeks')}`}</td>
+                                                                        <td className="center">{ this.state.data.skype.week }</td>
+                                                                        <td className="center">{ getSkypeCost(this.state) }&nbsp;{ currency }</td>
+                                                                    </tr>
+                                                                )
+                                                            }
+                                                        } else {
                                                             return (
-																<tr>
-																	<td>{ `${this.state.data.skype.description.split(' ').shift()} ${t('skypeWeeks')}`}</td>
-																	<td className="center">{ this.state.data.skype.week }</td>
-																	<td className="center">{ getSkypeCost(this.state) }&nbsp;{ currency }</td>
-                                                        </tr>
+                                                                <tr>
+                                                                    <td>{`${location.query.workshop.charAt(0).toUpperCase() + location.query.workshop.slice(1)} – ${location.query.day}.${location.query.month}, ${location.query.location.charAt(0).toUpperCase() + location.query.location.slice(1)}`}</td>
+                                                                    <td className="center heavy">{ getWorkshopCost(parseInt(location.query.price), this.state) }&nbsp;{currency}</td>
+                                                                </tr>
                                                             )
                                                         }
                                                     })()}
                                                     {(() => {
-                                                        if (this.state.data.email) {
-                                                            const duration = this.state.data.email.description.match(/\d+/g).map(Number)[0].toString();
-                                                            return (
-																<tr>
-																	<td>{`${t('email')} ${t('emailResponse')} ${duration} ${t('hours')}`}</td>
-																	<td className="center">{ this.state.data.email.week }</td>
-																	<td className="center">{ getEmailCost(this.state) }&nbsp;{ currency }</td>
-																</tr>
-                                                            )
+                                                        if (!location.query.workshop) {
+                                                            if (this.state.data.email) {
+                                                                const duration = this.state.data.email.description.match(/\d+/g).map(Number)[0].toString();
+                                                                return (
+                                                                    <tr>
+                                                                        <td>{`${t('email')} ${t('emailResponse')} ${duration} ${t('hours')}`}</td>
+                                                                        <td className="center">{ this.state.data.email.week }</td>
+                                                                        <td className="center">{ getEmailCost(this.state) }&nbsp;{ currency }</td>
+                                                                    </tr>
+                                                                )
+                                                            }
                                                         }
                                                     })()}
-													<tr>
-														<td>&nbsp;</td>
-														<td>&nbsp;</td>
-														<td>&nbsp;</td>
-													</tr>
-													<tr>
-														<td className={sumClass} colSpan="2">{ t('sum') }</td>
-														<td className={centerClass}>{ getSum(this.state) }&nbsp;{ currency }</td>
-													</tr>
                                                     {(() => {
-                                                        if (this.state.data.packageDiscount || this.state.data.skype && this.state.data.skype.week > 1 || this.state.data.email && this.state.data.email.week > 1) {
+                                                        if (!location.query.workshop) {
                                                             return (
-																<tr>
-																	<td className="right"
-																		colSpan="2">{ t('packageDiscount') }</td>
-																	<td className="center">{ getPackageDiscount(this.state) }&nbsp;{ currency }</td>
-																</tr>
+                                                                <tr>
+                                                                    <td>&nbsp;</td>
+                                                                    <td>&nbsp;</td>
+                                                                    <td>&nbsp;</td>
+                                                                </tr>
                                                             )
                                                         }
                                                     })()}
                                                     {(() => {
-                                                        if (this.state.data.packageDiscount > 0 || this.state.data.skype && this.state.data.skype.week > 1 || this.state.data.email && this.state.data.email.week > 1) {
-                                                            const labelName = this.state.data.promoDiscount
-                                                                ? 'right' : 'right heavy';
+                                                        if (!location.query.workshop) {
+                                                            return (
+                                                                <tr>
+                                                                    <td className={sumClass} colSpan="2">{ t('sum') }</td>
+                                                                    <td className={centerClass}>{ getSum(this.state) }&nbsp;{ currency }</td>
+                                                                </tr>
+                                                            )
+                                                        }
 
-                                                            const valueName = this.state.data.promoDiscount
-                                                                ? 'center' : 'center heavy';
+                                                    })()}
+                                                    {(() => {
+                                                        if (!location.query.workshop) {
+                                                            if (this.state.data.packageDiscount || this.state.data.skype && this.state.data.skype.week > 1 || this.state.data.email && this.state.data.email.week > 1) {
+                                                                return (
+                                                                    <tr>
+                                                                        <td className="right"
+                                                                            colSpan="2">{ t('packageDiscount') }</td>
+                                                                        <td className="center">{ getPackageDiscount(this.state) }&nbsp;{ currency }</td>
+                                                                    </tr>
+                                                                )
+                                                            }
+                                                        }
+                                                    })()}
+                                                    {(() => {
+                                                        if (!location.query.workshop) {
+                                                            if (this.state.data.packageDiscount > 0 || this.state.data.skype && this.state.data.skype.week > 1 || this.state.data.email && this.state.data.email.week > 1) {
+                                                                const labelName = this.state.data.promoDiscount
+                                                                    ? 'right' : 'right heavy';
 
-                                                            return (
-																<tr>
-																	<td className={labelName}
-																		colSpan="2">{ t('sumWithPackageDiscount')}</td>
-																	<td className={valueName}>
-                                                                        { getPackageSum(this.state) }&nbsp;{ currency }
-																	</td>
-																</tr>
-                                                            )
+                                                                const valueName = this.state.data.promoDiscount
+                                                                    ? 'center' : 'center heavy';
+
+                                                                return (
+                                                                    <tr>
+                                                                        <td className={labelName}
+                                                                            colSpan="2">{ t('sumWithPackageDiscount')}</td>
+                                                                        <td className={valueName}>
+                                                                            { getPackageSum(this.state) }&nbsp;{ currency }
+                                                                        </td>
+                                                                    </tr>
+                                                                )
+                                                            }
                                                         }
                                                     })()}
                                                     {(() => {
-                                                        if (this.state.data.promoDiscount) {
-                                                            return (
-																<tr>
-																	<td className="right"
-																		colSpan="2">{ t('voucherDiscount') }</td>
-																	<td className="center">{ getVoucherDiscount(this.state) }&nbsp;{ currency }</td>
-																</tr>
-                                                            )
+                                                        if (!location.query.workshop) {
+                                                            if (this.state.data.promoDiscount) {
+                                                                return (
+                                                                    <tr>
+                                                                        <td className="right"
+                                                                            colSpan="2">{ t('voucherDiscount') }</td>
+                                                                        <td className="center">{ getVoucherDiscount(this.state) }&nbsp;{ currency }</td>
+                                                                    </tr>
+                                                                )
+                                                            }
                                                         }
                                                     })()}
                                                     {(() => {
-                                                        if (this.state.data.promoDiscount || this.state.data.skype && this.state.data.skype.week > 1 || this.state.data.email && this.state.data.email.week > 1) {
-                                                            return (
-																<tr>
-																	<td className="right heavy"
-																		colSpan="2">{ t('total') }</td>
-																	<td className="center heavy">{ getTotal(this.state) }&nbsp;{ currency }</td>
-																</tr>
-                                                            )
+                                                        if (!location.query.workshop) {
+                                                            if (this.state.data.promoDiscount || this.state.data.skype && this.state.data.skype.week > 1 || this.state.data.email && this.state.data.email.week > 1) {
+                                                                return (
+                                                                    <tr>
+                                                                        <td className="right heavy"
+                                                                            colSpan="2">{ t('total') }</td>
+                                                                        <td className="center heavy">{ getTotal(this.state) }&nbsp;{ currency }</td>
+                                                                    </tr>
+                                                                )
+                                                            }
                                                         }
                                                     })()}
-													</tbody>
-												</table>
+                                                    </tbody>
+                                                </table>
                                                 <div className="disclaimer">
                                                     {(() => {
                                                         if (this.state.paypalFactor !== 1) {
@@ -835,33 +988,33 @@ export class Checkout extends FormComponent {
                                                         }
                                                     })()}
                                                 </div>
-												<div>
+                                                <div>
                                                     {(() => {
                                                         if (this.props.errorMessage.length > 0) {
                                                             return (
-																<div className="card-error">
-																	<p>Neformalno smo mogli da obradimo vašu narudžbinu. {t(`stripe.${this.props.errorMessage}`)}</p>
-																</div>
+                                                                <div className="card-error">
+                                                                    <p>Neformalno smo mogli da obradimo vašu narudžbinu. {t(`stripe.${this.props.errorMessage}`)}</p>
+                                                                </div>
                                                             )
                                                         }
                                                     })()}
-												</div>
-											</div>
+                                                </div>
+                                            </div>
                                         )
                                     }
                                 })()}
-								<div ref={(front) => { this.front = front; }} className={front}>
-									<div id="payment-form">
-										<div className="form-element-wrapper">
-											<label htmlFor="name">{ t('name') }</label>
-											<input
-												onChange={ this.handleChange }
-												id="name"
-												className="name"
-												type="text"
-												value={ this.state.name }/>
-											{this.getValidationMessages('name')}
-										</div>
+                                <div ref={(front) => { this.front = front; }} className={front}>
+                                    <div id="payment-form">
+                                        <div className="form-element-wrapper">
+                                            <label htmlFor="name">{ t('name') }</label>
+                                            <input
+                                                onChange={ this.handleChange }
+                                                id="name"
+                                                className="name"
+                                                type="text"
+                                                value={ this.state.name }/>
+                                            {this.getValidationMessages('name')}
+                                        </div>
                                         <div className="form-element-wrapper">
                                             <label htmlFor="adress">{ t('street') }</label>
                                             <input
@@ -920,34 +1073,52 @@ export class Checkout extends FormComponent {
                                                 value={ this.state.mail }/>
                                             { this.getValidationMessages('mail') }
                                         </div>
-										<div className="form-element-wrapper">
-											<label htmlFor="issue">{t('issue')}</label>
-											<div className="select-style">
-												<select id="issue" onChange={ this.handleSelect }>
-													{ this.renderIssues() }
-												</select>
-											</div>
-                                            {this.getValidationMessages('issue')}
-										</div>
-                                        <div className="form-element-wrapper">
-                                            <label htmlFor="skype">Skype ID</label>
-                                            <input
-                                                onChange={ this.handleChange }
-                                                id="skypeId"
-                                                type="text"
-                                                value={ this.state.skypeId }
-                                            />
-                                            { this.getValidationMessages('skype') }
-                                        </div>
-                                        <div className="form-element-wrapper">
-                                            <label htmlFor="timeframe">{ t('chooseTime') }</label>
-                                            <div className="select-style">
-                                                <select id="timeframe" onChange={ this.handleSelectTime }>
-                                                    { this.renderTimeframes() }
-                                                </select>
-                                            </div>
-                                            {this.getValidationMessages('timeframe')}
-                                        </div>
+                                        {(() => {
+                                            if (!location.query.workshop) {
+                                                return (
+                                                    <div className="form-element-wrapper">
+                                                        <label htmlFor="issue">{t('issue')}</label>
+                                                        <div className="select-style">
+                                                            <select id="issue" onChange={ this.handleSelect }>
+                                                                { this.renderIssues() }
+                                                            </select>
+                                                        </div>
+                                                        {this.getValidationMessages('issue')}
+                                                    </div>
+                                                )
+                                            }
+                                        })()}
+                                        {(() => {
+                                            if (!location.query.workshop) {
+                                                return (
+                                                    <div className="form-element-wrapper">
+                                                        <label htmlFor="skype">Skype ID</label>
+                                                        <input
+                                                            onChange={ this.handleChange }
+                                                            id="skypeId"
+                                                            type="text"
+                                                            value={ this.state.skypeId }
+                                                        />
+                                                        { this.getValidationMessages('skype') }
+                                                    </div>
+                                                )
+                                            }
+                                        })()}
+                                        {(() => {
+                                            if (!location.query.workshop) {
+                                                return (
+                                                    <div className="form-element-wrapper">
+                                                        <label htmlFor="timeframe">{ t('chooseTime') }</label>
+                                                        <div className="select-style">
+                                                            <select id="timeframe" onChange={ this.handleSelectTime }>
+                                                                { this.renderTimeframes() }
+                                                            </select>
+                                                        </div>
+                                                        {this.getValidationMessages('timeframe')}
+                                                    </div>
+                                                )
+                                            }
+                                        })()}
                                         <div className="form-element-wrapper payment-type">
                                             <fieldset id="payment-options">
                                                 <legend className="payment-type-header">{ t('paymentType') }</legend>
@@ -991,15 +1162,15 @@ export class Checkout extends FormComponent {
                                                 )
                                             }
                                         })()}
-										<div className="form-element-wrapper">
-											<label htmlFor="comment">{ t('comment') }</label>
-											<textarea
-												id="comment"
-												className={ this.getValidatorData('comment') }
-												onChange={ this.handleChange }
+                                        <div className="form-element-wrapper">
+                                            <label htmlFor="comment">{ t('comment') }</label>
+                                            <textarea
+                                                id="comment"
+                                                className={ this.getValidatorData('comment') }
+                                                onChange={ this.handleChange }
                                                 value={ this.state.comment } />
-											{this.getValidationMessages('comment')}
-										</div>
+                                            {this.getValidationMessages('comment')}
+                                        </div>
                                         <div className="form-element-wrapper">
                                             <div className="check-wrapper">
                                                 <input id="subscription" checked={ this.state.subscribe === 'on' } value={this.state.subscribe} className="checkbox" type="checkbox" />
@@ -1013,15 +1184,24 @@ export class Checkout extends FormComponent {
                                             </div>
                                             <span className="error checkbox">{termErrorMsg}</span>
                                         </div>
-                                        <div className="form-element-wrapper">
-                                            <div className="check-wrapper">
-                                                <input id="cancel" checked={this.state.cancel === 'on'} value={this.state.cancel} className="checkbox" type="checkbox" />
-                                                <label onClick={ this.handleCancel } className="checkbox" htmlFor="cancel">{ t('understand') }.</label>
-                                            </div>
-                                            <span className="error checkbox">{cancelErrorMsg}</span>
-                                        </div>
-										<div className="form-buttons">
-											<button onClick={ this.resetCheckout }>{ t('back') }</button>
+                                        {(() => {
+                                            if (!this.props.location.query.workshop) {
+                                                return (
+                                                    <div className="form-element-wrapper">
+                                                        <div className="check-wrapper">
+                                                            <input id="cancel" checked={this.state.cancel === 'on'}
+                                                                   value={this.state.cancel} className="checkbox"
+                                                                   type="checkbox"/>
+                                                            <label onClick={ this.handleCancel } className="checkbox"
+                                                                   htmlFor="cancel">{ t('understand') }.</label>
+                                                        </div>
+                                                        <span className="error checkbox">{cancelErrorMsg}</span>
+                                                    </div>
+                                                )
+                                            }
+                                        })()}
+                                        <div className="form-buttons">
+                                            <button onClick={ this.resetCheckout }>{ t('back') }</button>
                                             {(() => {
                                                 if (this.state.paymentType === 'credit' || this.state.paymentType === 'faktura') {
                                                     return <button className="stripe-button" onClick={this.handleSubmit}>{ t('placeOrder') }</button>;
@@ -1045,65 +1225,66 @@ export class Checkout extends FormComponent {
                                                     );
                                                 }
                                             })()}
-										</div>
-									</div>
-								</div>
-								<div className={back}>
-									<div>
-										<h2 className="back-header">{ t('thankYou') }</h2>
-										<p className="preamble">{ t('successfulOrder') }</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className={back}>
+                                    <div>
+                                        <h2 className="back-header">{ t('thankYou') }</h2>
+                                        <p className="preamble">{ t('successfulOrder') }</p>
                                         <p className="preamble">{ t('feedback') }:</p>
                                         <div className="rating">
-											<p className="rating-text">{ t('impressionWeb') } &#63;</p>
-											<div ref="stars-1" className="stars stars-1">
-												<span id="1" ref="star star-1" className="star" onClick={ this.handleWebStar }>☆</span>
-												<span id="2" ref="star star-2" className="star" onClick={ this.handleWebStar }>☆</span>
-												<span id="3" ref="star star-3" className="star" onClick={ this.handleWebStar }>☆</span>
-												<span id="4" ref="star star-4" className="star" onClick={ this.handleWebStar }>☆</span>
-												<span id="5" ref="star star-5" className="star" onClick={ this.handleWebStar }>☆</span>
-											</div>
-										</div>
-										<div className="rating">
-											<p className="rating-text">{ t('impressionPayment') } &#63;</p>
-											<div ref="stars-2" className="stars stars-2">
-												<span id="6" ref="star star-6" className="star" onClick={ this.handlePayStar }>☆</span>
-												<span id="7" ref="star star-7" className="star" onClick={ this.handlePayStar }>☆</span>
-												<span id="8" ref="star star-8" className="star" onClick={ this.handlePayStar }>☆</span>
-												<span id="9" ref="star star-9" className="star" onClick={ this.handlePayStar }>☆</span>
-												<span id="10" ref="star star-10" className="star" onClick={ this.handlePayStar }>☆</span>
-											</div>
-										</div>
-										<label className="comment-label">{ t('otherComments') }</label>
-										<textarea onChange={this.handleRatingComment} value={this.state.ratingComment} />
-										<button onClick={ this.postRating }>OK</button>
+                                            <p className="rating-text">{ t('impressionWeb') } &#63;</p>
+                                            <div ref="stars-1" className="stars stars-1">
+                                                <span id="1" ref="star star-1" className="star" onClick={ this.handleWebStar }>☆</span>
+                                                <span id="2" ref="star star-2" className="star" onClick={ this.handleWebStar }>☆</span>
+                                                <span id="3" ref="star star-3" className="star" onClick={ this.handleWebStar }>☆</span>
+                                                <span id="4" ref="star star-4" className="star" onClick={ this.handleWebStar }>☆</span>
+                                                <span id="5" ref="star star-5" className="star" onClick={ this.handleWebStar }>☆</span>
+                                            </div>
+                                        </div>
+                                        <div className="rating">
+                                            <p className="rating-text">{ t('impressionPayment') } &#63;</p>
+                                            <div ref="stars-2" className="stars stars-2">
+                                                <span id="6" ref="star star-6" className="star" onClick={ this.handlePayStar }>☆</span>
+                                                <span id="7" ref="star star-7" className="star" onClick={ this.handlePayStar }>☆</span>
+                                                <span id="8" ref="star star-8" className="star" onClick={ this.handlePayStar }>☆</span>
+                                                <span id="9" ref="star star-9" className="star" onClick={ this.handlePayStar }>☆</span>
+                                                <span id="10" ref="star star-10" className="star" onClick={ this.handlePayStar }>☆</span>
+                                            </div>
+                                        </div>
+                                        <label className="comment-label">{ t('otherComments') }</label>
+                                        <textarea onChange={this.handleRatingComment} value={this.state.ratingComment} />
+                                        <button onClick={ this.postRating }>OK</button>
                                         <p className="close-button-explanation">{ t('redirected') }.</p>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<Footer />
-				<div id="breakpoints" ref={(breakpoints) => { this.breakpoints = breakpoints; }}>
-					<div className="breakpoint-small" data-size="small" />
-					<div className="breakpoint-medium" data-size="medium" />
-					<div className="breakpoint-large" data-size="large" />
-				</div>
-			</div>
-		);
-	}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <Footer />
+                <div id="breakpoints" ref={(breakpoints) => { this.breakpoints = breakpoints; }}>
+                    <div className="breakpoint-small" data-size="small" />
+                    <div className="breakpoint-medium" data-size="medium" />
+                    <div className="breakpoint-large" data-size="large" />
+                </div>
+            </div>
+        );
+    }
 }
 
 Checkout.propTypes = { dispatch: PropTypes.func };
 
 const mapStateToProps = (state) => ({
-	save: state.encounter.saved,
-	cost: state.encounter.cost,
-	issues: state.issue.list,
-	stripe: state.encounter.stripe,
-	stripeToken: state.encounter.stripeToken,
-	rating: state.encounter.rating,
-	errorMessage: state.encounter.errorMessage,
+    save: state.encounter.saved,
+    cost: state.encounter.cost,
+    issues: state.issue.list,
+    stripe: state.encounter.stripe,
+    stripeToken: state.encounter.stripeToken,
+    paypalEnv: state.encounter.paypalEnv,
+    rating: state.encounter.rating,
+    errorMessage: state.encounter.errorMessage,
     paypalId: state.encounter.paypalId
 });
 

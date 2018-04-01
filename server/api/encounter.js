@@ -1,4 +1,5 @@
 import Encounter from '../models/encounter';
+import Workshop from '../models/workshop';
 import Newsletter from '../models/newsletter';
 import request from 'request';
 import stripe from 'stripe';
@@ -11,22 +12,50 @@ const getEncounters = (request, reply) => {
     });
 };
 
+const getWorkshops = (request, reply) => {
+    Workshop.find({}, (error, result) => {
+        if (error) return reply(error);
+        return reply(result);
+    });
+};
+
 const handleRating = (request, reply) => {
-   Encounter.find({ '_id': request.payload.id }, (err, encounter) => {
-       if (encounter.length) {
-           encounter[0].rating = {
-               web: request .payload.ratingObj.web,
-               pay: request.payload.ratingObj.pay,
-               comment: request.payload.ratingObj.comment
-           };
-           encounter[0].save();
-           return reply().code(200);
-       }
-   })
+    if (request.payload.ratingObj.workshop === true) {
+        Workshop.find({ '_id': request.payload.id }, (err, encounter) => {
+            if (encounter.length) {
+                encounter[0].rating = {
+                    web: request .payload.ratingObj.web,
+                    pay: request.payload.ratingObj.pay,
+                    comment: request.payload.ratingObj.comment
+                };
+                encounter[0].save();
+                return reply().code(200);
+            }
+        })
+    } else {
+        Encounter.find({ '_id': request.payload.id }, (err, encounter) => {
+            if (encounter.length) {
+                encounter[0].rating = {
+                    web: request .payload.ratingObj.web,
+                    pay: request.payload.ratingObj.pay,
+                    comment: request.payload.ratingObj.comment
+                };
+                encounter[0].save();
+                return reply().code(200);
+            }
+        })
+    }
 };
 
 const handleErase = (request, reply) => {
     Encounter.remove({ '_id': request.params.id }, (err, encounter) => {
+        if (err) return reply(err);
+        return reply().code(200);
+    })
+};
+
+const handleEraseWorkshop = (request, reply) => {
+    Workshop.remove({ '_id': request.params.id }, (err, workshop) => {
         if (err) return reply(err);
         return reply().code(200);
     })
@@ -98,12 +127,56 @@ const saveEncounter = (request, reply, charge) => {
     });
 };
 
+const saveWorkshop = (request, reply, charge) => {
+    const workshop = new Workshop();
+
+    if (request.payload.encounter.newsletter === true) {
+        Newsletter.find({ email: request.payload.encounter.mail }, (err, result) => {
+            if (result.length === 0) {
+                const newsletter = new Newsletter();
+                newsletter.email = request.payload.encounter.mail;
+                newsletter.save();
+            }
+        });
+    }
+
+    workshop.name = request.payload.encounter.name;
+    workshop.street = request.payload.encounter.street;
+    workshop.postalCode = request.payload.encounter.postal;
+    workshop.city = request.payload.encounter.city;
+    workshop.country = request.payload.encounter.country;
+    workshop.phone = request.payload.encounter.phone;
+    workshop.paymentType = request.payload.encounter.paymentType;
+    workshop.mail = request.payload.encounter.mail;
+    workshop.comment = request.payload.encounter.comment;
+    workshop.currency = request.payload.encounter.currency;
+    workshop.price = request.payload.encounter.cost.total;
+    workshop.location = request.payload.encounter.location;
+    workshop.day = request.payload.encounter.day;
+    workshop.month = request.payload.encounter.month;
+    workshop.workshopName = request.payload.encounter.workshopName;
+
+    const date = new Date();
+    workshop.date = date.toUTCString();
+
+    workshop.save((err, record) => {
+        if (charge) {
+            charge.encounterId = record._id;
+            return reply(charge);
+        } else {
+            return reply(record);
+        }
+    });
+};
+
 const handleCharge = (request, reply) => {
     if (request.payload.id !== null) {
         // Token is created using Checkout or Elements!
         // Get the payment token ID submitted by the form:
         const striper = stripe(config.get('stripe.server'));
         const token = request.payload.id;
+
+        console.log(request.payload.encounter);
 
         // Charge the user's card:
         // request.payload.cost
@@ -120,11 +193,19 @@ const handleCharge = (request, reply) => {
             });
 
             if (charge.paid) {
-                saveEncounter(request, reply, charge);
+                if (request.payload.encounter.workshop === false) {
+                    saveEncounter(request, reply, charge);
+                } else {
+                    saveWorkshop(request, reply, charge);
+                }
             }
         });
     } else {
-        saveEncounter(request, reply, null);
+        if (request.payload.encounter.workshop === false) {
+            saveEncounter(request, reply, null);
+        } else {
+            saveWorkshop(request, reply, null);
+        }
     }
 };
 
@@ -175,6 +256,20 @@ exports.register = (server, options, next) => {
             path: '/encounters',
             config: {
                 handler: getEncounters
+            }
+        },
+        {
+            method: 'DELETE',
+            path: '/workshop/{id}',
+            config: {
+                handler: handleEraseWorkshop
+            }
+        },
+        {
+            method: 'GET',
+            path: '/workshops',
+            config: {
+                handler: getWorkshops
             }
         },
         {

@@ -8,6 +8,7 @@ import i18n from './config/i18n';
 import { requireAuth } from './routes';
 import App from './components/App';
 import Admin from './components/Private/Encounter';
+import Workshop from './components/Private/Workshop';
 import Checkout from './components/Public/Checkout';
 import Login from './components/Private/Login';
 import Blog from './components/Public/Blog';
@@ -27,6 +28,7 @@ render((
           <Route path="/" component={App}>
               <Route path='/checkout' component={Checkout}/>
               <Route path='/admin' onEnter={requireAuth} component={Admin}/>
+              <Route path='/workshop' onEnter={requireAuth} component={Workshop}/>
               <Route path="/login" component={Login} />
               <Route path="/blogovi" component={Blog} />
               <Route path="/kontakt" component={CustomerCare} />

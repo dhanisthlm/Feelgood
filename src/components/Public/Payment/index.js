@@ -17,6 +17,11 @@ export class Payment extends Component {
             paypalFactor: 1,
             durationSkype: 's',
             isDirty: false,
+            cost: {
+                email: 0,
+                skype: 40,
+                total: 114
+            },
             languages: [
                 {
                     code: 'bam',
@@ -180,6 +185,7 @@ export class Payment extends Component {
 
         this.setCategorySize(size, type);
         const cost = this.calculateCost();
+        console.log(cost);
 
         const showDurationText = (this.skypePackage)
             ? this.skypePackage.cost === 0 : true;
