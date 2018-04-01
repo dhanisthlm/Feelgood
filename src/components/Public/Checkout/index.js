@@ -6,14 +6,15 @@ import strategy from 'joi-validation-strategy';
 import FormComponent from '../../FormComponent';
 import { routeActions } from 'redux-simple-router';
 import ReactDOM from 'react-dom'
-import { encounterValidator } from '../../../../validators/encounters';
+import { encounterValidator, workshopValidator } from '../../../../validators/encounters';
 import { getIssues } from '../../../actions/issue';
 import { saveRating, resetRating } from '../../../actions/encounter';
 import { i18nValidation } from  '../../../../helpers/validation';
 import { saveEncounter, resetEncounter } from '../../../actions/encounter';
 import { getCountries } from '../../../../helpers/countries';
 import { getCurrency } from '../../../../helpers/currencies';
-import { getSkypeCost, getEmailCost, getPackageDiscount, getVoucherDiscount, getSum, getTotal, getPackageSum, getSelectedCurrency } from '../../../../helpers/payment';
+import { getStripeToken, getPaypalEnv } from '../../../actions/config';
+import { getSkypeCost, getEmailCost, getPackageDiscount, getVoucherDiscount, getSum, getTotal, getPackageSum, getSelectedCurrency, getWorkshopCost } from '../../../../helpers/payment';
 import { InactivityModal } from '../../InactiveDialog';
 import Header from '../Header';
 import Footer from '../Footer';
@@ -48,26 +49,62 @@ export class Checkout extends FormComponent {
             idleTtl: 300000,
             tick: 10000,
 			webRating: 0,
+            location: '',
 			payRating: 0,
+            workshop: false,
             ratingComment: '',
             paymentType: 'credit',
             timeframes: ['Jutro', 'Popodne', 'Veče', 'Bilo kada'],
             country: 'Bosnia and Herzegovina',
             newsletter: true,
             currency: 'BAM',
-            cost: 0,
             paypalFactor: 1,
             subscribe: 'on',
             terms: 'off',
             cancel: 'off',
+            cost: 0,
             termsIsDirty: false,
             cancelIsDirty: false,
             comment: '',
             paypalCurrencies: ['€', '$', 'kn', 'kr'],
-            invoiceCurrencies: ['€', 'KM']
+            invoiceCurrencies: ['€', 'KM'],
+            languages: [
+                {
+                    code: 'bam',
+                    currency: 'KM',
+                    rate: 1
+                },
+                {
+                    code: 'eur',
+                    currency: '€',
+                    rate: 2
+                },
+                {
+                    code: 'hrk',
+                    currency: 'kn',
+                    rate: 1/4
+                },
+                {
+                    code: 'rsd',
+                    currency: 'RSD',
+                    rate: 1/60
+                },
+                {
+                    code: 'sek',
+                    currency: 'kr',
+                    rate: 1/5
+                },
+                {
+                    code: 'usd',
+                    currency: '$',
+                    rate: 1.6
+                }
+            ]
 		};
 
-		this.validatorTypes = encounterValidator;
+		this.validatorTypes = this.props.location.query.workshop
+            ? workshopValidator : encounterValidator;
+
 		this.resetCheckout = this.resetCheckout.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.handleChange = this.handleChange.bind(this);
@@ -94,23 +131,58 @@ export class Checkout extends FormComponent {
     }
 
 	componentWillMount () {
+	    const { location } = this.props;
+
 		if (window.localStorage.getItem('order') !== null) {
 			const cache = JSON.parse(window.localStorage.getItem('order'));
             this.setState({ ...cache, save: false });
+        }
+
+        if (window.localStorage.getItem('order') !== null) {
             this.props.dispatch(getIssues());
+        }
+
+        if (location.query.workshop) {
+		    this.setState({
+                language: this.props.location.query.currency,
+                cancel: 'on',
+                cost: {
+                    total: parseInt(location.query.price)
+                }
+		    }, () => {
+                this.props.dispatch(getStripeToken());
+                this.props.dispatch(getPaypalEnv());
+            });
+
         }
 	}
 
-	componentWillUnmount () {
+
+    componentWillUnmount () {
 	    this.resetOrder();
     }
 
 	componentDidMount () {
-        if (window.localStorage.getItem('order')) {
-            this.initStripe();
+	    const { location } = this.props;
+
+        if (location.query.workshop) {
             this.calculateViewportSize();
-            this.setState({ env: window.localStorage.getItem('pe') });
+            this.setState({
+                workshop: true,
+                workshopName: location.query.workshop,
+                location: location.query.location,
+                month: location.query.month,
+                day: location.query.day
+            });
         } else {
+            this.initStripe();
+        }
+
+        if (window.localStorage.getItem('order') && !location.query.workshop) {
+            this.setState({ env: window.localStorage.getItem('pe') });
+        }
+
+        if (!window.localStorage.getItem('order') && !location.query.workshop) {
             this.props.dispatch(routeActions.push('/'));
         }
     }
@@ -122,6 +194,19 @@ export class Checkout extends FormComponent {
      * @return {object}
      */
     componentWillReceiveProps (nextProps) {
+        const { location } = nextProps;
+
+        if (location.query.workshop) {
+            this.setState({
+                stripeToken: nextProps.stripeToken,
+                paypalEnv: nextProps.paypalEnv
+            }, () => {
+                setTimeout(() => {
+                    this.initStripe();
+                }, 1000)
+            });
+        }
+
         this.prepInit(nextProps);
         this.handleRating(nextProps);
         this.handleSave(nextProps);
@@ -134,15 +219,20 @@ export class Checkout extends FormComponent {
      * @return {object}
      */
 	prepInit (nextProps) {
+	    const { location } = nextProps;
+
 	    if (nextProps.issues === this.props.issues) return;
 
         this.setState({
             issues: nextProps.issues,
-            language: JSON.parse(window.localStorage.getItem('order')).language,
-            cost: JSON.parse(window.localStorage.getItem('order')).cost
+            language: window.localStorage.getItem('order') ? JSON.parse(window.localStorage.getItem('order')).language : this.state.language,
         });
 
-        if (window.localStorage.getItem('step') === null) {
+        if (!location.query.workshop) {
+            this.setState({ cost: JSON.parse(window.localStorage.getItem('order')).cost });
+        }
+
+        if (window.localStorage.getItem('step') === null && !location.query.workshop) {
             this.props.dispatch(routeActions.push('/'));
         }
 
@@ -183,7 +273,7 @@ export class Checkout extends FormComponent {
 
            if (id === 'paypal') {
                paypalFactor = (this.state.paypalCurrencies.indexOf(this.state.language) > -1) ? 1 : 2;
-               this.setState({ termsIsDirty: true, cancelIsDirty: true })
+               this.setState({ termsIsDirty: true, cancelIsDirty: true });
            } else if (id === 'faktura') {
                paypalFactor = (this.state.invoiceCurrencies.indexOf(this.state.language) > -1) ? 1 : 2;
            } else {
@@ -226,11 +316,12 @@ export class Checkout extends FormComponent {
      * @return {object}
      */
 	postRating () {
-    	const stripe = JSON.parse(window.localStorage.getItem('stripe'));
+    	const stripe = JSON.parse(window.localStorage.getItem('stripe')) || this.state.stripeToken;
     	const id = (stripe.data.encounterId) ? stripe.data.encounterId : stripe.data._id;
 
     	this.props.dispatch(saveRating(
     		id, {
+    		    workshop: this.state.workshop,
 				web: 5 - this.state.webRating +1,
 				pay: 10 - this.state.payRating + 1,
 				comment: this.state.ratingComment
@@ -364,7 +455,7 @@ export class Checkout extends FormComponent {
     	const element = document.getElementById('card-element');
 
     	if (element) {
-            const stripe = Stripe(window.localStorage.getItem('st'));
+            const stripe = Stripe(window.localStorage.getItem('st') || this.state.stripeToken);
             const elements = stripe.elements({locale: 'en'});
             const card = elements.create('card', {placeholder: 'Card'});
 
@@ -387,6 +478,8 @@ export class Checkout extends FormComponent {
      * @return {object}
      */
     calculateViewportSize () {
+        if (!this.breakpoints) return;
+
         for (let item of this.breakpoints.children) {
             const width = (item.offsetParent !== null) ? item.dataset.size : '';
             if (width) this.width = width;
@@ -422,9 +515,11 @@ export class Checkout extends FormComponent {
      * @return {object}
      */
 	handleChange (e) {
-		const cache = JSON.parse(window.localStorage.getItem('order'));
-		cache[e.target.id] = e.target.value;
-		window.localStorage.setItem('order', JSON.stringify(cache));
+	    if (!this.props.location.query.workshop) {
+            const cache = JSON.parse(window.localStorage.getItem('order'));
+            cache[e.target.id] = e.target.value;
+            window.localStorage.setItem('order', JSON.stringify(cache));
+        }
 		this.setState({ [e.target.id]: e.target.value });
         this.handlePaypal ();
     }
@@ -449,7 +544,8 @@ export class Checkout extends FormComponent {
      */
 	handleSubmit (event) {
 		event.preventDefault();
-        this.setState({
+
+		this.setState({
             termsIsDirty: true,
             cancelIsDirty: true,
             currency: getSelectedCurrency(this.state)[0].code.toUpperCase()
@@ -552,11 +648,23 @@ export class Checkout extends FormComponent {
      * @param {number} responseCode
      * @return {object}
      */
+<<<<<<< Updated upstream
     payment(data, actions) {
         const amount = getTotal(this.state);
+=======
+    payment(actions) {
+        let amount, currency;
+>>>>>>> Stashed changes
 
-        const currency = this.state.paypalCurrencies.indexOf(getSelectedCurrency(this.state)[0].currency) > -1
-            ? getSelectedCurrency(this.state)[0].code.toUpperCase() : 'EUR';
+        if (!this.props.location.query.workshop) {
+            amount = getTotal(this.state);
+
+            currency = this.state.paypalCurrencies.indexOf(getSelectedCurrency(this.state)[0].currency) > -1
+                ? getSelectedCurrency(this.state)[0].code.toUpperCase() : 'EUR';
+        } else {
+            amount = getWorkshopCost(this.state.cost.total, this.state);
+            currency = this.state.paypalCurrencies.indexOf(this.state.currency.toLowerCase()) > -1 ? this.state.currency : 'EUR';
+        }
 
         return actions.payment.create({
               transactions: [
@@ -665,12 +773,13 @@ export class Checkout extends FormComponent {
      * @return {object}
      */
 	render () {
-	    if (window.localStorage.getItem('order') === null) {
+        const { t, location } = this.props;
+
+        if (window.localStorage.getItem('order') === null && !location.query) {
 	        return null;
         }
 
-		const { t } = this.props;
-		const front = (window.localStorage.getItem('step') === '1') ? 'front' : 'front none';
+		const front = ((window.localStorage.getItem('step') === '1') || location.query) && window.localStorage.getItem('step') !== '2' ? 'front' : 'front none';
         const back = (window.localStorage.getItem('step') === '2') ? 'back' : 'back none';
 		const firstColSize = (this.width === 'small') ? '50%' : '60%';
 		const lastColSize = (this.width === 'small') ? '30%' : '20%';
@@ -678,20 +787,24 @@ export class Checkout extends FormComponent {
         const termErrorMsg = this.state.terms === 'off' && this.state.termsIsDirty ? 'Ovo polje je obavezno' : '';
         const cancelErrorMsg = this.state.cancel === 'off' && this.state.cancelIsDirty ? 'Ovo polje je obavezno' : '';
 
-		const sumClass =
-			(typeof this.state.data.packageDiscount === 'undefined' &&
-			typeof this.state.data.promoDiscount === 'undefined')
-				? 'right heavy' : 'right';
+        let sumClass, centerClass;
 
-        const centerClass =
-            (typeof this.state.data.packageDiscount === 'undefined' &&
-            typeof this.state.data.promoDiscount === 'undefined')
-                ? 'center heavy' : 'center';
+        if (window.localStorage.getItem('order')) {
+            sumClass =
+                (typeof this.state.data.packageDiscount === 'undefined' &&
+                typeof this.state.data.promoDiscount === 'undefined')
+                    ? 'right heavy' : 'right';
+
+            centerClass =
+                (typeof this.state.data.packageDiscount === 'undefined' &&
+                typeof this.state.data.promoDiscount === 'undefined')
+                    ? 'center heavy' : 'center';
+        }
 
 		const spinnerClass = this.state.showSpinner ? 'showbox' : 'none';
 
         const paypalStyle = {
-            lable: 'en_US',
+            label: 'en_US',
             size: 'responsive',
             color: 'blue',
             shape: 'rect',
@@ -719,7 +832,7 @@ export class Checkout extends FormComponent {
 						<div className="outer-frame">
 							<div className="inner-frame">
                                 {(() => {
-                                    if (window.localStorage.getItem('step') === '1') {
+                                    if ((window.localStorage.getItem('step') === '1' || location.query.workshop) && window.localStorage.getItem('step') !== '2') {
                                         return (
 											<div className="left-col-wrapper">
 												<table>
@@ -729,25 +842,56 @@ export class Checkout extends FormComponent {
 														<col width={ lastColSize }/>
 													</colgroup>
 													<thead>
-													<tr>
-														<th>{ t('item') }</th>
-														<th>{ t('weeks') }</th>
-														<th>{ t('price') }</th>
-													</tr>
+                                                    {(() => {
+                                                        if (!location.query.workshop) {
+                                                            return(
+                                                                <tr>
+                                                                    <th>{ t('item') }</th>
+                                                                    <th>{ t('weeks') }</th>
+                                                                    <th>{ t('price') }</th>
+                                                                </tr>
+                                                            );
+                                                        } else {
+                                                            return(
+                                                                <tr>
+                                                                    <th>Radionica</th>
+                                                                    <th>{ t('price') }</th>
+                                                                </tr>
+                                                            )
+                                                        }
+                                                    })()}
 													</thead>
 													<tbody>
                                                     {(() => {
-                                                        if (this.state.data.skype) {
+                                                        if (!location.query.workshop) {
+                                                            if (this.state.data.skype) {
+                                                                return (
+                                                                    <tr>
+                                                                        <td>{ `${this.state.data.skype.description.split(' ').shift()} ${t('skypeWeeks')}`}</td>
+                                                                        <td className="center">{ this.state.data.skype.week }</td>
+                                                                        <td className="center">{ getSkypeCost(this.state) }&nbsp;{ currency }</td>
+                                                                    </tr>
+                                                                )
+                                                            }
+                                                        } else {
                                                             return (
+<<<<<<< Updated upstream
 																<tr>
 																	<td>{ this.state.data.skype.description }</td>
 																	<td className="center">{ this.state.data.skype.week }</td>
 																	<td className="center">{ getSkypeCost(this.state) }&nbsp;{ currency }</td>
                                                         </tr>
+=======
+                                                                <tr>
+                                                                    <td>{`${location.query.workshop.charAt(0).toUpperCase() + location.query.workshop.slice(1)} – ${location.query.day}.${location.query.month}, ${location.query.location.charAt(0).toUpperCase() + location.query.location.slice(1)}`}</td>
+                                                                    <td className="center heavy">{ getWorkshopCost(parseInt(location.query.price), this.state) }&nbsp;{currency}</td>
+                                                                </tr>
+>>>>>>> Stashed changes
                                                             )
                                                         }
                                                     })()}
                                                     {(() => {
+<<<<<<< Updated upstream
                                                         if (this.state.data.email) {
                                                             return (
 																<tr>
@@ -756,67 +900,101 @@ export class Checkout extends FormComponent {
 																	<td className="center">{ getEmailCost(this.state) }&nbsp;{ currency }</td>
 																</tr>
                                                             )
+=======
+                                                        if (!location.query.workshop) {
+                                                            if (this.state.data.email) {
+                                                                const duration = this.state.data.email.description.match(/\d+/g).map(Number)[0].toString();
+                                                                return (
+                                                                    <tr>
+                                                                        <td>{`${t('email')} ${t('emailResponse')} ${duration} ${t('hours')}`}</td>
+                                                                        <td className="center">{ this.state.data.email.week }</td>
+                                                                        <td className="center">{ getEmailCost(this.state) }&nbsp;{ currency }</td>
+                                                                    </tr>
+                                                                )
+                                                            }
+>>>>>>> Stashed changes
                                                         }
                                                     })()}
-													<tr>
-														<td>&nbsp;</td>
-														<td>&nbsp;</td>
-														<td>&nbsp;</td>
-													</tr>
-													<tr>
-														<td className={sumClass} colSpan="2">{ t('sum') }</td>
-														<td className={centerClass}>{ getSum(this.state) }&nbsp;{ currency }</td>
-													</tr>
                                                     {(() => {
-                                                        if (this.state.data.packageDiscount || this.state.data.skype && this.state.data.skype.week > 1 || this.state.data.email && this.state.data.email.week > 1) {
+                                                        if (!location.query.workshop) {
                                                             return (
-																<tr>
-																	<td className="right"
-																		colSpan="2">{ t('packageDiscount') }</td>
-																	<td className="center">{ getPackageDiscount(this.state) }&nbsp;{ currency }</td>
-																</tr>
+                                                                <tr>
+                                                                    <td>&nbsp;</td>
+                                                                    <td>&nbsp;</td>
+                                                                    <td>&nbsp;</td>
+                                                                </tr>
                                                             )
                                                         }
                                                     })()}
                                                     {(() => {
-                                                        if (this.state.data.packageDiscount > 0 || this.state.data.skype && this.state.data.skype.week > 1 || this.state.data.email && this.state.data.email.week > 1) {
-                                                            const labelName = this.state.data.promoDiscount
-                                                                ? 'right' : 'right heavy';
+                                                        if (!location.query.workshop) {
+                                                        return (
+                                                            <tr>
+                                                                <td className={sumClass} colSpan="2">{ t('sum') }</td>
+                                                                <td className={centerClass}>{ getSum(this.state) }&nbsp;{ currency }</td>
+                                                            </tr>
+                                                            )
+                                                        }
 
-                                                            const valueName = this.state.data.promoDiscount
-                                                                ? 'center' : 'center heavy';
+                                                    })()}
+                                                    {(() => {
+                                                        if (!location.query.workshop) {
+                                                            if (this.state.data.packageDiscount || this.state.data.skype && this.state.data.skype.week > 1 || this.state.data.email && this.state.data.email.week > 1) {
+                                                                return (
+                                                                    <tr>
+                                                                        <td className="right"
+                                                                            colSpan="2">{ t('packageDiscount') }</td>
+                                                                        <td className="center">{ getPackageDiscount(this.state) }&nbsp;{ currency }</td>
+                                                                    </tr>
+                                                                )
+                                                            }
+                                                        }
+                                                    })()}
+                                                    {(() => {
+                                                        if (!location.query.workshop) {
+                                                            if (this.state.data.packageDiscount > 0 || this.state.data.skype && this.state.data.skype.week > 1 || this.state.data.email && this.state.data.email.week > 1) {
+                                                                const labelName = this.state.data.promoDiscount
+                                                                    ? 'right' : 'right heavy';
 
-                                                            return (
-																<tr>
-																	<td className={labelName}
-																		colSpan="2">{ t('sumWithPackageDiscount')}</td>
-																	<td className={valueName}>
-                                                                        { getPackageSum(this.state) }&nbsp;{ currency }
-																	</td>
-																</tr>
-                                                            )
+                                                                const valueName = this.state.data.promoDiscount
+                                                                    ? 'center' : 'center heavy';
+
+                                                                return (
+                                                                    <tr>
+                                                                        <td className={labelName}
+                                                                            colSpan="2">{ t('sumWithPackageDiscount')}</td>
+                                                                        <td className={valueName}>
+                                                                            { getPackageSum(this.state) }&nbsp;{ currency }
+                                                                        </td>
+                                                                    </tr>
+                                                                )
+                                                            }
                                                         }
                                                     })()}
                                                     {(() => {
-                                                        if (this.state.data.promoDiscount) {
-                                                            return (
-																<tr>
-																	<td className="right"
-																		colSpan="2">{ t('voucherDiscount') }</td>
-																	<td className="center">{ getVoucherDiscount(this.state) }&nbsp;{ currency }</td>
-																</tr>
-                                                            )
+                                                        if (!location.query.workshop) {
+                                                            if (this.state.data.promoDiscount) {
+                                                                return (
+                                                                    <tr>
+                                                                        <td className="right"
+                                                                            colSpan="2">{ t('voucherDiscount') }</td>
+                                                                        <td className="center">{ getVoucherDiscount(this.state) }&nbsp;{ currency }</td>
+                                                                    </tr>
+                                                                )
+                                                            }
                                                         }
                                                     })()}
                                                     {(() => {
-                                                        if (this.state.data.promoDiscount || this.state.data.skype && this.state.data.skype.week > 1 || this.state.data.email && this.state.data.email.week > 1) {
-                                                            return (
-																<tr>
-																	<td className="right heavy"
-																		colSpan="2">{ t('total') }</td>
-																	<td className="center heavy">{ getTotal(this.state) }&nbsp;{ currency }</td>
-																</tr>
-                                                            )
+                                                        if (!location.query.workshop) {
+                                                            if (this.state.data.promoDiscount || this.state.data.skype && this.state.data.skype.week > 1 || this.state.data.email && this.state.data.email.week > 1) {
+                                                                return (
+                                                                    <tr>
+                                                                        <td className="right heavy"
+                                                                            colSpan="2">{ t('total') }</td>
+                                                                        <td className="center heavy">{ getTotal(this.state) }&nbsp;{ currency }</td>
+                                                                    </tr>
+                                                                )
+                                                            }
                                                         }
                                                     })()}
 													</tbody>
@@ -919,34 +1097,52 @@ export class Checkout extends FormComponent {
                                                 value={ this.state.mail }/>
                                             { this.getValidationMessages('mail') }
                                         </div>
-										<div className="form-element-wrapper">
-											<label htmlFor="issue">{t('issue')}</label>
-											<div className="select-style">
-												<select id="issue" onChange={ this.handleSelect }>
-													{ this.renderIssues() }
-												</select>
-											</div>
-                                            {this.getValidationMessages('issue')}
-										</div>
-                                        <div className="form-element-wrapper">
-                                            <label htmlFor="skype">Skype ID</label>
-                                            <input
-                                                onChange={ this.handleChange }
-                                                id="skypeId"
-                                                type="text"
-                                                value={ this.state.skypeId }
-                                            />
-                                            { this.getValidationMessages('skype') }
-                                        </div>
-                                        <div className="form-element-wrapper">
-                                            <label htmlFor="timeframe">{ t('chooseTime') }</label>
-                                            <div className="select-style">
-                                                <select id="timeframe" onChange={ this.handleSelectTime }>
-                                                    { this.renderTimeframes() }
-                                                </select>
-                                            </div>
-                                            {this.getValidationMessages('timeframe')}
-                                        </div>
+                                        {(() => {
+                                            if (!location.query.workshop) {
+                                                return (
+                                                    <div className="form-element-wrapper">
+                                                        <label htmlFor="issue">{t('issue')}</label>
+                                                        <div className="select-style">
+                                                            <select id="issue" onChange={ this.handleSelect }>
+                                                                { this.renderIssues() }
+                                                            </select>
+                                                        </div>
+                                                        {this.getValidationMessages('issue')}
+                                                    </div>
+                                                )
+                                            }
+                                        })()}
+                                        {(() => {
+                                            if (!location.query.workshop) {
+                                                return (
+                                                    <div className="form-element-wrapper">
+                                                        <label htmlFor="skype">Skype ID</label>
+                                                        <input
+                                                            onChange={ this.handleChange }
+                                                            id="skypeId"
+                                                            type="text"
+                                                            value={ this.state.skypeId }
+                                                        />
+                                                        { this.getValidationMessages('skype') }
+                                                    </div>
+                                                )
+                                            }
+                                        })()}
+                                        {(() => {
+                                            if (!location.query.workshop) {
+                                                return (
+                                                    <div className="form-element-wrapper">
+                                                        <label htmlFor="timeframe">{ t('chooseTime') }</label>
+                                                        <div className="select-style">
+                                                            <select id="timeframe" onChange={ this.handleSelectTime }>
+                                                                { this.renderTimeframes() }
+                                                            </select>
+                                                        </div>
+                                                        {this.getValidationMessages('timeframe')}
+                                                    </div>
+                                                )
+                                            }
+                                        })()}
                                         <div className="form-element-wrapper payment-type">
                                             <fieldset id="payment-options">
                                                 <legend className="payment-type-header">{ t('paymentType') }</legend>
@@ -1012,13 +1208,22 @@ export class Checkout extends FormComponent {
                                             </div>
                                             <span className="error checkbox">{termErrorMsg}</span>
                                         </div>
-                                        <div className="form-element-wrapper">
-                                            <div className="check-wrapper">
-                                                <input id="cancel" checked={this.state.cancel === 'on'} value={this.state.cancel} className="checkbox" type="checkbox" />
-                                                <label onClick={ this.handleCancel } className="checkbox" htmlFor="cancel">{ t('understand') }.</label>
-                                            </div>
-                                            <span className="error checkbox">{cancelErrorMsg}</span>
-                                        </div>
+                                        {(() => {
+                                            if (!this.props.location.query.workshop) {
+                                                return (
+                                                    <div className="form-element-wrapper">
+                                                        <div className="check-wrapper">
+                                                            <input id="cancel" checked={this.state.cancel === 'on'}
+                                                                   value={this.state.cancel} className="checkbox"
+                                                                   type="checkbox"/>
+                                                            <label onClick={ this.handleCancel } className="checkbox"
+                                                                   htmlFor="cancel">{ t('understand') }.</label>
+                                                        </div>
+                                                        <span className="error checkbox">{cancelErrorMsg}</span>
+                                                    </div>
+                                                )
+                                            }
+                                        })()}
 										<div className="form-buttons">
 											<button onClick={ this.resetCheckout }>{ t('back') }</button>
                                             {(() => {
@@ -1101,6 +1306,7 @@ const mapStateToProps = (state) => ({
 	issues: state.issue.list,
 	stripe: state.encounter.stripe,
 	stripeToken: state.encounter.stripeToken,
+    paypalEnv: state.encounter.paypalEnv,
 	rating: state.encounter.rating,
 	errorMessage: state.encounter.errorMessage,
     paypalId: state.encounter.paypalId
