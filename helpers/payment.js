@@ -110,7 +110,7 @@ export const getTotal = (state) => {
  * @return {object}
  */
 export const exchange = (cost, state) => {
-    return state.paypalFactor !== 1
+    return state.paypalFactor === 1
         ? parseInt((cost / getSelectedCurrency(state)[0].rate).toFixed(0))
         : parseInt((cost).toFixed(0));
 };
