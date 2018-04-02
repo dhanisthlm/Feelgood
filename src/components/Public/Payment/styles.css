@@ -728,6 +728,10 @@
         min-width: 0 !important;
     }
 
+    .payment + .text-wrapper .total span {
+        vertical-align: unset;
+    }
+
     .payment .skype .wrapper label, .payment .email .wrapper label {
         width: 100%;
         box-sizing: border-box;

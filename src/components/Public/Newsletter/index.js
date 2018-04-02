@@ -62,15 +62,17 @@ export class Newsletter extends Component {
 
         return (
             <div className="newsletter">
-                <h2 className="heading">Subscribe to our newsletter</h2>
                 <img src="/images/envelope-feelwell.svg" />
-                <input
-                    onChange={ this.handleChange }
-                    onKeyUp={this.resetSuccess}
-                    className={ this.getValidatorData('mail') }
-                    value={this.state.mail}
-                    placeholder="E-pošta adresa" type="text" />
-                <button onClick={this.handleSubmit}>Submit</button>
+                <div>
+                    <h2 className="heading">Želim da dobijam informacije o popustima i drugim ponudama</h2>
+                    <input
+                        onChange={ this.handleChange }
+                        onKeyUp={this.resetSuccess}
+                        className={ this.getValidatorData('mail') }
+                        value={this.state.mail}
+                        placeholder="E-pošta adresa" type="text" />
+                    <button onClick={this.handleSubmit}>OK</button>
+                </div>
                 <span className="successMessage">{this.state.successMessage}</span>
                 {this.getValidationMessages('mail')}
             </div>
