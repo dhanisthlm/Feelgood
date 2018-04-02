@@ -9,7 +9,7 @@
     "url": "git@github.com:dhanisthlm/Feelgood.git"
   },
   "engines" : {
-    "node" : ">=0.7.10 <0.7.11"
+    "node" : ">=7.10.0 <7.11.0"
   },
   "scripts": {
     "mongo:start": "mongod --config /usr/local/etc/mongod.conf --fork --logpath /dev/null",
