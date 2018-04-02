@@ -8,6 +8,12 @@ export default handleActions({
             workshopErased: false
         }
     },
+    WORKSHOP_DELETED: (state, action) => {
+        return {
+            ...state,
+            workshopErased: true
+        }
+    },
     ENCOUNTERS: (state, action) => {
         return {
             ...state,
