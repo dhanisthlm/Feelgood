@@ -11,6 +11,18 @@ export const getWorkshops = () => (dispatch) => {
         });
 };
 
+export const getNewsletters = () => (dispatch) => {
+    return request
+        .get('/newsletter')
+        .then((data) => {
+            console.log(data);
+            dispatch({ type: 'NEWSLETTERS', payload: data.data });
+        })
+        .catch((error) => {
+            console.log('error', error);
+        });
+};
+
 export const getEncounters = () => (dispatch) => {
     return request
         .get('/encounters')
@@ -27,6 +39,17 @@ export const eraseWorkshop = (id) => (dispatch) => {
         .delete(`/workshop/${id}`)
         .then(() => {
             dispatch({ type: 'WORKSHOP_DELETED'});
+        })
+        .catch((error) => {
+            console.log('error', error);
+        });
+};
+
+export const eraseNewsletter = (id) => (dispatch) => {
+    return request
+        .delete(`/newsletter/${id}`)
+        .then(() => {
+            dispatch({ type: 'NEWSLETTER_DELETED'});
         })
         .catch((error) => {
             console.log('error', error);
@@ -61,7 +84,7 @@ export const saveRating = (encounterId, ratingObj) => (dispatch) => {
     return request
         .post('/rating', payload)
         .then(() => {
-             console.log('save rating')
+            console.log('save rating')
             dispatch({ type: 'RATING_SAVED' });
         })
         .catch((error) => {
@@ -102,4 +125,14 @@ export const resetEncounter = () => (dispatch) => {
 
 export const resetRating = () => (dispatch) => {
     dispatch({ type: 'RESET_RATING' })
+};
+
+export const addUserToNewsletter = (email) => (dispatch) => {
+    return request
+        .post('/newsletter', { email })
+        .then((data) => {
+        })
+        .catch((error) => {
+            console.log('error', error);
+        });
 };

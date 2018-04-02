@@ -19,6 +19,13 @@ const getWorkshops = (request, reply) => {
     });
 };
 
+const getNewsletters = (request, reply) => {
+    Newsletter.find({}, (error, result) => {
+        if (error) return reply(error);
+        return reply(result);
+    });
+};
+
 const handleRating = (request, reply) => {
     if (request.payload.ratingObj.workshop === true) {
         Workshop.find({ '_id': request.payload.id }, (err, encounter) => {
@@ -61,6 +68,13 @@ const handleEraseWorkshop = (request, reply) => {
     })
 };
 
+const handleEraseNewsletter = (request, reply) => {
+    Newsletter.remove({ '_id': request.params.id }, (err, newsletter) => {
+        if (err) return reply(err);
+        return reply().code(200);
+    })
+};
+
 const handleStripeToken = (request, reply) => {
     const token = config.get('stripe.client');
     return reply(token).code(200);
@@ -69,6 +83,16 @@ const handleStripeToken = (request, reply) => {
 const handlePaypalEnv = (request, reply) => {
     const env = config.get('paypal');
     return reply(env).code(200);
+};
+
+const handleNewsletter = (request, reply) => {
+    Newsletter.find({ email: request.payload.email }, (err, result) => {
+        if (result.length === 0) {
+            const newsletter = new Newsletter();
+            newsletter.email = request.payload.email;
+            newsletter.save();
+        }
+    });
 };
 
 const saveEncounter = (request, reply, charge) => {
@@ -176,8 +200,6 @@ const handleCharge = (request, reply) => {
         const striper = stripe(config.get('stripe.server'));
         const token = request.payload.id;
 
-        console.log(request.payload.encounter);
-
         // Charge the user's card:
         // request.payload.cost
         // amount: 3 * 100,
@@ -212,16 +234,16 @@ const handleCharge = (request, reply) => {
 const handlePaypal = (req, reply) => {
     let oauth = new Promise((resolve, reject) => {
         request.post({
-            uri:  'https://api.paypal.com/v1/oauth2/token',
-            body: 'grant_type=client_credentials',
-            auth: {
-                user: config.get('paypal.production'),
-                pass: config.get('paypal.secret')
+                uri:  'https://api.paypal.com/v1/oauth2/token',
+                body: 'grant_type=client_credentials',
+                auth: {
+                    user: config.get('paypal.production'),
+                    pass: config.get('paypal.secret')
+                },
             },
-        },
-        function (error, response, body) {
-            resolve(response)
-        });
+            function (error, response, body) {
+                resolve(response)
+            });
     });
 
     oauth.then((response) => {
@@ -320,7 +342,28 @@ exports.register = (server, options, next) => {
             config: {
                 handler: handlePaypal
             }
-        }
+        },
+        {
+            method: 'POST',
+            path: '/newsletter',
+            config: {
+                handler: handleNewsletter
+            }
+        },
+        {
+            method: 'GET',
+            path: '/newsletter',
+            config: {
+                handler: getNewsletters
+            }
+        },
+        {
+            method: 'DELETE',
+            path: '/newsletter/{id}',
+            config: {
+                handler: handleEraseNewsletter
+            }
+        },
     ]);
 
     next()

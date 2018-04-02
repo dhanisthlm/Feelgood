@@ -9,6 +9,7 @@ import { requireAuth } from './routes';
 import App from './components/App';
 import Admin from './components/Private/Encounter';
 import Workshop from './components/Private/Workshop';
+import Newsletter from './components/Private/Newsletter';
 import Checkout from './components/Public/Checkout';
 import Login from './components/Private/Login';
 import Blog from './components/Public/Blog';
@@ -29,6 +30,7 @@ render((
               <Route path='/checkout' component={Checkout}/>
               <Route path='/admin' onEnter={requireAuth} component={Admin}/>
               <Route path='/workshop' onEnter={requireAuth} component={Workshop}/>
+              <Route path='/newsletters' onEnter={requireAuth} component={Newsletter}/>
               <Route path="/login" component={Login} />
               <Route path="/blogovi" component={Blog} />
               <Route path="/kontakt" component={CustomerCare} />

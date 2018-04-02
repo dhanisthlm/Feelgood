@@ -10,50 +10,66 @@
       "emailResponse": "answer within",
       "hours": "hours",
       "Jutro": "Morning",
+      "validation": {
+        "\"name\" is required": "Name is required",
+        "\"name\" is not allowed to be empty": "Name is not allowed to be empty",
+        "\"phone\" is required": "Phone is required",
+        "\"phone\" is not allowed to be empty": "Phone is not allowed to be empty",
+        "\"street\" is required": "Street is required",
+        "\"street\" is not allowed to be empty": "Street is not allowed to be empty",
+        "\"postal\" is required": "Postal code is required",
+        "\"postal\" is not allowed to be empty": "Postal code is not allowed to be empty",
+        "\"city\" is required": "City is required",
+        "\"city\" is not allowed to be empty": "City is not allowed to be empty",
+        "\"mail\" is required": "E-mail is required",
+        "\"mail\" is not allowed to be empty": "E-mail is not allowed to be empty",
+        "\"mail\" must be a valid email": "E-mail must be valid",
+        "wrongRegexFormat": "Not correct format"
+      },
       "issues": {
         "stress": {
           "name": "Stress",
-          "description": "Are you under stress and do you have difficulty in reducing it?"
+          "description": "Are you constantly stressed?"
         },
         "anxiety": {
           "name": "Anxiety",
-          "description": "Do you feel like shaking and you can not take care?"
+          "description": "Do you get anxiety attacks?"
         },
         "exhaustion": {
-          "name": "Exhaustion",
-          "description": "Do you have difficulty with sleeping, feeling tired and exhausted?"
+          "name": "Fatigue",
+          "description": "Have trouble sleeping?"
         },
         "backPain": {
           "name": "Pain",
           "description": "Do you need help with pain relief?"
         },
         "depression": {
-          "name": "Depression",
-          "description": "Do you feel sad or gloomy?"
+          "name": "Greef",
+          "description": "Need help coping with grief? "
         },
         "kids": {
-          "name": "Kids",
-          "description": "Does your child have an outburst of anger?"
+          "name": "Child",
+          "description": "Help to manage outbursts and conflicts."
         },
         "weight": {
           "name": "Weight",
-          "description": "Do you have problems with body weight?"
+          "description": "Need help reaching your weight goal?"
         },
         "panic": {
           "name": "Panic",
-          "description": "Do you feel anxiety or panic attack?"
+          "description": "Do you get panic attacks?"
         },
         "fobia": {
           "name": "Fobia",
-          "description": "Do you have phobias that keep you alive?"
+          "description": "Have phobia that causes problems?"
         },
         "violence": {
-          "name": "Violence",
-          "description": "Are you getting into conflicts easily and are you frustrated?"
+          "name": "Conflict",
+          "description": "Frustrated and easily into conflict?"
         },
         "stuck": {
           "name": "Life crisis",
-          "description": "Have you been stuck personally or professionally?"
+          "description": "Stuck personally or professionally?"
         }
       }
     },
@@ -65,75 +81,75 @@
       "services": "Services",
       "prices": "Prices",
       "howWork": "How it works",
-      "whoAreWe": "Who are we",
+      "whoAreWe": "Our team",
       "blog": "Blog",
       "menu": "Menu"
     },
     "introView": {
-      "heading": "Psychological counseling for everyday problems",
-      "preamble": "We are here for you, if you need to talk to someone. Zdravlje.nu offers psychological counseling, discretely and at a reasonable price. In the conversation, we recognize which thoughts and emotions prevent you from feeling well and being successful in life, and working on change.",
+      "heading": "Online counseling and life coaching",
+      "preamble": "We are there for you if you need to talk to someone, no matter your location. Feeling well offers you counseling and life coaching online, confidentially and to a reasonable price. In a creative process, we identify what thoughts and emotions prevent you from feeling well and being successful, and together we work on change to reach your full potential.",
       "start": "Get started",
       "cookieText": "We use cookies for the proper functioning of certain services. They are temporary and disappear when you turn off the browser. By using this site, you accept the use of cookies."
     },
     "issueView": {
-      "heading": "Make the first step for a better tomorrow",
-      "preamble": "To find solutions to your situation, it may be useful to seek professional support and assistance. Contact us, we can help.",
+      "heading": "Let us help you reach your full potential",
+      "preamble": "Our counselors have experience in helping our clients living a more fulfilling life. Contact us, we can help you find solutions to your goals and problems.",
       "contactUs": "Contact us",
       "issues": {
         "stress": {
           "name": "Stress",
-          "description": "Are you under stress and do you have difficulty in reducing it?"
+          "description": "Are you constantly stressed?"
         },
         "anxiety": {
           "name": "Anxiety",
-          "description": "Do you feel like shaking and you can not take care?"
+          "description": "Do you get anxiety attacks?"
         },
         "exhaustion": {
-          "name": "Exhaustion",
-          "description": "Do you have difficulty with sleeping, feeling tired and exhausted?"
+          "name": "Fatigue",
+          "description": "Have trouble sleeping?"
         },
         "backPain": {
           "name": "Pain",
           "description": "Do you need help with pain relief?"
         },
         "depression": {
-          "name": "Depression",
-          "description": "Do you feel sad or gloomy?"
+          "name": "Greef",
+          "description": "Need help coping with grief? "
         },
         "kids": {
           "name": "Kids",
-          "description": "Does your child have an outburst of anger?"
+          "description": "Help to manage outbursts and conflicts."
         },
         "weight": {
           "name": "Weight",
-          "description": "Do you have problems with body weight?"
+          "description": "Need help reaching your weight goal?"
         },
         "panic": {
           "name": "Panic",
-          "description": "Do you feel anxiety or panic attack?"
+          "description": "Do you get panic attacks?"
         },
         "fobia": {
           "name": "Fobia",
-          "description": "Do you have phobias that keep you alive?"
+          "description": "Have phobia that causes problems?"
         },
         "violence": {
-          "name": "Violence",
-          "description": "Are you getting into conflicts easily and are you frustrated?"
+          "name": "Conflict",
+          "description": "Frustrated and easily into conflict?"
         },
         "stuck": {
           "name": "Life crisis",
-          "description": "Have you been stuck personally or professionally?"
+          "description": "Stuck personally or professionally?"
         }
       }
     },
     "quoteView": {
-      "quote1": "\"Happiness is when it's what you think,",
-      "quote2": "what you say and what you do.\"",
+      "quote1": "\"Happiness is when what you think what you say,",
+      "quote2": "and what you do are in harmony.\"",
       "signature": "Mahatma Ghandi"
     },
     "quoteImageView": {
-      "quote1": "\"The secret of change is to focus all your energy,",
-      "quote2": "not to fight the old, but to build a new one.\"",
+      "quote1": "\"The secret of change is to focus all your energy, not to fight the old, but to build a new one.\"",
+      "quote2": "",
       "signature": "Sokrates"
     },
     "staffView": {
@@ -141,11 +157,11 @@
       "preamble": "Our psychologists are involved in the Society of Psychologists of the Federation of BiH"
     },
     "howItWorksView": {
-      "heading": "How does it work",
-      "intro": "If you are ready to explore the way you think and feel, here we have described steps that will allow you to get psychological counseling in health. If you are ready to explore the way you think and feel, here we have described steps that will allow you to get psychological counseling in health. You can find frequently asked questions",
+      "heading": "How it works",
+      "intro": "We are here for you, if you are willing to explore the way you think and feel. To feel well or to reach your goals. The steps to get life coaching and counseling are described here. Frequently asked questions can be found",
       "step1": {
         "heading": "1. Estimation",
-        "text": "Talk at no cost, ten to fifteen minutes with our psychologists over the phone (+387 603 21 22 90 or +387 66 23 60 83) or via Skype (Skype address info@zdravlje.nu) to determine your advisory needs."
+        "text": "Talk at no cost, ten to fifteen minutes with our psychologists over the phone (+387 603 21 22 90 or +387 66 23 60 83) or via Skype (Skype address info@feelingwell.net) to determine your advisory needs."
       },
       "step2": {
         "heading": "2. Choose a plan for you",
@@ -177,17 +193,17 @@
       "text3": "Our advisory services are open to anyone who wants to live a more fulfilling life by working in everyday situations and problems he faces. If you have serious mental problems, e.g. a diagnosis of schizophrenia, a bipolar personality disorder, or you are addicted to alcohol or drugs, and if you have any other diagnosis of a mental disorder - you must not use our services."
     },
     "paymentView": {
-      "heading": "Schedule psychological counseling",
-      "intro": "You can schedule psychological counseling here. You can find the price for your selections at the bottom of the page. Click the highlighted key to select a Skype call, email or a combination of Skype calls and emails (in this case, click on both buttons). If you decide to buy more Skype calls or weeks in which to use the email service, this is an individual price for those services cheaper. During the selection, you can track the clearly indicated total and individual cost of all the services you choose.",
-      "skypeWeek": "skype call",
-      "skypeWeeks": "skype calls",
+      "heading": "Order online life coaching and counseling ",
+      "intro": "You can order life coaching and counseling here. See the total price for your choices at the bottom of the page. Select online calls, email, or a combination - in that case, click on both buttons. The more services you choose, the lower the price for each individual service.",
+      "skypeWeek": "online call",
+      "skypeWeeks": "online calls",
       "packageWith": "Package for",
       "selectPackageText": "Select one Skype call or a packet with multiple Skype calls. You can combine it with email.",
       "call": "call",
       "email": "E-mail",
-      "answerWithin": "The answer is in progress",
-      "emailSmallText": "Unlimited email, response within 24h. You can combine with a Skype call.",
-      "emailLargeText": "Unlimited e-mail, response within 4 working days: 07.00-22.00, weekends and holidays: 09.00-18.00.",
+      "answerWithin": "Reply within",
+      "emailSmallText": "Unlimited number of emails, response within 24h. You can combine with online calls. ",
+      "emailLargeText": "Unlimited number of e-mails, reply within 4 h between 7am and 10pm weekdays and 9am to 6pm on weekends and holidays.",
       "number": "Number",
       "week": "week",
       "discount": "discount",
@@ -198,8 +214,8 @@
       "until": "It's valid until 31/1-2018.",
       "year": "year",
       "price": "Price",
-      "writeCode": "Enter the code",
-      "purchase": "Schedule"
+      "writeCode": "Voucher",
+      "purchase": "Order"
     },
     "footerView": {
       "aboutWord": "About",
@@ -224,7 +240,7 @@
       },
       "forMe": {
         "heading": "How can I be sure that counseling is a good choice for me?",
-        "text1": "You have the opportunity to get an introduction to counseling for free, through a 10 to 15-minute telephone conversation. You can call us at +387 603 21 22 90 or +387 66 23 60 83, or via Skype (user Skype name: zdravlje.nu) and talk to one of our psychologists. He or she will discuss your needs, the current situation and the therapeutic goal, and will explain how online counseling works in health.",
+        "text1": "You have the opportunity to get an introduction to counseling for free, through a 10 to 15-minute telephone conversation. You can call us at +387 603 21 22 90 or +387 66 23 60 83, or via Skype (user Skype name: feelingwell.net) and talk to one of our psychologists. He or she will discuss your needs, the current situation and the therapeutic goal, and will explain how online counseling works in health.",
         "text2": "If you feel that we could be at your service and help, you have the opportunity to book and report the appointment of counsel during that call. Please understand that such a reservation is temporary and will be canceled if we do not receive payment until the agreed date of the session."
       },
       "discretion": {
@@ -249,10 +265,10 @@
         "text2": "The data of your credit or debit cards that you enter on health. Are never sent to our servers, but directly to Stripe. This is important because in this way we do not come into contact with sensitive data of your credit and debit cards through our servers.",
         "text3": "You can learn more about how Stripe manages your data via a link:",
         "text4": "If you choose to pay via Paypal, you will be redirected to a secure Paypal payment page. Again, no sensitive information on your cards will be handled by our server.",
-        "text5": "The website zdravlje.nu uses an SSL certificate. SSL is a standard security technology that establishes a secure connection (encrypted channel) between your Internet browser and our health.nu web site. All communications transmitted by this channel are transmitted encrypted, making the information inside it safer and private. You will know that SSL is turned on and running if you see a small green pad icon in the right corner of the bar area with the address bar of zdravlje.nu."
+        "text5": "The website feelingwell.net uses an SSL certificate. SSL is a standard security technology that establishes a secure connection (encrypted channel) between your Internet browser and our health.nu web site. All communications transmitted by this channel are transmitted encrypted, making the information inside it safer and private. You will know that SSL is turned on and running if you see a small green pad icon in the right corner of the bar area with the address bar of feelingwell.net."
       },
       "eligible": {
-        "heading": "Who can use zdravlje.nu services?",
+        "heading": "Who can use feelingwell.net services?",
         "text1": "Our advisory services are open to anyone who wants to live a more fulfilling life by working in everyday situations and problems he faces. If you have serious mental problems, e.g. a diagnosis of schizophrenia, a bipolar personality disorder, or you are addicted to alcohol or drugs, and if you have any other diagnosis of a mental disorder - you must not use our services.",
         "text2": "Please understand that our services are not for emergency purposes.",
         "text3": "If you are thinking about suicide or taking measures and actions that can cause serious harm to yourself or others, if you feel that you or someone else is in danger or if you have a medical emergency, you must contact the emergency department and inform the relevant authorities.",
@@ -266,7 +282,7 @@
       },
       "session": {
         "heading": "How long does a session last?",
-        "text1": "Zdravlje.nu offers you 20-minute and 45-minute sessions.",
+        "text1": "Feelingwell.net offers you 20-minute and 45-minute sessions.",
         "text2": "If you do not have time for a standard session length of 45 minutes, e.g. During working hours, we offer you a shorter, 20-minute option."
       },
       "satisfied": {
@@ -278,8 +294,8 @@
       "pay": {
         "heading": "How to pay?",
         "text1": "We have three payment options, credit / debit card, PayPal or through a bank account.",
-        "text2": "With Credit / Debit and PayPal payment options, you pay online on our website, zdravlje.nu. We use the SSL certificate, which creates an encrypted channel between the web browser and our server, making the information you give us private and secure.",
-        "text3": "Credit / debit card numbers are never recorded on our servers at zdravlje.nu."
+        "text2": "With Credit / Debit and PayPal payment options, you pay online on our website, feelingwell.net. We use the SSL certificate, which creates an encrypted channel between the web browser and our server, making the information you give us private and secure.",
+        "text3": "Credit / debit card numbers are never recorded on our servers at feelingwell.net."
       },
       "payAfter": {
         "heading": "Can I pay after the session?",
@@ -303,9 +319,9 @@
     "tacView": {
       "heading": "Terms and conditions",
       "preamble": {
-        "text1": "Baunad doo Tuzla is the author and publisher of the internet resource zdravlje.nu, a portal providing counselling services through web, mobile, audio and video. Baunad is a limited company with its registered office at Marsala Tita 109, 75000 Tuzla, Bosna and Herzegovina.",
+        "text1": "Baunad doo Tuzla is the author and publisher of the internet resource feelingwell.net, a portal providing counselling services through web, mobile, audio and video. Baunad is a limited company with its registered office at Marsala Tita 109, 75000 Tuzla, Bosna and Herzegovina.",
         "text2": "The terms “Baunad”, “we” and “our” refer to Baunad doo Tuzla. The terms “you,” “your,” and “yourself” refer to the individual user of the services.",
-        "text3": "If you have any questions about any part of the terms and conditions, or if you have ideas as to how we can improve our services, feel free to contact us at info@zdravlje.nu or +387 603 21 22 90; +387 66 23 60 83.",
+        "text3": "If you have any questions about any part of the terms and conditions, or if you have ideas as to how we can improve our services, feel free to contact us at info@feelingwell.net or +387 603 21 22 90; +387 66 23 60 83.",
         "text4": "These terms and conditions were last updated on December 15 th 2017."
       },
       "services": {
@@ -317,7 +333,7 @@
         "text5": "Our services are primarily provided in Bosnian and English. We will always try to help you to see a psychologist who suits your particular needs, however, we can only provide a closest match and cannot promise that you will be able to see a psychologist who can speak your native language or who has direct experience of the culture or country in which you live or have grown up.",
         "text6": "If you believe that our services have not met the standard of reasonable skilled and qualified professionals, then please contact us to let us know. We will treat your concerns seriously. Should we agree that standards are not being met, we will be happy to fix, refund or re-perform the service we have provided.",
         "text7": "Psychologist cannot prescribe medicines, as it is not within their authority to do so.",
-        "text8": "The services may change from time to time, at the sole discretion of Baunad, and the agreement will apply to your visit to and your use of the zdravlje.nu website to avail the services, as well as to all information provided by you on the website at any given point in time."
+        "text8": "The services may change from time to time, at the sole discretion of Baunad, and the agreement will apply to your visit to and your use of the feelingwell website to avail the services, as well as to all information provided by you on the website at any given point in time."
       },
       "terms": {
         "heading": "Client terms of use",
@@ -326,18 +342,18 @@
           "text2": "IF YOU ARE THINKING ABOUT SUICIDE OR IF YOU ARE CONSIDERING TAKING ACTIONS THAT MAY CAUSE HARM TO YOU OR TO OTHERS OR IF YOU FEEL THAT YOU OR ANY OTHER PERSON MAY BE IN ANY DANGER OR IF YOU HAVE ANY MEDICAL EMERGENCY, YOU MUST IMMEDIATELY CALL THE EMERGENCY SERVICE NUMBER AND NOTIFY THE RELEVANT AUTHORITIES."
         },
         "text1": "In order to be eligible to use our services, you must not have a serious mental health issue, e.g. diagnosed with schizophrenia, bipolar disorder, or drug or alcohol dependence.",
-        "text2": "The terms and conditions are applicable to your using (including browsing) of the zdravlje.nu website and/or availing of any of our services through the website or otherwise. By accessing or using our services, you irrevocably accept all the terms and conditions stipulated in this document and agree to abide by them. If you do not agree to all of these terms and conditions, you are not authorized to use our services. So, please read the terms and conditions carefully.",
-        "text3": "You must be 18 years of age or older to register, use the services, or visit or use the website zdravlje.nu in any manner. By registering, visiting and using the website zdravlje.nu or accepting this agreement, you represent and warrant to Baunad that you are 18 years of age or older, and that you have the right, authority and capacity to use the website zdravlje.nu and the services available through the website, and agree to and abide by this agreement.",
+        "text2": "The terms and conditions are applicable to your using (including browsing) of the feelingwell.net website and/or availing of any of our services through the website or otherwise. By accessing or using our services, you irrevocably accept all the terms and conditions stipulated in this document and agree to abide by them. If you do not agree to all of these terms and conditions, you are not authorized to use our services. So, please read the terms and conditions carefully.",
+        "text3": "You must be 18 years of age or older to register, use the services, or visit or use the website feelingwell.net in any manner. By registering, visiting and using the website feelingwell.net or accepting this agreement, you represent and warrant to Baunad that you are 18 years of age or older, and that you have the right, authority and capacity to use the website feelingwell.net and the services available through the website, and agree to and abide by this agreement.",
         "text4": "You hereby certify that you are over the age of eighteen (18). In the event that your certification is inaccurate, you agree to indemnify Baunad from any resulting damages, costs, or claims.",
-        "text5": "Baunad reserves the right to suspend access to the website and our services, and terminate association with any user/client who violates the terms and conditions of the zdravlje.nu website or disturbs the smooth functioning of the website and the dissemination of its services or disturbs other users or professionals in their activities, at its sole discretion.",
+        "text5": "Baunad reserves the right to suspend access to the website and our services, and terminate association with any user/client who violates the terms and conditions of the feelingwell.net website or disturbs the smooth functioning of the website and the dissemination of its services or disturbs other users or professionals in their activities, at its sole discretion.",
         "text6": "We do not tolerate abuse or offensive behaviour towards our psychologists.",
-        "text7": "Baunad reserves the right to stop access to the zdravlje.nu website and services, and terminate association with any user/client who is suspected to be illegal and/or fraudulent and/or abusive and/or competitive and may be referred to appropriate law enforcement authorities. You shall be liable to indemnify Baunad for any losses incurred as a result of any action that has adversely affected Baunad or its users/clients."
+        "text7": "Baunad reserves the right to stop access to the feelingwell.net website and services, and terminate association with any user/client who is suspected to be illegal and/or fraudulent and/or abusive and/or competitive and may be referred to appropriate law enforcement authorities. You shall be liable to indemnify Baunad for any losses incurred as a result of any action that has adversely affected Baunad or its users/clients."
       },
       "changes": {
         "heading": "Changes to terms and conditions",
         "text1": "Baunad reserves the right to modify or totally change this “Terms and Conditions” anytime and as many times without giving any prior notice.",
         "text2": "You have to review the “Terms and Conditions” from time to time to find out about the changes in it.",
-        "text3": "Visiting, using the resources, and/or availing the service/s from zdravlje.nu after any change in “Terms and Conditions” has been made, means you have acknowledged and agreed to the changes made in it."
+        "text3": "Visiting, using the resources, and/or availing the service/s from feelingwell.net after any change in “Terms and Conditions” has been made, means you have acknowledged and agreed to the changes made in it."
       },
       "payment": {
         "heading": "Payment",
@@ -346,7 +362,7 @@
         "text3": "If your appointment lasts shorter than the allotted time, and the reason is on your side, then we are not responsible to refund charges or compensate you. If, however, the appointment lasts shorter with two (2) minutes or more and the reason is on our side, then you will be compensated with another, equal session.",
         "text4": "Baunad offers three ways to pay for our services:",
         "text5": "The invoice has information on how to make payment to a bank in Bosnia and Herzegovina. In case wrong bank account details are entered on a payment slip, we will not be responsible for loss of money, if any.",
-        "text6": "In case of there being any technical failure, at the time of transaction and there is a problem in making payment, you could contact info@zdravlje.nu.",
+        "text6": "In case of there being any technical failure, at the time of transaction and there is a problem in making payment, you could contact info@feelingwell.net.",
         "creditcard": "credit / debit card",
         "invoice": "invoice"
       },
@@ -362,14 +378,14 @@
       },
       "disclaimer": {
         "heading": "Disclaimers",
-        "text1": "You should never rely on or make health or well-being decisions purely on the use of zdravlje.nu. Never disregard, avoid, or delay in obtaining medical advice from your doctor because of information or advice you received through zdravlje.nu.",
+        "text1": "You should never rely on or make health or well-being decisions purely on the use of feelingwell.net. Never disregard, avoid, or delay in obtaining medical advice from your doctor because of information or advice you received through feelingwell.net.",
         "text2": "None of the service content represents or warrants that any particular treatment is safe, appropriate, or effective for you. You should always talk to an appropriately qualified health care professional for diagnosis and treatment, including information regarding which medications or treatment may be appropriate for you.",
         "text3": "We do not warrant that our services will meet your specific needs or requirements, nor do we warrant that the quality of our services will meet your expectations."
       },
       "access": {
         "heading": "Accessing our services",
         "text1": "Access to our services and the information contained therein is provided “as-is” and “as available” without any warranty of any kind, express or implied. Baunad does not warrant that access to the service will be uninterrupted or error-free, or that defects, if any, will be corrected. You expressly agree that your use of the service and your reliance upon any of its content is at your sole risk.",
-        "text2": "Baunad has no responsibility for technical failures or faults arising out of causes over which we have no control and we are not responsible to refund charges or compensate you if they occur. You shall be solely and fully responsible for any damage to the service or any computer system, any loss of data, or any improper use or disclosure of information on the service caused by you or any person using your username or password. Baunad cannot and does not assume any responsibility for any loss, damages or liabilities arising from the failure of any telecommunications infrastructure, or the internet or for your misuse of any protected health information, advise, ideas, information, instructions or guidelines accessed through the service. If you are dissatisfied with the zdravlje.nu website, your sole remedy is to discontinue using the website.",
+        "text2": "Baunad has no responsibility for technical failures or faults arising out of causes over which we have no control and we are not responsible to refund charges or compensate you if they occur. You shall be solely and fully responsible for any damage to the service or any computer system, any loss of data, or any improper use or disclosure of information on the service caused by you or any person using your username or password. Baunad cannot and does not assume any responsibility for any loss, damages or liabilities arising from the failure of any telecommunications infrastructure, or the internet or for your misuse of any protected health information, advise, ideas, information, instructions or guidelines accessed through the service. If you are dissatisfied with the feelingwell.net website, your sole remedy is to discontinue using the website.",
         "text3": "Technical or security threats or issues affecting the infrastructure may require us to suspend our services and postpone consultations in order to ensure they are secure and/or operating optimally. We will minimise these suspensions, but are not responsible to refund charges or compensate you if they occur, unless they exceed 30 days in length, in which event you may cancel your agreement to take a consultation with us and receive a full refund.",
         "text4": "Anti-virus and anti-malware software is in use on the website, but we cannot guarantee that the website will be free from viruses or malicious software so please ensure anti-virus and anti-malware software are in operation on any device with which you use to access our website.",
         "text5": "You are responsible for any data usage fees and other third party charges you incur in connection with your access to our services, including the fees that may be charged by your internet service provider and/or other service providers.",
@@ -378,7 +394,7 @@
       },
       "parties": {
         "heading": "Third parties",
-        "text": "The zdravlje.nu website may be linked to the website of third parties, affiliates and business partners. Baunad has no control over, and not liable or responsible for content, accuracy, validity, reliability, quality of such websites or made available by/through our website. Inclusion of any link on the zdravlje.nu website does not imply that Baunad endorses the linked site. You may use the links and these services at your own risk."
+        "text": "The feelingwell.net website may be linked to the website of third parties, affiliates and business partners. Baunad has no control over, and not liable or responsible for content, accuracy, validity, reliability, quality of such websites or made available by/through our website. Inclusion of any link on the feelingwell.net website does not imply that Baunad endorses the linked site. You may use the links and these services at your own risk."
       },
       "recordings": {
         "heading": "Recordings",
@@ -388,21 +404,21 @@
       "limitation": {
         "heading": "Limitation of liability",
         "text1": "Where we are permitted by Bosnian and Hercegovina’s law, we exclude all conditions, warranties, representations or other terms which may apply whether expressed or implied. Even though we accept clients from outside of Bosnia and Hercegovina, we can’t take responsibility for any laws outside Bosnia and Hercegovina regarding access to and use of our services.",
-        "text2": "In no event, including but not limited to negligence, shall Baunad, or any of its directors and employees, or content or service providers, be liable for any direct, indirect, special, incidental or consequential matter relating to the Zdravlje.nu website or our services.",
+        "text2": "In no event, including but not limited to negligence, shall Baunad, or any of its directors and employees, or content or service providers, be liable for any direct, indirect, special, incidental or consequential matter relating to the feelingwell.net website or our services.",
         "text3": "The services supplied are for personal use and we are not responsible for any business-related losses arising out of the use of our services.",
         "text4": "If you have failed to adhere to our instructions or advice on use and your device suffers any damage from defective digital content, we are not responsible for compensation.",
         "text5": "Our total liability to you in respect of all losses arising under or in connection with these terms shall in no circumstances exceed the price you have paid to us for the services."
       },
       "property": {
         "heading": "Intellectual property rights",
-        "text1": "We own copyright and other intellectual property rights on the zdravlje.nu website, for our services and their content.",
-        "text2": "You are permitted to use our website and consultation system in order to receive our services. You are not permitted to copy, distribute or make any business use of zdravlje.nu."
+        "text1": "We own copyright and other intellectual property rights on the feelingwell.net website, for our services and their content.",
+        "text2": "You are permitted to use our website and consultation system in order to receive our services. You are not permitted to copy, distribute or make any business use of feelingwell.net."
       },
       "complaints": {
         "heading": "Complaints and Disputes",
         "text1": "What to do if you have a complaint with regards to our services:",
         "text2": "These terms and conditions are governed by Bosnian and Herzegovina’s law. This means that any dispute or claim arising out of it will be governed by Bosnian and Herzegovina’s law and the court in Tuzla will have exclusive jurisdiction over",
-        "list1": "Give us feedback on our services by contacting us at info@zdravlje.nu.",
+        "list1": "Give us feedback on our services by contacting us at info@feelingwell.net.",
         "list2": "Please tell us about any complaints you might have as soon as possible, so we are able to resolve it as soon as possible.",
         "list3": "If you have a complaint, we may ask you for certain details about you and your complaint in order to address it. Please provide these as soon as possible so that we can handle your complaint quickly.",
         "list4": "We will investigate any complaint and keep you updated on the results of the investigation.",
@@ -413,7 +429,7 @@
     "privacyPolicyView": {
       "heading": "Privacy Policy",
       "preamble1": "Your privacy is important to us. We have designed our Privacy Policy so that we can share information on how to use Health and how we collect and use your content and information. We encourage you to read the Privacy Policy in full.",
-      "preamble2": "Zdravlje.nu is a subsidiary of Baunad doo Tuzla.",
+      "preamble2": "Feelingwell.net is a subsidiary of Baunad doo Tuzla.",
       "disclosure": {
         "heading": "Data storage",
         "text1": "All information we collect through our website and client sessions is strictly confidential and will not be sold, leased or otherwise available to third parties not actively involved in the provision of services to our clients.",
@@ -467,47 +483,47 @@
     "issues": {
       "stress": {
         "name": "Stress",
-        "description": "Are you under stress and do you have difficulty in reducing it?"
+        "description": "Are you constantly stressed?"
       },
       "anxiety": {
         "name": "Anxiety",
-        "description": "Do you feel like shaking and you can not take care?"
+        "description": "Do you get anxiety attacks?"
       },
       "exhaustion": {
-        "name": "Exhaustion",
-        "description": "Do you have difficulty with sleeping, feeling tired and exhausted?"
+        "name": "Fatigue",
+        "description": "Have trouble sleeping?"
       },
       "backPain": {
         "name": "Pain",
         "description": "Do you need help with pain relief?"
       },
       "depression": {
-        "name": "Depression",
-        "description": "Do you feel sad or gloomy?"
+        "name": "Greef",
+        "description": "Need help coping with grief? "
       },
       "kids": {
-        "name": "Kids",
-        "description": "Does your child have an outburst of anger?"
+        "name": "Child",
+        "description": "Help to manage outbursts and conflicts."
       },
       "weight": {
         "name": "Weight",
-        "description": "Do you have problems with body weight?"
+        "description": "Need help reaching your weight goal?"
       },
       "panic": {
         "name": "Panic",
-        "description": "Do you feel anxiety or panic attack?"
+        "description": "Do you get panic attacks?"
       },
       "fobia": {
         "name": "Fobia",
-        "description": "Do you have phobias that keep you alive?"
+        "description": "Have phobia that causes problems?"
       },
       "violence": {
-        "name": "Violence",
-        "description": "Are you getting into conflicts easily and are you frustrated?"
+        "name": "Conflict",
+        "description": "Frustrated and easily into conflict?"
       },
       "stuck": {
         "name": "Life crisis",
-        "description": "Have you been stuck personally or professionally?"
+        "description": "Stuck personally or professionally?"
       }
     },
     "checkoutView": {
@@ -534,7 +550,7 @@
       "comment": "Comment",
       "chooseTheme": "Choose theme",
       "chooseTime": "Choose time",
-      "newsletter": "Yes, thanks, I want to get information on discounts and other offers from zdravlje.nu.",
+      "newsletter": "Yes, thanks, I want to get information on discounts and other offers from feelingwell.net.",
       "agree": "I agree with",
       "rules": "Rules and conditions",
       "privacyPolicy": "Privacy policy",
@@ -601,7 +617,23 @@
       "skypeWeek": "skype poziv",
       "skypeWeeks": "skype poziva",
       "emailResponse": "odgovor u toku",
-      "hours": "sata"
+      "hours": "sata",
+      "validation": {
+        "\"name\" is required": "Ime i prezime je obavezno",
+        "\"name\" is not allowed to be empty": "Ime / prezime je obavezno",
+        "\"phone\" is required": "Telefon je potreban",
+        "\"phone\" is not allowed to be empty": "Telefon je potreban",
+        "\"street\" is required": "Ulica je potreban",
+        "\"street\" is not allowed to be empty": "Ulica je potreban",
+        "\"postal\" is required": "Poštanski broj je potreban",
+        "\"postal\" is not allowed to be empty": "Poštanski broj je potreban",
+        "\"city\" is required": "Grad je potreban",
+        "\"city\" is not allowed to be empty": "Grad je potreban",
+        "\"mail\" is required": "E-pošta je potreban",
+        "\"mail\" is not allowed to be empty": "E-pošta je potreban",
+        "\"mail\" must be a valid email": "E-pošta mora biti važeća adresa e-pošte",
+        "wrongRegexFormat": "Greška, pogrešan format"
+      }
     },
     "headerView": {
       "contactUs": "Kontaktirajte nas",
@@ -752,6 +784,11 @@
       "price": "Cijena",
       "writeCode": "Unesite kod",
       "purchase": "Zakažite"
+    },
+    "newsletterView": {
+      "validation": {
+        "\"mail\" is required": "E-mail is required"
+      }
     },
     "footerView": {
       "aboutWord": "O",

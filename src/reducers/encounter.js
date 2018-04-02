@@ -14,6 +14,19 @@ export default handleActions({
             workshopErased: true
         }
     },
+    NEWSLETTERS: (state, action) => {
+        return {
+            ...state,
+            newsletters: action.payload,
+            newsletterErased: false
+        }
+    },
+    NEWSLETTER_DELETED: (state, action) => {
+        return {
+            ...state,
+            newsletterErased: true
+        }
+    },
     ENCOUNTERS: (state, action) => {
         return {
             ...state,
@@ -35,7 +48,7 @@ export default handleActions({
     ENCOUNTER_DELETED: (state, action) => {
         return {
             ...state,
-           erased: true
+            erased: true
         }
     },
     RATING_SAVED: (state, action) => {
@@ -71,7 +84,7 @@ export default handleActions({
     STRIPE_TOKEN: (state, action) => {
         return {
             ...state,
-           stripeToken: action.payload
+            stripeToken: action.payload
         }
     },
     CHECKOUT_ERROR: (state, action) => {
@@ -107,5 +120,7 @@ export default handleActions({
     paypalId: '',
     paypalEnv: '',
     workshops: [],
+    newsletters: [],
+    newsletterErased: false,
     workshopErased: false
 })
