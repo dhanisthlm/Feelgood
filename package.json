@@ -8,9 +8,6 @@
     "type": "git",
     "url": "git@github.com:dhanisthlm/Feelgood.git"
   },
-  "engines" : {
-    "node" : ">=7.10.0 <7.11.0"
-  },
   "scripts": {
     "mongo:start": "mongod --config /usr/local/etc/mongod.conf --fork --logpath /dev/null",
     "mongo:stop": "mongo admin --eval 'db.shutdownServer()' > /dev/null",
