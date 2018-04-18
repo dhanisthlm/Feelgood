@@ -263,7 +263,7 @@ const handleCharge = (request, reply) => {
                     saveEncounter(request, reply, charge);
                 } else if (request.payload.encounter.workshop) {
                     saveWorkshop(request, reply, charge);
-                } else if (request.payload.encounterskype || request.payload.encounter.email) {
+                } else if (request.payload.encounter.skype || request.payload.encounter.email) {
                     saveLinkEncounter(request, reply, charge);
                 }
             }
