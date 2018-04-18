@@ -149,3 +149,64 @@ export const workshopValidator = Joi.object().keys({
     stripUnknown: true,
     allowUnknown: true
 });
+
+export const onlineValidator = Joi.object().keys({
+    name: Joi
+        .string()
+        .trim()
+        .required(),
+
+    street: Joi
+        .string()
+        .trim()
+        .allow('', null),
+
+    postal: Joi
+        .string()
+        .trim()
+        .allow('', null),
+
+    city: Joi
+        .string()
+        .trim()
+        .allow('', null),
+
+    country: Joi
+        .string()
+        .trim()
+        .required(),
+
+    phone: Joi
+        .string()
+        .regex(/^[0-9]*$/)
+        .required(),
+
+    mail: Joi
+        .string()
+        .email()
+        .required(),
+
+    paymentType: Joi
+        .string()
+        .required(),
+
+    currency: Joi
+        .string()
+        .required(),
+
+    newsletter: Joi
+        .boolean()
+        .allow('', null),
+
+    comment: Joi
+        .string()
+        .allow('', null),
+
+    rating: Joi
+        .object()
+        .allow('', null),
+
+}).options({
+    stripUnknown: true,
+    allowUnknown: true
+});

@@ -6,7 +6,7 @@ import strategy from 'joi-validation-strategy';
 import FormComponent from '../../FormComponent';
 import { routeActions } from 'redux-simple-router';
 import ReactDOM from 'react-dom'
-import { encounterValidator, workshopValidator } from '../../../../validators/encounters';
+import { encounterValidator, workshopValidator, onlineValidator } from '../../../../validators/encounters';
 import { getIssues } from '../../../actions/issue';
 import { saveRating, resetRating } from '../../../actions/encounter';
 import { i18nValidation } from  '../../../../helpers/validation';
@@ -24,7 +24,7 @@ import styles from './styles.css';
 let PayPalButton = paypal.Button.driver('react', { React, ReactDOM });
 
 export class Checkout extends FormComponent {
-    constructor (props) {
+    constructor(props) {
         super(props);
 
         this.state = {
@@ -82,17 +82,17 @@ export class Checkout extends FormComponent {
                 {
                     code: 'hrk',
                     currency: 'kn',
-                    rate: 1/4
+                    rate: 1 / 4
                 },
                 {
                     code: 'rsd',
                     currency: 'RSD',
-                    rate: 1/60
+                    rate: 1 / 60
                 },
                 {
                     code: 'sek',
                     currency: 'kr',
-                    rate: 1/5
+                    rate: 1 / 5
                 },
                 {
                     code: 'usd',
@@ -103,7 +103,8 @@ export class Checkout extends FormComponent {
         };
 
         this.validatorTypes = this.props.location.query.workshop
-            ? workshopValidator : encounterValidator;
+            ? workshopValidator
+            : (this.props.location.query.skype || this.props.location.query.email) ? onlineValidator : encounterValidator;
 
         this.resetCheckout = this.resetCheckout.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -130,19 +131,19 @@ export class Checkout extends FormComponent {
         this.resetOrder = this.resetOrder.bind(this);
     }
 
-    componentWillMount () {
-        const { location } = this.props;
+    componentWillMount() {
+        const {location} = this.props;
 
         if (window.localStorage.getItem('order') !== null) {
             const cache = JSON.parse(window.localStorage.getItem('order'));
-            this.setState({ ...cache, save: false });
+            this.setState({...cache, save: false});
         }
 
         if (window.localStorage.getItem('order') !== null) {
             this.props.dispatch(getIssues());
         }
 
-        if (location.query.workshop) {
+        if (location.query.workshop || location.query.skype || location.query.email) {
             this.setState({
                 language: this.props.location.query.currency,
                 cancel: 'on',
@@ -158,12 +159,30 @@ export class Checkout extends FormComponent {
     }
 
 
-    componentWillUnmount () {
+    componentWillUnmount() {
         this.resetOrder();
     }
 
-    componentDidMount () {
-        const { location } = this.props;
+    componentDidMount() {
+        const {location} = this.props;
+
+        if (location.query.skype) {
+            this.calculateViewportSize();
+            this.setState({
+                skype: location.query.skype,
+                skypeDescription: location.query.skypeDescription,
+                skypeCost: location.query.skypeCost,
+            });
+        }
+
+        if (location.query.email) {
+            this.calculateViewportSize();
+            this.setState({
+                email: location.query.email,
+                emailDescription: location.query.emailDescription,
+                emailCost: location.query.emailCost,
+            });
+        }
 
         if (location.query.workshop) {
             this.calculateViewportSize();
@@ -178,11 +197,11 @@ export class Checkout extends FormComponent {
             this.initStripe();
         }
 
-        if (window.localStorage.getItem('order') && !location.query.workshop) {
-            this.setState({ env: window.localStorage.getItem('pe') });
+        if (window.localStorage.getItem('order') && !location.query.workshop && !location.query.skype && !location.query.email) {
+            this.setState({env: window.localStorage.getItem('pe')});
         }
 
-        if (!window.localStorage.getItem('order') && !location.query.workshop) {
+        if (!window.localStorage.getItem('order') && !location.query.workshop && !location.query.skype && !location.query.email) {
             this.props.dispatch(routeActions.push('/'));
         }
     }
@@ -193,10 +212,10 @@ export class Checkout extends FormComponent {
      * @param {number} responseCode
      * @return {object}
      */
-    componentWillReceiveProps (nextProps) {
-        const { location } = nextProps;
+    componentWillReceiveProps(nextProps) {
+        const {location} = nextProps;
 
-        if (location.query.workshop) {
+        if (location.query.workshop || location.query.skype || location.query.email) {
             this.setState({
                 stripeToken: nextProps.stripeToken,
                 paypalEnv: nextProps.paypalEnv
@@ -218,8 +237,8 @@ export class Checkout extends FormComponent {
      * @param {number} responseCode
      * @return {object}
      */
-    prepInit (nextProps) {
-        const { location } = nextProps;
+    prepInit(nextProps) {
+        const {location} = nextProps;
 
         if (nextProps.issues === this.props.issues) return;
 
@@ -229,15 +248,15 @@ export class Checkout extends FormComponent {
         });
 
         if (!location.query.workshop) {
-            this.setState({ cost: JSON.parse(window.localStorage.getItem('order')).cost });
+            this.setState({cost: JSON.parse(window.localStorage.getItem('order')).cost});
         }
 
-        if (window.localStorage.getItem('step') === null && !location.query.workshop) {
+        if (window.localStorage.getItem('step') === null && !location.query.workshop && !location.query.skype && !location.query.email) {
             this.props.dispatch(routeActions.push('/'));
         }
 
         if (nextProps.errorMessage.length) {
-            this.setState({ showSpinner: false });
+            this.setState({showSpinner: false});
         }
     }
 
@@ -247,11 +266,11 @@ export class Checkout extends FormComponent {
      * @param {number} responseCode
      * @return {object}
      */
-    handleNewsletter () {
+    handleNewsletter() {
         const newsletter = this.state.newsletter;
         const subscribe = this.state.subscribe === 'on' ? 'off' : 'on';
-        this.setState({ subscribe });
-        this.setState({ newsletter: this.state.subscribe === 'on' });
+        this.setState({subscribe});
+        this.setState({newsletter: this.state.subscribe === 'on'});
         window.localStorage.setItem('newsletter', newsletter);
     }
 
@@ -261,26 +280,26 @@ export class Checkout extends FormComponent {
      * @param {number} responseCode
      * @return {object}
      */
-    handlePaymentType (event) {
+    handlePaymentType(event) {
         const id = event.currentTarget.getAttribute('data-id');
         const options = document.getElementById('payment-options');
         let paypalFactor = 1;
 
-        this.setState({ paymentType: id }, () => {
+        this.setState({paymentType: id}, () => {
             if (id === 'credit') {
                 this.initStripe();
             }
 
             if (id === 'paypal') {
                 paypalFactor = (this.state.paypalCurrencies.indexOf(this.state.language) > -1) ? 1 : 2;
-                this.setState({ termsIsDirty: true, cancelIsDirty: true });
+                this.setState({termsIsDirty: true, cancelIsDirty: true});
             } else if (id === 'faktura') {
                 paypalFactor = (this.state.invoiceCurrencies.indexOf(this.state.language) > -1) ? 1 : 2;
             } else {
                 paypalFactor = 1;
             }
 
-            this.setState({ paypalFactor })
+            this.setState({paypalFactor})
         });
     }
 
@@ -290,7 +309,7 @@ export class Checkout extends FormComponent {
      * @param {number} responseCode
      * @return {object}
      */
-    handleTimePreference (event) {
+    handleTimePreference(event) {
         const id = event.target.id;
         this.setState({timePreference: id});
     }
@@ -301,11 +320,11 @@ export class Checkout extends FormComponent {
      * @param {number} responseCode
      * @return {object}
      */
-    handleSave (nextProps) {
+    handleSave(nextProps) {
         if (nextProps.save === true) {
             window.scrollTo(0, 0);
             window.localStorage.setItem('step', '2');
-            this.setState({ showSpinner: false, save: true });
+            this.setState({showSpinner: false, save: true});
         }
     }
 
@@ -315,14 +334,14 @@ export class Checkout extends FormComponent {
      * @param {number} responseCode
      * @return {object}
      */
-    postRating () {
+    postRating() {
         const stripe = JSON.parse(window.localStorage.getItem('stripe')) || this.state.stripeToken;
         const id = (stripe.data.encounterId) ? stripe.data.encounterId : stripe.data._id;
 
         this.props.dispatch(saveRating(
             id, {
                 workshop: this.state.workshop,
-                web: 5 - this.state.webRating +1,
+                web: 5 - this.state.webRating + 1,
                 pay: 10 - this.state.payRating + 1,
                 comment: this.state.ratingComment
             }
@@ -335,7 +354,7 @@ export class Checkout extends FormComponent {
      * @param {number} responseCode
      * @return {object}
      */
-    handleRating (nextProps) {
+    handleRating(nextProps) {
         if (nextProps.rating === true) {
             window.localStorage.removeItem('step');
             window.localStorage.removeItem('order');
@@ -355,23 +374,10 @@ export class Checkout extends FormComponent {
      * @param {number} responseCode
      * @return {object}
      */
-    handleCheckbox () {
+    handleCheckbox() {
         const terms = this.state.terms === 'on' ? 'off' : 'on';
-        this.setState({ terms });
-        this.setState({ termsIsDirty: true });
-        this.handlePaypal ();
-    }
-
-    /**
-     * This callback type is called `requestCallback
-     * @callback requestCallback
-     * @param {number} responseCode
-     * @return {object}
-     */
-    handleCancel () {
-        const cancel = this.state.cancel === 'on' ? 'off' : 'on';
-        this.setState({ cancel });
-        this.setState({ cancelIsDirty: true });
+        this.setState({terms});
+        this.setState({termsIsDirty: true});
         this.handlePaypal();
     }
 
@@ -381,8 +387,11 @@ export class Checkout extends FormComponent {
      * @param {number} responseCode
      * @return {object}
      */
-    handleRatingComment (event) {
-        this.setState({ ratingComment: event.target.value });
+    handleCancel() {
+        const cancel = this.state.cancel === 'on' ? 'off' : 'on';
+        this.setState({cancel});
+        this.setState({cancelIsDirty: true});
+        this.handlePaypal();
     }
 
     /**
@@ -391,7 +400,17 @@ export class Checkout extends FormComponent {
      * @param {number} responseCode
      * @return {object}
      */
-    handleWebStar (event) {
+    handleRatingComment(event) {
+        this.setState({ratingComment: event.target.value});
+    }
+
+    /**
+     * This callback type is called `requestCallback
+     * @callback requestCallback
+     * @param {number} responseCode
+     * @return {object}
+     */
+    handleWebStar(event) {
         const stars = document.querySelector('.stars-1');
         const star = stars.querySelectorAll('.star');
 
@@ -403,7 +422,7 @@ export class Checkout extends FormComponent {
             }
         }
 
-        this.setState({ webRating: event.target.id });
+        this.setState({webRating: event.target.id});
     }
 
     /**
@@ -412,7 +431,7 @@ export class Checkout extends FormComponent {
      * @param {number} responseCode
      * @return {object}
      */
-    handlePayStar (event) {
+    handlePayStar(event) {
         const stars = document.querySelector('.stars-2');
         const star = stars.querySelectorAll('.star');
 
@@ -424,7 +443,7 @@ export class Checkout extends FormComponent {
             }
         }
 
-        this.setState({ payRating: event.target.id });
+        this.setState({payRating: event.target.id});
     }
 
     /**
@@ -433,7 +452,7 @@ export class Checkout extends FormComponent {
      * @param {number} responseCode
      * @return {object}
      */
-    resetOrder () {
+    resetOrder() {
         this.props.dispatch(routeActions.push('/'));
         window.localStorage.removeItem('order');
         window.localStorage.removeItem('stripe');
@@ -446,16 +465,16 @@ export class Checkout extends FormComponent {
      * @param {number} responseCode
      * @return {object}
      */
-    initStripe () {
+    initStripe() {
         if (typeof Stripe === 'undefined') {
             return;
         }
 
-        const { t } = this.props;
+        const {t} = this.props;
         const element = document.getElementById('card-element');
 
         if (element) {
-            const stripe = Stripe(window.localStorage.getItem('st') || this.state.stripeToken);
+            const stripe = Stripe(window.localStorage.getItem('st') || this.state.stripeToken);
             const elements = stripe.elements({locale: 'en'});
             const card = elements.create('card', {placeholder: 'Card'});
 
@@ -477,7 +496,7 @@ export class Checkout extends FormComponent {
      * @param {number} responseCode
      * @return {object}
      */
-    calculateViewportSize () {
+    calculateViewportSize() {
         if (!this.breakpoints) return;
 
         for (let item of this.breakpoints.children) {
@@ -502,7 +521,7 @@ export class Checkout extends FormComponent {
      * @param {number} responseCode
      * @return {object}
      */
-    resetCheckout () {
+    resetCheckout() {
         window.localStorage.removeItem('order');
         this.props.dispatch(resetEncounter());
         this.props.dispatch(routeActions.push('/'));
@@ -514,17 +533,16 @@ export class Checkout extends FormComponent {
      * @param {number} responseCode
      * @return {object}
      */
-    handleChange (e) {
-        if (!this.props.location.query.workshop) {
-            const cache = JSON.parse(window.localStorage.getItem('order'));
+    handleChange(e) {
+        if (!this.props.location.query.workshop && !this.props.location.query.skype && !this.props.location.query.email) {
             cache[e.target.id] = e.target.value;
             window.localStorage.setItem('order', JSON.stringify(cache));
         }
-        this.setState({ [e.target.id]: e.target.value });
-        this.handlePaypal ();
+        this.setState({[e.target.id]: e.target.value});
+        this.handlePaypal();
     }
 
-    handlePaypal () {
+    handlePaypal() {
         if (this.state.paymentType === 'paypal') {
             this.props.validate((error) => {
                 if (error || (this.state.termsIsDirty && this.state.terms === 'off') || (this.state.cancelIsDirty && this.state.cancel === 'off')) {
@@ -542,7 +560,7 @@ export class Checkout extends FormComponent {
      * @param {number} responseCode
      * @return {object}
      */
-    handleSubmit (event) {
+    handleSubmit(event) {
         event.preventDefault();
 
         this.setState({
@@ -552,7 +570,7 @@ export class Checkout extends FormComponent {
         });
 
         this.props.validate((error) => {
-            const { t } = this.props;
+            const {t} = this.props;
 
             if (!error && this.state.terms !== 'off' && this.state.cancel !== 'off') {
                 if (this.state.paymentType === 'credit') {
@@ -580,8 +598,8 @@ export class Checkout extends FormComponent {
      * @param {number} responseCode
      * @return {object}
      */
-    getValidationMessages (prop) {
-        const { t } = this.props;
+    getValidationMessages(prop) {
+        const {t} = this.props;
         return (
             this.props.getValidationMessages(prop).map((message, i) => {
                 const validationMessage = message.indexOf('pattern') > -1 ? t('validation.wrongRegexFormat') : t(`validation.${message}`);
@@ -596,8 +614,8 @@ export class Checkout extends FormComponent {
      * @param {number} responseCode
      * @return {object}
      */
-    handleSelect (event) {
-        this.setState({ issue: event.target.value });
+    handleSelect(event) {
+        this.setState({issue: event.target.value});
     }
 
     /**
@@ -606,8 +624,8 @@ export class Checkout extends FormComponent {
      * @param {number} responseCode
      * @return {object}
      */
-    handleSelectTime (event) {
-        this.setState({ timeframe: event.target.value });
+    handleSelectTime(event) {
+        this.setState({timeframe: event.target.value});
     }
 
     /**
@@ -616,10 +634,10 @@ export class Checkout extends FormComponent {
      * @param {number} responseCode
      * @return {object}
      */
-    handleSelectCountry (event) {
+    handleSelectCountry(event) {
         const countryObj = getCountries().filter((countryObj) => countryObj.name === event.target.value)[0];
         const currency = getCurrency()[countryObj.code];
-        this.setState({ country: event.target.value, currency });
+        this.setState({country: event.target.value, currency});
     }
 
     /**
@@ -628,7 +646,7 @@ export class Checkout extends FormComponent {
      * @param {number} responseCode
      * @return {object}
      */
-    onCancel (data) {
+    onCancel(data) {
         console.log('cancel', data);
     }
 
@@ -638,7 +656,7 @@ export class Checkout extends FormComponent {
      * @param {number} responseCode
      * @return {object}
      */
-    onError (data) {
+    onError(data) {
         console.log('error', data)
     }
 
@@ -651,20 +669,22 @@ export class Checkout extends FormComponent {
     payment(actions) {
         let amount, currency;
 
-        if (!this.props.location.query.workshop) {
+        if (!this.props.location.query.workshop && !this.props.location.query.skype && !this.props.location.query.email) {
             amount = getTotal(this.state);
 
             currency = this.state.paypalCurrencies.indexOf(getSelectedCurrency(this.state)[0].currency) > -1
                 ? getSelectedCurrency(this.state)[0].code.toUpperCase() : 'EUR';
         } else {
-            amount = getWorkshopCost(this.state.cost.total, this.state);
-            currency = this.state.paypalCurrencies.indexOf(this.state.currency.toLowerCase()) > -1 ? this.state.currency : 'EUR';
+            amount = getWorkshopCost(parseInt(this.props.location.query.price), this.state);
+            currency = this.state.paypalCurrencies.indexOf(this.state.currency.toLowerCase()) > -1 ? this.state.currency : 'EUR' || 'KM';
         }
+
+        console.log('here', amount, currency, this.props, this.props.location, this);
 
         return actions.payment.create({
             transactions: [
                 {
-                    amount: { total: amount, currency }
+                    amount: {total: amount, currency}
                 }
             ]
         });
@@ -690,8 +710,8 @@ export class Checkout extends FormComponent {
      * @param {number} responseCode
      * @return {object}
      */
-    renderTimeframes () {
-        const { t } = this.props;
+    renderTimeframes() {
+        const {t} = this.props;
         const timeframes = [t('chooseTime'), ...this.state.timeframes];
         let frameName;
         let frameValue;
@@ -715,8 +735,8 @@ export class Checkout extends FormComponent {
      * @param {number} responseCode
      * @return {object}
      */
-    renderIssues () {
-        const { t } = this.props;
+    renderIssues() {
+        const {t} = this.props;
         const issues = [t('chooseTheme'), ...issueObj.issues];
         let issueName;
         let issueValue;
@@ -742,8 +762,8 @@ export class Checkout extends FormComponent {
      * @param {number} responseCode
      * @return {object}
      */
-    renderCountries () {
-        const { t } = this.props;
+    renderCountries() {
+        const {t} = this.props;
 
         return getCountries().map((country, i) => {
             return <option data-id={country.code} key={i} value={country.name}>{country.name}</option>;
@@ -756,7 +776,7 @@ export class Checkout extends FormComponent {
      * @param {number} responseCode
      * @return {object}
      */
-    validate (actions) {
+    validate(actions) {
         this.actions = actions;
         this.handlePaypal(actions);
     }
@@ -767,8 +787,8 @@ export class Checkout extends FormComponent {
      * @param {number} responseCode
      * @return {object}
      */
-    render () {
-        const { t, location } = this.props;
+    render() {
+        const {t, location} = this.props;
 
         if (window.localStorage.getItem('order') === null && !location.query) {
             return null;
@@ -809,17 +829,20 @@ export class Checkout extends FormComponent {
 
         return (
             <div className="page">
-                <InactivityModal resetOrder={this.resetOrder} />
+                <InactivityModal resetOrder={this.resetOrder}/>
                 <div className={spinnerClass}>
                     <div className="loader">
                         <svg className="circular" viewBox="25 25 50 50">
-                            <circle className="path" cx="50" cy="50" r="20" fill="none" strokeWidth="2" strokeMiterlimit="10"/>
+                            <circle className="path" cx="50" cy="50" r="20" fill="none" strokeWidth="2"
+                                    strokeMiterlimit="10"/>
                         </svg>
                         <p className="processing-text">Obrada nabavke</p>
                     </div>
                 </div>
-                <Header location={this.props.location} />
-                <div ref={(checkout) => { this.checkout = checkout; }} className="checkout">
+                <Header location={this.props.location}/>
+                <div ref={(checkout) => {
+                    this.checkout = checkout;
+                }} className="checkout">
                     <div className="basket">
                         <div className="page-header">
                             <h1>{ t('heading') }</h1>
@@ -827,7 +850,8 @@ export class Checkout extends FormComponent {
                         <div className="outer-frame">
                             <div className="inner-frame">
                                 {(() => {
-                                    if ((window.localStorage.getItem('step') === '1' || location.query.workshop) && window.localStorage.getItem('step') !== '2') {
+                                    if ((window.localStorage.getItem('step') === '1' || location.query.workshop || location.query.skype || location.query.email) &&
+                                        window.localStorage.getItem('step') !== '2') {
                                         return (
                                             <div className="left-col-wrapper">
                                                 <table>
@@ -838,16 +862,24 @@ export class Checkout extends FormComponent {
                                                     </colgroup>
                                                     <thead>
                                                     {(() => {
-                                                        if (!location.query.workshop) {
-                                                            return(
+                                                        if (!location.query.workshop && !location.query.skype && !location.query.email) {
+                                                            return (
                                                                 <tr>
                                                                     <th>{ t('item') }</th>
                                                                     <th>{ t('weeks') }</th>
                                                                     <th>{ t('price') }</th>
                                                                 </tr>
                                                             );
-                                                        } else {
-                                                            return(
+                                                        } else if (location.query.skype || location.query.email) {
+                                                            return (
+                                                                <tr>
+                                                                    <th>{location.query.title}</th>
+                                                                    <th>{ t('weeks') }</th>
+                                                                    <th>{ t('price') }</th>
+                                                                </tr>
+                                                            );
+                                                        } else if (location.query.workshop) {
+                                                            return (
                                                                 <tr>
                                                                     <th>Radionica</th>
                                                                     <th>{ t('price') }</th>
@@ -858,7 +890,7 @@ export class Checkout extends FormComponent {
                                                     </thead>
                                                     <tbody>
                                                     {(() => {
-                                                        if (!location.query.workshop) {
+                                                        if (!location.query.workshop && !location.query.skype && !location.query.email) {
                                                             if (this.state.data.skype) {
                                                                 return (
                                                                     <tr>
@@ -868,6 +900,14 @@ export class Checkout extends FormComponent {
                                                                     </tr>
                                                                 )
                                                             }
+                                                        } else if (location.query.skype) {
+                                                            return (
+                                                                <tr>
+                                                                    <td>{location.query.skypeDescription}, {location.query.skypeDuration}</td>
+                                                                    <td className="center">{ location.query.skype }</td>
+                                                                    <td className="center">{ location.query.skypeCost }&nbsp;{ currency }</td>
+                                                                </tr>
+                                                            )
                                                         } else {
                                                             return (
                                                                 <tr>
@@ -878,7 +918,7 @@ export class Checkout extends FormComponent {
                                                         }
                                                     })()}
                                                     {(() => {
-                                                        if (!location.query.workshop) {
+                                                        if (!location.query.workshop && !location.query.skype && !location.query.email) {
                                                             if (this.state.data.email) {
                                                                 const duration = this.state.data.email.description.match(/\d+/g).map(Number)[0].toString();
                                                                 return (
@@ -890,9 +930,18 @@ export class Checkout extends FormComponent {
                                                                 )
                                                             }
                                                         }
+                                                        if (location.query.email) {
+                                                            return (
+                                                                <tr>
+                                                                    <td>{location.query.emailDescription}</td>
+                                                                    <td className="center">{ location.query.email }</td>
+                                                                    <td className="center">{ location.query.emailCost }&nbsp;{ currency }</td>
+                                                                </tr>
+                                                            )
+                                                        }
                                                     })()}
                                                     {(() => {
-                                                        if (!location.query.workshop) {
+                                                        if (!location.query.workshop || location.query.skype || location.query.email) {
                                                             return (
                                                                 <tr>
                                                                     <td>&nbsp;</td>
@@ -903,18 +952,18 @@ export class Checkout extends FormComponent {
                                                         }
                                                     })()}
                                                     {(() => {
-                                                        if (!location.query.workshop) {
+                                                        if (!location.query.workshop && !location.query.skype && !location.query.email) {
                                                             return (
                                                                 <tr>
-                                                                    <td className={sumClass} colSpan="2">{ t('sum') }</td>
+                                                                    <td className={sumClass}
+                                                                        colSpan="2">{ t('sum') }</td>
                                                                     <td className={centerClass}>{ getSum(this.state) }&nbsp;{ currency }</td>
                                                                 </tr>
                                                             )
                                                         }
-
                                                     })()}
                                                     {(() => {
-                                                        if (!location.query.workshop) {
+                                                        if (!location.query.workshop && !location.query.skype && !location.query.email) {
                                                             if (this.state.data.packageDiscount || this.state.data.skype && this.state.data.skype.week > 1 || this.state.data.email && this.state.data.email.week > 1) {
                                                                 return (
                                                                     <tr>
@@ -927,7 +976,7 @@ export class Checkout extends FormComponent {
                                                         }
                                                     })()}
                                                     {(() => {
-                                                        if (!location.query.workshop) {
+                                                        if (!location.query.workshop && !location.query.skype && !location.query.email) {
                                                             if (this.state.data.packageDiscount > 0 || this.state.data.skype && this.state.data.skype.week > 1 || this.state.data.email && this.state.data.email.week > 1) {
                                                                 const labelName = this.state.data.promoDiscount
                                                                     ? 'right' : 'right heavy';
@@ -948,7 +997,7 @@ export class Checkout extends FormComponent {
                                                         }
                                                     })()}
                                                     {(() => {
-                                                        if (!location.query.workshop) {
+                                                        if (!location.query.workshop && !location.query.skype && !location.query.email) {
                                                             if (this.state.data.promoDiscount) {
                                                                 return (
                                                                     <tr>
@@ -961,7 +1010,7 @@ export class Checkout extends FormComponent {
                                                         }
                                                     })()}
                                                     {(() => {
-                                                        if (!location.query.workshop) {
+                                                        if (!location.query.workshop && !location.query.skype && !location.query.email) {
                                                             if (this.state.data.promoDiscount || this.state.data.skype && this.state.data.skype.week > 1 || this.state.data.email && this.state.data.email.week > 1) {
                                                                 return (
                                                                     <tr>
@@ -972,13 +1021,25 @@ export class Checkout extends FormComponent {
                                                                 )
                                                             }
                                                         }
+                                                        if (location.query.email || location.query.skype) {
+                                                            const skype = parseInt(location.query.skypeCost) || 0;
+                                                            const email = parseInt(location.query.emailCost) || 0;
+
+                                                            return (
+                                                                <tr>
+                                                                    <td className="right heavy"
+                                                                        colSpan="2">{ t('total') }</td>
+                                                                    <td className="center heavy">{ skype + email }&nbsp;{ currency }</td>
+                                                                </tr>
+                                                            )
+                                                        }
                                                     })()}
                                                     </tbody>
                                                 </table>
                                                 <div className="disclaimer">
                                                     {(() => {
                                                         if (this.state.paypalFactor !== 1) {
-                                                            return(
+                                                            return (
                                                                 <div>
                                                                     <p className="paypal">
                                                                         Izabrana valuta nije podržana.
@@ -993,7 +1054,8 @@ export class Checkout extends FormComponent {
                                                         if (this.props.errorMessage.length > 0) {
                                                             return (
                                                                 <div className="card-error">
-                                                                    <p>Neformalno smo mogli da obradimo vašu narudžbinu. {t(`stripe.${this.props.errorMessage}`)}</p>
+                                                                    <p>Neformalno smo mogli da obradimo vašu
+                                                                        narudžbinu. {t(`stripe.${this.props.errorMessage}`)}</p>
                                                                 </div>
                                                             )
                                                         }
@@ -1003,7 +1065,9 @@ export class Checkout extends FormComponent {
                                         )
                                     }
                                 })()}
-                                <div ref={(front) => { this.front = front; }} className={front}>
+                                <div ref={(front) => {
+                                    this.front = front;
+                                }} className={front}>
                                     <div id="payment-form">
                                         <div className="form-element-wrapper">
                                             <label htmlFor="name">{ t('name') }</label>
@@ -1050,7 +1114,8 @@ export class Checkout extends FormComponent {
                                         <div className="form-element-wrapper">
                                             <label htmlFor="country">{ t('country') }</label>
                                             <div className="select-style">
-                                                <select data-id={this.state.currency} value={this.state.country} id="country" onChange={ this.handleSelectCountry }>
+                                                <select data-id={this.state.currency} value={this.state.country}
+                                                        id="country" onChange={ this.handleSelectCountry }>
                                                     { this.renderCountries() }
                                                 </select>
                                             </div>
@@ -1074,7 +1139,7 @@ export class Checkout extends FormComponent {
                                             { this.getValidationMessages('mail') }
                                         </div>
                                         {(() => {
-                                            if (!location.query.workshop) {
+                                            if (!location.query.workshop && !location.query.skype && !location.query.email) {
                                                 return (
                                                     <div className="form-element-wrapper">
                                                         <label htmlFor="issue">{t('issue')}</label>
@@ -1105,7 +1170,7 @@ export class Checkout extends FormComponent {
                                             }
                                         })()}
                                         {(() => {
-                                            if (!location.query.workshop) {
+                                            if (!location.query.workshop & !location.skype && !location.email) {
                                                 return (
                                                     <div className="form-element-wrapper">
                                                         <label htmlFor="timeframe">{ t('chooseTime') }</label>
@@ -1123,22 +1188,30 @@ export class Checkout extends FormComponent {
                                             <fieldset id="payment-options">
                                                 <legend className="payment-type-header">{ t('paymentType') }</legend>
                                                 <div className="payment-type-wrapper credit-wrapper">
-                                                    <input id="credit" className="card-radio" checked={ this.state.paymentType === 'credit' } type="radio" name="payment-type" />
-                                                    <label data-id="credit" onClick={ this.handlePaymentType } htmlFor="credit">
-                                                        <img className="card" src="/images/visa.png" />
-                                                        <img className="card" src="/images/master.png" />
-                                                        <img className="card" src="/images/ae.png" />
+                                                    <input id="credit" className="card-radio"
+                                                           checked={ this.state.paymentType === 'credit' } type="radio"
+                                                           name="payment-type"/>
+                                                    <label data-id="credit" onClick={ this.handlePaymentType }
+                                                           htmlFor="credit">
+                                                        <img className="card" src="/images/visa.png"/>
+                                                        <img className="card" src="/images/master.png"/>
+                                                        <img className="card" src="/images/ae.png"/>
                                                     </label>
                                                 </div>
                                                 <div className="payment-type-wrapper paypal-wrapper">
-                                                    <input id="paypal" className="card-radio" checked={ this.state.paymentType === 'paypal' } type="radio" name="payment-type" />
-                                                    <label data-id="paypal" onClick={ this.handlePaymentType } htmlFor="paypal">
-                                                        <img className="card" src="/images/paypal.png" />
+                                                    <input id="paypal" className="card-radio"
+                                                           checked={ this.state.paymentType === 'paypal' } type="radio"
+                                                           name="payment-type"/>
+                                                    <label data-id="paypal" onClick={ this.handlePaymentType }
+                                                           htmlFor="paypal">
+                                                        <img className="card" src="/images/paypal.png"/>
                                                     </label>
                                                 </div>
                                                 <div className="payment-type-wrapper faktura-wrapper">
-                                                    <input id="faktura" checked={ this.state.paymentType === 'faktura' } type="radio" name="payment-type" />
-                                                    <label data-id="faktura" onClick={ this.handlePaymentType } htmlFor="paypal">{ t('invoice') }</label>
+                                                    <input id="faktura" checked={ this.state.paymentType === 'faktura' }
+                                                           type="radio" name="payment-type"/>
+                                                    <label data-id="faktura" onClick={ this.handlePaymentType }
+                                                           htmlFor="paypal">{ t('invoice') }</label>
                                                 </div>
                                                 {(() => {
                                                     if (this.state.paymentType === 'faktura') {
@@ -1168,19 +1241,28 @@ export class Checkout extends FormComponent {
                                                 id="comment"
                                                 className={ this.getValidatorData('comment') }
                                                 onChange={ this.handleChange }
-                                                value={ this.state.comment } />
+                                                value={ this.state.comment }/>
                                             {this.getValidationMessages('comment')}
                                         </div>
                                         <div className="form-element-wrapper">
                                             <div className="check-wrapper">
-                                                <input id="subscription" checked={ this.state.subscribe === 'on' } value={this.state.subscribe} className="checkbox" type="checkbox" />
-                                                <label id="subscribe" onClick={ this.handleNewsletter } className="checkbox" htmlFor="subscription">{ t('newsletter') }</label>
+                                                <input id="subscription" checked={ this.state.subscribe === 'on' }
+                                                       value={this.state.subscribe} className="checkbox"
+                                                       type="checkbox"/>
+                                                <label id="subscribe" onClick={ this.handleNewsletter }
+                                                       className="checkbox"
+                                                       htmlFor="subscription">{ t('newsletter') }</label>
                                             </div>
                                         </div>
                                         <div className="form-element-wrapper">
                                             <div className="check-wrapper">
-                                                <input id="conditions" ref="terms" checked={this.state.terms === 'on'} value={this.state.terms} className="checkbox" type="checkbox" />
-                                                <label id="terms" onClick={ this.handleCheckbox } className="checkbox" htmlFor="conditions">{ t('agree') } <a className="checkout-link" target="blank" href="/politika-privatnosti">{ t('privacyPolicy') }</a> { t('and') } <a className="checkout-link" target="blank" href="/tac">{ t('rules') }.</a>.</label>
+                                                <input id="conditions" ref="terms" checked={this.state.terms === 'on'}
+                                                       value={this.state.terms} className="checkbox" type="checkbox"/>
+                                                <label id="terms" onClick={ this.handleCheckbox } className="checkbox"
+                                                   htmlFor="conditions">{ t('agree') } <a className="checkout-link"
+                                                    target="blank"
+                                                  href="/politika-privatnosti">{ t('privacyPolicy') }</a> { t('and') }
+                                                    <a className="checkout-link" target="blank" href="/tac">{ t('rules') }.</a>.</label>
                                             </div>
                                             <span className="error checkbox">{termErrorMsg}</span>
                                         </div>
@@ -1203,8 +1285,9 @@ export class Checkout extends FormComponent {
                                         <div className="form-buttons">
                                             <button onClick={ this.resetCheckout }>{ t('back') }</button>
                                             {(() => {
-                                                if (this.state.paymentType === 'credit' || this.state.paymentType === 'faktura') {
-                                                    return <button className="stripe-button" onClick={this.handleSubmit}>{ t('placeOrder') }</button>;
+                                                if (this.state.paymentType === 'credit' || this.state.paymentType === 'faktura') {
+                                                    return <button className="stripe-button"
+                                                         onClick={this.handleSubmit}>{ t('placeOrder') }</button>;
                                                 }
                                             })()}
                                             {(() => {
@@ -1236,25 +1319,35 @@ export class Checkout extends FormComponent {
                                         <div className="rating">
                                             <p className="rating-text">{ t('impressionWeb') } &#63;</p>
                                             <div ref="stars-1" className="stars stars-1">
-                                                <span id="1" ref="star star-1" className="star" onClick={ this.handleWebStar }>☆</span>
-                                                <span id="2" ref="star star-2" className="star" onClick={ this.handleWebStar }>☆</span>
-                                                <span id="3" ref="star star-3" className="star" onClick={ this.handleWebStar }>☆</span>
-                                                <span id="4" ref="star star-4" className="star" onClick={ this.handleWebStar }>☆</span>
-                                                <span id="5" ref="star star-5" className="star" onClick={ this.handleWebStar }>☆</span>
+                                                <span id="1" ref="star star-1" className="star"
+                                                      onClick={ this.handleWebStar }>☆</span>
+                                                <span id="2" ref="star star-2" className="star"
+                                                      onClick={ this.handleWebStar }>☆</span>
+                                                <span id="3" ref="star star-3" className="star"
+                                                      onClick={ this.handleWebStar }>☆</span>
+                                                <span id="4" ref="star star-4" className="star"
+                                                      onClick={ this.handleWebStar }>☆</span>
+                                                <span id="5" ref="star star-5" className="star"
+                                                      onClick={ this.handleWebStar }>☆</span>
                                             </div>
                                         </div>
                                         <div className="rating">
                                             <p className="rating-text">{ t('impressionPayment') } &#63;</p>
                                             <div ref="stars-2" className="stars stars-2">
-                                                <span id="6" ref="star star-6" className="star" onClick={ this.handlePayStar }>☆</span>
-                                                <span id="7" ref="star star-7" className="star" onClick={ this.handlePayStar }>☆</span>
-                                                <span id="8" ref="star star-8" className="star" onClick={ this.handlePayStar }>☆</span>
-                                                <span id="9" ref="star star-9" className="star" onClick={ this.handlePayStar }>☆</span>
-                                                <span id="10" ref="star star-10" className="star" onClick={ this.handlePayStar }>☆</span>
+                                                <span id="6" ref="star star-6" className="star"
+                                                      onClick={ this.handlePayStar }>☆</span>
+                                                <span id="7" ref="star star-7" className="star"
+                                                      onClick={ this.handlePayStar }>☆</span>
+                                                <span id="8" ref="star star-8" className="star"
+                                                      onClick={ this.handlePayStar }>☆</span>
+                                                <span id="9" ref="star star-9" className="star"
+                                                      onClick={ this.handlePayStar }>☆</span>
+                                                <span id="10" ref="star star-10" className="star"
+                                                      onClick={ this.handlePayStar }>☆</span>
                                             </div>
                                         </div>
                                         <label className="comment-label">{ t('otherComments') }</label>
-                                        <textarea onChange={this.handleRatingComment} value={this.state.ratingComment} />
+                                        <textarea onChange={this.handleRatingComment} value={this.state.ratingComment}/>
                                         <button onClick={ this.postRating }>OK</button>
                                         <p className="close-button-explanation">{ t('redirected') }.</p>
                                     </div>
@@ -1264,12 +1357,15 @@ export class Checkout extends FormComponent {
                     </div>
                 </div>
                 <Footer />
-                <div id="breakpoints" ref={(breakpoints) => { this.breakpoints = breakpoints; }}>
-                    <div className="breakpoint-small" data-size="small" />
-                    <div className="breakpoint-medium" data-size="medium" />
-                    <div className="breakpoint-large" data-size="large" />
+                <div id="breakpoints" ref={(breakpoints) => {
+                    this.breakpoints = breakpoints;
+                }}>
+                    <div className="breakpoint-small" data-size="small"/>
+                    <div className="breakpoint-medium" data-size="medium"/>
+                    <div className="breakpoint-large" data-size="large"/>
                 </div>
             </div>
+
         );
     }
 }

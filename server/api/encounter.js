@@ -151,6 +151,48 @@ const saveEncounter = (request, reply, charge) => {
     });
 };
 
+const saveLinkEncounter = (request, reply, charge) => {
+    const encounter = new Encounter();
+
+    if (request.payload.encounter.newsletter === true) {
+        Newsletter.find({ email: request.payload.encounter.mail }, (err, result) => {
+            if (result.length === 0) {
+                const newsletter = new Newsletter();
+                newsletter.email = request.payload.encounter.mail;
+                newsletter.save();
+            }
+        });
+    }
+
+    encounter.name = request.payload.encounter.name;
+    encounter.street = request.payload.encounter.street;
+    encounter.postalCode = request.payload.encounter.postal;
+    encounter.city = request.payload.encounter.city;
+    encounter.country = request.payload.encounter.country;
+    encounter.phone = request.payload.encounter.phone;
+    encounter.skype = request.payload.encounter.skype;
+    encounter.mail = request.payload.encounter.email;
+    encounter.timeframe = request.payload.encounter.timeframe;
+    encounter.paymentType = request.payload.encounter.paymentType;
+    encounter.mail = request.payload.encounter.email;
+    encounter.comment = request.payload.encounter.comment;
+    encounter.currency = request.payload.encounter.currency;
+    encounter.price = request.payload.encounter.cost.total;
+    encounter.location = request.payload.encounter.location;
+
+    const date = new Date();
+    encounter.date = date.toUTCString();
+
+    encounter.save((err, record) => {
+        if (charge) {
+            charge.encounterId = record._id;
+            return reply(charge);
+        } else {
+            return reply(record);
+        }
+    });
+};
+
 const saveWorkshop = (request, reply, charge) => {
     const workshop = new Workshop();
 
@@ -215,10 +257,14 @@ const handleCharge = (request, reply) => {
             });
 
             if (charge.paid) {
-                if (request.payload.encounter.workshop === false) {
+                if (request.payload.encounter.workshop === false &&
+                    request.payload.encounter.skype === false &&
+                    request.payload.encounter.email === false) {
                     saveEncounter(request, reply, charge);
-                } else {
+                } else if (request.payload.encounter.workshop) {
                     saveWorkshop(request, reply, charge);
+                } else if (request.payload.encounterskype || request.payload.encounter.email) {
+                    saveLinkEncounter(request, reply, charge);
                 }
             }
         });
