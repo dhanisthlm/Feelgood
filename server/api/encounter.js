@@ -269,10 +269,12 @@ const handleCharge = (request, reply) => {
             }
         });
     } else {
-        if (request.payload.encounter.workshop === false) {
+        if (!request.payload.encounter.workshop && !request.payload.encounter.skype && !request.payload.email) {
             saveEncounter(request, reply, null);
-        } else {
+        } else if (request.payload.encounter.workshop) {
             saveWorkshop(request, reply, null);
+        } else if (request.payload.encounter.skype || request.payload.encounter.email) {
+            saveLinkEncounter(request, reply, null);
         }
     }
 };

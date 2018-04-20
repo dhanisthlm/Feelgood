@@ -151,6 +151,7 @@ export class Checkout extends FormComponent {
                     total: parseInt(location.query.price)
                 }
             }, () => {
+                console.log('fooooo')
                 this.props.dispatch(getStripeToken());
                 this.props.dispatch(getPaypalEnv());
             });
@@ -193,11 +194,10 @@ export class Checkout extends FormComponent {
                 month: location.query.month,
                 day: location.query.day
             });
-        } else {
-            this.initStripe();
         }
 
         if (window.localStorage.getItem('order') && !location.query.workshop && !location.query.skype && !location.query.email) {
+            this.initStripe();
             this.setState({env: window.localStorage.getItem('pe')});
         }
 
@@ -214,7 +214,7 @@ export class Checkout extends FormComponent {
      */
     componentWillReceiveProps(nextProps) {
         const {location} = nextProps;
-
+        console.log(nextProps);
         if (location.query.workshop || location.query.skype || location.query.email) {
             this.setState({
                 stripeToken: nextProps.stripeToken,
@@ -1022,14 +1022,11 @@ export class Checkout extends FormComponent {
                                                             }
                                                         }
                                                         if (location.query.email || location.query.skype) {
-                                                            const skype = parseInt(location.query.skypeCost) || 0;
-                                                            const email = parseInt(location.query.emailCost) || 0;
-
                                                             return (
                                                                 <tr>
                                                                     <td className="right heavy"
                                                                         colSpan="2">{ t('total') }</td>
-                                                                    <td className="center heavy">{ skype + email }&nbsp;{ currency }</td>
+                                                                    <td className="center heavy">{ location.query.price }&nbsp;{ currency }</td>
                                                                 </tr>
                                                             )
                                                         }
@@ -1170,7 +1167,7 @@ export class Checkout extends FormComponent {
                                             }
                                         })()}
                                         {(() => {
-                                            if (!location.query.workshop & !location.skype && !location.email) {
+                                            if (!location.query.workshop & !location.query.skype && !location.query.email) {
                                                 return (
                                                     <div className="form-element-wrapper">
                                                         <label htmlFor="timeframe">{ t('chooseTime') }</label>
@@ -1267,7 +1264,7 @@ export class Checkout extends FormComponent {
                                             <span className="error checkbox">{termErrorMsg}</span>
                                         </div>
                                         {(() => {
-                                            if (!this.props.location.query.workshop) {
+                                            if (!this.props.location.query.workshop && !this.props.location.query.skype && !this.props.location.query.email) {
                                                 return (
                                                     <div className="form-element-wrapper">
                                                         <div className="check-wrapper">
