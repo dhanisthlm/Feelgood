@@ -151,7 +151,6 @@ export class Checkout extends FormComponent {
                     total: parseInt(location.query.price)
                 }
             }, () => {
-                console.log('fooooo')
                 this.props.dispatch(getStripeToken());
                 this.props.dispatch(getPaypalEnv());
             });
@@ -214,7 +213,6 @@ export class Checkout extends FormComponent {
      */
     componentWillReceiveProps(nextProps) {
         const {location} = nextProps;
-        console.log(nextProps);
         if (location.query.workshop || location.query.skype || location.query.email) {
             this.setState({
                 stripeToken: nextProps.stripeToken,
@@ -535,6 +533,7 @@ export class Checkout extends FormComponent {
      */
     handleChange(e) {
         if (!this.props.location.query.workshop && !this.props.location.query.skype && !this.props.location.query.email) {
+            let cache = JSON.parse(window.localStorage.getItem('order'));
             cache[e.target.id] = e.target.value;
             window.localStorage.setItem('order', JSON.stringify(cache));
         }
@@ -678,8 +677,6 @@ export class Checkout extends FormComponent {
             amount = getWorkshopCost(parseInt(this.props.location.query.price), this.state);
             currency = this.state.paypalCurrencies.indexOf(this.state.currency.toLowerCase()) > -1 ? this.state.currency : 'EUR' || 'KM';
         }
-
-        console.log('here', amount, currency, this.props, this.props.location, this);
 
         return actions.payment.create({
             transactions: [
@@ -905,7 +902,7 @@ export class Checkout extends FormComponent {
                                                                 <tr>
                                                                     <td>{location.query.skypeDescription}, {location.query.skypeDuration}</td>
                                                                     <td className="center">{ location.query.skype }</td>
-                                                                    <td className="center">{ location.query.skypeCost }&nbsp;{ currency }</td>
+                                                                    <td className="center">{ getWorkshopCost(parseInt(location.query.skypeCost), this.state) }&nbsp;{ currency }</td>
                                                                 </tr>
                                                             )
                                                         } else {
@@ -935,7 +932,7 @@ export class Checkout extends FormComponent {
                                                                 <tr>
                                                                     <td>{location.query.emailDescription}</td>
                                                                     <td className="center">{ location.query.email }</td>
-                                                                    <td className="center">{ location.query.emailCost }&nbsp;{ currency }</td>
+                                                                    <td className="center">{ getWorkshopCost(parseInt(location.query.emailCost), this.state) }&nbsp;{ currency }</td>
                                                                 </tr>
                                                             )
                                                         }
@@ -1026,7 +1023,7 @@ export class Checkout extends FormComponent {
                                                                 <tr>
                                                                     <td className="right heavy"
                                                                         colSpan="2">{ t('total') }</td>
-                                                                    <td className="center heavy">{ location.query.price }&nbsp;{ currency }</td>
+                                                                    <td className="center heavy">{ getWorkshopCost(parseInt(location.query.price), this.state) }&nbsp;{ currency }</td>
                                                                 </tr>
                                                             )
                                                         }
