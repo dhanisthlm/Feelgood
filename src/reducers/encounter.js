@@ -104,6 +104,18 @@ export default handleActions({
             ...state,
             paypalEnv: action.payload
         }
+    },
+    CONTACT_MESSAGE_SENT: (state) => {
+        return {
+            ...state,
+            contactMessage: 'Hvala vam što ste nas kontaktirali, vratit ćemo vam se uskoro'
+        }
+    },
+    RESET_CONTACT: (state) => {
+        return {
+            ...state,
+            contactMessage: ''
+        }
     }
 }, {
     saved: false,
@@ -122,5 +134,6 @@ export default handleActions({
     workshops: [],
     newsletters: [],
     newsletterErased: false,
-    workshopErased: false
+    workshopErased: false,
+    contactMessage: ''
 })
