@@ -20,6 +20,21 @@ export class Footer extends Component {
         const { t } = this.props;
         const locale = this.state.locale || i18n.language;
 
+        /*
+         <div>
+            <img src="/images/twitter.svg" />
+            <span className="label">Twitter</span>
+         </div>
+         <div>
+            <img src="/images/youtube.svg" />
+            <span className="label">Youtube</span>
+         </div>
+         <div>
+            <img src="/images/instagram.svg" />
+            <span className="label">Instagram</span>
+         </div>
+         */
+
         return (
             <footer className="footer">
                 <div className="col col-1">
@@ -30,24 +45,19 @@ export class Footer extends Component {
                     </div>
                     <div className="share-mobile">
                         <div>
-                            <img src="/images/facebook.svg" />
-                            <span className="label">Facebook</span>
+                            <a target="blank" href="https://www.facebook.com/zdravljenu-158721211521168" className="label">
+                                <img src="/images/facebook.svg" />
+                            </a>
                         </div>
                         <div>
-                            <img src="/images/twitter.svg" />
-                            <span className="label">Twitter</span>
+                            <a target="blank" href="skype:info@zdravlje.nu?call" className="label">
+                                <img src="/images/skype.svg" />
+                            </a>
                         </div>
                         <div>
-                            <img src="/images/youtube.svg" />
-                            <span className="label">Youtube</span>
-                        </div>
-                        <div>
-                            <img src="/images/instagram.svg" />
-                            <span className="label">Instagram</span>
-                        </div>
-                        <div>
-                            <img src="/images/skype.svg" />
-                            <span className="label">Skype</span>
+                            <a target="blank" href="mailto:info@zdravlje.nu" className="label">
+                                <img src="/images/email.png" />
+                            </a>
                         </div>
                     </div>
                 </div>
