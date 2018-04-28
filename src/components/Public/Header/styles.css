@@ -11,7 +11,6 @@
 .languagepicker {
     display: none;
     background-color: #FFF;
-    //display: inline-block;
     padding: 0;
     height: 40px;
     overflow: hidden;
@@ -302,7 +301,7 @@
     }
 
     .navigation ul {
-        padding: 53px 0 0 0;
+        padding: 30px 0 0 0;
         margin-top: 0;
         text-align:center;
         list-style:none;

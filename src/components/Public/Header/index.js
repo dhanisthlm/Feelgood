@@ -184,6 +184,7 @@ handleLogout (event) {
                     <a href="/#kakoradi">{ t('howWork') }</a>
                     <a href="/#kosmomi">{ t('whoAreWe')}</a>
                     <a href="/blogovi">{ t('blog') }</a>
+                    <a href="/kontakt">Kontakt</a>
                 </nav>
                 <div id="topNav" className="navigation">
                     <span id="closebtn" onClick={this.navToggle}>
@@ -198,6 +199,7 @@ handleLogout (event) {
                         <li><a onClick={this.closeMobileMenu} className="menuitems" href="/#kakoradi">{ t('howWork') }</a></li>
                         <li><a onClick={this.closeMobileMenu} className="menuitems" href="/#kosmomi">{ t('whoAreWe')}</a></li>
                         <li><a className="menuitems" href="/blogovi">{ t('blog') }</a></li>
+                        <li><a className="menuitems" href="/kontakt">Kontakt</a></li>
                     </ul>
                 </div>
                 <div className="language">

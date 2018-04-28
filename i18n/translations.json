@@ -620,6 +620,8 @@
       "emailResponse": "odgovor u toku",
       "hours": "sata",
       "validation": {
+        "\"comment\" is required": "Komentar je potreban",
+        "\"comment\" is not allowed to be empty": "Komentar nije dozvoljen da bude prazan",
         "\"name\" is required": "Ime i prezime je obavezno",
         "\"name\" is not allowed to be empty": "Ime / prezime je obavezno",
         "\"phone\" is required": "Telefon je potreban",

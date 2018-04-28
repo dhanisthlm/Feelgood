@@ -7,6 +7,7 @@ import staff from './api/staff';
 import issue from './api/issue';
 import auth from './api/auth';
 import blog from './api/blog';
+import contact from './api/contact';
 import mongoose from 'mongoose';
 import config from 'config';
 
@@ -59,7 +60,8 @@ server.register([
   { register: staff },
   { register: issue },
   { register: auth },
-  { register: blog }
+  { register: blog },
+  { register: contact }
 
 ], (error) => {
   if (error) throw error

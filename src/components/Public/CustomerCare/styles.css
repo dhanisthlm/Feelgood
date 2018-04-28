@@ -7,6 +7,11 @@
     margin-top: 100px;
 }
 
+.contact .wrapper p {
+    margin: 0;
+    font-weight: 100;
+}
+
 .contact .page-header h1 {
     color: #ffffff;
     padding: 7px 0;
@@ -138,6 +143,232 @@
 
     .contact .page-header h1 {
         color: #C04C9C;
+    }
+
+    .contact .wrapper {
+        width: 100%;
+        max-width: 100%;
+        padding: 0 40px;
+        box-sizing: border-box;
+        margin-bottom: 30px;
+    }
+
+    .push {
+        height: 0 !important;
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    .contact .wrapper {
+        padding: 0 20px;
+    }
+}
+
+.contact .page-header h1 {
+    color: #ffffff;
+    padding: 7px 0;
+    margin-top: 8px;
+}
+
+.contact .error {
+    display: inline-block;
+    font-size: 14px;
+    text-align: left;
+    color: #f00 !important;
+    margin-right: 10px;
+    margin-top: 3px;
+}
+
+
+.contact .wrapper {
+    padding: 10px 90px 40px;
+    width: 60%;
+    margin: 30px auto 5px;
+}
+
+.contact .wrapper p:first-child {
+    margin: 0;
+}
+
+.contact .form-wrapper {
+    margin: 25px auto 0;
+}
+
+.contact input[type="text"] {
+    margin-bottom: 10px;
+    display: block;
+    width: 100%;
+    height: 45px;
+    padding: 10px;
+    border: 1px solid #999;
+    border-radius: 3px;
+    box-sizing: border-box;
+    font-size: 16px;
+}
+
+.contact textarea {
+    width: 100%;
+    border: 1px solid #999;
+    box-sizing: border-box;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    height: 150px;
+    resize: none;
+    border-radius: 3px;
+    margin: 0;
+    padding: 15px;
+    font-size: 16px;
+}
+
+.success {
+    margin-top: 9px;
+    display: block;
+    color: #C04C9C;
+}
+
+.contact label {
+    color: #C04C9C;
+    padding-left: 5px;
+    margin-bottom: 3px;
+    display: block;
+    margin-top: 15px;
+}
+
+.contact button {
+    background-image: linear-gradient(to right, #0e5ba5, #207eb6);
+    border: none;
+    color: #Fff;
+    width: 100%;
+    padding: 11px;
+    border-radius: 4px;
+    font-size: 21px;
+    font-weight: 300;
+    margin-top: 15px;
+    cursor: pointer;
+}
+
+.contact .contact-text {
+    margin-top: 5px;
+    font-size: 15px;
+    line-height: 26px;
+}
+
+.contact .phone-header,
+.contact .contact-header {
+    color:  #C04C9C;
+    font-size: 25px;
+    margin-bottom: 0;
+    margin-top: 20px;
+}
+
+.phone-header {
+    margin-bottom: 5px;
+}
+
+.contact .email {
+    margin-top: -10px;
+}
+
+.contact .text {
+    font-size: 16px;
+    line-height: 26px;
+}
+
+.contact .phone-number {
+    margin-bottom: 3px;
+    margin-top: 5px;
+    padding-left: 20px;
+}
+
+.contact a {
+    color: #333;
+    text-decoration: underline;
+}
+
+@media only screen and (max-width: 1024px) {
+    .push {
+        height: 50px !important;
+    }
+
+    .contact .wrapper {
+        padding: 10px 40px 40px;
+        margin: 0 auto;
+    }
+}
+
+@media only screen and (max-width: 1024px) and (orientation: landscape) {
+    .contact .wrapper {
+        padding: 10px 40px 40px;
+        margin: 0 auto;
+    }
+
+    .push {
+        height: 0;
+    }
+
+    .contact .page-header {
+        background-color: #fff;
+        background: none;
+        position: static;
+        display: block;
+        text-align: center;
+        padding-left: 0;
+        margin-top: 250px;
+    }
+
+    .contact .page-header h1 {
+        color:  #2e6632;
+        padding: 7px 0 0 0;
+        margin-top: 8px;
+        margin-bottom: 0;
+    }
+
+    .contact .push {
+        height: 0;
+    }
+}
+
+@media only screen and (max-width: 1024px) and (orientation: portrait) {
+    .contact .page-header {
+        background-color: #fff;
+        background: none;
+        position: static;
+        display: block;
+        text-align: center;
+        padding-left: 0;
+        margin-top: 250px;
+    }
+
+    .contact .page-header h1 {
+    //color: #fff;
+        padding-top: 7px;
+        margin-top: 8px;
+        margin-bottom: 0;
+    }
+
+    .contact .wrapper {
+        padding: 10px 40px 40px;
+        margin: 0 auto;
+    }
+
+    .contact .push {
+        height: 0;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    .contact .page-header {
+        background-color: #fff;
+        position: static;
+        display: block;
+        text-align: center;
+        padding-top: 20px;
+        padding-left: 0;
+        margin-top: 220px;
+    }
+
+    .contact .page-header h1 {
+        color:  #C04C9C;
     }
 
     .contact .wrapper {
