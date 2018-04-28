@@ -66,7 +66,7 @@ export class CustomerCare extends Component {
                 <div className="page-header"><h1>{ t('heading') }</h1></div>
                 <div className="wrapper">
                     <p>Mi smo posvećeni pružanju najboljih mogućih usluga psihološkog savjetovanja za sve naše klijente. Da bismo to postigli, uvek se trudimo da poboljšamo usluge koje nudimo i stoga cenimo sve povratne informacije, i dobre i loše.</p>
-                    <p>Možete kontaktirati našu službu korisnicima putem e-pošte, Skype-a (info@feelingwell.net) ili slanjem kontakt formulara u nastavku.</p>
+                    <p>Možete kontaktirati našu službu korisnicima putem e-pošte, Skype-a (info@zdravlje.nu) ili slanjem kontakt formulara u nastavku.</p>
                     <div className="form-wrapper">
                         <label className="label" htmlFor="name">Ime</label>
                         <input
