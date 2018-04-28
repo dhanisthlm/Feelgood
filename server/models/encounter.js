@@ -16,10 +16,6 @@ const encounterSchema = Schema({
     country: {
       type: String
     },
-    skype: {
-        type: String,
-        default: ''
-    },
     mail: {
       type: String
     },

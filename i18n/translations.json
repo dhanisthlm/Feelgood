@@ -616,6 +616,7 @@
       "here": "ovdje",
       "skypeWeek": "skype poziv",
       "skypeWeeks": "skype poziva",
+      "and": "i",
       "emailResponse": "odgovor u toku",
       "hours": "sata",
       "validation": {
@@ -631,7 +632,7 @@
         "\"city\" is not allowed to be empty": "Grad je potreban",
         "\"mail\" is required": "E-pošta je potreban",
         "\"mail\" is not allowed to be empty": "E-pošta je potreban",
-        "\"mail\" must be a valid email": "E-pošta mora biti važeća adresa e-pošte",
+        "\"mail\" must be a valid email": "E-pošta mora biti važeća",
         "wrongRegexFormat": "Greška, pogrešan format"
       }
     },
@@ -1075,8 +1076,10 @@
       "agree": "Slažem se sa",
       "i": "i",
       "privacyPolicy": "Politika privatnosti",
+      "privacyPolicyLink": "politika privatnosti",
       "thankYou": "Hvala vam na nalogu",
       "rules": "Pravilima i uslovima",
+      "rulesLink": "pravilima i uslovima",
       "understand": "Razumijem da imam besplatnu promjenu termina najkasnije 24 sata do početka samog termina",
       "successfulOrder": "Vaša kupovina je uspješna i dobili smo Vašu narudžbu. Uskoro ćemo Vas kontaktirat za inicijalnu besplatnu procjenu i za zakazivanje termina.",
       "feedback": "Molim vas, uzmite trenutak da nam date povratne informacije",
@@ -1094,8 +1097,8 @@
       "issue": "Tema",
       "invoiceText": "Dobićete fakturu poslanu na Vašu e-poštu sa uputama za plaćanje. Kada izvršite uplatu na naš bankovni račun, kontaktirat ćemo Vas za Vaše psihološko savjetovanje.",
       "stripe": {
-        "invalid_number": "Broj kartice nije važeći broj kreditne kartice.",
-        "incomplete_number": "Broj kartice nije važeći broj kreditne kartice.",
+        "invalid_number": "Broj kartice nije važeći.",
+        "incomplete_number": "Broj kartice nije važeći.",
         "invalid_expiry_month": "Mjesec isteka kartice nije važeći.",
         "invalid_expiry_year": "Godina isteka kartice nije važeći.",
         "invalid_cvc": "Sigurnosni kod kartice je nevažeći.",

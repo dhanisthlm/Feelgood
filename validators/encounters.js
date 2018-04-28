@@ -26,14 +26,9 @@ export const encounterValidator = Joi.object().keys({
         .trim()
         .required(),
 
-    skypeId: Joi
-        .string()
-        .allow('', null),
-
     phone: Joi
         .string()
-        .regex(/^[0-9]*$/)
-        .required(),
+        .regex(/^[0-9]*$/),
 
     mail: Joi
         .string()
@@ -101,8 +96,7 @@ export const workshopValidator = Joi.object().keys({
 
     phone: Joi
         .string()
-        .regex(/^[0-9]*$/)
-        .required(),
+        .regex(/^[0-9]*$/),
 
     mail: Joi
         .string()
@@ -178,8 +172,7 @@ export const onlineValidator = Joi.object().keys({
 
     phone: Joi
         .string()
-        .regex(/^[0-9]*$/)
-        .required(),
+        .regex(/^[0-9]*$/),
 
     mail: Joi
         .string()

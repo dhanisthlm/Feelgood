@@ -131,7 +131,6 @@ const saveEncounter = (request, reply, charge) => {
     encounter.phone = request.payload.encounter.phone;
     encounter.paymentType = request.payload.encounter.paymentType;
     encounter.timeframe = request.payload.encounter.timeframe;
-    encounter.skype = request.payload.encounter.skypeId;
     encounter.issue = request.payload.encounter.issue;
     encounter.mail = request.payload.encounter.mail;
     encounter.comment = request.payload.encounter.comment;

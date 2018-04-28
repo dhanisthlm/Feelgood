@@ -1019,11 +1019,13 @@ export class Checkout extends FormComponent {
                                                             }
                                                         }
                                                         if (location.query.email || location.query.skype) {
+                                                            let email = parseInt(location.query.email) || 0;
+                                                            let skype = parseInt(location.query.skype) || 0;
                                                             return (
                                                                 <tr>
                                                                     <td className="right heavy"
                                                                         colSpan="2">{ t('total') }</td>
-                                                                    <td className="center heavy">{ getWorkshopCost(parseInt(location.query.price), this.state) }&nbsp;{ currency }</td>
+                                                                    <td className="center heavy">{ getWorkshopCost((email + skype), this.state) }&nbsp;{ currency }</td>
                                                                 </tr>
                                                             )
                                                         }
@@ -1119,16 +1121,6 @@ export class Checkout extends FormComponent {
                                             </div>
                                         </div>
                                         <div className="form-element-wrapper">
-                                            <label htmlFor="phone">{ t('phone') }</label>
-                                            <input
-                                                onChange={ this.handleChange }
-                                                onKeyUp={ this.handleChange }
-                                                id="phone"
-                                                type="text"
-                                                value={ this.state.phone }/>
-                                            { this.getValidationMessages('phone') }
-                                        </div>
-                                        <div className="form-element-wrapper">
                                             <label htmlFor="email">{ t('email') }</label>
                                             <input
                                                 onChange={ this.handleChange }
@@ -1149,23 +1141,6 @@ export class Checkout extends FormComponent {
                                                             </select>
                                                         </div>
                                                         {this.getValidationMessages('issue')}
-                                                    </div>
-                                                )
-                                            }
-                                        })()}
-                                        {(() => {
-                                            if (!location.query.workshop) {
-                                                return (
-                                                    <div className="form-element-wrapper">
-                                                        <label htmlFor="skype">Skype ID</label>
-                                                        <input
-                                                            onChange={ this.handleChange }
-                                                            onKeyUp={ this.handleChange }
-                                                            id="skypeId"
-                                                            type="text"
-                                                            value={ this.state.skypeId }
-                                                        />
-                                                        { this.getValidationMessages('skype') }
                                                     </div>
                                                 )
                                             }
@@ -1259,11 +1234,12 @@ export class Checkout extends FormComponent {
                                             <div className="check-wrapper">
                                                 <input id="conditions" ref="terms" checked={this.state.terms === 'on'}
                                                        value={this.state.terms} className="checkbox" type="checkbox"/>
-                                                <label id="terms" onClick={ this.handleCheckbox } className="checkbox"
-                                                   htmlFor="conditions">{ t('agree') } <a className="checkout-link"
-                                                    target="blank"
-                                                  href="/politika-privatnosti">{ t('privacyPolicy') }</a> { t('and') }
-                                                    <a className="checkout-link" target="blank" href="/tac">{ t('rules') }.</a>.</label>
+                                                <label id="terms" onClick={ this.handleCheckbox } className="checkbox condition-label link"
+                                                   htmlFor="conditions">{ t('agree') }</label>
+                                                <a className="checkout-link link"
+                                                   target="blank"
+                                                   href="/politika-privatnosti">{ t('privacyPolicyLink') }</a>&nbsp;{ t('and') }&nbsp;
+                                                <a className="checkout-link link" target="blank" href="/tac">{ t('rulesLink') }.</a>
                                             </div>
                                             <span className="error checkbox">{termErrorMsg}</span>
                                         </div>

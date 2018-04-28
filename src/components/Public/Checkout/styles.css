@@ -18,6 +18,14 @@
     position: absolute;
 }
 
+.checkout .condition-label {
+    margin-right: 3px !important;
+}
+
+.checkout .link {
+    font-weight: 100 !important;
+}
+
 .checkout .asterix-text {
     margin: 6px 0 0 59px;
     font-size: 15px;
