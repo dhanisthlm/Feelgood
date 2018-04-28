@@ -1019,8 +1019,8 @@ export class Checkout extends FormComponent {
                                                             }
                                                         }
                                                         if (location.query.email || location.query.skype) {
-                                                            let email = parseInt(location.query.email) || 0;
-                                                            let skype = parseInt(location.query.skype) || 0;
+                                                            let email = parseInt(location.query.emailCost) || 0;
+                                                            let skype = parseInt(location.query.skypeCost) || 0;
                                                             return (
                                                                 <tr>
                                                                     <td className="right heavy"
