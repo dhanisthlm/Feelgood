@@ -1,0 +1,39 @@
+.share {
+    background-color: #c64c9c;
+    text-align: center;
+    padding: 35px 0 10px 0;
+    display: none;
+}
+
+.share div {
+    display: inline-block;
+    margin-right: 35px;
+    cursor: pointer;
+}
+
+.share img {
+    width: 55px;
+    border-radius: 50%;
+    box-shadow: 0 0 7px 1px rgba(0, 0, 0, 0.3);
+    display: block;
+    margin-bottom: 7px;
+}
+
+.label {
+    color: #fff;
+    font-weight: 300;
+}
+
+.share > span {
+    color: #fff;
+    font-size: 39px;
+    display: block;
+    margin-bottom: 17px;
+    margin-top: 0;
+}
+
+@media only screen and (max-width: 950px) {
+    .share {
+        display: none;
+    }
+}

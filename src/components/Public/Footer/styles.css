@@ -3,7 +3,34 @@
     padding: 40px 80px 0;
     color: #fff;
     text-align: center;
-    height: 295px;
+    height: 340px;
+}
+
+.footer .share-mobile {
+    margin-top: 25px;
+}
+
+.footer .share-mobile > div {
+    display: inline-block;
+    margin-right: 20px !important;
+    cursor: pointer;
+}
+
+.footer .share-mobile > div {
+    display: inline-block;
+    margin-right: 17px;
+    cursor: pointer;
+}
+
+.footer .share-mobile img {
+    width: 45px;
+    border-radius: 50%;
+    box-shadow: 0 0 7px 1px rgba(0, 0, 0, 0.3);
+    display: block;
+}
+
+.footer .share-mobile span {
+    display: none;
 }
 
 .footer > div * {

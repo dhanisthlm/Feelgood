@@ -4,11 +4,12 @@ import Header from './Header';
 import Hero from './Intro';
 import Payment from './Payment';
 import Quote from './Quote';
-import Traitments from './Issues';
+import Issues from './Issues';
 import QuoteImage from './Quoteimage';
 import Staff from './Staff';
 import HowItWorks from './HowItWorks';
 import Newsletter from './Newsletter';
+import Share from './Share';
 import Footer from './Footer';
 import styles from './styles.css';
 
@@ -24,11 +25,12 @@ export class Main extends Component {
                 <Header location={this.props.location} />
                 <Hero location={this.props.location} />
                 <Quote />
-                <Traitments />
+                <Issues />
                 <Payment />
                 <QuoteImage />
                 <Staff />
                 <HowItWorks />
+                <Share />
                 <Newsletter />
                 <Footer />
             </div>

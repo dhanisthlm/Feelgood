@@ -28,6 +28,28 @@ export class Footer extends Component {
                     <div className="address">
                         <p><span className="heading">{ t('address') }:</span> Baunad doo Tuzla, Zdravlje.nu, Maršala Tita 109, 75000 Tuzla, Bosna i Hercegovina</p>
                     </div>
+                    <div className="share-mobile">
+                        <div>
+                            <img src="/images/facebook.svg" />
+                            <span className="label">Facebook</span>
+                        </div>
+                        <div>
+                            <img src="/images/twitter.svg" />
+                            <span className="label">Twitter</span>
+                        </div>
+                        <div>
+                            <img src="/images/youtube.svg" />
+                            <span className="label">Youtube</span>
+                        </div>
+                        <div>
+                            <img src="/images/instagram.svg" />
+                            <span className="label">Instagram</span>
+                        </div>
+                        <div>
+                            <img src="/images/skype.svg" />
+                            <span className="label">Skype</span>
+                        </div>
+                    </div>
                 </div>
                 <div className="col col-2">
                     <h2>{ t('blog') }</h2>
