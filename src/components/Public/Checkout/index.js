@@ -545,9 +545,9 @@ export class Checkout extends FormComponent {
         if (this.state.paymentType === 'paypal') {
             this.props.validate((error) => {
                 if (error || (this.state.termsIsDirty && this.state.terms === 'off') || (this.state.cancelIsDirty && this.state.cancel === 'off')) {
-                    this.actions.disable();
+                    this.actions && this.actions.disable();
                 } else {
-                    this.actions.enable();
+                    this.actions && this.actions.enable();
                 }
             })
         }
@@ -1067,6 +1067,7 @@ export class Checkout extends FormComponent {
                                             <label htmlFor="name">{ t('name') }</label>
                                             <input
                                                 onChange={ this.handleChange }
+                                                onKeyUp={ this.handleChange }
                                                 id="name"
                                                 className="name"
                                                 type="text"
@@ -1077,6 +1078,7 @@ export class Checkout extends FormComponent {
                                             <label htmlFor="adress">{ t('street') }</label>
                                             <input
                                                 onChange={ this.handleChange }
+                                                onKeyUp={ this.handleChange }
                                                 id="street"
                                                 className="street"
                                                 type="text"
@@ -1088,6 +1090,7 @@ export class Checkout extends FormComponent {
                                                 <label htmlFor="postal">{ t('postal') }</label>
                                                 <input
                                                     onChange={ this.handleChange }
+                                                    onKeyUp={ this.handleChange }
                                                     id="postal"
                                                     className="postal"
                                                     type="text"
@@ -1098,6 +1101,7 @@ export class Checkout extends FormComponent {
                                                 <label htmlFor="city">{ t('city') }</label>
                                                 <input
                                                     onChange={ this.handleChange }
+                                                    onKeyUp={ this.handleChange }
                                                     id="city"
                                                     className="city"
                                                     type="text"
@@ -1118,6 +1122,7 @@ export class Checkout extends FormComponent {
                                             <label htmlFor="phone">{ t('phone') }</label>
                                             <input
                                                 onChange={ this.handleChange }
+                                                onKeyUp={ this.handleChange }
                                                 id="phone"
                                                 type="text"
                                                 value={ this.state.phone }/>
@@ -1127,6 +1132,7 @@ export class Checkout extends FormComponent {
                                             <label htmlFor="email">{ t('email') }</label>
                                             <input
                                                 onChange={ this.handleChange }
+                                                onKeyUp={ this.handleChange }
                                                 id="mail"
                                                 type="text"
                                                 value={ this.state.mail }/>
@@ -1154,6 +1160,7 @@ export class Checkout extends FormComponent {
                                                         <label htmlFor="skype">Skype ID</label>
                                                         <input
                                                             onChange={ this.handleChange }
+                                                            onKeyUp={ this.handleChange }
                                                             id="skypeId"
                                                             type="text"
                                                             value={ this.state.skypeId }

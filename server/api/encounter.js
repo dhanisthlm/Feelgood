@@ -137,6 +137,7 @@ const saveEncounter = (request, reply, charge) => {
     encounter.comment = request.payload.encounter.comment;
     encounter.currency = request.payload.encounter.currency;
     encounter.price = skypePrice + emailPrice;
+    encounter.fb = false;
 
     const date = new Date();
     encounter.date = date.toUTCString();
@@ -179,6 +180,7 @@ const saveLinkEncounter = (request, reply, charge) => {
     encounter.currency = request.payload.encounter.currency;
     encounter.price = request.payload.encounter.cost.total;
     encounter.location = request.payload.encounter.location;
+    encounter.fb = true;
 
     const date = new Date();
     encounter.date = date.toUTCString();
@@ -269,11 +271,11 @@ const handleCharge = (request, reply) => {
             }
         });
     } else {
-        if (!request.payload.encounter.workshop && !request.payload.encounter.skype && !request.payload.email) {
+        if (request.payload.encounter.data) {
             saveEncounter(request, reply, null);
-        } else if (request.payload.encounter.workshop) {
+        } else if (request.payload.encounter.workshop && !request.payload.encounter.data) {
             saveWorkshop(request, reply, null);
-        } else if (request.payload.encounter.skype || request.payload.encounter.email) {
+        } else if (request.payload.encounter.skype || request.payload.encounter.email && !request.payload.encounter.data) {
             saveLinkEncounter(request, reply, null);
         }
     }

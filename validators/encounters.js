@@ -194,6 +194,9 @@ export const onlineValidator = Joi.object().keys({
         .string()
         .required(),
 
+    fb: Joi
+        .boolean(),
+
     newsletter: Joi
         .boolean()
         .allow('', null),

@@ -93,6 +93,10 @@ const encounterSchema = Schema({
             type: String,
             default: ''
         }
+    },
+    fb: {
+        type: Boolean,
+        default: false
     }
 });
 
