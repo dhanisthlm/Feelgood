@@ -8,7 +8,6 @@
 }
 
 .contact .wrapper p {
-    margin: 0;
     font-weight: 100;
 }
 
@@ -191,7 +190,7 @@
 }
 
 .contact .form-wrapper {
-    margin: 25px auto 0;
+    margin: 0 auto 0;
 }
 
 .contact input[type="text"] {
@@ -315,14 +314,6 @@
         padding-left: 0;
         margin-top: 250px;
     }
-
-    .contact .page-header h1 {
-        color:  #2e6632;
-        padding: 7px 0 0 0;
-        margin-top: 8px;
-        margin-bottom: 0;
-    }
-
     .contact .push {
         height: 0;
     }

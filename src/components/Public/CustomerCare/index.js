@@ -86,7 +86,7 @@ export class CustomerCare extends Component {
                             value={this.state.mail}
                         />
                         {this.getValidationMessages('mail')}
-                        <label className="label" htmlFor="comment">Comment</label>
+                        <label className="label" htmlFor="comment">Komentar</label>
                         <textarea
                             onChange={ this.handleChange }
                             id="comment"
