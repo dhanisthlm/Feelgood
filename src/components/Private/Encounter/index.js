@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
+import { translate } from 'react-i18next';
 import validation from 'react-validation-mixin';
 import strategy from 'joi-validation-strategy';
 import moment from 'moment';
@@ -13,8 +14,14 @@ export class Encounter extends Component {
     constructor (props) {
         super(props);
 
+        this.state = {
+            openItems: []
+        };
+
         this.handleExport = this.handleExport.bind(this);
         this.eraseEncounter = this.eraseEncounter.bind(this);
+        this.handleClick = this.handleClick.bind(this);
+        this.renderDesktop = this.renderDesktop.bind(this);
     }
 
     componentDidMount () {
@@ -27,6 +34,21 @@ export class Encounter extends Component {
         }
     }
 
+    handleClick(event) {
+        const index = this.state.openItems.indexOf(event.currentTarget.id);
+        const openItems = this.state.openItems;
+
+        if (index < 0) {
+            openItems.push(event.currentTarget.id);
+        } else {
+            openItems.splice(index, 1);
+        }
+
+        console.log(openItems);
+
+        this.setState({ openItems });
+    }
+
     handleExport () {
         const tableToExcel=new TableToExcel();
         tableToExcel.render("admin-table");
@@ -37,7 +59,305 @@ export class Encounter extends Component {
         this.props.dispatch(eraseEncounter(id));
     }
 
+    isMobile () {
+        return window.innerWidth <= 800;
+    }
+
+    renderMobile() {
+        return (<ul className="mobile-list">
+                {this.props.encounters.map((encounter, i) => {
+                    const localTime = moment(encounter.date).format('YYYY-MM-DD / HH:mm');
+                    const webRating = encounter.rating ? encounter.rating.web : 0;
+                    const payRating = encounter.rating ? encounter.rating.pay : 0;
+                    const ratingComment = encounter.rating ? encounter.rating.comment : '';
+                    const isOpen = this.state.openItems.indexOf(encounter._id);
+                    const detailClass = isOpen < 0 ? 'details' : 'detailsOpen';
+                    const arrowClass = isOpen < 0 ? 'arrow-right': 'arrow-down';
+                    const type = encounter.fb === false ? 'Webstranica' : 'Facebook';
+
+                    let serviceLabel;
+                    let serviceType;
+
+                    if ('order' in encounter) {
+                        if (encounter.order.email.cost !== 0 && encounter.order.skype.cost !== 0) {
+                            serviceLabel = 'Online razgovor i e-pošta';
+                            serviceType = 'combo';
+                        } else if (encounter.order.skype.cost === 0 && encounter.order.email.cost !== 0) {
+                            serviceLabel = 'E-pošta';
+                            serviceType = 'email'
+                        } else if (encounter.order.skype.cost !== 0 && encounter.order.email.cost === 0) {
+                            serviceLabel = 'Online razgovor';
+                            serviceType = 'skype';
+                        }
+                    } else {
+                        if (encounter.email === 0 && encounter.skype !== 0) {
+                            serviceLabel = 'E-pošta';
+                            serviceType = 'email';
+                        } else if (encounter.email !== 0 && encounter.skype === 0) {
+                            serviceLabel = 'Online razgovor';
+                            serviceType = 'skype';
+                        } else if (encounter.email !== 0 && encounter.skype !== 0) {
+                            serviceLabel = 'Online razgovor i e-pošta';
+                            serviceType = 'combo';
+                        }
+                    }
+
+                    console.log(serviceType);
+
+                    return (
+                        <li onClick={this.handleClick}
+                            id={encounter._id}
+                            key={i} className="list-item">
+                            <div className="row">
+                                <div
+                                    className={arrowClass}>
+                                    <div className='arrow-mask' />
+                                </div>
+                                <div className="name">
+                                    <p>{encounter.name}</p>
+                                </div>
+                                <p className="price">{encounter.price} {encounter.currency}</p>
+                            </div>
+                            <div className={detailClass}>
+                                <div className="detail-inner">
+                                    <div className="col-1">
+                                        <p>{encounter.street}</p>
+                                        <p>{encounter.postalCode} {encounter.city}</p>
+                                        <p>{encounter.country}</p>
+                                    </div>
+                                    {(() => {
+                                    })()}
+                                    <div className="col-2">
+                                        {(() => {
+                                            if (serviceType === 'combo' || serviceType === 'skype') {
+                                                return <p>Online razgovor: {encounter.order.skype.week}</p>
+                                            }
+                                        })()}
+                                        {(() => {
+                                            if (serviceType === 'skype' || serviceType === 'combo') {
+                                                return <p>Vrsta: {encounter.order.skype.duration} minuta</p>
+                                            }
+                                        })()}
+                                        {(() => {
+                                            if (serviceType === 'combo' || serviceType === 'email') {
+                                                return <p>E-pošta: {encounter.order.email.week}</p>
+                                            }
+                                        })()}
+                                        {(() => {
+                                            if (serviceType === 'email' || serviceType === 'combo') {
+                                                return <p>Odgovor:</p>
+                                            }
+                                        })()}
+                                    </div>
+                                    <div className="col-3">
+                                        <p>Web: {encounter.rating.web}</p>
+                                        <p>Payment: {encounter.rating.pay}</p>
+                                        <p>Komentar: {encounter.rating.comment}</p>
+                                    </div>
+                                    <div className="col-4">
+                                        {(() => {
+                                            if (encounter.issue) {
+                                                return <p>Vrijeme: {encounter.timeframe}</p>
+                                            }
+                                        })()}
+                                        {(() => {
+                                            if (encounter.timeframe) {
+                                                return <p>Tip: {type}</p>
+                                            }
+                                        })()}
+                                        {(() => {
+                                            if (encounter.paymentType) {
+                                                return <p>Plaćanja: {encounter.paymentType}</p>
+                                            }
+                                        })()}
+                                    </div>
+                                    <div className="col-5">
+                                        {localTime}
+                                        {(() => {
+                                            if (encounter.phone) {
+                                                return <p>Tel.broj: {encounter.phone}</p>
+                                            }
+                                        })()}
+                                        {(() => {
+                                            if (encounter.mail) {
+                                                return <p>E-pošta: {encounter.mail}</p>
+                                            }
+                                        })()}
+                                    </div>
+                                    <div className="col-6">
+                                        {(() => {
+                                            if (encounter.order.skype.cost > 0) {
+                                                return <p>Online razgovor: {encounter.order.skype.cost} {encounter.currency}</p>
+                                            }
+                                        })()}
+                                        {(() => {
+                                            if (encounter.order.email.cost > 0) {
+                                                return <p>E-pošta: {encounter.order.email.cost} {encounter.currency}</p>
+                                            }
+                                        })()}
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    )
+                })}
+            </ul>
+        )
+    }
+
+    renderDesktop() {
+        return (<ul className="mobile-list">
+            <li>
+                <div>
+                    <p>Ime i adresa</p>
+                    <p>Usluga</p>
+                    <p>Komentar</p>
+                    <p>Narudžba</p>
+                    <p>Kontakt info</p>
+                    <p>Ukupan</p>
+                </div>
+            </li>
+            {this.props.encounters.map((encounter, i) => {
+                const localTime = moment(encounter.date).format('YYYY-MM-DD / HH:mm');
+                const webRating = encounter.rating ? encounter.rating.web : 0;
+                const payRating = encounter.rating ? encounter.rating.pay : 0;
+                const ratingComment = encounter.rating ? encounter.rating.comment : '';
+                const isOpen = this.state.openItems.indexOf(encounter._id);
+                const detailClass = isOpen < 0 ? 'details' : 'detailsOpen';
+                const arrowClass = isOpen < 0 ? 'arrow-right': 'arrow-down';
+                const type = encounter.fb === false ? 'Webstranica' : 'Facebook';
+
+                let serviceLabel;
+                let serviceType;
+
+                if ('order' in encounter) {
+                    if (encounter.order.email.cost !== 0 && encounter.order.skype.cost !== 0) {
+                        serviceLabel = 'Online razgovor i e-pošta';
+                        serviceType = 'combo';
+                    } else if (encounter.order.skype.cost === 0 && encounter.order.email.cost !== 0) {
+                        serviceLabel = 'E-pošta';
+                        serviceType = 'email'
+                    } else if (encounter.order.skype.cost !== 0 && encounter.order.email.cost === 0) {
+                        serviceLabel = 'Online razgovor';
+                        serviceType = 'skype';
+                    }
+                } else {
+                    if (encounter.email === 0 && encounter.skype !== 0) {
+                        serviceLabel = 'E-pošta';
+                        serviceType = 'email';
+                    } else if (encounter.email !== 0 && encounter.skype === 0) {
+                        serviceLabel = 'Online razgovor';
+                        serviceType = 'skype';
+                    } else if (encounter.email !== 0 && encounter.skype !== 0) {
+                        serviceLabel = 'Online razgovor i e-pošta';
+                        serviceType = 'combo';
+                    }
+                }
+
+                console.log(serviceType);
+
+                return (
+                    <li onClick={this.handleClick}
+                        id={encounter._id}
+                        key={i} className="list-item">
+                        <div>
+                            <div
+                                className={arrowClass}>
+                                <div className='arrow-mask' />
+                            </div>
+                            <div>
+                                <p>{encounter.name}</p>
+                            </div>
+                            <p>{serviceLabel}</p>
+                            <p className="rating-number">{Math.round((parseInt(encounter.rating.web) + parseInt(encounter.rating.pay)) / 2)}</p>
+                            <p>{localTime}</p>
+                            <p>{encounter.mail}</p>
+                            <p>{encounter.price} {encounter.currency}</p>
+                        </div>
+                        <div className={detailClass}>
+                            <div className="detail-inner">
+                                <div className="col-1">
+                                    <p>{encounter.street}</p>
+                                    <p>{encounter.postalCode} {encounter.city}</p>
+                                    <p>{encounter.country}</p>
+                                </div>
+                                {(() => {
+                                })()}
+                                <div className="col-2">
+                                    {(() => {
+                                        if (serviceType === 'combo' || serviceType === 'skype') {
+                                            return <p>Online razgovor: {encounter.order.skype.week}</p>
+                                        }
+                                    })()}
+                                    {(() => {
+                                        if (serviceType === 'skype' || serviceType === 'combo') {
+                                            return <p>Vrsta: {encounter.order.skype.duration} minuta</p>
+                                        }
+                                    })()}
+                                    {(() => {
+                                        if (serviceType === 'combo' || serviceType === 'email') {
+                                            return <p>E-pošta: {encounter.order.email.week}</p>
+                                        }
+                                    })()}
+                                    {(() => {
+                                        if (serviceType === 'email' || serviceType === 'combo') {
+                                            return <p>Odgovor:</p>
+                                        }
+                                    })()}
+                                </div>
+                                <div className="col-3">
+                                    <p>Web: {encounter.rating.web}</p>
+                                    <p>Payment: {encounter.rating.pay}</p>
+                                    <p>Komentar: {encounter.rating.comment}</p>
+                                </div>
+                                <div className="col-4">
+                                    {(() => {
+                                        if (encounter.issue) {
+                                            return <p>Vrijeme: {encounter.timeframe}</p>
+                                        }
+                                    })()}
+                                    {(() => {
+                                        if (encounter.timeframe) {
+                                            return <p>Tip: {type}</p>
+                                        }
+                                    })()}
+                                    {(() => {
+                                        if (encounter.paymentType) {
+                                            return <p>Plaćanja: {encounter.paymentType}</p>
+                                        }
+                                    })()}
+                                </div>
+                                <div className="col-5">
+                                    {(() => {
+                                        if (encounter.phone) {
+                                            return <p>Tel.broj: {encounter.phone}</p>
+                                        }
+                                    })()}
+                                </div>
+                                <div className="col-6">
+                                    {(() => {
+                                        if (encounter.order.skype.cost > 0) {
+                                            return <p>Online razgovor: {encounter.order.skype.cost} {encounter.currency}</p>
+                                        }
+                                    })()}
+                                    {(() => {
+                                        if (encounter.order.email.cost > 0) {
+                                            return <p>E-pošta: {encounter.order.email.cost} {encounter.currency}</p>
+                                        }
+                                    })()}
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                )
+            })}
+        </ul>
+        )
+    }
+
     render () {
+        const { t } = this.props;
+
         return (
             <div className="page admin">
                 <Header location={this.props.location} />
@@ -45,103 +365,13 @@ export class Encounter extends Component {
                     <h1 className="admin-heading">Rezervacije</h1>
                 </div>
                 <button className="export-button" onClick={ this.handleExport }>Izvoz u Excel</button>
-                <ul className="mobile-list">
-                    {this.props.encounters.map((encounter, i) => {
-                        const localTime = moment(encounter.date).format('YYYY-MM-DD / HH:mm');
-                        const webRating = encounter.rating ? encounter.rating.web : 0;
-                        const payRating = encounter.rating ? encounter.rating.pay : 0;
-                        const ratingComment = encounter.rating ? encounter.rating.comment : '';
-
-                        return (
-                            <li key={i} className="list-item">
-                                <h3>informacije osobe</h3>
-                                <div>
-                                    <p>Ime:</p>
-                                    <p>{encounter.name}</p>
-                                </div>
-                                <div>
-                                    <p>Ulica</p>
-                                    <p>{encounter.street}</p>
-                                </div>
-                                <div>
-                                    <p>Poštanski broj</p>
-                                    <p>{encounter.postalCode}</p>
-                                </div>
-                                <div>
-                                    <p>Grad</p>
-                                    <p>{encounter.city}</p>
-                                </div>
-                                <div>
-                                    <p>Zemlja</p>
-                                    <p>{encounter.country}</p>
-                                </div>
-                                <div>
-                                    <p>Valuta</p>
-                                    <p>{encounter.currency}</p>
-                                </div>
-                                <div>
-                                    <p>Tip plaćanja</p>
-                                    <p>{encounter.paymentType}</p>
-                                </div>
-                                <div>
-                                    <p>Odaberite vrijeme</p>
-                                    <p>{encounter.timeframe}</p>
-                                </div>
-                                <div>
-                                    <p>E-pošta:</p>
-                                    <p>{encounter.mail}</p>
-                                </div>
-                                <div>
-                                    <p>Telefon:</p>
-                                    <p>{encounter.phone}</p>
-                                </div>
-                                <div>
-                                    <p>Tema:</p>
-                                    <p>{encounter.issue}</p>
-                                </div>
-                                <div>
-                                    <p>Datum:</p>
-                                    <p>{localTime}</p>
-                                </div>
-                                <h3>E-pošta</h3>
-                                <div>
-                                    <p>Cena:</p>
-                                    <p>{encounter.order.email.cost}</p>
-                                </div>
-                                <div>
-                                    <p>Nedelje:</p>
-                                    <p>{encounter.order.email.week}</p>
-                                </div>
-                                <h3>Skype</h3>
-                                <div>
-                                    <p>Cena:</p>
-                                    <p>{encounter.order.skype.cost}</p>
-                                </div>
-                                <div>
-                                    <p>Nedelje:</p>
-                                    <p>{encounter.order.skype.week}</p>
-                                </div>
-                                <div>
-                                    <p>Ukupan:</p>
-                                    <p>{encounter.order.price}</p>
-                                </div>
-                                <h3>Rajting</h3>
-                                <div>
-                                    <p>Web:</p>
-                                    <p>{webRating}</p>
-                                </div>
-                                <div>
-                                    <p>Plaćanje:</p>
-                                    <p>{payRating}</p>
-                                </div>
-                                <div>
-                                    <p>Komentar:</p>
-                                    <p>{ratingComment}</p>
-                                </div>
-                            </li>
-                        );
-                    })};
-                </ul>
+                {(() => {
+                    if (this.isMobile()) {
+                        return this.renderMobile();
+                    } else {
+                        return this.renderDesktop();
+                    }
+                })()}
                 <div className="admin-wrapper">
                     <table id="admin-table" className="admin-table">
 
@@ -228,4 +458,4 @@ const mapStateToProps = (state) => ({
     erased: state.encounter.erased
 });
 
-export default connect(mapStateToProps)(validation(strategy())(Encounter));
+export default connect(mapStateToProps)(translate('checkoutView')(validation(strategy())(Encounter)));
