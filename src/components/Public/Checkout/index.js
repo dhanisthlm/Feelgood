@@ -172,6 +172,7 @@ export class Checkout extends FormComponent {
                 skype: location.query.skype,
                 skypeDescription: location.query.skypeDescription,
                 skypeCost: location.query.skypeCost,
+                skypeDuration: location.query.skypeDuration
             });
         }
 
@@ -181,6 +182,7 @@ export class Checkout extends FormComponent {
                 email: location.query.email,
                 emailDescription: location.query.emailDescription,
                 emailCost: location.query.emailCost,
+                emailResponse: location.query.emailResponse
             });
         }
 
@@ -1119,6 +1121,16 @@ export class Checkout extends FormComponent {
                                                     { this.renderCountries() }
                                                 </select>
                                             </div>
+                                        </div>
+                                        <div className="form-element-wrapper">
+                                            <label htmlFor="phone">{ t('phone') }</label>
+                                            <input
+                                                onChange={ this.handleChange }
+                                                onKeyUp={ this.handleChange }
+                                                id="phone"
+                                                type="text"
+                                                value={ this.state.phone }/>
+                                            { this.getValidationMessages('phone') }
                                         </div>
                                         <div className="form-element-wrapper">
                                             <label htmlFor="email">{ t('email') }</label>

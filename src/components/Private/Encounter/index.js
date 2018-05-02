@@ -67,42 +67,30 @@ export class Encounter extends Component {
         return (<ul className="mobile-list">
                 {this.props.encounters.map((encounter, i) => {
                     const localTime = moment(encounter.date).format('YYYY-MM-DD / HH:mm');
-                    const webRating = encounter.rating ? encounter.rating.web : 0;
-                    const payRating = encounter.rating ? encounter.rating.pay : 0;
-                    const ratingComment = encounter.rating ? encounter.rating.comment : '';
                     const isOpen = this.state.openItems.indexOf(encounter._id);
                     const detailClass = isOpen < 0 ? 'details' : 'detailsOpen';
-                    const arrowClass = isOpen < 0 ? 'arrow-right': 'arrow-down';
+                    const arrowClass = isOpen < 0 ? 'admin-arrow-right': 'admin-arrow-down';
                     const type = encounter.fb === false ? 'Webstranica' : 'Facebook';
 
-                    let serviceLabel;
                     let serviceType;
 
                     if ('order' in encounter) {
                         if (encounter.order.email.cost !== 0 && encounter.order.skype.cost !== 0) {
-                            serviceLabel = 'Online razgovor i e-pošta';
                             serviceType = 'combo';
                         } else if (encounter.order.skype.cost === 0 && encounter.order.email.cost !== 0) {
-                            serviceLabel = 'E-pošta';
                             serviceType = 'email'
                         } else if (encounter.order.skype.cost !== 0 && encounter.order.email.cost === 0) {
-                            serviceLabel = 'Online razgovor';
                             serviceType = 'skype';
                         }
                     } else {
                         if (encounter.email === 0 && encounter.skype !== 0) {
-                            serviceLabel = 'E-pošta';
                             serviceType = 'email';
                         } else if (encounter.email !== 0 && encounter.skype === 0) {
-                            serviceLabel = 'Online razgovor';
                             serviceType = 'skype';
                         } else if (encounter.email !== 0 && encounter.skype !== 0) {
-                            serviceLabel = 'Online razgovor i e-pošta';
                             serviceType = 'combo';
                         }
                     }
-
-                    console.log(serviceType);
 
                     return (
                         <li onClick={this.handleClick}
@@ -121,9 +109,21 @@ export class Encounter extends Component {
                             <div className={detailClass}>
                                 <div className="detail-inner">
                                     <div className="col-1">
-                                        <p>{encounter.street}</p>
-                                        <p>{encounter.postalCode} {encounter.city}</p>
-                                        <p>{encounter.country}</p>
+                                        {(() => {
+                                            if (encounter.street) {
+                                                return <p>{encounter.street}</p>
+                                            }
+                                        })()}
+                                        {(() => {
+                                            if (encounter.city) {
+                                                return <p>{encounter.postalCode} {encounter.city}</p>
+                                            }
+                                        })()}
+                                        {(() => {
+                                            if (encounter.country) {
+                                                return <p>{encounter.country}</p>
+                                            }
+                                        })()}
                                     </div>
                                     {(() => {
                                     })()}
@@ -150,9 +150,21 @@ export class Encounter extends Component {
                                         })()}
                                     </div>
                                     <div className="col-3">
-                                        <p>Web: {encounter.rating.web}</p>
-                                        <p>Payment: {encounter.rating.pay}</p>
-                                        <p>Komentar: {encounter.rating.comment}</p>
+                                        {(() => {
+                                            if (encounter.rating && encounter.rating.web) {
+                                                return <p>Rejting web: {encounter.rating.web}</p>
+                                            }
+                                        })()}
+                                        {(() => {
+                                            if (encounter.rating && encounter.rating.pay) {
+                                                return <p>Rejting payment: {encounter.rating.pay}</p>
+                                            }
+                                        })()}
+                                        {(() => {
+                                            if (encounter.rating && encounter.rating.comment) {
+                                                return <p>Komentar: {encounter.rating.comment}</p>
+                                            }
+                                        })()}
                                     </div>
                                     <div className="col-4">
                                         {(() => {
@@ -215,16 +227,14 @@ export class Encounter extends Component {
                     <p>Narudžba</p>
                     <p>Kontakt info</p>
                     <p>Ukupan</p>
+                    <p>Tip</p>
                 </div>
             </li>
             {this.props.encounters.map((encounter, i) => {
                 const localTime = moment(encounter.date).format('YYYY-MM-DD / HH:mm');
-                const webRating = encounter.rating ? encounter.rating.web : 0;
-                const payRating = encounter.rating ? encounter.rating.pay : 0;
-                const ratingComment = encounter.rating ? encounter.rating.comment : '';
                 const isOpen = this.state.openItems.indexOf(encounter._id);
                 const detailClass = isOpen < 0 ? 'details' : 'detailsOpen';
-                const arrowClass = isOpen < 0 ? 'arrow-right': 'arrow-down';
+                const arrowClass = isOpen < 0 ? 'admin-arrow-right': 'admin-arrow-down';
                 const type = encounter.fb === false ? 'Webstranica' : 'Facebook';
 
                 let serviceLabel;
@@ -254,8 +264,6 @@ export class Encounter extends Component {
                     }
                 }
 
-                console.log(serviceType);
-
                 return (
                     <li onClick={this.handleClick}
                         id={encounter._id}
@@ -266,20 +274,56 @@ export class Encounter extends Component {
                                 <div className='arrow-mask' />
                             </div>
                             <div>
-                                <p>{encounter.name}</p>
+                                {(() => {
+                                    if (encounter.name) {
+                                        return <p>{encounter.name}</p>
+                                    }
+                                })()}
                             </div>
                             <p>{serviceLabel}</p>
-                            <p className="rating-number">{Math.round((parseInt(encounter.rating.web) + parseInt(encounter.rating.pay)) / 2)}</p>
+                            {(() => {
+                                if (encounter.rating && encounter.rating.web && encounter.rating.pay) {
+                                    return <p
+                                        className="rating-number">{Math.round((parseInt(encounter.rating.web) + parseInt(encounter.rating.pay)) / 2)}</p>
+                                }
+                            })()}
                             <p>{localTime}</p>
-                            <p>{encounter.mail}</p>
-                            <p>{encounter.price} {encounter.currency}</p>
+                            {(() => {
+                                if (encounter.mail) {
+                                    return <p>{encounter.mail}</p>
+                                }
+                            })()}
+                            {(() => {
+                                if (encounter.currency) {
+                                    return <p>{encounter.price} {encounter.currency}</p>
+                                }
+                            })()}
+                            {(() => {
+                                if (encounter.fb === true) {
+                                    return <p>Facebook</p>
+                                } else {
+                                    return <p>Web stranica</p>
+                                }
+                            })()}
                         </div>
                         <div className={detailClass}>
                             <div className="detail-inner">
                                 <div className="col-1">
-                                    <p>{encounter.street}</p>
-                                    <p>{encounter.postalCode} {encounter.city}</p>
-                                    <p>{encounter.country}</p>
+                                    {(() => {
+                                        if (encounter.srreet) {
+                                            return <p>{encounter.street}</p>
+                                        }
+                                    })()}
+                                    {(() => {
+                                        if (encounter.city) {
+                                            return <p>{encounter.postalCode} {encounter.city}</p>
+                                        }
+                                    })()}
+                                    {(() => {
+                                        if (encounter.country) {
+                                            return <p>{encounter.country}</p>
+                                        }
+                                    })()}
                                 </div>
                                 {(() => {
                                 })()}
@@ -346,6 +390,7 @@ export class Encounter extends Component {
                                         }
                                     })()}
                                 </div>
+                                <div className="col-7" />
                             </div>
                         </div>
                     </li>
@@ -446,6 +491,7 @@ export class Encounter extends Component {
                         </tbody>
                     </table>
                 </div>
+                <Footer />
             </div>
         )
     }

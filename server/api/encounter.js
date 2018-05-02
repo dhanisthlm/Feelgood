@@ -164,21 +164,35 @@ const saveLinkEncounter = (request, reply, charge) => {
         });
     }
 
+    let order = {};
+
+    if (request.payload.encounter.skype) {
+        order.skype = {};
+        order.skype.week = request.payload.encounter.skype;
+        order.skype.cost = request.payload.encounter.skypeCost;
+        order.skype.duration = request.payload.encounter.skypeDuration;
+    }
+
+    if (request.payload.encounter.email) {
+        order.email = {};
+        order.email.week = request.payload.encounter.email;
+        order.email.cost = request.payload.encounter.emailCost;
+    }
+
     encounter.name = request.payload.encounter.name;
     encounter.street = request.payload.encounter.street;
     encounter.postalCode = request.payload.encounter.postal;
     encounter.city = request.payload.encounter.city;
     encounter.country = request.payload.encounter.country;
     encounter.phone = request.payload.encounter.phone;
-    encounter.skype = request.payload.encounter.skype;
-    encounter.mail = request.payload.encounter.email;
+    encounter.mail = request.payload.encounter.mail;
     encounter.timeframe = request.payload.encounter.timeframe;
     encounter.paymentType = request.payload.encounter.paymentType;
-    encounter.mail = request.payload.encounter.email;
     encounter.comment = request.payload.encounter.comment;
     encounter.currency = request.payload.encounter.currency;
     encounter.price = request.payload.encounter.cost.total;
     encounter.location = request.payload.encounter.location;
+    encounter.order = order;
     encounter.fb = true;
 
     const date = new Date();

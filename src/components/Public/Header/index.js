@@ -141,9 +141,70 @@ export class Header extends Component {
 };
 
 
-handleLogout (event) {
+    handleLogout (event) {
         event.preventDefault();
         this.props.dispatch(logout());
+    }
+
+    renderMenu () {
+        const { t } = this.props;
+
+        const issueHref = typeof window.orientation !== 'undefined' ? '/#usluge-mobile' : '/#usluge';
+
+        return (
+            <div>
+                <nav className="main-menu">
+                    <a href={issueHref}>{ t('services') }</a>
+                    <a href="/#cijene">{ t('prices') }</a>
+                    <a href="/#kakoradi">{ t('howWork') }</a>
+                    <a href="/#kosmomi">{ t('whoAreWe')}</a>
+                    <a href="/blogovi">{ t('blog') }</a>
+                    <a href="/kontakt">Kontakt</a>
+                </nav>
+                <div id="topNav" className="navigation">
+                    <span id="closebtn" onClick={this.navToggle}>
+                    <span className="line1" />
+                        <span className="line2" />
+                        <span className="line3" />
+                        <span className="menu-text">{ t('menu') }</span>
+                    </span>
+                    <ul className="menulist">
+                        <li><a onClick={this.closeMobileMenu} className="menuitems" href="/#kosmomi">{ t('whoAreWe')}</a></li>
+                        <li><a className="menuitems" href="/blogovi">{ t('blog') }</a></li>
+                        <li><a className="menuitems" href="/kontakt">Kontakt</a></li>
+                    </ul>
+                </div>
+            </div>
+        )
+    }
+
+    renderAdminMenu () {
+        const { t } = this.props;
+
+        return (
+            <div>
+                <nav className="main-menu">
+                    <a href='/admin'>Sessions</a>
+                    <a href="/workshop">Workshops</a>
+                    <a href="/newsletters">Newsletter</a>
+                    <a href="/messages">Messages</a>
+                </nav>
+                <div id="topNav" className="navigation">
+                    <span id="closebtn" onClick={this.navToggle}>
+                    <span className="line1" />
+                        <span className="line2" />
+                        <span className="line3" />
+                        <span className="menu-text">{ t('menu') }</span>
+                    </span>
+                    <ul className="menulist">
+                        <li><a className="menuitems" href="/admin">Sessions</a></li>
+                        <li><a className="menuitems" href="/workshop">Workshops</a></li>
+                        <li><a className="menuitems" href="/newsletters">Newsletter</a></li>
+                        <li><a className="menuitems" href="/messages">Messages</a></li>
+                    </ul>
+                </div>
+            </div>
+        )
     }
 
     render () {
@@ -153,8 +214,6 @@ handleLogout (event) {
 
         const logoutBtn = (this.props.location.pathname === '/admin')
             ? 'auth-controls is-visible' : 'auth-controls is-hidden';
-
-        const issueHref = typeof window.orientation !== 'undefined' ? '/#usluge-mobile' : '/#usluge';
 
         return (
             <header className={headerClass}>
@@ -178,30 +237,13 @@ handleLogout (event) {
                         </svg>
                     </a>
                 </h1>
-                <nav className="main-menu">
-                    <a href={issueHref}>{ t('services') }</a>
-                    <a href="/#cijene">{ t('prices') }</a>
-                    <a href="/#kakoradi">{ t('howWork') }</a>
-                    <a href="/#kosmomi">{ t('whoAreWe')}</a>
-                    <a href="/blogovi">{ t('blog') }</a>
-                    <a href="/kontakt">Kontakt</a>
-                </nav>
-                <div id="topNav" className="navigation">
-                    <span id="closebtn" onClick={this.navToggle}>
-                        <span className="line1" />
-                        <span className="line2" />
-                        <span className="line3" />
-                        <span className="menu-text">{ t('menu') }</span>
-                    </span>
-                    <ul className="menulist">
-                        <li><a onClick={this.closeMobileMenu} className="menuitems" href={issueHref}>{ t('services') }</a></li>
-                        <li><a onClick={this.closeMobileMenu} className="menuitems" href="/#cijene">{ t('prices') }</a></li>
-                        <li><a onClick={this.closeMobileMenu} className="menuitems" href="/#kakoradi">{ t('howWork') }</a></li>
-                        <li><a onClick={this.closeMobileMenu} className="menuitems" href="/#kosmomi">{ t('whoAreWe')}</a></li>
-                        <li><a className="menuitems" href="/blogovi">{ t('blog') }</a></li>
-                        <li><a className="menuitems" href="/kontakt">Kontakt</a></li>
-                    </ul>
-                </div>
+                {(() => {
+                    if (this.props.location.pathname !== '/' && this.props.location.pathname !== '/checkout') {
+                        return this.renderAdminMenu();
+                    } else {
+                        return this.renderMenu();
+                    }
+                })()}
                 <div className="language">
                     <ul onClick={this.openLanguage} className="languagepicker roundborders large">
                         {this.renderFlags()}

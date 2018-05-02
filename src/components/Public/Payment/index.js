@@ -185,7 +185,6 @@ export class Payment extends Component {
 
         this.setCategorySize(size, type);
         const cost = this.calculateCost();
-        console.log(cost);
 
         const showDurationText = (this.skypePackage)
             ? this.skypePackage.cost === 0 : true;
