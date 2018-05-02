@@ -310,7 +310,7 @@ export class Encounter extends Component {
                             <div className="detail-inner">
                                 <div className="col-1">
                                     {(() => {
-                                        if (encounter.srreet) {
+                                        if (encounter.street) {
                                             return <p>{encounter.street}</p>
                                         }
                                     })()}
