@@ -9,7 +9,7 @@
 }
 
 .languagepicker {
-    display: none;
+    //display: none;
     background-color: #FFF;
     padding: 0;
     height: 40px;
@@ -119,6 +119,10 @@
     font-size: 18px;
     text-decoration: none;
     cursor: pointer;
+}
+
+.header .menuitem-active {
+    border-bottom: 1px solid #C04C9C;
 }
 
 .header .logo-text {

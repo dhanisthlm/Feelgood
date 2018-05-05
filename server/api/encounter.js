@@ -88,8 +88,12 @@ const handlePaypalEnv = (request, reply) => {
 const handleNewsletter = (request, reply) => {
     Newsletter.find({ email: request.payload.email }, (err, result) => {
         if (result.length === 0) {
+            const date = new Date();
+
             const newsletter = new Newsletter();
             newsletter.email = request.payload.email;
+            newsletter.date = date.toUTCString();
+
             newsletter.save();
         }
     });

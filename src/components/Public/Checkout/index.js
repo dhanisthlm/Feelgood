@@ -158,7 +158,6 @@ export class Checkout extends FormComponent {
         }
     }
 
-
     componentWillUnmount() {
         this.resetOrder();
     }

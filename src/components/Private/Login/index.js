@@ -37,7 +37,7 @@ export class Login extends Component {
                 <div className="page-header"><h1>Login</h1></div>
                 <div className="login-wrapper">
                     <div>
-                        <label htmlFor="username">Username</label>
+                        <label htmlFor="username">Korisničko ime</label>
                         <input
                             id="username"
                             type="text"
@@ -46,7 +46,7 @@ export class Login extends Component {
                         />
                     </div>
                     <div>
-                        <label htmlFor="password">Password</label>
+                        <label htmlFor="password">Lozinka</label>
                         <input
                             id="password"
                             type="password"
@@ -54,7 +54,7 @@ export class Login extends Component {
                             value={ this.state.password }
                         />
                     </div>
-                    <button onClick={ this.handleSubmit }>Login</button>
+                    <button onClick={ this.handleSubmit }>Ulogovati se</button>
                     <div className="push" />
                 </div>
                 <Footer />

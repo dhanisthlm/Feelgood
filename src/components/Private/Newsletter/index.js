@@ -3,8 +3,10 @@ import { connect } from 'react-redux';
 import validation from 'react-validation-mixin';
 import strategy from 'joi-validation-strategy';
 import TableToExcel from 'table-to-excel';
+import moment from 'moment';
 import { getNewsletters, eraseNewsletter } from '../../../actions/encounter';
 import Header from '../../Public/Header/index';
+import Footer from '../../Public/Footer/index';
 import styles from './styles.css';
 
 export class Newsletter extends Component {
@@ -40,16 +42,24 @@ export class Newsletter extends Component {
             <div className="page admin">
                 <Header location={this.props.location} />
                 <div className="page-header">
-                    <h1 className="admin-heading">Newsletter subscriptions</h1>
+                    <h1 className="admin-heading">E-pošta lista</h1>
                 </div>
-                <button className="export-button" onClick={ this.handleExport }>Export to Excel</button>
+                <button className="export-button" onClick={ this.handleExport }>Izvoz u Excel</button>
                 <ul className="mobile-list">
+                    <li>
+                        <div>
+                            <p>E-pošta</p>
+                            <p>Datum</p>
+                        </div>
+                    </li>
                     {this.props.newsletters.map((newsletter, i) => {
+                        const localTime = moment(newsletter.date).format('YYYY-MM-DD / HH:mm');
+
                         return (
                             <li key={i} className="list-item">
                                 <div>
-                                    <p>Email:</p>
                                     <p>{newsletter.email}</p>
+                                    <p>{localTime}</p>
                                 </div>
                             </li>
                         );
@@ -66,7 +76,7 @@ export class Newsletter extends Component {
                         {this.props.newsletters.map((newsletter, i) => {
                             return (
                                 <tr key={i}>
-                                    <td>{newsletter.email}</td>
+                                    <td>Email: {newsletter.email}</td>
                                     <td id={newsletter._id} onClick={this.eraseNewsletter}>
                                         <svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
                                             <g fill="#0e5ba5">
@@ -80,6 +90,7 @@ export class Newsletter extends Component {
                         </tbody>
                     </table>
                 </div>
+                <Footer />
             </div>
         )
     }

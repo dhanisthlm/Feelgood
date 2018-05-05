@@ -13,8 +13,15 @@ export class Encounter extends Component {
     constructor (props) {
         super(props);
 
+        this.state = {
+            openItems: []
+        };
+
         this.handleExport = this.handleExport.bind(this);
         this.eraseEncounter = this.eraseEncounter.bind(this);
+        this.renderMobile = this.renderMobile.bind(this);
+        this.renderDesktop = this.renderDesktop.bind(this);
+        this.handleClick = this.handleClick.bind(this);
     }
 
     componentDidMount () {
@@ -27,6 +34,21 @@ export class Encounter extends Component {
         }
     }
 
+    handleClick(event) {
+        const index = this.state.openItems.indexOf(event.currentTarget.id);
+        const openItems = this.state.openItems;
+
+        if (index < 0) {
+            openItems.push(event.currentTarget.id);
+        } else {
+            openItems.splice(index, 1);
+        }
+
+        console.log(openItems);
+
+        this.setState({ openItems });
+    }
+
     handleExport () {
         const tableToExcel=new TableToExcel();
         tableToExcel.render("admin-table");
@@ -37,6 +59,226 @@ export class Encounter extends Component {
         this.props.dispatch(eraseWorkshop(id));
     }
 
+    isMobile () {
+        return window.innerWidth <= 800;
+    }
+
+    renderMobile() {
+        return (<ul className="mobile-list">
+            {this.props.workshops.map((workshop, i) => {
+                const localTime = moment(workshop.date).format('YYYY-MM-DD / HH:mm');
+                const isOpen = this.state.openItems.indexOf(workshop._id);
+                const detailClass = isOpen < 0 ? 'details' : 'detailsOpen';
+                const arrowClass = isOpen < 0 ? 'admin-arrow-right': 'admin-arrow-down';
+
+                return (
+                <li onClick={this.handleClick}
+                    id={workshop._id}
+                    key={i} className="list-item">
+                    <div className="row">
+                        <div
+                            className={arrowClass}>
+                            <div className='arrow-mask' />
+                        </div>
+                        <div className="name">
+                            <p>{workshop.name}</p>
+                        </div>
+                        <p className="price">{workshop.price} {workshop.currency}</p>
+                    </div>
+                    <div className={detailClass}>
+                        <div className="detail-inner">
+                            <div className="col-1">
+                                {(() => {
+                                    if (workshop.street) {
+                                        return <p>{workshop.street}</p>
+                                    }
+                                })()}
+                                {(() => {
+                                    if (workshop.city) {
+                                        return <p>{workshop.postalCode} {workshop.city}</p>
+                                    }
+                                })()}
+                                {(() => {
+                                    if (workshop.country) {
+                                        return <p>{workshop.country}</p>
+                                    }
+                                })()}
+                            </div>
+                            {(() => {
+                            })()}
+                            <div className="col-2">
+                                {(() => {
+                                    if (workshop.workshopName) {
+                                        return <p>{workshop.workshopName}</p>
+                                    }
+                                })()}
+                                {(() => {
+                                    if (workshop.location) {
+                                        return <p>{workshop.location}</p>
+                                    }
+                                })()}
+                            </div>
+                            <div className="col-3">
+                                {(() => {
+                                    if (workshop.rating && workshop.rating.web) {
+                                        return <p>Rejting web: {workshop.rating.web}</p>
+                                    }
+                                })()}
+                                {(() => {
+                                    if (workshop.rating && workshop.rating.pay) {
+                                        return <p>Rejting payment: {workshop.rating.pay}</p>
+                                    }
+                                })()}
+                                {(() => {
+                                    if (workshop.rating && workshop.rating.comment) {
+                                        return <p>Komentar: {workshop.rating.comment}</p>
+                                    }
+                                })()}
+                            </div>
+                            <div className="col-4">
+                                {(() => {
+                                    if (workshop.paymentType) {
+                                        return <p>Plaćanja: {workshop.paymentType}</p>
+                                    }
+                                })()}
+                            </div>
+                            <div className="col-5">
+                                {localTime}
+                                {(() => {
+                                    if (workshop.phone) {
+                                        return <p>Tel.broj: {workshop.phone}</p>
+                                    }
+                                })()}
+                                {(() => {
+                                    if (workshop.mail) {
+                                        return <p>E-pošta: {workshop.mail}</p>
+                                    }
+                                })()}
+                            </div>
+                        </div>
+                    </div>
+                </li>);
+            })};
+        </ul>);
+    }
+
+    renderDesktop() {
+        return (<ul className="mobile-list">
+            <li>
+                <div>
+                    <p>Ime i adresa</p>
+                    <p>Radionica</p>
+                    <p>Grad</p>
+                    <p>Komentar</p>
+                    <p>Narudžba</p>
+                    <p>Kontakt info</p>
+                    <p>Ukupno</p>
+                </div>
+            </li>
+            {this.props.workshops.map((workshop, i) => {
+                const localTime = moment(workshop.date).format('YYYY-MM-DD / HH:mm');
+                const isOpen = this.state.openItems.indexOf(workshop._id);
+                const detailClass = isOpen < 0 ? 'details' : 'detailsOpen';
+                const arrowClass = isOpen < 0 ? 'admin-arrow-right' : 'admin-arrow-down';
+
+                return (
+                    <li onClick={this.handleClick}
+                        id={workshop._id}
+                        key={i} className="list-item">
+                        <div>
+                            <div
+                                className={arrowClass}>
+                                <div className='arrow-mask'/>
+                            </div>
+                            <div>
+                                {(() => {
+                                    if (workshop.name) {
+                                        return <p>{workshop.name}</p>
+                                    }
+                                })()}
+                            </div>
+                            <div>
+                                {(() => {
+                                    if (workshop.workshopName) {
+                                        return <p>{workshop.workshopName}</p>
+                                    }
+                                })()}
+                            </div>
+                            <div>
+                                {(() => {
+                                    if (workshop.location) {
+                                        return <p>{workshop.location}</p>
+                                    }
+                                })()}
+                            </div>
+                            {(() => {
+                                if (workshop.rating && workshop.rating.web && workshop.rating.pay) {
+                                    return <p
+                                        className="rating-number">{Math.round((parseInt(workshop.rating.web) + parseInt(workshop.rating.pay)) / 2)}</p>
+                                }
+                            })()}
+                            <p>{localTime}</p>
+                            {(() => {
+                                if (workshop.mail) {
+                                    return <p>{workshop.mail}</p>
+                                }
+                            })()}
+                            {(() => {
+                                if (workshop.currency) {
+                                    return <p>{workshop.price} {workshop.currency}</p>
+                                }
+                            })()}
+                        </div>
+                        <div className={detailClass}>
+                            <div className="detail-inner">
+                                <div className="col-1">
+                                    {(() => {
+                                        if (workshop.street) {
+                                            return <p>{workshop.street}</p>
+                                        }
+                                    })()}
+                                    {(() => {
+                                        if (workshop.city) {
+                                            return <p>{workshop.postalCode} {workshop.city}</p>
+                                        }
+                                    })()}
+                                    {(() => {
+                                        if (workshop.country) {
+                                            return <p>{workshop.country}</p>
+                                        }
+                                    })()}
+                                </div>
+                                <div className="col-2" />
+                                <div className="col-3" />
+                                <div className="col-4">
+                                    <p>Web: {workshop.rating.web}</p>
+                                    <p>Payment: {workshop.rating.pay}</p>
+                                    <p>Komentar: {workshop.rating.comment}</p>
+                                </div>
+                                <div className="col-5">
+                                    {(() => {
+                                        if (workshop.paymentType) {
+                                            return <p>Plaćanja: {workshop.paymentType}</p>
+                                        }
+                                    })()}
+                                </div>
+                                <div className="col-6">
+                                    {(() => {
+                                        if (workshop.phone) {
+                                            return <p>Tel.broj: {workshop.phone}</p>
+                                        }
+                                    })()}
+                                </div>
+                                <div className="col-7">
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                );
+            })};
+        </ul>);
+    }
+
     render () {
         return (
             <div className="page admin">
@@ -45,92 +287,13 @@ export class Encounter extends Component {
                     <h1 className="admin-heading">Rezervacije</h1>
                 </div>
                 <button className="export-button" onClick={ this.handleExport }>Izvoz u Excel</button>
-                <ul className="mobile-list">
-                    {this.props.workshops.map((workshop, i) => {
-                        const localTime = moment(workshop.date).format('YYYY-MM-DD / HH:mm');
-                        const webRating = workshop.rating ? workshop.rating.web : 0;
-                        const payRating = workshop.rating ? workshop.rating.pay : 0;
-                        const ratingComment = workshop.rating ? workshop.rating.comment : '';
-
-                        return (
-                            <li key={i} className="list-item">
-                                <div>
-                                    <p>Radionica grad:</p>
-                                    <p>{workshop.location}</p>
-                                </div>
-                                <div>
-                                    <p>Radionica ime:</p>
-                                    <p>{workshop.workshopName}</p>
-                                </div>
-                                <div>
-                                    <p>Mjesec:</p>
-                                    <p>{workshop.month}</p>
-                                </div>
-                                <div>
-                                    <p>Dan:</p>
-                                    <p>{workshop.day}</p>
-                                </div>
-                                <div>
-                                    <p>Ime:</p>
-                                    <p>{workshop.name}</p>
-                                </div>
-                                <div>
-                                    <p>Ulica</p>
-                                    <p>{workshop.street}</p>
-                                </div>
-                                <div>
-                                    <p>Poštanski broj</p>
-                                    <p>{workshop.postalCode}</p>
-                                </div>
-                                <div>
-                                    <p>Grad</p>
-                                    <p>{workshop.city}</p>
-                                </div>
-                                <div>
-                                    <p>Zemlja</p>
-                                    <p>{workshop.country}</p>
-                                </div>
-                                <div>
-                                    <p>Valuta</p>
-                                    <p>{workshop.currency}</p>
-                                </div>
-                                <div>
-                                    <p>Tip plaćanja</p>
-                                    <p>{workshop.paymentType}</p>
-                                </div>
-                                <div>
-                                    <p>E-pošta:</p>
-                                    <p>{workshop.mail}</p>
-                                </div>
-                                <div>
-                                    <p>Telefon:</p>
-                                    <p>{workshop.phone}</p>
-                                </div>
-                                <div>
-                                    <p>Datum:</p>
-                                    <p>{localTime}</p>
-                                </div>
-                                <div>
-                                    <p>Ukupan:</p>
-                                    <p>{workshop.price}</p>
-                                </div>
-                                <h3>Rajting</h3>
-                                <div>
-                                    <p>Web:</p>
-                                    <p>{webRating}</p>
-                                </div>
-                                <div>
-                                    <p>Plaćanje:</p>
-                                    <p>{payRating}</p>
-                                </div>
-                                <div>
-                                    <p>Komentar:</p>
-                                    <p>{ratingComment}</p>
-                                </div>
-                            </li>
-                        );
-                    })};
-                </ul>
+                {(() => {
+                    if (this.isMobile()) {
+                        return this.renderMobile();
+                    } else {
+                        return this.renderDesktop();
+                    }
+                })()}
                 <div className="admin-wrapper">
                     <table id="admin-table" className="admin-table">
                         <thead>
@@ -198,6 +361,7 @@ export class Encounter extends Component {
                         </tbody>
                     </table>
                 </div>
+                <Footer />
             </div>
         )
     }

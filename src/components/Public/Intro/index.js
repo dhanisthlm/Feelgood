@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux';
+import { Link } from 'react-router';
 import { translate } from 'react-i18next';
 import { resetRating } from '../../../actions/encounter';
 import styles from './styles.css';
@@ -43,7 +44,7 @@ export class Hero extends Component {
                 <div className="text-wrapper">
                     <h3 className="heading">{ t('heading') }</h3>
                     <p className="preamble">{ t('preamble') }</p>
-                    <a href="#cijene" className="intro-button">{ t('start') }</a>
+                    <Link to="#cijene" className="intro-button">{ t('start') }</Link>
                 </div>
             </div>
         );

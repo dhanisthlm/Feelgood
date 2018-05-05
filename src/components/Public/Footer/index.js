@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux';
+import { Link } from 'react-router';
 import { translate } from 'react-i18next';
 import { getBlogs } from '../../../actions/blog';
 import i18n from '../../../config/i18n';
@@ -67,18 +68,18 @@ export class Footer extends Component {
                         this.props.blogs.map((blog, i) => {
                             const href = `/blogovi#${blog.hash}`;
                             return (i < 6)
-                                ? <a className="link" href={href} key={i}>{blog.title[locale]}</a>
+                                ? <Link className="link" to={href} key={i}>{blog.title[locale]}</Link>
                                 : null;
                         })
                     }
                 </div>
                 <div className="col col-3">
                     <h2>{ t('conditions') }</h2>
-                    <a className="link" href="/politika-privatnosti">{ t('privacyPolicy') }</a>
-                    <a className="link" href="/tac">{ t('tac') }</a>
-                    <a className="link" href="/cookies">{ t('cookiePolicy') }</a>
-                    <a className="link" href="/faq">FAQ - { t('questions') }</a>
-                    <a className="link" href="/kontakt">{ t('customerService') }</a>
+                    <Link className="link" to="/politika-privatnosti">{ t('privacyPolicy') }</Link>
+                    <Link className="link" to="/tac">{ t('tac') }</Link>
+                    <Link className="link" to="/cookies">{ t('cookiePolicy') }</Link>
+                    <Link className="link" to="/faq">FAQ - { t('questions') }</Link>
+                    <Link className="link" to="/kontakt">{ t('customerService') }</Link>
                 </div>
             </footer>
         )

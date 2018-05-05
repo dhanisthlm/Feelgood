@@ -89,7 +89,7 @@
     background-color: #c04c9c;
     position: absolute;
     top: 25px;
-    left: 2%;
+    left: 30px;
     transform: translate(-50%, -50%) rotate(-135deg);
 }
 
@@ -99,7 +99,7 @@
     background-color: #c04c9c;
     position: absolute;
     top: 25px;
-    left: 2%;
+    left: 30px;
     transform: translate(-50%, -50%) rotate(-45deg);
 }
 

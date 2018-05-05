@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux';
+import { Link } from 'react-router';
 import { translate } from 'react-i18next';
 import styles from './styles.css';
 
@@ -256,7 +257,7 @@ export class Issues extends Component {
 				<div className="text-wrapper">
 					<h3 className="heading">{ t('heading') }</h3>
 					<p className="preamble">{ t('preamble') }</p>
-					<a href="/kontakt" className="issue-button">{ t('contactUs') }</a>
+					<Link to="/kontakt" className="issue-button">{ t('contactUs') }</Link>
 				</div>
 			</div>
 

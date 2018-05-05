@@ -44,8 +44,6 @@ export class Encounter extends Component {
             openItems.splice(index, 1);
         }
 
-        console.log(openItems);
-
         this.setState({ openItems });
     }
 
@@ -226,7 +224,7 @@ export class Encounter extends Component {
                     <p>Komentar</p>
                     <p>Narudžba</p>
                     <p>Kontakt info</p>
-                    <p>Ukupan</p>
+                    <p>Ukupno</p>
                     <p>Tip</p>
                 </div>
             </li>
