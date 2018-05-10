@@ -213,12 +213,11 @@ export class Checkout extends FormComponent {
      * @return {object}
      */
     componentWillReceiveProps(nextProps) {
-        console.log(nextProps);
         const {location} = nextProps;
         if (location.query.workshop || location.query.skype || location.query.email) {
             this.setState({
                 stripeToken: nextProps.stripeToken,
-                paypalEnv: nextProps.paypalEnv
+                //paypalEnv: nextProps.paypalEnv
             }, () => {
                 setTimeout(() => {
                     this.initStripe();
