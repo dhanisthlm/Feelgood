@@ -827,7 +827,6 @@ export class Checkout extends FormComponent {
 
         return (
             <div className="page">
-                <InactivityModal resetOrder={this.resetOrder}/>
                 <div className={spinnerClass}>
                     <div className="loader">
                         <svg className="circular" viewBox="25 25 50 50">
