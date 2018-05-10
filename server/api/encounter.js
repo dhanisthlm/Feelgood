@@ -40,17 +40,19 @@ const handleRating = (request, reply) => {
             }
         })
     } else {
-        Encounter.find({ '_id': request.payload.id }, (err, encounter) => {
-            if (encounter.length) {
-                encounter[0].rating = {
-                    web: request .payload.ratingObj.web,
-                    pay: request.payload.ratingObj.pay,
-                    comment: request.payload.ratingObj.comment
-                };
-                encounter[0].save();
-                return reply().code(200);
-            }
-        })
+        if (request.pqyload.id) {
+            Encounter.find({ '_id': request.payload.id }, (err, encounter) => {
+                if (encounter.length) {
+                    encounter[0].rating = {
+                        web: request .payload.ratingObj.web,
+                        pay: request.payload.ratingObj.pay,
+                        comment: request.payload.ratingObj.comment
+                    };
+                    encounter[0].save();
+                    return reply().code(200);
+                }
+            })
+        }
     }
 };
 
@@ -147,7 +149,9 @@ const saveEncounter = (request, reply, charge) => {
 
     encounter.save((err, record) => {
         if (charge) {
-            charge.encounterId = record._id;
+            if (record) {
+                charge.encounterId = record._id;
+            }
             return reply(charge);
         } else {
             return reply(record);
