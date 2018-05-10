@@ -277,7 +277,7 @@ const handleCharge = (request, reply) => {
             });
 
             if (charge.paid) {
-                if (!request.payload.encounter.skype && !request.payload.encounter.email !request.payload.encounter.workshop) {
+                if (!request.payload.encounter.skype && !request.payload.encounter.email && !request.payload.encounter.workshop) {
                     saveEncounter(request, reply, charge);
                 } else if (request.payload.encounter.workshop) {
                     saveWorkshop(request, reply, charge);
@@ -287,7 +287,7 @@ const handleCharge = (request, reply) => {
             }
         });
     } else {
-        if (!request.payload.encounter.skype && !request.payload.encounter.email !request.payload.encounter.workshop) {
+        if (!request.payload.encounter.skype && !request.payload.encounter.email && !request.payload.encounter.workshop) {
             saveEncounter(request, reply, null);
         } else if (request.payload.encounter.workshop) {
             saveWorkshop(request, reply, null);
