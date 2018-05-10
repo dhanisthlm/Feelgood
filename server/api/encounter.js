@@ -263,6 +263,7 @@ const saveWorkshop = (request, reply, charge) => {
 };
 
 const handleCharge = (request, reply) => {
+    console.log('1', request.payload.id);
     if (request.payload.id !== null) {
         // Token is created using Checkout or Elements!
         // Get the payment token ID submitted by the form:
@@ -271,10 +272,12 @@ const handleCharge = (request, reply) => {
         let amount = 0;
 
         if (request.payload.encounter.workshop || request.payload.encounter.skype || request.payload.encounter.email) {
-            amount = request.payload.encounter.price * 100;
+            amount = parseInt(request.payload.encounter.cost.total) * 100;
         } else {
-            amount = request.payload.encounter.cost.total * 100
+            amount = parseInt(request.payload.encounter.cost.total) * 100;
         }
+
+        console.log('2', amount);
 
         // Charge the user's card:
         // request.payload.cost
@@ -286,9 +289,13 @@ const handleCharge = (request, reply) => {
             description: "zdravlje.nu",
             source: token,
         }, function (error, charge) {
+            console.log(error);
+
             if (error) return reply({
                 message: error.code, code: error.type
             });
+
+            console.log(error, charge);
 
             if (charge.paid) {
                 if (request.payload.encounter.workshop) {
