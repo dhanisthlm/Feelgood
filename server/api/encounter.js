@@ -209,7 +209,8 @@ const saveLinkEncounter = (request, reply, charge) => {
     encounter.date = date.toUTCString();
 
     encounter.save((err, record) => {
-        console.log('record', record);
+        if (err) return reply(err);
+
         if (charge) {
             charge.encounterId = record._id;
             return reply(charge);
