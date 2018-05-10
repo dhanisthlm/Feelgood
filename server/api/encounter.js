@@ -268,13 +268,20 @@ const handleCharge = (request, reply) => {
         // Get the payment token ID submitted by the form:
         const striper = stripe(config.get('stripe.server'));
         const token = request.payload.id;
+        let amount = 0;
+
+        if (request.payload.encounter.workshop || request.payload.encounter.skype || request.payload.encounter.email) {
+            amount = request.payload.encounter.price * 100;
+        } else {
+            amount = request.payload.encounter.cost.total * 100
+        }
 
         // Charge the user's card:
         // request.payload.cost
         // amount: 3 * 100,
         // currency: request.payload.encounter.currency,
         striper.charges.create({
-            amount: request.payload.encounter.cost.total * 100,
+            amount: amount,
             currency: request.payload.encounter.currency,
             description: "zdravlje.nu",
             source: token,
