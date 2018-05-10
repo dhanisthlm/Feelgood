@@ -276,13 +276,11 @@ const handleCharge = (request, reply) => {
             });
 
             if (charge.paid) {
-                if (request.payload.encounter.workshop === false &&
-                    request.payload.encounter.skype === false &&
-                    request.payload.encounter.email === false) {
+                if (request.payload.encounter.data) {
                     saveEncounter(request, reply, charge);
-                } else if (request.payload.encounter.workshop) {
+                } else if (request.payload.encounter.workshop && !request.payload.encounter.data) {
                     saveWorkshop(request, reply, charge);
-                } else if (request.payload.encounter.skype || request.payload.encounter.email) {
+                } else if (request.payload.encounter.skype || request.payload.encounter.email && !request.payload.encounter.data) {
                     saveLinkEncounter(request, reply, charge);
                 }
             }
