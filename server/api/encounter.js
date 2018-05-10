@@ -40,7 +40,7 @@ const handleRating = (request, reply) => {
             }
         })
     } else {
-        if (request.pqyload.id) {
+        if (request.payload.id) {
             Encounter.find({ '_id': request.payload.id }, (err, encounter) => {
                 if (encounter.length) {
                     encounter[0].rating = {
@@ -52,6 +52,8 @@ const handleRating = (request, reply) => {
                     return reply().code(200);
                 }
             })
+        } else {
+            return reply().code(200);
         }
     }
 };
