@@ -82,7 +82,7 @@ const handleStripeToken = (request, reply) => {
 
 const handlePaypalEnv = (request, reply) => {
     const env = config.get('paypal');
-    return reply(env).code(200);
+    return reply('production').code(200);
 };
 
 const handleNewsletter = (request, reply) => {
