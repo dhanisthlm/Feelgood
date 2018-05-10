@@ -32,7 +32,7 @@ export class Checkout extends FormComponent {
                 sandbox: 'ASjq_5LtraMQlFGyiih32_C8F-Yh_k1-jfGa54hGrXDPJ0PdeGV861q2kv3ez_QTsOAMxSm_eNChI1ha',
                 production: 'AdHHMFOsZkPDUuMIuqtVycTd5cybDC_IaFRsJn1hCOsb6wQKTTTiT-SbIL6YqxP2SY3N6bPRzEfDT01_',
             },
-            env: 'sandbox',
+            env: 'production',
             commit: true,
             issue: '',
             isOpen: false,
@@ -213,6 +213,7 @@ export class Checkout extends FormComponent {
      * @return {object}
      */
     componentWillReceiveProps(nextProps) {
+        console.log(nextProps);
         const {location} = nextProps;
         if (location.query.workshop || location.query.skype || location.query.email) {
             this.setState({
