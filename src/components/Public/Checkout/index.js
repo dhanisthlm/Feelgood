@@ -906,7 +906,7 @@ export class Checkout extends FormComponent {
                                                                     <td className="center">{ getWorkshopCost(parseInt(location.query.skypeCost), this.state) }&nbsp;{ currency }</td>
                                                                 </tr>
                                                             )
-                                                        } else {
+                                                        } else if (location.query.workshop) {
                                                             return (
                                                                 <tr>
                                                                     <td>{`${location.query.workshop.charAt(0).toUpperCase() + location.query.workshop.slice(1)} – ${location.query.day}.${location.query.month}, ${location.query.location.charAt(0).toUpperCase() + location.query.location.slice(1)}`}</td>
