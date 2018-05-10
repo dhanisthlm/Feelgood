@@ -203,6 +203,7 @@ const saveLinkEncounter = (request, reply, charge) => {
     encounter.date = date.toUTCString();
 
     encounter.save((err, record) => {
+        console.log('record', record);
         if (charge) {
             charge.encounterId = record._id;
             return reply(charge);
@@ -276,21 +277,21 @@ const handleCharge = (request, reply) => {
             });
 
             if (charge.paid) {
-                if (request.payload.encounter.data) {
+                if (!request.payload.encounter.skype && !request.payload.encounter.email !request.payload.encounter.workshop) {
                     saveEncounter(request, reply, charge);
-                } else if (request.payload.encounter.workshop && !request.payload.encounter.data) {
+                } else if (request.payload.encounter.workshop) {
                     saveWorkshop(request, reply, charge);
-                } else if (request.payload.encounter.skype || request.payload.encounter.email && !request.payload.encounter.data) {
+                } else if (request.payload.encounter.skype || request.payload.encounter.email) {
                     saveLinkEncounter(request, reply, charge);
                 }
             }
         });
     } else {
-        if (request.payload.encounter.data) {
+        if (!request.payload.encounter.skype && !request.payload.encounter.email !request.payload.encounter.workshop) {
             saveEncounter(request, reply, null);
-        } else if (request.payload.encounter.workshop && !request.payload.encounter.data) {
+        } else if (request.payload.encounter.workshop) {
             saveWorkshop(request, reply, null);
-        } else if (request.payload.encounter.skype || request.payload.encounter.email && !request.payload.encounter.data) {
+        } else if (request.payload.encounter.skype || request.payload.encounter.email) {
             saveLinkEncounter(request, reply, null);
         }
     }
