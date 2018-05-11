@@ -263,8 +263,12 @@ const saveWorkshop = (request, reply, charge) => {
 };
 
 const handleCharge = (request, reply) => {
-    console.log('1', request.payload.id);
-    if (request.payload.encounter && request.payload.id !== null) {
+    if (!request.payload.encounter) {
+        return.reply().code(200);
+    }
+
+
+    if (request.payload.id !== null) {
         // Token is created using Checkout or Elements!
         // Get the payment token ID submitted by the form:
         const striper = stripe(config.get('stripe.server'));
