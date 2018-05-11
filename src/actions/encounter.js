@@ -93,8 +93,10 @@ export const saveRating = (encounterId, ratingObj) => (dispatch) => {
 };
 
 export const saveEncounter = (encounter, id) => (dispatch) => {
+    console.log(encounter);
+    
     return request
-        .post('/encounter', { id, encounter })
+        .post('/encounter', { encounter, id })
         .then((data) => {
             if (data.data.code === 'StripeCardError') {
                 dispatch({type: 'CHECKOUT_ERROR', payload: data.data.message });
