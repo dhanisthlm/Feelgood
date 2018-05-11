@@ -248,7 +248,7 @@ export class Checkout extends FormComponent {
             language: window.localStorage.getItem('order') ? JSON.parse(window.localStorage.getItem('order')).language : this.state.language,
         });
 
-        if (!location.query.workshop) {
+        if (!location.query.workshop && !location.query.skype && !location.query.email) {
             this.setState({cost: JSON.parse(window.localStorage.getItem('order')).cost});
         }
 
