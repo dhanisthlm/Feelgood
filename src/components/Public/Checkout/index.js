@@ -294,7 +294,7 @@ export class Checkout extends FormComponent {
                 this.setState({termsIsDirty: true, cancelIsDirty: true, paymentType: 'paypal' });
             } else if (id === 'faktura') {
                 paypalFactor = (this.state.invoiceCurrencies.indexOf(this.state.language) > -1) ? 1 : 2;
-                this.setState({termsIsDirty: true, cancelIsDirty: true, paymentType: 'faaktura' });
+                this.setState({termsIsDirty: true, cancelIsDirty: true, paymentType: 'faktura' });
             } else {
                 paypalFactor = 1;
                 this.setState({termsIsDirty: true, cancelIsDirty: true, paymentType: 'credit' });
