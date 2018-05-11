@@ -271,12 +271,6 @@ const handleCharge = (request, reply) => {
         const token = request.payload.id;
         let amount = 0;
 
-        if (request.payload.encounter.workshop || request.payload.encounter.skype || request.payload.encounter.email) {
-            amount = parseInt(request.payload.encounter.cost.total) * 100;
-        } else {
-            amount = parseInt(request.payload.encounter.cost.total) * 100;
-        }
-
         console.log('2', amount);
 
         // Charge the user's card:
@@ -284,7 +278,7 @@ const handleCharge = (request, reply) => {
         // amount: 3 * 100,
         // currency: request.payload.encounter.currency,
         striper.charges.create({
-            amount: amount,
+            amount: parseInt(request.payload.encounter.cost.total) * 100,
             currency: request.payload.encounter.currency,
             description: "zdravlje.nu",
             source: token,
