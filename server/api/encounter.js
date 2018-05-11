@@ -264,7 +264,7 @@ const saveWorkshop = (request, reply, charge) => {
 
 const handleCharge = (request, reply) => {
     if (!request.payload.encounter) {
-        return.reply().code(200);
+        return reply().code(200);
     }
 
 
