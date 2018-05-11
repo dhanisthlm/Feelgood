@@ -291,11 +291,13 @@ export class Checkout extends FormComponent {
 
             if (id === 'paypal') {
                 paypalFactor = (this.state.paypalCurrencies.indexOf(this.state.language) > -1) ? 1 : 2;
-                this.setState({termsIsDirty: true, cancelIsDirty: true});
+                this.setState({termsIsDirty: true, cancelIsDirty: true, paymentType: 'paypal' });
             } else if (id === 'faktura') {
                 paypalFactor = (this.state.invoiceCurrencies.indexOf(this.state.language) > -1) ? 1 : 2;
+                this.setState({termsIsDirty: true, cancelIsDirty: true, paymentType: 'faaktura' });
             } else {
                 paypalFactor = 1;
+                this.setState({termsIsDirty: true, cancelIsDirty: true, paymentType: 'credit' });
             }
 
             this.setState({paypalFactor})
