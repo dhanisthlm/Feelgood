@@ -93,7 +93,7 @@ export const saveRating = (encounterId, ratingObj) => (dispatch) => {
 };
 
 export const saveEncounter = (encounter, id) => (dispatch) => {
-    console.log(encounter);
+    console.log(encounter, id);
     
     return request
         .post('/encounter', { encounter, id })
