@@ -1143,7 +1143,7 @@ export class Checkout extends FormComponent {
                                             { this.getValidationMessages('mail') }
                                         </div>
                                         {(() => {
-                                            if (!location.query.workshop && !location.query.skype && !location.query.email) {
+                                            if (!location.query.workshop) {
                                                 return (
                                                     <div className="form-element-wrapper">
                                                         <label htmlFor="issue">{t('issue')}</label>
@@ -1158,7 +1158,7 @@ export class Checkout extends FormComponent {
                                             }
                                         })()}
                                         {(() => {
-                                            if (!location.query.workshop & !location.query.skype && !location.query.email) {
+                                            if (!location.query.workshop) {
                                                 return (
                                                     <div className="form-element-wrapper">
                                                         <label htmlFor="timeframe">{ t('chooseTime') }</label>
