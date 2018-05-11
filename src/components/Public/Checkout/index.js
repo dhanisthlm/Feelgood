@@ -144,6 +144,8 @@ export class Checkout extends FormComponent {
         }
 
         if (location.query.workshop || location.query.skype || location.query.email) {
+            window.localStorage.removeItem('order');
+
             this.setState({
                 language: this.props.location.query.currency,
                 cancel: 'on',
