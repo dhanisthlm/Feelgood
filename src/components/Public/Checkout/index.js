@@ -134,18 +134,16 @@ export class Checkout extends FormComponent {
     componentWillMount() {
         const {location} = this.props;
 
-        if (window.localStorage.getItem('order') !== null) {
+        if (window.localStorage.getItem('order') !== null && !location.query.workshop && !location.query.skype && !location.query.email) {
             const cache = JSON.parse(window.localStorage.getItem('order'));
             this.setState({...cache, save: false});
         }
 
-        if (window.localStorage.getItem('order') !== null) {
+        if (window.localStorage.getItem('order') !== null || location.query.workshop || location.query.skype || location.query.email) {
             this.props.dispatch(getIssues());
         }
 
         if (location.query.workshop || location.query.skype || location.query.email) {
-            window.localStorage.removeItem('order');
-
             this.setState({
                 language: this.props.location.query.currency,
                 cancel: 'on',
@@ -806,7 +804,7 @@ export class Checkout extends FormComponent {
 
         let sumClass, centerClass;
 
-        if (window.localStorage.getItem('order')) {
+        if (window.localStorage.getItem('order') && !location.query.workshop && !location.query.skype && !location.query.email) {
             sumClass =
                 (typeof this.state.data.packageDiscount === 'undefined' &&
                 typeof this.state.data.promoDiscount === 'undefined')
