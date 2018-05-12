@@ -293,12 +293,10 @@ const handleCharge = (request, reply) => {
                 message: error.code, code: error.type
             });
 
-            console.log(error, charge);
-
             if (charge.paid) {
-                if (request.payload.encounter.workshop) {
+                if (!request.payload.encounter.data && request.payload.encounter.workshop) {
                     saveWorkshop(request, reply, charge);
-                } else if (request.payload.encounter.skype || request.payload.encounter.email) {
+                } else if (!request.payload.encounter.data && request.payload.encounter.skype || request.payload.encounter.email) {
                     saveLinkEncounter(request, reply, charge);
                 } else {
                     saveEncounter(request, reply, charge);
@@ -306,9 +304,9 @@ const handleCharge = (request, reply) => {
             }
         });
     } else {
-        if (request.payload.encounter.workshop) {
+        if (!request.payload.encounter.data && request.payload.encounter.workshop) {
             saveWorkshop(request, reply, null);
-        } else if (request.payload.encounter.skype || request.payload.encounter.email) {
+        } else if (!request.payload.encounter.data && request.payload.encounter.skype || request.payload.encounter.email) {
             saveLinkEncounter(request, reply, null);
         } else {
             saveEncounter(request, reply, null);
