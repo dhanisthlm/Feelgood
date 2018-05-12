@@ -287,8 +287,6 @@ const handleCharge = (request, reply) => {
             description: "zdravlje.nu",
             source: token,
         }, function (error, charge) {
-            console.log(error);
-
             if (error) return reply({
                 message: error.code, code: error.type
             });

@@ -137,6 +137,8 @@ export class Checkout extends FormComponent {
         if (window.localStorage.getItem('order') !== null && !location.query.workshop && !location.query.skype && !location.query.email) {
             const cache = JSON.parse(window.localStorage.getItem('order'));
             this.setState({...cache, save: false});
+        } else {
+            window.localStorage.removeItem('order');
         }
 
         if (window.localStorage.getItem('order') !== null || location.query.workshop || location.query.skype || location.query.email) {
@@ -223,6 +225,10 @@ export class Checkout extends FormComponent {
                     this.initStripe();
                 }, 1000)
             });
+        }
+
+        if (nextProps.errorMessage.length > 0) {
+            this.setState({ showSpinner: false });
         }
 
         this.prepInit(nextProps);
