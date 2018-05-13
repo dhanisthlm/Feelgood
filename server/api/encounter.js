@@ -178,15 +178,16 @@ const saveLinkEncounter = (request, reply, charge) => {
 
     if (request.payload.encounter.skype) {
         order.skype = {};
-        order.skype.week = request.payload.encounter.skype;
-        order.skype.cost = request.payload.encounter.skypeCost;
-        order.skype.duration = request.payload.encounter.skypeDuration;
+        order.skype.week = parseInt(request.payload.encounter.skype);
+        order.skype.cost = parseInt(request.payload.encounter.skypeCost);
+        order.skype.duration = parseInt(request.payload.encounter.skypeDuration);
     }
 
     if (request.payload.encounter.email) {
         order.email = {};
-        order.email.week = request.payload.encounter.email;
-        order.email.cost = request.payload.encounter.emailCost;
+        order.email.week = parseInt(request.payload.encounter.email);
+        order.email.cost = parseInt(request.payload.encounter.emailCost);
+        order.email.response = parseInt(request.payload.encounter.emailResponse);
     }
 
     encounter.name = request.payload.encounter.name;

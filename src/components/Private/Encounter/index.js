@@ -193,6 +193,11 @@ export class Encounter extends Component {
                                                 return <p>E-pošta: {encounter.mail}</p>
                                             }
                                         })()}
+                                         {(() => {
+                                            if (encounter.comment) {
+                                                return <p>{encounter.comment}</p>
+                                            }
+                                        })()}
                                     </div>
                                     <div className="col-6">
                                         {(() => {

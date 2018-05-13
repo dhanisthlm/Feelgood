@@ -63,6 +63,9 @@ const encounterSchema = Schema({
             cost: {
                type: Number,
                 default: 0
+            },
+            response: {
+                type: Number
             }
         }
     },

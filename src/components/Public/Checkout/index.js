@@ -814,12 +814,12 @@ export class Checkout extends FormComponent {
             sumClass =
                 (typeof this.state.data.packageDiscount === 'undefined' &&
                 typeof this.state.data.promoDiscount === 'undefined')
-                    ? 'right heavy' : 'right';
+                    ? 'right' : 'right';
 
             centerClass =
                 (typeof this.state.data.packageDiscount === 'undefined' &&
                 typeof this.state.data.promoDiscount === 'undefined')
-                    ? 'center heavy' : 'center';
+                    ? 'center' : 'center';
         }
 
         const spinnerClass = this.state.showSpinner ? 'showbox' : 'none';
@@ -917,7 +917,7 @@ export class Checkout extends FormComponent {
                                                             return (
                                                                 <tr>
                                                                     <td>{`${location.query.workshop.charAt(0).toUpperCase() + location.query.workshop.slice(1)} – ${location.query.day}.${location.query.month}, ${location.query.location.charAt(0).toUpperCase() + location.query.location.slice(1)}`}</td>
-                                                                    <td className="center heavy">{ getWorkshopCost(parseInt(location.query.price), this.state) }&nbsp;{currency}</td>
+                                                                    <td className="center">{ getWorkshopCost(parseInt(location.query.price), this.state) }&nbsp;{currency}</td>
                                                                 </tr>
                                                             )
                                                         }
@@ -984,10 +984,10 @@ export class Checkout extends FormComponent {
                                                         if (!location.query.workshop && !location.query.skype && !location.query.email) {
                                                             if (this.state.data.packageDiscount > 0 || this.state.data.skype && this.state.data.skype.week > 1 || this.state.data.email && this.state.data.email.week > 1) {
                                                                 const labelName = this.state.data.promoDiscount
-                                                                    ? 'right' : 'right heavy';
+                                                                    ? 'right' : 'right';
 
                                                                 const valueName = this.state.data.promoDiscount
-                                                                    ? 'center' : 'center heavy';
+                                                                    ? 'center' : 'center';
 
                                                                 return (
                                                                     <tr>
@@ -1019,9 +1019,9 @@ export class Checkout extends FormComponent {
                                                             if (this.state.data.promoDiscount || this.state.data.skype && this.state.data.skype.week > 1 || this.state.data.email && this.state.data.email.week > 1) {
                                                                 return (
                                                                     <tr>
-                                                                        <td className="right heavy"
+                                                                        <td className="right"
                                                                             colSpan="2">{ t('total') }</td>
-                                                                        <td className="center heavy">{ getTotal(this.state) }&nbsp;{ currency }</td>
+                                                                        <td className="center">{ getTotal(this.state) }&nbsp;{ currency }</td>
                                                                     </tr>
                                                                 )
                                                             }
@@ -1031,9 +1031,9 @@ export class Checkout extends FormComponent {
                                                             let skype = parseInt(location.query.skypeCost) || 0;
                                                             return (
                                                                 <tr>
-                                                                    <td className="right heavy"
+                                                                    <td className="right"
                                                                         colSpan="2">{ t('total') }</td>
-                                                                    <td className="center heavy">{ getWorkshopCost((email + skype), this.state) }&nbsp;{ currency }</td>
+                                                                    <td className="center">{ getWorkshopCost((email + skype), this.state) }&nbsp;{ currency }</td>
                                                                 </tr>
                                                             )
                                                         }
@@ -1077,7 +1077,7 @@ export class Checkout extends FormComponent {
                                             <label htmlFor="name">{ t('name') }</label>
                                             <input
                                                 onChange={ this.handleChange }
-                                                onKeyUp={ this.handleChange }
+                                                onKeyUp={ this.props.handleValidation('name') }
                                                 id="name"
                                                 className="name"
                                                 type="text"
@@ -1088,7 +1088,6 @@ export class Checkout extends FormComponent {
                                             <label htmlFor="adress">{ t('street') }</label>
                                             <input
                                                 onChange={ this.handleChange }
-                                                onKeyUp={ this.handleChange }
                                                 id="street"
                                                 className="street"
                                                 type="text"
@@ -1100,7 +1099,6 @@ export class Checkout extends FormComponent {
                                                 <label htmlFor="postal">{ t('postal') }</label>
                                                 <input
                                                     onChange={ this.handleChange }
-                                                    onKeyUp={ this.handleChange }
                                                     id="postal"
                                                     className="postal"
                                                     type="text"
@@ -1111,7 +1109,6 @@ export class Checkout extends FormComponent {
                                                 <label htmlFor="city">{ t('city') }</label>
                                                 <input
                                                     onChange={ this.handleChange }
-                                                    onKeyUp={ this.handleChange }
                                                     id="city"
                                                     className="city"
                                                     type="text"
@@ -1132,7 +1129,6 @@ export class Checkout extends FormComponent {
                                             <label htmlFor="phone">{ t('phone') }</label>
                                             <input
                                                 onChange={ this.handleChange }
-                                                onKeyUp={ this.handleChange }
                                                 id="phone"
                                                 type="text"
                                                 value={ this.state.phone }/>
@@ -1142,7 +1138,7 @@ export class Checkout extends FormComponent {
                                             <label htmlFor="email">{ t('email') }</label>
                                             <input
                                                 onChange={ this.handleChange }
-                                                onKeyUp={ this.handleChange }
+                                                onKeyUp={ this.props.handleValidation('email') }
                                                 id="mail"
                                                 type="text"
                                                 value={ this.state.mail }/>
