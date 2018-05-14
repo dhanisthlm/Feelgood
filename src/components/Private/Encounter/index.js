@@ -380,6 +380,11 @@ export class Encounter extends Component {
                                             return <p>Tel.broj: {encounter.phone}</p>
                                         }
                                     })()}
+                                     {(() => {
+                                        if (encounter.comment) {
+                                            return <p>{encounter.comment}</p>
+                                        }
+                                    })()}
                                 </div>
                                 <div className="col-6">
                                     {(() => {

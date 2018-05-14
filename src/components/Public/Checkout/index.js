@@ -908,7 +908,7 @@ export class Checkout extends FormComponent {
                                                         } else if (location.query.skype) {
                                                             return (
                                                                 <tr>
-                                                                    <td>{location.query.skypeDescription}, {location.query.skypeDuration}</td>
+                                                                    <td>{location.query.skypeDescription}, {location.query.skypeDuration} min</td>
                                                                     <td className="center">{ location.query.skype }</td>
                                                                     <td className="center">{ getWorkshopCost(parseInt(location.query.skypeCost), this.state) }&nbsp;{ currency }</td>
                                                                 </tr>
@@ -1138,7 +1138,7 @@ export class Checkout extends FormComponent {
                                             <label htmlFor="email">{ t('email') }</label>
                                             <input
                                                 onChange={ this.handleChange }
-                                                onKeyUp={ this.props.handleValidation('email') }
+                                                onKeyUp={ this.props.handleValidation('mail') }
                                                 id="mail"
                                                 type="text"
                                                 value={ this.state.mail }/>
