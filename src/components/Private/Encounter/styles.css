@@ -17,6 +17,13 @@
     display: none;
 }
 
+.rowLabels {
+    position: relative;
+    display: flex;
+    justify-content: space-evenly;
+    min-width: 200px;
+}
+
 .admin .push {
     height: 160px;
 }
@@ -184,6 +191,7 @@
     height: 100%;
     justify-content: space-evenly;
     min-width: 200px;
+    max-width: 200px;
 }
 
 .detail-inner > .col-1 {
@@ -210,6 +218,7 @@
 .mobile-list li > div p {
     justify-content: space-evenly;
     min-width: 200px;
+    line-height: 22px;
 }
 
 .mobile-list li > p {

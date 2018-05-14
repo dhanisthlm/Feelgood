@@ -1078,6 +1078,7 @@ export class Checkout extends FormComponent {
                                             <input
                                                 onChange={ this.handleChange }
                                                 onKeyUp={ this.props.handleValidation('name') }
+                                                onBlur={ this.props.handleValidation('name') }
                                                 id="name"
                                                 className="name"
                                                 type="text"
@@ -1088,6 +1089,8 @@ export class Checkout extends FormComponent {
                                             <label htmlFor="adress">{ t('street') }</label>
                                             <input
                                                 onChange={ this.handleChange }
+                                                onKeyUp={ this.props.handleValidation('street') }
+                                                onBlur={ this.props.handleValidation('street') }
                                                 id="street"
                                                 className="street"
                                                 type="text"
@@ -1099,6 +1102,8 @@ export class Checkout extends FormComponent {
                                                 <label htmlFor="postal">{ t('postal') }</label>
                                                 <input
                                                     onChange={ this.handleChange }
+                                                    onKeyUp={ this.props.handleValidation('postal') }
+                                                    onBlur={ this.props.handleValidation('postal') }
                                                     id="postal"
                                                     className="postal"
                                                     type="text"
@@ -1109,6 +1114,8 @@ export class Checkout extends FormComponent {
                                                 <label htmlFor="city">{ t('city') }</label>
                                                 <input
                                                     onChange={ this.handleChange }
+                                                    onKeyUp={ this.props.handleValidation('city') }
+                                                    onBlur={ this.props.handleValidation('city') }
                                                     id="city"
                                                     className="city"
                                                     type="text"
@@ -1258,7 +1265,7 @@ export class Checkout extends FormComponent {
                                             <span className="error checkbox">{termErrorMsg}</span>
                                         </div>
                                         {(() => {
-                                            if (!this.props.location.query.workshop && !this.props.location.query.skype && !this.props.location.query.email) {
+                                            if (!this.props.location.query.workshop && !this.props.location.query.email) {
                                                 return (
                                                     <div className="form-element-wrapper">
                                                         <div className="check-wrapper">

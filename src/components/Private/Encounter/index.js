@@ -276,38 +276,50 @@ export class Encounter extends Component {
                                 className={arrowClass}>
                                 <div className='arrow-mask' />
                             </div>
-                            <div>
+                            <div className="rowLabels">
                                 {(() => {
                                     if (encounter.name) {
                                         return <p>{encounter.name}</p>
                                     }
                                 })()}
                             </div>
-                            <p>{serviceLabel}</p>
+                            <div className="rowLabels">
+                                <p>{serviceLabel}</p>
+                            </div>
+                            <div className="rowLabels">
                             {(() => {
                                 if (encounter.rating && encounter.rating.web && encounter.rating.pay) {
                                     return <p
                                         className="rating-number">{Math.round((parseInt(encounter.rating.web) + parseInt(encounter.rating.pay)) / 2)}</p>
                                 }
                             })()}
-                            <p>{localTime}</p>
-                            {(() => {
-                                if (encounter.mail) {
-                                    return <p>{encounter.mail}</p>
-                                }
-                            })()}
-                            {(() => {
-                                if (encounter.currency) {
-                                    return <p>{encounter.price} {encounter.currency}</p>
-                                }
-                            })()}
-                            {(() => {
-                                if (encounter.fb === true) {
-                                    return <p>Facebook</p>
-                                } else {
-                                    return <p>Web stranica</p>
-                                }
-                            })()}
+                            </div>
+                            <div className="rowLabels">
+                                <p>{localTime}</p>
+                            </div>
+                            <div>
+                                {(() => {
+                                    if (encounter.mail) {
+                                        return <p>{encounter.mail}</p>
+                                    }
+                                })()}
+                            </div>
+                            <div className="rowLabels">
+                                {(() => {
+                                    if (encounter.currency) {
+                                        return <p>{encounter.price} {encounter.currency}</p>
+                                    }
+                                })()}
+                            </div>
+                            <div className="rowLabels">
+                                {(() => {
+                                    if (encounter.fb === true) {
+                                        return <p>Facebook</p>
+                                    } else {
+                                        return <p>Web stranica</p>
+                                    }
+                                })()}
+                            </div>
                         </div>
                         <div className={detailClass}>
                             <div className="detail-inner">
@@ -410,7 +422,18 @@ export class Encounter extends Component {
                                         }
                                     })()}
                                 </div>
-                                <div className="col-7" />
+                                <div className="col-7" >
+                                    {(() => {
+                                        if (encounter.issue) {
+                                            return <p>Tema: {encounter.issue}</p>
+                                        }
+                                    })()}
+                                    {(() => {
+                                        if (encounter.timeframe) {
+                                            return <p>Odaberite vrijeme: {encounter.timeframe}</p>
+                                        }
+                                    })()}
+                                </div>
                             </div>
                         </div>
                     </li>

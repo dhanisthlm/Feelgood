@@ -33,6 +33,7 @@ export const encounterValidator = Joi.object().keys({
     mail: Joi
         .string()
         .email()
+        .regex(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)
         .required(),
 
     issue: Joi
@@ -77,17 +78,17 @@ export const workshopValidator = Joi.object().keys({
     street: Joi
         .string()
         .trim()
-        .allow('', null),
+        .required(),
 
     postal: Joi
         .string()
         .trim()
-        .allow('', null),
+        .required(),
 
     city: Joi
         .string()
         .trim()
-        .allow('', null),
+        .required(),
 
     country: Joi
         .string()
@@ -101,6 +102,7 @@ export const workshopValidator = Joi.object().keys({
     mail: Joi
         .string()
         .email()
+        .regex(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)
         .required(),
 
     month: Joi
@@ -153,17 +155,17 @@ export const onlineValidator = Joi.object().keys({
     street: Joi
         .string()
         .trim()
-        .allow('', null),
+        .required(),
 
     postal: Joi
         .string()
         .trim()
-        .allow('', null),
+        .required(),
 
     city: Joi
         .string()
         .trim()
-        .allow('', null),
+        .required(),
 
     country: Joi
         .string()
@@ -177,6 +179,7 @@ export const onlineValidator = Joi.object().keys({
     mail: Joi
         .string()
         .email()
+        .regex(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)
         .required(),
 
     paymentType: Joi
