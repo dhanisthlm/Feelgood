@@ -462,7 +462,6 @@ export class Checkout extends FormComponent {
      * @return {object}
      */
     resetOrder() {
-        this.props.dispatch(routeActions.push('/'));
         window.localStorage.removeItem('order');
         window.localStorage.removeItem('stripe');
         window.localStorage.removeItem('saved');
