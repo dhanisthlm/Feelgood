@@ -36,12 +36,14 @@ export class Encounter extends Component {
 
     handleClick(event) {
         const index = this.state.openItems.indexOf(event.currentTarget.id);
-        const openItems = this.state.openItems;
+        let openItems = this.state.openItems;
 
         if (index < 0) {
-            openItems.push(event.currentTarget.id);
+            openItems = [event.currentTarget.id];
+            //openItems.push(event.currentTarget.id);
         } else {
-            openItems.splice(index, 1);
+            openItems = [];
+            //openItems.splice(index, 1);
         }
 
         this.setState({ openItems });
@@ -62,162 +64,161 @@ export class Encounter extends Component {
     }
 
     renderMobile() {
-        return (<ul className="mobile-list">
-                {this.props.encounters.map((encounter, i) => {
-                    const localTime = moment(encounter.date).format('YYYY-MM-DD / HH:mm');
-                    const isOpen = this.state.openItems.indexOf(encounter._id);
-                    const detailClass = isOpen < 0 ? 'details' : 'detailsOpen';
-                    const arrowClass = isOpen < 0 ? 'admin-arrow-right': 'admin-arrow-down';
-                    const type = encounter.fb === false ? 'Webstranica' : 'Facebook';
+    return (<ul className="mobile-list">
+            {this.props.encounters.map((encounter, i) => {
+                const localTime = moment(encounter.date).format('YYYY-MM-DD / HH:mm');
+                const isOpen = this.state.openItems.indexOf(encounter._id);
+                const detailClass = isOpen < 0 ? 'details' : 'detailsOpen';
+                const arrowClass = isOpen < 0 ? 'admin-arrow-right': 'admin-arrow-down';
+                const type = encounter.fb === false ? 'Webstranica' : 'Facebook';
 
-                    let serviceType;
+                let serviceType;
 
-                    if ('order' in encounter) {
-                        if (encounter.order.email.cost !== 0 && encounter.order.skype.cost !== 0) {
-                            serviceType = 'combo';
-                        } else if (encounter.order.skype.cost === 0 && encounter.order.email.cost !== 0) {
-                            serviceType = 'email'
-                        } else if (encounter.order.skype.cost !== 0 && encounter.order.email.cost === 0) {
-                            serviceType = 'skype';
-                        }
-                    } else {
-                        if (encounter.email === 0 && encounter.skype !== 0) {
-                            serviceType = 'email';
-                        } else if (encounter.email !== 0 && encounter.skype === 0) {
-                            serviceType = 'skype';
-                        } else if (encounter.email !== 0 && encounter.skype !== 0) {
-                            serviceType = 'combo';
-                        }
+                if ('order' in encounter) {
+                    if (encounter.order.email.cost !== 0 && encounter.order.skype.cost !== 0) {
+                        serviceType = 'combo';
+                    } else if (encounter.order.skype.cost === 0 && encounter.order.email.cost !== 0) {
+                        serviceType = 'email'
+                    } else if (encounter.order.skype.cost !== 0 && encounter.order.email.cost === 0) {
+                        serviceType = 'skype';
                     }
+                } else {
+                    if (encounter.email === 0 && encounter.skype !== 0) {
+                        serviceType = 'email';
+                    } else if (encounter.email !== 0 && encounter.skype === 0) {
+                        serviceType = 'skype';
+                    } else if (encounter.email !== 0 && encounter.skype !== 0) {
+                        serviceType = 'combo';
+                    }
+                }
 
-                    return (
-                        <li onClick={this.handleClick}
-                            id={encounter._id}
-                            key={i} className="list-item">
-                            <div className="row">
-                                <div
-                                    className={arrowClass}>
-                                    <div className='arrow-mask' />
-                                </div>
-                                <div className="name">
-                                    <p>{encounter.name}</p>
-                                </div>
-                                <p className="price">{encounter.price} {encounter.currency}</p>
+                return (
+                    <li onClick={this.handleClick}
+                        id={encounter._id}
+                        key={i} className="list-item">
+                        <div className="row">
+                            <div
+                                className={arrowClass}>
+                                <div className='arrow-mask' />
                             </div>
-                            <div className={detailClass}>
-                                <div className="detail-inner">
-                                    <div className="col-1">
-                                        {(() => {
-                                            if (encounter.street) {
-                                                return <p>{encounter.street}</p>
-                                            }
-                                        })()}
-                                        {(() => {
-                                            if (encounter.city) {
-                                                return <p>{encounter.postalCode} {encounter.city}</p>
-                                            }
-                                        })()}
-                                        {(() => {
-                                            if (encounter.country) {
-                                                return <p>{encounter.country}</p>
-                                            }
-                                        })()}
-                                    </div>
+                            <div className="name">
+                                <p>{encounter.name}</p>
+                            </div>
+                            <p className="price">{encounter.price} {encounter.currency}</p>
+                        </div>
+                        <div className={detailClass}>
+                            <div className="detail-inner">
+                                <div className="col-1">
                                     {(() => {
+                                        if (encounter.street) {
+                                            return <p>{encounter.street}</p>
+                                        }
                                     })()}
-                                    <div className="col-2">
-                                        {(() => {
-                                            if (serviceType === 'combo' || serviceType === 'skype') {
-                                                return <p>Online razgovor: {encounter.order.skype.week}</p>
-                                            }
-                                        })()}
-                                        {(() => {
-                                            if (serviceType === 'skype' || serviceType === 'combo') {
-                                                return <p>Vrsta: {encounter.order.skype.duration} minuta</p>
-                                            }
-                                        })()}
-                                        {(() => {
-                                            if (serviceType === 'combo' || serviceType === 'email') {
-                                                return <p>E-pošta: {encounter.order.email.week}</p>
-                                            }
-                                        })()}
-                                        {(() => {
-                                            if (serviceType === 'email' || serviceType === 'combo') {
-                                                return <p>Odgovor:</p>
-                                            }
-                                        })()}
-                                    </div>
-                                    <div className="col-3">
-                                        {(() => {
-                                            if (encounter.rating) {
-                                                return <p>Rejting web: {encounter.rating.web}</p>
-                                            }
-                                        })()}
-                                        {(() => {
-                                            if (encounter.rating) {
-                                                return <p>Rejting payment: {encounter.rating.pay}</p>
-                                            }
-                                        })()}
-                                        {(() => {
-                                            if (encounter.rating) {
-                                                return <p>Komentar: {encounter.rating.comment}</p>
-                                            }
-                                        })()}
-                                    </div>
-                                    <div className="col-4">
-                                        {(() => {
-                                            if (encounter.issue) {
-                                                return <p>Vrijeme: {encounter.timeframe}</p>
-                                            }
-                                        })()}
-                                        {(() => {
-                                            if (encounter.timeframe) {
-                                                return <p>Tip: {type}</p>
-                                            }
-                                        })()}
-                                        {(() => {
-                                            if (encounter.paymentType) {
-                                                return <p>Plaćanja: {encounter.paymentType}</p>
-                                            }
-                                        })()}
-                                    </div>
-                                    <div className="col-5">
-                                        {localTime}
-                                        {(() => {
-                                            if (encounter.phone) {
-                                                return <p>Tel.broj: {encounter.phone}</p>
-                                            }
-                                        })()}
-                                        {(() => {
-                                            if (encounter.mail) {
-                                                return <p>E-pošta: {encounter.mail}</p>
-                                            }
-                                        })()}
-                                         {(() => {
-                                            if (encounter.comment) {
-                                                return <p>{encounter.comment}</p>
-                                            }
-                                        })()}
-                                    </div>
-                                    <div className="col-6">
-                                        {(() => {
-                                            if (encounter.order.skype.cost > 0) {
-                                                return <p>Online razgovor: {encounter.order.skype.cost} {encounter.currency}</p>
-                                            }
-                                        })()}
-                                        {(() => {
-                                            if (encounter.order.email.cost > 0) {
-                                                return <p>E-pošta: {encounter.order.email.cost} {encounter.currency}</p>
-                                            }
-                                        })()}
-                                    </div>
+                                    {(() => {
+                                        if (encounter.city) {
+                                            return <p>{encounter.postalCode} {encounter.city}</p>
+                                        }
+                                    })()}
+                                    {(() => {
+                                        if (encounter.country) {
+                                            return <p>{encounter.country}</p>
+                                        }
+                                    })()}
+                                </div>
+                                {(() => {
+                                })()}
+                                <div className="col-2">
+                                    {(() => {
+                                        if (serviceType === 'combo' || serviceType === 'skype') {
+                                            return <p>Online razgovor: {encounter.order.skype.week}</p>
+                                        }
+                                    })()}
+                                    {(() => {
+                                        if (serviceType === 'skype' || serviceType === 'combo') {
+                                            return <p>Vrsta: {encounter.order.skype.duration} minuta</p>
+                                        }
+                                    })()}
+                                    {(() => {
+                                        if (serviceType === 'combo' || serviceType === 'email') {
+                                            return <p>E-pošta: {encounter.order.email.week}</p>
+                                        }
+                                    })()}
+                                    {(() => {
+                                        if (serviceType === 'email' || serviceType === 'combo') {
+                                            return <p>Odgovor:</p>
+                                        }
+                                    })()}
+                                </div>
+                                <div className="col-3">
+                                    {(() => {
+                                        if (encounter.rating) {
+                                            return <p>Rejting web: {encounter.rating.web}</p>
+                                        }
+                                    })()}
+                                    {(() => {
+                                        if (encounter.rating) {
+                                            return <p>Rejting payment: {encounter.rating.pay}</p>
+                                        }
+                                    })()}
+                                    {(() => {
+                                        if (encounter.rating) {
+                                            return <p>Komentar: {encounter.rating.comment}</p>
+                                        }
+                                    })()}
+                                </div>
+                                <div className="col-4">
+                                    {(() => {
+                                        if (encounter.issue) {
+                                            return <p>Vrijeme: {encounter.timeframe}</p>
+                                        }
+                                    })()}
+                                    {(() => {
+                                        if (encounter.timeframe) {
+                                            return <p>Tip: {type}</p>
+                                        }
+                                    })()}
+                                    {(() => {
+                                        if (encounter.paymentType) {
+                                            return <p>Plaćanja: {encounter.paymentType}</p>
+                                        }
+                                    })()}
+                                </div>
+                                <div className="col-5">
+                                    {localTime}
+                                    {(() => {
+                                        if (encounter.phone) {
+                                            return <p>Tel.broj: {encounter.phone}</p>
+                                        }
+                                    })()}
+                                    {(() => {
+                                        if (encounter.mail) {
+                                            return <p>E-pošta: {encounter.mail}</p>
+                                        }
+                                    })()}
+                                     {(() => {
+                                        if (encounter.comment) {
+                                            return <p>{encounter.comment}</p>
+                                        }
+                                    })()}
+                                </div>
+                                <div className="col-6">
+                                    {(() => {
+                                        if (encounter.order.skype.cost > 0) {
+                                            return <p>Online razgovor: {encounter.order.skype.cost} {encounter.currency}</p>
+                                        }
+                                    })()}
+                                    {(() => {
+                                        if (encounter.order.email.cost > 0) {
+                                            return <p>E-pošta: {encounter.order.email.cost} {encounter.currency}</p>
+                                        }
+                                    })()}
                                 </div>
                             </div>
-                        </li>
-                    )
-                })}
-            </ul>
-        )
+                        </div>
+                    </li>
+                )
+            })}
+        </ul>)
     }
 
     renderDesktop() {

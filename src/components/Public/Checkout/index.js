@@ -134,6 +134,8 @@ export class Checkout extends FormComponent {
     componentWillMount() {
         const {location} = this.props;
 
+        window.localStorage.setItem('step', '1');
+
         if (window.localStorage.getItem('order') !== null && !location.query.workshop && !location.query.skype && !location.query.email) {
             const cache = JSON.parse(window.localStorage.getItem('order'));
             this.setState({...cache, save: false});
@@ -1053,18 +1055,6 @@ export class Checkout extends FormComponent {
                                                         }
                                                     })()}
                                                 </div>
-                                                <div>
-                                                    {(() => {
-                                                        if (this.props.errorMessage.length > 0) {
-                                                            return (
-                                                                <div className="card-error">
-                                                                    <p>Neformalno smo mogli da obradimo vašu
-                                                                        narudžbinu. {t(`stripe.${this.props.errorMessage}`)}</p>
-                                                                </div>
-                                                            )
-                                                        }
-                                                    })()}
-                                                </div>
                                             </div>
                                         )
                                     }
@@ -1228,6 +1218,15 @@ export class Checkout extends FormComponent {
                                                         <label htmlFor="card-element">{ t('creditCard')}</label>
                                                         <div id="card-element"/>
                                                         <div id="card-errors" role="alert"/>
+                                                        {(() => {
+                                                            if (this.props.errorMessage.length > 0) {
+                                                                return (
+                                                                    <div className="card-error">
+                                                                        <p>{t(`stripe.${this.props.errorMessage}`)}</p>
+                                                                    </div>
+                                                                )
+                                                            }
+                                                        })()}
                                                     </div>
                                                 )
                                             }
@@ -1265,7 +1264,7 @@ export class Checkout extends FormComponent {
                                             <span className="error checkbox">{termErrorMsg}</span>
                                         </div>
                                         {(() => {
-                                            if (!this.props.location.query.workshop && !this.props.location.query.email) {
+                                            if (!this.props.location.query.workshop && (this.props.location.query.skype || (this.state.data && this.state.data.skype && this.state.data.skype.active === true))) {
                                                 return (
                                                     <div className="form-element-wrapper">
                                                         <div className="check-wrapper">

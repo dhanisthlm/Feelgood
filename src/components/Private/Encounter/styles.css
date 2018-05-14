@@ -148,7 +148,13 @@
 }
 
 .details {
-    display: none !important;
+    max-height: 0;
+    overflow: hidden;
+    box-shadow: inset 0 0 4px 1px rgba(0,0,0, 0.4);
+    background-color:  #c04c9c;
+    color: #fff;
+    transition: max-height .5s ease-in-out;
+    box-sizing: border-box;
 }
 
 .visible-row-items {
@@ -164,6 +170,7 @@
     margin: 0 auto;
     display: flex;
     justify-content: space-evenly;
+    width: 100%;
 }
 
 .rating-number {
@@ -208,11 +215,12 @@
 .detailsOpen {
     display: block !important;
     max-width: none !important;
-    min-height: 100px;
+    max-height: 550px;
     box-sizing: border-box;
     box-shadow: inset 0 0 4px 1px rgba(0,0,0, 0.4);
     background-color:  #c04c9c;
     color: #fff;
+    transition: max-height .5s ease-in-out;
 }
 
 .mobile-list li > div p {
