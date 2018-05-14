@@ -149,17 +149,17 @@ export class Encounter extends Component {
                                     </div>
                                     <div className="col-3">
                                         {(() => {
-                                            if (encounter.rating && encounter.rating.web) {
+                                            if (encounter.rating) {
                                                 return <p>Rejting web: {encounter.rating.web}</p>
                                             }
                                         })()}
                                         {(() => {
-                                            if (encounter.rating && encounter.rating.pay) {
+                                            if (encounter.rating) {
                                                 return <p>Rejting payment: {encounter.rating.pay}</p>
                                             }
                                         })()}
                                         {(() => {
-                                            if (encounter.rating && encounter.rating.comment) {
+                                            if (encounter.rating) {
                                                 return <p>Komentar: {encounter.rating.comment}</p>
                                             }
                                         })()}
@@ -353,9 +353,21 @@ export class Encounter extends Component {
                                     })()}
                                 </div>
                                 <div className="col-3">
-                                    <p>Web: {encounter.rating.web}</p>
-                                    <p>Payment: {encounter.rating.pay}</p>
-                                    <p>Komentar: {encounter.rating.comment}</p>
+                                    {(() => {
+                                        if (encounter.rating && encounter.rating.web) {
+                                            return <p>Web: {encounter.rating.web}</p>
+                                        }
+                                    })()}
+                                    {(() => {
+                                        if (encounter.rating && encounter.rating.pay) {
+                                            return <p>Payment: {encounter.rating.pay}</p>
+                                        }
+                                    })()}
+                                    {(() => {
+                                        if (encounter.rating && encounter.rating.comment) {
+                                            return <p>Komentar: {encounter.rating.comment}</p>
+                                        }
+                                    })()}
                                 </div>
                                 <div className="col-4">
                                     {(() => {
