@@ -9,7 +9,6 @@
 }
 
 .languagepicker {
-    //display: none;
     background-color: #FFF;
     padding: 0;
     height: 40px;
@@ -139,6 +138,7 @@
     color: #27548c;
     font-size: 14px;
     margin-right: 20px;
+    text-decoration: none;
 }
 
 .header .logo-text a:first-child:after {
