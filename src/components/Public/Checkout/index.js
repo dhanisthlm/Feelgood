@@ -589,10 +589,15 @@ export class Checkout extends FormComponent {
                         if (result.error) {
                             const errorElement = document.getElementById('card-errors');
                             errorElement.textContent = t(`stripe.${result.error.code}`);
+                            this.setState({showSpinner: false});
                         } else {
                             // Send the token to your server
                             this.setState({showSpinner: true});
                             this.props.dispatch(saveEncounter(this.state, result.token.id));
+
+                            setTimeout(() => {
+                                this.setState({showSpinner: false});
+                            }, 7000);
                         }
                     });
                 } else {
