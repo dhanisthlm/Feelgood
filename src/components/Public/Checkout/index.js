@@ -915,7 +915,7 @@ export class Checkout extends FormComponent {
                                                                 <tr>
                                                                     <td>{location.query.videoDescription}, {location.query.videoDuration} min</td>
                                                                     <td className="center">{ location.query.video }</td>
-                                                                    <td className="center">{ getWorkshopCost(parseInt(location.query.videoCost this.state) }&nbsp;{ currency }</td>
+                                                                    <td className="center">{ getWorkshopCost(parseInt(location.query.videoCost, this.state) }&nbsp;{ currency }</td>
                                                                 </tr>
                                                             )
                                                         } else if (location.query.workshop) {
