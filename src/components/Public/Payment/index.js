@@ -439,7 +439,7 @@ export class Payment extends Component {
 					<p className="preamble">{ t('intro') }</p>
 					<div className="payment-type-wrapper">
 						<div className="container skype">
-							<h4 className="category-heading">Skype</h4>
+							<h4 className="category-heading">Online video</h4>
 							<div className="wrapper">
 								<input
 									id="skype-s"
