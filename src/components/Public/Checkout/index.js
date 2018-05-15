@@ -688,6 +688,8 @@ export class Checkout extends FormComponent {
                 ? getSelectedCurrency(this.state)[0].code.toUpperCase() : 'EUR';
         }
 
+        this.setState({ currency });
+
         return actions.payment.create({
             transactions: [
                 {
