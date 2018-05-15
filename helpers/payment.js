@@ -11,7 +11,7 @@ export const getSkypeCost = (state) => {
 };
 
 export const getWorkshopCost = (cost, state) => {
-    return exchange(cost, state) / state.paypalFactor;
+    return cost / state.paypalFactor;
 };
 
 

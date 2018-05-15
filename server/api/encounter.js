@@ -198,6 +198,7 @@ const saveLinkEncounter = (request, reply, charge) => {
     encounter.phone = request.payload.encounter.phone;
     encounter.mail = request.payload.encounter.mail;
     encounter.timeframe = request.payload.encounter.timeframe;
+    encounter.issue = request.payload.encounter.issue;
     encounter.paymentType = request.payload.encounter.paymentType;
     encounter.comment = request.payload.encounter.comment;
     encounter.currency = request.payload.encounter.currency;

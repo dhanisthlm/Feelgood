@@ -40,10 +40,8 @@ export class Encounter extends Component {
 
         if (index < 0) {
             openItems = [event.currentTarget.id];
-            //openItems.push(event.currentTarget.id);
         } else {
             openItems = [];
-            //openItems.splice(index, 1);
         }
 
         this.setState({ openItems });

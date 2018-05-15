@@ -55,9 +55,9 @@ export class Checkout extends FormComponent {
             ratingComment: '',
             paymentType: 'credit',
             timeframes: ['Jutro', 'Popodne', 'Veče', 'Bilo kada'],
-            country: 'Bosnia and Herzegovina',
+            country: '',
             newsletter: true,
-            currency: 'BAM',
+            currency: '',
             paypalFactor: 1,
             subscribe: 'on',
             terms: 'off',
@@ -150,7 +150,6 @@ export class Checkout extends FormComponent {
         if (location.query.workshop || location.query.skype || location.query.email) {
             this.setState({
                 language: this.props.location.query.currency,
-                cancel: 'on',
                 cost: {
                     total: parseInt(location.query.price)
                 }

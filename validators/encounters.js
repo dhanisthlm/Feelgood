@@ -190,6 +190,14 @@ export const onlineValidator = Joi.object().keys({
         .string()
         .required(),
 
+    issue: Joi
+        .string()
+        .allow('', null),
+
+    timeframe: Joi
+        .string()
+        .allow('', null),
+
     fb: Joi
         .boolean(),
 

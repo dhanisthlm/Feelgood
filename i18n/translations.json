@@ -5,8 +5,8 @@
       "english": "English",
       "bosnian": "Bosnian",
       "here": "here",
-      "skypeWeek": "skype week",
-      "skypeWeeks": "skype weeks",
+      "skypeWeek": "online video week",
+      "skypeWeeks": "online video weeks",
       "emailResponse": "answer within",
       "hours": "hours",
       "Jutro": "Morning",
@@ -161,11 +161,11 @@
       "intro": "We are here for you, if you are willing to explore the way you think and feel. To feel well or to reach your goals. The steps to get life coaching and counseling are described here. Frequently asked questions can be found",
       "step1": {
         "heading": "1. Estimation",
-        "text": "Talk at no cost, ten to fifteen minutes with our psychologists over the phone (+387 603 21 22 90 or +387 66 23 60 83) or via Skype (Skype address info@feelingwell.net) to determine your advisory needs."
+        "text": "Talk at no cost, ten to fifteen minutes with our psychologists over the phone (+387 603 21 22 90 or +387 66 23 60 83) or via online video to determine your advisory needs."
       },
       "step2": {
         "heading": "2. Choose a plan for you",
-        "text": "Select a payment plan that suits your needs and budget. Select Skype conversations, emails or a combination of these two services. You can pay with a card, paypal or invoice."
+        "text": "Select a payment plan that suits your needs and budget. Select online video conversations, emails or a combination of these two services. You can pay with a card, paypal or invoice."
       },
       "step3": {
         "heading": "3. Appointment",
@@ -175,16 +175,16 @@
       "step4": {
         "heading": "4. Psychological counseling",
         "text1": "You can talk to our psychologists from the benefits of your home, without the knowledge of your family or friends.",
-        "text2": "For Skype calls, you will need a stable and relatively fast Internet connection, computer or mobile phone with built-in camera and sound transmission, quiet and private room, as well as Skype application.",
+        "text2": "For online video calls, you will need a stable and relatively fast Internet connection, computer or mobile phone with built-in camera and sound transmission, quiet and private room, as well as online video application.",
         "text3": "For email counseling services, you will need a private e-mail address."
       }
     },
     "customerCareView": {
       "heading": "Customer Service",
-      "skypeChat": "Free skype chat:",
+      "skypeChat": "Free online video chat:",
       "preamble1": "Our customer service is available to you every working day from 08:00 to 17:00 for all information and advice.",
       "preamble2": "We are committed to providing the best possible psychological counseling services for all our clients. In order to achieve this, we always strive to improve the services we offer and therefore we value all feedback, both good and bad.",
-      "contactText": "You can contact our customer service by email, Skype or by calling the following phone numbers:"
+      "contactText": "You can contact our customer service by email, online video or by calling the following phone numbers:"
     },
     "emergencyView": {
       "heading": "Emergency",
@@ -198,7 +198,7 @@
       "skypeWeek": "online call",
       "skypeWeeks": "online calls",
       "packageWith": "Package for",
-      "selectPackageText": "Select one Skype call or a packet with multiple Skype calls. You can combine it with email.",
+      "selectPackageText": "Select one online video call or a packet with multiple online video calls. You can combine it with email.",
       "call": "call",
       "email": "E-mail",
       "answerWithin": "Reply within",
@@ -240,7 +240,7 @@
       },
       "forMe": {
         "heading": "How can I be sure that counseling is a good choice for me?",
-        "text1": "You have the opportunity to get an introduction to counseling for free, through a 10 to 15-minute telephone conversation. You can call us at +387 603 21 22 90 or +387 66 23 60 83, or via Skype (user Skype name: feelingwell.net) and talk to one of our psychologists. He or she will discuss your needs, the current situation and the therapeutic goal, and will explain how online counseling works in health.",
+        "text1": "You have the opportunity to get an introduction to counseling for free, through a 10 to 15-minute telephone conversation. You can call us at +387 603 21 22 90 or +387 66 23 60 83, or via online video and talk to one of our psychologists. He or she will discuss your needs, the current situation and the therapeutic goal, and will explain how online counseling works in health.",
         "text2": "If you feel that we could be at your service and help, you have the opportunity to book and report the appointment of counsel during that call. Please understand that such a reservation is temporary and will be canceled if we do not receive payment until the agreed date of the session."
       },
       "discretion": {
@@ -276,7 +276,7 @@
       },
       "getStarted": {
         "heading": "What do I need to start?",
-        "text1": "For Skype calls, you will need a stable and relatively fast internet connection, a computer or mobile phone with built-in camera and sound transmission, a quiet and private room, as well as a Skype application." ,
+        "text1": "For online video calls, you will need a stable and relatively fast internet connection, a computer or mobile phone with built-in camera and sound transmission, a quiet and private room, as well as a online video application." ,
         "text2": "To install Skype, visit",
         "text3": "For email counseling services, you will need a private e-mail address."
       },
@@ -726,11 +726,11 @@
       "intro": "Ako ste spremni da istražite način na koji razmišljate i osjećate, ovdje smo opisali korake koji će omogućiti da dobijete psihološko savjetovanje u zdravlje.nu. Ako ste spremni da istražite način na koji razmišljate i osjećate, ovdje smo opisali korake koji će omogućiti da dobijete psihološko savjetovanje u zdravlje.nu. Često postavljana pitanja možete naći",
       "step1": {
         "heading": "1. Procjena",
-        "text": "Razgovarajte bez troška, deset do petnaest minuta sa našim psiholozima preko telefona (+387 603 21 22 90 ili +387 66 23 60 83) ili preko Skypea (Skype adresa info@zdravlje.nu) kako biste utvrdili vaše savjetodavne potrebe."
+        "text": "Razgovarajte bez troška, deset do petnaest minuta sa našim psiholozima preko telefona (+387 603 21 22 90 ili +387 66 23 60 83) ili preko online video, kako biste utvrdili vaše savjetodavne potrebe."
       },
       "step2": {
         "heading": "2. Izaberite plan za vas",
-        "text": "Izaberite plan plaćanja koji odgovara vašim potrebama i budžetu. Izaberite Skype razgovore, e-poštu ili kombinaciju ove dvije usluge. Možete platiti karticom, paypal-om ili fakturom."
+        "text": "Izaberite plan plaćanja koji odgovara vašim potrebama i budžetu. Izaberite online video razgovore, e-poštu ili kombinaciju ove dvije usluge. Možete platiti karticom, paypal-om ili fakturom."
       },
       "step3": {
         "heading": "3. Termin",
@@ -740,17 +740,17 @@
       "step4": {
         "heading": "4. Psihološko savjetovanje",
         "text1": "Možete razgovarati sa našim psiholozima iz ugodnosti Vaše kuće, bez znanja Vaše porodice ili prijatelja.",
-        "text2": "Za Skype pozive trebat ćete stabilnu i relativno brzu internet vezu, kompjuter ili mobitel sa ugrađenom kamerom i mogućnošću prenošenja zvuka, tihu i privatnu sobu, kao i Skype aplikaciju. ",
+        "text2": "Za online video pozive trebat ćete stabilnu i relativno brzu internet vezu, kompjuter ili mobitel sa ugrađenom kamerom i mogućnošću prenošenja zvuka, tihu i privatnu sobu, kao i Skype aplikaciju. ",
         "text3": "Za usluge savjetovanja putem e-maila, trebat ćete privatnu e-mail adresu."
       }
 
     },
     "customerCareView": {
-      "skypeChat": "Besplatan razgovor preko Skypea:",
+      "skypeChat": "Besplatan razgovor preko online video:",
       "heading": "Služba za korisnike",
       "preamble1": "Naša služba za korisnike stoji Vam na raspolaganju svakim radnim danom od 08.00 do 17.00 za sve informacije i savjete.",
       "preamble2": "Mi u zdravlje.nu smo posvećeni pružanju najbolje moguće usluge psihološkog savjetovanja za sve naše klijente. Da bismo to postigli, uvijek se trudimo poboljšati usluge koje nudimo te stoga cjenimo sve povratne informacije, i dobre i loše.",
-      "contactText": "Našu službu za korisnike možete kontaktirati putem email-a, Skype-a ili pozivom na sljedeće telefonske brojeve:"
+      "contactText": "Našu službu za korisnike možete kontaktirati putem e-pošta, online video ili pozivom na sljedeće telefonske brojeve:"
     },
     "emergencyView": {
       "heading": "Hitna pomoć",
@@ -766,14 +766,14 @@
     "paymentView": {
       "heading": "Zakažite psihološko savjetovanje",
       "intro": "Ovdje možete zakazati psihološko savjetovanje. Cijenu za Vaše izbore možete naći na donjem dijelu stranice. Kliknite na označenu tipku da izaberete online video poziv, e-poštu ili kombinaciju online video poziva i e-pošte (u tom slučaju kliknite na obje tipke). Ukoliko odlučite da kupite više online video ili sedmica u kojima biste koristili uslugu e-poštom, to je pojedinačna cijena tih usluga jeftinija. Tokom biranja možete pratiti jasno naznačenu ukupnu i pojedinačnu cijenu svih usluga koje odaberete.",
-      "skypeWeek": "skype poziv",
-      "skypeWeeks": "skype poziva",
-      "packageWith": "Paket za",
-      "selectPackageText": "Izaberite jedan Skype-poziv ili paket sa više Skype-poziva. Možete kombinovati sa e-poštom.",
+      "skypeWeek": "online video poziv",
+      "skypeWeeks": "online video poziva",
+      "packageWith": "",
+      "selectPackageText": "Izaberite jedan online video poziv ili paket sa više online video poziva. Možete kombinovati sa e-poštom.",
       "call": "poziv",
       "email": "E-pošta",
       "answerWithin": "Odgovor u toku",
-      "emailSmallText": "Neograničen broj e-pošte, odgovor u toku 24h. Možete kombinovati sa Skype-pozivom.",
+      "emailSmallText": "Neograničen broj e-pošte, odgovor u toku 24h. Možete kombinovati sa online video pozivom.",
       "emailLargeText": "Neograničen broj e-pošte, odgovor u toku 4h radnim danima: 07.00-22.00, vikendom i praznikom: 09.00-18.00.",
       "number": "Broj",
       "week": "sedmica",
@@ -930,7 +930,7 @@
       },
       "forMe": {
         "heading": "Kako da budem siguran/na da je savjetovanje dobar izbor za mene?",
-        "text1": "Imate priliku da dobijete uvod u savjetovanje besplatno, putem 10 do 15-minutnog telefonskog razgovora. Možete nas pozvati na +387 603 21 22 90 ili +387 66 23 60 83, ili putem Skype-a (korisničko Skype ime: zdravlje.nu) i razgovarati sa nekim od naših psihologa. On ili ona će razgovarati o Vašim potrebama, trenutnoj situaciji i terapijskom cilju, te će Vam objasniti kako funkcioniše online savjetovanje u zdravlje.nu.",
+        "text1": "Imate priliku da dobijete uvod u savjetovanje besplatno, putem 10 do 15-minutnog telefonskog razgovora. Možete nas pozvati na +387 603 21 22 90 ili +387 66 23 60 83, ili putem online video i razgovarati sa nekim od naših psihologa. On ili ona će razgovarati o Vašim potrebama, trenutnoj situaciji i terapijskom cilju, te će Vam objasniti kako funkcioniše online savjetovanje u zdravlje.nu.",
         "text2": "Ukoliko osjetite da bismo Vam mogli biti na usluzi i pomoći, otvorena Vam je mogućnost da rezervišete i prijavite termin savjetovanja tokom tog poziva. Molimo Vas da imate razumjevanja da je takva rezervacija privremena, te da će biti otkazana ukoliko ne primimo uplatu do dogovorenog termina sesije."
       },
       "discretion": {
@@ -966,7 +966,7 @@
       },
       "getStarted": {
         "heading": "Šta mi treba da započnem?",
-        "text1": "Za Skype pozive trebat ćete stabilnu i relativno brzu internet vezu, kompjuter ili mobitel sa ugrađenom kamerom i mogućnošću prenošenja zvuka, tihu i privatnu sobu, kao i Skype aplikaciju." ,
+        "text1": "Za online video pozive trebat ćete stabilnu i relativno brzu internet vezu, kompjuter ili mobitel sa ugrađenom kamerom i mogućnošću prenošenja zvuka, tihu i privatnu sobu, kao i Skype aplikaciju." ,
         "text2": "Da instalirate Skype, posjetite",
         "text3": "Za usluge savjetovanja putem e-maila, trebat ćete privatnu e-mail adresu."
       },
