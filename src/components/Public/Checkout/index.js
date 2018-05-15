@@ -104,7 +104,7 @@ export class Checkout extends FormComponent {
 
         this.validatorTypes = this.props.location.query.workshop
             ? workshopValidator
-            : (this.props.location.query.skype || this.props.location.query.email) ? onlineValidator : encounterValidator;
+            : (this.props.location.query.video || this.props.location.query.email) ? onlineValidator : encounterValidator;
 
         this.resetCheckout = this.resetCheckout.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -136,18 +136,18 @@ export class Checkout extends FormComponent {
 
         window.localStorage.setItem('step', '1');
 
-        if (window.localStorage.getItem('order') !== null && !location.query.workshop && !location.query.skype && !location.query.email) {
+        if (window.localStorage.getItem('order') !== null && !location.query.workshop && !location.query.video && !location.query.email) {
             const cache = JSON.parse(window.localStorage.getItem('order'));
             this.setState({...cache, save: false});
         } else {
             window.localStorage.removeItem('order');
         }
 
-        if (window.localStorage.getItem('order') !== null || location.query.workshop || location.query.skype || location.query.email) {
+        if (window.localStorage.getItem('order') !== null || location.query.workshop || location.query.video || location.query.email) {
             this.props.dispatch(getIssues());
         }
 
-        if (location.query.workshop || location.query.skype || location.query.email) {
+        if (location.query.workshop || location.query.video || location.query.email) {
             this.setState({
                 language: this.props.location.query.currency,
                 cost: {
@@ -168,13 +168,13 @@ export class Checkout extends FormComponent {
     componentDidMount() {
         const {location} = this.props;
 
-        if (location.query.skype) {
+        if (location.query.video) {
             this.calculateViewportSize();
             this.setState({
-                skype: location.query.skype,
-                skypeDescription: location.query.skypeDescription,
-                skypeCost: location.query.skypeCost,
-                skypeDuration: location.query.skypeDuration
+                skype: location.query.video,
+                skypeDescription: location.query.videoDescription,
+                skypeCost: location.query.videoCost,
+                skypeDuration: location.query.videoDuration
             });
         }
 
@@ -199,12 +199,12 @@ export class Checkout extends FormComponent {
             });
         }
 
-        if (window.localStorage.getItem('order') && !location.query.workshop && !location.query.skype && !location.query.email) {
+        if (window.localStorage.getItem('order') && !location.query.workshop && !location.query.video && !location.query.email) {
             this.initStripe();
             this.setState({env: window.localStorage.getItem('pe')});
         }
 
-        if (!window.localStorage.getItem('order') && !location.query.workshop && !location.query.skype && !location.query.email) {
+        if (!window.localStorage.getItem('order') && !location.query.workshop && !location.query.video && !location.query.email) {
             this.props.dispatch(routeActions.push('/'));
         }
     }
@@ -217,7 +217,7 @@ export class Checkout extends FormComponent {
      */
     componentWillReceiveProps(nextProps) {
         const {location} = nextProps;
-        if (location.query.workshop || location.query.skype || location.query.email) {
+        if (location.query.workshop || location.query.video || location.query.email) {
             this.setState({
                 stripeToken: nextProps.stripeToken,
                 //paypalEnv: nextProps.paypalEnv
@@ -253,11 +253,11 @@ export class Checkout extends FormComponent {
             language: window.localStorage.getItem('order') ? JSON.parse(window.localStorage.getItem('order')).language : this.state.language,
         });
 
-        if (!location.query.workshop && !location.query.skype && !location.query.email) {
+        if (!location.query.workshop && !location.query.video && !location.query.email) {
             this.setState({cost: JSON.parse(window.localStorage.getItem('order')).cost});
         }
 
-        if (window.localStorage.getItem('step') === null && !location.query.workshop && !location.query.skype && !location.query.email) {
+        if (window.localStorage.getItem('step') === null && !location.query.workshop && !location.query.video && !location.query.email) {
             this.props.dispatch(routeActions.push('/'));
         }
 
@@ -541,7 +541,7 @@ export class Checkout extends FormComponent {
      * @return {object}
      */
     handleChange(e) {
-        if (!this.props.location.query.workshop && !this.props.location.query.skype && !this.props.location.query.email) {
+        if (!this.props.location.query.workshop && !this.props.location.query.video && !this.props.location.query.email) {
             let cache = JSON.parse(window.localStorage.getItem('order'));
             cache[e.target.id] = e.target.value;
             window.localStorage.setItem('order', JSON.stringify(cache));
@@ -682,7 +682,7 @@ export class Checkout extends FormComponent {
     payment(actions) {
         let amount, currency;
 
-        if (!this.props.location.query.workshop && !this.props.location.query.skype && !this.props.location.query.email) {
+        if (!this.props.location.query.workshop && !this.props.location.query.video && !this.props.location.query.email) {
             amount = getTotal(this.state);
 
             currency = this.state.paypalCurrencies.indexOf(getSelectedCurrency(this.state)[0].currency) > -1
@@ -815,7 +815,7 @@ export class Checkout extends FormComponent {
 
         let sumClass, centerClass;
 
-        if (window.localStorage.getItem('order') && !location.query.workshop && !location.query.skype && !location.query.email) {
+        if (window.localStorage.getItem('order') && !location.query.workshop && !location.query.video && !location.query.email) {
             sumClass =
                 (typeof this.state.data.packageDiscount === 'undefined' &&
                 typeof this.state.data.promoDiscount === 'undefined')
@@ -860,7 +860,7 @@ export class Checkout extends FormComponent {
                         <div className="outer-frame">
                             <div className="inner-frame">
                                 {(() => {
-                                    if ((window.localStorage.getItem('step') === '1' || location.query.workshop || location.query.skype || location.query.email) &&
+                                    if ((window.localStorage.getItem('step') === '1' || location.query.workshop || location.query.video || location.query.email) &&
                                         window.localStorage.getItem('step') !== '2') {
                                         return (
                                             <div className="left-col-wrapper">
@@ -872,7 +872,7 @@ export class Checkout extends FormComponent {
                                                     </colgroup>
                                                     <thead>
                                                     {(() => {
-                                                        if (!location.query.workshop && !location.query.skype && !location.query.email) {
+                                                        if (!location.query.workshop && !location.query.video && !location.query.email) {
                                                             return (
                                                                 <tr>
                                                                     <th>{ t('item') }</th>
@@ -880,7 +880,7 @@ export class Checkout extends FormComponent {
                                                                     <th>{ t('price') }</th>
                                                                 </tr>
                                                             );
-                                                        } else if (location.query.skype || location.query.email) {
+                                                        } else if (location.query.video || location.query.email) {
                                                             return (
                                                                 <tr>
                                                                     <th>{location.query.title}</th>
@@ -900,7 +900,7 @@ export class Checkout extends FormComponent {
                                                     </thead>
                                                     <tbody>
                                                     {(() => {
-                                                        if (!location.query.workshop && !location.query.skype && !location.query.email) {
+                                                        if (!location.query.workshop && !location.query.video && !location.query.email) {
                                                             if (this.state.data.skype) {
                                                                 return (
                                                                     <tr>
@@ -910,12 +910,12 @@ export class Checkout extends FormComponent {
                                                                     </tr>
                                                                 )
                                                             }
-                                                        } else if (location.query.skype) {
+                                                        } else if (location.query.video) {
                                                             return (
                                                                 <tr>
-                                                                    <td>{location.query.skypeDescription}, {location.query.skypeDuration} min</td>
-                                                                    <td className="center">{ location.query.skype }</td>
-                                                                    <td className="center">{ getWorkshopCost(parseInt(location.query.skypeCost), this.state) }&nbsp;{ currency }</td>
+                                                                    <td>{location.query.videoDescription}, {location.query.videoDuration} min</td>
+                                                                    <td className="center">{ location.query.video }</td>
+                                                                    <td className="center">{ getWorkshopCost(parseInt(location.query.videoCost this.state) }&nbsp;{ currency }</td>
                                                                 </tr>
                                                             )
                                                         } else if (location.query.workshop) {
@@ -928,7 +928,7 @@ export class Checkout extends FormComponent {
                                                         }
                                                     })()}
                                                     {(() => {
-                                                        if (!location.query.workshop && !location.query.skype && !location.query.email) {
+                                                        if (!location.query.workshop && !location.query.video && !location.query.email) {
                                                             if (this.state.data.email) {
                                                                 const duration = this.state.data.email.description.match(/\d+/g).map(Number)[0].toString();
                                                                 return (
@@ -951,7 +951,7 @@ export class Checkout extends FormComponent {
                                                         }
                                                     })()}
                                                     {(() => {
-                                                        if (!location.query.workshop || location.query.skype || location.query.email) {
+                                                        if (!location.query.workshop || location.query.video || location.query.email) {
                                                             return (
                                                                 <tr>
                                                                     <td>&nbsp;</td>
@@ -962,7 +962,7 @@ export class Checkout extends FormComponent {
                                                         }
                                                     })()}
                                                     {(() => {
-                                                        if (!location.query.workshop && !location.query.skype && !location.query.email) {
+                                                        if (!location.query.workshop && !location.query.video && !location.query.email) {
                                                             return (
                                                                 <tr>
                                                                     <td className={sumClass}
@@ -973,7 +973,7 @@ export class Checkout extends FormComponent {
                                                         }
                                                     })()}
                                                     {(() => {
-                                                        if (!location.query.workshop && !location.query.skype && !location.query.email) {
+                                                        if (!location.query.workshop && !location.query.video && !location.query.email) {
                                                             if (this.state.data.packageDiscount || this.state.data.skype && this.state.data.skype.week > 1 || this.state.data.email && this.state.data.email.week > 1) {
                                                                 return (
                                                                     <tr>
@@ -986,7 +986,7 @@ export class Checkout extends FormComponent {
                                                         }
                                                     })()}
                                                     {(() => {
-                                                        if (!location.query.workshop && !location.query.skype && !location.query.email) {
+                                                        if (!location.query.workshop && !location.query.video && !location.query.email) {
                                                             if (this.state.data.packageDiscount > 0 || this.state.data.skype && this.state.data.skype.week > 1 || this.state.data.email && this.state.data.email.week > 1) {
                                                                 const labelName = this.state.data.promoDiscount
                                                                     ? 'right' : 'right';
@@ -1007,7 +1007,7 @@ export class Checkout extends FormComponent {
                                                         }
                                                     })()}
                                                     {(() => {
-                                                        if (!location.query.workshop && !location.query.skype && !location.query.email) {
+                                                        if (!location.query.workshop && !location.query.video && !location.query.email) {
                                                             if (this.state.data.promoDiscount) {
                                                                 return (
                                                                     <tr>
@@ -1020,7 +1020,7 @@ export class Checkout extends FormComponent {
                                                         }
                                                     })()}
                                                     {(() => {
-                                                        if (!location.query.workshop && !location.query.skype && !location.query.email) {
+                                                        if (!location.query.workshop && !location.query.video && !location.query.email) {
                                                             if (this.state.data.promoDiscount || this.state.data.skype && this.state.data.skype.week > 1 || this.state.data.email && this.state.data.email.week > 1) {
                                                                 return (
                                                                     <tr>
@@ -1031,9 +1031,9 @@ export class Checkout extends FormComponent {
                                                                 )
                                                             }
                                                         }
-                                                        if (location.query.email || location.query.skype) {
+                                                        if (location.query.email || location.query.video) {
                                                             let email = parseInt(location.query.emailCost) || 0;
-                                                            let skype = parseInt(location.query.skypeCost) || 0;
+                                                            let skype = parseInt(location.query.videoCost) || 0;
                                                             return (
                                                                 <tr>
                                                                     <td className="right"
@@ -1267,7 +1267,7 @@ export class Checkout extends FormComponent {
                                             <span className="error checkbox">{termErrorMsg}</span>
                                         </div>
                                         {(() => {
-                                            if (!this.props.location.query.workshop && (this.props.location.query.skype || (this.state.data && this.state.data.skype && this.state.data.skype.active === true))) {
+                                            if (!this.props.location.query.workshop && (this.props.location.query.video || (this.state.data && this.state.data.skype && this.state.data.skype.active === true))) {
                                                 return (
                                                     <div className="form-element-wrapper">
                                                         <div className="check-wrapper">
