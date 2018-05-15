@@ -150,6 +150,7 @@ export class Checkout extends FormComponent {
         if (location.query.workshop || location.query.video || location.query.email) {
             this.setState({
                 language: this.props.location.query.currency,
+                currency: this.props.location.query.currency,
                 cost: {
                     total: parseInt(location.query.price)
                 }
@@ -548,6 +549,7 @@ export class Checkout extends FormComponent {
     handlePaypal() {
         if (this.state.paymentType === 'paypal') {
             this.props.validate((error) => {
+                console.log(error);
                 if (error || (this.state.termsIsDirty && this.state.terms === 'off') || (this.state.cancelIsDirty && this.state.cancel === 'off')) {
                     this.actions && this.actions.disable();
                 } else {
