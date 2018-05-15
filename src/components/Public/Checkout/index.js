@@ -161,10 +161,6 @@ export class Checkout extends FormComponent {
         }
     }
 
-    componentWillUnmount() {
-        this.resetOrder();
-    }
-
     componentDidMount() {
         const {location} = this.props;
 
@@ -220,7 +216,6 @@ export class Checkout extends FormComponent {
         if (location.query.workshop || location.query.video || location.query.email) {
             this.setState({
                 stripeToken: nextProps.stripeToken,
-                //paypalEnv: nextProps.paypalEnv
             }, () => {
                 setTimeout(() => {
                     this.initStripe();
@@ -689,7 +684,8 @@ export class Checkout extends FormComponent {
                 ? getSelectedCurrency(this.state)[0].code.toUpperCase() : 'EUR';
         } else {
             amount = getWorkshopCost(parseInt(this.props.location.query.price), this.state);
-            currency = this.state.paypalCurrencies.indexOf(this.state.currency.toLowerCase()) > -1 ? this.state.currency : 'EUR';
+            currency = this.state.paypalCurrencies.indexOf(getSelectedCurrency(this.state)[0].currency) > -1
+                ? getSelectedCurrency(this.state)[0].code.toUpperCase() : 'EUR';
         }
 
         return actions.payment.create({
