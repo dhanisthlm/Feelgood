@@ -340,7 +340,7 @@ const handlePaypal = (req, reply) => {
                     payment_method: 'paypal'
                 },
                 transactions: [{
-                    amount: { total: request.encounter.price, currency: 'EUR' }
+                    amount: { total: request.encounter.price, currency: request.payload.encounter.currency }
                 }],
                 redirect_urls: {
                     return_url: 'https://www.zdravlje.nu/checkout',

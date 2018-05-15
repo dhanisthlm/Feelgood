@@ -412,6 +412,7 @@
     position: relative;
     color: #333;
     border: 1px solid #fff;
+    text-align: center;
 }
 
 .currency-wrapper .select-style select {
@@ -432,6 +433,7 @@
     left: 0;
     font-weight: 300;
     padding: 0 0 0 18px;
+    text-align: center;
 }
 
 .currency-wrapper .select-style:after {
@@ -1016,7 +1018,7 @@
     .payment .preamble {
         margin: 0 auto 10px;
         line-height: 25px;
-        font-size: 18px;
+        font-size: 17px;
         box-sizing: border-box;
         text-align: left;
         width: 100%;
@@ -1291,7 +1293,7 @@
     .payment .preamble {
         margin: 0 auto 10px;
         line-height: 25px;
-        font-size: 18px;
+        font-size: 17px;
         box-sizing: border-box;
         text-align: left;
         width: 100%;

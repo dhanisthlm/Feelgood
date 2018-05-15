@@ -174,7 +174,11 @@ export class Header extends Component {
                         <span className="menu-text">{ t('menu') }</span>
                     </span>
                     <ul className="menulist">
+                        <li><Link className="menuitems" to={issueHref}>{ t('services') }</Link></li>
                         <li><Link onClick={this.closeMobileMenu} className="menuitems" to="/#kosmomi">{ t('whoAreWe')}</Link></li>
+                        <li><Link className="menuitems" to="/#cijene">{ t('prices') }</Link></li>
+                        <li><Link className="menuitems" to="/#kakoradi">{ t('howWork') }</Link></li>
+                        <li><Link className="menuitems" to="/#kosmomi">{ t('whoAreWe')}</Link></li>
                         <li><Link className="menuitems" to="/blogovi">{ t('blog') }</Link></li>
                         <li><Link className="menuitems" to="/kontakt">Kontakt</Link></li>
                     </ul>

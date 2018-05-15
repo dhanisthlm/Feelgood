@@ -689,7 +689,7 @@ export class Checkout extends FormComponent {
                 ? getSelectedCurrency(this.state)[0].code.toUpperCase() : 'EUR';
         } else {
             amount = getWorkshopCost(parseInt(this.props.location.query.price), this.state);
-            currency = this.state.paypalCurrencies.indexOf(this.state.currency.toLowerCase()) > -1 ? this.state.currency : 'EUR' || 'KM';
+            currency = this.state.paypalCurrencies.indexOf(this.state.currency.toLowerCase()) > -1 ? this.state.currency : 'EUR';
         }
 
         return actions.payment.create({

@@ -24,7 +24,7 @@ export const encounterValidator = Joi.object().keys({
     country: Joi
         .string()
         .trim()
-        .required(),
+        .allow('', null),
 
     phone: Joi
         .string()
@@ -93,7 +93,7 @@ export const workshopValidator = Joi.object().keys({
     country: Joi
         .string()
         .trim()
-        .required(),
+        .allow('', null),
 
     phone: Joi
         .string()
@@ -170,7 +170,7 @@ export const onlineValidator = Joi.object().keys({
     country: Joi
         .string()
         .trim()
-        .required(),
+        .allow('', null),
 
     phone: Joi
         .string()

@@ -172,7 +172,7 @@
     background-color: #246cc7;
     color: #fff;
     border: 1px solid #fff;
-    font-size: 18px;
+    font-size: 17px;
     font-weight: 300;
     padding: 7px 10px 10px 10px;
     display: block;
@@ -311,7 +311,7 @@
         color: #fff;
         font-weight: 300;
         z-index: 999;
-        font-size: 18px;
+        font-size: 17px;
         top: 228px;
         left: -14px;
         line-height: 24px;
@@ -331,7 +331,7 @@
         text-align: left;
         color: #333;
         line-height: 25px;
-        font-size: 18px;
+        font-size: 17px;
         margin: 0;
     }
 
