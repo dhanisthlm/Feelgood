@@ -150,11 +150,14 @@ export class Checkout extends FormComponent {
         if (location.query.workshop || location.query.video || location.query.email) {
             this.setState({
                 language: this.props.location.query.currency,
-                currency: this.props.location.query.currency,
                 cost: {
                     total: parseInt(location.query.price)
                 }
             }, () => {
+                this.setState({
+                    currency: this.state.paypalCurrencies.indexOf(getSelectedCurrency(this.state)[0].currency) > -1
+                        ? getSelectedCurrency(this.state)[0].code.toUpperCase() : 'EUR'
+                })
                 this.props.dispatch(getStripeToken());
                 this.props.dispatch(getPaypalEnv());
             });
