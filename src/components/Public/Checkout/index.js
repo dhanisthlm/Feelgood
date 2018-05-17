@@ -573,7 +573,7 @@ export class Checkout extends FormComponent {
      * @param {number} responseCode
      * @return {object}
      */
-    handleSubmit (event) {
+    handleSubmit(event) {
         event.preventDefault();
 
         this.setState({
@@ -585,7 +585,12 @@ export class Checkout extends FormComponent {
         this.props.validate((error) => {
             const {t} = this.props;
 
-            if (!error && this.state.terms !== 'off' && this.state.cancel !== 'off') {
+            if (!error && this.state.terms !== 'off') {
+                if (this.props.location.query.video) {
+                    if (this.state.cancel === 'off') {
+                        return;
+                    }
+                }
                 if (this.state.paymentType === 'credit') {
                     this.stripe.createToken(this.card).then(result => {
                         // Inform the customer that there was an error
