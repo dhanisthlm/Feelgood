@@ -202,7 +202,7 @@ const saveLinkEncounter = (request, reply, charge) => {
     encounter.paymentType = request.payload.encounter.paymentType;
     encounter.comment = request.payload.encounter.comment;
     encounter.currency = request.payload.encounter.currency;
-    encounter.price = request.payload.encounter.cost.total;
+    encounter.price = request.payload.encounter.price;
     encounter.location = request.payload.encounter.location;
     encounter.order = order;
     encounter.fb = true;
@@ -245,7 +245,7 @@ const saveWorkshop = (request, reply, charge) => {
     workshop.mail = request.payload.encounter.mail;
     workshop.comment = request.payload.encounter.comment;
     workshop.currency = request.payload.encounter.currency;
-    workshop.price = request.payload.encounter.cost.total;
+    workshop.price = request.payload.encounter.price;
     workshop.location = request.payload.encounter.location;
     workshop.day = request.payload.encounter.day;
     workshop.month = request.payload.encounter.month;
