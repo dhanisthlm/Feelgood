@@ -553,7 +553,12 @@ export class Checkout extends FormComponent {
         if (this.state.paymentType === 'paypal') {
             this.props.validate((error) => {
                 console.log(error);
-                if (error || (this.state.termsIsDirty && this.state.terms === 'off') || (this.state.cancelIsDirty && this.state.cancel === 'off')) {
+                if (error || (this.state.termsIsDirty && this.state.terms === 'off')) {
+                    if (this.props.location.query.video) {
+                        if (this.state.cancel === 'off') {
+                            this.actions && this.actions.disable();
+                        }
+                    }
                     this.actions && this.actions.disable();
                 } else {
                     this.actions && this.actions.enable();
@@ -568,7 +573,7 @@ export class Checkout extends FormComponent {
      * @param {number} responseCode
      * @return {object}
      */
-    handleSubmit(event) {
+    handleSubmit (event) {
         event.preventDefault();
 
         this.setState({
@@ -1261,11 +1266,16 @@ export class Checkout extends FormComponent {
                                                 <input id="conditions" ref="terms" checked={this.state.terms === 'on'}
                                                        value={this.state.terms} className="checkbox" type="checkbox"/>
                                                 <label id="terms" onClick={ this.handleCheckbox } className="checkbox condition-label link"
-                                                   htmlFor="conditions">{ t('agree') }</label>
-                                                <a className="checkout-link link"
-                                                   target="blank"
-                                                   href="/politika-privatnosti">{ t('privacyPolicyLink') }</a>&nbsp;{ t('and') }&nbsp;
-                                                <a className="checkout-link link" target="blank" href="/tac">{ t('rulesLink') }.</a>
+                                                   htmlFor="conditions">
+                                                   <span>{ t('agree') }</span>
+                                                   <a className="checkout-link link"
+                                                        target="blank"
+                                                        href="/politika-privatnosti">
+                                                        { t('privacyPolicyLink') }
+                                                    </a>&nbsp;
+                                                    <span>{ t('and') }</span>&nbsp;
+                                                    <a className="checkout-link link" target="blank" href="/tac">{ t('rulesLink') }.</a>
+                                                </label>
                                             </div>
                                             <span className="error checkbox">{termErrorMsg}</span>
                                         </div>
