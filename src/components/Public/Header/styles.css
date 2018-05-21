@@ -9,6 +9,7 @@
 }
 
 .languagepicker {
+    display: none;
     background-color: #FFF;
     padding: 0;
     height: 40px;

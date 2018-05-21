@@ -65,12 +65,14 @@ export class Footer extends Component {
                 <div className="col col-2">
                     <h2>{ t('blog') }</h2>
                     {
+                        /*
                         this.props.blogs.map((blog, i) => {
                             const href = `/blogovi#${blog.hash}`;
                             return (i < 6)
                                 ? <Link className="link" to={href} key={i}>{blog.title[locale]}</Link>
                                 : null;
                         })
+                        */
                     }
                 </div>
                 <div className="col col-3">

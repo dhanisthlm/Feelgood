@@ -163,7 +163,7 @@ export class Header extends Component {
                     <Link to="/#cijene">{ t('prices') }</Link>
                     <Link to="/#kakoradi">{ t('howWork') }</Link>
                     <Link to="/#kosmomi">{ t('whoAreWe')}</Link>
-                    <Link to="/blogovi">{ t('blog') }</Link>
+                    {/*<Link to="/blogovi">{ t('blog') }</Link>*/}
                     <Link to="/kontakt">Kontakt</Link>
                 </nav>
                 <div id="topNav" className="navigation">
@@ -179,7 +179,7 @@ export class Header extends Component {
                         <li><Link className="menuitems" to="/#cijene">{ t('prices') }</Link></li>
                         <li><Link className="menuitems" to="/#kakoradi">{ t('howWork') }</Link></li>
                         <li><Link className="menuitems" to="/#kosmomi">{ t('whoAreWe')}</Link></li>
-                        <li><Link className="menuitems" to="/blogovi">{ t('blog') }</Link></li>
+                        {/*<li><Link className="menuitems" to="/blogovi">{ t('blog') }</Link></li>*/}
                         <li><Link className="menuitems" to="/kontakt">Kontakt</Link></li>
                     </ul>
                 </div>
