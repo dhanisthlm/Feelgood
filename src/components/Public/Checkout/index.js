@@ -151,7 +151,7 @@ export class Checkout extends FormComponent {
             this.setState({
                 language: this.props.location.query.currency,
                 cost: {
-                    total: parseInt(location.query.price)
+                    total: getWorkshopCost(parseInt(location.query.price), this.state)
                 }
             }, () => {
                 this.setState({
