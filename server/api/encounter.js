@@ -131,6 +131,16 @@ const saveEncounter = (request, reply, charge) => {
         });
     }
 
+    const monetary = request.payload.encounter.languages.filter((item) => {
+        return item.code.toUpperCase() === request.payload.encounter.currency;
+    });
+
+    if (monetary && monetary.length) {
+        encounter.currency = monetary[0].currency;
+    } else {
+        encounter.currency = request.payload.encounter.currency;
+    }
+
     encounter.name = request.payload.encounter.name;
     encounter.street = request.payload.encounter.street;
     encounter.postalCode = request.payload.encounter.postal;
@@ -142,7 +152,6 @@ const saveEncounter = (request, reply, charge) => {
     encounter.issue = request.payload.encounter.issue;
     encounter.mail = request.payload.encounter.mail;
     encounter.comment = request.payload.encounter.comment;
-    encounter.currency = request.payload.encounter.currency;
     encounter.price = skypePrice + emailPrice;
     encounter.fb = false;
 
@@ -190,6 +199,16 @@ const saveLinkEncounter = (request, reply, charge) => {
         order.email.response = parseInt(request.payload.encounter.emailResponse);
     }
 
+    const monetary = request.payload.encounter.languages.filter((item) => {
+        return item.code.toUpperCase() === request.payload.encounter.currency;
+    });
+
+    if (monetary && monetary.length) {
+        encounter.currency = monetary[0].currency;
+    } else {
+        encounter.currency = request.payload.encounter.currency;
+    }
+
     encounter.name = request.payload.encounter.name;
     encounter.street = request.payload.encounter.street;
     encounter.postalCode = request.payload.encounter.postal;
@@ -201,7 +220,6 @@ const saveLinkEncounter = (request, reply, charge) => {
     encounter.issue = request.payload.encounter.issue;
     encounter.paymentType = request.payload.encounter.paymentType;
     encounter.comment = request.payload.encounter.comment;
-    encounter.currency = request.payload.encounter.currency;
     encounter.price = request.payload.encounter.cost.total;
     encounter.location = request.payload.encounter.location;
     encounter.order = order;
@@ -235,6 +253,16 @@ const saveWorkshop = (request, reply, charge) => {
         });
     }
 
+    const monetary = request.payload.encounter.languages.filter((item) => {
+        return item.code.toUpperCase() === request.payload.encounter.currency;
+    });
+
+    if (monetary && monetary.length) {
+        encounter.currency = monetary[0].currency;
+    } else {
+        encounter.currency = request.payload.encounter.currency;
+    }
+
     workshop.name = request.payload.encounter.name;
     workshop.street = request.payload.encounter.street;
     workshop.postalCode = request.payload.encounter.postal;
@@ -244,7 +272,6 @@ const saveWorkshop = (request, reply, charge) => {
     workshop.paymentType = request.payload.encounter.paymentType;
     workshop.mail = request.payload.encounter.mail;
     workshop.comment = request.payload.encounter.comment;
-    workshop.currency = request.payload.encounter.currency;
     workshop.price = request.payload.encounter.cost.total;
     workshop.location = request.payload.encounter.location;
     workshop.day = request.payload.encounter.day;
