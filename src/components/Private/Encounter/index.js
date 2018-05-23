@@ -63,7 +63,7 @@ export class Encounter extends Component {
 
     renderMobile() {
     return (<ul className="mobile-list">
-            {this.props.encounters.map((encounter, i) => {
+            {[].concat(this.props.encounters).reverse().map((encounter, i) => {
                 const localTime = moment(encounter.date).format('YYYY-MM-DD / HH:mm');
                 const isOpen = this.state.openItems.indexOf(encounter._id);
                 const detailClass = isOpen < 0 ? 'details' : 'detailsOpen';
@@ -232,7 +232,7 @@ export class Encounter extends Component {
                     <p>Tip</p>
                 </div>
             </li>
-            {this.props.encounters.map((encounter, i) => {
+            {[].concat(this.props.encounters).reverse().map((encounter, i) => {
                 const localTime = moment(encounter.date).format('YYYY-MM-DD / HH:mm');
                 const isOpen = this.state.openItems.indexOf(encounter._id);
                 const detailClass = isOpen < 0 ? 'details' : 'detailsOpen';

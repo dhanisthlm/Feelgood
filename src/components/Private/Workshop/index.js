@@ -44,8 +44,6 @@ export class Encounter extends Component {
             openItems.splice(index, 1);
         }
 
-        console.log(openItems);
-
         this.setState({ openItems });
     }
 
