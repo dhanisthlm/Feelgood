@@ -345,6 +345,10 @@
     color: red !important;
 }
 
+.checkout .senderror {
+    margin-top: 5px;
+}
+
 .checkout .rating {
     overflow: hidden;
     margin-top: -24px;
@@ -443,7 +447,6 @@
     width: 30%;
     margin-right: 2%;
     background: #c2519e8c;
-    margin-bottom: 40px;
 }
 
 .checkout .form-buttons button:last-child {

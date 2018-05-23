@@ -43,6 +43,7 @@ export class Checkout extends FormComponent {
             showDialog: true,
             startTime: null,
             timeRemaining: '2:00',
+            errorMessage: '',
             idleTime: 0,
             location: null,
             countInactivity: true,
@@ -552,15 +553,17 @@ export class Checkout extends FormComponent {
     handlePaypal() {
         if (this.state.paymentType === 'paypal') {
             this.props.validate((error) => {
-                console.log(error);
                 if (error || (this.state.termsIsDirty && this.state.terms === 'off')) {
                     if (this.props.location.query.video) {
                         if (this.state.cancel === 'off') {
                             this.actions && this.actions.disable();
+                            this.setState({ errorMessage: 'Molimo da ispravite grešku iznad.' });
                         }
                     }
                     this.actions && this.actions.disable();
+                    this.setState({ errorMessage: 'Molimo da ispravite grešku iznad.' });
                 } else {
+                    this.setState({ errorMessage: '' })
                     this.actions && this.actions.enable();
                 }
             })
@@ -588,6 +591,7 @@ export class Checkout extends FormComponent {
             if (!error && this.state.terms !== 'off') {
                 if (this.props.location.query.video) {
                     if (this.state.cancel === 'off') {
+                        this.setState({ errorMessage: 'Molimo da ispravite grešku iznad.' });
                         return;
                     }
                 }
@@ -600,7 +604,6 @@ export class Checkout extends FormComponent {
                             this.setState({showSpinner: false});
                         } else {
                             // Send the token to your server
-                            this.setState({showSpinner: true});
                             this.props.dispatch(saveEncounter(this.state, result.token.id));
 
                             setTimeout(() => {
@@ -611,6 +614,10 @@ export class Checkout extends FormComponent {
                 } else {
                     this.props.dispatch(saveEncounter(this.state, null));
                 }
+
+                this.setState({ errorMessage: '' });
+            } else {
+                this.setState({ errorMessage: 'Molimo da ispravite grešku iznad.' });
             }
         })
     }
@@ -1331,6 +1338,7 @@ export class Checkout extends FormComponent {
                                                     );
                                                 }
                                             })()}
+                                            <span className="error senderror">{this.state.errorMessage}</span>
                                         </div>
                                     </div>
                                 </div>
