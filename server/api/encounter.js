@@ -110,13 +110,13 @@ const saveEncounter = (request, reply, charge) => {
 
     if (request.payload.encounter.data.skype) {
         encounter.order.skype.week = request.payload.encounter.data.skype.week;
-        encounter.order.skype.cost = request.payload.encounter.data.skype.cost;
+        encounter.order.skype.cost = request.payload.encounter.data.skype.cost / request.payload.encounter.paypalFactor;
         encounter.order.skype.duration = request.payload.encounter.data.skypeDuration.length;
         skypePrice = request.payload.encounter.data.skype.cost;
     }
 
     if (request.payload.encounter.data.email) {
-        encounter.order.email.cost = request.payload.encounter.data.email.cost;
+        encounter.order.email.cost = request.payload.encounter.data.email.cost / request.payload.encounter.paypalFactor;
         encounter.order.email.week = request.payload.encounter.data.email.week;
         emailPrice = request.payload.encounter.data.email.cost;
     }
@@ -188,14 +188,14 @@ const saveLinkEncounter = (request, reply, charge) => {
     if (request.payload.encounter.skype) {
         order.skype = {};
         order.skype.week = parseInt(request.payload.encounter.skype);
-        order.skype.cost = parseInt(request.payload.encounter.skypeCost);
+        order.skype.cost = parseInt(request.payload.encounter.skypeCost / request.payload.encounter.paypalFactor);
         order.skype.duration = parseInt(request.payload.encounter.skypeDuration);
     }
 
     if (request.payload.encounter.email) {
         order.email = {};
         order.email.week = parseInt(request.payload.encounter.email);
-        order.email.cost = parseInt(request.payload.encounter.emailCost);
+        order.email.cost = parseInt(request.payload.encounter.emailCost / request.payload.encounter.paypalFactor);
         order.email.response = parseInt(request.payload.encounter.emailResponse);
     }
 
