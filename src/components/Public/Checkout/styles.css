@@ -1030,6 +1030,10 @@ thead tr {
         margin-top: 25px;
     }
 
+    .checkout .form-buttons .stripe-button {
+        width: 100% !important;
+    }
+
     .checkout .asterix-text {
         margin: -17px 0 5px 0;
     }
