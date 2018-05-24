@@ -446,7 +446,7 @@
 .checkout .form-buttons button:first-child {
     width: 30%;
     margin-right: 2%;
-    background: #c2519e8c;
+    background: #ecc6e0;
 }
 
 .checkout .form-buttons button:last-child {
@@ -1248,7 +1248,7 @@ thead tr {
     .checkout .city-wrapper div:last-child {
         width: 55%;
     }
-    
+
     .checkout .basket input[type="checkbox"]:checked + label:before {
         content: '✗';
         background-color: #c04c9c;
