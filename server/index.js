@@ -10,9 +10,41 @@ import blog from './api/blog';
 import contact from './api/contact';
 import mongoose from 'mongoose';
 import config from 'config';
+import path from 'path';
+import 'ignore-styles';
+import requireFromString from 'require-from-string';
+import MemoryFS from 'memory-fs';
+import serverConfig from '../webpack/server.config.dev.js';
+
+const webpack = require('webpack');
+const WebpackPlugin = require('hapi-webpack-plugin');
+const wpconfig = require('../webpack/config.dev');
+const fs = new MemoryFS();
+
+var global = require("global")
+var document = require("global/document")
+var window = require("global/window")
 
 mongoose.connect(config.get('database.host'));
 mongoose.connection.on('error', console.error.bind(console, 'db error:'));
+
+const outputErrors = (err, stats) => {
+    if (err) {
+         console.error(err.stack || err);
+         if (err.details) {
+              console.error(err.details);
+         }
+         return;
+    }
+
+    const info = stats.toJson();
+    if (stats.hasErrors()) {
+        console.error(info.errors);
+    }
+    if (stats.hasWarnings()) {
+        console.warn(info.warnings);
+    }
+};
 
 const server = new Hapi.Server({
     connections: {
@@ -34,10 +66,6 @@ server.connection({
 
 
 if (process.env.NODE_ENV === 'development') {
-  const webpack = require('webpack');
-  const WebpackPlugin = require('hapi-webpack-plugin');
-  const wpconfig = require('../webpack/config.dev');
-
   server.register({
     register: WebpackPlugin,
     options: {
@@ -52,6 +80,45 @@ if (process.env.NODE_ENV === 'development') {
     if (error) throw error;
   })
 }
+
+
+  const serverCompiler = webpack(serverConfig);
+
+  serverCompiler.outputFileSystem = fs;
+
+  serverCompiler.run((err, stats) => {
+      outputErrors(err, stats);
+      const contents = fs.readFileSync(path.resolve(serverConfig.output.path, serverConfig.output.filename), 'utf8');
+      const app = requireFromString(contents, serverConfig.output.filename);
+
+      server.route({
+          method: 'GET',
+          path: '/{param*}',
+          handler: (request, reply) => {
+                console.log('x', request.headers['x-forwarded-proto']);
+
+                if ((process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'stage') &&
+                    request.headers['x-forwarded-proto'] && request.headers['x-forwarded-proto'] === 'http') {
+                        if (request.path.includes('J6BN6HOk4dHzhqlAm7uLXq6_Hsj376d0r6glXVLC6k')) {
+                            return reply.file('client/google43bf8a2e6701fef2.html');
+                        } else {
+                            return reply(app.default(request, reply));
+                            //return reply().redirect(config.get('baseUrl'));
+                        }
+                } else {
+                    if (request.path.includes('pki-validation')) {
+                        return reply.file('client/.well-known/pki-validation/godaddy.html');
+                    } else if (request.path.includes('BingSiteAuth')) {
+                        return reply.file('client/BingSiteAuth.xml');
+                    } else if (request.path.includes('icon')) {
+                        return reply.file('client/icon/' + request.path.split('/').pop());
+                    } else {
+                        return reply(app.default(request, reply));
+                    }
+                }
+            }
+      });
+  });
 
 server.register([
   { register: Inert },

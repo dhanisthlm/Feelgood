@@ -4,7 +4,7 @@ import { syncHistory } from 'redux-simple-router';
 import thunkMiddleware from 'redux-thunk';
 import reducers from '../reducers';
 
-const reduxRouterMiddleware = syncHistory(browserHistory);
-const createStoreWithMiddleware = applyMiddleware(reduxRouterMiddleware, thunkMiddleware)(createStore);
+//const reduxRouterMiddleware = syncHistory(browserHistory);
+const createStoreWithMiddleware = applyMiddleware(thunkMiddleware)(createStore);
 
 export default createStoreWithMiddleware(reducers);

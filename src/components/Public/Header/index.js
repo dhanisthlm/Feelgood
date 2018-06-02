@@ -6,6 +6,12 @@ import { ping, logout } from '../../../actions/auth';
 import i18n from '../../../config/i18n';
 import styles from './styles.css';
 
+if (window === undefined) {
+    var global = require("global")
+    var document = require("global/document")
+    var window = require("global/window")
+}
+
 export class Header extends Component {
     constructor (props) {
         super(props);

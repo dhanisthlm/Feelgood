@@ -18,7 +18,8 @@ module.exports = {
         new webpack.DefinePlugin({
             'process.env.NODE_ENV': JSON.stringify('stage'),
             'process.env.RAVEN_ENV': JSON.stringify('stage'),
-            'process.env.npm_package_version': JSON.stringify(require('../package.json').version)
+            'process.env.npm_package_version': JSON.stringify(require('../package.json').version),
+            'process.env.BROWSER': true
         }),
         new webpack.optimize.UglifyJsPlugin({
             compressor: {
@@ -35,7 +36,7 @@ module.exports = {
         loaders: [
             {
                 test: /\.js$/,
-                loaders: ['babel'],
+                loaders: ['babel-loader'],
                 include: [
                     path.join(__dirname, '..', 'src'),
                     path.join(__dirname, '..', 'server/config'),
@@ -43,13 +44,7 @@ module.exports = {
                     path.join(__dirname, '..', 'validators')
                 ]
             },
-            {
-                test: /\.css$/,
-                loader: 'style-loader!css-loader',
-                options: {
-                    modules: true
-                }
-            },
+            { test: /\.css/, loader: "style-loader!css-loader" },
             { test: /\.png$/, loader: 'url-loader?limit=100000' },
             { test: /\.jpg$/, loader: 'file-loader' },
             { test: /\.json$/, loader: 'json-loader' },

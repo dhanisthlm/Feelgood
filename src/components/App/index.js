@@ -3,11 +3,11 @@ import { connect } from 'react-redux';
 import Public from '../Public';
 import styles from './styles.css';
 
-export class App extends Component {
+class App extends Component {
   constructor (props) {
     super(props)
   }
-    
+
   render () {
     return (
       <div className="app">
@@ -21,4 +21,4 @@ export class App extends Component {
 
 App.propTypes = { children: PropTypes.object };
 
-export default connect()(App)
+export default(App);
