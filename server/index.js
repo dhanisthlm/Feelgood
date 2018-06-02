@@ -99,7 +99,7 @@ if (process.env.NODE_ENV === 'development') {
 
                 if ((process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'stage') &&
                     request.headers['x-forwarded-proto'] && request.headers['x-forwarded-proto'] === 'http') {
-                        if (request.path.includes('J6BN6HOk4dHzhqlAm7uLXq6_Hsj376d0r6glXVLC6k')) {
+                        if (request.path.includes('google43bf8a2e6701fef2')) {
                             return reply.file('client/google43bf8a2e6701fef2.html');
                         } else {
                             return reply(app.default(request, reply));
