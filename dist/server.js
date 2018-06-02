@@ -1528,6 +1528,7 @@ var Payment = exports.Payment = function (_Component) {
             this.setState({ data: this.getData() }, function () {
                 window.localStorage.setItem('order', JSON.stringify(_this4.state));
                 window.localStorage.setItem('step', '1');
+                console.log('here');
                 _this4.props.dispatch(_reduxSimpleRouter.routeActions.push('/checkout'));
             });
         }

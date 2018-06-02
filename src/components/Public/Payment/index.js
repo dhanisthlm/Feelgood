@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux';
 import { translate } from 'react-i18next';
+import { Link } from 'react-router';
 import { routeActions } from 'redux-simple-router';
 import { setEncounterData } from '../../../actions/encounter';
 import { getStripeToken, getPaypalEnv } from '../../../actions/config';
@@ -570,11 +571,11 @@ export class Payment extends Component {
 							</select>
 						</div>
 					</div>
-					<button
+					<Link to="/checkout"
 						className={buttonStyle}
 						onClick={ this.handleCheckout }>
                         { t('purchase') }
-					</button>
+					</Link>
 				</div>
 			</div>
         );

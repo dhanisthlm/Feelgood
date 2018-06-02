@@ -297,7 +297,7 @@
     max-width: 700px;
 }
 
-.payment + .text-wrapper button {
+.payment + .text-wrapper .checkout-button {
     background-color: #246cc7;
     color: #fff;
     border: 1px solid #fff;
