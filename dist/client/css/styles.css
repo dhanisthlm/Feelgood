@@ -1173,7 +1173,7 @@
     font-weight: 300;
 }
 
-.payment + .text-wrapper button.disabled {
+.payment + .text-wrapper .checkout-button.disabled {
     pointer-events: none !important;
     background-color: #246cc7;
     opacity: .5;
@@ -1452,6 +1452,7 @@
         width: 70%;
         margin-bottom: 5px;
         margin-top: 5px;
+        pointer-events: all !important;
     }
 
     .payment + .text-wrapper .promo-textfield {
@@ -1512,6 +1513,7 @@
 
     .payment + .text-wrapper button {
         margin-top: 2px;
+        pointer-events: none !important;
     }
 
     .payment .preamble {
@@ -1537,6 +1539,7 @@
 
     .payment + .text-wrapper .checkout-button {
         margin: 0;
+        pointer-events: all !important;
     }
 
     .payment {

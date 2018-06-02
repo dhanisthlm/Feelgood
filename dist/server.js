@@ -394,7 +394,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 
 exports.default = function (html) {
-  return "\n<!doctype html>\n<html lang=\"bs\" class=\"stars\">\n  <head>\n    <title>zdravlje.nu</title>\n    <meta charset=\"UTF-8\">\n    <meta name=\"description\" content=\"Privatno savjetovanje za zdrav \u017Eivot\" />\n    <meta name=\"keywords\" content=\"sre\u0107a, zdravlje, uspje\u0161an, uspje\u0161na, stretna, sretan, osje\u0107am, ose\u0107am, nasikiran, nezaposlen, nestretna, nestretan, meditacija, psiholo\u0161ko savjetovanje, nesanica, nervozan, nervozna, mirna, miran online\">\n    <meta name=\"google\" content=\"notranslate\" />\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n    <link rel=\"stylesheet\" href=\"css/font-awesome.css\">\n    <link rel=\"stylesheet\" href=\"/css/styles.css\" />\n    <link rel=\"icon\" type=\"image/png\" sizes=\"16x16\" href=\"/icon/favicon-16x16.png\">\n    <link href=\"https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&amp;subset=cyrillic,cyrillic-ext,latin-ext\" rel=\"stylesheet\">\n    <script type=\"text/javascript\">\n        var image= new Image(150,20);\n        image.src = '/images/flowers.jpg';\n        var image2= new Image(150,20);\n        image2.src = '/images/reader.jpg';\n    </script>\n  </head>\n  <body>\n    <div id=\"root\"><div>" + html + "</div></div>\n    <!-- Global site tag (gtag.js) - Google Analytics -->\n    <script async src=\"https://www.googletagmanager.com/gtag/js?id=UA-111896615-1\"></script>\n    <!-- Facebook Pixel Code -->\n\n    <script>\n      !function(f,b,e,v,n,t,s)\n      {if(f.fbq)return;n=f.fbq=function(){n.callMethod?\n      n.callMethod.apply(n,arguments):n.queue.push(arguments)};\n      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';\n      n.queue=[];t=b.createElement(e);t.async=!0;\n      t.src=v;s=b.getElementsByTagName(e)[0];\n      s.parentNode.insertBefore(t,s)}(window, document,'script',\n      'https://connect.facebook.net/en_US/fbevents.js');\n      fbq('init', '424767497941103');\n      fbq('track', 'PageView');\n    </script>\n\n    <noscript><img height=\"1\" width=\"1\" style=\"display:none\"\n      src=\"https://www.facebook.com/tr?id=424767497941103&ev=PageView&noscript=1\"\n    /></noscript>\n\n    <!-- End Facebook Pixel Code -->\n    <script>\n        window.dataLayer = window.dataLayer || [];\n        function gtag(){dataLayer.push(arguments);}\n        gtag('js', new Date());\n        gtag('config', 'UA-111896615-1');\n    </script>\n    <script src=\"https://www.paypalobjects.com/api/checkout.js\"></script>\n    <script src=\"https://js.stripe.com/v3/\"></script>\n    <script src=\"/static/bundle.js\"></script>\n  </body>\n</html>\n";
+  return "\n<!doctype html>\n<html>\n  <head>\n    <title>zdravlje.nu</title>\n    <meta charset=\"UTF-8\">\n    <meta name=\"description\" content=\"Privatno savjetovanje za zdrav \u017Eivot\" />\n    <meta name=\"keywords\" content=\"sre\u0107a, zdravlje, uspje\u0161an, uspje\u0161na, stretna, sretan, osje\u0107am, ose\u0107am, nasikiran, nezaposlen, nestretna, nestretan, meditacija, psiholo\u0161ko savjetovanje, nesanica, nervozan, nervozna, mirna, miran online\">\n    <meta name=\"google\" content=\"notranslate\" />\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n    <link rel=\"stylesheet\" href=\"/css/styles.css\" />\n  </head>\n  <body>\n    <div id=\"root\"><div>" + html + "</div></div>\n    <!-- Global site tag (gtag.js) - Google Analytics -->\n    <!-- Facebook Pixel Code -->\n    <script type=\"text/javascript\">\n        var image= new Image(150,20);\n        image.src = '/images/flowers.jpg';\n        var image2= new Image(150,20);\n        image2.src = '/images/reader.jpg';\n    </script>\n    <script>\n      !function(f,b,e,v,n,t,s)\n      {if(f.fbq)return;n=f.fbq=function(){n.callMethod?\n      n.callMethod.apply(n,arguments):n.queue.push(arguments)};\n      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';\n      n.queue=[];t=b.createElement(e);t.async=!0;\n      t.src=v;s=b.getElementsByTagName(e)[0];\n      s.parentNode.insertBefore(t,s)}(window, document,'script',\n      'https://connect.facebook.net/en_US/fbevents.js');\n      fbq('init', '424767497941103');\n      fbq('track', 'PageView');\n    </script>\n\n    <noscript><img height=\"1\" width=\"1\" style=\"display:none\"\n      src=\"https://www.facebook.com/tr?id=424767497941103&ev=PageView&noscript=1\"\n    /></noscript>\n    <!-- End Facebook Pixel Code -->\n    <script async src=\"https://www.googletagmanager.com/gtag/js?id=UA-111896615-1\"></script>\n    <script>\n        window.dataLayer = window.dataLayer || [];\n        function gtag(){dataLayer.push(arguments);}\n        gtag('js', new Date());\n        gtag('config', 'UA-111896615-1');\n    </script>\n    <script async src=\"https://www.paypalobjects.com/api/checkout.js\"></script>\n    <script async src=\"https://js.stripe.com/v3/\"></script>\n    <script async src=\"/static/bundle.js\"></script>\n  </body>\n</html>\n";
 };
 
 /***/ }),
@@ -1524,10 +1524,9 @@ var Payment = exports.Payment = function (_Component) {
 
     }, {
         key: 'handleCheckout',
-        value: function handleCheckout(e) {
+        value: function handleCheckout() {
             var _this4 = this;
 
-            e.preventDefault();
             this.setState({ data: this.getData() }, function () {
                 window.localStorage.setItem('order', JSON.stringify(_this4.state));
                 window.localStorage.setItem('step', '1');
@@ -2248,8 +2247,8 @@ var Payment = exports.Payment = function (_Component) {
                         )
                     ),
                     _react2.default.createElement(
-                        'a',
-                        { href: '#',
+                        'button',
+                        {
                             className: buttonStyle,
                             onClick: this.handleCheckout },
                         t('purchase')

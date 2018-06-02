@@ -1,6 +1,6 @@
 export default (html) => `
 <!doctype html>
-<html lang="bs" class="stars">
+<html lang="bs">
   <head>
     <title>zdravlje.nu</title>
     <meta charset="UTF-8">
@@ -8,23 +8,20 @@ export default (html) => `
     <meta name="keywords" content="sreća, zdravlje, uspješan, uspješna, stretna, sretan, osjećam, osećam, nasikiran, nezaposlen, nestretna, nestretan, meditacija, psihološko savjetovanje, nesanica, nervozan, nervozna, mirna, miran online">
     <meta name="google" content="notranslate" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="css/font-awesome.css">
-    <link rel="stylesheet" href="/css/styles.css" />
     <link rel="icon" type="image/png" sizes="16x16" href="/icon/favicon-16x16.png">
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&amp;subset=cyrillic,cyrillic-ext,latin-ext" rel="stylesheet">
+    <link rel="shortcut icon" href="favicon2.ico" />
+    <link rel="stylesheet" href="/css/styles.css" />
+  </head>
+  <body>
+    <div id="root">${html}</div>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <!-- Facebook Pixel Code -->
     <script type="text/javascript">
         var image= new Image(150,20);
         image.src = '/images/flowers.jpg';
         var image2= new Image(150,20);
         image2.src = '/images/reader.jpg';
     </script>
-  </head>
-  <body>
-    <div id="root"><div>${html}</div></div>
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-111896615-1"></script>
-    <!-- Facebook Pixel Code -->
-
     <script>
       !function(f,b,e,v,n,t,s)
       {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -41,17 +38,17 @@ export default (html) => `
     <noscript><img height="1" width="1" style="display:none"
       src="https://www.facebook.com/tr?id=424767497941103&ev=PageView&noscript=1"
     /></noscript>
-
     <!-- End Facebook Pixel Code -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-111896615-1"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
         gtag('config', 'UA-111896615-1');
     </script>
-    <script src="https://www.paypalobjects.com/api/checkout.js"></script>
-    <script src="https://js.stripe.com/v3/"></script>
-    <script src="/static/bundle.js"></script>
+    <script async src="https://www.paypalobjects.com/api/checkout.js"></script>
+    <script async src="https://js.stripe.com/v3/"></script>
+    <script async src="/static/bundle.js"></script>
   </body>
 </html>
 `;
