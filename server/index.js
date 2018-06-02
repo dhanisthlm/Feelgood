@@ -97,13 +97,11 @@ if (process.env.NODE_ENV === 'development') {
           handler: (request, reply) => {
                 console.log('x', request.headers['x-forwarded-proto']);
 
-                if ((process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'stage') &&
-                    request.headers['x-forwarded-proto'] && request.headers['x-forwarded-proto'] === 'http') {
+                if (process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'stage') {
                         if (request.path.includes('/google431368c2d31f8465')) {
                             return reply.file('client/google43bf8a2e6701fef2.html');
                         } else {
                             return reply(app.default(request, reply));
-                            //return reply().redirect(config.get('baseUrl'));
                         }
                 } else {
                     if (request.path.includes('pki-validation')) {
