@@ -86,16 +86,22 @@ module.exports = require("react-i18next");
 /* 3 */
 /***/ (function(module, exports) {
 
-module.exports = require("axios");
+module.exports = require("react-router");
 
 /***/ }),
 /* 4 */
 /***/ (function(module, exports) {
 
-module.exports = require("redux-actions");
+module.exports = require("axios");
 
 /***/ }),
 /* 5 */
+/***/ (function(module, exports) {
+
+module.exports = require("redux-actions");
+
+/***/ }),
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -135,12 +141,6 @@ _i18next2.default.init({
 exports.default = _i18next2.default;
 
 /***/ }),
-/* 6 */
-/***/ (function(module, exports) {
-
-module.exports = require("react-router");
-
-/***/ }),
 /* 7 */
 /***/ (function(module, exports) {
 
@@ -158,7 +158,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.addUserToNewsletter = exports.resetRating = exports.resetEncounter = exports.setEncounterData = exports.saveEncounter = exports.saveRating = exports.eraseEncounter = exports.payPaypal = exports.eraseNewsletter = exports.eraseWorkshop = exports.getEncounters = exports.getNewsletters = exports.getWorkshops = undefined;
 
-var _axios = __webpack_require__(3);
+var _axios = __webpack_require__(4);
 
 var request = _interopRequireWildcard(_axios);
 
@@ -323,7 +323,7 @@ var _reactRedux = __webpack_require__(1);
 
 var _reactI18next = __webpack_require__(2);
 
-var _i18n = __webpack_require__(5);
+var _i18n = __webpack_require__(6);
 
 var _i18n2 = _interopRequireDefault(_i18n);
 
@@ -606,11 +606,11 @@ var _reactRedux = __webpack_require__(1);
 
 var _reactI18next = __webpack_require__(2);
 
-var _reactRouter = __webpack_require__(6);
+var _reactRouter = __webpack_require__(3);
 
 var _auth = __webpack_require__(18);
 
-var _i18n = __webpack_require__(5);
+var _i18n = __webpack_require__(6);
 
 var _i18n2 = _interopRequireDefault(_i18n);
 
@@ -1134,7 +1134,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.ping = exports.gotoLogout = exports.logout = exports.register = exports.login = undefined;
 
-var _axios = __webpack_require__(3);
+var _axios = __webpack_require__(4);
 
 var request = _interopRequireWildcard(_axios);
 
@@ -1245,7 +1245,7 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRedux = __webpack_require__(1);
 
-var _reactRouter = __webpack_require__(6);
+var _reactRouter = __webpack_require__(3);
 
 var _reactI18next = __webpack_require__(2);
 
@@ -1383,6 +1383,8 @@ var _react2 = _interopRequireDefault(_react);
 var _reactRedux = __webpack_require__(1);
 
 var _reactI18next = __webpack_require__(2);
+
+var _reactRouter = __webpack_require__(3);
 
 var _reduxSimpleRouter = __webpack_require__(7);
 
@@ -1522,13 +1524,13 @@ var Payment = exports.Payment = function (_Component) {
 
     }, {
         key: 'handleCheckout',
-        value: function handleCheckout() {
+        value: function handleCheckout(e) {
             var _this4 = this;
 
+            e.preventDefault();
             this.setState({ data: this.getData() }, function () {
                 window.localStorage.setItem('order', JSON.stringify(_this4.state));
                 window.localStorage.setItem('step', '1');
-                console.log('here');
                 _this4.props.dispatch(_reduxSimpleRouter.routeActions.push('/checkout'));
             });
         }
@@ -2246,8 +2248,8 @@ var Payment = exports.Payment = function (_Component) {
                         )
                     ),
                     _react2.default.createElement(
-                        'button',
-                        {
+                        'a',
+                        { href: '#',
                             className: buttonStyle,
                             onClick: this.handleCheckout },
                         t('purchase')
@@ -2283,7 +2285,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.getPaypalEnv = exports.getStripeToken = undefined;
 
-var _axios = __webpack_require__(3);
+var _axios = __webpack_require__(4);
 
 var request = _interopRequireWildcard(_axios);
 
@@ -2561,7 +2563,7 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRedux = __webpack_require__(1);
 
-var _reactRouter = __webpack_require__(6);
+var _reactRouter = __webpack_require__(3);
 
 var _reactI18next = __webpack_require__(2);
 
@@ -3185,7 +3187,7 @@ var _reactI18next = __webpack_require__(2);
 
 var _staff = __webpack_require__(36);
 
-var _i18n = __webpack_require__(5);
+var _i18n = __webpack_require__(6);
 
 var _i18n2 = _interopRequireDefault(_i18n);
 
@@ -3389,7 +3391,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.createStaff = exports.getStaff = undefined;
 
-var _axios = __webpack_require__(3);
+var _axios = __webpack_require__(4);
 
 var request = _interopRequireWildcard(_axios);
 
@@ -4047,13 +4049,13 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRedux = __webpack_require__(1);
 
-var _reactRouter = __webpack_require__(6);
+var _reactRouter = __webpack_require__(3);
 
 var _reactI18next = __webpack_require__(2);
 
 var _blog = __webpack_require__(50);
 
-var _i18n = __webpack_require__(5);
+var _i18n = __webpack_require__(6);
 
 var _i18n2 = _interopRequireDefault(_i18n);
 
@@ -4245,7 +4247,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.getBlogs = undefined;
 
-var _axios = __webpack_require__(3);
+var _axios = __webpack_require__(4);
 
 var request = _interopRequireWildcard(_axios);
 
@@ -4338,7 +4340,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-var _reduxActions = __webpack_require__(4);
+var _reduxActions = __webpack_require__(5);
 
 exports.default = (0, _reduxActions.handleActions)({
     WORKSHOPS: function WORKSHOPS(state, action) {
@@ -4474,7 +4476,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-var _reduxActions = __webpack_require__(4);
+var _reduxActions = __webpack_require__(5);
 
 exports.default = (0, _reduxActions.handleActions)({
     GET_STAFF: function GET_STAFF(state, action) {
@@ -4499,7 +4501,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-var _reduxActions = __webpack_require__(4);
+var _reduxActions = __webpack_require__(5);
 
 exports.default = (0, _reduxActions.handleActions)({
     GET_ISSUES: function GET_ISSUES(state, action) {
@@ -4524,7 +4526,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-var _reduxActions = __webpack_require__(4);
+var _reduxActions = __webpack_require__(5);
 
 var initialState = {
     username: '',
@@ -4563,7 +4565,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-var _reduxActions = __webpack_require__(4);
+var _reduxActions = __webpack_require__(5);
 
 exports.default = (0, _reduxActions.handleActions)({
     GET_BLOGS: function GET_BLOGS(state, action) {

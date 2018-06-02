@@ -116,7 +116,7 @@ export class Payment extends Component {
         this.setState({ data: this.getData() }, () => {
             window.localStorage.setItem('order', JSON.stringify(this.state));
             window.localStorage.setItem('step', '1');
-            this.props.dispatch(routeActions.push('/checkout'));
+            window.location.href='/checkout'
         });
     }
 
@@ -571,11 +571,11 @@ export class Payment extends Component {
 							</select>
 						</div>
 					</div>
-					<Link to="/checkout"
+					<span
 						className={buttonStyle}
 						onClick={ this.handleCheckout }>
                         { t('purchase') }
-					</Link>
+					</span>
 				</div>
 			</div>
         );
