@@ -96,8 +96,8 @@ if (process.env.NODE_ENV === 'development') {
           handler: (request, reply) => {
                 console.log('x', request.headers['x-forwarded-proto']);
 
-                if (process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'stage') {
-                    request.headers['x-forwarded-proto'] && request.headers['x-forwarded-proto'] === 'http') {
+                 if ((process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'stage') &&
+                  request.headers['x-forwarded-proto'] && request.headers['x-forwarded-proto'] === 'http') {
                         if (request.path.includes('google43bf8a2e6701fef2')) {
                             return reply.file('client/google43bf8a2e6701fef2.html');
                         } else {
