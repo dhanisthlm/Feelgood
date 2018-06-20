@@ -23,7 +23,7 @@ import styles from './styles.css';
 
 let PayPalButton = paypal.Button.driver('react', { React, ReactDOM });
 
-export class Checkout extends FormComponent {
+export class Checkout extends Component {
     constructor(props) {
         super(props);
 
@@ -168,6 +168,21 @@ export class Checkout extends FormComponent {
 
     componentDidMount() {
         const {location} = this.props;
+
+        let videoCost;
+        let emailCost;
+
+        if (location.query.videoCost) {
+            videoCost = parseInt(location.query.videoCost);
+        }
+
+        if (location.query.emailCost) {
+            emailCost = parseInt(location.query.emailCost);
+        }
+
+        if (videoCost + emailCost === 0) {
+            this.setState({ paymentType: 'free' });
+        }
 
         if (location.query.video) {
             this.calculateViewportSize();
@@ -1199,46 +1214,52 @@ export class Checkout extends FormComponent {
                                                 )
                                             }
                                         })()}
-                                        <div className="form-element-wrapper payment-type">
-                                            <fieldset id="payment-options">
-                                                <legend className="payment-type-header">{ t('paymentType') }</legend>
-                                                <div className="payment-type-wrapper credit-wrapper">
-                                                    <input id="credit" className="card-radio"
-                                                           checked={ this.state.paymentType === 'credit' } type="radio"
-                                                           name="payment-type"/>
-                                                    <label data-id="credit" onClick={ this.handlePaymentType }
-                                                           htmlFor="credit">
-                                                        <img className="card" src="/images/visa.png"/>
-                                                        <img className="card" src="/images/master.png"/>
-                                                        <img className="card" src="/images/ae.png"/>
-                                                    </label>
-                                                </div>
-                                                <div className="payment-type-wrapper paypal-wrapper">
-                                                    <input id="paypal" className="card-radio"
-                                                           checked={ this.state.paymentType === 'paypal' } type="radio"
-                                                           name="payment-type"/>
-                                                    <label data-id="paypal" onClick={ this.handlePaymentType }
-                                                           htmlFor="paypal">
-                                                        <img className="card" src="/images/paypal.png"/>
-                                                    </label>
-                                                </div>
-                                                <div className="payment-type-wrapper faktura-wrapper">
-                                                    <input id="faktura" checked={ this.state.paymentType === 'faktura' }
-                                                           type="radio" name="payment-type"/>
-                                                    <label data-id="faktura" onClick={ this.handlePaymentType }
-                                                           htmlFor="paypal">{ t('invoice') }</label>
-                                                </div>
-                                                {(() => {
-                                                    if (this.state.paymentType === 'faktura') {
-                                                        return (
-                                                            <div className="faktura-info">
-                                                                <p>{ t('invoiceText') }</p>
+                                        {(() => {
+                                            if (this.state.paymentType !== 'free') {
+                                               return(
+                                                    <div className="form-element-wrapper payment-type">
+                                                        <fieldset id="payment-options">
+                                                            <legend className="payment-type-header">{ t('paymentType') }</legend>
+                                                            <div className="payment-type-wrapper credit-wrapper">
+                                                                <input id="credit" className="card-radio"
+                                                                       checked={ this.state.paymentType === 'credit' } type="radio"
+                                                                       name="payment-type"/>
+                                                                <label data-id="credit" onClick={ this.handlePaymentType }
+                                                                       htmlFor="credit">
+                                                                    <img className="card" src="/images/visa.png"/>
+                                                                    <img className="card" src="/images/master.png"/>
+                                                                    <img className="card" src="/images/ae.png"/>
+                                                                </label>
                                                             </div>
-                                                        )
-                                                    }
-                                                })()}
-                                            </fieldset>
-                                        </div>
+                                                            <div className="payment-type-wrapper paypal-wrapper">
+                                                                <input id="paypal" className="card-radio"
+                                                                       checked={ this.state.paymentType === 'paypal' } type="radio"
+                                                                       name="payment-type"/>
+                                                                <label data-id="paypal" onClick={ this.handlePaymentType }
+                                                                       htmlFor="paypal">
+                                                                    <img className="card" src="/images/paypal.png"/>
+                                                                </label>
+                                                            </div>
+                                                            <div className="payment-type-wrapper faktura-wrapper">
+                                                                <input id="faktura" checked={ this.state.paymentType === 'faktura' }
+                                                                       type="radio" name="payment-type"/>
+                                                                <label data-id="faktura" onClick={ this.handlePaymentType }
+                                                                       htmlFor="paypal">{ t('invoice') }</label>
+                                                            </div>
+                                                            {(() => {
+                                                                if (this.state.paymentType === 'faktura') {
+                                                                    return (
+                                                                        <div className="faktura-info">
+                                                                            <p>{ t('invoiceText') }</p>
+                                                                        </div>
+                                                                    )
+                                                                }
+                                                            })()}
+                                                        </fieldset>
+                                                    </div>
+                                                )
+                                            }
+                                        })()}
                                         {(() => {
                                             if (this.state.paymentType === 'credit') {
                                                 return (
@@ -1315,7 +1336,7 @@ export class Checkout extends FormComponent {
                                         <div className="form-buttons">
                                             <button onClick={ this.resetCheckout }>{ t('back') }</button>
                                             {(() => {
-                                                if (this.state.paymentType === 'credit' || this.state.paymentType === 'faktura') {
+                                                if (this.state.paymentType === 'credit' || this.state.paymentType === 'faktura' || this.state.paymentType === 'free') {
                                                     return <button className="stripe-button"
                                                          onClick={this.handleSubmit}>{ t('placeOrder') }</button>;
                                                 }

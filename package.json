@@ -17,7 +17,7 @@
     "start": "npm run build-prod && npm run build-dev-server && NODE_ENV=production node index.js",
     "start-stage": "npm run build-stage && NODE_ENV=stage node index.js",
     "build:clean": "rimraf dist/client/static",
-    "dev": "npm run build:clean && npm run build-dev-server && NODE_ENV=development node index.js",
+    "dev": "npm run build:clean && webpack --config ./webpack/config.dev.js && npm run build-dev-server && NODE_ENV=development node index.js",
     "test": "nyc --reporter=html --reporter=text mocha --require ignore-styles test/utils/setup.js --compilers js:babel-register test/**/*Spec.jsx"
   },
   "dependencies": {
