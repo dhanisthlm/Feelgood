@@ -169,19 +169,21 @@ export class Checkout extends Component {
     componentDidMount() {
         const {location} = this.props;
 
-        let videoCost = 0;
-        let emailCost = 0;
+        if (location.query.videoCost || location.query.emailCost) {
+            let videoCost = 0;
+            let emailCost = 0;
 
-        if (location.query.videoCost) {
-            videoCost = parseInt(location.query.videoCost);
-        }
+            if (location.query.videoCost) {
+                videoCost = parseInt(location.query.videoCost);
+            }
 
-        if (location.query.emailCost) {
-            emailCost = parseInt(location.query.emailCost);
-        }
+            if (location.query.emailCost) {
+                emailCost = parseInt(location.query.emailCost);
+            }
 
-        if (videoCost + emailCost === 0) {
-            this.setState({ paymentType: 'free' });
+            if (videoCost + emailCost === 0) {
+                this.setState({ paymentType: 'free' });
+            }
         }
 
         if (location.query.video) {
