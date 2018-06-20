@@ -534,6 +534,7 @@ export class Checkout extends Component {
      * @return {object}
      */
     getValidatorData() {
+        console.log('data', this.state);
         return this.state
     }
 
@@ -599,6 +600,8 @@ export class Checkout extends Component {
             cancelIsDirty: true,
             currency: getSelectedCurrency(this.state)[0].code.toUpperCase()
         });
+
+        console.log(this.props);
 
         this.props.validate((error) => {
             const {t} = this.props;
