@@ -169,8 +169,8 @@ export class Checkout extends Component {
     componentDidMount() {
         const {location} = this.props;
 
-        let videoCost;
-        let emailCost;
+        let videoCost = 0;
+        let emailCost = 0;
 
         if (location.query.videoCost) {
             videoCost = parseInt(location.query.videoCost);
