@@ -337,12 +337,11 @@
 }
 
 .checkout .error {
-    display: blocK;
     float: left;
     font-size: 14px;
-    width: 100%;
     text-align: left;
-    color: red !important;
+    color: #f00 !important;
+    margin-right: 10px;
 }
 
 .checkout .senderror {
