@@ -81,7 +81,6 @@ if (process.env.NODE_ENV === 'development') {
   })
 }
 
-
   const serverCompiler = webpack(serverConfig);
 
   serverCompiler.outputFileSystem = fs;
@@ -98,10 +97,11 @@ if (process.env.NODE_ENV === 'development') {
                 console.log('x', request.headers['x-forwarded-proto']);
 
                 if (process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'stage') {
-                        if (request.path.includes('/google431368c2d31f8465')) {
+                    request.headers['x-forwarded-proto'] && request.headers['x-forwarded-proto'] === 'http') {
+                        if (request.path.includes('google43bf8a2e6701fef2')) {
                             return reply.file('client/google43bf8a2e6701fef2.html');
                         } else {
-                            return reply(app.default(request, reply));
+                            return reply(app.default(request, reply)).redirect(config.get('baseUrl'));
                         }
                 } else {
                     if (request.path.includes('pki-validation')) {
