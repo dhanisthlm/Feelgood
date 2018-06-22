@@ -14,6 +14,7 @@ export default (html) => `
   </head>
   <body>
     <div id="root">${html}</div>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&amp;subset=cyrillic,cyrillic-ext,latin-ext" rel="stylesheet">
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <!-- Facebook Pixel Code -->
     <script type="text/javascript">
