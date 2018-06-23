@@ -63,7 +63,6 @@ export class Footer extends Component {
                     </div>
                 </div>
                 <div className="col col-2">
-                    <h2>{ t('blog') }</h2>
                     {
                         /*
                         this.props.blogs.map((blog, i) => {

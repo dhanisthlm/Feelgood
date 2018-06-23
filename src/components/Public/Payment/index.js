@@ -536,19 +536,17 @@ export class Payment extends Component {
 								</div>
 							</div>
 						</div>
-						<a href="https://www.facebook.com/zdravljenu-158721211521168" target="blank" className="info-text">
+						<Link to="https://www.zdravlje.nu/checkout?video=1&videoDuration=20&videoCost=0&videoDescription=Online%20Savjetovanje&title=Stavka&currency=€&price=0" className="info-text">
 							<div className="promo">
 								<div className="promo-text">
-									<span className="percent-text">Poklanjamo</span>
-									<span className="launch">Life-coaching</span>
-									<p className="web-adress">sesiju <span>svakog petka!</span></p>
-									<span className="year-1">Kliknite ovdje da biste</span>
-									<p className="kod-text">došli do <span>nagradne</span></p>
-									<p className="kod-text2"><span>igre</span> na našem</p>
-									<span className="last">FaceBook!</span>
+									<span className="percent-text">Kliknite ovde</span>
+									<span className="launch">da biste dobili</span>
+									<p className="web-adress">prvi 20 minuta</p>
+									<span className="year-1">online sesije</span>
+									<p className="kod-text">besplatno!</p>
 								</div>
 							</div>
-						</a>
+						</Link>
 					</div>
 				</div>
 				<div className="text-wrapper">

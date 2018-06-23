@@ -249,9 +249,10 @@
 
 .payment .promo-text {
     display: inline-block;
-    margin-top: 92px;
+    margin-top: 107px;
     color: #fff;
     text-align: center;
+    margin-left: 5px;
 }
 
 .payment .n-weeks span {
@@ -268,7 +269,6 @@
 }
 
 .payment .info-text p {
-    font-size: 20px;
     margin-top: 0;
     line-height: 25px;
     margin-bottom: 0;
@@ -484,7 +484,7 @@
 
 .info-text .web-adress {
     display: block;
-    font-size: 23px;
+    font-size: 29px;
     margin-top: 4px;
     margin-bottom: 8px;
     font-weight: 300;
@@ -505,8 +505,8 @@
 .info-text .kod-text {
     display: inline;
     margin-top: 6px;
-    font-weight: 300;
-    font-size: 19px;
+    font-size: 32px;
+    font-weight: 500;
     margin-bottom: 5px;
 }
 
@@ -529,7 +529,7 @@
     display: block;
     margin-top: 2px;
     font-weight: 300;
-    font-size: 18px;
+    font-size: 24px;
     margin-bottom: 6px;
 }
 
@@ -789,7 +789,8 @@
 
     .payment .promo-text {
         display: inline-block;
-        margin-top: 74px;
+        margin-top: 82px;
+        margin-left: 0;
         color: #fff;
         text-align: center;
     }
@@ -821,7 +822,7 @@
         display: inline-block;
     }
 
-    .payment + .text-wrapper button {
+    .payment + .text-wrapper .checkout-button {
         float: none;
         width: 70%;
         margin-bottom: 5px;
@@ -1182,6 +1183,14 @@
         text-align-last: center;
         margin-bottom: 7px;
         padding: 0;
+    }
+
+    .payment .promo-text {
+        display: inline-block;
+        margin-top: 88px;
+        margin-left: 0;
+        color: #fff;
+        text-align: center;
     }
 
     .payment .toggle_radios label p {
