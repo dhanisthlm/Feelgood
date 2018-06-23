@@ -1224,6 +1224,10 @@
         margin: 0 auto;
     }
 
+    .payment + .text-wrapper .checkout-button {
+        width: 100%;
+    }
+
     #duration-l:checked ~ .toggle_option_slider{
         left: 50%;
     }
