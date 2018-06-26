@@ -3,9 +3,7 @@ import { connect } from 'react-redux';
 import { translate } from 'react-i18next';
 import validation from 'react-validation-mixin';
 import strategy from 'joi-validation-strategy';
-import FormComponent from '../../FormComponent';
 import { routeActions } from 'redux-simple-router';
-import ReactDOM from 'react-dom'
 import { encounterValidator, workshopValidator, onlineValidator } from '../../../../validators/encounters';
 import { getIssues } from '../../../actions/issue';
 import { saveRating, resetRating } from '../../../actions/encounter';
@@ -14,14 +12,13 @@ import { saveEncounter, resetEncounter } from '../../../actions/encounter';
 import { getCountries } from '../../../../helpers/countries';
 import { getCurrency } from '../../../../helpers/currencies';
 import { getStripeToken, getPaypalEnv } from '../../../actions/config';
+import ReactDOM from 'react-dom'
 import { getSkypeCost, getEmailCost, getPackageDiscount, getVoucherDiscount, getSum, getTotal, getPackageSum, getSelectedCurrency, getWorkshopCost } from '../../../../helpers/payment';
-import { InactivityModal } from '../../InactiveDialog';
+import scriptLoader from 'react-async-script-loader';
 import Header from '../Header';
 import Footer from '../Footer';
 import issueObj from '../../../../json/issues.json';
 import styles from './styles.css';
-
-let PayPalButton = paypal.Button.driver('react', { React, ReactDOM });
 
 export class Checkout extends Component {
     constructor(props) {
@@ -234,7 +231,12 @@ export class Checkout extends Component {
      * @return {object}
      */
     componentWillReceiveProps(nextProps) {
-        const {location} = nextProps;
+        const {location, isScriptLoaded, isScriptLoadSucceed} = nextProps;
+
+        if (isScriptLoaded && isScriptLoadSucceed) {
+            this.PayPalButton = paypal.Button.driver('react', { React, ReactDOM });
+        }
+
         if (location.query.workshop || location.query.video || location.query.email) {
             this.setState({
                 stripeToken: nextProps.stripeToken,
@@ -1347,7 +1349,8 @@ export class Checkout extends Component {
                                                 }
                                             })()}
                                             {(() => {
-                                                if (this.state.paymentType === 'paypal') {
+                                                if (this.state.paymentType === 'paypal' && this.PayPalButton) {
+                                                    const PayPalButton = this.PayPalButton;
                                                     return (
                                                         <PayPalButton
                                                             style={paypalStyle}
@@ -1441,4 +1444,7 @@ const mapStateToProps = (state) => ({
     paypalId: state.encounter.paypalId
 });
 
-export default connect(mapStateToProps)(translate('checkoutView')(validation(strategy(i18nValidation()))(Checkout)));
+export default scriptLoader([
+    'https://www.paypalobjects.com/api/checkout.js',
+    'https://js.stripe.com/v3/'
+])(connect(mapStateToProps)(translate('checkoutView')(validation(strategy(i18nValidation()))(Checkout))));

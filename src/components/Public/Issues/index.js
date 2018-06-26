@@ -21,7 +21,8 @@ export class Issues extends Component {
 				'fobia',
 				'violence',
 				'stuck'
-			]
+			],
+			index: 0
 		};
 
 		this.renderMobileIssues = this.renderMobileIssues.bind(this);
@@ -47,32 +48,29 @@ export class Issues extends Component {
 		e.currentTarget.classList.remove('show');
 	}
 
-	renderMobileIssues () {
-		const { t } = this.props;
+    renderMobileIssues () {
+        const { t } = this.props;
+        const issue = this.state.issues[this.state.index];
+        const name = `issues.${issue}.name`;
+        const description = `issues.${issue}.description`;
+        const issueClass = `issue ${issue}`;
+        const imgPath = `/images/${issue}.svg`;
+        const imgClass = `issue-icon issue-icon-${issue}`;
 
-		return this.state.issues.map((issue, i) => {
-			const name = `issues.${issue}.name`;
-			const description = `issues.${issue}.description`;
-			const issueClass = `issue ${issue}`;
-			return (
-				<div key={i} className="issue-wrapper">
-					<div id={ t(name) }
-						 onMouseEnter={this.handleMouseEnter}
-						 onMouseLeave={this.handleMouseLeave}
-						 ref={(issueRef) => { this.issueRef = issueRef; }}
-						 className={ issueClass }>
-					</div>
-					<h6 className="heading">{ t(name) }</h6>
-					<p className="issue-text">{ t(description) }</p>
-					<div className="text-wrapper text-wrapper-mobile">
-						<h3 className="heading">{ t('heading') }</h3>
-						<p className="preamble">{ t('preamble') }</p>
-						<a href="/kontakt" className="issue-button">{ t('contactUs') }</a>
-					</div>
+        return (
+			<div className="issue-wrapper">
+				<div id={ t(name) }
+					 onMouseEnter={this.handleMouseEnter}
+					 onMouseLeave={this.handleMouseLeave}
+					 ref={(issueRef) => { this.issueRef = issueRef; }}
+					 className={ issueClass }>
 				</div>
-			);
-		})
-	}
+				<img className={imgClass} src={imgPath} />
+				<h6 className="heading">{ t(name) }</h6>
+				<p className="issue-text">{ t(description) }</p>
+			</div>
+        );
+    }
 
     handleSwipeRight () {
         const carousel = this.carousel;
@@ -253,6 +251,11 @@ export class Issues extends Component {
                         { this.renderMobileIssues() }
 					</div>
 					<div id="right" onClick={this.handleSwipeLeft} className="issue-arrow-right" />
+				</div>
+				<div className="text-wrapper text-wrapper-mobile">
+					<h3 className="heading">{ t('heading') }</h3>
+					<p className="preamble">{ t('preamble') }</p>
+					<a href="/kontakt" className="issue-button">{ t('contactUs') }</a>
 				</div>
 				<div className="text-wrapper">
 					<h3 className="heading">{ t('heading') }</h3>

@@ -394,7 +394,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 
 exports.default = function (html) {
-  return "\n<!doctype html>\n<html lang=\"bs\">\n  <head>\n    <title>zdravlje.nu</title>\n    <meta charset=\"UTF-8\">\n    <meta name=\"description\" content=\"Privatno savjetovanje za zdrav \u017Eivot\" />\n    <meta name=\"keywords\" content=\"sre\u0107a, zdravlje, uspje\u0161an, uspje\u0161na, stretna, sretan, osje\u0107am, ose\u0107am, nasikiran, nezaposlen, nestretna, nestretan, meditacija, psiholo\u0161ko savjetovanje, nesanica, nervozan, nervozna, mirna, miran online\">\n    <meta name=\"google\" content=\"notranslate\" />\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n    <link rel=\"icon\" type=\"image/png\" sizes=\"16x16\" href=\"/icon/favicon-16x16.png\">\n    <link rel=\"shortcut icon\" href=\"favicon2.ico\" />\n    <link rel=\"stylesheet\" href=\"/css/styles.css\" />\n  </head>\n  <body>\n    <div id=\"root\">" + html + "</div>\n    <link href=\"https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&amp;subset=cyrillic,cyrillic-ext,latin-ext\" rel=\"stylesheet\">\n    <!-- Global site tag (gtag.js) - Google Analytics -->\n    <!-- Facebook Pixel Code -->\n    <script type=\"text/javascript\">\n        var image= new Image(150,20);\n        image.src = '/images/flowers.jpg';\n        var image2= new Image(150,20);\n        image2.src = '/images/reader.jpg';\n    </script>\n    <script>\n      !function(f,b,e,v,n,t,s)\n      {if(f.fbq)return;n=f.fbq=function(){n.callMethod?\n      n.callMethod.apply(n,arguments):n.queue.push(arguments)};\n      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';\n      n.queue=[];t=b.createElement(e);t.async=!0;\n      t.src=v;s=b.getElementsByTagName(e)[0];\n      s.parentNode.insertBefore(t,s)}(window, document,'script',\n      'https://connect.facebook.net/en_US/fbevents.js');\n      fbq('init', '424767497941103');\n      fbq('track', 'PageView');\n    </script>\n\n    <noscript><img height=\"1\" width=\"1\" style=\"display:none\"\n      src=\"https://www.facebook.com/tr?id=424767497941103&ev=PageView&noscript=1\"\n    /></noscript>\n    <!-- End Facebook Pixel Code -->\n    <script async src=\"https://www.googletagmanager.com/gtag/js?id=UA-111896615-1\"></script>\n    <script>\n        window.dataLayer = window.dataLayer || [];\n        function gtag(){dataLayer.push(arguments);}\n        gtag('js', new Date());\n        gtag('config', 'UA-111896615-1');\n    </script>\n    <script async src=\"https://www.paypalobjects.com/api/checkout.js\"></script>\n    <script async src=\"https://js.stripe.com/v3/\"></script>\n    <script async src=\"/static/bundle.js\"></script>\n  </body>\n</html>\n";
+  return "\n<!doctype html>\n<html lang=\"bs\">\n  <head>\n    <title>zdravlje.nu</title>\n    <meta charset=\"UTF-8\">\n    <meta name=\"description\" content=\"Privatno savjetovanje za zdrav \u017Eivot\" />\n    <meta name=\"keywords\" content=\"sre\u0107a, zdravlje, uspje\u0161an, uspje\u0161na, stretna, sretan, osje\u0107am, ose\u0107am, nasikiran, nezaposlen, nestretna, nestretan, meditacija, psiholo\u0161ko savjetovanje, nesanica, nervozan, nervozna, mirna, miran online\">\n    <meta name=\"google\" content=\"notranslate\" />\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n    <link rel=\"icon\" type=\"image/png\" sizes=\"16x16\" href=\"/icon/favicon-16x16.png\">\n    <link rel=\"shortcut icon\" href=\"favicon2.ico\" />\n    <link rel=\"stylesheet\" href=\"/css/styles.css\" />\n  </head>\n  <body>\n    <div id=\"root\"><div>" + html + "</div></div>\n    <link href=\"https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&amp;subset=cyrillic,cyrillic-ext,latin-ext\" rel=\"stylesheet\">\n    <script type=\"text/javascript\">\n        var image= new Image(150,20);\n        image.src = '/images/flowers.jpg';\n        var image2= new Image(150,20);\n        image2.src = '/images/reader.jpg';\n    </script>\n    <script async src=\"/static/bundle.js\"></script>\n    <script async src=\"https://www.googletagmanager.com/gtag/js?id=UA-111896615-1\"></script>\n    <script>\n        window.dataLayer = window.dataLayer || [];\n        function gtag(){dataLayer.push(arguments);}\n        gtag('js', new Date());\n        gtag('config', 'UA-111896615-1');\n    </script>\n  </body>\n</html>\n";
 };
 
 /***/ }),
@@ -2121,8 +2121,8 @@ var Payment = exports.Payment = function (_Component) {
                             )
                         ),
                         _react2.default.createElement(
-                            'a',
-                            { href: 'https://www.facebook.com/zdravljenu-158721211521168', target: 'blank', className: 'info-text' },
+                            _reactRouter.Link,
+                            { to: 'https://www.zdravlje.nu/checkout?video=1&videoDuration=20&videoCost=0&videoDescription=Online%20Savjetovanje&title=Stavka&currency=\u20AC&price=0', className: 'info-text' },
                             _react2.default.createElement(
                                 'div',
                                 { className: 'promo' },
@@ -2562,7 +2562,8 @@ var Issues = exports.Issues = function (_Component) {
 		var _this = _possibleConstructorReturn(this, (Issues.__proto__ || Object.getPrototypeOf(Issues)).call(this, props));
 
 		_this.state = {
-			issues: ['stress', 'anxiety', 'exhaustion', 'backPain', 'depression', 'kids', 'weight', 'panic', 'fobia', 'violence', 'stuck']
+			issues: ['stress', 'anxiety', 'exhaustion', 'backPain', 'depression', 'kids', 'weight', 'panic', 'fobia', 'violence', 'stuck'],
+			index: 0
 		};
 
 		_this.renderMobileIssues = _this.renderMobileIssues.bind(_this);
@@ -2620,52 +2621,35 @@ var Issues = exports.Issues = function (_Component) {
 
 			var t = this.props.t;
 
+			var issue = this.state.issues[this.state.index];
+			var name = 'issues.' + issue + '.name';
+			var description = 'issues.' + issue + '.description';
+			var issueClass = 'issue ' + issue;
+			var imgPath = '/images/' + issue + '.svg';
+			var imgClass = 'issue-icon issue-icon-' + issue;
 
-			return this.state.issues.map(function (issue, i) {
-				var name = 'issues.' + issue + '.name';
-				var description = 'issues.' + issue + '.description';
-				var issueClass = 'issue ' + issue;
-				return _react2.default.createElement(
-					'div',
-					{ key: i, className: 'issue-wrapper' },
-					_react2.default.createElement('div', { id: t(name),
-						onMouseEnter: _this2.handleMouseEnter,
-						onMouseLeave: _this2.handleMouseLeave,
-						ref: function ref(issueRef) {
-							_this2.issueRef = issueRef;
-						},
-						className: issueClass }),
-					_react2.default.createElement(
-						'h6',
-						{ className: 'heading' },
-						t(name)
-					),
-					_react2.default.createElement(
-						'p',
-						{ className: 'issue-text' },
-						t(description)
-					),
-					_react2.default.createElement(
-						'div',
-						{ className: 'text-wrapper text-wrapper-mobile' },
-						_react2.default.createElement(
-							'h3',
-							{ className: 'heading' },
-							t('heading')
-						),
-						_react2.default.createElement(
-							'p',
-							{ className: 'preamble' },
-							t('preamble')
-						),
-						_react2.default.createElement(
-							'a',
-							{ href: '/kontakt', className: 'issue-button' },
-							t('contactUs')
-						)
-					)
-				);
-			});
+			return _react2.default.createElement(
+				'div',
+				{ className: 'issue-wrapper' },
+				_react2.default.createElement('div', { id: t(name),
+					onMouseEnter: this.handleMouseEnter,
+					onMouseLeave: this.handleMouseLeave,
+					ref: function ref(issueRef) {
+						_this2.issueRef = issueRef;
+					},
+					className: issueClass }),
+				_react2.default.createElement('img', { className: imgClass, src: imgPath }),
+				_react2.default.createElement(
+					'h6',
+					{ className: 'heading' },
+					t(name)
+				),
+				_react2.default.createElement(
+					'p',
+					{ className: 'issue-text' },
+					t(description)
+				)
+			);
 		}
 	}, {
 		key: 'handleSwipeRight',
@@ -3004,6 +2988,25 @@ var Issues = exports.Issues = function (_Component) {
 						this.renderMobileIssues()
 					),
 					_react2.default.createElement('div', { id: 'right', onClick: this.handleSwipeLeft, className: 'issue-arrow-right' })
+				),
+				_react2.default.createElement(
+					'div',
+					{ className: 'text-wrapper text-wrapper-mobile' },
+					_react2.default.createElement(
+						'h3',
+						{ className: 'heading' },
+						t('heading')
+					),
+					_react2.default.createElement(
+						'p',
+						{ className: 'preamble' },
+						t('preamble')
+					),
+					_react2.default.createElement(
+						'a',
+						{ href: '/kontakt', className: 'issue-button' },
+						t('contactUs')
+					)
 				),
 				_react2.default.createElement(
 					'div',

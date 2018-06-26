@@ -69,7 +69,8 @@ if (process.env.NODE_ENV === 'development') {
   server.register({
     register: WebpackPlugin,
     options: {
-      compiler: webpack(wpconfig),
+      //compiler: webpack(wpconfig),
+      compiler: webpack(serverConfig),
       assets: {
         noInfo: true,
         publicPath: wpconfig.output.publicPath,

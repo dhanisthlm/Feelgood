@@ -5,10 +5,9 @@ exports.register = function (server, options, next) {
         {
             method: 'GET',
             path: '/static/{param*}',
-            handler: {
-                directory: {
-                    path: 'client/static'
-                }
+            handler: (request, h) => {
+                console.log(request, h);
+                return h.file('client/static/bundle.js');
             }
         },
         {

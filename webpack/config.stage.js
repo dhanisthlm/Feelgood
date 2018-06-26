@@ -20,6 +20,13 @@ module.exports = {
             'process.env.npm_package_version': JSON.stringify(require('../package.json').version),
             'process.env.BROWSER': true
         }),
+        new CompressionPlugin({
+            asset: "[path].gz[query]",
+            algorithm: "gzip",
+            test: /\.js$|\.css$|\.html$/,
+            threshold: 10240,
+            minRatio: 0.8
+        }),
         new webpack.optimize.UglifyJsPlugin({
             compressor: {
                 warnings: false

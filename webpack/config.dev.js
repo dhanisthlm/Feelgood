@@ -1,5 +1,7 @@
 var path = require('path');
 var webpack = require('webpack');
+var CompressionPlugin = require('compression-webpack-plugin');
+//const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = {
   entry: [
@@ -11,9 +13,22 @@ module.exports = {
     publicPath: '/static/'
   },
   plugins: [
+      new webpack.optimize.UglifyJsPlugin({
+          compressor: {
+              warnings: false
+          }
+      }),
+    //new BundleAnalyzerPlugin(),
     new webpack.EnvironmentPlugin({
       'NODE_ENV': 'development',
       'BROWSER': true
+    }),
+    new CompressionPlugin({
+        asset: "[path].gz[query]",
+        algorithm: "gzip",
+        test: /\.js$|\.css$|\.html$/,
+        threshold: 10240,
+        minRatio: 0.8
     }),
     new webpack.DefinePlugin({
       'process.env.BROWSER': true
